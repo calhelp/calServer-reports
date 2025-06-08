@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Dakks1_Results" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="98765abc-1234-4ef7-9f12-9876543210ab">
+	<parameter name="PrefixTable" class="java.lang.String"/>
+	<parameter name="P_CTAG" class="java.lang.String"/>
+	<parameter name="Debug" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+            COALESCE(remark,      '') AS remark,
+            COALESCE(test_desc,   '') AS test_desc,
+            COALESCE(test_step2,  '') AS test_step2,
+            COALESCE(fixq,        '') AS fixq,
+            COALESCE(fixq_p,      '') AS fixq_p,
+            COALESCE(fixq_u,      '') AS fixq_u,
+            COALESCE(varq,        '') AS varq,
+            COALESCE(varq_p,      '') AS varq_p,
+            COALESCE(varq_u,      '') AS varq_u,
+            COALESCE(tol_pos,     '') AS tol_pos,
+            COALESCE(tol_pos_p,   '') AS tol_pos_p,
+            COALESCE(tol_pos_u,   '') AS tol_pos_u,
+            COALESCE(tol_neg,     '') AS tol_neg,
+            COALESCE(tol_neg_p,   '') AS tol_neg_p,
+            COALESCE(tol_neg_u,   '') AS tol_neg_u,
+            COALESCE(exp_uncert,  '') AS exp_uncert,
+            COALESCE(exp_uncert_p,'') AS exp_uncert_p,
+            COALESCE(exp_uncert_u,'') AS exp_uncert_u,
+            COALESCE(tol_err,     '') AS tol_err,
+            COALESCE(test_status, '') AS test_status
+        FROM $P!{PrefixTable}results
+        WHERE ctag = $P{P_CTAG}]]>
+	</queryString>
+	<field name="remark" class="java.lang.String"/>
+	<field name="test_desc" class="java.lang.String"/>
+	<field name="test_step2" class="java.lang.String"/>
+	<field name="fixq" class="java.lang.String"/>
+	<field name="fixq_p" class="java.lang.String"/>
+	<field name="fixq_u" class="java.lang.String"/>
+	<field name="varq" class="java.lang.String"/>
+	<field name="varq_p" class="java.lang.String"/>
+	<field name="varq_u" class="java.lang.String"/>
+	<field name="tol_pos" class="java.lang.String"/>
+	<field name="tol_pos_p" class="java.lang.String"/>
+	<field name="tol_pos_u" class="java.lang.String"/>
+	<field name="tol_neg" class="java.lang.String"/>
+	<field name="tol_neg_p" class="java.lang.String"/>
+	<field name="tol_neg_u" class="java.lang.String"/>
+	<field name="exp_uncert" class="java.lang.String"/>
+	<field name="exp_uncert_p" class="java.lang.String"/>
+	<field name="exp_uncert_u" class="java.lang.String"/>
+	<field name="tol_err" class="java.lang.String"/>
+	<field name="test_status" class="java.lang.String"/>
+	<variable name="NominalValue" class="java.lang.String">
+		<variableExpression><![CDATA[$F{fixq}.trim().isEmpty() 
+            ? "" 
+            : $F{fixq}
+              + ($F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p})
+              + $F{fixq_u}]]></variableExpression>
+	</variable>
+	<variable name="MeasuredValue" class="java.lang.String">
+		<variableExpression><![CDATA[$F{varq}.trim().isEmpty() 
+            ? "" 
+            : $F{varq}
+              + ($F{varq_p}.trim().isEmpty() ? "" : " " + $F{varq_p})
+              + $F{varq_u}]]></variableExpression>
+	</variable>
+	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[// Helper-Funktion für numerische Prüfung
+	        (
+	            ($F{tol_neg} != null && $F{tol_pos} != null &&
+	             $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
+	             $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
+	             Math.abs(
+	                 Double.parseDouble($F{tol_neg}.replace(",", "."))
+	                 - Double.parseDouble($F{tol_pos}.replace(",", "."))
+	             ) < 1e-9
+	            )
+	            // Wenn numerisch und gleich -> nur positiver Wert
+	            ? $F{tol_pos}.trim()
+	            // Sonst einfach beide Zeilen (egal ob Zahl oder nicht)
+	            : (
+	                ($F{tol_neg} != null ? $F{tol_neg}.trim() : "")
+	                + "\n"
+	                + ($F{tol_pos} != null ? $F{tol_pos}.trim() : "")
+	            )
+	        ).trim()]]></variableExpression>
+	</variable>
+	<variable name="RoundedTolErr" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_err}.trim().isEmpty()
+            ? ""
+            : (
+                $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
+                  .matches("-?\\d+(\\.\\d+)?")
+                  ? new java.text.DecimalFormat("0.0")
+                      .format(Double.parseDouble($F{tol_err}.replace(",", ".")))
+                    + "%"
+                  : $F{tol_err}
+              )]]></variableExpression>
+	</variable>
+	<variable name="FormattedUncertainty" class="java.lang.String">
+		<variableExpression><![CDATA[(
+	      $F{exp_uncert} == null || $F{exp_uncert}.trim().isEmpty()
+	    ) 
+	      ? ""
+	      : (
+	          $F{exp_uncert}.replace(",",".").matches("-?\\d+(\\.\\d+)?")
+	            ? (
+	                Double.parseDouble($F{exp_uncert}.replace(",", ".")) == 0.0
+	                  ? "0"
+	                  : (
+	                      "± " +
+	                      new java.text.DecimalFormat("0.00E0")
+	                        .format(Double.parseDouble($F{exp_uncert}.replace(",", ".")))
+	                        .replaceAll("E(\\+)?0$", "")
+	                        .replace("E", " ×10<sup>")
+	                      +
+	                      (
+	                        new java.text.DecimalFormat("0.00E0")
+	                          .format(Double.parseDouble($F{exp_uncert}.replace(",", ".")))
+	                          .matches(".*E(\\+)?0$")
+	                          ? ""
+	                          : "</sup>"
+	                      )
+	                    )
+	              )
+	            : $F{exp_uncert}
+	        )
+	      +
+	      (
+	        $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+	          ? ""
+	          : " " + $F{exp_uncert_u}
+	      )]]></variableExpression>
+	</variable>
+	<variable name="SymbolStatus" class="java.lang.String">
+		<variableExpression><![CDATA[($F{remark}.trim().isEmpty())
+            ? (
+                $F{test_status}.trim().isEmpty()
+                ? ""
+                : (
+                    $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
+                    $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
+                    $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
+                    $F{test_status}.equalsIgnoreCase("pass")               ? "iO"  :
+                    $F{test_status}
+                  )
+              )
+            : ""]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="35">
+			<staticText>
+				<reportElement x="0" y="18" width="150" height="17" uuid="35705dd9-db7d-4a68-b73d-70731da70156"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beschreibung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="18" width="70" height="17" uuid="ebde96d9-e386-4c49-9caa-eddec5fe083c"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sollwert]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="18" width="70" height="17" uuid="07d689a7-75db-40d1-8212-4d4c34ce9deb"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Messwert]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="18" width="90" height="17" uuid="8121cbbe-d65d-4198-9b1e-851b4d4c1cbd"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zul. Abweichung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="18" width="70" height="17" uuid="26623eb4-b64b-4b31-aba1-8bad9fa3885b"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOL %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="18" width="60" height="17" uuid="cd094d04-c8d5-4314-bf7f-1969a1135d94"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="18" width="31" height="17" uuid="46d4edac-188a-41bc-8743-a23bac3dd1d8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONF]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<printWhenExpression><![CDATA[!$F{remark}.trim().isEmpty() ||
+                !$F{test_desc}.trim().isEmpty() ||
+                !$F{test_step2}.trim().isEmpty() ||
+                !$F{fixq}.trim().isEmpty() ||
+                !$F{varq}.trim().isEmpty()]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="150" height="20" uuid="d386a173-eebd-4ee1-8196-6e56aca58b8a"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[!$F{remark}.trim().isEmpty()
+                    ? $F{remark}
+                    : (
+                        !$F{test_desc}.trim().isEmpty()
+                        ? $F{test_desc}
+                          + (
+                              !$F{test_step2}.trim().isEmpty()
+                              ? " " + $F{test_step2}
+                              : ""
+                            )
+                        : $F{test_step2}
+                      )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="70" height="20" uuid="135ae340-9dd0-41c8-a4c7-d5a43ef9b6b2"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="70" height="20" uuid="f6b0d7e3-363b-47b3-9fb9-7131daffb9ee"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="90" height="20" uuid="91ae59df-eea5-403c-971f-c9dfaeb60086"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ToleranceRange}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="70" height="20" uuid="3a4230cc-41ec-4702-b731-8ecb0797963a"/>
+				<textElement markup="html">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="450" y="0" width="60" height="20" uuid="8840f66b-3048-4395-aefe-32825b905066"/>
+				<textElement markup="html">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{FormattedUncertainty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="31" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SymbolStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
