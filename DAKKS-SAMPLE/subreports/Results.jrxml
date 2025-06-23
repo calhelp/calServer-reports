@@ -284,7 +284,7 @@
                                 <textElement textAlignment="Right">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
-				<textFieldExpression><![CDATA[$V{SymbolStatus}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$V{SymbolStatus} == null || $V{SymbolStatus}.trim().isEmpty() ? "-" : $V{SymbolStatus}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
