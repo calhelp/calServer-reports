@@ -26,6 +26,8 @@
             COALESCE(exp_uncert,  '') AS exp_uncert,
             COALESCE(exp_uncert_p,'') AS exp_uncert_p,
             COALESCE(exp_uncert_u,'') AS exp_uncert_u,
+            COALESCE(exp_uncert_iso_e,'') AS exp_uncert_iso_e,
+            COALESCE(exp_uncert_iso_p,'') AS exp_uncert_iso_p,
             COALESCE(tol_err,     '') AS tol_err,
             COALESCE(test_status, '') AS test_status
         FROM $P!{PrefixTable}results
@@ -48,9 +50,11 @@
 	<field name="tol_neg_u" class="java.lang.String"/>
 	<field name="exp_uncert" class="java.lang.String"/>
 	<field name="exp_uncert_p" class="java.lang.String"/>
-	<field name="exp_uncert_u" class="java.lang.String"/>
-	<field name="tol_err" class="java.lang.String"/>
-	<field name="test_status" class="java.lang.String"/>
+        <field name="exp_uncert_u" class="java.lang.String"/>
+        <field name="exp_uncert_iso_e" class="java.lang.String"/>
+        <field name="exp_uncert_iso_p" class="java.lang.String"/>
+        <field name="tol_err" class="java.lang.String"/>
+        <field name="test_status" class="java.lang.String"/>
 	<variable name="NominalValue" class="java.lang.String">
 		<variableExpression><![CDATA[$F{fixq}.trim().isEmpty() 
             ? "" 
@@ -185,18 +189,25 @@
 				</textElement>
 				<text><![CDATA[TOL %]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="450" y="18" width="60" height="17" uuid="cd094d04-c8d5-4314-bf7f-1969a1135d94"/>
-				<textElement>
-					<font fontName="Arial" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[MU]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="510" y="18" width="31" height="17" uuid="46d4edac-188a-41bc-8743-a23bac3dd1d8"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial" size="9" isBold="true"/>
-				</textElement>
+                        <staticText>
+                                <reportElement x="450" y="18" width="30" height="17" uuid="cd094d04-c8d5-4314-bf7f-1969a1135d94"/>
+                                <textElement>
+                                        <font fontName="Arial" size="9" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[MU-E]]></text>
+                        </staticText>
+                        <staticText>
+                                <reportElement x="480" y="18" width="30" height="17" uuid="ec32bb46-f2ab-4c57-a80a-f5b7ad02ba94"/>
+                                <textElement>
+                                        <font fontName="Arial" size="9" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[MU-P]]></text>
+                        </staticText>
+                        <staticText>
+                                <reportElement x="510" y="18" width="31" height="17" uuid="46d4edac-188a-41bc-8743-a23bac3dd1d8"/>
+                                <textElement textAlignment="Right">
+                                        <font fontName="Arial" size="9" isBold="true"/>
+                                </textElement>
 				<text><![CDATA[CONF]]></text>
 			</staticText>
 		</band>
@@ -254,18 +265,25 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="450" y="0" width="60" height="20" uuid="8840f66b-3048-4395-aefe-32825b905066"/>
-				<textElement markup="html">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{FormattedUncertainty}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="510" y="0" width="31" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial" size="8"/>
-				</textElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement x="450" y="0" width="30" height="20" uuid="29af6774-21c4-43ea-a10d-ebb47a6ebed6"/>
+                                <textElement markup="html">
+                                        <font fontName="Arial" size="8"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{exp_uncert_iso_e}]]></textFieldExpression>
+                        </textField>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement x="480" y="0" width="30" height="20" uuid="ff778a2d-5eb9-4097-a4cc-1bd98afd0535"/>
+                                <textElement markup="html">
+                                        <font fontName="Arial" size="8"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{exp_uncert_iso_p}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="510" y="0" width="31" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
+                                <textElement textAlignment="Right">
+                                        <font fontName="Arial" size="8"/>
+                                </textElement>
 				<textFieldExpression><![CDATA[$V{SymbolStatus}]]></textFieldExpression>
 			</textField>
 		</band>
