@@ -9,13 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Create ZIP with both folders
-        run: |
-          cd DAKKS-SAMPLE
-          zip -r ../DAKKS-SAMPLE.zip main_reports subreports
-      - name: Upload ZIP as artifact
+      - name: Upload both folders as artifact
         uses: actions/upload-artifact@v4
         with:
           name: DAKKS-SAMPLE
-          path: DAKKS-SAMPLE.zip
+          path: |
+            DAKKS-SAMPLE/main_reports
+            DAKKS-SAMPLE/subreports
           if-no-files-found: error
