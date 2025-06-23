@@ -265,16 +265,16 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 			</textField>
-                        <textField>
+                        <textField textAdjust="StretchHeight">
                                 <reportElement x="450" y="0" width="30" height="20" uuid="29af6774-21c4-43ea-a10d-ebb47a6ebed6"/>
-                                <textElement>
+                                <textElement markup="html">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$F{exp_uncert_iso_e}]]></textFieldExpression>
                         </textField>
-                        <textField>
+                        <textField textAdjust="StretchHeight">
                                 <reportElement x="480" y="0" width="30" height="20" uuid="ff778a2d-5eb9-4097-a4cc-1bd98afd0535"/>
-                                <textElement>
+                                <textElement markup="html">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$F{exp_uncert_iso_p}]]></textFieldExpression>
