@@ -1,22 +1,13 @@
-name: Package Reports
+- name: Upload artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: DAKKS-SAMPLE
+    path: DAKKS-SAMPLE/main_reports
+    if-no-files-found: error
 
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Create ZIP
-        run: |
-          cd DAKKS-SAMPLE
-          zip -r ../DAKKS-SAMPLE.zip main_reports subreports
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: DAKKS-SAMPLE
-          path: DAKKS-SAMPLE.zip
-          if-no-files-found: error
-
+- name: Upload artifact (subreports)
+  uses: actions/upload-artifact@v4
+  with:
+    name: DAKKS-SAMPLE-subreports
+    path: DAKKS-SAMPLE/subreports
+    if-no-files-found: error
