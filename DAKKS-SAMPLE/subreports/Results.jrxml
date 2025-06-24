@@ -88,7 +88,7 @@
                         "\n" +
                         ($F{tol_pos} != null ? $F{tol_pos}.trim() : "")
                     )
-                )).trim()]]></variableExpression>
+                ).trim()]]></variableExpression>
 	</variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
 		<variableExpression><![CDATA[$F{tol_err}.trim().isEmpty()
