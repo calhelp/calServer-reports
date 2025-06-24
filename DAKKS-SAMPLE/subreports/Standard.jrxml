@@ -113,13 +113,13 @@ GROUP BY t.C2430]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Lastcal}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="2" y="-1" width="539" height="1" uuid="d7c389b6-a414-4ded-88e2-d779c944aef3">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
+                        <line>
+                                <reportElement x="1" y="-1" width="539" height="1" uuid="d7c389b6-a414-4ded-88e2-d779c944aef3">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
+                        </line>
 			<line>
 				<reportElement stretchType="ContainerHeight" x="1" y="-1" width="1" height="22" uuid="57ad07c3-c3de-4cbd-b343-4d2bdb3c6cb8">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -177,59 +177,66 @@ GROUP BY t.C2430]]>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
-			<line>
-				<reportElement stretchType="ContainerHeight" x="405" y="0" width="1" height="21" uuid="9377853e-7c02-49a9-a1c4-f45ead19c34e">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-		</band>
-	</columnHeader>
+                        <line>
+                                <reportElement stretchType="ContainerHeight" x="405" y="0" width="1" height="21" uuid="9377853e-7c02-49a9-a1c4-f45ead19c34e">
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
+                        </line>
+                        <line>
+                                <reportElement x="1" y="21" width="539" height="1" uuid="eed54ee2-48e5-4fda-8112-a2b36a267f7d">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
+                        </line>
+                </band>
+        </columnHeader>
 	<detail>
 		<band height="19">
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="2" y="2" width="65" height="15" uuid="0d96956e-4643-4ba4-ac39-ac4cb74a32aa">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="2" y="2" width="68" height="15" uuid="0d96956e-4643-4ba4-ac39-ac4cb74a32aa">
+                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="74" y="2" width="98" height="15" uuid="83a956fb-b686-4354-9937-39a49a3671bc">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="71" y="2" width="104" height="15" uuid="83a956fb-b686-4354-9937-39a49a3671bc">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="179" y="2" width="72" height="15" uuid="3ae953ea-2f94-4e1b-b797-5c8c54c98a59">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="176" y="2" width="78" height="15" uuid="3ae953ea-2f94-4e1b-b797-5c8c54c98a59">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="259" y="2" width="89" height="15" uuid="62c728e3-c649-4650-9437-b3a14f675730">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="255" y="2" width="96" height="15" uuid="62c728e3-c649-4650-9437-b3a14f675730">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                </reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="355" y="2" width="48" height="15" uuid="5137d73d-f05a-43eb-b6ed-4bd6d13e75fe">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="352" y="2" width="53" height="15" uuid="5137d73d-f05a-43eb-b6ed-4bd6d13e75fe">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
@@ -289,36 +296,36 @@ GROUP BY t.C2430]]>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="409" y="2" width="48" height="15" uuid="484d1ac8-495b-4fb6-a313-3c0d92ddd991">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="406" y="2" width="53" height="15" uuid="484d1ac8-495b-4fb6-a313-3c0d92ddd991">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                </reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="462" y="2" width="77" height="15" uuid="cb10c2ca-371a-42c0-8c09-cd2159aad3c4">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement stretchType="ContainerHeight" x="460" y="2" width="80" height="15" uuid="cb10c2ca-371a-42c0-8c09-cd2159aad3c4">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                </reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2364}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement stretchType="ContainerHeight" x="540" y="0" width="1" height="17" uuid="02775489-a8f9-4764-b6e6-30717663214f">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
+                        <line>
+                                <reportElement stretchType="ContainerHeight" x="540" y="0" width="1" height="18" uuid="02775489-a8f9-4764-b6e6-30717663214f">
+                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                </reportElement>
 			</line>
 			<line>
-				<reportElement x="1" y="17" width="540" height="1" uuid="b389f3de-3b6c-4444-a71a-9294959334a6">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
+                                <reportElement x="1" y="18" width="540" height="1" uuid="b389f3de-3b6c-4444-a71a-9294959334a6">
+                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                </reportElement>
 			</line>
 		</band>
 	</detail>
