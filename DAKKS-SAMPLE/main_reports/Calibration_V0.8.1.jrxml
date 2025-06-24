@@ -556,7 +556,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                         <textFieldExpression><![CDATA[$V{Group_header_4a}]]></textFieldExpression>
                                 </textField>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement x="16" y="21" width="535" height="20" uuid="EXPUNCTYPE-PLACEHOLDER">
+                                        <reportElement x="16" y="21" width="535" height="20" uuid="dd773530-b848-4d9d-b3b8-4edb3558bb22">
                                                 <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                         </reportElement>
                                         <textElement>
