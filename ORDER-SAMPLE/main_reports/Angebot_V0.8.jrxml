@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-05-29T16:42:26 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Angebot_V0.8" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="calresults DB"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Sprache" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dokumenttyp" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Auftrag"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Articletype1" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Articletype2" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Articletype3" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Auftragsnummer" class="java.lang.String">
+		<defaultValueExpression><![CDATA["B2016-0056"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Auftragsid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Return_address" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Report_mail_address" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Report_phone_number" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Report_description" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT b.uID, a.uID AS article_id, c.K4601, CONCAT_WS(" ", c.K4613, c.K4602) AS K4602, c.K4603, c.K4604, c.K4605, c.K4606, c.K4633, b.W4102,b.W4103, b.date, b.number, b.W4106, b.W4101, b.W4104, b.customer_KTAG, DATE_FORMAT(b.W4105, "%d.%m.%Y") AS W4105, W4108, IF(W4109 IS NULL OR TRIM(W4109) = "", "", DATE_FORMAT(STR_TO_DATE(W4109, '%Y-%m-%d'), '%d.%m.%Y')) AS W4109,
+bc.K4601 as BK4601, CONCAT_WS(" ", bc.K4613, bc.K4602) AS BK4602, bc.K4603 AS BK4603, bc.K4604 AS BK4604, bc.K4605 AS BK4605, bc.K4606 AS BK4606, dc.K4601 AS DK4601, CONCAT_WS(" ", dc.K4613, dc.K4602) AS DK4602, dc.K4603 AS DK4603, dc.K4604 AS DK4604, dc.K4605 AS DK4605, dc.K4606 AS DK4606,
+CONCAT_WS(" ", IF(c.K4606 IS NULL OR TRIM(c.K4606) = "", NULL, c.K4606), IF(c.K4604 IS NULL OR TRIM(c.K4604) = "", NULL, c.K4604)) AS order_address, CONCAT_WS(" ", bc.K4606, bc.K4604) AS billing_company, CONCAT_WS(" ", dc.K4606, dc.K4604) AS delivery_company, b.customer_contact_id, tc.type AS contact_type,
+CONCAT_WS("\n", IF(tc.label IS NULL OR TRIM(tc.label) = "", NULL, tc.label), tc.name, IF(tc.contact IS NULL OR TRIM(tc.contact) = "", NULL, tc.contact), tc.street, CONCAT_WS(" ", tc.zip, tc.location)) AS customer_contact, COALESCE(tc.street, "") AS customer_street, CONCAT_WS(" ", COALESCE(tc.zip, ""), COALESCE(tc.location, "")) AS customer_address,
+CONCAT_WS(", ", IF(tc.label IS NULL OR TRIM(tc.label) = "", NULL, tc.label), tc.name, IF(tc.contact IS NULL OR TRIM(tc.contact) = "", NULL, tc.contact), tc.street, CONCAT_WS(" ", tc.zip, tc.location)) AS customer_contact_for_billing,
+b.invoice_customer_KTAG, b.delivery_customer_KTAG, b.invoice_contact_id, b.delivery_contact_id,
+CONCAT_WS("\n", IF(ti.label IS NULL OR TRIM(ti.label) = "", NULL, ti.label), ti.name, IF(ti.contact IS NULL OR TRIM(ti.contact) = "", NULL, ti.contact), ti.street, CONCAT_WS(" ", ti.zip, ti.location)) AS billing_contact, COALESCE(ti.street, "") AS billing_street, CONCAT_WS(" ", COALESCE(ti.zip, ""), COALESCE(ti.location, "")) AS billing_address,
+CONCAT_WS("\n", IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label), td.name, IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location)) AS delivery_contact, COALESCE(td.street, "") AS delivery_street, CONCAT_WS(" ", COALESCE(td.zip, ""), COALESCE(td.location, "")) AS delivery_address,
+CONCAT_WS(", ", IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label), td.name, IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location)) AS delivery_contact_for_billing,
+IF(a.pos_number IS NULL, "", COALESCE(a.pos_number, "1.00")) AS pos_number, a.tax, IF($P{Dokumenttyp} IN ('Billing','Rechnung') AND a.article_type = 'type', 0, ROUND(COALESCE(a.price, 0), 2)) AS price, CONCAT_WS(" | ", IF(a.complexity IS NULL OR TRIM(a.complexity) = "", NULL, a.complexity), sa.article_name) AS article_name, IF(a.complexity IS NULL OR TRIM(a.complexity) = "", "", a.complexity) AS complexity, COALESCE(a.quantity, "1.00") AS quantity, COALESCE(a.unit, "1.00") AS unit, a.article_type, IF(a.discount IS NULL OR TRIM(a.discount) = "", 0, TRIM(ROUND(a.discount, 2))+0) AS discount, CONCAT_WS(" | ", IF(a.complexity IS NULL OR TRIM(a.complexity) = "", NULL, a.complexity), COALESCE(t.type_name,"")) AS type_name,
+CONCAT_WS("\n", CONCAT_WS(" | ", IF(a.complexity IS NULL OR TRIM(a.complexity) = "", NULL, a.complexity), i.I4202, i.I4203), CONCAT_WS(" | ", i.I4201, IF(i.I4244 IS NULL, NULL, i.I4244))) AS inventory_name, COALESCE( i.I4204,"") AS I4204, COALESCE(i.I4202,"") AS I4202, COALESCE( i.I4206,"") AS I4206, COALESCE(i.I4203,"") AS I4203, DATE_FORMAT(DATE_ADD(CURDATE(), INTERVAL COALESCE(b.W4103, 0) DAY), "%d.%m.%Y") AS Added_Date
+FROM $P!{PrefixTable}booking b
+LEFT JOIN $P!{PrefixTable}collective_invoices ci ON ci.invoice_uID=b.uID
+LEFT JOIN $P!{PrefixTable}customers c on b.customer_KTAG=c.KTAG
+LEFT JOIN $P!{PrefixTable}customers bc on b.invoice_customer_KTAG=bc.KTAG
+LEFT JOIN $P!{PrefixTable}customers dc on b.delivery_customer_KTAG=dc.KTAG
+LEFT JOIN $P!{PrefixTable}contact tc on tc.uid=b.customer_contact_id
+LEFT JOIN $P!{PrefixTable}contact ti on ti.uid=b.invoice_contact_id
+LEFT JOIN $P!{PrefixTable}contact td on td.uid=b.delivery_contact_id
+LEFT JOIN $P!{PrefixTable}article a
+	ON (b.uid=a.booking_uid OR ci.other_booking_uID=a.booking_uid)
+	AND a.article_type IN ('$P!{Articletype1}','$P!{Articletype2}','$P!{Articletype3}')
+LEFT JOIN $P!{PrefixTable}standard_article sa on a.article_ID=sa.uID
+LEFT JOIN $P!{PrefixTable}prices p on a.article_ID=p.pID
+LEFT JOIN $P!{PrefixTable}inventory i on a.article_ID=i.MTAG
+LEFT JOIN $P!{PrefixTable}types t on p.type_tID=t.tID
+WHERE b.uID=$P{Auftragsid}
+ORDER BY a.pos_number ASC,
+		CASE WHEN a.article_type = 'inventory' THEN 0
+     		 WHEN a.article_type = 'article' THEN 1
+     	ELSE 2 END]]>
+	</queryString>
+	<field name="uID" class="java.lang.String"/>
+	<field name="article_id" class="java.lang.String"/>
+	<field name="K4601" class="java.lang.String"/>
+	<field name="K4602" class="java.lang.String"/>
+	<field name="K4603" class="java.lang.String"/>
+	<field name="K4604" class="java.lang.String"/>
+	<field name="K4605" class="java.lang.String"/>
+	<field name="K4606" class="java.lang.String"/>
+	<field name="BK4602" class="java.lang.String"/>
+	<field name="BK4603" class="java.lang.String"/>
+	<field name="BK4604" class="java.lang.String"/>
+	<field name="BK4605" class="java.lang.String"/>
+	<field name="BK4606" class="java.lang.String"/>
+	<field name="DK4602" class="java.lang.String"/>
+	<field name="DK4603" class="java.lang.String"/>
+	<field name="DK4604" class="java.lang.String"/>
+	<field name="DK4605" class="java.lang.String"/>
+	<field name="DK4606" class="java.lang.String"/>
+	<field name="customer_KTAG" class="java.lang.String"/>
+	<field name="billing_company" class="java.lang.String"/>
+	<field name="delivery_company" class="java.lang.String"/>
+	<field name="customer_contact_id" class="java.lang.String"/>
+	<field name="invoice_customer_KTAG" class="java.lang.String"/>
+	<field name="delivery_customer_KTAG" class="java.lang.String"/>
+	<field name="contact_type" class="java.lang.String"/>
+	<field name="invoice_contact_id" class="java.lang.String"/>
+	<field name="delivery_contact_id" class="java.lang.String"/>
+	<field name="W4102" class="java.lang.String"/>
+	<field name="W4103" class="java.lang.String"/>
+	<field name="date" class="java.util.Date"/>
+	<field name="number" class="java.lang.String"/>
+	<field name="W4106" class="java.lang.String"/>
+	<field name="W4101" class="java.lang.String"/>
+	<field name="W4104" class="java.lang.String"/>
+	<field name="W4105" class="java.lang.String"/>
+	<field name="W4108" class="java.lang.String"/>
+	<field name="W4109" class="java.lang.String"/>
+	<field name="pos_number" class="java.math.BigDecimal"/>
+	<field name="tax" class="java.math.BigDecimal"/>
+	<field name="price" class="java.math.BigDecimal"/>
+	<field name="article_name" class="java.lang.String"/>
+	<field name="complexity" class="java.lang.String"/>
+	<field name="quantity" class="java.math.BigDecimal"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="article_type" class="java.lang.String"/>
+	<field name="discount" class="java.math.BigDecimal"/>
+	<field name="type_name" class="java.lang.String"/>
+	<field name="inventory_name" class="java.lang.String"/>
+	<field name="order_address" class="java.lang.String"/>
+	<field name="customer_contact" class="java.lang.String"/>
+	<field name="customer_contact_for_billing" class="java.lang.String"/>
+	<field name="billing_contact" class="java.lang.String"/>
+	<field name="delivery_contact" class="java.lang.String"/>
+	<field name="delivery_contact_for_billing" class="java.lang.String"/>
+	<field name="customer_address" class="java.lang.String"/>
+	<field name="billing_address" class="java.lang.String"/>
+	<field name="delivery_address" class="java.lang.String"/>
+	<field name="customer_street" class="java.lang.String"/>
+	<field name="billing_street" class="java.lang.String"/>
+	<field name="delivery_street" class="java.lang.String"/>
+	<field name="I4204" class="java.lang.String"/>
+	<field name="I4202" class="java.lang.String"/>
+	<field name="I4206" class="java.lang.String"/>
+	<field name="I4203" class="java.lang.String"/>
+	<field name="Added_Date" class="java.lang.String"/>
+	<variable name="P_Contact_Type" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery") ? "2" : "0"]]></variableExpression>
+	</variable>
+	<variable name="Order_Address" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{K4603} == null || $F{K4603}.equals("") ? "" : $F{K4603} + "\n" + $F{order_address})]]></variableExpression>
+	</variable>
+	<variable name="Order_Address_1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{K4603} == null || $F{K4603}.equals("") ? "" : $F{K4603} + ", " + $F{order_address})]]></variableExpression>
+	</variable>
+	<variable name="Customer_Address" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("")) ? ($F{contact_type}.equals($V{P_Contact_Type}) || $V{P_Contact_Type}.equals("0") ? ($F{customer_street} + (!$F{customer_address}.equals("") ? "\n" + $F{customer_address} : "")) : $V{Order_Address}) : $V{Order_Address})]]></variableExpression>
+	</variable>
+	<variable name="Customer_Address_1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("")) ? $F{customer_street} + (!$F{customer_address}.equals("") ? ", " + $F{customer_address} : "") : $V{Order_Address_1})]]></variableExpression>
+	</variable>
+	<variable name="Billing_Company" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{BK4603} == null || $F{BK4603}.equals("") ? $V{Customer_Address} : $F{BK4603} + "\n" + $F{billing_company})]]></variableExpression>
+	</variable>
+	<variable name="Delivery_Company" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{DK4603} == null || $F{DK4603}.equals("") ? $V{Customer_Address_1} : $F{DK4603} + ($F{delivery_company} != null && !$F{delivery_company}.equals("") ? ", " + $F{delivery_company} : ""))]]></variableExpression>
+	</variable>
+	<variable name="Main_Delivery_Company" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{DK4603} == null || $F{DK4603}.equals("") ? $V{Customer_Address} : $F{DK4603} + "\n" + ($F{delivery_company} != null && !$F{delivery_company}.equals("") ? $F{delivery_company} : ""))]]></variableExpression>
+	</variable>
+	<variable name="Billing_Address" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($F{invoice_contact_id} != null && !$F{invoice_contact_id}.equals("")) ? $F{billing_street} + (!$F{billing_address}.equals("") ? "\n" + $F{billing_address} : "") : $V{Billing_Company})]]></variableExpression>
+	</variable>
+	<variable name="Main_Delivery_Address" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($F{delivery_contact_id} != null && !$F{delivery_contact_id}.equals("")) ? $F{delivery_street} + (!$F{delivery_address}.equals("") ? "\n" + $F{delivery_address} : "") : $V{Main_Delivery_Company})]]></variableExpression>
+	</variable>
+	<variable name="Delivery_Address" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($F{delivery_contact_id} != null && !$F{delivery_contact_id}.equals("")) ? ($P{Sprache}.equals("Deutsch") ? "Lieferadresse " : "Invoice of your order from ") + $F{delivery_street} + (!$F{delivery_address}.equals("") ? ", " + $F{delivery_address} : "") : ($P{Sprache}.equals("Deutsch") ? "Lieferadresse " : "Invoice of your order from ") + $V{Delivery_Company})]]></variableExpression>
+	</variable>
+	<variable name="Default_Customer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{K4602} != null && !$F{K4602}.equals("")) ? $F{K4602} : ($P{Sprache}.equals("Deutsch") ? "Nicht verfügbar" : ($P{Sprache}.equals("Englisch") ? "Unavailable" : ""))]]></variableExpression>
+	</variable>
+	<variable name="Customer_Name" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? (($F{BK4602} != null && !$F{BK4602}.equals("")) ? $F{BK4602} : $V{Default_Customer}) : ($P{Dokumenttyp}.equals("Delivery") || $P{Dokumenttyp}.equals("Lieferung") ? (($F{DK4602} != null && !$F{DK4602}.equals("")) ? $F{DK4602} : $V{Default_Customer}) : $V{Default_Customer})]]></variableExpression>
+	</variable>
+	<variable name="Billing_Contact" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{invoice_contact_id} != null && !$F{invoice_contact_id}.equals("")) ? $F{billing_contact} : ($F{invoice_customer_KTAG} != null && !$F{invoice_customer_KTAG}.equals("") ? $V{Billing_Address} : ($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("") && $F{contact_type}.equals($V{P_Contact_Type}) ? $F{customer_contact} : $V{Customer_Address}))]]></variableExpression>
+	</variable>
+	<variable name="Delivery_Contact" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{delivery_contact_id} != null && !$F{delivery_contact_id}.equals("")) ? $F{delivery_contact} : ($F{delivery_customer_KTAG} != null && !$F{delivery_customer_KTAG}.equals("") ? $V{Delivery_Address} : ($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("") && $F{contact_type}.equals($V{P_Contact_Type}) ? $F{customer_contact} : $V{Customer_Address}))]]></variableExpression>
+	</variable>
+	<variable name="Delivery_Contact_For_Billing" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{customer_KTAG} != null && !$F{customer_KTAG}.equals("") ? ($P{Sprache}.equals("Deutsch") ? "Lieferadresse " : "Invoice of your order from ") : "") + (($F{delivery_contact_id} != null && !$F{delivery_contact_id}.equals("")) ? $F{delivery_contact_for_billing} : ($F{delivery_customer_KTAG} != null && !$F{delivery_customer_KTAG}.equals("") ? $V{Delivery_Company} : ($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("") && $F{contact_type}.equals($V{P_Contact_Type}) ? $F{customer_contact_for_billing} : $V{Customer_Address})))]]></variableExpression>
+	</variable>
+	<variable name="Customer_Contact" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{customer_contact_id} != null && !$F{customer_contact_id}.equals("") && ($F{contact_type}.equals($V{P_Contact_Type}) || $V{P_Contact_Type}.equals("0"))) ? $F{customer_contact} : $V{Customer_Address}]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Betreff-Zeile-1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "Angebot "+$P{Auftragsnummer}:($P{Dokumenttyp}.equals("Auftrag")) ? "Auftragsbestätigung "+$P{Auftragsnummer}:($P{Dokumenttyp}.equals("Rechnung")) ? "Rechnung " + ($F{W4108} != null && !$F{W4108}.equals("") ? $F{W4108} : $P{Auftragsnummer}) : ($P{Dokumenttyp}.equals("Lieferung") ? "Lieferung "+$P{Auftragsnummer}:"Vorgangsnummer "+$P{Auftragsnummer}) : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "Offer "+$P{Auftragsnummer}:($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Order "+$P{Auftragsnummer}:($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Invoice " + ($F{W4108} != null && !$F{W4108}.equals("") ? $F{W4108} : $P{Auftragsnummer}) :(($P{Dokumenttyp}.equals("Delivery")) ? "Delivery "+$P{Auftragsnummer}:"Number "+$P{Auftragsnummer}))]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Betreff-Zeile-2" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Kalibrierung Ihrer Messmittel" :($P{Sprache}.equals("Englisch")) ? "Calibration of your equipment":""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Betreff-Zeile-3" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") && $P{Dokumenttyp}.equals("Auftrag")) ? "Recht herzlichen Dank für Ihren Auftrag. Wir werden diesen so schnell wie möglich bearbeiten.":""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Dokumentdatum" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "Angebotsdatum ":($P{Dokumenttyp}.equals("Auftrag")) ? "Auftragsdatum ":($P{Dokumenttyp}.equals("Rechnung")) ? "Rechnungsdatum ": ($P{Dokumenttyp}.equals("Lieferung") ? "Lieferdatum " : "Vorgangsdatum ") : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "Offerdate ":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Orderdate ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Invoicedate" : ($P{Dokumenttyp}.equals("Delivery") ? "Deliverydate " : "Date "))]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Dokumentnummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "Angebotsnummer ":($P{Dokumenttyp}.equals("Auftrag")) ? "Auftragsnummer ":($P{Dokumenttyp}.equals("Rechnung")) ? "Vorgangsnummer " : ($P{Dokumenttyp}.equals("Lieferung") ? "Liefernummer " : "Vorgangsnummer ") : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "Offernumber ":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Ordernumber ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Invoicenumber " : ($P{Dokumenttyp}.equals("Delivery") ? "Deliverynumber " : "Number "))]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Kundennummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Kundennummer " :($P{Sprache}.equals("Englisch")) ? "Customer ID ":"ID"]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Ansprechpartner" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Ihr Ansprechpartner " :($P{Sprache}.equals("Englisch")) ? "Your Contact ":""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Email Adresse" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Emailadresse " :($P{Sprache}.equals("Englisch")) ? "Emailadress ":""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Telefon" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Telefon " :($P{Sprache}.equals("Englisch")) ? "Phone ":""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Referenz" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? ($P{Dokumenttyp}.equals("Angebot")) ? "":($P{Dokumenttyp}.equals("Auftrag")) ? "Ihre Referenz ":($P{Dokumenttyp}.equals("Rechnung")) ? "Ihre Bestellnummer ":"" : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Your reference ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Your reference":"")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Bestelldatum" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "":($P{Dokumenttyp}.equals("Auftrag")) ? "Ihr Bestelldatum ":($P{Dokumenttyp}.equals("Rechnung")) ? "Ihr Bestelldatum ":"" : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Order date ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Order date ":"")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Lieferantennummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "Lieferantennummer" : ($P{Dokumenttyp}.equals("Auftrag")) ? "Lieferantennummer " : ($P{Dokumenttyp}.equals("Rechnung")) ? "Lieferantennummer " : "" : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "" : ($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "" : ($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "":"")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Liefertermin" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Liefer/Leistungsdatum" : "Delivery date")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Lieferscheinnummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "" : ($P{Dokumenttyp}.equals("Auftrag")) ? "" : ($P{Dokumenttyp}.equals("Rechnung")) ? "Lieferscheinnummer " : "" : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "":"")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Hinweis" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "Alle Preise in EURO. Angebot gültig bis " + $F{Added_Date}:($P{Dokumenttyp}.equals("Auftrag")) ? "" : ($P{Dokumenttyp}.equals("Rechnung") ? $V{Delivery_Contact_For_Billing} : "") : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "All prices in EURO. This offer is firm until " + $F{Added_Date} : ($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "" : ($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? $V{Delivery_Contact_For_Billing} : "")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_TypDatum" class="java.util.Date" resetType="None">
+		<variableExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? $F{date} : $P{CurrentDate}]]></variableExpression>
+	</variable>
+	<variable name="Angebotsrevision" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) && ($F{W4106} != null && LEN($F{W4106}) > 0) ? " - " + $F{W4106} : ""]]></variableExpression>
+	</variable>
+	<variable name="KOPF_Referenznummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "":($P{Dokumenttyp}.equals("Auftrag")) ? $F{W4104}:($P{Dokumenttyp}.equals("Rechnung")) ? $F{W4104}:"": ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? $F{W4104}:($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? $F{W4104}:"")]]></variableExpression>
+	</variable>
+	<variable name="KOPF_BestDatum" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? ($P{Dokumenttyp}.equals("Angebot")) ? "":($P{Dokumenttyp}.equals("Auftrag")) ? $F{W4105}:($P{Dokumenttyp}.equals("Rechnung")) ? $F{W4105}:"": ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? $F{W4105}:($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? $F{W4105}:"")]]></variableExpression>
+	</variable>
+	<variable name="FUSS_Zahlungsinformationen-Zeile-2" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Zahlungsbedingungen: " :($P{Sprache}.equals("Englisch")) ? "Terms of Payment:  ":""]]></variableExpression>
+	</variable>
+	<variable name="FUSS_Zahlungsinformationen-Zeile-1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Zahlbar innerhalb 14 Tagen netto vom Rechnungsdatum ohne Abzug. " :($P{Sprache}.equals("Englisch")) ? "payable within 14 days from the date of invoice without deduction. ":""]]></variableExpression>
+	</variable>
+	<variable name="FUSS_Bankinformationen" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Bank und Steuerinformationen: " :($P{Sprache}.equals("Englisch")) ? "Bank- and Accounting Informations: ":""]]></variableExpression>
+	</variable>
+	<variable name="FUSS_Kontonummer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "KontoNr.: " :($P{Sprache}.equals("Englisch")) ? "Bank Account: ":""]]></variableExpression>
+	</variable>
+	<variable name="FUSS_Geschaeftsfuehrer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Geschäftsf.: " :($P{Sprache}.equals("Englisch")) ? "CEO: ":""]]></variableExpression>
+	</variable>
+	<variable name="FUSS_USTID" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "UST.-Identnr.: " :($P{Sprache}.equals("Englisch")) ? "VAT Number:  ":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_Artikelbeschreibung" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Artikelbeschreibung" :($P{Sprache}.equals("Englisch")) ? "Description":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_Menge" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Menge" :($P{Sprache}.equals("Englisch")) ? "Quantity":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_Preis" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Preis / Einheit" :($P{Sprache}.equals("Englisch")) ? "Unit Price":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_Betrag" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Betrag" :($P{Sprache}.equals("Englisch")) ? "Line Total":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_MwSt" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "MwSt" :($P{Sprache}.equals("Englisch")) ? "Tax":""]]></variableExpression>
+	</variable>
+	<variable name="DETAIL_Zwischensumme" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Zwischensumme" :($P{Sprache}.equals("Englisch")) ? "Sub Total":""]]></variableExpression>
+	</variable>
+	<variable name="Zwischensumme_davor" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{Linegross}]]></variableExpression>
+	</variable>
+	<variable name="Quantity" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[(($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) && $F{article_type}.equals("type")) ? "" : ($F{quantity} + " " + $F{unit})]]></variableExpression>
+	</variable>
+	<variable name="Rabatt" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{discount} == null || $F{discount}.toString().equals("0")) ? "" : "-" + $F{discount} + "%"]]></variableExpression>
+	</variable>
+	<variable name="Einzelpreis" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[($F{discount} == null ? new java.math.BigDecimal(($F{quantity}.doubleValue() * $F{price}.doubleValue())) : new java.math.BigDecimal(($F{quantity}.doubleValue() * $F{price}.doubleValue())-(($F{quantity}.doubleValue() * $F{price}.doubleValue()))* $F{discount}.doubleValue()/100)).setScale(2, java.math.RoundingMode.HALF_UP)]]></variableExpression>
+	</variable>
+	<variable name="MwST_Single" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{tax}.doubleValue()).setScale(0, java.math.RoundingMode.HALF_UP)]]></variableExpression>
+	</variable>
+	<variable name="Zwischensumme_danach" class="java.math.BigDecimal" resetType="Group" resetGroup="bookingUID" calculation="Sum">
+		<variableExpression><![CDATA[$V{Linegross}]]></variableExpression>
+	</variable>
+	<variable name="Linegross" class="java.math.BigDecimal" resetType="None" incrementType="Column">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{quantity}.doubleValue() * $F{price}.doubleValue() - ($F{quantity}.doubleValue() * $F{price}.doubleValue() * $F{discount}.doubleValue() / 100)).setScale(2, java.math.RoundingMode.HALF_UP)]]></variableExpression>
+	</variable>
+	<variable name="v_current_page" class="java.lang.Integer" resetType="Page">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<group name="bookingUID">
+		<groupExpression><![CDATA[$F{uID}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<staticText>
+					<reportElement x="35" y="8" width="38" height="15" uuid="3acd8d43-e121-44dc-9399-33115b56368a">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Pos]]></text>
+				</staticText>
+				<line>
+					<reportElement x="35" y="30" width="516" height="1" uuid="31db4449-9493-4ce0-b3bf-6aa846ab8a84">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<textField>
+					<reportElement x="79" y="8" width="241" height="15" uuid="faa8219b-2cdf-42b0-a66c-4a329b02d0c0">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DETAIL_Artikelbeschreibung}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="330" y="8" width="54" height="15" uuid="9a54ad27-65ab-49c7-ae66-8cd7587c54fa">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DETAIL_Menge}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="370" y="8" width="78" height="15" uuid="91c7cbfd-e8c8-4821-9bfa-47695a7e7184">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DETAIL_Preis}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="478" y="8" width="40" height="15" uuid="626b1a4b-787f-4687-82a0-dbd4a3501b72">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DETAIL_Betrag}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="25" y="0" width="1" height="40" uuid="64875f84-dfed-4529-b428-9e31b92d85ae">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement x="25" y="0" width="536" height="1" printWhenGroupChanges="bookingUID" uuid="9f652b88-66e8-4775-95bc-8e864195f099">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement x="561" y="0" width="1" height="40" uuid="6ac37d0f-3198-4e5b-9d92-648a5e44c034">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<textField>
+					<reportElement x="519" y="8" width="32" height="15" uuid="5d83c08d-271e-4ac7-b3c2-69ecf4f3c7e8">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DETAIL_MwSt}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15" splitType="Prevent">
+				<line>
+					<reportElement x="25" y="10" width="536" height="1" uuid="cec03764-03ca-47f8-8639-837438170792">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="10" uuid="6dbe126f-babf-4277-b909-2cbdc4bd00d4">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="11" uuid="70c23caf-6d36-46c9-8562-0e3b7b24ce62">
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<subreport overflowType="Stretch">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="561" height="15" uuid="05b7be9c-e170-40cc-ba23-ea1580e8c81f">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} > 0]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="PrefixTable">
+						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Sprache">
+						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Dokumenttyp">
+						<subreportParameterExpression><![CDATA[$P{Dokumenttyp}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Articletype1">
+						<subreportParameterExpression><![CDATA[$P{Articletype1}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Articletype2">
+						<subreportParameterExpression><![CDATA[$P{Articletype2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Articletype3">
+						<subreportParameterExpression><![CDATA[$P{Articletype3}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Auftragsid">
+						<subreportParameterExpression><![CDATA[$P{Auftragsid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Report_description">
+						<subreportParameterExpression><![CDATA[$P{Report_description}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Statistics.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="271" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="25" y="108" width="254" height="124" uuid="5878cf48-be6d-4789-b99c-acfa4d90ca21">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="25" y="131" width="254" height="1" uuid="9919db5a-b191-4e4b-8378-8ee57b074fba">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="306" y="108" width="255" height="159" uuid="7d2255f6-79b3-4ad3-8bb3-a98bf4b69c57">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="310" y="113" width="105" height="15" uuid="0bf5b648-759f-43b4-8221-b98d566a4104">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Dokumentdatum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="128" width="87" height="15" uuid="facde546-1314-40aa-b36c-88f898091499">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Dokumentnummer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="143" width="105" height="15" uuid="a64ae5bc-0fab-47af-acbd-4ad4bfe778fc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Kundennummer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="158" width="105" height="15" uuid="1ce689a0-8e1a-4456-a364-b78624e6558d">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Ansprechpartner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="173" width="105" height="15" uuid="e21d8ce4-9213-4793-9717-6c4e025136ef">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Email Adresse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="188" width="105" height="15" uuid="f9c2070b-a63c-4772-83e2-e797fadfd6a9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Telefon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="203" width="105" height="15" uuid="f9ad505c-a04b-485e-9068-209a9420d9e0">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Referenz}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="218" width="105" height="15" uuid="882c2466-1139-45b3-b9c0-a0a06b25241d">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Bestelldatum}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="310" y="249" width="243" height="15" uuid="80dbf544-c3e2-442b-b5af-63fd1bab509f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Hinweis}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement x="341" y="113" width="216" height="15" printWhenGroupChanges="bookingUID" uuid="a917bcce-4ca6-4c67-b087-ad7021892ed0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_TypDatum}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="341" y="128" width="216" height="15" uuid="85e463a2-2dfc-4e27-b0e4-60ae3d5b7234">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{number} == null ? "" : $F{number}) + ($V{Angebotsrevision})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="341" y="143" width="216" height="15" uuid="1b770cb0-413f-4593-9cae-c058580a9eca">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{K4601}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="341" y="158" width="216" height="15" uuid="2d39cf54-402c-4a8c-9e06-978cca79cb78">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{W4101}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="341" y="203" width="216" height="15" uuid="fd32b6c9-c3b3-4f01-9b1b-5935ff86f5ba">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Referenznummer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement x="341" y="218" width="216" height="15" uuid="9712297e-7b39-4041-82dc-189d604003b7">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_BestDatum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="25" y="246" width="272" height="20" forecolor="#006BB3" uuid="9ff5b587-6290-4acb-a111-b890ae4d91fb">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{Sprache}.equals("Deutsch") || $P{Sprache}.equals("Englisch")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{KOPF_Betreff-Zeile-1} == null ? "" : $V{KOPF_Betreff-Zeile-1})+($V{Angebotsrevision})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="138" width="244" height="20" uuid="836210af-b690-447b-98c4-3c307b256b08">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Customer_Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement x="30" y="165" width="244" height="65" uuid="04531446-c7a6-41a6-878b-294cc016bc9c">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing"))]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{Billing_Contact}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement x="30" y="165" width="244" height="65" uuid="04531446-c7a6-41a6-878b-294cc016bc9c">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[(!$P{Dokumenttyp}.equals("Rechnung") && !$P{Dokumenttyp}.equals("Billing"))]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{Customer_Contact}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="310" y="233" width="105" height="15" uuid="3a3b330d-62ff-4e91-b3fa-60bf296a814d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KOPF_Liefertermin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement x="341" y="233" width="216" height="15" uuid="63423023-2939-4dc3-9034-77df0a3e8f01">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{W4109}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="30" y="110" width="244" height="20" uuid="82fc51c5-f03f-4544-adae-a971dccde821">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($P{Return_address}.replace("_s_", " ").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="341" y="173" width="216" height="15" uuid="9ce74528-ab23-4e19-94bb-53cd81bcc151">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Report_mail_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="341" y="188" width="216" height="15" uuid="e719020b-d56b-4283-8759-a6a8d58f871c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Report_phone_number}.replace("_s_", " ")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} >1]]></printWhenExpression>
+			<textField>
+				<reportElement x="25" y="0" width="56" height="18" uuid="c754994d-a223-4e56-96c6-7c390a48b004">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite  " + $V{PAGE_NUMBER}+ " von ") : ("Page " + $V{PAGE_NUMBER}+ " of ")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="254" height="18" uuid="b66c09e1-6e16-46e4-b68f-7409e6eaaec1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{KOPF_Betreff-Zeile-1} == null ? "" : $V{KOPF_Betreff-Zeile-1}+ " ")+($V{Angebotsrevision} == null ? "" : $V{Angebotsrevision}+ " ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="82" y="0" width="60" height="18" uuid="12e9bdd2-ec6a-460c-bd6b-0ca489843f84">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + ($P{Sprache}.equals("Deutsch") ? "  Seiten" : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Immediate">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<line>
+				<reportElement x="26" y="0" width="536" height="1" uuid="66451b6d-4259-47bd-bdf3-620946926954">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="25" y="0" width="1" height="30" uuid="d1036850-b477-4ebf-bc8f-2f83aca00be8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="561" y="0" width="1" height="30" uuid="c68dc11b-77e6-43df-9596-9acd72b392bd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="25" y="30" width="536" height="1" uuid="a0a65c21-f8a5-48c1-954d-935556b3fc72">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField evaluationTime="Band" pattern="#,##0.00#">
+				<reportElement x="441" y="3" width="108" height="25" uuid="d6882fd8-8264-4671-8b31-4a4df5ce29a6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Zwischensumme_davor} == null ? 0 : $V{Zwischensumme_davor} + "  €"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="20" uuid="8bb19082-425e-4854-b621-5abcf19b35a2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="20" uuid="c1896946-6f35-4b37-9ff5-e37b6b25970a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="35" y="0" width="42" height="20" uuid="a126ed98-ce5e-4609-9ebd-771b87c1dced">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{article_id} == null ? "" : $F{pos_number}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="385" y="0" width="62" height="20" uuid="e3c6a6ea-b112-4c92-8215-f58f9bc815fb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}.toString()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="80" y="0" width="242" height="20" uuid="add79233-1f56-4563-9725-593f9743c9e3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{article_type}.equals( "article" )]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{article_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="54" height="20" uuid="30b66047-b70e-4b57-a6fc-bff5f8fc53f0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="478" y="0" width="40" height="20" uuid="9b469f92-c811-4446-9488-0ab59f198289">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Einzelpreis}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="0" width="30" height="20" uuid="237ec9a3-591e-4255-9851-b5ce87afd733">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Rabatt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="0" width="32" height="20" uuid="b6b4d172-5525-48d6-b7d9-105a311ddf29"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{MwST_Single}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="80" y="0" width="242" height="20" uuid="325b1c32-2140-4184-a54e-0a18f1d7c700">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{article_type}.equals("type")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<printWhenExpression><![CDATA[(($V{PAGE_NUMBER} == 1 && $V{PAGE_COUNT} > 14) || ($V{PAGE_NUMBER} > 1 && $V{PAGE_COUNT} > 27))]]></printWhenExpression>
+			<textField>
+				<reportElement x="35" y="2" width="404" height="25" uuid="e3617674-5cbf-4534-889e-71e413a84f44">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{Zwischensumme_davor} == null ? "" : $V{DETAIL_Zwischensumme})]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Band" pattern="#,##0.00#">
+				<reportElement x="442" y="2" width="108" height="25" uuid="63fabf51-14c5-4a57-9fc7-80c891a15d24">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Zwischensumme_davor} == null ? "" : $V{Zwischensumme_davor} + "  €"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="25" y="0" width="1" height="30" uuid="11ee6e01-ec30-43f6-8b3a-e57e15484e50">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="561" y="0" width="1" height="30" uuid="dde976c9-4c68-4cae-b5f0-06cef0f4e6b5"/>
+			</line>
+			<line>
+				<reportElement x="25" y="0" width="536" height="1" uuid="98077ff5-34c2-4d0b-9f94-8ab5b21190c5">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="25" y="29" width="536" height="1" uuid="bf8d77ad-4fc6-406f-aeec-eab0b2881cd8">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+		</band>
+	</pageFooter>
+</jasperReport>
