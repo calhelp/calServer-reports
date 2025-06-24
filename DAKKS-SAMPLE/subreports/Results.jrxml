@@ -71,24 +71,24 @@
 	</variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[// Helper-Funktion für numerische Prüfung
-	        (
-	            ($F{tol_neg} != null && $F{tol_pos} != null &&
-	             $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
-	             $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
-	             Math.abs(
-	                 Double.parseDouble($F{tol_neg}.replace(",", "."))
-	                 - Double.parseDouble($F{tol_pos}.replace(",", "."))
-	             ) < 1e-9
-	            )
-	            // Wenn numerisch und gleich -> nur positiver Wert
-	            ? $F{tol_pos}.trim()
-	            // Sonst einfach beide Zeilen (egal ob Zahl oder nicht)
-	            : (
-	                ($F{tol_neg} != null ? $F{tol_neg}.trim() : "")
-	                + "\n"
-	                + ($F{tol_pos} != null ? $F{tol_pos}.trim() : "")
-	            )
-	        ).trim()]]></variableExpression>
+                ((
+                    $F{tol_neg} != null && $F{tol_pos} != null &&
+                    $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
+                    $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
+                    Math.abs(
+                        Math.abs(Double.parseDouble($F{tol_neg}.replace(",", "."))) -
+                        Math.abs(Double.parseDouble($F{tol_pos}.replace(",", ".")))
+                    ) < 1e-9
+                )
+                    // Wenn numerisch und der Betrag gleich ist -> ein Wert mit ±
+                    ? "± " + $F{tol_pos}.trim().replaceFirst("^[+-]", "")
+                    // Sonst beide Werte ausgeben (egal ob Zahl oder nicht)
+                    : (
+                        ($F{tol_neg} != null ? $F{tol_neg}.trim() : "") +
+                        "\n" +
+                        ($F{tol_pos} != null ? $F{tol_pos}.trim() : "")
+                    )
+                )).trim()]]></variableExpression>
 	</variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
 		<variableExpression><![CDATA[$F{tol_err}.trim().isEmpty()
