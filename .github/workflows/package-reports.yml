@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Upload both folders as artifact
+      - name: Upload DAKKS-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
           name: DAKKS-SAMPLE
@@ -17,3 +17,24 @@ jobs:
             DAKKS-SAMPLE/main_reports
             DAKKS-SAMPLE/subreports
           if-no-files-found: error
+      - name: Upload ORDER-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ORDER-SAMPLE
+          path: |
+            ORDER-SAMPLE/main_reports
+            ORDER-SAMPLE/subreports
+          if-no-files-found: error
+      - name: Create ZIP of DAKKS-SAMPLE
+        run: |
+          mkdir -p zip_output
+          zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports
+      - name: Send DAKKS-SAMPLE ZIP to API
+        env:
+          DOMAIN: ${{ secrets.API_DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.API_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.API_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          curl -X POST "https://${DOMAIN}/api/report/0ea8c25c-6409-67b5-9da2-66c41b27dc32?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
+            -F "file=@zip_output/dakks-sample.zip"
