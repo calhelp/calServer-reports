@@ -587,7 +587,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		</groupHeader>
 	</group>
 	<title>
-		<band height="759" splitType="Prevent">
+		<band height="793" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="17" y="370" width="134" height="30" uuid="6e73786e-fde1-4967-9ccb-5258187d7a90">
@@ -880,7 +880,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="16" y="749" width="535" height="1" uuid="d14783c6-e3cc-4217-a64f-df17f8f3e82a">
+				<reportElement x="16" y="773" width="535" height="1" uuid="d14783c6-e3cc-4217-a64f-df17f8f3e82a">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
