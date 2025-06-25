@@ -43,10 +43,11 @@ jobs:
 
       - name: Show ZIP contents (Debug)
         run: |
-          echo "🧾 Inhalt dakks-sample.zip:"
-          unzip -l zip_output/dakks-sample.zip
-          echo "🧾 Inhalt order-sample.zip:"
-          unzip -l zip_output/order-sample.zip
+            mkdir -p zip_output
+            cd DAKKS-SAMPLE
+            zip -r ../zip_output/dakks-sample.zip main_reports subreports -x "*.zip"
+            cd ../ORDER-SAMPLE
+            zip -r ../zip_output/order-sample.zip main_reports subreports -x "*.zip"
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
@@ -57,5 +58,7 @@ jobs:
         run: |
           curl -X POST "https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
             -F "file=@zip_output/dakks-sample.zip"
+
+        
 
     
