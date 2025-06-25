@@ -31,10 +31,10 @@ jobs:
           zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
-          DOMAIN: ${{ secrets.API_DOMAIN }}
-          HTTP_X_REST_USERNAME: ${{ secrets.API_USERNAME }}
-          HTTP_X_REST_PASSWORD: ${{ secrets.API_PASSWORD }}
-          HTTP_X_REST_API_KEY: ${{ secrets.API_KEY }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
         run: |
           curl -X POST "https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
             -F "file=@zip_output/dakks-sample.zip"
