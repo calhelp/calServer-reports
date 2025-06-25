@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Upload DAKKS-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -17,6 +18,7 @@ jobs:
             DAKKS-SAMPLE/main_reports
             DAKKS-SAMPLE/subreports
           if-no-files-found: error
+
       - name: Upload ORDER-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -25,10 +27,27 @@ jobs:
             ORDER-SAMPLE/main_reports
             ORDER-SAMPLE/subreports
           if-no-files-found: error
-      - name: Create ZIP of DAKKS-SAMPLE
+
+      - name: List files before zipping (Debug)
+        run: |
+          echo "📂 Inhalt von DAKKS-SAMPLE:"
+          find DAKKS-SAMPLE
+          echo "📂 Inhalt von ORDER-SAMPLE:"
+          find ORDER-SAMPLE
+
+      - name: Create ZIPs of both folders (excluding existing ZIPs)
         run: |
           mkdir -p zip_output
-          zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports
+          zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
+          zip -r zip_output/order-sample.zip ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
+
+      - name: Show ZIP contents (Debug)
+        run: |
+          echo "🧾 Inhalt dakks-sample.zip:"
+          unzip -l zip_output/dakks-sample.zip
+          echo "🧾 Inhalt order-sample.zip:"
+          unzip -l zip_output/order-sample.zip
+
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
           DOMAIN: ${{ secrets.DOMAIN }}
@@ -38,3 +57,5 @@ jobs:
         run: |
           curl -X POST "https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
             -F "file=@zip_output/dakks-sample.zip"
+
+    
