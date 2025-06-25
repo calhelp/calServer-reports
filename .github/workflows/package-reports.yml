@@ -36,5 +36,5 @@ jobs:
           HTTP_X_REST_PASSWORD: ${{ secrets.API_PASSWORD }}
           HTTP_X_REST_API_KEY: ${{ secrets.API_KEY }}
         run: |
-          curl -X POST "https://${DOMAIN}/api/report/0ea8c25c-6409-67b5-9da2-66c41b27dc32?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
+          curl -X POST "https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
             -F "file=@zip_output/dakks-sample.zip"
