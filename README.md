@@ -44,4 +44,18 @@ ORDER-SAMPLE/
 └── subreports/
 ```
 
+## Repository klonen und GitHub Action nutzen
+
+1. Dieses Projekt via
+   ```bash
+   git clone https://github.com/calhelp/calServer-reports.git
+   ```
+   lokal auschecken und die JRXML-Dateien im JasperReports Editor bearbeiten.
+2. Änderungen committen und auf deinen GitHub-Branch pushen.
+3. Die Workflow-Datei `.github/workflows/package-reports.yml` erstellt beim
+   Push automatisch ZIP-Archive der Verzeichnisse `main_reports` und
+   `subreports` und lädt sie über die API an deine calServer‑Instanz hoch. Hierfür
+   müssen die Zugangsdaten (`DOMAIN`, `HTTP_X_REST_USERNAME`,
+   `HTTP_X_REST_PASSWORD`, `HTTP_X_REST_API_KEY`) als Secrets hinterlegt sein.
+
 © calHelp / René Buske
