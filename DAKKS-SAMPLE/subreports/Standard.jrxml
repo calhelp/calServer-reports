@@ -183,7 +183,7 @@ GROUP BY t.C2430]]>
                                 </reportElement>
                         </line>
                         <line>
-                                <reportElement x="1" y="21" width="539" height="1" uuid="eed54ee2-48e5-4fda-8112-a2b36a267f7d">
+                                <reportElement x="1" y="20" width="539" height="1" uuid="eed54ee2-48e5-4fda-8112-a2b36a267f7d">
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
