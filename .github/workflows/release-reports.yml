@@ -1,0 +1,24 @@
+name: Release Reports
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create ZIP archives
+        run: |
+          mkdir -p release_zips
+          zip -r release_zips/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
+          zip -r release_zips/order-sample.zip ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
+
+      - name: Publish release on GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release_zips/*.zip
