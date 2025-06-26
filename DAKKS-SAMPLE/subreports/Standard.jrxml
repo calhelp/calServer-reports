@@ -61,129 +61,129 @@ GROUP BY t.C2430]]>
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="2" y="0" width="68" height="21" forecolor="#000000" backcolor="#E8E6E6" uuid="f08f8e14-abd2-442e-8898-304d142f1595">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="2" y="0" width="68" height="21" forecolor="#000000" backcolor="#F2F2F2" uuid="f08f8e14-abd2-442e-8898-304d142f1595">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Inv_Nr}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="71" y="0" width="104" height="21" backcolor="#E8E6E6" uuid="41f90429-f360-4c52-aec6-7ac664805370">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="71" y="0" width="104" height="21" backcolor="#F2F2F2" uuid="41f90429-f360-4c52-aec6-7ac664805370">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Description}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="176" y="0" width="78" height="21" backcolor="#E8E6E6" uuid="840c7a63-103f-4cb9-8d65-9618cb4c8fd6">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="176" y="0" width="78" height="21" backcolor="#F2F2F2" uuid="840c7a63-103f-4cb9-8d65-9618cb4c8fd6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Manufacturer}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="255" y="0" width="96" height="21" backcolor="#E8E6E6" uuid="bf220f4f-a0db-4dca-ad2f-919b68bbcb55">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="255" y="0" width="96" height="21" backcolor="#F2F2F2" uuid="bf220f4f-a0db-4dca-ad2f-919b68bbcb55">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Type}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="352" y="0" width="53" height="21" backcolor="#E8E6E6" uuid="4efcade6-a312-4f89-aa10-46343ff32c98">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="352" y="0" width="53" height="21" backcolor="#F2F2F2" uuid="4efcade6-a312-4f89-aa10-46343ff32c98">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Lastcal}]]></textFieldExpression>
 			</textField>
                         <line>
-                                <reportElement x="1" y="-1" width="539" height="1" uuid="d7c389b6-a414-4ded-88e2-d779c944aef3">
+                                <reportElement forecolor="#CCCCCC" x="1" y="-1" width="539" height="1" uuid="d7c389b6-a414-4ded-88e2-d779c944aef3">
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
                         </line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="1" y="-1" width="1" height="22" uuid="57ad07c3-c3de-4cbd-b343-4d2bdb3c6cb8">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="1" y="-1" width="1" height="22" uuid="57ad07c3-c3de-4cbd-b343-4d2bdb3c6cb8">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="540" y="-1" width="1" height="22" uuid="40e18a0d-ce0e-4400-b968-069fb18cdd71">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="540" y="-1" width="1" height="22" uuid="40e18a0d-ce0e-4400-b968-069fb18cdd71">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="70" y="0" width="1" height="21" uuid="d9dbcc1f-98a4-4adb-9a49-0fdd7b8ae0d4">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="70" y="0" width="1" height="21" uuid="d9dbcc1f-98a4-4adb-9a49-0fdd7b8ae0d4">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="175" y="0" width="1" height="21" uuid="85f37987-9bd4-4a7e-8a9f-f18e2f38606e">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="175" y="0" width="1" height="21" uuid="85f37987-9bd4-4a7e-8a9f-f18e2f38606e">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="254" y="0" width="1" height="21" uuid="64d54ddb-23a8-4560-8fed-11f136202aa5">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="254" y="0" width="1" height="21" uuid="64d54ddb-23a8-4560-8fed-11f136202aa5">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="351" y="0" width="1" height="21" uuid="e39c2888-3bc9-409c-8120-8cb1f1391675">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="351" y="0" width="1" height="21" uuid="e39c2888-3bc9-409c-8120-8cb1f1391675">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="406" y="0" width="53" height="21" backcolor="#E8E6E6" uuid="24d9bfbe-4650-495a-9247-17226ba95734">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="406" y="0" width="53" height="21" backcolor="#F2F2F2" uuid="24d9bfbe-4650-495a-9247-17226ba95734">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Duedate}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="460" y="0" width="80" height="21" backcolor="#E8E6E6" uuid="08991099-57f5-4013-8849-928ad1885811">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="460" y="0" width="80" height="21" backcolor="#F2F2F2" uuid="08991099-57f5-4013-8849-928ad1885811">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box padding="5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Calibration_mark}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="459" y="0" width="1" height="21" uuid="d0a3ae43-0892-4c91-9308-51bea5bc5d3d">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="459" y="0" width="1" height="21" uuid="d0a3ae43-0892-4c91-9308-51bea5bc5d3d">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
                         <line>
-                                <reportElement stretchType="ContainerHeight" x="405" y="0" width="1" height="21" uuid="9377853e-7c02-49a9-a1c4-f45ead19c34e">
+                                <reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="405" y="0" width="1" height="21" uuid="9377853e-7c02-49a9-a1c4-f45ead19c34e">
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
                         </line>
                         <line>
-                                <reportElement x="1" y="20" width="539" height="1" uuid="eed54ee2-48e5-4fda-8112-a2b36a267f7d">
+                                <reportElement forecolor="#CCCCCC" x="1" y="20" width="539" height="1" uuid="eed54ee2-48e5-4fda-8112-a2b36a267f7d">
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -199,7 +199,7 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
 			</textField>
@@ -209,7 +209,7 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
@@ -219,7 +219,7 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
@@ -228,7 +228,7 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                 </reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
@@ -238,59 +238,59 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="1" y="0" width="1" height="18" uuid="111a0b0d-61de-4a32-afaa-ff6fdf63b94f">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="1" y="0" width="1" height="18" uuid="111a0b0d-61de-4a32-afaa-ff6fdf63b94f">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="70" y="0" width="1" height="18" uuid="7daa5fd3-fcc0-488f-a5a1-209eb280cd13">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="70" y="0" width="1" height="18" uuid="7daa5fd3-fcc0-488f-a5a1-209eb280cd13">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="175" y="0" width="1" height="18" uuid="d9b90f07-50cc-49fb-ad8f-a9a9327e2bf7">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement stretchType="ContainerHeight" x="254" y="0" width="1" height="18" uuid="a44c32e5-dd2b-4188-b9cf-440609cb6a6d">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="175" y="0" width="1" height="18" uuid="d9b90f07-50cc-49fb-ad8f-a9a9327e2bf7">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="405" y="0" width="1" height="18" uuid="b146f9f4-1c79-4740-a606-8aa3bf1959fa">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="254" y="0" width="1" height="18" uuid="a44c32e5-dd2b-4188-b9cf-440609cb6a6d">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="351" y="0" width="1" height="18" uuid="2d3226da-8359-4baa-96e7-126fe7733694">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="405" y="0" width="1" height="18" uuid="b146f9f4-1c79-4740-a606-8aa3bf1959fa">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="1" y="0" width="540" height="1" uuid="ea1640e6-dc91-4757-8e0c-39ec609f01cb">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="351" y="0" width="1" height="18" uuid="2d3226da-8359-4baa-96e7-126fe7733694">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement forecolor="#CCCCCC" x="1" y="0" width="540" height="1" uuid="ea1640e6-dc91-4757-8e0c-39ec609f01cb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement stretchType="ContainerHeight" x="459" y="0" width="1" height="18" uuid="5e85eb35-80ae-434f-9ff1-2b44582a251d">
+				<reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="459" y="0" width="1" height="18" uuid="5e85eb35-80ae-434f-9ff1-2b44582a251d">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -301,7 +301,7 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                 </reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
 			</textField>
@@ -311,19 +311,19 @@ GROUP BY t.C2430]]>
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2364}]]></textFieldExpression>
 			</textField>
                         <line>
-                                <reportElement stretchType="ContainerHeight" x="540" y="0" width="1" height="18" uuid="02775489-a8f9-4764-b6e6-30717663214f">
+                                <reportElement forecolor="#CCCCCC" stretchType="ContainerHeight" x="540" y="0" width="1" height="18" uuid="02775489-a8f9-4764-b6e6-30717663214f">
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                 </reportElement>
 			</line>
 			<line>
-                                <reportElement x="1" y="18" width="540" height="1" uuid="b389f3de-3b6c-4444-a71a-9294959334a6">
+                                <reportElement forecolor="#CCCCCC" x="1" y="18" width="540" height="1" uuid="b389f3de-3b6c-4444-a71a-9294959334a6">
                                         <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                 </reportElement>
 			</line>
