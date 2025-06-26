@@ -25,6 +25,7 @@ In diesem Repository bündeln wir Beispielberichte (JRXML) für den calServer, s
 ## Was ist dieses Projekt?
 
 Dieses Repository ist der zentrale Ort zur **gemeinsamen Entwicklung, Pflege und Verbesserung von JasperReports-Vorlagen (JRXML)** für den calServer.  
+
 Es bietet:
 
 - **Beispielreports** zur Orientierung und als Startpunkt für eigene Anpassungen
