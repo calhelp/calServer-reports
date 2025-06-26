@@ -1,22 +1,98 @@
 # 📑 calServer Reports
 
-Dieses Repository bündelt Beispielberichte (JRXML) für den calServer. Die Ordner `DAKKS-SAMPLE` und `ORDER-SAMPLE` enthalten je einen Satz von `main_reports` und `subreports`, die als Vorlage oder Testbasis dienen.
+**Willkommen beim Community-Projekt für calServer Reportvorlagen!**  
+In diesem Repository bündeln wir Beispielberichte (JRXML) für den calServer, schaffen einen Raum für gemeinsames Bugfixing, aktiven Austausch und die nachhaltige Weiterentwicklung von Reportvorlagen.
+
+> **Hinweis:** Dieses Projekt richtet sich an alle calServer-Kund:innen und Anwender:innen, die Reports erstellen, anpassen oder verbessern möchten. Ziel ist es, die Qualität, Vielfalt und Praxistauglichkeit der Reports kontinuierlich zu steigern.
+
+---
+
+## 🌟 Übersicht
+
+- [Was ist dieses Projekt?](#was-ist-dieses-projekt)
+- [Projektstruktur & Beispielberichte](#projektstruktur--beispielberichte)
+- [Voraussetzungen](#voraussetzungen)
+- [Berichte im calServer hochladen](#berichte-im-calserver-hochladen)
+- [Skripte für Upload und Automatisierung](#skripte-für-upload-und-automatisierung)
+- [Repository klonen & Arbeiten mit GitHub Actions](#repository-klonen--arbeiten-mit-github-actions)
+- [Contributing & Community](#contributing--community)
+- [Fehler melden & Support](#fehler-melden--support)
+- [Lizenz](#lizenz)
+- [Kontakt & Dank](#kontakt--dank)
+
+---
+
+## Was ist dieses Projekt?
+
+Dieses Repository ist der zentrale Ort zur **gemeinsamen Entwicklung, Pflege und Verbesserung von JasperReports-Vorlagen (JRXML)** für den calServer.  
+Es bietet:
+
+- **Beispielreports** zur Orientierung und als Startpunkt für eigene Anpassungen
+- **Ordnerstrukturen für verschiedene Anwendungsfälle** (z. B. DAKKS-Berichte, Auftragsberichte)
+- **Community-getriebene Fehlerbehebung** (Bugfixing) und Feature-Requests
+- **Hilfestellung beim Hochladen, Testen und Deployen von Reports**
+
+---
+
+## Projektstruktur & Beispielberichte
+
+Die bereitgestellten Verzeichnisse gliedern sich wie folgt:
+
+```text
+DAKKS-SAMPLE/
+├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
+└── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+
+ORDER-SAMPLE/
+├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
+└── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
+
+scripts/
+└── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+````
+
+**Hinweis:** Die Beispiele sind bewusst generisch gehalten. Sie können direkt als Grundlage für eigene Anpassungen verwendet werden.
+
+---
+
+## Voraussetzungen
+
+* Aktive calServer-Instanz (Cloud oder On-Premise)
+* Zugang zur **Reportverwaltung** im calServer (Admin-Berechtigung)
+* JasperReports Editor (z. B. Jaspersoft Studio) zur Bearbeitung der JRXML-Dateien
+* Grundkenntnisse in Git und (optional) GitHub Actions
+
+---
 
 ## Berichte im calServer hochladen
 
-Die Registrierung neuer Reports erfolgt im Admin-Backend unter **Reportverwaltung**. Hier werden die hochgeladenen JRXML-Dateien mit Metadaten versehen. Wichtige Felder:
+Um eigene Reports in den calServer zu integrieren, befolge diese Schritte:
 
-- **Grid Name** – Zuordnung zum Modul, etwa INVENTORY oder CALIBRATION
-- **Schaltflächenname** – Name des Aufrufs im Frontend
-- **Vorlagenname / Verzeichnisname / Dateiname** – Pfad zur JRXML- oder PDF-Vorlage
-- **Format** – gewünschtes Ausgabeformat, z. B. `pdf`
-- **Enabled** – nur aktivierte Reports sind für Nutzer sichtbar
+1. **Navigiere ins Admin-Backend** → **Reportverwaltung**.
+2. Lade die gewünschte(n) JRXML-Datei(en) hoch und ergänze die Metadaten:
 
-Die physische JRXML-Datei muss im angegebenen Verzeichnis auf dem Server liegen. Statische PDF-Layouts können im Dialog **Vorlagendateien** per Drag‑&‑Drop hochgeladen werden. Weitere Anpassungen wie Variablen, Unterschriften oder Freigaberegeln lassen sich in den jeweiligen Bereichen der Reportverwaltung pflegen.
+   * **Grid Name**: Modulzuordnung, z. B. INVENTORY, CALIBRATION, ORDER.
+   * **Schaltflächenname**: Bezeichnung des Report-Buttons im Frontend.
+   * **Vorlagenname / Verzeichnisname / Dateiname**: Pfad zur JRXML- oder PDF-Vorlage auf dem Server.
+   * **Format**: z. B. `pdf` (weitere Formate wie HTML, XLSX nach Bedarf).
+   * **Enabled**: Nur aktivierte Reports sind für Nutzer\:innen sichtbar.
+3. **Speichern** und die physischen Dateien im angegebenen Verzeichnis ablegen.
 
-## Helferskript
+   * **Statische PDFs** können direkt im Dialog „Vorlagendateien“ per Drag & Drop hochgeladen werden.
+   * **Erweiterte Einstellungen** wie Variablen, Unterschriftenfelder oder Freigaberegeln lassen sich ebenfalls hier verwalten.
 
-Unter `scripts` liegt das Batch-Skript `dakks_upload_sample.bat`. Es packt einen Beispielordner in ein ZIP und sendet ihn via `curl` an die API des calServer. Vor dem Ausführen sind Domain, Nutzername, Passwort, API-Key und Report-ID im Skript anzupassen:
+**Praxis-Tipp:**
+Nutze Versionierung für Reports, um bei Fehlern jederzeit auf eine frühere Variante zurückzugreifen!
+
+---
+
+## Skripte für Upload und Automatisierung
+
+Im Ordner `scripts` findest du das Batch-Skript `dakks_upload_sample.bat`, das Beispielberichte als ZIP-Archiv an die calServer-API sendet.
+
+### Vorbereitung:
+
+Bearbeite vor Ausführung die folgenden Variablen im Skript:
 
 ```bat
 set DOMAIN=deine.domain.tld
@@ -26,36 +102,95 @@ set HTTP_X_REST_API_KEY=deinApiKey
 set REPORT_ID=cd5797da-e7a9-0bc6-fc73-dedc595bd59b
 ```
 
-Aufgerufen wird anschließend:
+### Ausführung:
 
 ```cmd
 dakks_upload_sample.bat
 ```
 
-## Verzeichnisübersicht
+Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API deiner calServer-Instanz hoch.
 
-```text
-DAKKS-SAMPLE/
-├── main_reports/
-└── subreports/
+---
 
-ORDER-SAMPLE/
-├── main_reports/
-└── subreports/
-```
+## Repository klonen & Arbeiten mit GitHub Actions
 
-## Repository klonen und GitHub Action nutzen
+1. **Repository klonen:**
 
-1. Dieses Projekt via
    ```bash
    git clone https://github.com/calhelp/calServer-reports.git
    ```
-   lokal auschecken und die JRXML-Dateien im JasperReports Editor bearbeiten.
-2. Änderungen committen und auf deinen GitHub-Branch pushen.
-3. Die Workflow-Datei `.github/workflows/package-reports.yml` erstellt beim
-   Push automatisch ZIP-Archive der Verzeichnisse `main_reports` und
-   `subreports` und lädt sie über die API an deine calServer‑Instanz hoch. Hierfür
-   müssen die Zugangsdaten (`DOMAIN`, `HTTP_X_REST_USERNAME`,
-   `HTTP_X_REST_PASSWORD`, `HTTP_X_REST_API_KEY`) als Secrets hinterlegt sein.
 
-© calHelp / René Buske
+2. **JRXML-Dateien bearbeiten** – Nutze Jaspersoft Studio oder einen anderen Editor.
+
+3. **Änderungen committen & pushen** – Schicke deine Anpassungen per Pull Request (siehe [Contributing](#contributing--community)).
+
+4. **Automatisiertes Deployment:**
+   Der Workflow `.github/workflows/package-reports.yml` erstellt bei jedem Push automatisch ZIP-Archive der Haupt- und Unterberichte und lädt diese – sofern eingerichtet – über die API an deine calServer-Instanz hoch.
+   Die dafür notwendigen Zugangsdaten werden sicher als GitHub Secrets verwaltet:
+
+   * `DOMAIN`
+   * `HTTP_X_REST_USERNAME`
+   * `HTTP_X_REST_PASSWORD`
+   * `HTTP_X_REST_API_KEY`
+
+---
+
+## Contributing & Community
+
+**Wir freuen uns auf deine Beiträge!**
+Egal ob Bugfix, Feature, Report-Idee oder Feedback – jede Unterstützung ist willkommen.
+
+**So bringst du dich ein:**
+
+1. Forke das Repository.
+2. Erstelle einen neuen Branch für deine Änderungen.
+3. Sende einen Pull Request mit einer kurzen, aussagekräftigen Beschreibung.
+4. Nutze die GitHub-Issue-Funktion, um Bugs zu melden oder Wünsche zu äußern.
+
+**Verhaltenskodex:**
+Wir legen Wert auf einen freundlichen, offenen und respektvollen Umgang. Bitte beachte die üblichen Community-Regeln.
+
+---
+
+## Fehler melden & Support
+
+Bei Fragen oder Problemen:
+
+* **Nutze die GitHub Issues:**
+  Beschreibe dein Anliegen so detailliert wie möglich (Schritte, Screenshot, ggf. calServer-Version).
+
+* **Support:**
+  Für individuellen Support, Anpassungen oder Schulungen rund um calServer-Reports kannst du dich gern an [calHelp](https://calhelp.de) wenden.
+
+---
+
+## Lizenz
+
+Dieses Projekt und die darin enthaltenen Beispielvorlagen stehen unter der [MIT-Lizenz](LICENSE), sofern im jeweiligen Unterordner oder in einzelnen Dateien nichts anderes vermerkt ist.
+
+---
+
+## Kontakt & Dank
+
+**calHelp / René Buske**
+Web: [calhelp.de](https://calhelp.de)
+E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
+
+---
+
+**Danke an alle Mitwirkenden und an die gesamte calServer-Community für Ideen, Feedback und gemeinsames Vorankommen!**
+
+---
+
+*Letzte Aktualisierung: 2025-06-26*
+
+```
+
+---
+
+**Vorteile dieser README:**
+- Ermöglicht neuen Nutzer:innen einen schnellen Einstieg ins Projekt.
+- Bietet eine strukturierte Übersicht über alle wichtigen Funktionen und Prozesse.
+- Regt zur aktiven Beteiligung an und schafft Transparenz über den Projektablauf.
+- Fördert gemeinsames Wachstum und Wissensaustausch in der calServer-Community.
+
