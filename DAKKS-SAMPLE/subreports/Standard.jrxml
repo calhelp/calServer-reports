@@ -26,8 +26,8 @@
 COALESCE(c.C2301, "") AS C2301, COALESCE(c.C2303, "") AS C2303, COALESCE(c.C2364, "") AS C2364
 FROM $P!{PrefixTable}standards t 
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430`=i.`MTAG`) 
-LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG`=i.`MTAG`) 
-WHERE t.CTAG = $P{P_CTAG} AND c.C2339 = 1 
+LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG`=i.`MTAG` AND c.C2339 = 1)
+WHERE t.CTAG = $P{P_CTAG}
 GROUP BY t.C2430]]>
 	</queryString>
 	<field name="I4201" class="java.lang.String"/>
