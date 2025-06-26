@@ -186,11 +186,3 @@ E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
 
 ```
 
----
-
-**Vorteile dieser README:**
-- Ermöglicht neuen Nutzer:innen einen schnellen Einstieg ins Projekt.
-- Bietet eine strukturierte Übersicht über alle wichtigen Funktionen und Prozesse.
-- Regt zur aktiven Beteiligung an und schafft Transparenz über den Projektablauf.
-- Fördert gemeinsames Wachstum und Wissensaustausch in der calServer-Community.
-
