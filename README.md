@@ -103,6 +103,12 @@ set HTTP_X_REST_API_KEY=deinApiKey
 set REPORT_ID=cd5797da-e7a9-0bc6-fc73-dedc595bd59b
 ```
 
+Die benötigte **Report-ID** kannst du direkt im calServer ermitteln: In der
+Berichtsübersicht öffnest du beim gewünschten Eintrag das Menü
+„**Actions**" und klickst auf **Copy ID**. Damit wird die eindeutige ID in
+deine Zwischenablage kopiert und lässt sich in der Variablen `REPORT_ID`
+einfügen.
+
 ### Ausführung:
 
 ```cmd
