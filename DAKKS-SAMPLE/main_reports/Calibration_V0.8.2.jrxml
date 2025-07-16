@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Calibration_V0.7.3.1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Calibration_V0.7.3.1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" isSummaryNewPage="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -982,7 +982,158 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 		</band>
 	</pageFooter>
-	<lastPageFooter>
-		<band height="74"/>
-	</lastPageFooter>
+        <lastPageFooter>
+                <band height="74"/>
+        </lastPageFooter>
+        <summary>
+                <band height="420">
+                        <textField>
+                                <reportElement x="16" y="0" width="535" height="20" uuid="19d94f5d-f62c-484f-b774-e4c21b50e8e0"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Reportpath: " + $P{Reportpath}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="20" width="535" height="20" uuid="6380408e-08a0-4543-a99d-934b96bd1f7d"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["PrefixTable: " + $P{PrefixTable}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="40" width="535" height="20" uuid="e4cfa43e-a284-41da-bb77-d8f3c5b6112a"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Sprache: " + $P{Sprache}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="60" width="535" height="20" uuid="fc735792-cb8f-4086-8ecd-fcd60055a22c"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["QR_Code_Value: " + $P{QR_Code_Value}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="80" width="535" height="20" uuid="a21b6b7f-daea-4de6-9794-5c746623fcd3"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["P_CTAG: " + $P{P_CTAG}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="100" width="535" height="20" uuid="be96b1d3-e20c-445c-8e1b-2e3ae7c52472"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Cert_description: " + $P{Cert_description}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="120" width="535" height="20" uuid="89a78dc7-3cf2-4b18-ac82-971959bdb31f"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Cert_description_1: " + $P{Cert_description_1}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="140" width="535" height="20" uuid="81d2d68e-16c3-4962-8f66-c47c356d733b"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Asset_description: " + $P{Asset_description}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="160" width="535" height="20" uuid="4794b99e-1fe5-4d5f-be7e-ceac390ce90f"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Results_description: " + $P{Results_description}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="180" width="535" height="20" uuid="df69b31e-8764-4271-8338-b9706a6b1b5a"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Measurements_description: " + $P{Measurements_description}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="200" width="535" height="20" uuid="49021c49-173c-41ae-832e-85f094b23c83"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Measurements_description_1: " + $P{Measurements_description_1}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="220" width="535" height="20" uuid="c7c85ce0-44cb-4cc7-8ace-1c98f65d5876"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Conformity_description_1: " + $P{Conformity_description_1}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="240" width="535" height="20" uuid="dff3317c-b574-4c7d-96b3-1a265c54b9a1"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Conformity_description_2: " + $P{Conformity_description_2}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="260" width="535" height="20" uuid="612aa598-bb63-485e-a424-f7817fd8aa63"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Conformity_description_3: " + $P{Conformity_description_3}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="280" width="535" height="20" uuid="31f3577c-aa9a-4515-b7a0-984f660e34e4"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Additional_information: " + $P{Additional_information}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="300" width="535" height="20" uuid="c2307dff-0354-4589-88a2-0f08f2750bc2"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Calibration_procedure_1: " + $P{Calibration_procedure_1}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="320" width="535" height="20" uuid="06ad6e64-c6d5-4f11-a87c-2b41f8ab275b"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Calibration_document: " + $P{Calibration_document}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="340" width="535" height="20" uuid="c88888c6-d628-4d46-b535-b24ec349fa8e"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Calibration_procedure_2: " + $P{Calibration_procedure_2}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="360" width="535" height="20" uuid="82da9a57-b3d6-4538-8978-615fab346b8c"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Cert_field: " + $P{Cert_field}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="380" width="535" height="20" uuid="75b990d7-8106-4ca5-9b6c-3ba6b2e317ad"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["P_Image_Path: " + $P{P_Image_Path}]]></textFieldExpression>
+                        </textField>
+                        <textField>
+                                <reportElement x="16" y="400" width="535" height="20" uuid="882e9063-15f8-4e2e-8194-eb7492caf2ff"/>
+                                <textElement verticalAlignment="Middle">
+                                        <font size="11"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["ExpUncType: " + $P{ExpUncType}]]></textFieldExpression>
+                        </textField>
+                </band>
+        </summary>
 </jasperReport>
