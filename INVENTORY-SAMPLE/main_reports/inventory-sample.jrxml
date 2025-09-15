@@ -784,6 +784,10 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 				<reportElement x="150" y="344" width="395" height="18" uuid="1eb4b398-2a5d-41a8-aae4-b47f5788bec5"/>
 				<textFieldExpression><![CDATA[$F{inv_I4299}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="16" y="206" width="76" height="22" uuid="a628a6a5-d299-49e1-9b80-d9ede77461ef"/>
+				<textFieldExpression><![CDATA[$F{loc_L2803}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
