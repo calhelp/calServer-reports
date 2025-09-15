@@ -13,23 +13,14 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="PrefixTable" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Sprache" class="java.lang.String">
-		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="P_MTAG" class="java.lang.String">
-		<defaultValueExpression><![CDATA["0000005005:1204109518"]]></defaultValueExpression>
-	</parameter>
-	<queryString language="SQL">
-		<![CDATA[SELECT C2301, COALESCE(C2314, "") AS C2314, COALESCE(C2341, "") AS C2341, COALESCE(C2307, "") AS C2307, COALESCE(C2303, "") AS C2303 FROM $P!{PrefixTable}calibration WHERE MTAG=$P{P_MTAG}]]>
-	</queryString>
-	<field name="C2301" class="java.lang.String"/>
-	<field name="C2314" class="java.lang.String"/>
-	<field name="C2341" class="java.lang.String"/>
-	<field name="C2307" class="java.lang.String"/>
-	<field name="C2303" class="java.lang.String"/>
+        <parameter name="Sprache" class="java.lang.String">
+                <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="C2301" class="java.lang.String"/>
+        <parameter name="C2314" class="java.lang.String"/>
+        <parameter name="C2341" class="java.lang.String"/>
+        <parameter name="C2307" class="java.lang.String"/>
+        <parameter name="C2303" class="java.lang.String"/>
 	<variable name="Calibration_title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierungen" : "Calibrations"]]></variableExpression>
 	</variable>
@@ -48,10 +39,9 @@
 	<variable name="Next_DueDate" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Nächste Kal" : "Next Due"]]></variableExpression>
 	</variable>
-	<group name="calibration"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+        <background>
+                <band splitType="Stretch"/>
+        </background>
 	<pageHeader>
 		<band height="72">
 			<textField>
@@ -185,7 +175,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{C2301}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="100" y="4" width="89" height="25" uuid="10c6d2e7-3e34-4eff-a70a-147355a4422d">
@@ -194,7 +184,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2314}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{C2314}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="200" y="5" width="165" height="25" uuid="bb4da48e-b59e-4fd7-a0dd-412a7fbac8fb">
@@ -204,7 +194,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2341}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{C2341}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="374" y="4" width="91" height="25" uuid="3d7bc564-ee06-4788-880d-7cea206d1593">
@@ -213,7 +203,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2307}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{C2307}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="475" y="4" width="74" height="25" uuid="2ed56792-da39-4fda-99cb-434fa9400673">
@@ -222,7 +212,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{C2303}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="12" y="0" width="1" height="32" uuid="590b409e-3b07-4add-9b17-cd4ecfe920b7">
