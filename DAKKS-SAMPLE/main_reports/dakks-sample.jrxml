@@ -997,7 +997,4 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 		</band>
 	</pageFooter>
-        <lastPageFooter>
-                <band height="74"/>
-        </lastPageFooter>
 </jasperReport>
