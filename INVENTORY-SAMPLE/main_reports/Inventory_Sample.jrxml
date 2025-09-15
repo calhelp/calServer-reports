@@ -22,10 +22,13 @@
 	<parameter name="P_MTAG" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
-	</parameter>
-	<queryString>
+        <parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
+                <defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ReportVersion" class="java.lang.String">
+                <defaultValueExpression><![CDATA["V0.1"]]></defaultValueExpression>
+        </parameter>
+        <queryString>
 		<![CDATA[SELECT i.MTAG, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4206, "") AS I4206, COALESCE(i.I4232, "") AS I4232, COALESCE(i.I4228, "") AS I4228, COALESCE(i.I4229, "") AS I4229, COALESCE(i.I4299, "") AS I4299,
 COALESCE(c.K4602, "") AS K4602, COALESCE(c.K4603, "") AS K4603, COALESCE(c.K4604, "") AS K4604, COALESCE(c.K4605, "") AS K4605, COALESCE(c.K4606, "") AS K4606, b.barcode_type, b.barcode_value
 FROM $P!{PrefixTable}inventory i
@@ -101,10 +104,20 @@ WHERE i.MTAG=$P{P_MTAG}]]>
 	<variable name="Zip" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "PLZ" : "Zip"]]></variableExpression>
 	</variable>
-	<title>
-		<band height="285" splitType="Stretch">
-			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-			<rectangle>
+<title>
+<band height="285" splitType="Stretch">
+<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+<textField>
+<reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="a0f8c523-c365-4853-93e8-85e6f5d4d77d">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+</reportElement>
+<textElement>
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
+</textField>
+<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="17" y="151" width="543" height="124" uuid="57f8e2b7-41b1-4221-868f-1fd20a9d76ae">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
