@@ -1,3 +1,4 @@
+---
 name: Package Reports
 
 on:
@@ -28,29 +29,42 @@ jobs:
             ORDER-SAMPLE/subreports
           if-no-files-found: error
 
-        - name: List files before zipping (Debug)
-          run: |
-            echo "📂 Inhalt von DAKKS-SAMPLE:"
-            find DAKKS-SAMPLE
-            echo "📂 Inhalt von ORDER-SAMPLE:"
-            find ORDER-SAMPLE
+      - name: Upload INVENTORY-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: INVENTORY-SAMPLE
+          path: |
+            INVENTORY-SAMPLE/main_reports
+            INVENTORY-SAMPLE/subreports
+          if-no-files-found: error
 
-        - name: Check JasperReports version
-          run: bash scripts/check_jasper_version.sh
+      - name: List files before zipping (Debug)
+        run: |
+          echo "📂 Inhalt von DAKKS-SAMPLE:"
+          find DAKKS-SAMPLE
+          echo "📂 Inhalt von ORDER-SAMPLE:"
+          find ORDER-SAMPLE
+          echo "📂 Inhalt von INVENTORY-SAMPLE:"
+          find INVENTORY-SAMPLE
 
-        - name: Create ZIPs of both folders (excluding existing ZIPs)
-          run: |
-            mkdir -p zip_output
-            zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
-            zip -r zip_output/order-sample.zip ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
+      - name: Check JasperReports version
+        run: bash scripts/check_jasper_version.sh
+
+      - name: Create ZIPs of all folders (excluding existing ZIPs)
+        run: |
+          mkdir -p zip_output
+          zip -r zip_output/dakks-sample.zip \
+            DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
+          zip -r zip_output/order-sample.zip \
+            ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
+          zip -r zip_output/inventory-sample.zip \
+            INVENTORY-SAMPLE/main_reports INVENTORY-SAMPLE/subreports -x "*.zip"
 
       - name: Show ZIP contents (Debug)
         run: |
-            mkdir -p zip_output
-            cd DAKKS-SAMPLE
-            zip -r ../zip_output/dakks-sample.zip main_reports subreports -x "*.zip"
-            cd ../ORDER-SAMPLE
-            zip -r ../zip_output/order-sample.zip main_reports subreports -x "*.zip"
+          unzip -l zip_output/dakks-sample.zip
+          unzip -l zip_output/order-sample.zip
+          unzip -l zip_output/inventory-sample.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
@@ -59,9 +73,9 @@ jobs:
           HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
           HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
         run: |
-          curl -X POST "https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b?HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}" \
+          REPORT_URL="https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
             -F "file=@zip_output/dakks-sample.zip"
-
-        
-
-    
