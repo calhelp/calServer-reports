@@ -102,41 +102,22 @@
                   : $F{tol_err}
               )]]></variableExpression>
 	</variable>
-	<variable name="FormattedUncertainty" class="java.lang.String">
-		<variableExpression><![CDATA[(
-	      $F{exp_uncert} == null || $F{exp_uncert}.trim().isEmpty()
-	    ) 
-	      ? ""
-	      : (
-	          $F{exp_uncert}.replace(",",".").matches("-?\\d+(\\.\\d+)?")
-	            ? (
-	                Double.parseDouble($F{exp_uncert}.replace(",", ".")) == 0.0
-	                  ? "0"
-	                  : (
-	                      "± " +
-	                      new java.text.DecimalFormat("0.00E0")
-	                        .format(Double.parseDouble($F{exp_uncert}.replace(",", ".")))
-	                        .replaceAll("E(\\+)?0$", "")
-	                        .replace("E", " ×10<sup>")
-	                      +
-	                      (
-	                        new java.text.DecimalFormat("0.00E0")
-	                          .format(Double.parseDouble($F{exp_uncert}.replace(",", ".")))
-	                          .matches(".*E(\\+)?0$")
-	                          ? ""
-	                          : "</sup>"
-	                      )
-	                    )
-	              )
-	            : $F{exp_uncert}
-	        )
-	      +
-	      (
-	        $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
-	          ? ""
-	          : " " + $F{exp_uncert_u}
-	      )]]></variableExpression>
-	</variable>
+        <variable name="FormattedUncertainty" class="java.lang.String">
+                <variableExpression><![CDATA[(
+              $F{exp_uncert_iso_e} == null || $F{exp_uncert_iso_e}.trim().isEmpty()
+            )
+              ? ""
+              : (
+                  $F{exp_uncert_iso_e}.trim().contains("<sup>")
+                    ? $F{exp_uncert_iso_e}.trim()
+                    : (
+                        $F{exp_uncert_iso_e}.trim().matches(".*\\d\\s*[eE]\\s*[+-]?\\d+.*")
+                          ? $F{exp_uncert_iso_e}.trim()
+                              .replaceAll("(?<=\\d)\\s*[eE]\\s*([+-]?\\d+)", " ×10<sup>$1</sup>")
+                          : $F{exp_uncert_iso_e}.trim()
+                      )
+                )]]></variableExpression>
+        </variable>
 	<variable name="SymbolStatus" class="java.lang.String">
 		<variableExpression><![CDATA[($F{remark}.trim().isEmpty())
             ? (
@@ -270,7 +251,7 @@
                                 <textElement markup="html">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[$F{exp_uncert_iso_e} == null || $F{exp_uncert_iso_e}.trim().isEmpty() ? "" : $F{exp_uncert_iso_e}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty() ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
                         </textField>
                         <textField textAdjust="StretchHeight">
                                 <reportElement x="475" y="0" width="40" height="20" uuid="ff778a2d-5eb9-4097-a4cc-1bd98afd0535"/>
