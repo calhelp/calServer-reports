@@ -47,10 +47,10 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 <parameter name="Report_description" class="java.lang.String">
-<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+<defaultValueExpression><![CDATA["Beispielauftrag"]]></defaultValueExpression>
 </parameter>
 <parameter name="ReportVersion" class="java.lang.String">
-<defaultValueExpression><![CDATA["V0.8"]]></defaultValueExpression>
+<defaultValueExpression><![CDATA["V0.8.1"]]></defaultValueExpression>
 </parameter>
 <queryString>
 		<![CDATA[SELECT b.uID, a.uID AS article_id, c.K4601, CONCAT_WS(" ", c.K4613, c.K4602) AS K4602, c.K4603, c.K4604, c.K4605, c.K4606, c.K4633, b.W4102,b.W4103, b.date, b.number, b.W4106, b.W4101, b.W4104, b.customer_KTAG, DATE_FORMAT(b.W4105, "%d.%m.%Y") AS W4105, W4108, IF(W4109 IS NULL OR TRIM(W4109) = "", "", DATE_FORMAT(STR_TO_DATE(W4109, '%Y-%m-%d'), '%d.%m.%Y')) AS W4109,
