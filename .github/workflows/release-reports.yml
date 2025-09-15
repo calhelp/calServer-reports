@@ -19,17 +19,17 @@ jobs:
 
       - name: Create ZIP archives
         run: |
-          mkdir -p release_zips
-          zip -r release_zips/dakks-sample.zip \
+          mkdir -p output
+          zip -r output/dakks-sample.zip \
             DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
-          zip -r release_zips/order-sample.zip \
+          zip -r output/order-sample.zip \
             ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
-          zip -r release_zips/inventory-sample.zip \
+          zip -r output/inventory-sample.zip \
             INVENTORY-SAMPLE/main_reports INVENTORY-SAMPLE/subreports -x "*.zip"
 
       - name: Publish release on GitHub
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
-          files: release_zips/*.zip
+          files: output/*.zip
           generate_release_notes: true
