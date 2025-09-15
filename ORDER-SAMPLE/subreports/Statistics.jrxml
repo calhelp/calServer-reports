@@ -126,7 +126,7 @@ GROUP BY tax]]>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 				</line>
-				<textField isStretchWithOverflow="true">
+				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToBandHeight" x="35" y="0" width="160" height="15" uuid="20074f80-45d6-4b04-9f19-3c54d94e394e">
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -135,7 +135,7 @@ GROUP BY tax]]>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$V{DETAIL_Discount}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="bookingID" isBlankWhenNull="true">
+				<textField textAdjust="StretchHeight" evaluationTime="Group" evaluationGroup="bookingID" isBlankWhenNull="true">
 					<reportElement stretchType="RelativeToBandHeight" x="451" y="0" width="100" height="15" uuid="a01b5b3e-22fd-4990-a127-610739f6d855">
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
@@ -196,7 +196,7 @@ GROUP BY tax]]>
 					</textElement>
 					<textFieldExpression><![CDATA[($V{Order_Total} == null ? 0 : $V{Order_Total}) + "  €"]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToBandHeight" x="35" y="42" width="516" height="26" uuid="486dc54f-7909-422e-bf3d-c0b3d4e859db">
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -234,7 +234,7 @@ GROUP BY tax]]>
 						<printWhenExpression><![CDATA[!$F{W4114}.toPlainString().equals("0")]]></printWhenExpression>
 					</reportElement>
 				</line>
-				<textField isStretchWithOverflow="true">
+				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToBandHeight" x="35" y="-12" width="100" height="15" uuid="6febf5fb-29b7-489c-b666-f0903c0f8d8c">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -246,7 +246,7 @@ GROUP BY tax]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{DETAIL_Discount_Max_Tax}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToBandHeight" x="135" y="-12" width="60" height="15" uuid="7aa02ae4-c2e5-4787-99db-fabfcc494d34">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -257,7 +257,7 @@ GROUP BY tax]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{DETAIL_Percent}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToBandHeight" x="451" y="-12" width="100" height="15" uuid="916f53c2-f4d9-4c52-8cb1-982ee8351bf4">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -324,7 +324,7 @@ GROUP BY tax]]>
 	<detail>
 		<band height="15" splitType="Prevent">
 			<printWhenExpression><![CDATA[!$F{tax}.toPlainString().equals("0")]]></printWhenExpression>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement stretchType="RelativeToBandHeight" x="35" y="0" width="100" height="15" uuid="60e6fc68-95e2-4d45-8365-fbe75a203b7b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -336,7 +336,7 @@ GROUP BY tax]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{DETAIL_Steuerbasisbeitrag}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement stretchType="RelativeToBandHeight" x="135" y="0" width="60" height="15" uuid="ae18fc17-edc5-4a4f-8514-e59b41486467">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -348,7 +348,7 @@ GROUP BY tax]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{DETAIL_Percent}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement stretchType="RelativeToBandHeight" x="451" y="0" width="100" height="15" uuid="bf7a1a73-6db3-4ba6-b957-7b11977a811a">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
