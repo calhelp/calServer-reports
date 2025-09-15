@@ -7,9 +7,9 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
-	<parameter name="PrefixTable" class="java.lang.String">
-		<defaultValueExpression><![CDATA["thermo_"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="PrefixTable" class="java.lang.String">
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Sprache" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
