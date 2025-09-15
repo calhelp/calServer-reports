@@ -567,10 +567,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
 				</textField>
-				<subreport>
-					<reportElement x="0" y="42" width="560" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
+                                <subreport>
+                                        <reportElement x="16" y="42" width="535" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
+                                                <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        </reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>

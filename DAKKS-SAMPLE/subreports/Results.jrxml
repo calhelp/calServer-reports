@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Results" pageWidth="560" pageHeight="842" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="12" bottomMargin="12" uuid="98765abc-1234-4ef7-9f12-9876543210ab">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Results" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="12" bottomMargin="12" uuid="98765abc-1234-4ef7-9f12-9876543210ab">
 	<parameter name="PrefixTable" class="java.lang.String"/>
 	<parameter name="P_CTAG" class="java.lang.String"/>
 	<parameter name="Debug" class="java.lang.String" isForPrompting="false">
@@ -162,49 +162,49 @@
 				<text><![CDATA[Beschreibung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="18" width="70" height="17" uuid="ebde96d9-e386-4c49-9caa-eddec5fe083c"/>
+                                <reportElement x="150" y="18" width="65" height="17" uuid="ebde96d9-e386-4c49-9caa-eddec5fe083c"/>
 				<textElement>
 					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sollwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="220" y="18" width="70" height="17" uuid="07d689a7-75db-40d1-8212-4d4c34ce9deb"/>
+                                <reportElement x="215" y="18" width="65" height="17" uuid="07d689a7-75db-40d1-8212-4d4c34ce9deb"/>
 				<textElement>
 					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Messwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="18" width="90" height="17" uuid="8121cbbe-d65d-4198-9b1e-851b4d4c1cbd"/>
+                                <reportElement x="280" y="18" width="85" height="17" uuid="8121cbbe-d65d-4198-9b1e-851b4d4c1cbd"/>
 				<textElement>
 					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Zul. Abweichung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="18" width="70" height="17" uuid="26623eb4-b64b-4b31-aba1-8bad9fa3885b"/>
+                                <reportElement x="365" y="18" width="65" height="17" uuid="26623eb4-b64b-4b31-aba1-8bad9fa3885b"/>
 				<textElement>
 					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOL %]]></text>
 			</staticText>
                         <staticText>
-                                <reportElement x="450" y="18" width="45" height="17" uuid="cd094d04-c8d5-4314-bf7f-1969a1135d94"/>
+                                <reportElement x="430" y="18" width="45" height="17" uuid="cd094d04-c8d5-4314-bf7f-1969a1135d94"/>
                                 <textElement>
                                         <font fontName="Arial" size="9" isBold="true"/>
                                 </textElement>
                                 <text><![CDATA[MU-E]]></text>
                         </staticText>
                         <staticText>
-                                <reportElement x="495" y="18" width="45" height="17" uuid="ec32bb46-f2ab-4c57-a80a-f5b7ad02ba94"/>
+                                <reportElement x="475" y="18" width="40" height="17" uuid="ec32bb46-f2ab-4c57-a80a-f5b7ad02ba94"/>
                                 <textElement>
                                         <font fontName="Arial" size="9" isBold="true"/>
                                 </textElement>
                                 <text><![CDATA[MU-P]]></text>
                         </staticText>
                         <staticText>
-                                <reportElement x="540" y="18" width="20" height="17" uuid="46d4edac-188a-41bc-8743-a23bac3dd1d8"/>
+                                <reportElement x="515" y="18" width="20" height="17" uuid="46d4edac-188a-41bc-8743-a23bac3dd1d8"/>
                                 <textElement textAlignment="Right">
                                         <font fontName="Arial" size="9" isBold="true"/>
                                 </textElement>
@@ -238,49 +238,49 @@
                       )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="0" width="70" height="20" uuid="135ae340-9dd0-41c8-a4c7-d5a43ef9b6b2"/>
+                                <reportElement x="150" y="0" width="65" height="20" uuid="135ae340-9dd0-41c8-a4c7-d5a43ef9b6b2"/>
 				<textElement>
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="220" y="0" width="70" height="20" uuid="f6b0d7e3-363b-47b3-9fb9-7131daffb9ee"/>
+                                <reportElement x="215" y="0" width="65" height="20" uuid="f6b0d7e3-363b-47b3-9fb9-7131daffb9ee"/>
 				<textElement>
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="0" width="90" height="20" uuid="91ae59df-eea5-403c-971f-c9dfaeb60086"/>
+                                <reportElement x="280" y="0" width="85" height="20" uuid="91ae59df-eea5-403c-971f-c9dfaeb60086"/>
 				<textElement>
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{ToleranceRange}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="70" height="20" uuid="3a4230cc-41ec-4702-b731-8ecb0797963a"/>
+                                <reportElement x="365" y="0" width="65" height="20" uuid="3a4230cc-41ec-4702-b731-8ecb0797963a"/>
 				<textElement markup="html">
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 			</textField>
                         <textField textAdjust="StretchHeight">
-                                <reportElement x="450" y="0" width="45" height="20" uuid="29af6774-21c4-43ea-a10d-ebb47a6ebed6"/>
+                                <reportElement x="430" y="0" width="45" height="20" uuid="29af6774-21c4-43ea-a10d-ebb47a6ebed6"/>
                                 <textElement markup="html">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$F{exp_uncert_iso_e} == null || $F{exp_uncert_iso_e}.trim().isEmpty() ? "" : $F{exp_uncert_iso_e}]]></textFieldExpression>
                         </textField>
                         <textField textAdjust="StretchHeight">
-                                <reportElement x="495" y="0" width="45" height="20" uuid="ff778a2d-5eb9-4097-a4cc-1bd98afd0535"/>
+                                <reportElement x="475" y="0" width="40" height="20" uuid="ff778a2d-5eb9-4097-a4cc-1bd98afd0535"/>
                                 <textElement markup="html">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$F{exp_uncert_iso_p} == null || $F{exp_uncert_iso_p}.trim().isEmpty() ? "" : $F{exp_uncert_iso_p}]]></textFieldExpression>
                         </textField>
                         <textField>
-                                <reportElement x="540" y="0" width="20" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
+                                <reportElement x="515" y="0" width="20" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
                                 <textElement textAlignment="Right">
                                         <font fontName="Arial" size="8"/>
                                 </textElement>
