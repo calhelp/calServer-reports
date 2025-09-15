@@ -22,13 +22,12 @@
 		<defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[SELECT COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4204, "") AS I4204,
+		<![CDATA[SELECT DISTINCT COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4204, "") AS I4204,
 COALESCE(c.C2301, "") AS C2301, COALESCE(c.C2303, "") AS C2303, COALESCE(c.C2364, "") AS C2364
 FROM $P!{PrefixTable}standards t 
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430`=i.`MTAG`) 
 LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG`=i.`MTAG` AND c.C2339 = 1)
-WHERE t.CTAG = $P{P_CTAG}
-GROUP BY t.C2430]]>
+WHERE t.CTAG = $P{P_CTAG}]]>
 	</queryString>
 	<field name="I4201" class="java.lang.String"/>
 	<field name="I4202" class="java.lang.String"/>
