@@ -232,8 +232,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1a}]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
+                        <textField textAdjust="StretchHeight">
+                                        <reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -270,9 +270,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<font size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1c}]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="20" uuid="3539430e-8b02-4f1c-9782-73125f58696c">
+                        </textField>
+                        <textField textAdjust="StretchHeight">
+                                        <reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="20" uuid="3539430e-8b02-4f1c-9782-73125f58696c">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<textElement verticalAlignment="Middle">
@@ -840,15 +840,15 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
-                        <textField isStretchWithOverflow="true" textAdjust="StretchHeight">
-                                <reportElement positionType="Float" x="329" y="423" width="222" height="237" uuid="63ba20c4-fdad-4cef-8538-a07589d41d75"/>
-				<textElement textAlignment="Justified">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new String($P{Cert_description}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
-			</textField>
-                        <textField isStretchWithOverflow="true" textAdjust="StretchHeight">
-                                <reportElement positionType="Float" x="16" y="677" width="535" height="21" uuid="470997ee-2360-4f40-8dc0-1cd01e68aa01">
+                        <textField textAdjust="ScaleFont">
+                                <reportElement x="329" y="423" width="222" height="237" uuid="63ba20c4-fdad-4cef-8538-a07589d41d75"/>
+                                <textElement textAlignment="Justified">
+                                        <font size="9"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[new String($P{Cert_description}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
+                        </textField>
+                        <textField textAdjust="ScaleFont">
+                                <reportElement x="16" y="677" width="535" height="21" uuid="470997ee-2360-4f40-8dc0-1cd01e68aa01">
                                         <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
                                 </reportElement>
                                 <textElement textAlignment="Justified">

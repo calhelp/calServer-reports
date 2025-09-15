@@ -120,8 +120,6 @@ dakks_upload_sample.bat
 
 Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API deiner calServer-Instanz hoch.
 
----
-
 ## Repository klonen & Arbeiten mit GitHub Actions
 
 1. **Repository klonen:**
