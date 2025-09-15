@@ -222,7 +222,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="Page_count" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
-	<group name="Group1" isStartNewPage="true">
+        <group name="Group1" isStartNewPage="false">
 		<groupHeader>
 			<band height="60">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
