@@ -54,12 +54,23 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<variable name="Duedate" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "nächste Kal" : "Cal Due"]]></variableExpression>
 	</variable>
-	<variable name="Calibration_mark" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierkennzeichnung" : "Calibration-Mark"]]></variableExpression>
-	</variable>
+        <variable name="Calibration_mark" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierkennzeichnung" : "Calibration-Mark"]]></variableExpression>
+        </variable>
+        <title>
+                <band height="22">
+                        <textField>
+                                <reportElement x="0" y="0" width="535" height="22" uuid="4cc0d0da-854f-4db1-b3c1-8c1acbbf9fb7"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                        <font fontName="Arial" size="10" isBold="true"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["STANDARD SUBREPORT LÄUFT"]]></textFieldExpression>
+                        </textField>
+                </band>
+        </title>
         <columnHeader>
                 <band height="18" splitType="Stretch">
-			<textField>
+                        <textField>
                                 <reportElement x="0" y="0" width="75" height="18" backcolor="#F2F2F2" uuid="fc29e98b-b159-4cc3-a555-602e348eb0c6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
