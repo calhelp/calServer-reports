@@ -12,27 +12,18 @@
     <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
     <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
     <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-    <parameter name="PrefixTable" class="java.lang.String">
-        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
     <parameter name="Sprache" class="java.lang.String">
         <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
     </parameter>
-    <parameter name="P_MTAG" class="java.lang.String">
-        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
-    <queryString language="SQL">
-        <![CDATA[SELECT L2801, L2802, L2803, L2804, L2806, L2807, L2809, L2815, L2816 FROM $P!{PrefixTable}location WHERE MTAG=$P{P_MTAG}]]>
-    </queryString>
-    <field name="L2801" class="java.lang.String"/>
-    <field name="L2802" class="java.lang.String"/>
-    <field name="L2803" class="java.lang.String"/>
-    <field name="L2804" class="java.lang.String"/>
-    <field name="L2806" class="java.lang.String"/>
-    <field name="L2807" class="java.lang.String"/>
-    <field name="L2809" class="java.lang.String"/>
-    <field name="L2815" class="java.lang.String"/>
-    <field name="L2816" class="java.lang.String"/>
+    <parameter name="L2801" class="java.lang.String"/>
+    <parameter name="L2802" class="java.lang.String"/>
+    <parameter name="L2803" class="java.lang.String"/>
+    <parameter name="L2804" class="java.lang.String"/>
+    <parameter name="L2806" class="java.lang.String"/>
+    <parameter name="L2807" class="java.lang.String"/>
+    <parameter name="L2809" class="java.lang.String"/>
+    <parameter name="L2815" class="java.lang.String"/>
+    <parameter name="L2816" class="java.lang.String"/>
     <variable name="Loc1" class="java.lang.String" resetType="None">
         <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Ort 1" : "Location 1"]]></variableExpression>
     </variable>
@@ -143,63 +134,63 @@
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2801}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2801}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="72" y="0" width="60" height="25" uuid="aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2802}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2802}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="132" y="0" width="60" height="25" uuid="aaaaaaa3-aaaa-aaaa-aaaa-aaaaaaaaaaa3"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2803}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2803}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="192" y="0" width="60" height="25" uuid="aaaaaaa4-aaaa-aaaa-aaaa-aaaaaaaaaaa4"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2804}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2804}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="252" y="0" width="60" height="25" uuid="aaaaaaa5-aaaa-aaaa-aaaa-aaaaaaaaaaa5"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2806}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2806}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="312" y="0" width="60" height="25" uuid="aaaaaaa6-aaaa-aaaa-aaaa-aaaaaaaaaaa6"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2807}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2807}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="372" y="0" width="60" height="25" uuid="aaaaaaa7-aaaa-aaaa-aaaa-aaaaaaaaaaa7"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2809}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2809}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="432" y="0" width="60" height="25" uuid="aaaaaaa8-aaaa-aaaa-aaaa-aaaaaaaaaaa8"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2815}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2815}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement x="492" y="0" width="63" height="25" uuid="aaaaaaa9-aaaa-aaaa-aaaa-aaaaaaaaaaa9"/>
                 <textElement verticalAlignment="Middle">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{L2816}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{L2816}]]></textFieldExpression>
             </textField>
         </band>
     </detail>
