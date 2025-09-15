@@ -47,9 +47,6 @@ jobs:
           echo "📂 Inhalt von INVENTORY-SAMPLE:"
           find INVENTORY-SAMPLE
 
-      - name: Check JasperReports version
-        run: bash scripts/check_jasper_version.sh
-
       - name: Create ZIPs of all folders (excluding existing ZIPs)
         run: |
           mkdir -p zip_output
