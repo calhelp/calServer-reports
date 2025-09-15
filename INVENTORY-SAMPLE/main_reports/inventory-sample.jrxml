@@ -28,32 +28,419 @@
         <parameter name="ReportVersion" class="java.lang.String">
                 <defaultValueExpression><![CDATA["V0.1"]]></defaultValueExpression>
         </parameter>
-        <queryString>
-		<![CDATA[SELECT i.MTAG, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4206, "") AS I4206, COALESCE(i.I4232, "") AS I4232, COALESCE(i.I4228, "") AS I4228, COALESCE(i.I4229, "") AS I4229, COALESCE(i.I4299, "") AS I4299,
-COALESCE(c.K4602, "") AS K4602, COALESCE(c.K4603, "") AS K4603, COALESCE(c.K4604, "") AS K4604, COALESCE(c.K4605, "") AS K4605, COALESCE(c.K4606, "") AS K4606, b.barcode_type, b.barcode_value
+                <queryString>
+                <![CDATA[SELECT i.*, COALESCE(c.K4602, '') AS K4602, COALESCE(c.K4603, '') AS K4603, COALESCE(c.K4604, '') AS K4604, COALESCE(c.K4605, '') AS K4605, COALESCE(c.K4606, '') AS K4606, b.barcode_type, b.barcode_value
 FROM $P!{PrefixTable}inventory i
 LEFT JOIN $P!{PrefixTable}customers c on i.ktag=c.KTAG
 LEFT JOIN $P!{PrefixTable}barcode b on i.MTAG=b.barcode_key
 WHERE i.MTAG=$P{P_MTAG}]]>
-	</queryString>
-	<field name="MTAG" class="java.lang.String"/>
-	<field name="I4201" class="java.lang.String"/>
-	<field name="I4202" class="java.lang.String"/>
-	<field name="I4203" class="java.lang.String"/>
-	<field name="I4204" class="java.lang.String"/>
-	<field name="I4206" class="java.lang.String"/>
-	<field name="I4228" class="java.lang.String"/>
-	<field name="I4229" class="java.lang.String"/>
-	<field name="I4232" class="java.lang.String"/>
-	<field name="I4299" class="java.lang.String"/>
-	<field name="K4602" class="java.lang.String"/>
-	<field name="K4603" class="java.lang.String"/>
-	<field name="K4604" class="java.lang.String"/>
-	<field name="K4605" class="java.lang.String"/>
-	<field name="K4606" class="java.lang.String"/>
-	<field name="barcode_type" class="java.lang.String"/>
-	<field name="barcode_value" class="java.lang.String"/>
-	<variable name="Inventory_title" class="java.lang.String" resetType="None">
+        </queryString>
+        <field name="MTAG" class="java.lang.String"/>
+        <field name="KTAG" class="java.lang.String"/>
+        <field name="I2801" class="java.lang.String"/>
+        <field name="I2802" class="java.lang.String"/>
+        <field name="I2803" class="java.lang.String"/>
+        <field name="I2804" class="java.lang.String"/>
+        <field name="I2805" class="java.lang.String"/>
+        <field name="I2806" class="java.lang.String"/>
+        <field name="I2807" class="java.lang.String"/>
+        <field name="I2808" class="java.lang.String"/>
+        <field name="I2809" class="java.lang.String"/>
+        <field name="I2810" class="java.lang.String"/>
+        <field name="I2811" class="java.lang.String"/>
+        <field name="I2812" class="java.lang.String"/>
+        <field name="I2813" class="java.lang.String"/>
+        <field name="I2814" class="java.lang.String"/>
+        <field name="I2815" class="java.lang.String"/>
+        <field name="I2816" class="java.lang.String"/>
+        <field name="I2817" class="java.lang.String"/>
+        <field name="I2818" class="java.lang.String"/>
+        <field name="I2819" class="java.lang.String"/>
+        <field name="I2820" class="java.lang.String"/>
+        <field name="I2821" class="java.lang.String"/>
+        <field name="I2822" class="java.lang.String"/>
+        <field name="I2823" class="java.lang.String"/>
+        <field name="I2824" class="java.lang.String"/>
+        <field name="I2825" class="java.lang.String"/>
+        <field name="I2826" class="java.lang.String"/>
+        <field name="I2827" class="java.lang.String"/>
+        <field name="I2828" class="java.lang.String"/>
+        <field name="I2829" class="java.lang.String"/>
+        <field name="I2830" class="java.lang.String"/>
+        <field name="I2831" class="java.lang.String"/>
+        <field name="I2832" class="java.lang.String"/>
+        <field name="I2833" class="java.lang.String"/>
+        <field name="I2834" class="java.lang.String"/>
+        <field name="I2835" class="java.lang.String"/>
+        <field name="I2836" class="java.lang.String"/>
+        <field name="I2837" class="java.lang.String"/>
+        <field name="I2838" class="java.lang.String"/>
+        <field name="I2839" class="java.lang.String"/>
+        <field name="I2840" class="java.lang.String"/>
+        <field name="I2841" class="java.lang.String"/>
+        <field name="I2842" class="java.lang.String"/>
+        <field name="I2843" class="java.lang.String"/>
+        <field name="I2844" class="java.lang.String"/>
+        <field name="I2845" class="java.lang.String"/>
+        <field name="I2846" class="java.lang.String"/>
+        <field name="I2847" class="java.lang.String"/>
+        <field name="I2848" class="java.lang.String"/>
+        <field name="I2849" class="java.lang.String"/>
+        <field name="I2850" class="java.lang.String"/>
+        <field name="I2851" class="java.lang.String"/>
+        <field name="I2852" class="java.lang.String"/>
+        <field name="I2853" class="java.lang.String"/>
+        <field name="I2854" class="java.lang.String"/>
+        <field name="I2855" class="java.lang.String"/>
+        <field name="I2856" class="java.lang.String"/>
+        <field name="I2857" class="java.lang.String"/>
+        <field name="I2858" class="java.lang.String"/>
+        <field name="I2859" class="java.lang.String"/>
+        <field name="I2860" class="java.lang.String"/>
+        <field name="I2861" class="java.lang.String"/>
+        <field name="I2862" class="java.lang.String"/>
+        <field name="I2863" class="java.lang.String"/>
+        <field name="I2864" class="java.lang.String"/>
+        <field name="I2865" class="java.lang.String"/>
+        <field name="I2866" class="java.lang.String"/>
+        <field name="I2867" class="java.lang.String"/>
+        <field name="I2868" class="java.lang.String"/>
+        <field name="I2869" class="java.lang.String"/>
+        <field name="I2870" class="java.lang.String"/>
+        <field name="I2871" class="java.lang.String"/>
+        <field name="I2872" class="java.lang.String"/>
+        <field name="I2873" class="java.lang.String"/>
+        <field name="I2874" class="java.lang.String"/>
+        <field name="I2875" class="java.lang.String"/>
+        <field name="I2876" class="java.lang.String"/>
+        <field name="I2877" class="java.lang.String"/>
+        <field name="I2878" class="java.lang.String"/>
+        <field name="I2879" class="java.lang.String"/>
+        <field name="I2880" class="java.lang.String"/>
+        <field name="I2881" class="java.lang.String"/>
+        <field name="I2882" class="java.lang.String"/>
+        <field name="I2883" class="java.lang.String"/>
+        <field name="I2884" class="java.lang.String"/>
+        <field name="I2885" class="java.lang.String"/>
+        <field name="I2886" class="java.lang.String"/>
+        <field name="I2887" class="java.lang.String"/>
+        <field name="I2888" class="java.lang.String"/>
+        <field name="I2889" class="java.lang.String"/>
+        <field name="I2890" class="java.lang.String"/>
+        <field name="I2891" class="java.lang.String"/>
+        <field name="I2892" class="java.lang.String"/>
+        <field name="I2893" class="java.lang.String"/>
+        <field name="I2894" class="java.lang.String"/>
+        <field name="I2895" class="java.lang.String"/>
+        <field name="I2896" class="java.lang.String"/>
+        <field name="I2897" class="java.lang.String"/>
+        <field name="I2898" class="java.lang.String"/>
+        <field name="I2899" class="java.lang.String"/>
+        <field name="I4201" class="java.lang.String"/>
+        <field name="I4202" class="java.lang.String"/>
+        <field name="I4203" class="java.lang.String"/>
+        <field name="I4204" class="java.lang.String"/>
+        <field name="I4205" class="java.lang.String"/>
+        <field name="I4206" class="java.lang.String"/>
+        <field name="I4207" class="java.lang.String"/>
+        <field name="I4208" class="java.lang.String"/>
+        <field name="I4209" class="java.lang.String"/>
+        <field name="I4210" class="java.lang.String"/>
+        <field name="I4211" class="java.lang.String"/>
+        <field name="I4212" class="java.lang.String"/>
+        <field name="I4213" class="java.lang.String"/>
+        <field name="I4214" class="java.lang.String"/>
+        <field name="I4215" class="java.lang.String"/>
+        <field name="I4216" class="java.lang.String"/>
+        <field name="I4217" class="java.lang.String"/>
+        <field name="I4218" class="java.lang.String"/>
+        <field name="I4219" class="java.lang.String"/>
+        <field name="I4220" class="java.lang.String"/>
+        <field name="I4221" class="java.lang.String"/>
+        <field name="I4222" class="java.lang.String"/>
+        <field name="I4223" class="java.lang.String"/>
+        <field name="I4224" class="java.lang.String"/>
+        <field name="I4225" class="java.lang.String"/>
+        <field name="I4226" class="java.lang.String"/>
+        <field name="I4227" class="java.lang.String"/>
+        <field name="I4228" class="java.lang.String"/>
+        <field name="I4229" class="java.lang.String"/>
+        <field name="I4230" class="java.lang.String"/>
+        <field name="I4231" class="java.lang.String"/>
+        <field name="I4232" class="java.lang.String"/>
+        <field name="I4233" class="java.lang.String"/>
+        <field name="I4234" class="java.lang.String"/>
+        <field name="I4235" class="java.lang.String"/>
+        <field name="I4236" class="java.lang.String"/>
+        <field name="I4237" class="java.lang.String"/>
+        <field name="I4238" class="java.lang.String"/>
+        <field name="I4239" class="java.lang.String"/>
+        <field name="I4240" class="java.lang.String"/>
+        <field name="I4241" class="java.lang.String"/>
+        <field name="I4242" class="java.lang.String"/>
+        <field name="I4243" class="java.lang.String"/>
+        <field name="I4244" class="java.lang.String"/>
+        <field name="I4245" class="java.lang.String"/>
+        <field name="I4246" class="java.lang.String"/>
+        <field name="I4247" class="java.lang.String"/>
+        <field name="I4248" class="java.lang.String"/>
+        <field name="I4249" class="java.lang.String"/>
+        <field name="I4250" class="java.lang.String"/>
+        <field name="I4251" class="java.lang.String"/>
+        <field name="I4252" class="java.lang.String"/>
+        <field name="I4253" class="java.lang.String"/>
+        <field name="I4254" class="java.lang.String"/>
+        <field name="I4255" class="java.lang.String"/>
+        <field name="I4256" class="java.lang.String"/>
+        <field name="I4257" class="java.lang.String"/>
+        <field name="I4258" class="java.lang.String"/>
+        <field name="I4259" class="java.lang.String"/>
+        <field name="I4260" class="java.lang.String"/>
+        <field name="I4261" class="java.lang.String"/>
+        <field name="I4262" class="java.lang.String"/>
+        <field name="I4263" class="java.lang.String"/>
+        <field name="I4264" class="java.lang.String"/>
+        <field name="I4265" class="java.lang.String"/>
+        <field name="I4266" class="java.lang.String"/>
+        <field name="I4267" class="java.lang.String"/>
+        <field name="I4268" class="java.lang.String"/>
+        <field name="I4269" class="java.lang.String"/>
+        <field name="I4270" class="java.lang.String"/>
+        <field name="I4271" class="java.lang.String"/>
+        <field name="I4272" class="java.lang.String"/>
+        <field name="I4273" class="java.lang.String"/>
+        <field name="I4274" class="java.lang.String"/>
+        <field name="I4275" class="java.lang.String"/>
+        <field name="I4276" class="java.lang.String"/>
+        <field name="I4277" class="java.lang.String"/>
+        <field name="I4278" class="java.lang.String"/>
+        <field name="I4279" class="java.lang.String"/>
+        <field name="I4280" class="java.lang.String"/>
+        <field name="I4281" class="java.lang.String"/>
+        <field name="I4282" class="java.lang.String"/>
+        <field name="I4283" class="java.lang.String"/>
+        <field name="I4284" class="java.lang.String"/>
+        <field name="I4285" class="java.lang.String"/>
+        <field name="I4286" class="java.lang.String"/>
+        <field name="I4287" class="java.lang.String"/>
+        <field name="I4288" class="java.lang.String"/>
+        <field name="I4289" class="java.lang.String"/>
+        <field name="I4290" class="java.lang.String"/>
+        <field name="I4291" class="java.lang.String"/>
+        <field name="I4292" class="java.lang.String"/>
+        <field name="I4293" class="java.lang.String"/>
+        <field name="I4294" class="java.lang.String"/>
+        <field name="I4295" class="java.lang.String"/>
+        <field name="I4296" class="java.lang.String"/>
+        <field name="I4297" class="java.lang.String"/>
+        <field name="I4298" class="java.lang.String"/>
+        <field name="I4299" class="java.lang.String"/>
+        <field name="K4602" class="java.lang.String"/>
+        <field name="K4603" class="java.lang.String"/>
+        <field name="K4604" class="java.lang.String"/>
+        <field name="K4605" class="java.lang.String"/>
+        <field name="K4606" class="java.lang.String"/>
+        <field name="barcode_type" class="java.lang.String"/>
+        <field name="barcode_value" class="java.lang.String"/>
+        <variable name="V_I2801" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2801}]]></variableExpression></variable>
+        <variable name="V_I2802" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2802}]]></variableExpression></variable>
+        <variable name="V_I2803" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2803}]]></variableExpression></variable>
+        <variable name="V_I2804" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2804}]]></variableExpression></variable>
+        <variable name="V_I2805" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2805}]]></variableExpression></variable>
+        <variable name="V_I2806" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2806}]]></variableExpression></variable>
+        <variable name="V_I2807" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2807}]]></variableExpression></variable>
+        <variable name="V_I2808" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2808}]]></variableExpression></variable>
+        <variable name="V_I2809" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2809}]]></variableExpression></variable>
+        <variable name="V_I2810" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2810}]]></variableExpression></variable>
+        <variable name="V_I2811" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2811}]]></variableExpression></variable>
+        <variable name="V_I2812" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2812}]]></variableExpression></variable>
+        <variable name="V_I2813" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2813}]]></variableExpression></variable>
+        <variable name="V_I2814" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2814}]]></variableExpression></variable>
+        <variable name="V_I2815" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2815}]]></variableExpression></variable>
+        <variable name="V_I2816" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2816}]]></variableExpression></variable>
+        <variable name="V_I2817" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2817}]]></variableExpression></variable>
+        <variable name="V_I2818" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2818}]]></variableExpression></variable>
+        <variable name="V_I2819" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2819}]]></variableExpression></variable>
+        <variable name="V_I2820" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2820}]]></variableExpression></variable>
+        <variable name="V_I2821" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2821}]]></variableExpression></variable>
+        <variable name="V_I2822" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2822}]]></variableExpression></variable>
+        <variable name="V_I2823" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2823}]]></variableExpression></variable>
+        <variable name="V_I2824" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2824}]]></variableExpression></variable>
+        <variable name="V_I2825" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2825}]]></variableExpression></variable>
+        <variable name="V_I2826" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2826}]]></variableExpression></variable>
+        <variable name="V_I2827" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2827}]]></variableExpression></variable>
+        <variable name="V_I2828" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2828}]]></variableExpression></variable>
+        <variable name="V_I2829" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2829}]]></variableExpression></variable>
+        <variable name="V_I2830" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2830}]]></variableExpression></variable>
+        <variable name="V_I2831" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2831}]]></variableExpression></variable>
+        <variable name="V_I2832" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2832}]]></variableExpression></variable>
+        <variable name="V_I2833" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2833}]]></variableExpression></variable>
+        <variable name="V_I2834" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2834}]]></variableExpression></variable>
+        <variable name="V_I2835" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2835}]]></variableExpression></variable>
+        <variable name="V_I2836" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2836}]]></variableExpression></variable>
+        <variable name="V_I2837" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2837}]]></variableExpression></variable>
+        <variable name="V_I2838" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2838}]]></variableExpression></variable>
+        <variable name="V_I2839" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2839}]]></variableExpression></variable>
+        <variable name="V_I2840" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2840}]]></variableExpression></variable>
+        <variable name="V_I2841" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2841}]]></variableExpression></variable>
+        <variable name="V_I2842" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2842}]]></variableExpression></variable>
+        <variable name="V_I2843" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2843}]]></variableExpression></variable>
+        <variable name="V_I2844" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2844}]]></variableExpression></variable>
+        <variable name="V_I2845" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2845}]]></variableExpression></variable>
+        <variable name="V_I2846" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2846}]]></variableExpression></variable>
+        <variable name="V_I2847" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2847}]]></variableExpression></variable>
+        <variable name="V_I2848" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2848}]]></variableExpression></variable>
+        <variable name="V_I2849" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2849}]]></variableExpression></variable>
+        <variable name="V_I2850" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2850}]]></variableExpression></variable>
+        <variable name="V_I2851" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2851}]]></variableExpression></variable>
+        <variable name="V_I2852" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2852}]]></variableExpression></variable>
+        <variable name="V_I2853" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2853}]]></variableExpression></variable>
+        <variable name="V_I2854" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2854}]]></variableExpression></variable>
+        <variable name="V_I2855" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2855}]]></variableExpression></variable>
+        <variable name="V_I2856" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2856}]]></variableExpression></variable>
+        <variable name="V_I2857" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2857}]]></variableExpression></variable>
+        <variable name="V_I2858" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2858}]]></variableExpression></variable>
+        <variable name="V_I2859" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2859}]]></variableExpression></variable>
+        <variable name="V_I2860" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2860}]]></variableExpression></variable>
+        <variable name="V_I2861" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2861}]]></variableExpression></variable>
+        <variable name="V_I2862" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2862}]]></variableExpression></variable>
+        <variable name="V_I2863" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2863}]]></variableExpression></variable>
+        <variable name="V_I2864" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2864}]]></variableExpression></variable>
+        <variable name="V_I2865" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2865}]]></variableExpression></variable>
+        <variable name="V_I2866" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2866}]]></variableExpression></variable>
+        <variable name="V_I2867" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2867}]]></variableExpression></variable>
+        <variable name="V_I2868" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2868}]]></variableExpression></variable>
+        <variable name="V_I2869" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2869}]]></variableExpression></variable>
+        <variable name="V_I2870" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2870}]]></variableExpression></variable>
+        <variable name="V_I2871" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2871}]]></variableExpression></variable>
+        <variable name="V_I2872" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2872}]]></variableExpression></variable>
+        <variable name="V_I2873" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2873}]]></variableExpression></variable>
+        <variable name="V_I2874" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2874}]]></variableExpression></variable>
+        <variable name="V_I2875" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2875}]]></variableExpression></variable>
+        <variable name="V_I2876" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2876}]]></variableExpression></variable>
+        <variable name="V_I2877" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2877}]]></variableExpression></variable>
+        <variable name="V_I2878" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2878}]]></variableExpression></variable>
+        <variable name="V_I2879" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2879}]]></variableExpression></variable>
+        <variable name="V_I2880" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2880}]]></variableExpression></variable>
+        <variable name="V_I2881" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2881}]]></variableExpression></variable>
+        <variable name="V_I2882" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2882}]]></variableExpression></variable>
+        <variable name="V_I2883" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2883}]]></variableExpression></variable>
+        <variable name="V_I2884" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2884}]]></variableExpression></variable>
+        <variable name="V_I2885" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2885}]]></variableExpression></variable>
+        <variable name="V_I2886" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2886}]]></variableExpression></variable>
+        <variable name="V_I2887" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2887}]]></variableExpression></variable>
+        <variable name="V_I2888" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2888}]]></variableExpression></variable>
+        <variable name="V_I2889" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2889}]]></variableExpression></variable>
+        <variable name="V_I2890" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2890}]]></variableExpression></variable>
+        <variable name="V_I2891" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2891}]]></variableExpression></variable>
+        <variable name="V_I2892" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2892}]]></variableExpression></variable>
+        <variable name="V_I2893" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2893}]]></variableExpression></variable>
+        <variable name="V_I2894" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2894}]]></variableExpression></variable>
+        <variable name="V_I2895" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2895}]]></variableExpression></variable>
+        <variable name="V_I2896" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2896}]]></variableExpression></variable>
+        <variable name="V_I2897" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2897}]]></variableExpression></variable>
+        <variable name="V_I2898" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2898}]]></variableExpression></variable>
+        <variable name="V_I2899" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I2899}]]></variableExpression></variable>
+        <variable name="V_I4201" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4201}]]></variableExpression></variable>
+        <variable name="V_I4202" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4202}]]></variableExpression></variable>
+        <variable name="V_I4203" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4203}]]></variableExpression></variable>
+        <variable name="V_I4204" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4204}]]></variableExpression></variable>
+        <variable name="V_I4205" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4205}]]></variableExpression></variable>
+        <variable name="V_I4206" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4206}]]></variableExpression></variable>
+        <variable name="V_I4207" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4207}]]></variableExpression></variable>
+        <variable name="V_I4208" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4208}]]></variableExpression></variable>
+        <variable name="V_I4209" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4209}]]></variableExpression></variable>
+        <variable name="V_I4210" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4210}]]></variableExpression></variable>
+        <variable name="V_I4211" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4211}]]></variableExpression></variable>
+        <variable name="V_I4212" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4212}]]></variableExpression></variable>
+        <variable name="V_I4213" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4213}]]></variableExpression></variable>
+        <variable name="V_I4214" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4214}]]></variableExpression></variable>
+        <variable name="V_I4215" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4215}]]></variableExpression></variable>
+        <variable name="V_I4216" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4216}]]></variableExpression></variable>
+        <variable name="V_I4217" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4217}]]></variableExpression></variable>
+        <variable name="V_I4218" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4218}]]></variableExpression></variable>
+        <variable name="V_I4219" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4219}]]></variableExpression></variable>
+        <variable name="V_I4220" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4220}]]></variableExpression></variable>
+        <variable name="V_I4221" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4221}]]></variableExpression></variable>
+        <variable name="V_I4222" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4222}]]></variableExpression></variable>
+        <variable name="V_I4223" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4223}]]></variableExpression></variable>
+        <variable name="V_I4224" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4224}]]></variableExpression></variable>
+        <variable name="V_I4225" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4225}]]></variableExpression></variable>
+        <variable name="V_I4226" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4226}]]></variableExpression></variable>
+        <variable name="V_I4227" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4227}]]></variableExpression></variable>
+        <variable name="V_I4228" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4228}]]></variableExpression></variable>
+        <variable name="V_I4229" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4229}]]></variableExpression></variable>
+        <variable name="V_I4230" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4230}]]></variableExpression></variable>
+        <variable name="V_I4231" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4231}]]></variableExpression></variable>
+        <variable name="V_I4232" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4232}]]></variableExpression></variable>
+        <variable name="V_I4233" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4233}]]></variableExpression></variable>
+        <variable name="V_I4234" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4234}]]></variableExpression></variable>
+        <variable name="V_I4235" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4235}]]></variableExpression></variable>
+        <variable name="V_I4236" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4236}]]></variableExpression></variable>
+        <variable name="V_I4237" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4237}]]></variableExpression></variable>
+        <variable name="V_I4238" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4238}]]></variableExpression></variable>
+        <variable name="V_I4239" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4239}]]></variableExpression></variable>
+        <variable name="V_I4240" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4240}]]></variableExpression></variable>
+        <variable name="V_I4241" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4241}]]></variableExpression></variable>
+        <variable name="V_I4242" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4242}]]></variableExpression></variable>
+        <variable name="V_I4243" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4243}]]></variableExpression></variable>
+        <variable name="V_I4244" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4244}]]></variableExpression></variable>
+        <variable name="V_I4245" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4245}]]></variableExpression></variable>
+        <variable name="V_I4246" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4246}]]></variableExpression></variable>
+        <variable name="V_I4247" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4247}]]></variableExpression></variable>
+        <variable name="V_I4248" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4248}]]></variableExpression></variable>
+        <variable name="V_I4249" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4249}]]></variableExpression></variable>
+        <variable name="V_I4250" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4250}]]></variableExpression></variable>
+        <variable name="V_I4251" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4251}]]></variableExpression></variable>
+        <variable name="V_I4252" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4252}]]></variableExpression></variable>
+        <variable name="V_I4253" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4253}]]></variableExpression></variable>
+        <variable name="V_I4254" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4254}]]></variableExpression></variable>
+        <variable name="V_I4255" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4255}]]></variableExpression></variable>
+        <variable name="V_I4256" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4256}]]></variableExpression></variable>
+        <variable name="V_I4257" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4257}]]></variableExpression></variable>
+        <variable name="V_I4258" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4258}]]></variableExpression></variable>
+        <variable name="V_I4259" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4259}]]></variableExpression></variable>
+        <variable name="V_I4260" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4260}]]></variableExpression></variable>
+        <variable name="V_I4261" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4261}]]></variableExpression></variable>
+        <variable name="V_I4262" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4262}]]></variableExpression></variable>
+        <variable name="V_I4263" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4263}]]></variableExpression></variable>
+        <variable name="V_I4264" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4264}]]></variableExpression></variable>
+        <variable name="V_I4265" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4265}]]></variableExpression></variable>
+        <variable name="V_I4266" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4266}]]></variableExpression></variable>
+        <variable name="V_I4267" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4267}]]></variableExpression></variable>
+        <variable name="V_I4268" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4268}]]></variableExpression></variable>
+        <variable name="V_I4269" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4269}]]></variableExpression></variable>
+        <variable name="V_I4270" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4270}]]></variableExpression></variable>
+        <variable name="V_I4271" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4271}]]></variableExpression></variable>
+        <variable name="V_I4272" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4272}]]></variableExpression></variable>
+        <variable name="V_I4273" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4273}]]></variableExpression></variable>
+        <variable name="V_I4274" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4274}]]></variableExpression></variable>
+        <variable name="V_I4275" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4275}]]></variableExpression></variable>
+        <variable name="V_I4276" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4276}]]></variableExpression></variable>
+        <variable name="V_I4277" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4277}]]></variableExpression></variable>
+        <variable name="V_I4278" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4278}]]></variableExpression></variable>
+        <variable name="V_I4279" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4279}]]></variableExpression></variable>
+        <variable name="V_I4280" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4280}]]></variableExpression></variable>
+        <variable name="V_I4281" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4281}]]></variableExpression></variable>
+        <variable name="V_I4282" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4282}]]></variableExpression></variable>
+        <variable name="V_I4283" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4283}]]></variableExpression></variable>
+        <variable name="V_I4284" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4284}]]></variableExpression></variable>
+        <variable name="V_I4285" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4285}]]></variableExpression></variable>
+        <variable name="V_I4286" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4286}]]></variableExpression></variable>
+        <variable name="V_I4287" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4287}]]></variableExpression></variable>
+        <variable name="V_I4288" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4288}]]></variableExpression></variable>
+        <variable name="V_I4289" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4289}]]></variableExpression></variable>
+        <variable name="V_I4290" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4290}]]></variableExpression></variable>
+        <variable name="V_I4291" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4291}]]></variableExpression></variable>
+        <variable name="V_I4292" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4292}]]></variableExpression></variable>
+        <variable name="V_I4293" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4293}]]></variableExpression></variable>
+        <variable name="V_I4294" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4294}]]></variableExpression></variable>
+        <variable name="V_I4295" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4295}]]></variableExpression></variable>
+        <variable name="V_I4296" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4296}]]></variableExpression></variable>
+        <variable name="V_I4297" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4297}]]></variableExpression></variable>
+        <variable name="V_I4298" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4298}]]></variableExpression></variable>
+        <variable name="V_I4299" class="java.lang.String" resetType="None"><variableExpression><![CDATA[$F{I4299}]]></variableExpression></variable>
+        <variable name="Inventory_title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ") + $F{I4201}]]></variableExpression>
 	</variable>
 	<variable name="Barcode" class="java.lang.String" resetType="None">
