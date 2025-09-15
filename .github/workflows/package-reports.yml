@@ -79,3 +79,31 @@ jobs:
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
           curl -X POST "$REPORT_URL?$QUERY" \
             -F "file=@zip_output/dakks-sample.zip"
+
+      - name: Send ORDER-SAMPLE ZIP to API
+        env:
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
+        run: |
+          REPORT_URL="https://${DOMAIN}/api/report/bbf1a0d1-8fbb-6d89-c966-156451250ef3"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
+            -F "file=@zip_output/order-sample.zip"
+
+      - name: Send INVENTORY-SAMPLE ZIP to API
+        env:
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
+        run: |
+          REPORT_URL="https://${DOMAIN}/api/report/ff64a5c7-f592-a871-5dbb-6dc24bff9bbd"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
+            -F "file=@zip_output/inventory-sample.zip"
