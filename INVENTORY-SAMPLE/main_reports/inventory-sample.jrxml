@@ -17,7 +17,6 @@
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT 
-  -- Inventory (inv_)
   i.`I4201` AS inv_I4201,
   i.`I4202` AS inv_I4202,
   i.`I4203` AS inv_I4203,
@@ -88,8 +87,8 @@
   i.`I4262` AS inv_I4262,
   i.`copied_to_mssql` AS inv_copied_to_mssql,
   i.`path` AS inv_path,
-  -- Customers (cust_)
- c.`KTAG` AS cust_KTAG,
+
+  c.`KTAG` AS cust_KTAG,
   c.`nFacilityUID` AS cust_nFacilityUID,
   c.`KPUBLISH` AS cust_KPUBLISH,
   c.`K4601` AS cust_K4601,
@@ -133,14 +132,14 @@
   c.`K4635` AS cust_K4635,
   c.`K4636` AS cust_K4636,
   c.`K4637` AS cust_K4637,
-  -- Barcode (bc_)
- b.`id` AS bc_id,
+
+  b.`id` AS bc_id,
   b.`barcode_key` AS bc_barcode_key,
   b.`barcode_value` AS bc_barcode_value,
   b.`barcode_image` AS bc_barcode_image,
   b.`barcode_type` AS bc_barcode_type,
   b.`type` AS bc_type,
-  -- Location (loc_, nur letzte mit L2815=1)
+
   l.`LTAG` AS loc_LTAG,
   l.`nAssetUID` AS loc_nAssetUID,
   l.`nToolAssignmentUID` AS loc_nToolAssignmentUID,
@@ -189,7 +188,7 @@
   l.`L2835` AS loc_L2835,
   l.`L2836` AS loc_L2836,
   l.`L2837` AS loc_L2837,
-  -- Calibration (cal_, nur gültige mit C2339=1)
+
   cal.`CTAG` AS cal_CTAG,
   cal.`nCallSheetUID` AS cal_nCallSheetUID,
   cal.`C2301` AS cal_C2301,
@@ -289,11 +288,20 @@
   cal.`C2395` AS cal_C2395,
   cal.`C2396` AS cal_C2396,
   cal.`combine` AS cal_combine,
-  cal.`copied_to_mssql` AS cal_copied_to_mssql
+  cal.`copied_to_mssql` AS cal_copied_to_mssql,
+
+  uc.`KTAG`   AS loc_user_KTAG,
+  uc.`K4602`  AS loc_user_name,
+  uc.`K4603`  AS loc_user_name2,
+  uc.`K4604`  AS loc_user_street,
+  uc.`K4605`  AS loc_user_zipcity,
+  uc.`K4606`  AS loc_user_country
+
 FROM $P!{PrefixTable}inventory i
-LEFT JOIN $P!{PrefixTable}customers c ON i.KTAG = c.KTAG
-LEFT JOIN $P!{PrefixTable}barcode b   ON i.MTAG = b.barcode_key
-LEFT JOIN $P!{PrefixTable}location l  ON l.MTAG = i.MTAG AND l.L2815 = 1
+LEFT JOIN $P!{PrefixTable}customers c   ON i.KTAG = c.KTAG
+LEFT JOIN $P!{PrefixTable}barcode   b   ON i.MTAG = b.barcode_key
+LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = i.MTAG AND l.L2815 = 1
+LEFT JOIN $P!{PrefixTable}customers uc  ON l.L2801 = uc.KTAG
 LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1
 WHERE i.MTAG = $P{P_MTAG}]]>
 	</queryString>
@@ -565,6 +573,12 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="cal_C2396" class="java.lang.String"/>
 	<field name="cal_combine" class="java.lang.String"/>
 	<field name="cal_copied_to_mssql" class="java.lang.String"/>
+	<field name="loc_user_KTAG" class="java.lang.String"/>
+	<field name="loc_user_name" class="java.lang.String"/>
+	<field name="loc_user_name2" class="java.lang.String"/>
+	<field name="loc_user_street" class="java.lang.String"/>
+	<field name="loc_user_zipcity" class="java.lang.String"/>
+	<field name="loc_user_country" class="java.lang.String"/>
 	<variable name="Inventory_title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ")
             + ($F{inv_I4201} == null ? "" : $F{inv_I4201})]]></variableExpression>
@@ -701,7 +715,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="150" y="140" width="395" height="36" uuid="f129ef4c-09ad-41d7-adb0-e3955b6b3afb"/>
-				<textFieldExpression><![CDATA[($F{cust_K4602}==null?"":$F{cust_K4602})
+				<textFieldExpression><![CDATA[($F{loc_user_name}==null?"":$F{loc_user_name})
                     + (($F{cust_K4603}!=null && !$F{cust_K4603}.isEmpty()) ? ("\n" + $F{cust_K4603}) : "")
                     + (($F{cust_K4604}!=null && !$F{cust_K4604}.isEmpty()) ? ("\n" + $F{cust_K4604}) : "")]]></textFieldExpression>
 			</textField>
