@@ -10,9 +10,9 @@
 	<parameter name="Reportpath" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="PrefixTable" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
+        <parameter name="PrefixTable" class="java.lang.String">
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Sprache" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
