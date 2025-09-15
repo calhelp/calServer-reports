@@ -28,18 +28,21 @@ jobs:
             ORDER-SAMPLE/subreports
           if-no-files-found: error
 
-      - name: List files before zipping (Debug)
-        run: |
-          echo "📂 Inhalt von DAKKS-SAMPLE:"
-          find DAKKS-SAMPLE
-          echo "📂 Inhalt von ORDER-SAMPLE:"
-          find ORDER-SAMPLE
+        - name: List files before zipping (Debug)
+          run: |
+            echo "📂 Inhalt von DAKKS-SAMPLE:"
+            find DAKKS-SAMPLE
+            echo "📂 Inhalt von ORDER-SAMPLE:"
+            find ORDER-SAMPLE
 
-      - name: Create ZIPs of both folders (excluding existing ZIPs)
-        run: |
-          mkdir -p zip_output
-          zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
-          zip -r zip_output/order-sample.zip ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
+        - name: Check JasperReports version
+          run: bash scripts/check_jasper_version.sh
+
+        - name: Create ZIPs of both folders (excluding existing ZIPs)
+          run: |
+            mkdir -p zip_output
+            zip -r zip_output/dakks-sample.zip DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
+            zip -r zip_output/order-sample.zip ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
 
       - name: Show ZIP contents (Debug)
         run: |
