@@ -715,7 +715,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="150" y="140" width="395" height="36" uuid="f129ef4c-09ad-41d7-adb0-e3955b6b3afb"/>
-				<textFieldExpression><![CDATA[($F{loc_user_name}==null?"":$F{loc_user_name})
+				<textFieldExpression><![CDATA[($F{cust_K4602}==null?"":$F{cust_K4602})
                     + (($F{cust_K4603}!=null && !$F{cust_K4603}.isEmpty()) ? ("\n" + $F{cust_K4603}) : "")
                     + (($F{cust_K4604}!=null && !$F{cust_K4604}.isEmpty()) ? ("\n" + $F{cust_K4604}) : "")]]></textFieldExpression>
 			</textField>
@@ -728,7 +728,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="150" y="186" width="395" height="36" uuid="f363ec01-defa-4dd5-8f2a-7acb7b32381f"/>
-				<textFieldExpression><![CDATA[($F{loc_L2801}==null?"":$F{loc_L2801})
+				<textFieldExpression><![CDATA[($F{loc_user_name2}==null?"":$F{loc_user_name2})
                     + (($F{loc_L2802}!=null && !$F{loc_L2802}.isEmpty()) ? (", " + $F{loc_L2802}) : "")
                     + ($F{loc_L2809}!=null ? ("\nStart: " + new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format($F{loc_L2809})) : "")]]></textFieldExpression>
 			</textField>
