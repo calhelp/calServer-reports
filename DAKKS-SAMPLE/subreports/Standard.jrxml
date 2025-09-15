@@ -103,7 +103,7 @@ GROUP BY t.C2430]]>
 				<textFieldExpression><![CDATA[$V{Duedate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="0" width="105" height="21" backcolor="#F2F2F2" uuid="bba1fa61-8bea-4d3c-a7e7-1a1483c1458d"/>
+				<reportElement x="490" y="0" width="45" height="21" backcolor="#F2F2F2" uuid="bba1fa61-8bea-4d3c-a7e7-1a1483c1458d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
@@ -156,7 +156,7 @@ GROUP BY t.C2430]]>
 				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="0" width="105" height="19" uuid="9075fa2a-aa64-472c-b973-3d44a95d0c0b"/>
+				<reportElement x="490" y="0" width="45" height="19" uuid="9075fa2a-aa64-472c-b973-3d44a95d0c0b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
