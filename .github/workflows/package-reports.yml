@@ -50,12 +50,9 @@ jobs:
       - name: Create ZIPs of all folders (excluding existing ZIPs)
         run: |
           mkdir -p zip_output
-          zip -r zip_output/dakks-sample.zip \
-            DAKKS-SAMPLE/main_reports DAKKS-SAMPLE/subreports -x "*.zip"
-          zip -r zip_output/order-sample.zip \
-            ORDER-SAMPLE/main_reports ORDER-SAMPLE/subreports -x "*.zip"
-          zip -r zip_output/inventory-sample.zip \
-            INVENTORY-SAMPLE/main_reports INVENTORY-SAMPLE/subreports -x "*.zip"
+          (cd DAKKS-SAMPLE && zip -r ../zip_output/dakks-sample.zip main_reports subreports -x "*.zip")
+          (cd ORDER-SAMPLE && zip -r ../zip_output/order-sample.zip main_reports subreports -x "*.zip")
+          (cd INVENTORY-SAMPLE && zip -r ../zip_output/inventory-sample.zip main_reports subreports -x "*.zip")
 
       - name: Show ZIP contents (Debug)
         run: |
