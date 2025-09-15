@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag name (e.g., v1.2.3)'
-        required: true
+        description: 'Optional custom tag name (leave empty for auto-generated tag)'
+        required: false
+        default: ''
 
 jobs:
   build-release:
@@ -20,13 +21,35 @@ jobs:
       - name: Create ZIP archives
         run: |
           mkdir -p output
-          (cd DAKKS-SAMPLE && zip -r ../output/dakks-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
-          (cd ORDER-SAMPLE && zip -r ../output/order-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
-          (cd INVENTORY-SAMPLE && zip -r ../output/inventory-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          (cd DAKKS-SAMPLE && zip -r ../output/dakks-sample.zip main_reports subreports \
+            -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          (cd ORDER-SAMPLE && zip -r ../output/order-sample.zip main_reports subreports \
+            -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          (cd INVENTORY-SAMPLE && zip -r ../output/inventory-sample.zip main_reports subreports \
+            -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+
+      - name: Determine release metadata
+        id: release_meta
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ -n "${{ github.event.inputs.tag }}" ]; then
+              TAG="${{ github.event.inputs.tag }}"
+            else
+              TAG="reports-$(date -u +'%Y%m%d-%H%M%S')"
+            fi
+          else
+            TAG="${{ github.ref_name }}"
+          fi
+
+          NAME="Reports ${TAG}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
 
       - name: Publish release on GitHub
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+          tag_name: ${{ steps.release_meta.outputs.tag }}
+          name: ${{ steps.release_meta.outputs.name }}
+          target_commitish: ${{ github.sha }}
           files: output/*.zip
           generate_release_notes: true
