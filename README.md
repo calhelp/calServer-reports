@@ -60,7 +60,10 @@ scripts/
 
 * Aktive calServer-Instanz (Cloud oder On-Premise)
 * Zugang zur **Reportverwaltung** im calServer (Admin-Berechtigung)
-* JasperReports Editor (z. B. Jaspersoft Studio) zur Bearbeitung der JRXML-Dateien
+* JasperReports Editor (z. B. Jaspersoft Studio) zur Bearbeitung der JRXML-Dateien. 
+  Stelle sicher, dass die Vorlagen mit **JasperReports Library 6.20.6** exportiert werden. 
+  Das Skript `scripts/check_jasper_version.sh` bricht andernfalls mit der Meldung 
+  `Expected JasperReports Library version 6.20.6` ab.
 * Grundkenntnisse in Git und (optional) GitHub Actions
 
 ---

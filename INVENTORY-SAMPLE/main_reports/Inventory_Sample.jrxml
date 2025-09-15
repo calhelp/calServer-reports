@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-12-18T16:23:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventory_0.1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Sprache" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QR_Code_Value" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_MTAG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT i.MTAG, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4206, "") AS I4206, COALESCE(i.I4232, "") AS I4232, COALESCE(i.I4228, "") AS I4228, COALESCE(i.I4229, "") AS I4229, COALESCE(i.I4299, "") AS I4299,
+COALESCE(c.K4602, "") AS K4602, COALESCE(c.K4603, "") AS K4603, COALESCE(c.K4604, "") AS K4604, COALESCE(c.K4605, "") AS K4605, COALESCE(c.K4606, "") AS K4606, b.barcode_type, b.barcode_value
+FROM $P!{PrefixTable}inventory i
+LEFT JOIN $P!{PrefixTable}customers c on i.ktag=c.KTAG
+LEFT JOIN $P!{PrefixTable}barcode b on i.MTAG=b.barcode_key
+WHERE i.MTAG=$P{P_MTAG}]]>
+	</queryString>
+	<field name="MTAG" class="java.lang.String"/>
+	<field name="I4201" class="java.lang.String"/>
+	<field name="I4202" class="java.lang.String"/>
+	<field name="I4203" class="java.lang.String"/>
+	<field name="I4204" class="java.lang.String"/>
+	<field name="I4206" class="java.lang.String"/>
+	<field name="I4228" class="java.lang.String"/>
+	<field name="I4229" class="java.lang.String"/>
+	<field name="I4232" class="java.lang.String"/>
+	<field name="I4299" class="java.lang.String"/>
+	<field name="K4602" class="java.lang.String"/>
+	<field name="K4603" class="java.lang.String"/>
+	<field name="K4604" class="java.lang.String"/>
+	<field name="K4605" class="java.lang.String"/>
+	<field name="K4606" class="java.lang.String"/>
+	<field name="barcode_type" class="java.lang.String"/>
+	<field name="barcode_value" class="java.lang.String"/>
+	<variable name="Inventory_title" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ") + $F{I4201}]]></variableExpression>
+	</variable>
+	<variable name="Barcode" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Barcode" : "Barcode"]]></variableExpression>
+	</variable>
+	<variable name="Inventory_information" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inventar informationen" : "Inventory information"]]></variableExpression>
+	</variable>
+	<variable name="Customer_information" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kunden informationen" : "Customer information"]]></variableExpression>
+	</variable>
+	<variable name="Asset_number" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Prüfmittel Nr" : "Asset Number"]]></variableExpression>
+	</variable>
+	<variable name="Serial_number" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "SN / Werk-Nr" : "Serial Number"]]></variableExpression>
+	</variable>
+	<variable name="Manufacturer" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Hersteller" : "Manufacturer"]]></variableExpression>
+	</variable>
+	<variable name="Model" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Modell" : "Model"]]></variableExpression>
+	</variable>
+	<variable name="Description" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Beschreibung" : "Description"]]></variableExpression>
+	</variable>
+	<variable name="Interval" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Interval" : "Intervall"]]></variableExpression>
+	</variable>
+	<variable name="F_Interval" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$F{I4229} + " " + $F{I4228}]]></variableExpression>
+	</variable>
+	<variable name="State_of_asset" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Zustand" : "State of Asset"]]></variableExpression>
+	</variable>
+	<variable name="Customer_name" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kunde" : "Customer"]]></variableExpression>
+	</variable>
+	<variable name="Street" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Straße (Firma)" : "Street (Company)"]]></variableExpression>
+	</variable>
+	<variable name="City" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Ort" : "City"]]></variableExpression>
+	</variable>
+	<variable name="Country" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Land" : "Country"]]></variableExpression>
+	</variable>
+	<variable name="Zip" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "PLZ" : "Zip"]]></variableExpression>
+	</variable>
+	<title>
+		<band height="285" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="17" y="151" width="543" height="124" uuid="57f8e2b7-41b1-4221-868f-1fd20a9d76ae">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="402" y="195" width="143" height="18" uuid="64443f9f-09c8-4a57-82b2-0ffeb217ef2b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Serial_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="249" width="77" height="20" uuid="c4328bd1-4cc5-4d56-be11-05914c90cdd8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Manufacturer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="218" width="77" height="20" uuid="993d5180-2365-4db3-80f6-86b0541b245b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Model}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="188" width="78" height="20" uuid="0cb131ee-99a0-447b-b854-4b963f3273e4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Description}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="162" y="157" width="78" height="20" uuid="d15750ec-ae55-4a7a-898b-128409a9ffe2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Customer_name}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="402" y="154" width="155" height="18" uuid="4a066aee-2a66-4bc6-99a3-121fd860adad">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="402" y="213" width="153" height="18" uuid="e43664a7-970d-45b4-84a2-adc4462e0b0a">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4206}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="249" width="151" height="20" uuid="9dbac371-ccea-4e5a-b71d-d09ba933236b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="218" width="151" height="20" uuid="7ffd5e67-2ff5-4467-be2c-b9a42fde24d2">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="188" width="151" height="20" uuid="ff17bb9f-c246-44f9-b3e6-cbe9d060453f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="157" width="151" height="20" uuid="4b7a83b1-c084-4d3d-a707-e91f85d188d6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{K4602}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="75" y="198" width="30" height="30" uuid="57d15359-9808-4818-be9e-420686dae4cf">
+					<printWhenExpression><![CDATA[$F{barcode_type}.equals("datamatrix")]]></printWhenExpression>
+				</reportElement>
+				<jr:DataMatrix xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{barcode_value}]]></jr:codeExpression>
+				</jr:DataMatrix>
+			</componentElement>
+			<componentElement>
+				<reportElement x="50" y="198" width="80" height="30" uuid="5991708f-e37e-4f14-8724-eb8a451dd53c">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{barcode_type}.equals("ean8")]]></printWhenExpression>
+				</reportElement>
+				<jr:EAN8 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{barcode_value}]]></jr:codeExpression>
+				</jr:EAN8>
+			</componentElement>
+			<componentElement>
+				<reportElement x="40" y="198" width="100" height="30" uuid="0568d0d0-334b-4330-9442-b821166432c5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{barcode_type}.equals("code39")]]></printWhenExpression>
+				</reportElement>
+				<jr:Code39 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{barcode_value}]]></jr:codeExpression>
+				</jr:Code39>
+			</componentElement>
+			<textField>
+				<reportElement x="24" y="183" width="129" height="15" uuid="a18728c8-998e-4d37-ac76-d7e675446b52"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{barcode_value}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="228" width="128" height="15" uuid="9df51412-ca59-4f32-9438-7ee34ae8eb53">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Asset_number}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="159" y="151" width="1" height="124" uuid="1903bef4-f16f-4245-a95f-e2aabacd47e7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="396" y="151" width="1" height="124" uuid="ed9f4cf0-8f60-4d74-aedd-37b085ca8083">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="160" y="183" width="237" height="1" uuid="5be16f3e-062c-46a5-9f9d-dcbb829821ec">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="160" y="213" width="237" height="1" uuid="04202673-a735-415c-aad3-4dd1770be273">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="160" y="243" width="237" height="1" uuid="5ebae67f-8b87-4a6c-8587-d691adb1f1a5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="17" y="108" width="543" height="30" uuid="86dabf67-5fa7-468b-869c-3204b20496aa">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Inventory_title}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="397" y="192" width="163" height="1" uuid="e4b4b876-2d0a-465e-8c16-1ea8f6a0368c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="397" y="234" width="163" height="1" uuid="d8e73004-b8c1-4653-aea7-ffe656261e52">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="402" y="172" width="155" height="18" uuid="3bca21c9-26f6-4d69-affb-279eae048a67">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4232}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="237" width="142" height="18" uuid="c6d344c5-1c5d-44e0-bee8-0238240afac8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Interval}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="403" y="255" width="153" height="18" uuid="4cccbe58-7a98-494e-8c28-79f97eec6d52">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{F_Interval}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="511" y="11" width="50" height="50" uuid="a964ef9e-d577-4180-b10a-2e5ec3168ff7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA[$P{QR_Code_Value}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport isUsingCache="false">
+				<reportElement x="-17" y="0" width="595" height="20" uuid="d3085e09-4ab5-495c-aeb3-02d2fd99daa4"/>
+				<subreportParameter name="PrefixTable">
+					<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Sprache">
+					<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_MTAG">
+					<subreportParameterExpression><![CDATA[$P{P_MTAG}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Calibration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="70" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="74"/>
+	</lastPageFooter>
+</jasperReport>
