@@ -1,215 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventory_0.1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
-	<parameter name="Reportpath" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="PrefixTable" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Sprache" class="java.lang.String">
-		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="QR_Code_Value" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="P_MTAG" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
-	</parameter>
-	<queryString>
-		<![CDATA[SELECT i.*, c.*, b.*, l.*, cal.*
-FROM $P!{PrefixTable}inventory i
-LEFT JOIN $P!{PrefixTable}customers c
-  ON i.ktag = c.KTAG
-LEFT JOIN $P!{PrefixTable}barcode b
-  ON i.MTAG = b.barcode_key
-LEFT JOIN (
-  SELECT * FROM $P!{PrefixTable}location
-  WHERE L2815 = 1
-) l
-  ON l.MTAG = i.MTAG
-LEFT JOIN (
-  SELECT * FROM $P!{PrefixTable}calibration
-  WHERE C2339 = 1
-) cal
-  ON cal.MTAG = i.MTAG
-WHERE i.MTAG = $P{P_MTAG}]]>
-	</queryString>
-	<field name="MTAG" class="java.lang.String"/>
-	<field name="I4201" class="java.lang.String"/>
-	<field name="I4202" class="java.lang.String"/>
-	<field name="I4203" class="java.lang.String"/>
-	<field name="I4204" class="java.lang.String"/>
-	<field name="I4206" class="java.lang.String"/>
-	<field name="I4228" class="java.lang.String"/>
-	<field name="I4229" class="java.lang.String"/>
-	<field name="I4232" class="java.lang.String"/>
-	<field name="I4299" class="java.lang.String"/>
-	<field name="K4602" class="java.lang.String"/>
-	<field name="K4603" class="java.lang.String"/>
-	<field name="K4604" class="java.lang.String"/>
-	<field name="K4605" class="java.lang.String"/>
-	<field name="K4606" class="java.lang.String"/>
-	<field name="barcode_type" class="java.lang.String"/>
-	<field name="barcode_value" class="java.lang.String"/>
-	<variable name="Inventory_title" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ") + $F{I4201}]]></variableExpression>
-	</variable>
-	<variable name="Barcode" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Barcode" : "Barcode"]]></variableExpression>
-	</variable>
-	<variable name="Inventory_information" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inventar informationen" : "Inventory information"]]></variableExpression>
-	</variable>
-	<variable name="Customer_information" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kunden informationen" : "Customer information"]]></variableExpression>
-	</variable>
-	<variable name="Asset_number" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Prüfmittel Nr" : "Asset Number"]]></variableExpression>
-	</variable>
-	<variable name="Serial_number" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "SN / Werk-Nr" : "Serial Number"]]></variableExpression>
-	</variable>
-	<variable name="Manufacturer" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Hersteller" : "Manufacturer"]]></variableExpression>
-	</variable>
-	<variable name="Model" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Modell" : "Model"]]></variableExpression>
-	</variable>
-	<variable name="Description" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Beschreibung" : "Description"]]></variableExpression>
-	</variable>
-	<variable name="Interval" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Interval" : "Intervall"]]></variableExpression>
-	</variable>
-	<variable name="F_Interval" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$F{I4229} + " " + $F{I4228}]]></variableExpression>
-	</variable>
-	<variable name="State_of_asset" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Zustand" : "State of Asset"]]></variableExpression>
-	</variable>
-	<variable name="Customer_name" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kunde" : "Customer"]]></variableExpression>
-	</variable>
-	<variable name="Street" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Straße (Firma)" : "Street (Company)"]]></variableExpression>
-	</variable>
-	<variable name="City" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Ort" : "City"]]></variableExpression>
-	</variable>
-	<variable name="Country" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Land" : "Country"]]></variableExpression>
-	</variable>
-	<variable name="Zip" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "PLZ" : "Zip"]]></variableExpression>
-	</variable>
-	<title>
-		<band height="285" splitType="Stretch">
-			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-			<rectangle>
-				<reportElement stretchType="ContainerHeight" mode="Transparent" x="17" y="151" width="543" height="124" uuid="57f8e2b7-41b1-4221-868f-1fd20a9d76ae">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</rectangle>
-			<textField>
-				<reportElement x="402" y="195" width="143" height="18" uuid="64443f9f-09c8-4a57-82b2-0ffeb217ef2b">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Serial_number}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="163" y="249" width="77" height="20" uuid="c4328bd1-4cc5-4d56-be11-05914c90cdd8">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Manufacturer}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="163" y="218" width="77" height="20" uuid="993d5180-2365-4db3-80f6-86b0541b245b">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Model}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="162" y="188" width="78" height="20" uuid="0cb131ee-99a0-447b-b854-4b963f3273e4">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Description}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="162" y="157" width="78" height="20" uuid="d15750ec-ae55-4a7a-898b-128409a9ffe2">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Customer_name}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="402" y="154" width="155" height="18" uuid="4a066aee-2a66-4bc6-99a3-121fd860adad">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="402" y="213" width="153" height="18" uuid="e43664a7-970d-45b4-84a2-adc4462e0b0a">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{I4206}]]></textFieldExpression>
-			</textField>
-			<componentElement>
-				<reportElement x="511" y="11" width="50" height="50" uuid="a964ef9e-d577-4180-b10a-2e5ec3168ff7">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
-					<jr:codeExpression><![CDATA[$P{QR_Code_Value}]]></jr:codeExpression>
-				</jr:QRCode>
-			</componentElement>
-		</band>
-	</title>
-	<detail>
-		<band height="20" splitType="Stretch"/>
-	</detail>
-	<pageFooter>
-		<band height="70" splitType="Stretch"/>
-	</pageFooter>
-	<lastPageFooter>
-		<band height="74"/>
-	</lastPageFooter>
+<!-- Inventory Overview (ohne Subreports) - JasperReports 6.x kompatibel -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="Inventory_Overview_SQL"
+              pageWidth="595" pageHeight="842"
+              columnWidth="561"
+              leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12"
+              whenNoDataType="AllSectionsNoDetail"
+              uuid="c1c8b2ec-4a0d-4a27-9b2e-9b0a4b0e9abc">
+
+    <!-- Grundeinstellungen / Parameter -->
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+
+    <parameter name="PrefixTable" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Sprache" class="java.lang.String">
+        <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="QR_Code_Value" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="P_MTAG" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+
+    <!-- SQL: holt * aus allen Tabellen + Aliasse für die im Layout genutzten Felder -->
+    <queryString language="SQL"><![CDATA[
+SELECT
+  -- alle Spalten aller Tabellen (dein Wunsch)
+  i.*,
+  c.*,
+  b.*,
+  l.*,
+  cal.*,
+
+  -- Eindeutige Aliasse für das Layout (Kernfelder):
+  i.MTAG                    AS inv_MTAG,
+  i.I4201                   AS inv_I4201,
+  i.I4202                   AS inv_I4202,
+  i.I4203                   AS inv_I4203,
+  i.I4204                   AS inv_I4204,
+  i.I4206                   AS inv_I4206,
+  i.I4228                   AS inv_I4228,
+  i.I4229                   AS inv_I4229,
+  i.I4232                   AS inv_I4232,
+  i.I4299                   AS inv_I4299,
+
+  c.K4602                   AS cust_K4602,
+  c.K4603                   AS cust_K4603,
+  c.K4604                   AS cust_K4604,
+  c.K4605                   AS cust_K4605,
+  c.K4606                   AS cust_K4606,
+
+  l.L2801                   AS loc_L2801,
+  l.L2802                   AS loc_L2802,
+  l.L2809                   AS loc_L2809,
+
+  cal.C2301                 AS cal_C2301,
+  cal.C2307                 AS cal_C2307,
+  cal.C2311                 AS cal_C2311,
+  cal.C2312                 AS cal_C2312,
+  cal.C2339                 AS cal_C2339,
+  cal.C2396                 AS cal_C2396
+
+FROM $P!{PrefixTable}inventory   i
+LEFT JOIN $P!{PrefixTable}customers   c  ON i.KTAG = c.KTAG
+LEFT JOIN $P!{PrefixTable}barcode     b  ON i.MTAG = b.barcode_key
+LEFT JOIN $P!{PrefixTable}location    l  ON l.MTAG = i.MTAG  AND l.L2815 = 1      -- letzte/aktive Location
+LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1  -- letzte gültige Kalibrierung
+WHERE i.MTAG = $P{P_MTAG}
+    ]]></queryString>
+
+    <!-- Felder: nutze die eindeutigen Aliasse (die *-Spalten sind zusätzlich verfügbar, müssen aber nicht deklariert werden) -->
+    <field name="inv_MTAG"  class="java.lang.String"/>
+    <field name="inv_I4201" class="java.lang.String"/>
+    <field name="inv_I4202" class="java.lang.String"/>
+    <field name="inv_I4203" class="java.lang.String"/>
+    <field name="inv_I4204" class="java.lang.String"/>
+    <field name="inv_I4206" class="java.lang.String"/>
+    <field name="inv_I4228" class="java.lang.String"/>
+    <field name="inv_I4229" class="java.lang.String"/>
+    <field name="inv_I4232" class="java.lang.String"/>
+    <field name="inv_I4299" class="java.lang.String"/>
+
+    <field name="cust_K4602" class="java.lang.String"/>
+    <field name="cust_K4603" class="java.lang.String"/>
+    <field name="cust_K4604" class="java.lang.String"/>
+    <field name="cust_K4605" class="java.lang.String"/>
+    <field name="cust_K4606" class="java.lang.String"/>
+
+    <field name="loc_L2801" class="java.lang.String"/>
+    <field name="loc_L2802" class="java.lang.String"/>
+    <field name="loc_L2809" class="java.sql.Timestamp"/>
+
+    <field name="cal_C2301" class="java.sql.Date"/>
+    <field name="cal_C2307" class="java.lang.String"/>
+    <field name="cal_C2311" class="java.lang.String"/>
+    <field name="cal_C2312" class="java.lang.String"/>
+    <field name="cal_C2339" class="java.lang.String"/>
+    <field name="cal_C2396" class="java.lang.String"/>
+
+    <!-- Titelvariable -->
+    <variable name="Inventory_title" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[
+            ($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ")
+            + ($F{inv_I4201} == null ? "" : $F{inv_I4201})
+        ]]></variableExpression>
+    </variable>
+
+    <!-- Titel -->
+    <title>
+        <band height="120" splitType="Stretch">
+            <textField>
+                <reportElement x="16" y="10" width="529" height="28"/>
+                <textElement textAlignment="Center"><font size="18" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[$V{Inventory_title}]]></textFieldExpression>
+            </textField>
+
+            <componentElement>
+                <reportElement x="511" y="8" width="48" height="48"/>
+                <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components">
+                    <jr:codeExpression><![CDATA[$P{QR_Code_Value}]]></jr:codeExpression>
+                </jr:QRCode>
+            </componentElement>
+
+            <textField>
+                <reportElement x="16" y="50" width="529" height="16"/>
+                <textElement textAlignment="Center"><font size="10" isItalic="true"/></textElement>
+                <textFieldExpression><![CDATA[
+                    $P{Sprache}.equals("Deutsch")
+                    ? "Übersicht: Stammdaten, Kunde, letzter Standort (L2815=1), letzte Kalibrierung (C2339=1)"
+                    : "Overview: master data, customer, last location (L2815=1), last calibration (C2339=1)"
+                ]]></textFieldExpression>
+            </textField>
+
+            <line><reportElement x="16" y="74" width="529" height="1"/></line>
+        </band>
+    </title>
+
+    <!-- Kopf -->
+    <pageHeader>
+        <band height="24" splitType="Prevent">
+            <textField>
+                <reportElement x="16" y="4" width="300" height="18"/>
+                <textElement verticalAlignment="Middle"><font size="9"/></textElement>
+                <textFieldExpression><![CDATA["Kunde: " 
+                    + ($F{cust_K4602}==null?"":$F{cust_K4602})
+                    + (($F{cust_K4603}!=null && !$F{cust_K4603}.isEmpty()) ? (", " + $F{cust_K4603}) : "")
+                ]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="336" y="4" width="209" height="18"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="9"/></textElement>
+                <textFieldExpression><![CDATA["Seriennr.: " + ($F{inv_I4206}==null?"":$F{inv_I4206})]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <!-- Übersicht im Summary-Band (druckt immer) -->
+    <summary>
+        <band height="520" splitType="Stretch">
+            <!-- Stammdaten -->
+            <staticText><reportElement x="16" y="8" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[ID-NR / Inventar:]]></text></staticText>
+            <textField><reportElement x="150" y="8" width="395" height="18"/><textFieldExpression><![CDATA[$F{inv_I4201}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="30" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Hersteller:]]></text></staticText>
+            <textField><reportElement x="150" y="30" width="395" height="18"/><textFieldExpression><![CDATA[$F{inv_I4202}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="52" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Modell / Typ:]]></text></staticText>
+            <textField><reportElement x="150" y="52" width="395" height="18"/><textFieldExpression><![CDATA[$F{inv_I4203}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="74" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Beschreibung:]]></text></staticText>
+            <textField isStretchWithOverflow="true"><reportElement x="150" y="74" width="395" height="34"/><textFieldExpression><![CDATA[$F{inv_I4204}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="116" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Intervall:]]></text></staticText>
+            <textField><reportElement x="150" y="116" width="160" height="18"/><textFieldExpression><![CDATA[($F{inv_I4229}==null?"":$F{inv_I4229}) + " " + ($F{inv_I4228}==null?"":$F{inv_I4228})]]></textFieldExpression></textField>
+
+            <!-- Kunde -->
+            <staticText><reportElement x="16" y="140" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Kunde:]]></text></staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="150" y="140" width="395" height="36"/>
+                <textFieldExpression><![CDATA[
+                    ($F{cust_K4602}==null?"":$F{cust_K4602})
+                    + (($F{cust_K4603}!=null && !$F{cust_K4603}.isEmpty()) ? ("\n" + $F{cust_K4603}) : "")
+                    + (($F{cust_K4604}!=null && !$F{cust_K4604}.isEmpty()) ? ("\n" + $F{cust_K4604}) : "")
+                ]]></textFieldExpression>
+            </textField>
+
+            <!-- Letzter Standort -->
+            <staticText><reportElement x="16" y="186" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Letzter Standort:]]></text></staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="150" y="186" width="395" height="36"/>
+                <textFieldExpression><![CDATA[
+                    ($F{loc_L2801}==null?"":$F{loc_L2801})
+                    + (($F{loc_L2802}!=null && !$F{loc_L2802}.isEmpty()) ? (", " + $F{loc_L2802}) : "")
+                    + ($F{loc_L2809}!=null ? ("\nStart: " + new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format($F{loc_L2809})) : "")
+                ]]></textFieldExpression>
+            </textField>
+
+            <!-- Letzte Kalibrierung -->
+            <staticText><reportElement x="16" y="232" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Letzte Kalibrierung:]]></text></staticText>
+            <textField pattern="dd.MM.yyyy"><reportElement x="150" y="232" width="160" height="18"/><textFieldExpression><![CDATA[$F{cal_C2301}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="320" y="232" width="80" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Techniker:]]></text></staticText>
+            <textField><reportElement x="400" y="232" width="145" height="18"/><textFieldExpression><![CDATA[$F{cal_C2307}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="256" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Temp / Feuchte:]]></text></staticText>
+            <textField><reportElement x="150" y="256" width="200" height="18"/><textFieldExpression><![CDATA[
+                ($F{cal_C2311}==null?"":$F{cal_C2311}) + " °C / " + ($F{cal_C2312}==null?"":$F{cal_C2312}) + " %"
+            ]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="280" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Gültiger Eintrag:]]></text></staticText>
+            <textField><reportElement x="150" y="280" width="80" height="18"/><textFieldExpression><![CDATA[$F{cal_C2339}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="16" y="304" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Zertifikatname:]]></text></staticText>
+            <textField isStretchWithOverflow="true"><reportElement x="150" y="304" width="395" height="34"/><textFieldExpression><![CDATA[$F{cal_C2396}]]></textFieldExpression></textField>
+
+            <!-- Barcode / ID -->
+            <staticText><reportElement x="16" y="344" width="120" height="18"/><textElement><font isBold="true" size="10"/></textElement><text><![CDATA[Barcode / ID:]]></text></staticText>
+            <textField><reportElement x="150" y="344" width="395" height="18"/><textFieldExpression><![CDATA[$F{inv_I4299}]]></textFieldExpression></textField>
+        </band>
+    </summary>
+
+    <!-- Fußzeile -->
+    <pageFooter>
+        <band height="36" splitType="Stretch">
+            <textField evaluationTime="Report">
+                <reportElement x="16" y="8" width="200" height="16"/>
+                <textElement><font size="9"/></textElement>
+                <textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <!-- LEERES Detailband (kein Unterbericht) -->
+    <detail>
+        <band height="1" splitType="Stretch"/>
+    </detail>
+
 </jasperReport>
