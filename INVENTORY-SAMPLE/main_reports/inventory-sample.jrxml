@@ -573,13 +573,12 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="cal_C2396" class="java.lang.String"/>
 	<field name="cal_combine" class="java.lang.String"/>
 	<field name="cal_copied_to_mssql" class="java.lang.String"/>
-	<field name="ucust_KTAG" class="java.lang.String"/>
-	<field name="ucust_K4602" class="java.lang.String"/>
-	<field name="ucust_K4603" class="java.lang.String"/>
-	<field name="ucust_K4604" class="java.lang.String"/>
-	<field name="ucust_K4605" class="java.lang.String"/>
-	<field name="ucust_K4606" class="java.lang.String"/>
-	<field name="ucust_K4607" class="java.lang.String"/>
+	<field name="loc_user_KTAG" class="java.lang.String"/>
+	<field name="loc_user_name" class="java.lang.String"/>
+	<field name="loc_user_name2" class="java.lang.String"/>
+	<field name="loc_user_street" class="java.lang.String"/>
+	<field name="loc_user_zipcity" class="java.lang.String"/>
+	<field name="loc_user_country" class="java.lang.String"/>
 	<variable name="Inventory_title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ")
             + ($F{inv_I4201} == null ? "" : $F{inv_I4201})]]></variableExpression>
