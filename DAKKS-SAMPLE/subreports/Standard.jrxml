@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="12" bottomMargin="12" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="535" pageHeight="818" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -12,9 +12,9 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-        <parameter name="PrefixTable" class="java.lang.String">
-                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-        </parameter>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<parameter name="Sprache" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
@@ -54,122 +54,111 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<variable name="Duedate" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "nächste Kal" : "Cal Due"]]></variableExpression>
 	</variable>
-        <variable name="Calibration_mark" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierkennzeichnung" : "Calibration-Mark"]]></variableExpression>
-        </variable>
-        <title>
-                <band height="22">
-                        <textField>
-                                <reportElement x="0" y="0" width="535" height="22" uuid="4cc0d0da-854f-4db1-b3c1-8c1acbbf9fb7"/>
-                                <textElement textAlignment="Center" verticalAlignment="Middle">
-                                        <font fontName="Arial" size="10" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA["STANDARD SUBREPORT LÄUFT"]]></textFieldExpression>
-                        </textField>
-                </band>
-        </title>
-        <columnHeader>
-                <band height="16" splitType="Stretch">
-                        <textField>
-                                <reportElement x="0" y="0" width="75" height="16" backcolor="#F2F2F2" uuid="fc29e98b-b159-4cc3-a555-602e348eb0c6"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Inv_Nr}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="75" y="0" width="110" height="16" backcolor="#F2F2F2" uuid="b3d9104d-98d3-4c37-91df-245f86aa107b"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Description}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="185" y="0" width="75" height="16" backcolor="#F2F2F2" uuid="61d70333-b95a-40cf-8c3b-ec30de752c67"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Manufacturer}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="260" y="0" width="85" height="16" backcolor="#F2F2F2" uuid="d814a74a-4a49-44c8-a349-aaa613d2543b"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Type}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="345" y="0" width="65" height="16" backcolor="#F2F2F2" uuid="d475d00e-fe39-410c-a223-7991737bab30"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Lastcal}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="410" y="0" width="65" height="16" backcolor="#F2F2F2" uuid="d8d5996d-7ecd-479d-a35a-ac4c50229a59"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Duedate}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="475" y="0" width="45" height="16" backcolor="#F2F2F2" uuid="bba1fa61-8bea-4d3c-a7e7-1a1483c1458d"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8" isBold="true"/>
-                                </textElement>
+	<variable name="Calibration_mark" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierkennzeichnung" : "Calibration-Mark"]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="75" height="16" backcolor="#F2F2F2" uuid="fc29e98b-b159-4cc3-a555-602e348eb0c6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Inv_Nr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="95" height="16" backcolor="#F2F2F2" uuid="b3d9104d-98d3-4c37-91df-245f86aa107b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="75" height="16" backcolor="#F2F2F2" uuid="61d70333-b95a-40cf-8c3b-ec30de752c67"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Manufacturer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="85" height="16" backcolor="#F2F2F2" uuid="d814a74a-4a49-44c8-a349-aaa613d2543b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="65" height="16" backcolor="#F2F2F2" uuid="d475d00e-fe39-410c-a223-7991737bab30"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Lastcal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="65" height="16" backcolor="#F2F2F2" uuid="d8d5996d-7ecd-479d-a35a-ac4c50229a59"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Duedate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="45" height="16" backcolor="#F2F2F2" uuid="bba1fa61-8bea-4d3c-a7e7-1a1483c1458d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{Calibration_mark}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
-        <detail>
-                <band height="16">
-                        <textField>
-                                <reportElement x="0" y="0" width="75" height="16" uuid="c7ae95e5-d1c2-4ebb-b86c-c57c342e41d0"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                <reportElement x="75" y="0" width="110" height="16" uuid="38cff896-60bc-4170-b821-4b18da5a4427"/>
-                                <textElement verticalAlignment="Top">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="185" y="0" width="75" height="16" uuid="9903b87d-6099-40b1-bba0-6ee5574d96df"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="260" y="0" width="85" height="16" uuid="79080a7e-1b0a-424f-8478-8543e0b81ba0"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="345" y="0" width="65" height="16" uuid="34913dcf-b72a-4141-9aa7-c6ce9a3ddee4"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="410" y="0" width="65" height="16" uuid="0a316a53-bd2b-4942-af33-6d6065c7bffe"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="475" y="0" width="45" height="16" uuid="9075fa2a-aa64-472c-b973-3d44a95d0c0b"/>
-                                <textElement verticalAlignment="Middle">
-                                        <font fontName="Arial" size="8"/>
-                                </textElement>
+	<detail>
+		<band height="16">
+			<textField>
+				<reportElement x="0" y="0" width="75" height="16" uuid="c7ae95e5-d1c2-4ebb-b86c-c57c342e41d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="75" y="0" width="95" height="16" uuid="38cff896-60bc-4170-b821-4b18da5a4427"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="75" height="16" uuid="9903b87d-6099-40b1-bba0-6ee5574d96df"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="85" height="16" uuid="79080a7e-1b0a-424f-8478-8543e0b81ba0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="65" height="16" uuid="34913dcf-b72a-4141-9aa7-c6ce9a3ddee4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="65" height="16" uuid="0a316a53-bd2b-4942-af33-6d6065c7bffe"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="45" height="16" uuid="9075fa2a-aa64-472c-b973-3d44a95d0c0b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{C2364}]]></textFieldExpression>
 			</textField>
 		</band>
