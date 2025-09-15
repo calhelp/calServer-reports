@@ -429,7 +429,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jrxml"]]></subreportExpression>
+                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 			<band height="160">
@@ -584,7 +584,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jrxml"]]></subreportExpression>
+                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</groupHeader>

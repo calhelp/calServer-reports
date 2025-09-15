@@ -29,7 +29,7 @@
                 <defaultValueExpression><![CDATA["V0.1"]]></defaultValueExpression>
         </parameter>
                 <queryString>
-                <![CDATA[SELECT i.*,
+                      <![CDATA[SELECT i.*,
        l.L2801 AS last_L2801,
        l.L2802 AS last_L2802,
        l.L2803 AS last_L2803,
@@ -1163,7 +1163,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<detail>
                <band height="40" splitType="Stretch">
                        <subreport isUsingCache="false">
-                               <reportElement x="-17" y="0" width="595" height="20" uuid="d3085e09-4ab5-495c-aeb3-02d2fd99daa4"/>
+                               <reportElement positionType="Float" x="-17" y="0" width="595" height="20" uuid="d3085e09-4ab5-495c-aeb3-02d2fd99daa4"/>
                                <subreportParameter name="PrefixTable">
                                        <subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
                                </subreportParameter>
@@ -1177,7 +1177,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Calibration.jasper"]]></subreportExpression>
                        </subreport>
                        <subreport isUsingCache="false">
-                               <reportElement x="-17" y="20" width="595" height="20" uuid="4cee815a-761d-4693-8893-22f9cf2e1e41"/>
+                               <reportElement positionType="Float" x="-17" y="20" width="595" height="20" uuid="4cee815a-761d-4693-8893-22f9cf2e1e41"/>
                                <subreportParameter name="PrefixTable">
                                        <subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
                                </subreportParameter>
