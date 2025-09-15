@@ -297,30 +297,274 @@ LEFT JOIN $P!{PrefixTable}location l  ON l.MTAG = i.MTAG AND l.L2815 = 1
 LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1
 WHERE i.MTAG = $P{P_MTAG}]]>
 	</queryString>
-	<field name="inv_MTAG" class="java.lang.String"/>
 	<field name="inv_I4201" class="java.lang.String"/>
 	<field name="inv_I4202" class="java.lang.String"/>
 	<field name="inv_I4203" class="java.lang.String"/>
 	<field name="inv_I4204" class="java.lang.String"/>
+	<field name="inv_I4205" class="java.lang.String"/>
 	<field name="inv_I4206" class="java.lang.String"/>
+	<field name="inv_I4207" class="java.lang.String"/>
+	<field name="inv_I4208" class="java.lang.String"/>
+	<field name="inv_I4209" class="java.lang.String"/>
+	<field name="inv_I4210" class="java.lang.String"/>
+	<field name="inv_I4211" class="java.lang.String"/>
+	<field name="inv_I4212" class="java.lang.String"/>
+	<field name="inv_I4213" class="java.lang.String"/>
+	<field name="inv_I4214" class="java.lang.String"/>
+	<field name="inv_I4215" class="java.lang.String"/>
+	<field name="inv_I4216" class="java.lang.String"/>
+	<field name="inv_I4217" class="java.lang.String"/>
+	<field name="inv_I4218" class="java.lang.String"/>
+	<field name="inv_I4219" class="java.lang.String"/>
+	<field name="inv_I4220" class="java.lang.String"/>
+	<field name="inv_I4221" class="java.lang.String"/>
+	<field name="inv_I4222" class="java.lang.String"/>
+	<field name="inv_I4223" class="java.lang.String"/>
+	<field name="inv_I4224" class="java.lang.String"/>
+	<field name="inv_I4225" class="java.lang.String"/>
+	<field name="inv_I4226" class="java.lang.String"/>
 	<field name="inv_I4228" class="java.lang.String"/>
 	<field name="inv_I4229" class="java.lang.String"/>
+	<field name="inv_I4230" class="java.lang.String"/>
+	<field name="inv_I4231" class="java.lang.String"/>
 	<field name="inv_I4232" class="java.lang.String"/>
+	<field name="inv_I4233" class="java.lang.String"/>
+	<field name="inv_I4234" class="java.lang.String"/>
+	<field name="inv_I4235" class="java.lang.String"/>
+	<field name="inv_I4236" class="java.lang.String"/>
+	<field name="inv_I4237" class="java.lang.String"/>
+	<field name="inv_I4238" class="java.lang.String"/>
+	<field name="inv_I4239" class="java.lang.String"/>
+	<field name="inv_I4240" class="java.lang.String"/>
 	<field name="inv_I4299" class="java.lang.String"/>
+	<field name="inv_MTAG" class="java.lang.String"/>
+	<field name="inv_nAssetUID" class="java.lang.String"/>
+	<field name="inv_I4241" class="java.lang.String"/>
+	<field name="inv_I4242" class="java.lang.String"/>
+	<field name="inv_I4243" class="java.lang.String"/>
+	<field name="inv_idsrc" class="java.lang.String"/>
+	<field name="inv_IPUBLISH" class="java.lang.String"/>
+	<field name="inv_ktag" class="java.lang.String"/>
+	<field name="inv_replic" class="java.lang.String"/>
+	<field name="inv_I4258" class="java.lang.String"/>
+	<field name="inv_I4244" class="java.lang.String"/>
+	<field name="inv_I4245" class="java.lang.String"/>
+	<field name="inv_I4246" class="java.lang.String"/>
+	<field name="inv_I4247" class="java.lang.String"/>
+	<field name="inv_I4248" class="java.lang.String"/>
+	<field name="inv_I4249" class="java.lang.String"/>
+	<field name="inv_I4250" class="java.lang.String"/>
+	<field name="inv_I4251" class="java.lang.String"/>
+	<field name="inv_I4252" class="java.lang.String"/>
+	<field name="inv_I4253" class="java.lang.String"/>
+	<field name="inv_I4254" class="java.lang.String"/>
+	<field name="inv_I4255" class="java.lang.String"/>
+	<field name="inv_I4256" class="java.lang.String"/>
+	<field name="inv_I4257" class="java.lang.String"/>
+	<field name="inv_I4259" class="java.lang.String"/>
+	<field name="inv_I4260" class="java.lang.String"/>
+	<field name="inv_I4261" class="java.lang.String"/>
+	<field name="inv_I4262" class="java.lang.String"/>
+	<field name="inv_copied_to_mssql" class="java.lang.String"/>
+	<field name="inv_path" class="java.lang.String"/>
+	<field name="cust_KTAG" class="java.lang.String"/>
+	<field name="cust_nFacilityUID" class="java.lang.String"/>
+	<field name="cust_KPUBLISH" class="java.lang.String"/>
+	<field name="cust_K4601" class="java.lang.String"/>
 	<field name="cust_K4602" class="java.lang.String"/>
 	<field name="cust_K4603" class="java.lang.String"/>
 	<field name="cust_K4604" class="java.lang.String"/>
 	<field name="cust_K4605" class="java.lang.String"/>
 	<field name="cust_K4606" class="java.lang.String"/>
+	<field name="cust_K4607" class="java.lang.String"/>
+	<field name="cust_K4608" class="java.lang.String"/>
+	<field name="cust_K4609" class="java.lang.String"/>
+	<field name="cust_K4610" class="java.lang.String"/>
+	<field name="cust_K4611" class="java.lang.String"/>
+	<field name="cust_K4612" class="java.lang.String"/>
+	<field name="cust_K4613" class="java.lang.String"/>
+	<field name="cust_K4614" class="java.lang.String"/>
+	<field name="cust_K4615" class="java.lang.String"/>
+	<field name="cust_K4616" class="java.lang.String"/>
+	<field name="cust_K4617" class="java.lang.String"/>
+	<field name="cust_K4618" class="java.lang.String"/>
+	<field name="cust_K4619" class="java.lang.String"/>
+	<field name="cust_K4620" class="java.lang.String"/>
+	<field name="cust_K4621" class="java.lang.String"/>
+	<field name="cust_K4622" class="java.lang.String"/>
+	<field name="cust_K4623" class="java.lang.String"/>
+	<field name="cust_K4624" class="java.lang.String"/>
+	<field name="cust_K4625" class="java.lang.String"/>
+	<field name="cust_K4626" class="java.lang.String"/>
+	<field name="cust_K4627" class="java.lang.String"/>
+	<field name="cust_K4628" class="java.lang.String"/>
+	<field name="cust_K4640" class="java.lang.String"/>
+	<field name="cust_K4629" class="java.lang.String"/>
+	<field name="cust_K4630" class="java.lang.String"/>
+	<field name="cust_K4631" class="java.lang.String"/>
+	<field name="cust_K4632" class="java.lang.String"/>
+	<field name="cust_KDSRC" class="java.lang.String"/>
+	<field name="cust_kreplic" class="java.lang.String"/>
+	<field name="cust_price_cat_uID" class="java.lang.String"/>
+	<field name="cust_K4633" class="java.lang.String"/>
+	<field name="cust_K4634" class="java.lang.String"/>
+	<field name="cust_K4635" class="java.lang.String"/>
+	<field name="cust_K4636" class="java.lang.String"/>
+	<field name="cust_K4637" class="java.lang.String"/>
+	<field name="bc_id" class="java.lang.String"/>
+	<field name="bc_barcode_key" class="java.lang.String"/>
+	<field name="bc_barcode_value" class="java.lang.String"/>
+	<field name="bc_barcode_image" class="java.lang.String"/>
+	<field name="bc_barcode_type" class="java.lang.String"/>
+	<field name="bc_type" class="java.lang.String"/>
+	<field name="loc_LTAG" class="java.lang.String"/>
+	<field name="loc_nAssetUID" class="java.lang.String"/>
+	<field name="loc_nToolAssignmentUID" class="java.lang.String"/>
 	<field name="loc_L2801" class="java.lang.String"/>
 	<field name="loc_L2802" class="java.lang.String"/>
+	<field name="loc_L2803" class="java.lang.String"/>
+	<field name="loc_L2804" class="java.lang.String"/>
+	<field name="loc_L2805" class="java.lang.String"/>
+	<field name="loc_L2806" class="java.lang.String"/>
+	<field name="loc_L2807" class="java.lang.String"/>
+	<field name="loc_L2808" class="java.lang.String"/>
 	<field name="loc_L2809" class="java.sql.Timestamp"/>
+	<field name="loc_L2810" class="java.lang.String"/>
+	<field name="loc_L2811" class="java.lang.String"/>
+	<field name="loc_L2812" class="java.lang.String"/>
+	<field name="loc_L2813" class="java.lang.String"/>
+	<field name="loc_L2814" class="java.lang.String"/>
+	<field name="loc_L2815" class="java.lang.String"/>
+	<field name="loc_status" class="java.lang.String"/>
+	<field name="loc_MTAG" class="java.lang.String"/>
+	<field name="loc_customer_KTAG" class="java.lang.String"/>
+	<field name="loc_delivery_customer_KTAG" class="java.lang.String"/>
+	<field name="loc_customer_contact_id" class="java.lang.String"/>
+	<field name="loc_delivery_contact_id" class="java.lang.String"/>
+	<field name="loc_ldsrc" class="java.lang.String"/>
+	<field name="loc_L2816" class="java.lang.String"/>
+	<field name="loc_L2817" class="java.lang.String"/>
+	<field name="loc_LPUBLISH" class="java.lang.String"/>
+	<field name="loc_L2818" class="java.lang.String"/>
+	<field name="loc_L2819" class="java.lang.String"/>
+	<field name="loc_L2820" class="java.lang.String"/>
+	<field name="loc_L2821" class="java.lang.String"/>
+	<field name="loc_L2822" class="java.lang.String"/>
+	<field name="loc_L2823" class="java.lang.String"/>
+	<field name="loc_L2824" class="java.lang.String"/>
+	<field name="loc_L2825" class="java.lang.String"/>
+	<field name="loc_L2826" class="java.lang.String"/>
+	<field name="loc_L2827" class="java.lang.String"/>
+	<field name="loc_L2828" class="java.lang.String"/>
+	<field name="loc_L2829" class="java.lang.String"/>
+	<field name="loc_L2830" class="java.lang.String"/>
+	<field name="loc_L2831" class="java.lang.String"/>
+	<field name="loc_L2832" class="java.lang.String"/>
+	<field name="loc_L2833" class="java.lang.String"/>
+	<field name="loc_L2834" class="java.lang.String"/>
+	<field name="loc_L2835" class="java.lang.String"/>
+	<field name="loc_L2836" class="java.lang.String"/>
+	<field name="loc_L2837" class="java.lang.String"/>
+	<field name="cal_CTAG" class="java.lang.String"/>
+	<field name="cal_nCallSheetUID" class="java.lang.String"/>
 	<field name="cal_C2301" class="java.sql.Date"/>
+	<field name="cal_C2302" class="java.lang.String"/>
+	<field name="cal_C2303" class="java.lang.String"/>
+	<field name="cal_C2304" class="java.lang.String"/>
+	<field name="cal_C2306" class="java.lang.String"/>
 	<field name="cal_C2307" class="java.lang.String"/>
+	<field name="cal_C2309" class="java.lang.String"/>
+	<field name="cal_C2310" class="java.lang.String"/>
 	<field name="cal_C2311" class="java.lang.String"/>
 	<field name="cal_C2312" class="java.lang.String"/>
+	<field name="cal_C2313" class="java.lang.String"/>
+	<field name="cal_C2314" class="java.lang.String"/>
+	<field name="cal_C2316" class="java.lang.String"/>
+	<field name="cal_C2320" class="java.lang.String"/>
+	<field name="cal_C2321" class="java.lang.String"/>
+	<field name="cal_C2322" class="java.lang.String"/>
+	<field name="cal_C2323" class="java.lang.String"/>
+	<field name="cal_C2324" class="java.lang.String"/>
+	<field name="cal_C2326" class="java.lang.String"/>
+	<field name="cal_C2327" class="java.lang.String"/>
+	<field name="cal_C2328" class="java.lang.String"/>
+	<field name="cal_C2329" class="java.lang.String"/>
+	<field name="cal_C2330" class="java.lang.String"/>
+	<field name="cal_C2331" class="java.lang.String"/>
+	<field name="cal_C2332" class="java.lang.String"/>
+	<field name="cal_C2333" class="java.lang.String"/>
+	<field name="cal_C2334" class="java.lang.String"/>
+	<field name="cal_C2335" class="java.lang.String"/>
+	<field name="cal_C2336" class="java.lang.String"/>
+	<field name="cal_C2337" class="java.lang.String"/>
+	<field name="cal_C2338" class="java.lang.String"/>
 	<field name="cal_C2339" class="java.lang.String"/>
+	<field name="cal_status" class="java.lang.String"/>
+	<field name="cal_C2341" class="java.lang.String"/>
+	<field name="cal_MTAG" class="java.lang.String"/>
+	<field name="cal_C2362" class="java.lang.String"/>
+	<field name="cal_C2308" class="java.lang.String"/>
+	<field name="cal_C2315" class="java.lang.String"/>
+	<field name="cal_C2342" class="java.lang.String"/>
+	<field name="cal_C2343" class="java.lang.String"/>
+	<field name="cal_C2317" class="java.lang.String"/>
+	<field name="cal_C2318" class="java.lang.String"/>
+	<field name="cal_C2319" class="java.lang.String"/>
+	<field name="cal_C2325" class="java.lang.String"/>
+	<field name="cal_C2350" class="java.lang.String"/>
+	<field name="cal_C2351" class="java.lang.String"/>
+	<field name="cal_C2352" class="java.lang.String"/>
+	<field name="cal_C2353" class="java.lang.String"/>
+	<field name="cal_C2354" class="java.lang.String"/>
+	<field name="cal_C2355" class="java.lang.String"/>
+	<field name="cal_C2356" class="java.lang.String"/>
+	<field name="cal_C2357" class="java.lang.String"/>
+	<field name="cal_C2358" class="java.lang.String"/>
+	<field name="cal_C2359" class="java.lang.String"/>
+	<field name="cal_C2360" class="java.lang.String"/>
+	<field name="cal_C2361" class="java.lang.String"/>
+	<field name="cal_C2363" class="java.lang.String"/>
+	<field name="cal_cdsrc" class="java.lang.String"/>
+	<field name="cal_CPUBLISH" class="java.lang.String"/>
+	<field name="cal_C2381" class="java.lang.String"/>
+	<field name="cal_C2382" class="java.lang.String"/>
+	<field name="cal_C2364" class="java.lang.String"/>
+	<field name="cal_C2365" class="java.lang.String"/>
+	<field name="cal_C2366" class="java.lang.String"/>
+	<field name="cal_C2367" class="java.lang.String"/>
+	<field name="cal_C2368" class="java.lang.String"/>
+	<field name="cal_C2369" class="java.lang.String"/>
+	<field name="cal_C2370" class="java.lang.String"/>
+	<field name="cal_C2371" class="java.lang.String"/>
+	<field name="cal_C2372" class="java.lang.String"/>
+	<field name="cal_C2373" class="java.lang.String"/>
+	<field name="cal_C2374" class="java.lang.String"/>
+	<field name="cal_C2375" class="java.lang.String"/>
+	<field name="cal_C2376" class="java.lang.String"/>
+	<field name="cal_C2377" class="java.lang.String"/>
+	<field name="cal_C2378" class="java.lang.String"/>
+	<field name="cal_C2379" class="java.lang.String"/>
+	<field name="cal_C2380" class="java.lang.String"/>
+	<field name="cal_C2383" class="java.lang.String"/>
+	<field name="cal_C2384" class="java.lang.String"/>
+	<field name="cal_C2385" class="java.lang.String"/>
+	<field name="cal_C2344" class="java.lang.String"/>
+	<field name="cal_C2345" class="java.lang.String"/>
+	<field name="cal_C2346" class="java.lang.String"/>
+	<field name="cal_C2347" class="java.lang.String"/>
+	<field name="cal_C2386" class="java.lang.String"/>
+	<field name="cal_C2387" class="java.lang.String"/>
+	<field name="cal_C2388" class="java.lang.String"/>
+	<field name="cal_C2389" class="java.lang.String"/>
+	<field name="cal_C2390" class="java.lang.String"/>
+	<field name="cal_C2391" class="java.lang.String"/>
+	<field name="cal_C2392" class="java.lang.String"/>
+	<field name="cal_C2393" class="java.lang.String"/>
+	<field name="cal_C2394" class="java.lang.String"/>
+	<field name="cal_C2395" class="java.lang.String"/>
 	<field name="cal_C2396" class="java.lang.String"/>
+	<field name="cal_combine" class="java.lang.String"/>
+	<field name="cal_copied_to_mssql" class="java.lang.String"/>
 	<variable name="Inventory_title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kalibrierkontrollblatt: " : "Calibration control sheet: ")
             + ($F{inv_I4201} == null ? "" : $F{inv_I4201})]]></variableExpression>
