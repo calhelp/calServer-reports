@@ -301,7 +301,7 @@ FROM $P!{PrefixTable}inventory i
 LEFT JOIN $P!{PrefixTable}customers c   ON i.KTAG = c.KTAG
 LEFT JOIN $P!{PrefixTable}barcode   b   ON i.MTAG = b.barcode_key
 LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = i.MTAG AND l.L2815 = 1
-LEFT JOIN $P!{PrefixTable}customers uc ON l.L2801 = uc.KTAG
+LEFT JOIN $P!{PrefixTable}customers uc  ON l.L2801 = uc.KTAG
 LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1
 WHERE i.MTAG = $P{P_MTAG}]]>
 	</queryString>
@@ -729,11 +729,9 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="150" y="186" width="395" height="36" uuid="f363ec01-defa-4dd5-8f2a-7acb7b32381f"/>
-				<textFieldExpression><![CDATA[(($F{loc_user_name}!=null && !$F{loc_user_name}.isEmpty()) ? $F{loc_user_name} : "")
-+ (($F{loc_user_name2}!=null && !$F{loc_user_name2}.isEmpty()) ? (" " + $F{loc_user_name2}) : "")
-+ (($F{loc_L2802}!=null && !$F{loc_L2802}.isEmpty()) ? (", " + $F{loc_L2802}) : "")
-+ ($F{loc_L2809}!=null ? ("\nStart: " + new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format($F{loc_L2809})) : "")
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{loc_user_name2}==null?"":$F{loc_user_name2})
+                    + (($F{loc_L2802}!=null && !$F{loc_L2802}.isEmpty()) ? (", " + $F{loc_L2802}) : "")
+                    + ($F{loc_L2809}!=null ? ("\nStart: " + new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format($F{loc_L2809})) : "")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="16" y="258" width="120" height="18" uuid="c4295784-1e89-4253-9e15-e95297a9d255"/>
