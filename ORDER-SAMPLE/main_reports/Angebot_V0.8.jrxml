@@ -46,10 +46,13 @@
 	<parameter name="Report_phone_number" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Report_description" class="java.lang.String">
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<queryString>
+<parameter name="Report_description" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="ReportVersion" class="java.lang.String">
+<defaultValueExpression><![CDATA["V0.8"]]></defaultValueExpression>
+</parameter>
+<queryString>
 		<![CDATA[SELECT b.uID, a.uID AS article_id, c.K4601, CONCAT_WS(" ", c.K4613, c.K4602) AS K4602, c.K4603, c.K4604, c.K4605, c.K4606, c.K4633, b.W4102,b.W4103, b.date, b.number, b.W4106, b.W4101, b.W4104, b.customer_KTAG, DATE_FORMAT(b.W4105, "%d.%m.%Y") AS W4105, W4108, IF(W4109 IS NULL OR TRIM(W4109) = "", "", DATE_FORMAT(STR_TO_DATE(W4109, '%Y-%m-%d'), '%d.%m.%Y')) AS W4109,
 bc.K4601 as BK4601, CONCAT_WS(" ", bc.K4613, bc.K4602) AS BK4602, bc.K4603 AS BK4603, bc.K4604 AS BK4604, bc.K4605 AS BK4605, bc.K4606 AS BK4606, dc.K4601 AS DK4601, CONCAT_WS(" ", dc.K4613, dc.K4602) AS DK4602, dc.K4603 AS DK4603, dc.K4604 AS DK4604, dc.K4605 AS DK4605, dc.K4606 AS DK4606,
 CONCAT_WS(" ", IF(c.K4606 IS NULL OR TRIM(c.K4606) = "", NULL, c.K4606), IF(c.K4604 IS NULL OR TRIM(c.K4604) = "", NULL, c.K4604)) AS order_address, CONCAT_WS(" ", bc.K4606, bc.K4604) AS billing_company, CONCAT_WS(" ", dc.K4606, dc.K4604) AS delivery_company, b.customer_contact_id, tc.type AS contact_type,
@@ -465,10 +468,20 @@ ORDER BY a.pos_number ASC,
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="271" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-			<rectangle>
+<title>
+<band height="271" splitType="Stretch">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<textField>
+<reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="d930268a-b0ba-4b82-986f-ee1a71a70c4d">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+</reportElement>
+<textElement>
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
+</textField>
+<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="25" y="108" width="254" height="124" uuid="5878cf48-be6d-4789-b99c-acfa4d90ca21">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
