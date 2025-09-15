@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-sample" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" isSummaryNewPage="false" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-sample" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -10,9 +10,9 @@
 	<parameter name="Reportpath" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-        <parameter name="PrefixTable" class="java.lang.String">
-                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-        </parameter>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<parameter name="Sprache" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
@@ -77,16 +77,16 @@
 	<parameter name="Cert_field" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C2396"]]></defaultValueExpression>
 	</parameter>
-<parameter name="P_Image_Path" class="java.lang.String">
-<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-</parameter>
-        <parameter name="ExpUncType" class="java.lang.String">
-                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-        </parameter>
-        <parameter name="ReportVersion" class="java.lang.String">
-                <defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
-        </parameter>
-        <queryString language="SQL">
+	<parameter name="P_Image_Path" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ExpUncType" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportVersion" class="java.lang.String">
+		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
 		<![CDATA[SELECT COALESCE(c.$P!{Cert_field}, "") AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
 COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", DATE_FORMAT(i.I4224, '%Y-%m-%d'), NULL) AS I4224,
 c.C2301, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312
@@ -222,7 +222,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="Page_count" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
-        <group name="Group1" isStartNewPage="false">
+	<group name="Group1">
 		<groupHeader>
 			<band height="60">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -235,8 +235,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1a}]]></textFieldExpression>
 				</textField>
-                        <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -273,9 +273,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<font size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1c}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="20" uuid="3539430e-8b02-4f1c-9782-73125f58696c">
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="20" uuid="3539430e-8b02-4f1c-9782-73125f58696c">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<textElement verticalAlignment="Middle">
@@ -416,8 +416,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA[$V{Group_header_2}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="21" width="535" height="20" uuid="527ac653-f755-41a1-99f2-41ee1ccab50e">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<reportElement x="16" y="21" width="545" height="20" uuid="527ac653-f755-41a1-99f2-41ee1ccab50e">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
@@ -429,7 +429,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 			<band height="160">
@@ -481,11 +481,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA[$P{Measurements_description_1}]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="77">
-                                <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                <textField>
-                                        <reportElement x="16" y="0" width="295" height="25" uuid="30ab2d2c-8b5c-4f68-a97e-fb874344b6f3">
-                                                <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<band height="77">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField>
+					<reportElement x="16" y="0" width="295" height="25" uuid="30ab2d2c-8b5c-4f68-a97e-fb874344b6f3">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
@@ -567,10 +567,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
 				</textField>
-                                <subreport>
-                                        <reportElement x="16" y="42" width="535" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
-                                                <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        </reportElement>
+				<subreport>
+					<reportElement x="16" y="42" width="535" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -584,28 +584,25 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</groupHeader>
 	</group>
-        <title>
-               <!-- the title prints on its own page (see isTitleNewPage)
-                    so we can keep generous spacing without affecting the
-                    first content page -->
-               <band height="707" splitType="Stretch">
-                       <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-                       <textField>
-                               <reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="09fbdd07-84e0-421a-8062-48071b34af67">
-                                       <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-                                       <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                               </reportElement>
-                               <textElement>
-                                       <font size="8"/>
-                               </textElement>
-                               <textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
-                       </textField>
-                       <textField textAdjust="StretchHeight">
+	<title>
+		<band height="707" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="09fbdd07-84e0-421a-8062-48071b34af67">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
 				<reportElement x="17" y="303" width="134" height="30" uuid="6e73786e-fde1-4967-9ccb-5258187d7a90">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -854,94 +851,94 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
-                        <textField textAdjust="ScaleFont">
-                                <reportElement x="329" y="356" width="222" height="237" uuid="63ba20c4-fdad-4cef-8538-a07589d41d75"/>
-                                <textElement textAlignment="Justified">
-                                        <font size="9"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[new String($P{Cert_description}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="ScaleFont">
-                                <reportElement x="16" y="610" width="535" height="21" uuid="470997ee-2360-4f40-8dc0-1cd01e68aa01">
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                </reportElement>
-                                <textElement textAlignment="Justified">
-                                        <font size="9"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[new String($P{Cert_description_1}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
-                        </textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="329" y="356" width="222" height="237" uuid="63ba20c4-fdad-4cef-8538-a07589d41d75"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($P{Cert_description}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="16" y="610" width="535" height="21" uuid="470997ee-2360-4f40-8dc0-1cd01e68aa01">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($P{Cert_description_1}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement positionType="Float" x="16" y="633" width="535" height="1" uuid="7180f2cc-b318-42fe-8297-222a27072378">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</line>
-                        <textField>
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="636" width="134" height="20" uuid="46c04130-b64c-43e6-9a51-d831732c69dc">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Datum}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight" pattern="dd.MM.yyyy" isBlankWhenNull="true">
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="659" width="134" height="20" uuid="e0db9184-37b0-441a-9c29-bf6775d558f7">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
-                        </textField>
-                        <line>
-                                <reportElement positionType="Float" x="16" y="706" width="535" height="1" uuid="d14783c6-e3cc-4217-a64f-df17f8f3e82a">
-                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                </reportElement>
-                        </line>
-                        <textField>
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="204" y="636" width="149" height="20" uuid="6142ebc6-b46e-4e8e-a702-9b9d810d885f">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Kalibrierlabor}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="204" y="659" width="149" height="20" uuid="374d1e1f-60cd-4376-8b3d-006adc0bc73f">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{C2327}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="408" y="636" width="143" height="20" uuid="f0491c98-4de4-4515-9038-a2a20eae9865">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Person_in_charge}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                <reportElement positionType="Float" stretchType="ContainerHeight" x="408" y="659" width="143" height="20" uuid="ec31e771-b9cd-4088-8317-5f5f22b50907">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="10"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$F{C2307}]]></textFieldExpression>
-                        </textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="636" width="134" height="20" uuid="46c04130-b64c-43e6-9a51-d831732c69dc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Datum}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="659" width="134" height="20" uuid="e0db9184-37b0-441a-9c29-bf6775d558f7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="16" y="706" width="535" height="1" uuid="d14783c6-e3cc-4217-a64f-df17f8f3e82a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="204" y="636" width="149" height="20" uuid="6142ebc6-b46e-4e8e-a702-9b9d810d885f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Kalibrierlabor}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="204" y="659" width="149" height="20" uuid="374d1e1f-60cd-4376-8b3d-006adc0bc73f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2327}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="408" y="636" width="143" height="20" uuid="f0491c98-4de4-4515-9038-a2a20eae9865">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Person_in_charge}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="408" y="659" width="143" height="20" uuid="ec31e771-b9cd-4088-8317-5f5f22b50907">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2307}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="498" y="282" width="51" height="24" uuid="de2ec427-896e-4411-86b3-d78b5eb6e1dc">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -993,71 +990,71 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</textField>
 		</band>
 	</pageHeader>
-        <pageFooter>
-                <band height="70" splitType="Stretch">
-                        <printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
-                </band>
-        </pageFooter>
-        <summary>
-                <band height="130" splitType="Stretch">
-                        <textField>
-                                <reportElement x="16" y="0" width="295" height="25" uuid="375fef28-e914-40cf-9883-d60a8c5f9add">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="11" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Group_header_3d}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                <reportElement x="16" y="25" width="535" height="30" uuid="1b1ec9d6-b95e-4f58-beea-b597ddb78faf">
-                                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-                                </reportElement>
-                                <textElement>
-                                        <font size="11"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$P{Additional_information}]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="16" y="60" width="535" height="20" uuid="edc84cd0-a056-4c0e-b9a9-04211d67e48f">
-                                        <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-                                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-                                </reportElement>
-                                <textElement verticalAlignment="Middle">
-                                        <font size="11" isBold="true"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$V{Group_header_4a}]]></textFieldExpression>
-                        </textField>
-                        <textField textAdjust="StretchHeight">
-                                <reportElement x="16" y="81" width="535" height="20" uuid="dd773530-b848-4d9d-b3b8-4edb3558bb22">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                </reportElement>
-                                <textElement>
-                                        <font size="11"/>
-                                </textElement>
-                                <textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
-                        </textField>
-                        <subreport>
-                                <reportElement x="16" y="102" width="535" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
-                                        <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-                                </reportElement>
-                                <subreportParameter name="PrefixTable">
-                                        <subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
-                                </subreportParameter>
-                                <subreportParameter name="Sprache">
-                                        <subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
-                                </subreportParameter>
-                                <subreportParameter name="P_CTAG">
-                                        <subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
-                                </subreportParameter>
-                                <subreportParameter name="P_Image_Path">
-                                        <subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
-                                </subreportParameter>
-                                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
-                        </subreport>
-                </band>
-        </summary>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="16" y="0" width="295" height="25" uuid="375fef28-e914-40cf-9883-d60a8c5f9add">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Group_header_3d}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="16" y="25" width="535" height="30" uuid="1b1ec9d6-b95e-4f58-beea-b597ddb78faf">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Additional_information}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="60" width="535" height="20" uuid="edc84cd0-a056-4c0e-b9a9-04211d67e48f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Group_header_4a}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="16" y="81" width="535" height="20" uuid="dd773530-b848-4d9d-b3b8-4edb3558bb22">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="16" y="102" width="535" height="20" uuid="5b421b52-027f-4f4d-8460-fd59f9c17f36">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="PrefixTable">
+					<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Sprache">
+					<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_CTAG">
+					<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Image_Path">
+					<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
 </jasperReport>

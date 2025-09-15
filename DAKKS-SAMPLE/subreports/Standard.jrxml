@@ -121,7 +121,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="75" y="0" width="85" height="16" uuid="38cff896-60bc-4170-b821-4b18da5a4427"/>
-				<textElement verticalAlignment="Top">
+				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
