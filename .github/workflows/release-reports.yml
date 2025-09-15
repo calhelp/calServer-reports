@@ -20,9 +20,9 @@ jobs:
       - name: Create ZIP archives
         run: |
           mkdir -p output
-          (cd DAKKS-SAMPLE && zip -r ../output/dakks-sample.zip main_reports subreports)
-          (cd ORDER-SAMPLE && zip -r ../output/order-sample.zip main_reports subreports)
-          (cd INVENTORY-SAMPLE && zip -r ../output/inventory-sample.zip main_reports subreports)
+          (cd DAKKS-SAMPLE && zip -r ../output/dakks-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          (cd ORDER-SAMPLE && zip -r ../output/order-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          (cd INVENTORY-SAMPLE && zip -r ../output/inventory-sample.zip main_reports subreports -x "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
 
       - name: Publish release on GitHub
         uses: softprops/action-gh-release@v1
