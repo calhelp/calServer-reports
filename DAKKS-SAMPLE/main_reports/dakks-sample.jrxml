@@ -221,266 +221,188 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	</variable>
 	<group name="Group1">
 		<groupHeader>
-			<band height="60">
+			<band height="56">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="1ee82a2a-95e2-42ae-bcf4-e4e9bd2a800f"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="54069309-ceca-4822-82f5-0bf28ea5a115"/>
-						<textElement textAlignment="Left" verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["KALIBRIERGEGENSTAND"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="b79bd10f-6734-4782-b9b2-1d9194df739b"/>
-						<textElement textAlignment="Left" verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["UNIT UNDER TEST"]]></textFieldExpression>
-					</textField>
-				</frame>
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="e28e106b-6408-40e0-8a7b-f5c3c8f6dce3"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>KALIBRIERGEGENSTAND</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>UNIT UNDER TEST</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="e98a2fc9-fe09-45bb-84f8-f4ab0a5a777a"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="fc61368e-5259-45c2-bb1f-e5b5a4ba38fc"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
 					<textFieldExpression><![CDATA[new String(
-            $P{Asset_description}.replace("_s_", " ").replace("_n_", "\n").getBytes("ISO-8859-1"), "UTF-8"
+            $P{Asset_description}.replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8"
           ).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
            .replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="ead965fc-4d68-4759-93e1-e06baaf4f072"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="ef30e444-05ac-46ae-a32d-fc159c3f8f15"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["DATUM DER ANLIEFERUNG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="fcce9bf0-3782-4406-9d5c-6ab546bc6815"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["INCOMING DATE"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="48">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="32a3e581-b134-4b53-b703-383bbbfdd648"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>DATUM DER ANLIEFERUNG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>INCOMING DATE</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight" pattern="dd.MM.yyyy" isBlankWhenNull="true">
-					<reportElement x="16" y="25" width="535" height="20" uuid="d95094ab-bd53-42b0-9c69-c1e9a1f0fe84"/>
+					<reportElement x="16" y="22" width="535" height="20" uuid="3d58b06d-d231-4106-967d-c4601b4c73bd"/>
 					<textElement verticalAlignment="Middle">
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{I4224}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="e22ada9d-2514-4b63-b9fa-a44b42b9fa38"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="951f3ce6-f222-4c02-8a85-7599cae952c5"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ZUSTAND BEI EINGANG/AUSGANG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="a4507a31-63b8-46d8-9112-2d0aa004d0b4"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["INCOMING/OUTGOING CONDITION"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="48">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="a9929126-85cf-411e-8044-57f4d48a580d"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>ZUSTAND BEI EINGANG/AUSGANG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>INCOMING/OUTGOING CONDITION</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="20" uuid="b94c9c3c-e8a8-4d24-ba22-64aed47de1e9"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="22" width="535" height="20" uuid="a794bed6-dfe4-46d4-bafc-3a6b46374029"/>
 					<textElement verticalAlignment="Middle">
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Foundleft}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="63dd02aa-7a97-4a97-99ed-7cf611591b62"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="404edb1b-8551-428d-a0f5-212f05a853e3"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ZUSTAND BEI AUSGANG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="d8994172-59bb-44fb-a102-feea358aa0f1"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["OUTGOING CONDITION"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="26">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="2c22a2bb-a03b-4389-b77b-aa59b3e87412"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>ZUSTAND BEI AUSGANG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>OUTGOING CONDITION</style>"]]></textFieldExpression>
+				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="ec6bf791-d5bf-46c3-8e06-34cbd0c43c95"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="d7a8ced5-79be-438c-b8d9-c4cd0bef1dcf"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["KALIBRIERVERFAHREN"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="63ad6e89-51fb-4a4b-9b8d-6761d701f054"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="56">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="b5c468ad-1031-460a-858b-bf920821bedb"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>KALIBRIERVERFAHREN</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>CALIBRATION PROCEDURE</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f6e3864a-8f80-4101-b643-5d0bb2615716"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="81c04085-ae4c-4c80-bb9c-13daf688f1fe"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$P{Calibration_procedure_1}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="65">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="78ce30e5-1344-4ba7-9256-4cd6e2b94e14"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="da506ef6-c108-4bb9-bbdb-fe167fa89752"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["VERFAHRENSANWEISUNG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="2f1c76f0-75ae-48ee-9a10-ffe2961fe64c"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["PROCEDURAL DOCUMENT"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="56">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="9d7ccbf2-13ca-46a5-b714-16748b66e550"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>VERFAHRENSANWEISUNG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>PROCEDURAL DOCUMENT</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="136214c3-ee8d-46bc-87a2-3e22ce4b3256"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="c1e88495-20b4-4b1f-ab53-915288e56bde"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$P{Calibration_document}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="65">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="acd9bb8c-964c-46e4-878b-e3d684f14dce"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="d12d9e1d-804b-494d-952f-e211d81e98d8"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ARBEITSANWEISUNG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="c3d11785-f72e-4c82-ae73-f6be3cb4eda5"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="56">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="df47d497-f2a5-494e-aab7-1ef6863c4358"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>ARBEITSANWEISUNG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>CALIBRATION PROCEDURE</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f7007ca2-2e94-4a35-8dad-2e1a08b32992"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="75241fd3-df1f-41e2-860e-ed621859184b"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$P{Calibration_procedure_2}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="40089e79-887d-448b-91d7-933c4c1930d0"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="bf095263-64aa-4e51-add7-0095b42c3e63"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ORT DER KALIBRIERUNG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="dd2cec1c-7654-46ab-8973-d3a6f08387f8"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["PLACE OF CALIBRATION"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="44">
 				<textField>
-					<reportElement x="16" y="25" width="535" height="20" uuid="e8166f75-5c8f-4070-9d4d-64f525db2b60"/>
+					<reportElement x="16" y="0" width="535" height="20" uuid="e3c800f7-2b1d-4297-b474-5c4aaaae00d7"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>ORT DER KALIBRIERUNG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>PLACE OF CALIBRATION</style>"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="16" y="22" width="535" height="20" uuid="1675ef15-73cc-4fe4-baa2-833d323173a6"/>
 					<textElement verticalAlignment="Middle">
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1h_1}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="75">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="ce9973a6-13d6-4fda-9a3c-93f4b8fa4b86"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="93d7b388-3398-42c5-aaa8-46282bed467f"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["UMGEBUNGSBEDINGUNGEN"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="3a7d2e71-f02f-4549-a121-60aa5ec74511"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ENVIRONMENTAL CONDITIONS"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="70">
 				<textField>
-					<reportElement x="16" y="25" width="148" height="20" uuid="8fcff642-1531-407e-b612-cb8055ba002a"/>
+					<reportElement x="16" y="0" width="535" height="20" uuid="7a6f539e-dd99-429f-8d72-dd7fe8b3caf9"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>UMGEBUNGSBEDINGUNGEN</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>ENVIRONMENTAL CONDITIONS</style>"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="16" y="22" width="148" height="20" uuid="81487aa3-4793-4aed-9a0e-d0c6bc517636"/>
 					<textElement verticalAlignment="Middle">
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1i_1}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="16" y="45" width="148" height="20" uuid="1b1456ed-4f67-499c-a9ff-3eb0dcf34c36"/>
+					<reportElement x="16" y="42" width="148" height="20" uuid="f4e716b7-98d4-4c75-9d06-6fdade90016b"/>
 					<textElement verticalAlignment="Middle">
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1i_2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="164" y="25" width="100" height="20" uuid="3b95d421-4b34-4799-a7a5-6c3c91833d0f"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="11"/>
+					<reportElement x="164" y="22" width="100" height="20" uuid="9c8c9d6e-8f7c-4ef2-8d8b-4981f94e1fc4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{C2311} + " °C"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="164" y="45" width="100" height="20" uuid="5ea85097-6516-43e8-8db0-5f8d629a2ef4"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="11"/>
+					<reportElement x="164" y="42" width="100" height="20" uuid="9110988f-7cc6-44cb-ba61-fbc4325a4d52"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{C2312} + " %"]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="50">
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="2b94ed32-28d1-4c21-9d4d-b6e896035d62"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="fc36da38-9a61-422b-897c-1c59b0df502b"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["VERWENDETE NORMALE / RÜCKFÜHRUNG"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="c341cd9f-a946-4b67-b5bf-c099dd559763"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="48">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="c4a8f05a-4700-4aa1-9a44-57671c2a898f"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>VERWENDETE NORMALE / RÜCKFÜHRUNG</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>STANDARDS USED / TRACEABILITY</style>"]]></textFieldExpression>
+				</textField>
 				<subreport>
-					<reportElement x="16" y="21" width="545" height="20" uuid="e824658c-4ff4-4628-acb4-8b6e0485709e"/>
+					<reportElement x="16" y="22" width="545" height="20" uuid="1df20594-8d01-4432-bc12-8cf4af65bf42"/>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -494,159 +416,103 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-			<band height="160">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="9d524f35-6c5e-481a-9427-9434e23c2bb2"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="9741a47a-8e27-4643-a06e-0f8cac79f742"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="39ceb5b2-07ce-4240-81e7-f2ef97e35c70"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="150">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="63d114f4-f11f-42e5-b58b-39efeafd3ba1"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>MESSERGEBNISSE</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>MEASUREMENTS RESULTS</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="30" uuid="6e8adc5d-ffeb-4dba-bb4a-2e63da7da39d"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="28" uuid="c165dc13-7f82-4da7-a8b1-fc64018a0522"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[msg($P{Results_description}, $V{PAGE_NUMBER} + 1)]]></textFieldExpression>
 				</textField>
-				<frame>
-					<reportElement x="16" y="61" width="295" height="20" uuid="1dd8c8d4-3ccf-40a9-9ed2-991a2dc5c331"/>
-					<textField>
-						<reportElement x="0" y="0" width="190" height="20" uuid="e80a405f-7dde-45eb-b1c8-e0d5657820c6"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="195" y="0" width="100" height="20" uuid="029fc3be-561e-46ba-bea7-0d20c22d5c21"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["RESULTS"]]></textFieldExpression>
-					</textField>
-				</frame>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="93" width="535" height="30" uuid="e6726598-0bfb-4708-9229-f85925309e1a"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="54" width="535" height="28" uuid="9a5e351e-67b0-4a9c-a638-17323160cf5c"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Measurements_description}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="125" width="535" height="20" uuid="d241593f-8a49-4056-a237-2b65d092ca7c"/>
+					<reportElement x="16" y="84" width="535" height="24" uuid="e8da4d48-ccd0-413c-8646-c77886660822"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Measurements_description_1}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="77">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<frame>
-					<reportElement x="16" y="0" width="295" height="25" uuid="38e0ddbe-a0f4-4e11-8985-13fb31aa5ae1"/>
-					<textField>
-						<reportElement x="0" y="0" width="190" height="20" uuid="7fc39313-c837-4748-a80c-95ea8f26c349"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["KONFORMITÄT"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="195" y="0" width="100" height="20" uuid="73c74fc9-e57b-4786-bd7d-f56650b134d8"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="74">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="23049cb8-7a68-4b07-ae42-395c942ac284"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>KONFORMITÄT</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>CONFORMITY</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="25" width="535" height="20" uuid="7a342a3c-1146-4839-bb3e-45fbdc3e0d62"/>
+					<reportElement x="16" y="22" width="535" height="20" uuid="7f7a54ad-0168-45e4-9144-87fe78f32dc6"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Conformity_description_1}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="50" y="54" width="501" height="20" uuid="e69f1a61-ad6e-4bcb-ae92-4b10fb4e7767"/>
+					<reportElement x="50" y="48" width="501" height="20" uuid="5ee7bed1-e5e0-4ff7-a907-c457e17251e2"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Conformity_description_3}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="54" width="20" height="20" uuid="89873e01-8d68-4097-99f6-e127a919a591"/>
+					<reportElement x="16" y="48" width="20" height="20" uuid="bcb22588-2add-4da7-bc1b-94606a1f3812"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Conformity_description_2}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60">
-				<frame>
-					<reportElement x="16" y="0" width="295" height="25" uuid="0722f556-581e-456d-a8ec-a51745700115"/>
-					<textField>
-						<reportElement x="0" y="0" width="190" height="20" uuid="900ad288-50e0-4340-9b3c-b43fb032053d"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["WEITERE HINWEISE"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="195" y="0" width="100" height="20" uuid="ae985ea5-47b1-41d8-a574-075dc4e322c9"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="54">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="3c30cb50-2f93-4c7d-94be-d00704859104"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>WEITERE HINWEISE</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>ADDITIONAL INFORMATION</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="25" width="535" height="30" uuid="bc7ad78f-0f06-4c8b-96e2-9621fed5ac76"/>
+					<reportElement x="16" y="22" width="535" height="30" uuid="1d0592a3-f574-46c2-8cdd-0a5cd2be703d"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Additional_information}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="62" splitType="Prevent">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<frame>
-					<reportElement x="16" y="0" width="535" height="20" uuid="9c7fbe16-067d-4151-8883-83c27fb0f549"/>
-					<textField>
-						<reportElement x="0" y="0" width="330" height="20" uuid="227548fa-84be-4415-8d46-634512bbbd71"/>
-						<textElement verticalAlignment="Middle">
-							<font size="13" isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
-					</textField>
-					<textField>
-						<reportElement x="335" y="0" width="200" height="20" uuid="3ad55ba5-bb09-430b-b96f-b8f3f6c3900b"/>
-						<textElement verticalAlignment="Middle">
-							<font size="8" isItalic="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="60" splitType="Prevent">
+				<textField>
+					<reportElement x="16" y="0" width="535" height="20" uuid="7fb9db2f-008a-49c4-8feb-734f8af92759"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style fontName='Arial' fontSize='12' isBold='true'>MESSERGEBNISSE</style> " +
+          "<style fontName='Arial' fontSize='8'  isItalic='true'>MEASUREMENTS RESULTS</style>"]]></textFieldExpression>
+				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement x="16" y="21" width="535" height="20" uuid="678e5b33-54e8-4631-b9af-fff2c38f1976"/>
+					<reportElement x="16" y="22" width="535" height="20" uuid="0c18c17e-0fb6-44e1-a310-9c2a3651b3c6"/>
 					<textElement>
-						<font size="11"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="42" width="535" height="20" uuid="02720deb-267e-435c-9962-5ba085531b9b"/>
+					<reportElement x="16" y="42" width="535" height="20" uuid="660bc527-45aa-428b-ac57-75f016a4aef3"/>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
