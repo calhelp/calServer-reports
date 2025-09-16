@@ -223,14 +223,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<groupHeader>
 			<band height="56">
 				<textField>
-					<reportElement x="16" y="0" width="174" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
+					<reportElement x="16" y="0" width="154" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["KALIBRIERGEGENSTAND"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="190" y="0" width="191" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
+					<reportElement x="170" y="0" width="201" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
@@ -572,30 +572,30 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA[$P{Additional_information}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="60" splitType="Prevent">
+			<band height="132" splitType="Prevent">
 				<textField>
-					<reportElement x="16" y="0" width="138" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
+					<reportElement x="16" y="26" width="138" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="154" y="0" width="191" height="20" uuid="485a1252-b6aa-4c57-b031-f535277c2af0"/>
+					<reportElement x="154" y="26" width="191" height="20" uuid="485a1252-b6aa-4c57-b031-f535277c2af0"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement x="16" y="22" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
+					<reportElement x="16" y="48" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="42" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
+					<reportElement x="16" y="66" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -611,6 +611,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
+				<break>
+					<reportElement x="0" y="13" width="100" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
+				</break>
 			</band>
 		</groupHeader>
 	</group>
