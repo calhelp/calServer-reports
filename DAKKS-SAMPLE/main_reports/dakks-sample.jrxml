@@ -224,11 +224,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="60">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				<textField>
-					<reportElement x="16" y="0" width="275" height="25" uuid="9e9fe0b8-4e8c-42e4-b231-7b7f2d6d2e08">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle" markup="html"/>
-					<textFieldExpression><![CDATA["<font size='6'><b>KALIBRIERGEGENSTAND </b></font><font size='4'><i>UNIT UNDER TEST</i></font>"]]></textFieldExpression>
+  					<reportElement x="16" y="0" width="275" height="25" uuid="9e9fe0b8-4e8c-42e4-b231-7b7f2d6d2e08">
+  					<textElement verticalAlignment="Middle" markup="html"/>
+  					<textFieldExpression><![CDATA[
+   					 	"<font size='4'><b>KALIBRIERGEGENSTAND </b></font><font size='3'><i>UNIT UNDER TEST</i></font>"
+ 						]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
