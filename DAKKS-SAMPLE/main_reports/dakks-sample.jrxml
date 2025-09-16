@@ -457,44 +457,47 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-			<band height="135">
+			<band height="135" splitType="Stretch">
 				<textField>
-					<reportElement x="16" y="19" width="134" height="20" uuid="3f69acc6-00ff-4ed5-ac70-57dd4d083f51"/>
+					<reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="150" y="19" width="191" height="20" uuid="09433e41-d8ec-484c-8a39-fb5b920d7be0"/>
+					<reportElement x="150" y="19" width="191" height="20" uuid="969fe463-6949-4ac5-aa9e-2e2d77627712"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="43" width="535" height="28" uuid="e528f486-8f24-4595-9faa-d255cac9e30e"/>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="43" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[msg($P{Results_description}, $V{PAGE_NUMBER} + 1)]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="73" width="535" height="28" uuid="f5b25a7f-e6f1-4d5c-91ae-028c24048d24"/>
+					<reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Measurements_description}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="103" width="535" height="24" uuid="684db482-dc8e-4102-8169-175f91f27320"/>
+					<reportElement positionType="Float" x="16" y="103" width="535" height="24" uuid="0ec19fbc-5096-4311-845b-271f6bb617c7"/>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{Measurements_description_1}]]></textFieldExpression>
 				</textField>
 				<break>
-					<reportElement x="0" y="10" width="98" height="1" uuid="43ab6121-0234-4ea6-afb7-c3f62348c499"/>
+					<reportElement x="0" y="10" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
 				</break>
 			</band>
 			<band height="74">
