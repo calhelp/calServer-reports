@@ -227,7 +227,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<reportElement x="16" y="0" width="275" height="25" uuid="32002683-ae87-4aa6-8df5-ad8ea4bf27e7"/>
 					<textElement verticalAlignment="Middle" markup="styled"/>
 					<textFieldExpression><![CDATA["<style fontSize='12' isBold='true'>KALIBRIERGEGENSTAND </style>" +
-    "<style fontSize='10' isItalic='true'>UNIT UNDER TEST</style>"]]></textFieldExpression>
+    "<style fontSize='2' isItalic='true'>UNIT UNDER TEST</style>"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
