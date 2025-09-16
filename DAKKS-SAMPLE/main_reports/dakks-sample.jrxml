@@ -226,15 +226,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<groupHeader>
 			<band height="60">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<textField>
-					<reportElement x="16" y="0" width="275" height="25" uuid="9e9fe0b8-4e8c-42e4-b231-7b7f2d6d2e08">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle">
-						<font size="11" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{Group_header_1a}]]></textFieldExpression>
-				</textField>
+                                <textField>
+                                        <reportElement x="16" y="0" width="275" height="25" uuid="9e9fe0b8-4e8c-42e4-b231-7b7f2d6d2e08">
+                                                <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                                        </reportElement>
+                                        <textElement markup="styled" verticalAlignment="Middle"/>
+                                        <textFieldExpression><![CDATA["<style isBold=\"true\" fontSize=\"12\">KALIBRIERGEGENSTAND </style><style isItalic=\"true\" fontSize=\"10\">UNIT UNDER TEST</style>"]]></textFieldExpression>
+                                </textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
