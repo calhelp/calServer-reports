@@ -241,10 +241,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new String(
-            $P{Asset_description}.replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8"
-          ).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
-           .replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new String($P{Asset_description}.replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="48">
@@ -1088,11 +1085,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="70" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="130" splitType="Stretch"/>
-	</summary>
 </jasperReport>
