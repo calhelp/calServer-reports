@@ -243,7 +243,7 @@
 					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="9" isBold="true"/>
+					<font fontName="Arial" size="7" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Measuring Condition]]></text>
 			</staticText>
