@@ -228,7 +228,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                                 <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
                                         </reportElement>
                                         <textElement verticalAlignment="Middle" markup="html"/>
-                                        <textFieldExpression><![CDATA["<font size='14'><b>KALIBRIERGEGENSTAND </b></font><font size='10'><i>UNIT UNDER TEST</i></font>"]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA["<font size='12'><b>KALIBRIERGEGENSTAND </b></font><font size='10'><i>UNIT UNDER TEST</i></font>"]]></textFieldExpression>
                                 </textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="26" width="535" height="34" uuid="f64af78b-568f-4c33-8607-48ef6c19c765">
