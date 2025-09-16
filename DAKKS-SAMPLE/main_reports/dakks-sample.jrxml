@@ -162,9 +162,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="Cert_calibration" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein Nr." : "Calibration Certificate Nr."]]></variableExpression>
 	</variable>
-	<variable name="Group_header_1a" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "KALIBRIERGEGENSTAND" : "UNIT UNDER TEST"]]></variableExpression>
-	</variable>
 	<variable name="Group_header_1b" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "DATUM DER ANLIEFERUNG" : "INCOMING DATE"]]></variableExpression>
 	</variable>
