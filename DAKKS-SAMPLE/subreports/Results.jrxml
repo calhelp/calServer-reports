@@ -8,30 +8,31 @@
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT
-            COALESCE(remark,      '') AS remark,
-            COALESCE(test_desc,   '') AS test_desc,
-            COALESCE(test_step2,  '') AS test_step2,
-            COALESCE(fixq,        '') AS fixq,
-            COALESCE(fixq_p,      '') AS fixq_p,
-            COALESCE(fixq_u,      '') AS fixq_u,
-            COALESCE(varq,        '') AS varq,
-            COALESCE(varq_p,      '') AS varq_p,
-            COALESCE(varq_u,      '') AS varq_u,
-            COALESCE(tol_pos,     '') AS tol_pos,
-            COALESCE(tol_pos_p,   '') AS tol_pos_p,
-            COALESCE(tol_pos_u,   '') AS tol_pos_u,
-            COALESCE(tol_neg,     '') AS tol_neg,
-            COALESCE(tol_neg_p,   '') AS tol_neg_p,
-            COALESCE(tol_neg_u,   '') AS tol_neg_u,
-            COALESCE(exp_uncert,  '') AS exp_uncert,
-            COALESCE(exp_uncert_p,'') AS exp_uncert_p,
-            COALESCE(exp_uncert_u,'') AS exp_uncert_u,
-            COALESCE(exp_uncert_iso_e,'') AS exp_uncert_iso_e,
-            COALESCE(exp_uncert_iso_p,'') AS exp_uncert_iso_p,
-            COALESCE(tol_err,     '') AS tol_err,
-            COALESCE(test_status, '') AS test_status
-        FROM $P!{PrefixTable}results
-        WHERE ctag = $P{P_CTAG}]]>
+      COALESCE(remark,'')              AS remark,
+      COALESCE(test_desc,'')           AS test_desc,
+      COALESCE(test_step2,'')          AS test_step2,
+      COALESCE(fixq,'')                AS fixq,
+      COALESCE(fixq_p,'')              AS fixq_p,
+      COALESCE(fixq_u,'')              AS fixq_u,
+      COALESCE(varq,'')                AS varq,
+      COALESCE(varq_p,'')              AS varq_p,
+      COALESCE(varq_u,'')              AS varq_u,
+      COALESCE(tol_pos,'')             AS tol_pos,
+      COALESCE(tol_pos_p,'')           AS tol_pos_p,
+      COALESCE(tol_pos_u,'')           AS tol_pos_u,
+      COALESCE(tol_neg,'')             AS tol_neg,
+      COALESCE(tol_neg_p,'')           AS tol_neg_p,
+      COALESCE(tol_neg_u,'')           AS tol_neg_u,
+      COALESCE(exp_uncert,'')          AS exp_uncert,
+      COALESCE(exp_uncert_p,'')        AS exp_uncert_p,
+      COALESCE(exp_uncert_u,'')        AS exp_uncert_u,
+      COALESCE(exp_uncert_iso_e,'')    AS exp_uncert_iso_e,
+      COALESCE(exp_uncert_iso_p,'')    AS exp_uncert_iso_p,
+      COALESCE(tol_err,'')             AS tol_err,
+      COALESCE(error,'')               AS error,
+      COALESCE(test_status,'')         AS test_status
+    FROM $P!{PrefixTable}results
+    WHERE ctag = $P{P_CTAG}]]>
 	</queryString>
 	<field name="remark" class="java.lang.String"/>
 	<field name="test_desc" class="java.lang.String"/>
@@ -54,401 +55,399 @@
 	<field name="exp_uncert_iso_e" class="java.lang.String"/>
 	<field name="exp_uncert_iso_p" class="java.lang.String"/>
 	<field name="tol_err" class="java.lang.String"/>
+	<field name="error" class="java.lang.String"/>
 	<field name="test_status" class="java.lang.String"/>
 	<variable name="NominalValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{fixq}.trim().isEmpty() 
-            ? "" 
-            : $F{fixq}
-              + ($F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p})
-              + $F{fixq_u}]]></variableExpression>
+		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
+      ? ""
+      : $F{fixq}.trim()
+        + ($F{fixq_p}==null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
+        + ($F{fixq_u}==null ? "" : $F{fixq_u})]]></variableExpression>
 	</variable>
 	<variable name="MeasuredValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{varq}.trim().isEmpty() 
-            ? "" 
-            : $F{varq}
-              + ($F{varq_p}.trim().isEmpty() ? "" : " " + $F{varq_p})
-              + $F{varq_u}]]></variableExpression>
+		<variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
+      ? ""
+      : $F{varq}.trim()
+        + ($F{varq_p}==null || $F{varq_p}.trim().isEmpty() ? "" : " " + $F{varq_p}.trim())
+        + ($F{varq_u}==null ? "" : $F{varq_u})]]></variableExpression>
+	</variable>
+	<variable name="PosLimit" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
+      ? ""
+      : $F{tol_pos}.trim()
+        + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
+        + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})]]></variableExpression>
+	</variable>
+	<variable name="NegLimit" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
+      ? ""
+      : $F{tol_neg}.trim()
+        + ($F{tol_neg_p}==null || $F{tol_neg_p}.trim().isEmpty() ? "" : " " + $F{tol_neg_p}.trim())
+        + ($F{tol_neg_u}==null ? "" : $F{tol_neg_u})]]></variableExpression>
 	</variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[// Helper-Funktion für numerische Prüfung
-                ((
-                    $F{tol_neg} != null && $F{tol_pos} != null &&
-                    $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
-                    $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?") &&
-                    Math.abs(
-                        Math.abs(Double.parseDouble($F{tol_neg}.replace(",", "."))) -
-                        Math.abs(Double.parseDouble($F{tol_pos}.replace(",", ".")))
-                    ) < 1e-9
-                )
-                    // Wenn numerisch und der Betrag gleich ist -> ein Wert mit ±
-                    ? "± " + $F{tol_pos}.trim().replaceFirst("^[+-]", "")
-                    // Sonst beide Werte ausgeben (egal ob Zahl oder nicht)
-                    : (
-                        ($F{tol_neg} != null ? $F{tol_neg}.trim() : "") +
-                        "\n" +
-                        ($F{tol_pos} != null ? $F{tol_pos}.trim() : "")
-                    )
-                ).trim()]]></variableExpression>
+		<variableExpression><![CDATA[(
+        $F{tol_neg}!=null && $F{tol_pos}!=null
+        && $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+        && $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+        && Math.abs(
+             Math.abs(Double.parseDouble($F{tol_neg}.replace(",", "."))) -
+             Math.abs(Double.parseDouble($F{tol_pos}.replace(",", ".")))
+           ) < 1e-9
+      )
+      ? ( "± " + $F{tol_pos}.trim().replaceFirst("^[+-]","")
+          + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
+          + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})
+        )
+      : (
+          ($V{NegLimit}==null ? "" : $V{NegLimit}.trim()) + "\n" +
+          ($V{PosLimit}==null ? "" : $V{PosLimit}.trim())
+        )]]></variableExpression>
+	</variable>
+	<variable name="RoundedRelError" class="java.lang.String">
+		<variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
+      ? ""
+      : (
+          $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+          ? ( new java.text.DecimalFormat("0.0")
+                .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
+            )
+          : $F{error}
+        )]]></variableExpression>
 	</variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_err}.trim().isEmpty()
-            ? ""
-            : (
-                $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
-                  .matches("-?\\d+(\\.\\d+)?")
-                  ? new java.text.DecimalFormat("0.0")
-                      .format(Double.parseDouble($F{tol_err}.replace(",", ".")))
-                    + "%"
-                  : $F{tol_err}
-              )]]></variableExpression>
+		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
+      ? ""
+      : (
+          $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+          ? ( new java.text.DecimalFormat("0.0")
+                .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
+            )
+          : $F{tol_err}
+        )]]></variableExpression>
 	</variable>
 	<variable name="FormattedUncertainty" class="java.lang.String">
-		<variableExpression><![CDATA[(
-              $F{exp_uncert_iso_e} == null || $F{exp_uncert_iso_e}.trim().isEmpty()
+		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
+      ? ""
+      : (
+          $F{exp_uncert_iso_e}.trim().contains("<sup>")
+          ? $F{exp_uncert_iso_e}.trim()
+          : (
+              $F{exp_uncert_iso_e}.trim().matches(".*\\d\\s*[eE]\\s*[+-]?\\d+.*")
+              ? $F{exp_uncert_iso_e}.trim().replaceAll("(?<=\\d)\\s*[eE]\\s*([+-]?\\d+)", " ×10<sup>$1</sup>")
+              : $F{exp_uncert_iso_e}.trim()
             )
-              ? ""
-              : (
-                  $F{exp_uncert_iso_e}.trim().contains("<sup>")
-                    ? $F{exp_uncert_iso_e}.trim()
-                    : (
-                        $F{exp_uncert_iso_e}.trim().matches(".*\\d\\s*[eE]\\s*[+-]?\\d+.*")
-                          ? $F{exp_uncert_iso_e}.trim()
-                              .replaceAll("(?<=\\d)\\s*[eE]\\s*([+-]?\\d+)", " ×10<sup>$1</sup>")
-                          : $F{exp_uncert_iso_e}.trim()
-                      )
-                )]]></variableExpression>
-	</variable>
-	<variable name="SymbolStatus" class="java.lang.String">
-		<variableExpression><![CDATA[($F{remark}.trim().isEmpty())
-            ? (
-                $F{test_status}.trim().isEmpty()
-                ? ""
-                : (
-                    $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
-                    $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
-                    $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
-                    $F{test_status}.equalsIgnoreCase("pass")               ? "iO"  :
-                    $F{test_status}
-                  )
-              )
-            : ""]]></variableExpression>
+        )]]></variableExpression>
 	</variable>
 	<columnHeader>
-		<band height="43">
+		<band height="35">
 			<staticText>
-				<reportElement x="0" y="0" width="120" height="18" uuid="35705dd9-db7d-4a68-b73d-70731da70156"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="0" y="0" width="120" height="18" uuid="3b38be93-a6e8-4403-9960-371fdd6813f9"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Messbedingungen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="120" height="20" uuid="d5fee59a-122c-4a1d-bf6e-ee151618fc10"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="0" y="18" width="120" height="15" uuid="56f53891-d5b5-47f6-88d9-8f10d426d312"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Measuring Condition]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="60" height="18" uuid="3666c715-842a-4534-ab9e-6473c866b554"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="120" y="0" width="60" height="18" uuid="e9f5c19e-465d-4e43-891f-dc77db28737f"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sollwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="18" width="60" height="20" uuid="8fb14203-0200-46a5-af7a-b134c292edb7"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="120" y="18" width="60" height="15" uuid="87bed544-e38a-4708-bea4-e96d1b57fc01"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[True Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="0" width="65" height="18" uuid="b53e5bb5-fb25-4bc4-af46-414b2d160607"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="180" y="0" width="62" height="18" uuid="dae57c5a-1241-463f-84a0-6f32ae5233eb"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Messwert]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="242" y="18" width="65" height="20" uuid="e49f448f-5f4e-4e72-acb2-c7a53117e32e"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Measured Value]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="180" y="0" width="62" height="18" uuid="05f484f8-42e7-4302-bc63-ee155ead2d79"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[untere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="18" width="62" height="20" uuid="d0ad3992-75c9-4739-9b22-4195329c01f2"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="180" y="18" width="62" height="15" uuid="5babb9b0-c2ed-4163-a0c2-2adc7a97b1c1"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Lower Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="0" width="65" height="18" uuid="013e1612-c8d8-4638-8e2e-655fe980bdf3"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="242" y="0" width="65" height="18" uuid="33472321-77de-40b4-a0dc-c387bf9298ca"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Messwert]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="18" width="65" height="15" uuid="1e77ac64-5659-43da-91d6-2e984a922bf2"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Measured Value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="0" width="65" height="18" uuid="22a6af2e-5d2e-4a84-9471-c3ae4ab39b2e"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[obere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="18" width="65" height="20" uuid="1e468ef4-da55-48e7-8cbd-c865f1eb80f3"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="307" y="18" width="65" height="15" uuid="1ddb88c7-36e6-4050-8082-b0042fee0543"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Upper Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="0" width="38" height="18" uuid="0d29e99d-2a47-4c13-94c6-19fa33d054e8"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="372" y="0" width="38" height="18" uuid="4a0858bb-1557-444c-86b3-bef186e2a52c"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% rel. Abweichung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="18" width="38" height="20" uuid="46e094d0-8864-48b1-9375-d5ba18971b8b"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="372" y="18" width="38" height="15" uuid="65024de4-6774-4335-9c0a-1f977be49b98"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[% rel. Deviation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="0" width="65" height="18" uuid="46b9535f-e973-4796-a688-033d08e4f053"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="410" y="0" width="65" height="18" uuid="b6f3c1c2-b5d0-4474-9cd1-70759976d926"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[erweiterte Messunsicherheit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="18" width="65" height="20" uuid="9a6aceab-862f-4580-a59d-98f5dd847f51"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="410" y="18" width="65" height="15" uuid="42972b8b-6e16-4931-bd95-91e5c78db442"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Expended Uncertainty of Measurement]]></text>
+				<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="0" width="30" height="18" uuid="cc8174fd-aa38-499b-8c08-1f38fb20d9c3"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="475" y="0" width="30" height="18" uuid="ddd59212-6842-4145-bd30-b3d2d177c69e"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="18" width="30" height="20" uuid="d551ec96-4162-48e5-85dc-629d0efe20f9"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+				<reportElement x="475" y="18" width="30" height="15" uuid="2676b2f9-df2e-43eb-925f-a047361e2a7f"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[% Tol]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="0" width="30" height="18" uuid="6815b14a-74b6-4990-b415-d0625bfa8cd8"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Konformität]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="18" width="30" height="15" uuid="76a3b8f5-0532-455f-8d13-33466b40b2ed"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Conformity]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
-			<printWhenExpression><![CDATA[!$F{remark}.trim().isEmpty() ||
-                !$F{test_desc}.trim().isEmpty() ||
-                !$F{test_step2}.trim().isEmpty() ||
-                !$F{fixq}.trim().isEmpty() ||
-                !$F{varq}.trim().isEmpty()]]></printWhenExpression>
+			<printWhenExpression><![CDATA[!$F{remark}.trim().isEmpty()
+        || !$F{test_desc}.trim().isEmpty()
+        || !$F{test_step2}.trim().isEmpty()
+        || !$F{fixq}.trim().isEmpty()
+        || !$F{varq}.trim().isEmpty()]]></printWhenExpression>
 			<textField>
-				<reportElement x="0" y="0" width="120" height="20" uuid="d386a173-eebd-4ee1-8196-6e56aca58b8a"/>
+				<reportElement x="0" y="1" width="120" height="18" uuid="30dd35ea-c3ef-4081-b700-d02984989094"/>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="8" isBold="false"/>
+					<font fontName="Arial" size="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[!$F{remark}.trim().isEmpty()
-                    ? $F{remark}
-                    : (
-                        !$F{test_desc}.trim().isEmpty()
-                        ? $F{test_desc}
-                          + (
-                              !$F{test_step2}.trim().isEmpty()
-                              ? " " + $F{test_step2}
-                              : ""
-                            )
-                        : $F{test_step2}
-                      )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[!$F{remark}.trim().isEmpty() ? $F{remark}
+          : (
+              !$F{test_desc}.trim().isEmpty()
+              ? $F{test_desc} + ( !$F{test_step2}.trim().isEmpty() ? " " + $F{test_step2} : "" )
+              : $F{test_step2}
+            )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="0" width="60" height="20" uuid="135ae340-9dd0-41c8-a4c7-d5a43ef9b6b2"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="8"/>
+				<reportElement x="120" y="1" width="60" height="18" uuid="7c6ae0d8-9db3-4aed-a230-e4f77f1904ad"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="242" y="0" width="65" height="20" uuid="f6b0d7e3-363b-47b3-9fb9-7131daffb9ee"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="8"/>
+				<reportElement x="180" y="1" width="62" height="18" uuid="42bab502-0694-4473-91bb-b28ed3d7fc7a"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="1" width="65" height="18" uuid="bf0259a6-09a1-4788-a39b-53b4339726d5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="475" y="0" width="30" height="20" uuid="3a4230cc-41ec-4702-b731-8ecb0797963a"/>
-				<textElement verticalAlignment="Bottom" markup="html">
-					<font fontName="Arial" size="8"/>
+				<reportElement x="307" y="1" width="65" height="18" uuid="0e1f21b3-ccea-472d-8963-2e71b1716f1b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="1" width="38" height="18" uuid="81edfdbe-e681-4a79-96cc-8abfed88f33f"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="1" width="65" height="18" uuid="7cd6b728-c968-4119-b2b8-dcefe8cbfbe2"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
+          ? ""
+          : $V{FormattedUncertainty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="1" width="30" height="18" uuid="762109b1-8b00-4694-b19c-d4daaf551045"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="410" y="0" width="65" height="20" uuid="29af6774-21c4-43ea-a10d-ebb47a6ebed6"/>
-				<textElement verticalAlignment="Bottom" markup="html">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty() ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
-			</textField>
 			<textField>
-				<reportElement x="505" y="0" width="30" height="20" uuid="1f48e5bb-6d8e-4037-ac69-c1bb1f29e4af"/>
+				<reportElement x="505" y="1" width="30" height="18" uuid="5532692b-d1d8-4204-b101-f3b412e7c3ab"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="8"/>
+					<font fontName="Arial" size="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SymbolStatus} == null || $V{SymbolStatus}.trim().isEmpty() ? "-" : $V{SymbolStatus}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{remark}==null || $F{remark}.trim().isEmpty())
+            ? (
+                $F{test_status}==null || $F{test_status}.trim().isEmpty()
+                ? "-"
+                : (
+                    $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
+                    $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
+                    $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
+                    $F{test_status}.equalsIgnoreCase("pass")               ? "iO" :
+                    $F{test_status}
+                  )
+              )
+            : ""]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="505" y="-25" width="30" height="20" uuid="022899e3-b67c-4b6d-b42f-4b0b89f35d0d"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="false" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Conformity]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="505" y="-43" width="30" height="18" uuid="499a7ffc-e0bd-44f1-b077-67adc8719fbc"/>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Konformität]]></text>
-			</staticText>
 		</band>
 	</detail>
 </jasperReport>
