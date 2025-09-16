@@ -310,7 +310,7 @@
 				<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="0" width="30" height="18" uuid="ddd59212-6842-4145-bd30-b3d2d177c69e"/>
+				<reportElement x="475" y="0" width="25" height="18" uuid="ddd59212-6842-4145-bd30-b3d2d177c69e"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -322,7 +322,7 @@
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="18" width="30" height="15" uuid="2676b2f9-df2e-43eb-925f-a047361e2a7f"/>
+				<reportElement x="475" y="18" width="25" height="15" uuid="2676b2f9-df2e-43eb-925f-a047361e2a7f"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -334,7 +334,7 @@
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="505" y="0" width="30" height="18" uuid="6815b14a-74b6-4990-b415-d0625bfa8cd8"/>
+				<reportElement x="500" y="0" width="35" height="18" uuid="6815b14a-74b6-4990-b415-d0625bfa8cd8"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -346,7 +346,7 @@
 				<text><![CDATA[Konformität]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="505" y="18" width="30" height="15" uuid="76a3b8f5-0532-455f-8d13-33466b40b2ed"/>
+				<reportElement x="500" y="18" width="35" height="15" uuid="76a3b8f5-0532-455f-8d13-33466b40b2ed"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -423,14 +423,14 @@
           : $V{FormattedUncertainty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="475" y="1" width="30" height="18" uuid="762109b1-8b00-4694-b19c-d4daaf551045"/>
+				<reportElement x="475" y="1" width="25" height="18" uuid="762109b1-8b00-4694-b19c-d4daaf551045"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="505" y="1" width="30" height="18" uuid="5532692b-d1d8-4204-b101-f3b412e7c3ab"/>
+				<reportElement x="500" y="1" width="35" height="18" uuid="5532692b-d1d8-4204-b101-f3b412e7c3ab"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" size="6"/>
 				</textElement>
