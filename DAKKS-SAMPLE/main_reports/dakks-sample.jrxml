@@ -512,7 +512,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="42" width="535" height="20" uuid="660bc527-45aa-428b-ac57-75f016a4aef3"/>
+					<reportElement x="16" y="42" width="535" height="18" uuid="660bc527-45aa-428b-ac57-75f016a4aef3"/>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
