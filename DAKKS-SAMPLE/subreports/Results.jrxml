@@ -126,8 +126,8 @@
           : $F{tol_err}
         )]]></variableExpression>
 	</variable>
-	<variable name="FormattedUncertainty" class="java.lang.String">
-		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
+        <variable name="FormattedUncertainty" class="java.lang.String">
+                <variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
       : (
           $F{exp_uncert_iso_e}.trim().contains("<sup>")
@@ -138,10 +138,25 @@
               : $F{exp_uncert_iso_e}.trim()
             )
         )]]></variableExpression>
-	</variable>
-	<variable name="AccredMark" class="java.lang.String">
-		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
-	</variable>
+        </variable>
+        <variable name="HasMeasurementData" class="java.lang.Boolean">
+                <variableExpression><![CDATA[
+        Boolean.valueOf(
+            ($V{NominalValue} != null && !$V{NominalValue}.trim().isEmpty())
+         || ($V{MeasuredValue} != null && !$V{MeasuredValue}.trim().isEmpty())
+         || ($V{NegLimit} != null && !$V{NegLimit}.trim().isEmpty())
+         || ($V{PosLimit} != null && !$V{PosLimit}.trim().isEmpty())
+         || ($V{ToleranceRange} != null && !$V{ToleranceRange}.trim().isEmpty())
+         || ($V{RoundedRelError} != null && !$V{RoundedRelError}.trim().isEmpty())
+         || ($V{RoundedTolErr} != null && !$V{RoundedTolErr}.trim().isEmpty())
+         || ($V{FormattedUncertainty} != null && !$V{FormattedUncertainty}.trim().isEmpty())
+         || ($F{test_status} != null && !$F{test_status}.trim().isEmpty())
+        )
+        ]]></variableExpression>
+        </variable>
+        <variable name="AccredMark" class="java.lang.String">
+                <variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
+        </variable>
 	<columnHeader>
 		<band height="35">
 			<staticText>
@@ -365,11 +380,14 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="535" height="20" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
-					<printWhenExpression><![CDATA[$F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
-				</reportElement>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="20" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
+                                <reportElement x="0" y="0" width="535" height="20" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
+                                        <printWhenExpression><![CDATA[(
+              $V{HasMeasurementData} == null || !$V{HasMeasurementData}
+            )
+            && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
+                                </reportElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="20" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="7" isBold="true"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
@@ -378,9 +396,9 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="0" y="0" width="535" height="20" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
-					<printWhenExpression><![CDATA[$F{remark} == null || $F{remark}.trim().length() == 0]]></printWhenExpression>
-				</reportElement>
+                                <reportElement x="0" y="0" width="535" height="20" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
+                                        <printWhenExpression><![CDATA[$V{HasMeasurementData} != null && $V{HasMeasurementData}]]></printWhenExpression>
+                                </reportElement>
 				<textField>
 					<reportElement x="0" y="1" width="120" height="18" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
 					<textElement verticalAlignment="Bottom">
