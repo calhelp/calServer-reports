@@ -289,54 +289,26 @@ WHERE t.CTAG = $P{P_CTAG}]]>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[new Object(){
-        final java.text.SimpleDateFormat isoParser = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.ROOT);
-        final java.text.SimpleDateFormat targetFormat = new java.text.SimpleDateFormat("MMMM yyyy", $P{REPORT_LOCALE});
-        {
-                isoParser.setLenient(false);
-        }
-        String format(String value){
-                if(value == null){
-                        return "";
-                }
-                String trimmed = value.trim();
-                if(trimmed.isEmpty()){
-                        return "";
-                }
-                try{
-                        return targetFormat.format(isoParser.parse(trimmed));
-                }catch(java.text.ParseException ex){
-                        return value;
-                }
-        }
-}.format($F{C2301})]]></textFieldExpression>
+                        <textFieldExpression><![CDATA[
+($F{C2301} == null || $F{C2301}.trim().isEmpty())
+? ""
+: (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2301}.trim())
+        ? java.time.LocalDate.parse($F{C2301}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{REPORT_LOCALE}))
+        : $F{C2301})
+]]></textFieldExpression>
                         </textField>
                         <textField isBlankWhenNull="true">
                                 <reportElement x="390" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[new Object(){
-        final java.text.SimpleDateFormat isoParser = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.ROOT);
-        final java.text.SimpleDateFormat targetFormat = new java.text.SimpleDateFormat("MMMM yyyy", $P{REPORT_LOCALE});
-        {
-                isoParser.setLenient(false);
-        }
-        String format(String value){
-                if(value == null){
-                        return "";
-                }
-                String trimmed = value.trim();
-                if(trimmed.isEmpty()){
-                        return "";
-                }
-                try{
-                        return targetFormat.format(isoParser.parse(trimmed));
-                }catch(java.text.ParseException ex){
-                        return value;
-                }
-        }
-}.format($F{C2303})]]></textFieldExpression>
+                        <textFieldExpression><![CDATA[
+($F{C2303} == null || $F{C2303}.trim().isEmpty())
+? ""
+: (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2303}.trim())
+        ? java.time.LocalDate.parse($F{C2303}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{REPORT_LOCALE}))
+        : $F{C2303})
+]]></textFieldExpression>
                         </textField>
                         <textField>
                                 <reportElement x="460" y="0" width="75" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
