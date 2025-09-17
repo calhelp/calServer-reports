@@ -18,8 +18,8 @@
   COALESCE(i.I4202, "") AS I4202,
   COALESCE(i.I4203, "") AS I4203,
   COALESCE(i.I4204, "") AS I4204,
-  c.C2301 AS C2301,
-  c.C2303 AS C2303,
+  STR_TO_DATE(c.C2301, '%Y-%m-%d') AS C2301,
+  STR_TO_DATE(c.C2303, '%Y-%m-%d') AS C2303,
   COALESCE(c.C2356, "") AS C2356
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
