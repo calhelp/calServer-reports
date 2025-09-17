@@ -59,29 +59,29 @@
 	<field name="exp_uncert_iso_p" class="java.lang.String"/>
 	<field name="tol_err" class="java.lang.String"/>
 	<field name="error" class="java.lang.String"/>
-        <field name="test_status" class="java.lang.String"/>
-        <field name="accred" class="java.lang.String"/>
-        <field name="row_num" class="java.lang.Number"/>
-        <variable name="NominalValue" class="java.lang.String">
-                <variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
+	<field name="test_status" class="java.lang.String"/>
+	<field name="accred" class="java.lang.String"/>
+	<field name="row_num" class="java.lang.Number"/>
+	<variable name="NominalValue" class="java.lang.String">
+		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
       : $F{fixq}.trim()]]></variableExpression>
-        </variable>
-        <variable name="MeasuredValue" class="java.lang.String">
-                <variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
+	</variable>
+	<variable name="MeasuredValue" class="java.lang.String">
+		<variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
       ? ""
       : $F{varq}.trim()]]></variableExpression>
-        </variable>
-        <variable name="PosLimit" class="java.lang.String">
-                <variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
+	</variable>
+	<variable name="PosLimit" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
       ? ""
       : $F{tol_pos}.trim()]]></variableExpression>
-        </variable>
-        <variable name="NegLimit" class="java.lang.String">
-                <variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
+	</variable>
+	<variable name="NegLimit" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
       ? ""
       : $F{tol_neg}.trim()]]></variableExpression>
-        </variable>
+	</variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[(
         $F{tol_neg}!=null && $F{tol_pos}!=null
@@ -101,8 +101,8 @@
           ($V{PosLimit}==null ? "" : $V{PosLimit}.trim())
         )]]></variableExpression>
 	</variable>
-        <variable name="RoundedRelError" class="java.lang.String">
-                <variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
+	<variable name="RoundedRelError" class="java.lang.String">
+		<variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
       ? ""
       : (
           $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
@@ -110,9 +110,9 @@
               .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
           : $F{error}
         )]]></variableExpression>
-        </variable>
-        <variable name="RoundedTolErr" class="java.lang.String">
-                <variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
+	</variable>
+	<variable name="RoundedTolErr" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
       : (
           $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
@@ -120,9 +120,9 @@
               .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
           : $F{tol_err}
         )]]></variableExpression>
-        </variable>
-        <variable name="FormattedUncertainty" class="java.lang.String">
-                <variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
+	</variable>
+	<variable name="FormattedUncertainty" class="java.lang.String">
+		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
       : (
           $F{exp_uncert_iso_e}.trim().contains("<sup>")
@@ -133,22 +133,20 @@
               : $F{exp_uncert_iso_e}.trim()
             )
         )]]></variableExpression>
-        </variable>
-        <variable name="HasMeasurementData" class="java.lang.Boolean">
-                <variableExpression><![CDATA[
-        Boolean.valueOf(
+	</variable>
+	<variable name="HasMeasurementData" class="java.lang.Boolean">
+		<variableExpression><![CDATA[Boolean.valueOf(
             ($F{fixq} != null && !$F{fixq}.trim().isEmpty())
          || ($F{varq} != null && !$F{varq}.trim().isEmpty())
-        )
-        ]]></variableExpression>
-        </variable>
-        <variable name="AccredMark" class="java.lang.String">
-                <variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
-        </variable>
+        )]]></variableExpression>
+	</variable>
+	<variable name="AccredMark" class="java.lang.String">
+		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
+	</variable>
 	<columnHeader>
 		<band height="35">
 			<staticText>
-				<reportElement x="0" y="0" width="120" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
+				<reportElement x="0" y="0" width="100" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -160,7 +158,7 @@
 				<text><![CDATA[Messbedingungen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="120" height="15" uuid="b60abc68-076c-493d-a3f3-9195326664bd"/>
+				<reportElement x="0" y="18" width="100" height="15" uuid="b60abc68-076c-493d-a3f3-9195326664bd"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -172,7 +170,7 @@
 				<text><![CDATA[Measuring Condition]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="60" height="18" uuid="7880a955-3d0e-47e0-b0ca-86f6808ec459"/>
+				<reportElement x="100" y="0" width="60" height="18" uuid="7880a955-3d0e-47e0-b0ca-86f6808ec459"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -184,7 +182,7 @@
 				<text><![CDATA[Sollwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="18" width="60" height="15" uuid="bd32f354-0a23-4f84-8c54-8742d8eda0a9"/>
+				<reportElement x="100" y="18" width="60" height="15" uuid="bd32f354-0a23-4f84-8c54-8742d8eda0a9"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -196,7 +194,7 @@
 				<text><![CDATA[True Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="0" width="62" height="18" uuid="b8aaaf0e-818f-4cb7-bc68-d6f5bccef281"/>
+				<reportElement x="160" y="0" width="68" height="18" uuid="b8aaaf0e-818f-4cb7-bc68-d6f5bccef281"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -208,7 +206,7 @@
 				<text><![CDATA[untere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="18" width="62" height="15" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
+				<reportElement x="160" y="18" width="68" height="15" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -220,7 +218,7 @@
 				<text><![CDATA[Lower Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="0" width="65" height="18" uuid="ab19233c-cc95-4e62-8907-3b85cd8a99ba"/>
+				<reportElement x="228" y="0" width="65" height="18" uuid="ab19233c-cc95-4e62-8907-3b85cd8a99ba"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -232,7 +230,7 @@
 				<text><![CDATA[Messwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="18" width="65" height="15" uuid="c2ef9866-31f4-4f4c-a509-99fbbaa5e2a7"/>
+				<reportElement x="228" y="18" width="65" height="15" uuid="c2ef9866-31f4-4f4c-a509-99fbbaa5e2a7"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -244,7 +242,7 @@
 				<text><![CDATA[Measured Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="0" width="65" height="18" uuid="6cfc31ec-8210-4030-ac0b-9345ad984c2a"/>
+				<reportElement x="293" y="0" width="72" height="18" uuid="6cfc31ec-8210-4030-ac0b-9345ad984c2a"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -256,7 +254,7 @@
 				<text><![CDATA[obere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="18" width="65" height="15" uuid="c2956eb9-f42e-4a14-aeac-aec17661d608"/>
+				<reportElement x="293" y="18" width="72" height="15" uuid="c2956eb9-f42e-4a14-aeac-aec17661d608"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -268,7 +266,7 @@
 				<text><![CDATA[Upper Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="0" width="38" height="18" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
+				<reportElement x="365" y="0" width="45" height="18" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -280,7 +278,7 @@
 				<text><![CDATA[% rel. Abweichung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="18" width="38" height="15" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
+				<reportElement x="365" y="18" width="45" height="15" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -365,92 +363,91 @@
 			</staticText>
 		</band>
 	</columnHeader>
-        <detail>
-                <band height="14" splitType="Stretch">
-                        <frame>
-                                <reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
-                                        <printWhenExpression><![CDATA[
-            !Boolean.TRUE.equals($V{HasMeasurementData})
+	<detail>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
+					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{HasMeasurementData})
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
-                                </reportElement>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
+				</reportElement>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="SansSerif" size="7" isBold="true"/>
+						<font fontName="SansSerif" size="8" isBold="true"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
 				</textField>
 			</frame>
-                        <frame>
-                                <reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
-                                        <printWhenExpression><![CDATA[Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
-                                </reportElement>
-                                <textField>
-                                        <reportElement x="0" y="0" width="120" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
+					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
+					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc}
               : $F{test_step2}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="120" y="0" width="60" height="14" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
+				</textField>
+				<textField>
+					<reportElement x="100" y="0" width="60" height="14" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="180" y="0" width="62" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
+				</textField>
+				<textField>
+					<reportElement x="160" y="0" width="68" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="242" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
+				</textField>
+				<textField>
+					<reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="307" y="0" width="65" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
+				</textField>
+				<textField>
+					<reportElement x="293" y="0" width="72" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="372" y="0" width="38" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+				</textField>
+				<textField>
+					<reportElement x="365" y="0" width="45" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+				</textField>
+				<textField>
+					<reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
               ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
+				</textField>
+				<textField>
+					<reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="500" y="0" width="35" height="14" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
+				</textField>
+				<textField>
+					<reportElement x="500" y="0" width="35" height="14" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="6"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[(
+					<textFieldExpression><![CDATA[(
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
