@@ -272,35 +272,35 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</textField>
 			<textField>
 				<reportElement x="160" y="0" width="75" height="16" uuid="9c298e7d-09e9-497c-8d26-07a2be6f16ff"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="235" y="0" width="85" height="16" uuid="f327e31e-ed27-4cb8-af23-a482dc4cebc1"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="320" y="0" width="50" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="0" width="50" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="420" y="0" width="115" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
