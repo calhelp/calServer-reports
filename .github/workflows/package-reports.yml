@@ -71,6 +71,12 @@ jobs:
               fi
             done
 
+            # Falls trotz Filter noch andere Dateien vorhanden sind (z. B. README.md),
+            # werden sie vorsorglich entfernt, damit die ZIP-Archive ausschliesslich
+            # JRXML-Dateien enthalten.
+            find "${stage_dir}" -type f ! -name '*.jrxml' -delete
+            find "${stage_dir}" -type d -empty -delete
+
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
               echo "❌ No JRXML files found in ${sample}" >&2
               exit 1
