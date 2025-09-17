@@ -30,7 +30,8 @@
       COALESCE(exp_uncert_iso_p,'')    AS exp_uncert_iso_p,
       COALESCE(tol_err,'')             AS tol_err,
       COALESCE(error,'')               AS error,
-      COALESCE(test_status,'')         AS test_status
+      COALESCE(test_status,'')         AS test_status,
+      COALESCE(accred, 0)              AS accred
     FROM $P!{PrefixTable}results
     WHERE ctag = $P{P_CTAG}]]>
 	</queryString>
@@ -57,6 +58,7 @@
 	<field name="tol_err" class="java.lang.String"/>
 	<field name="error" class="java.lang.String"/>
 	<field name="test_status" class="java.lang.String"/>
+	<field name="accred" class="java.lang.String"/>
 	<variable name="NominalValue" class="java.lang.String">
 		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
@@ -109,9 +111,8 @@
       ? ""
       : (
           $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-          ? ( new java.text.DecimalFormat("0.0")
-                .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
-            )
+          ? new java.text.DecimalFormat("0.0")
+              .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
           : $F{error}
         )]]></variableExpression>
 	</variable>
@@ -120,9 +121,8 @@
       ? ""
       : (
           $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-          ? ( new java.text.DecimalFormat("0.0")
-                .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
-            )
+          ? new java.text.DecimalFormat("0.0")
+              .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
           : $F{tol_err}
         )]]></variableExpression>
 	</variable>
@@ -139,315 +139,326 @@
             )
         )]]></variableExpression>
 	</variable>
+	<variable name="AccredMark" class="java.lang.String">
+		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
+	</variable>
 	<columnHeader>
 		<band height="35">
 			<staticText>
-				<reportElement x="0" y="0" width="120" height="18" uuid="3b38be93-a6e8-4403-9960-371fdd6813f9"/>
+				<reportElement x="0" y="0" width="120" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Messbedingungen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="120" height="15" uuid="56f53891-d5b5-47f6-88d9-8f10d426d312"/>
+				<reportElement x="0" y="18" width="120" height="15" uuid="b60abc68-076c-493d-a3f3-9195326664bd"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Measuring Condition]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="60" height="18" uuid="e9f5c19e-465d-4e43-891f-dc77db28737f"/>
+				<reportElement x="120" y="0" width="60" height="18" uuid="7880a955-3d0e-47e0-b0ca-86f6808ec459"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sollwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="18" width="60" height="15" uuid="87bed544-e38a-4708-bea4-e96d1b57fc01"/>
+				<reportElement x="120" y="18" width="60" height="15" uuid="bd32f354-0a23-4f84-8c54-8742d8eda0a9"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[True Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="0" width="62" height="18" uuid="dae57c5a-1241-463f-84a0-6f32ae5233eb"/>
+				<reportElement x="180" y="0" width="62" height="18" uuid="b8aaaf0e-818f-4cb7-bc68-d6f5bccef281"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[untere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="18" width="62" height="15" uuid="5babb9b0-c2ed-4163-a0c2-2adc7a97b1c1"/>
+				<reportElement x="180" y="18" width="62" height="15" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Lower Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="0" width="65" height="18" uuid="33472321-77de-40b4-a0dc-c387bf9298ca"/>
+				<reportElement x="242" y="0" width="65" height="18" uuid="ab19233c-cc95-4e62-8907-3b85cd8a99ba"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Messwert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="18" width="65" height="15" uuid="1e77ac64-5659-43da-91d6-2e984a922bf2"/>
+				<reportElement x="242" y="18" width="65" height="15" uuid="c2ef9866-31f4-4f4c-a509-99fbbaa5e2a7"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Measured Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="0" width="65" height="18" uuid="22a6af2e-5d2e-4a84-9471-c3ae4ab39b2e"/>
+				<reportElement x="307" y="0" width="65" height="18" uuid="6cfc31ec-8210-4030-ac0b-9345ad984c2a"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[obere Spezifikationsgrenze]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="18" width="65" height="15" uuid="1ddb88c7-36e6-4050-8082-b0042fee0543"/>
+				<reportElement x="307" y="18" width="65" height="15" uuid="c2956eb9-f42e-4a14-aeac-aec17661d608"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Upper Limit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="0" width="38" height="18" uuid="4a0858bb-1557-444c-86b3-bef186e2a52c"/>
+				<reportElement x="372" y="0" width="38" height="18" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% rel. Abweichung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="18" width="38" height="15" uuid="65024de4-6774-4335-9c0a-1f977be49b98"/>
+				<reportElement x="372" y="18" width="38" height="15" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[% rel. Deviation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="0" width="65" height="18" uuid="b6f3c1c2-b5d0-4474-9cd1-70759976d926"/>
+				<reportElement x="410" y="0" width="65" height="18" uuid="70528edb-30a7-46d4-af65-e17aa067d645"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[erweiterte Messunsicherheit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="18" width="65" height="15" uuid="42972b8b-6e16-4931-bd95-91e5c78db442"/>
+				<reportElement x="410" y="18" width="65" height="15" uuid="41fa5341-396a-4209-91b3-92c6d3498388"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="0" width="25" height="18" uuid="ddd59212-6842-4145-bd30-b3d2d177c69e"/>
+				<reportElement x="475" y="0" width="25" height="18" uuid="42b6ddce-c26d-4176-bad0-ad7c5ba311ab"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="18" width="25" height="15" uuid="2676b2f9-df2e-43eb-925f-a047361e2a7f"/>
+				<reportElement x="475" y="18" width="25" height="15" uuid="4b7181f7-6f15-4ab7-8366-60e34fa86fda"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="500" y="0" width="35" height="18" uuid="6815b14a-74b6-4990-b415-d0625bfa8cd8"/>
+				<reportElement x="500" y="0" width="35" height="18" uuid="bcbd02e7-375c-458f-b6bf-e7f832f6b5ad"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Konformität]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="500" y="18" width="35" height="15" uuid="76a3b8f5-0532-455f-8d13-33466b40b2ed"/>
+				<reportElement x="500" y="18" width="35" height="15" uuid="95a9d488-0a25-4f7f-9a41-6b3a566768f6"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="5" isItalic="true"/>
+					<font fontName="SansSerif" size="5" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Conformity]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
-			<printWhenExpression><![CDATA[!$F{remark}.trim().isEmpty()
-        || !$F{test_desc}.trim().isEmpty()
-        || !$F{test_step2}.trim().isEmpty()
-        || !$F{fixq}.trim().isEmpty()
-        || !$F{varq}.trim().isEmpty()]]></printWhenExpression>
-			<textField>
-				<reportElement x="0" y="1" width="120" height="18" uuid="30dd35ea-c3ef-4081-b700-d02984989094"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[!$F{remark}.trim().isEmpty() ? $F{remark}
-          : (
-              !$F{test_desc}.trim().isEmpty()
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="535" height="20" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
+					<printWhenExpression><![CDATA[$F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
+				</reportElement>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="20" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="20" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
+					<printWhenExpression><![CDATA[$F{remark} == null || $F{remark}.trim().length() == 0]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement x="0" y="1" width="120" height="18" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc} + ( !$F{test_step2}.trim().isEmpty() ? " " + $F{test_step2} : "" )
-              : $F{test_step2}
-            )]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="120" y="1" width="60" height="18" uuid="7c6ae0d8-9db3-4aed-a230-e4f77f1904ad"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="180" y="1" width="62" height="18" uuid="42bab502-0694-4473-91bb-b28ed3d7fc7a"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="242" y="1" width="65" height="18" uuid="bf0259a6-09a1-4788-a39b-53b4339726d5"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="307" y="1" width="65" height="18" uuid="0e1f21b3-ccea-472d-8963-2e71b1716f1b"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="372" y="1" width="38" height="18" uuid="81edfdbe-e681-4a79-96cc-8abfed88f33f"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="410" y="1" width="65" height="18" uuid="7cd6b728-c968-4119-b2b8-dcefe8cbfbe2"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
-          ? ""
-          : $V{FormattedUncertainty}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="475" y="1" width="25" height="18" uuid="762109b1-8b00-4694-b19c-d4daaf551045"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="500" y="1" width="35" height="18" uuid="5532692b-d1d8-4204-b101-f3b412e7c3ab"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{remark}==null || $F{remark}.trim().isEmpty())
-            ? (
-                $F{test_status}==null || $F{test_status}.trim().isEmpty()
-                ? "-"
-                : (
-                    $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
-                    $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
-                    $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
-                    $F{test_status}.equalsIgnoreCase("pass")               ? "iO" :
-                    $F{test_status}
-                  )
-              )
-            : ""]]></textFieldExpression>
-			</textField>
+              : $F{test_step2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="1" width="60" height="18" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="1" width="62" height="18" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="242" y="1" width="65" height="18" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="307" y="1" width="65" height="18" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="372" y="1" width="38" height="18" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="1" width="65" height="18" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
+              ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="475" y="1" width="25" height="18" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="500" y="1" width="35" height="18" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="SansSerif" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
+              ($F{test_status}==null || $F{test_status}.trim().isEmpty())
+              ? "-"
+              : (
+                  $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
+                  $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
+                  $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
+                  $F{test_status}.equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}
+                )
+            )
+            + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
 </jasperReport>
