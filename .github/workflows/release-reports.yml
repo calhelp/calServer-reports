@@ -42,6 +42,10 @@ jobs:
               fi
             done
 
+            # Sicherstellen, dass nur JRXML-Dateien in den ZIPs landen
+            find "${stage_dir}" -type f ! -name '*.jrxml' -delete
+            find "${stage_dir}" -type d -empty -delete
+
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
               echo "❌ No JRXML files found in ${sample}" >&2
               exit 1
