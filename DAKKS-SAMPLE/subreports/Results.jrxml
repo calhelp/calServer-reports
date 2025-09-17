@@ -380,17 +380,17 @@
 			</staticText>
 		</band>
 	</columnHeader>
-	<detail>
-		<band height="20" splitType="Stretch">
-			<frame>
-                                <reportElement x="0" y="0" width="535" height="20" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
+        <detail>
+                <band height="16" splitType="Stretch">
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="16" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
                                         <printWhenExpression><![CDATA[(
               $V{HasMeasurementData} == null || !$V{HasMeasurementData}
             )
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
                                 </reportElement>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="20" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="16" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="7" isBold="true"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
@@ -398,71 +398,71 @@
 					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
 				</textField>
 			</frame>
-			<frame>
-                                <reportElement x="0" y="0" width="535" height="20" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="16" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
                                         <printWhenExpression><![CDATA[$V{HasMeasurementData} != null && $V{HasMeasurementData}]]></printWhenExpression>
                                 </reportElement>
-				<textField>
-					<reportElement x="0" y="1" width="120" height="18" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+                                <textField>
+                                        <reportElement x="0" y="0" width="120" height="16" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc} + ( !$F{test_step2}.trim().isEmpty() ? " " + $F{test_step2} : "" )
               : $F{test_step2}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="120" y="1" width="60" height="18" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="120" y="0" width="60" height="16" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="180" y="1" width="62" height="18" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="180" y="0" width="62" height="16" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="242" y="1" width="65" height="18" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="242" y="0" width="65" height="16" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="307" y="1" width="65" height="18" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="307" y="0" width="65" height="16" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="372" y="1" width="38" height="18" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="372" y="0" width="38" height="16" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="410" y="1" width="65" height="18" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="410" y="0" width="65" height="16" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
               ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="475" y="1" width="25" height="18" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="475" y="0" width="25" height="16" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="500" y="1" width="35" height="18" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
+                                </textField>
+                                <textField>
+                                        <reportElement x="500" y="0" width="35" height="16" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
