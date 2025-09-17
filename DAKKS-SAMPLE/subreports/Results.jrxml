@@ -72,20 +72,16 @@
       ? ""
       : $F{varq}.trim()]]></variableExpression>
         </variable>
-	<variable name="PosLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
+        <variable name="PosLimit" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
       ? ""
-      : $F{tol_pos}.trim()
-        + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
-        + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})]]></variableExpression>
-	</variable>
-	<variable name="NegLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
+      : $F{tol_pos}.trim()]]></variableExpression>
+        </variable>
+        <variable name="NegLimit" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
       ? ""
-      : $F{tol_neg}.trim()
-        + ($F{tol_neg_p}==null || $F{tol_neg_p}.trim().isEmpty() ? "" : " " + $F{tol_neg_p}.trim())
-        + ($F{tol_neg_u}==null ? "" : $F{tol_neg_u})]]></variableExpression>
-	</variable>
+      : $F{tol_neg}.trim()]]></variableExpression>
+        </variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[(
         $F{tol_neg}!=null && $F{tol_pos}!=null
