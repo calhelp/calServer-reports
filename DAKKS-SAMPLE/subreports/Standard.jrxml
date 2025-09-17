@@ -18,8 +18,8 @@
   COALESCE(i.I4202, "") AS I4202,
   COALESCE(i.I4203, "") AS I4203,
   COALESCE(i.I4204, "") AS I4204,
-  COALESCE(c.C2301, "") AS C2301,
-  COALESCE(c.C2303, "") AS C2303,
+  c.C2301 AS C2301,
+  c.C2303 AS C2303,
   COALESCE(c.C2356, "") AS C2356
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
@@ -30,8 +30,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-        <field name="C2301" class="java.lang.String"/>
-        <field name="C2303" class="java.lang.String"/>
+  <field name="C2301" class="java.lang.String"/>
+  <field name="C2303" class="java.lang.String"/>
 	<field name="C2356" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
