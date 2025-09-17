@@ -622,20 +622,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="17" y="303" width="134" height="30" uuid="6e73786e-fde1-4967-9ccb-5258187d7a90"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="SansSerif" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{title}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="154" y="313" width="162" height="20" uuid="07efb9da-d825-467b-aa7f-024beca396d4"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="SansSerif" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cert_field}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="371" y="313" width="115" height="20" uuid="dc0bbf1c-965c-4463-946b-4175962c6f4c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
