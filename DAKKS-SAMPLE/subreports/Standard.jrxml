@@ -18,8 +18,8 @@
   COALESCE(i.I4202, "") AS I4202,
   COALESCE(i.I4203, "") AS I4203,
   COALESCE(i.I4204, "") AS I4204,
-  c.C2301 AS C2301,
-  c.C2303 AS C2303,
+  COALESCE(c.C2301, "") AS C2301,
+  COALESCE(c.C2303, "") AS C2303,
   COALESCE(c.C2356, "") AS C2356
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
@@ -30,8 +30,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-        <field name="C2301" class="java.sql.Date"/>
-        <field name="C2303" class="java.sql.Date"/>
+        <field name="C2301" class="java.lang.String"/>
+        <field name="C2303" class="java.lang.String"/>
 	<field name="C2356" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
@@ -168,8 +168,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="320" y="0" width="50" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
+                        <staticText>
+                                <reportElement x="320" y="0" width="60" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -182,8 +182,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[letzte Kal]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="320" y="17" width="50" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
+                        <staticText>
+                                <reportElement x="320" y="17" width="60" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -196,8 +196,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Last Cal]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="370" y="0" width="50" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+                        <staticText>
+                                <reportElement x="380" y="0" width="60" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -210,8 +210,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="370" y="17" width="50" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+                        <staticText>
+                                <reportElement x="380" y="17" width="60" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -224,8 +224,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="420" y="0" width="115" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+                        <staticText>
+                                <reportElement x="440" y="0" width="95" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -238,8 +238,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="420" y="17" width="115" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+                        <staticText>
+                                <reportElement x="440" y="17" width="95" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -284,25 +284,57 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
-                        <textField isBlankWhenNull="true" pattern="MMMM yyyy">
-                                <reportElement x="320" y="0" width="50" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
+                        <textField isBlankWhenNull="true">
+                                <reportElement x="320" y="0" width="60" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[new Object(){
+                                        String format(String value){
+                                                if(value == null){
+                                                        return "";
+                                                }
+                                                String trimmed = value.trim();
+                                                if(trimmed.isEmpty()){
+                                                        return "";
+                                                }
+                                                try{
+                                                        return new java.text.SimpleDateFormat("MMMM yyyy", $P{REPORT_LOCALE})
+                                                                .format(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(trimmed));
+                                                }catch(java.text.ParseException ignored){
+                                                        return trimmed;
+                                                }
+                                        }
+                                }.format($F{C2301})]]></textFieldExpression>
                         </textField>
-                        <textField isBlankWhenNull="true" pattern="MMMM yyyy">
-                                <reportElement x="370" y="0" width="50" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+                        <textField isBlankWhenNull="true">
+                                <reportElement x="380" y="0" width="60" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[new Object(){
+                                        String format(String value){
+                                                if(value == null){
+                                                        return "";
+                                                }
+                                                String trimmed = value.trim();
+                                                if(trimmed.isEmpty()){
+                                                        return "";
+                                                }
+                                                try{
+                                                        return new java.text.SimpleDateFormat("MMMM yyyy", $P{REPORT_LOCALE})
+                                                                .format(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(trimmed));
+                                                }catch(java.text.ParseException ignored){
+                                                        return trimmed;
+                                                }
+                                        }
+                                }.format($F{C2303})]]></textFieldExpression>
                         </textField>
-			<textField>
-				<reportElement x="420" y="0" width="115" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8"/>
-				</textElement>
+                        <textField>
+                                <reportElement x="440" y="0" width="95" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                        <font fontName="SansSerif" size="8"/>
+                                </textElement>
 				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
 			</textField>
 		</band>
