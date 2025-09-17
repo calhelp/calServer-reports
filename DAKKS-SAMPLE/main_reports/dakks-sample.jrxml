@@ -253,7 +253,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["DATUM DER ANLIEFERUNG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="200" y="6" width="191" height="20" uuid="d046ecfa-ab08-4938-bfc7-f6ffc7e4be7d"/>
+					<reportElement x="192" y="6" width="191" height="20" uuid="d046ecfa-ab08-4938-bfc7-f6ffc7e4be7d"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
@@ -269,14 +269,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
 			<band height="56">
 				<textField>
-					<reportElement x="16" y="8" width="224" height="20" uuid="2a9b8f77-21df-46c6-8550-0dbfc6c5bbe9"/>
+					<reportElement x="16" y="8" width="228" height="20" uuid="2a9b8f77-21df-46c6-8550-0dbfc6c5bbe9"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["ZUSTAND BEI EINGANG/AUSGANG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="240" y="8" width="201" height="20" uuid="fc656972-ed40-4334-aa91-0058b02bf0c1"/>
+					<reportElement x="245" y="8" width="201" height="20" uuid="fc656972-ed40-4334-aa91-0058b02bf0c1"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
