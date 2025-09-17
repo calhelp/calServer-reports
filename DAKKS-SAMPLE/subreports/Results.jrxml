@@ -101,26 +101,26 @@
           ($V{PosLimit}==null ? "" : $V{PosLimit}.trim())
         )]]></variableExpression>
 	</variable>
-	<variable name="RoundedRelError" class="java.lang.String">
-		<variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
+        <variable name="RoundedRelError" class="java.lang.String">
+                <variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
       ? ""
       : (
           $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
           ? new java.text.DecimalFormat("0.0")
-              .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
+              .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
           : $F{error}
         )]]></variableExpression>
-	</variable>
-	<variable name="RoundedTolErr" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
+        </variable>
+        <variable name="RoundedTolErr" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
       : (
           $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
           ? new java.text.DecimalFormat("0.0")
-              .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) + "%"
+              .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
           : $F{tol_err}
         )]]></variableExpression>
-	</variable>
+        </variable>
         <variable name="FormattedUncertainty" class="java.lang.String">
                 <variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
