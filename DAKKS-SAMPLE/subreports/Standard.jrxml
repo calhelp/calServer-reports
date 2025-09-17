@@ -258,28 +258,28 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 		<band height="16">
 			<textField>
 				<reportElement x="0" y="0" width="75" height="16" uuid="777648ed-7c4b-4078-baaa-64ad5962ad8f"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="75" y="0" width="85" height="16" uuid="d008f271-68f5-4a7c-8d8c-4c15ad5e0210"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="160" y="0" width="75" height="16" uuid="9c298e7d-09e9-497c-8d26-07a2be6f16ff"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="235" y="0" width="85" height="16" uuid="f327e31e-ed27-4cb8-af23-a482dc4cebc1"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
@@ -290,6 +290,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+				<patternExpression><![CDATA[MONTH($F{C2301}) + ' ' + YEAR( $F{C2301}) ]]></patternExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="0" width="50" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
@@ -300,7 +301,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</textField>
 			<textField>
 				<reportElement x="420" y="0" width="115" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
