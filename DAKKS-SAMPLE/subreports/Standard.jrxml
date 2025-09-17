@@ -30,8 +30,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-  <field name="C2301" class="java.lang.String"/>
-  <field name="C2303" class="java.lang.String"/>
+        <field name="C2301" class="java.sql.Date"/>
+        <field name="C2303" class="java.sql.Date"/>
 	<field name="C2356" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
@@ -284,19 +284,19 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
-                        <textField isBlankWhenNull="true">
+                        <textField isBlankWhenNull="true" pattern="MMMM yyyy">
                                 <reportElement x="320" y="0" width="50" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression class="java.lang.String"><![CDATA[$F{C2301} == null || String.valueOf($F{C2301}).trim().isEmpty() ? null : java.time.LocalDate.parse(String.valueOf($F{C2301}).trim().split("[ T]")[0], java.time.format.DateTimeFormatter.ISO_LOCAL_DATE).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{Sprache}.equals("Deutsch") ? java.util.Locale.GERMAN : java.util.Locale.ENGLISH))]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
                         </textField>
-                        <textField isBlankWhenNull="true">
+                        <textField isBlankWhenNull="true" pattern="MMMM yyyy">
                                 <reportElement x="370" y="0" width="50" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="SansSerif" size="8"/>
                                 </textElement>
-                                <textFieldExpression class="java.lang.String"><![CDATA[$F{C2303} == null || String.valueOf($F{C2303}).trim().isEmpty() ? null : java.time.LocalDate.parse(String.valueOf($F{C2303}).trim().split("[ T]")[0], java.time.format.DateTimeFormatter.ISO_LOCAL_DATE).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{Sprache}.equals("Deutsch") ? java.util.Locale.GERMAN : java.util.Locale.ENGLISH))]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
                         </textField>
 			<textField>
 				<reportElement x="420" y="0" width="115" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
