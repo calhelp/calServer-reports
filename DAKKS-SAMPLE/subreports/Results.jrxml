@@ -62,34 +62,26 @@
         <field name="test_status" class="java.lang.String"/>
         <field name="accred" class="java.lang.String"/>
         <field name="row_num" class="java.lang.Number"/>
-	<variable name="NominalValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
+        <variable name="NominalValue" class="java.lang.String">
+                <variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
-      : $F{fixq}.trim()
-        + ($F{fixq_p}==null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
-        + ($F{fixq_u}==null ? "" : $F{fixq_u})]]></variableExpression>
-	</variable>
-	<variable name="MeasuredValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
+      : $F{fixq}.trim()]]></variableExpression>
+        </variable>
+        <variable name="MeasuredValue" class="java.lang.String">
+                <variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
       ? ""
-      : $F{varq}.trim()
-        + ($F{varq_p}==null || $F{varq_p}.trim().isEmpty() ? "" : " " + $F{varq_p}.trim())
-        + ($F{varq_u}==null ? "" : $F{varq_u})]]></variableExpression>
-	</variable>
-	<variable name="PosLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
+      : $F{varq}.trim()]]></variableExpression>
+        </variable>
+        <variable name="PosLimit" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
       ? ""
-      : $F{tol_pos}.trim()
-        + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
-        + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})]]></variableExpression>
-	</variable>
-	<variable name="NegLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
+      : $F{tol_pos}.trim()]]></variableExpression>
+        </variable>
+        <variable name="NegLimit" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
       ? ""
-      : $F{tol_neg}.trim()
-        + ($F{tol_neg_p}==null || $F{tol_neg_p}.trim().isEmpty() ? "" : " " + $F{tol_neg_p}.trim())
-        + ($F{tol_neg_u}==null ? "" : $F{tol_neg_u})]]></variableExpression>
-	</variable>
+      : $F{tol_neg}.trim()]]></variableExpression>
+        </variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[(
         $F{tol_neg}!=null && $F{tol_pos}!=null
