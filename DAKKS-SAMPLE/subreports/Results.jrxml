@@ -137,14 +137,8 @@
         <variable name="HasMeasurementData" class="java.lang.Boolean">
                 <variableExpression><![CDATA[
         Boolean.valueOf(
-            ($V{NominalValue} != null && !$V{NominalValue}.trim().isEmpty())
-         || ($V{MeasuredValue} != null && !$V{MeasuredValue}.trim().isEmpty())
-         || ($V{NegLimit} != null && !$V{NegLimit}.trim().isEmpty())
-         || ($V{PosLimit} != null && !$V{PosLimit}.trim().isEmpty())
-         || ($V{ToleranceRange} != null && !$V{ToleranceRange}.trim().isEmpty())
-         || ($V{RoundedRelError} != null && !$V{RoundedRelError}.trim().isEmpty())
-         || ($V{RoundedTolErr} != null && !$V{RoundedTolErr}.trim().isEmpty())
-         || ($V{FormattedUncertainty} != null && !$V{FormattedUncertainty}.trim().isEmpty())
+            ($F{fixq} != null && !$F{fixq}.trim().isEmpty())
+         || ($F{varq} != null && !$F{varq}.trim().isEmpty())
         )
         ]]></variableExpression>
         </variable>
