@@ -31,9 +31,11 @@
       COALESCE(tol_err,'')             AS tol_err,
       COALESCE(error,'')               AS error,
       COALESCE(test_status,'')         AS test_status,
-      COALESCE(accred, 0)              AS accred
+      COALESCE(accred, 0)              AS accred,
+      row_num
     FROM $P!{PrefixTable}results
-    WHERE ctag = $P{P_CTAG}]]>
+    WHERE ctag = $P{P_CTAG}
+    ORDER BY row_num]]>
 	</queryString>
 	<field name="remark" class="java.lang.String"/>
 	<field name="test_desc" class="java.lang.String"/>
@@ -57,8 +59,9 @@
 	<field name="exp_uncert_iso_p" class="java.lang.String"/>
 	<field name="tol_err" class="java.lang.String"/>
 	<field name="error" class="java.lang.String"/>
-	<field name="test_status" class="java.lang.String"/>
-	<field name="accred" class="java.lang.String"/>
+        <field name="test_status" class="java.lang.String"/>
+        <field name="accred" class="java.lang.String"/>
+        <field name="row_num" class="java.lang.Number"/>
 	<variable name="NominalValue" class="java.lang.String">
 		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
