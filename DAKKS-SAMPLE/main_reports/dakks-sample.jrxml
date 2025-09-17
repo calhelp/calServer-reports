@@ -759,63 +759,63 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<text><![CDATA[Date of calibration]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="124" y="356" width="188" height="20" uuid="b63361a0-7916-463a-ba8b-69953f0ba88d"/>
+				<reportElement x="195" y="356" width="116" height="20" uuid="b63361a0-7916-463a-ba8b-69953f0ba88d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="125" y="379" width="187" height="20" uuid="941eecd0-707b-4597-a095-0aca74e4d3db"/>
+				<reportElement x="195" y="379" width="117" height="20" uuid="941eecd0-707b-4597-a095-0aca74e4d3db"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="125" y="403" width="187" height="20" uuid="fb0beb86-5286-4a09-a5ca-fc27eed71ea8"/>
+				<reportElement x="195" y="403" width="117" height="20" uuid="fb0beb86-5286-4a09-a5ca-fc27eed71ea8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="125" y="427" width="187" height="20" uuid="1bf4786e-9acd-488c-ad0a-0dfade27c501"/>
+				<reportElement x="195" y="427" width="117" height="20" uuid="1bf4786e-9acd-488c-ad0a-0dfade27c501"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4206}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="125" y="449" width="187" height="20" uuid="8b6b3437-4958-46b2-99c1-6bc2d152fb6b"/>
+				<reportElement x="195" y="449" width="117" height="20" uuid="8b6b3437-4958-46b2-99c1-6bc2d152fb6b"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{inv_number}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="125" y="473" width="187" height="40" uuid="5f016946-6721-48c5-bbbd-22da1fec173c"/>
+				<reportElement x="195" y="473" width="117" height="40" uuid="5f016946-6721-48c5-bbbd-22da1fec173c"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{customer} != null ? $F{customer} : "--"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="dd.MM.yyyy" isBlankWhenNull="true">
-				<reportElement x="125" y="518" width="187" height="20" uuid="44b06eae-f04d-4355-b948-2686dd51230f"/>
+				<reportElement x="195" y="518" width="117" height="20" uuid="44b06eae-f04d-4355-b948-2686dd51230f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="125" y="540" width="187" height="20" uuid="4822b3e2-e452-4dfe-8fcb-e74ed065820a"/>
+				<reportElement x="195" y="540" width="116" height="20" uuid="4822b3e2-e452-4dfe-8fcb-e74ed065820a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2314}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="125" y="563" width="187" height="20" uuid="9f375b64-1b4e-46b3-9fb1-e2bcf0a24743"/>
+				<reportElement x="195" y="563" width="117" height="20" uuid="9f375b64-1b4e-46b3-9fb1-e2bcf0a24743"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>

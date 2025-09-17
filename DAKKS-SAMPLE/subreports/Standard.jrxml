@@ -20,7 +20,7 @@
   COALESCE(i.I4204, "") AS I4204,
   COALESCE(c.C2301, "") AS C2301,
   COALESCE(c.C2303, "") AS C2303,
-  COALESCE(c.C2364, "") AS C2364
+  COALESCE(c.C2356, "") AS C2356
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
 LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG` = i.`MTAG` AND c.C2339 = 1)
@@ -32,7 +32,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4204" class="java.lang.String"/>
 	<field name="C2301" class="java.lang.String"/>
 	<field name="C2303" class="java.lang.String"/>
-	<field name="C2364" class="java.lang.String"/>
+	<field name="C2356" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
 	</variable>
@@ -58,6 +58,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 		<band height="32" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="7d913788-7f1a-47f8-b1ed-61821264a611"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -65,6 +72,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="c7f65ae6-9a2c-4c41-8acb-07b8fb87ba34"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -72,6 +86,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="75" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="3de199d1-63f1-49e4-9f4d-41284b1b1d24"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -79,6 +100,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="75" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="ed254a3b-9128-498a-8f43-72d57dd85871"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -86,6 +114,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="160" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="47826ff7-5663-49b1-ae0b-e1447701c763"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -93,6 +128,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="160" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="ad739623-fe43-438d-b259-c25de96b2854"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -100,6 +142,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="235" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="e8248c6a-a7f7-448b-b94e-88f297e53df6"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -107,6 +156,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="235" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="9b5efa6a-1729-4a8e-81cc-2e9f59a5666a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -114,6 +170,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="320" y="0" width="50" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -121,6 +184,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="320" y="17" width="50" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -128,6 +198,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="370" y="0" width="50" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -135,6 +212,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="370" y="17" width="50" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -142,6 +226,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="420" y="0" width="115" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
@@ -149,6 +240,13 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="420" y="17" width="115" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7" isItalic="true"/>
 				</textElement>
@@ -205,7 +303,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2364}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
