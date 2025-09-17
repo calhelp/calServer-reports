@@ -373,7 +373,7 @@
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="SansSerif" size="8" isBold="true"/>
+						<font fontName="SansSerif" size="10" isBold="true"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
@@ -386,7 +386,7 @@
 				<textField>
 					<reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc}
@@ -395,42 +395,42 @@
 				<textField>
 					<reportElement x="100" y="0" width="60" height="14" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="160" y="0" width="68" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NegLimit}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="293" y="0" width="72" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{PosLimit}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="365" y="0" width="45" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
               ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
@@ -438,14 +438,14 @@
 				<textField>
 					<reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="500" y="0" width="35" height="14" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="7"/>
+						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[(
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
