@@ -153,7 +153,6 @@
          || ($V{RoundedRelError} != null && !$V{RoundedRelError}.trim().isEmpty())
          || ($V{RoundedTolErr} != null && !$V{RoundedTolErr}.trim().isEmpty())
          || ($V{FormattedUncertainty} != null && !$V{FormattedUncertainty}.trim().isEmpty())
-         || ($F{test_status} != null && !$F{test_status}.trim().isEmpty())
         )
         ]]></variableExpression>
         </variable>
@@ -384,9 +383,8 @@
                 <band height="14" splitType="Stretch">
                         <frame>
                                 <reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
-                                        <printWhenExpression><![CDATA[(
-              $V{HasMeasurementData} == null || !$V{HasMeasurementData}
-            )
+                                        <printWhenExpression><![CDATA[
+            !Boolean.TRUE.equals($V{HasMeasurementData})
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
                                 </reportElement>
                                 <textField textAdjust="StretchHeight">
@@ -400,7 +398,7 @@
 			</frame>
                         <frame>
                                 <reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
-                                        <printWhenExpression><![CDATA[$V{HasMeasurementData} != null && $V{HasMeasurementData}]]></printWhenExpression>
+                                        <printWhenExpression><![CDATA[Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
                                 </reportElement>
                                 <textField>
                                         <reportElement x="0" y="0" width="120" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
