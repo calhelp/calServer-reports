@@ -918,44 +918,44 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<band height="88" splitType="Prevent">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 			<line>
-				<reportElement x="485" y="7" width="57" height="1" uuid="531f85e8-3ca4-4b8f-b75c-e5133a718333">
+				<reportElement x="492" y="7" width="57" height="1" uuid="531f85e8-3ca4-4b8f-b75c-e5133a718333">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="485" y="80" width="57" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
+				<reportElement x="492" y="80" width="57" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="485" y="7" width="1" height="74" uuid="e7d3c686-65de-42be-b99d-f6e6ef4d8a4e">
+				<reportElement x="492" y="7" width="1" height="74" uuid="e7d3c686-65de-42be-b99d-f6e6ef4d8a4e">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="541" y="7" width="1" height="74" uuid="cf1fba74-b971-480b-865d-faba195c6210">
+				<reportElement x="548" y="7" width="1" height="74" uuid="cf1fba74-b971-480b-865d-faba195c6210">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="485" y="27" width="57" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
+				<reportElement x="492" y="27" width="57" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="485" y="60" width="57" height="1" uuid="44ac9db4-cafc-475b-a626-17a6475d0bc3">
+				<reportElement x="492" y="60" width="57" height="1" uuid="44ac9db4-cafc-475b-a626-17a6475d0bc3">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 			</line>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="488" y="10" width="51" height="15" uuid="5713e1f6-e91c-48d9-bada-b49b9a2778f3">
+				<reportElement x="495" y="10" width="51" height="15" uuid="5713e1f6-e91c-48d9-bada-b49b9a2778f3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -965,7 +965,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[$F{cert_field}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="488" y="63" width="51" height="15" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
+				<reportElement x="495" y="63" width="51" height="15" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -975,7 +975,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[$F{cal_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="488" y="32" width="51" height="24" uuid="75a2e336-7a08-4793-bc32-5801fb896088">
+				<reportElement x="495" y="32" width="51" height="24" uuid="75a2e336-7a08-4793-bc32-5801fb896088">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
