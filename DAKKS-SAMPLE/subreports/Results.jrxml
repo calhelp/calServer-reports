@@ -464,15 +464,15 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
-              ? "-"
+              ? ""
               : (
-                  $F{test_status}.equalsIgnoreCase("pass indeterminate") ? "?"  :
-                  $F{test_status}.equalsIgnoreCase("fail indeterminate") ? "!?" :
-                  $F{test_status}.equalsIgnoreCase("fail")               ? "!"  :
-                  $F{test_status}.equalsIgnoreCase("pass")               ? "i.T" :
-                  $F{test_status}
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
+                  $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
+                  $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
+                  ""
                 )
             )
             + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
