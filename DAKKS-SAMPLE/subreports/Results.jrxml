@@ -391,8 +391,8 @@
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
-              ? $F{test_desc} + ( !$F{test_step2}.trim().isEmpty() ? " " + $F{test_step2} : "" )
+                                        <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
+              ? $F{test_desc}
               : $F{test_step2}]]></textFieldExpression>
                                 </textField>
                                 <textField>
