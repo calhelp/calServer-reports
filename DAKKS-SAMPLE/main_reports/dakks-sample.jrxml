@@ -808,7 +808,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA["- " + $V{PAGE_NUMBER} + " -"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="329" y="356" width="222" height="274" uuid="e35b62e9-104b-4a7b-8ca9-bd42cc5c8396"/>
+				<reportElement x="329" y="356" width="222" height="254" uuid="e35b62e9-104b-4a7b-8ca9-bd42cc5c8396"/>
 				<textElement textAlignment="Justified">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
@@ -817,7 +817,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
           .replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="16" y="637" width="535" height="21" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
+				<reportElement x="16" y="620" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
 				<textElement textAlignment="Justified">
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
