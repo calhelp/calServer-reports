@@ -47,12 +47,53 @@ jobs:
           echo "📂 Inhalt von INVENTORY-SAMPLE:"
           find INVENTORY-SAMPLE
 
-      - name: Create ZIPs of all folders (excluding existing ZIPs)
+      - name: Create ZIPs of all folders (JRXML only)
         run: |
-          mkdir -p zip_output
-          (cd DAKKS-SAMPLE && zip -r ../zip_output/dakks-sample.zip main_reports subreports -x "*.zip" "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
-          (cd ORDER-SAMPLE && zip -r ../zip_output/order-sample.zip main_reports subreports -x "*.zip" "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
-          (cd INVENTORY-SAMPLE && zip -r ../zip_output/inventory-sample.zip main_reports subreports -x "*.zip" "*.md" "*.MD" "*.txt" "*.TXT" "*.gitkeep")
+          set -euo pipefail
+
+          mkdir -p zip_output staging
+
+          create_zip() {
+            local sample="$1"
+            local zip_name="$2"
+            local stage_dir="staging/${zip_name}"
+
+            rm -rf "${stage_dir}"
+            mkdir -p "${stage_dir}"
+
+            for folder in main_reports subreports; do
+              if [ -d "${sample}/${folder}" ]; then
+                rsync -avm \
+                  --include='*/' \
+                  --include='*.jrxml' \
+                  --exclude='*' \
+                  "${sample}/${folder}/" "${stage_dir}/${folder}/"
+              fi
+            done
+
+            if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
+              echo "❌ No JRXML files found in ${sample}" >&2
+              exit 1
+            fi
+
+            pushd "${stage_dir}" >/dev/null
+            if [ -d main_reports ] && [ -d subreports ]; then
+              zip -r "../../zip_output/${zip_name}.zip" main_reports subreports
+            elif [ -d main_reports ]; then
+              zip -r "../../zip_output/${zip_name}.zip" main_reports
+            elif [ -d subreports ]; then
+              zip -r "../../zip_output/${zip_name}.zip" subreports
+            else
+              echo "❌ No report folders found for ${sample}" >&2
+              popd >/dev/null
+              exit 1
+            fi
+            popd >/dev/null
+          }
+
+          create_zip "DAKKS-SAMPLE" "dakks-sample"
+          create_zip "ORDER-SAMPLE" "order-sample"
+          create_zip "INVENTORY-SAMPLE" "inventory-sample"
 
       - name: Show ZIP contents (Debug)
         run: |
