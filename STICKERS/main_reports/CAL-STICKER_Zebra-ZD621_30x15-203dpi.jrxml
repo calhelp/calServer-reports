@@ -15,6 +15,9 @@
 	<parameter name="Sprache" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Reportpath" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<parameter name="QR_Code_Value" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
