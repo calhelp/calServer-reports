@@ -168,14 +168,8 @@ jobs:
           HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
           HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
           HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
-          FIELD_NAMES_REPORT_ID: ${{ secrets.FIELD_NAMES_REPORT_ID }}
         run: |
-          if [ -z "${FIELD_NAMES_REPORT_ID}" ]; then
-            echo "ℹ️ FIELD_NAMES_REPORT_ID not configured – überspringe Upload."
-            exit 0
-          fi
-
-          REPORT_URL="https://${DOMAIN}/api/report/${FIELD_NAMES_REPORT_ID}"
+          REPORT_URL="https://${DOMAIN}/api/report/94b42cc6-a66e-b633-bf71-5d29756ff023"
           QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
           QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
