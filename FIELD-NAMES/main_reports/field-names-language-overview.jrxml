@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="field-names-language-overview" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d5a6f91-09f9-4f53-9df3-8196c8a7a011">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="field-names-language-overview" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d5a6f91-09f9-4f53-9df3-8196c8a7a011">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter"/>
 	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
 	<parameter name="SchemaName" class="java.lang.String">
@@ -70,9 +70,9 @@ ORDER BY fc.table_name, fc.column_name]]>
 	<group name="TableGroup">
 		<groupExpression><![CDATA[$F{table_name}]]></groupExpression>
 		<groupHeader>
-			<band height="32">
-				<textField textAdjust="StretchHeight">
-					<reportElement x="0" y="6" width="555" height="24" uuid="69a703ae-a3af-4f48-8a3f-5c7c598cecf5"/>
+                <band height="26">
+                        <textField textAdjust="StretchHeight">
+                                <reportElement x="0" y="4" width="802" height="20" uuid="69a703ae-a3af-4f48-8a3f-5c7c598cecf5"/>
 					<textElement>
 						<font size="14" isBold="true"/>
 					</textElement>
@@ -82,9 +82,9 @@ ORDER BY fc.table_name, fc.column_name]]>
 		</groupHeader>
 	</group>
 	<title>
-		<band height="98">
-			<staticText>
-				<reportElement x="0" y="0" width="360" height="24" uuid="6601c03a-af0a-4b8d-bc61-227e545d66b8"/>
+                <band height="90">
+                        <staticText>
+                                <reportElement x="0" y="0" width="360" height="24" uuid="6601c03a-af0a-4b8d-bc61-227e545d66b8"/>
 				<textElement>
 					<font size="18" isBold="true"/>
 				</textElement>
@@ -111,15 +111,15 @@ ORDER BY fc.table_name, fc.column_name]]>
 				</textElement>
 				<textFieldExpression><![CDATA["Tabellenliste: " + ($P{TableList} == null || $P{TableList}.isEmpty() ? "(alle)" : $P{TableList})]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="400" y="0" width="135" height="18" uuid="2350c9ac-3c03-49fb-9e04-f417ded7c6bc"/>
+                        <textField>
+                                <reportElement x="602" y="0" width="200" height="18" uuid="2350c9ac-3c03-49fb-9e04-f417ded7c6bc"/>
 				<textElement textAlignment="Right">
 					<font size="9" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Version " + $P{ReportVersion}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd.MM.yyyy HH:mm">
-				<reportElement x="400" y="20" width="135" height="18" uuid="5c41f89b-555a-4f43-a128-0ea09fed3c1f"/>
+                        <textField pattern="dd.MM.yyyy HH:mm">
+                                <reportElement x="602" y="20" width="200" height="18" uuid="5c41f89b-555a-4f43-a128-0ea09fed3c1f"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
@@ -128,42 +128,42 @@ ORDER BY fc.table_name, fc.column_name]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="24">
-			<frame>
-				<reportElement x="0" y="0" width="555" height="24" uuid="46129e07-0989-46ef-b8a1-6bd8d7d6c3a9"/>
+                <band height="22">
+                        <frame>
+                                <reportElement x="0" y="0" width="802" height="22" uuid="46129e07-0989-46ef-b8a1-6bd8d7d6c3a9"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
-				<staticText>
-					<reportElement x="0" y="4" width="110" height="16" uuid="f3e368e4-f970-493b-9832-a3caec53b41b"/>
+                                <staticText>
+                                        <reportElement x="0" y="3" width="150" height="16" uuid="f3e368e4-f970-493b-9832-a3caec53b41b"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Feld]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="110" y="4" width="240" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
+                                <staticText>
+                                        <reportElement x="150" y="3" width="350" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Übersetzung]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="350" y="4" width="70" height="16" uuid="da06ebe6-cffc-448d-8a6f-b556c7a6990e"/>
+                                <staticText>
+                                        <reportElement x="500" y="3" width="90" height="16" uuid="da06ebe6-cffc-448d-8a6f-b556c7a6990e"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Datentyp]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="420" y="4" width="50" height="16" uuid="4de7c4d9-b6d3-4ca1-ad4b-a351ca82a42d"/>
+                                <staticText>
+                                        <reportElement x="590" y="3" width="60" height="16" uuid="4de7c4d9-b6d3-4ca1-ad4b-a351ca82a42d"/>
 					<textElement textAlignment="Center">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Pflicht]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="470" y="4" width="85" height="16" uuid="9c763896-d996-4a6c-9a4e-751ce901ddc6"/>
+                                <staticText>
+                                        <reportElement x="650" y="3" width="152" height="16" uuid="9c763896-d996-4a6c-9a4e-751ce901ddc6"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
@@ -173,14 +173,14 @@ ORDER BY fc.table_name, fc.column_name]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="48" splitType="Stretch">
-			<frame>
-				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="555" height="48" uuid="69ff56d8-b64a-4552-9e72-83a8749d41f8"/>
+                <band height="28" splitType="Stretch">
+                        <frame>
+                                <reportElement stretchType="ElementGroupHeight" x="0" y="0" width="802" height="28" uuid="69ff56d8-b64a-4552-9e72-83a8749d41f8"/>
 				<box>
 					<bottomPen lineWidth="0.2" lineStyle="Dotted"/>
 				</box>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="0" y="4" width="110" height="16" uuid="d0a6a546-d2d0-47dd-a798-59492607db8f"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement x="0" y="3" width="150" height="16" uuid="d0a6a546-d2d0-47dd-a798-59492607db8f"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
@@ -188,8 +188,8 @@ ORDER BY fc.table_name, fc.column_name]]>
   ? "(Unbekannte Spalte)"
   : $F{column_name}]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="110" y="4" width="240" height="16" uuid="c1a523af-38d0-46c0-934e-0a1e68832f31"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement x="150" y="3" width="350" height="16" uuid="c1a523af-38d0-46c0-934e-0a1e68832f31"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
@@ -197,15 +197,15 @@ ORDER BY fc.table_name, fc.column_name]]>
   ? $F{translation_label}
   : "(keine Übersetzung)"]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="350" y="4" width="70" height="16" uuid="9adcc709-33fb-48d9-8698-e5b66d1bd1a1"/>
+                                <textField>
+                                        <reportElement x="500" y="3" width="90" height="16" uuid="9adcc709-33fb-48d9-8698-e5b66d1bd1a1"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{field_type}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="420" y="4" width="50" height="16" uuid="fd48e7b9-3d9f-4bb0-bc74-2df4f65a9f1d"/>
+                                <textField>
+                                        <reportElement x="590" y="3" width="60" height="16" uuid="fd48e7b9-3d9f-4bb0-bc74-2df4f65a9f1d"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
@@ -213,8 +213,8 @@ ORDER BY fc.table_name, fc.column_name]]>
   ? ""
   : (java.lang.Integer.valueOf(1).equals($F{edit_mandatory}) ? "Ja" : "Nein")]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="470" y="4" width="85" height="16" uuid="1991fde8-ff16-4f28-b3fe-0b5ff8b17aea"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement x="650" y="3" width="152" height="16" uuid="1991fde8-ff16-4f28-b3fe-0b5ff8b17aea"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
@@ -229,16 +229,16 @@ ORDER BY fc.table_name, fc.column_name]]>
 		<band height="12"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="16">
-			<textField>
-				<reportElement x="0" y="0" width="520" height="16" uuid="df5c2da4-8c0c-4259-8cc2-9ba1e7f19d22"/>
+                <band height="16">
+                        <textField>
+                                <reportElement x="0" y="0" width="767" height="16" uuid="df5c2da4-8c0c-4259-8cc2-9ba1e7f19d22"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " / "]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="520" y="0" width="35" height="16" uuid="c3d6a5a8-2e58-4a6c-9a1c-1d7b8b6a8d01"/>
+                        <textField evaluationTime="Report">
+                                <reportElement x="767" y="0" width="35" height="16" uuid="c3d6a5a8-2e58-4a6c-9a1c-1d7b8b6a8d01"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -247,9 +247,9 @@ ORDER BY fc.table_name, fc.column_name]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="24">
-			<textField>
-				<reportElement x="0" y="0" width="555" height="20" uuid="0f9e4c14-e45b-4f24-8d1b-de9b3e3d33ac"/>
+                <band height="20">
+                        <textField>
+                                <reportElement x="0" y="0" width="802" height="18" uuid="0f9e4c14-e45b-4f24-8d1b-de9b3e3d33ac"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
