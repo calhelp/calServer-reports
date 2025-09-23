@@ -38,7 +38,8 @@ SELECT
 FROM $P!{PrefixTable}field_metadata fn
 LEFT JOIN $P!{PrefixTable}field_metadata_translation tr
        ON tr.schema_name = fn.schema_name
-      AND tr.field_key = fn.field_key
+      AND tr.table_name = fn.table_name
+      AND tr.field_name = fn.field_name
       AND (tr.language_code = $P{LanguageCode} OR $P{LanguageCode} IS NULL)
 WHERE fn.schema_name = $P{SchemaName}
 ORDER BY fn.table_name, fn.field_name
