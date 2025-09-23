@@ -20,6 +20,15 @@ jobs:
             DAKKS-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload FIELD-NAMES as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FIELD-NAMES
+          path: |
+            FIELD-NAMES/main_reports
+            FIELD-NAMES/subreports
+          if-no-files-found: error
+
       - name: Upload ORDER-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -42,6 +51,8 @@ jobs:
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
           find DAKKS-SAMPLE
+          echo "📂 Inhalt von FIELD-NAMES:"
+          find FIELD-NAMES
           echo "📂 Inhalt von ORDER-SAMPLE:"
           find ORDER-SAMPLE
           echo "📂 Inhalt von INVENTORY-SAMPLE:"
@@ -98,12 +109,14 @@ jobs:
           }
 
           create_zip "DAKKS-SAMPLE" "dakks-sample"
+          create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
 
       - name: Show ZIP contents (Debug)
         run: |
           unzip -l zip_output/dakks-sample.zip
+          unzip -l zip_output/field-names.zip
           unzip -l zip_output/order-sample.zip
           unzip -l zip_output/inventory-sample.zip
 
@@ -148,3 +161,23 @@ jobs:
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
           curl -X POST "$REPORT_URL?$QUERY" \
             -F "file=@zip_output/inventory-sample.zip"
+
+      - name: Send FIELD-NAMES ZIP to API
+        env:
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
+          FIELD_NAMES_REPORT_ID: ${{ secrets.FIELD_NAMES_REPORT_ID }}
+        run: |
+          if [ -z "${FIELD_NAMES_REPORT_ID}" ]; then
+            echo "ℹ️ FIELD_NAMES_REPORT_ID not configured – überspringe Upload."
+            exit 0
+          fi
+
+          REPORT_URL="https://${DOMAIN}/api/report/${FIELD_NAMES_REPORT_ID}"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
+            -F "file=@zip_output/field-names.zip"

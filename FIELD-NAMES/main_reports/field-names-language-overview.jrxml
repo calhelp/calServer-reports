@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="field-names-language-overview" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+    topMargin="20" bottomMargin="20" uuid="4d5a6f91-09f9-4f53-9df3-8196c8a7a011">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter"/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+    <parameter name="SchemaName" class="java.lang.String">
+        <defaultValueExpression><![CDATA["inventory"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="LanguageCode" class="java.lang.String">
+        <defaultValueExpression><![CDATA["de"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PrefixTable" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="ReportVersion" class="java.lang.String">
+        <defaultValueExpression><![CDATA["v1.0"]]></defaultValueExpression>
+    </parameter>
+    <queryString language="SQL">
+        <![CDATA[
+SELECT
+    fn.schema_name,
+    fn.table_name,
+    fn.field_key,
+    fn.field_name,
+    fn.data_type,
+    fn.required_flag,
+    fn.default_label,
+    fn.default_hint,
+    tr.language_code,
+    tr.translation_label,
+    tr.translation_hint,
+    tr.last_update
+FROM $P!{PrefixTable}field_metadata fn
+LEFT JOIN $P!{PrefixTable}field_metadata_translation tr
+       ON tr.schema_name = fn.schema_name
+      AND tr.field_key = fn.field_key
+      AND (tr.language_code = $P{LanguageCode} OR $P{LanguageCode} IS NULL)
+WHERE fn.schema_name = $P{SchemaName}
+ORDER BY fn.table_name, fn.field_name
+        ]]>
+    </queryString>
+    <field name="schema_name" class="java.lang.String"/>
+    <field name="table_name" class="java.lang.String"/>
+    <field name="field_key" class="java.lang.String"/>
+    <field name="field_name" class="java.lang.String"/>
+    <field name="data_type" class="java.lang.String"/>
+    <field name="required_flag" class="java.lang.String"/>
+    <field name="default_label" class="java.lang.String"/>
+    <field name="default_hint" class="java.lang.String"/>
+    <field name="language_code" class="java.lang.String"/>
+    <field name="translation_label" class="java.lang.String"/>
+    <field name="translation_hint" class="java.lang.String"/>
+    <field name="last_update" class="java.sql.Timestamp"/>
+    <sortField name="table_name"/>
+    <sortField name="field_name"/>
+    <group name="TableGroup">
+        <groupExpression><![CDATA[$F{table_name}]]></groupExpression>
+        <groupHeader>
+            <band height="32">
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="6" width="515" height="24" uuid="69a703ae-a3af-4f48-8a3f-5c7c598cecf5"/>
+                    <textElement>
+                        <font size="14" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{table_name} == null ? "(Unbekannte Tabelle)" : $F{table_name}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    <title>
+        <band height="80">
+            <staticText>
+                <reportElement x="0" y="0" width="360" height="24" uuid="6601c03a-af0a-4b8d-bc61-227e545d66b8"/>
+                <textElement>
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Feld- & Sprachübersicht]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="32" width="360" height="18" uuid="ee239cf6-17d1-4a54-9be6-88c072f4414a"/>
+                <textElement>
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Schema: " + ($P{SchemaName} == null || $P{SchemaName}.isEmpty() ? "(alle)" : $P{SchemaName})]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="52" width="360" height="18" uuid="ce8a01dc-7cde-4a14-903a-9f7be6f8c1f2"/>
+                <textElement>
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Sprache: " + ($P{LanguageCode} == null || $P{LanguageCode}.isEmpty() ? "(alle)" : $P{LanguageCode})]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="0" width="135" height="18" uuid="2350c9ac-3c03-49fb-9e04-f417ded7c6bc"/>
+                <textElement textAlignment="Right">
+                    <font size="9" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Version " + $P{ReportVersion}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd.MM.yyyy HH:mm">
+                <reportElement x="400" y="20" width="135" height="18" uuid="5c41f89b-555a-4f43-a128-0ea09fed3c1f"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="24">
+            <frame>
+                <reportElement x="0" y="0" width="555" height="24" uuid="46129e07-0989-46ef-b8a1-6bd8d7d6c3a9"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <staticText>
+                    <reportElement x="0" y="4" width="110" height="16" uuid="f3e368e4-f970-493b-9832-a3caec53b41b"/>
+                    <textElement textAlignment="Left">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Feld]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="110" y="4" width="120" height="16" uuid="5c307570-07f9-4c16-9f29-3ce994ed3a2a"/>
+                    <textElement textAlignment="Left">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Standardlabel]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="230" y="4" width="120" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
+                    <textElement textAlignment="Left">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Übersetzung]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="350" y="4" width="70" height="16" uuid="da06ebe6-cffc-448d-8a6f-b556c7a6990e"/>
+                    <textElement textAlignment="Left">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Datatype]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="420" y="4" width="50" height="16" uuid="4de7c4d9-b6d3-4ca1-ad4b-a351ca82a42d"/>
+                    <textElement textAlignment="Center">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Pflicht]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="470" y="4" width="85" height="16" uuid="9c763896-d996-4a6c-9a4e-751ce901ddc6"/>
+                    <textElement textAlignment="Left">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Hinweis]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </pageHeader>
+    <detail>
+        <band height="48" splitType="Stretch">
+            <frame isStretchWithOverflow="true">
+                <reportElement x="0" y="0" width="555" height="48" uuid="69ff56d8-b64a-4552-9e72-83a8749d41f8"/>
+                <box>
+                    <bottomPen lineWidth="0.2" lineStyle="Dotted"/>
+                </box>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="4" width="110" height="16" uuid="d0a6a546-d2d0-47dd-a798-59492607db8f"/>
+                    <textElement>
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{field_name}]]></textFieldExpression>
+                </textField>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="110" y="4" width="120" height="16" uuid="6debb1a0-2b0d-4dbd-8ad7-11541834cf55"/>
+                    <textElement>
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{default_label} == null ? "" : $F{default_label}]]></textFieldExpression>
+                </textField>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="230" y="4" width="120" height="16" uuid="c1a523af-38d0-46c0-934e-0a1e68832f31"/>
+                    <textElement>
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{translation_label} == null ? "(keine Übersetzung)" : $F{translation_label}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="350" y="4" width="70" height="16" uuid="9adcc709-33fb-48d9-8698-e5b66d1bd1a1"/>
+                    <textElement>
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{data_type}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="420" y="4" width="50" height="16" uuid="fd48e7b9-3d9f-4bb0-bc74-2df4f65a9f1d"/>
+                    <textElement textAlignment="Center">
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{required_flag} == null ? "" : ($F{required_flag}.equalsIgnoreCase("Y") || $F{required_flag}.equalsIgnoreCase("1") ? "Ja" : "Nein")]]></textFieldExpression>
+                </textField>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="470" y="4" width="85" height="16" uuid="1991fde8-ff16-4f28-b3fe-0b5ff8b17aea"/>
+                    <textElement>
+                        <font size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{translation_hint} != null && !$F{translation_hint}.isEmpty() ? $F{translation_hint} : $F{default_hint}]]></textFieldExpression>
+                </textField>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="24" width="555" height="18" uuid="7b9434ab-5463-4850-9d37-992bfb45d51c"/>
+                    <textElement>
+                        <font size="8" isItalic="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{last_update} == null ? "" : ("Zuletzt aktualisiert: " + new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format($F{last_update}))]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="12"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="16">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="16" uuid="df5c2da4-8c0c-4259-8cc2-9ba1e7f19d22"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " / " + $V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="24">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="20" uuid="0f9e4c14-e45b-4f24-8d1b-de9b3e3d33ac"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Anzahl Felder: " + $V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>
