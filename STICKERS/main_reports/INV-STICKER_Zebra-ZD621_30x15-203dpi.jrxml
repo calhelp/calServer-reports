@@ -68,7 +68,7 @@
   i.`I4235` AS inv_I4235,
   CAST(i.`I4236` AS CHAR) AS inv_I4236,
   i.`I4237` AS inv_I4237,
-  i.`I4238` AS inv_I4238,
+  CAST(i.`I4238` AS CHAR) AS inv_I4238,
   i.`I4239` AS inv_I4239,
   i.`I4240` AS inv_I4240,
   i.`I4299` AS inv_I4299,
