@@ -37,11 +37,14 @@ calServer zu pflegen.
 
 Die Vorlage greift auf folgende Tabellen zu:
 
-* `${PrefixTable}field_metadata`
+* `${PrefixTable}field_configuration`
   * Stammdaten der Felder, inklusive technischem Schlüssel, Datentyp und
     Standardlabel.
-* `${PrefixTable}field_metadata_translation`
-  * Übersetzungen/Sprachvarianten der Feldlabels und Hilfetexte.
+* `${PrefixTable}messages`
+  * Enthält sprachspezifische Texte für Feldlabels, Hinweise und weitere UI-
+    Elemente.
+* `${PrefixTable}languages`
+  * Referenztabelle mit verfügbaren Sprachen inklusive Kürzeln und Metadaten.
 
 > ⚠️ Passe Tabellen- und Spaltennamen an deine calServer-Instanz an, falls sie
 > abweichen. Die Struktur orientiert sich an der Standardinstallation.
