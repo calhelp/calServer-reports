@@ -47,7 +47,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
         : $F{CAL_C2303}.toString())]]></variableExpression>
     </variable>
     <background>
-        <band splitType="Stretch">
+        <band height="120" splitType="Stretch">
             <rectangle>
                 <reportElement x="0" y="0" width="240" height="120" backcolor="#FFFFFF" uuid="a53d301f-3c72-4dea-bac7-3bcd708dd05b"/>
             </rectangle>
@@ -62,7 +62,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                 </textElement>
                 <text><![CDATA[Inventar-Nr.]]></text>
             </staticText>
-            <textField isStretchWithOverflow="true">
+            <textField textAdjust="StretchHeight">
                 <reportElement x="10" y="22" width="220" height="20" uuid="06673d21-a482-4f75-9f77-e8cfba39fb9d"/>
                 <textElement verticalAlignment="Middle">
                     <font size="14" isBold="true"/>
@@ -79,7 +79,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                 </textElement>
                 <text><![CDATA[Kalibriert durch]]></text>
             </staticText>
-            <textField isStretchWithOverflow="true">
+            <textField textAdjust="StretchHeight">
                 <reportElement x="10" y="68" width="220" height="16" uuid="ad8d8d46-086b-47c7-a768-453ad62c611f"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
