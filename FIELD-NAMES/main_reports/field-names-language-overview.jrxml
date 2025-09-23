@@ -21,13 +21,29 @@
   fc.column_name,
   fc.field_type,
   fc.edit_mandatory,
-  m.language_code,
-  m.message_to      AS translation_label,
-  m.tooltip         AS translation_hint
+  COALESCE(m1.language_code, m2.language_code)                           AS language_code,
+  COALESCE(m1.message_to,   m2.message_to)                               AS translation_label,
+  COALESCE(m1.tooltip,      m2.tooltip)                                  AS translation_hint
 FROM $P!{PrefixTable}field_configuration fc
-LEFT JOIN $P!{PrefixTable}messages m
-       ON m.message_from = CONCAT(fc.table_name, '.', fc.column_name)
-      AND (COALESCE($P{LanguageCode}, '') = '' OR m.language_code = $P{LanguageCode})
+
+/* 1) Exakter Key: table.column */
+LEFT JOIN $P!{PrefixTable}messages m1
+  ON m1.message_from = CONCAT(fc.table_name, '.', fc.column_name)
+ AND (
+       COALESCE($P{LanguageCode},'') = ''
+    OR LOWER(REPLACE(m1.language_code,'-','_')) = LOWER(REPLACE($P{LanguageCode},'-','_'))
+    OR LOWER(m1.language_code) LIKE CONCAT(LOWER($P{LanguageCode}), '%')
+ )
+
+/* 2) Fallback: nur column */
+LEFT JOIN $P!{PrefixTable}messages m2
+  ON m2.message_from = fc.column_name
+ AND (
+       COALESCE($P{LanguageCode},'') = ''
+    OR LOWER(REPLACE(m2.language_code,'-','_')) = LOWER(REPLACE($P{LanguageCode},'-','_'))
+    OR LOWER(m2.language_code) LIKE CONCAT(LOWER($P{LanguageCode}), '%')
+ )
+
 WHERE (COALESCE($P{SchemaName}, '') = '' OR fc.table_name LIKE CONCAT($P{SchemaName}, '%'))
 ORDER BY fc.table_name, fc.column_name]]>
 	</queryString>
