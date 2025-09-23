@@ -29,8 +29,7 @@
 
     <parameter name="P_MTAG" class="java.lang.String">
         <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
-    
+    </parameter>    
 	<queryString language="SQL">
 		<![CDATA[SELECT 
   i.`I4201` AS inv_I4201,
@@ -44,7 +43,7 @@
   i.`I4209` AS inv_I4209,
   i.`I4210` AS inv_I4210,
   i.`I4211` AS inv_I4211,
-  i.`I4212` AS inv_I4212,
+  CAST(i.`I4212` AS CHAR) AS inv_I4212,
   i.`I4213` AS inv_I4213,
   i.`I4214` AS inv_I4214,
   i.`I4215` AS inv_I4215,
@@ -596,78 +595,72 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_user_zipcity" class="java.lang.String"/>
 	<field name="loc_user_country" class="java.lang.String"/>
 	<background>
-        <band splitType="Stretch">
-            <rectangle>
-                <reportElement x="0" y="0" width="240" height="120" backcolor="#FFFFFF" uuid="f06892b2-713d-41ab-b880-d1201d3e0a83"/>
-            </rectangle>
-        </band>
-    </background>
-    <detail>
-        <band height="120" splitType="Prevent">
-            <componentElement>
-                <reportElement x="8" y="12" width="96" height="96" uuid="b9276c7f-112e-4ae0-b6bc-0fb8d7257dc1"/>
-                <jr:QRCode>
-                    <jr:codeExpression><![CDATA[$F{inv_I4201} == null || $F{inv_I4201}.trim().isEmpty() ? "" : $F{inv_I4201}.trim()]]></jr:codeExpression>
-                </jr:QRCode>
-            </componentElement>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="8" y="103" width="96" height="15" uuid="27c363dc-57eb-4ee7-9a7e-69b32e5174a5"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{inv_I4201} == null ? "" : $F{inv_I4201}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="112" y="6" width="120" height="14" uuid="3c008baa-d7f5-4819-bf3f-6bf0d9090f6d"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[OE-Bezeichnung]]></text>
-            </staticText>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="112" y="20" width="120" height="28" uuid="85dd7099-8882-4fc8-9ce0-d3c61f91a4af"/>
-                <textElement verticalAlignment="Top">
-                    <font size="11" isBold="true"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{cust_K4602} == null || $F{cust_K4602}.trim().isEmpty() ? "-" : $F{cust_K4602}.trim()]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="112" y="50" width="120" height="14" uuid="fbe5c3a4-3955-4ed4-b79a-422655c8d5cd"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Kostenstelle]]></text>
-            </staticText>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="112" y="64" width="120" height="18" uuid="31b4a303-6cd2-4e74-bf63-8e4244dcb70c"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{cust_K4601} == null || $F{cust_K4601}.trim().isEmpty() ? "-" : $F{cust_K4601}.trim()]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="112" y="84" width="120" height="14" uuid="44c9064b-2f5d-4d75-966f-b9914949a8b3"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Gebäude / Raum]]></text>
-            </staticText>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="112" y="98" width="120" height="20" uuid="a1b3a44d-4c9b-4e4e-88e6-04675c9d260d"/>
-                <textElement verticalAlignment="Top">
-                    <font size="9"/>
-                </textElement>
-                <textFieldExpression><![CDATA[
-                    $F{loc_L2801} == null && ($F{loc_L2802} == null || $F{loc_L2802}.trim().isEmpty())
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="120" splitType="Prevent">
+			<componentElement>
+				<reportElement x="8" y="12" width="96" height="96" uuid="b9276c7f-112e-4ae0-b6bc-0fb8d7257dc1"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{inv_I4201} == null || $F{inv_I4201}.trim().isEmpty() ? "" : $F{inv_I4201}.trim()]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="8" y="103" width="96" height="15" uuid="27c363dc-57eb-4ee7-9a7e-69b32e5174a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_I4201} == null ? "" : $F{inv_I4201}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="6" width="120" height="14" uuid="3c008baa-d7f5-4819-bf3f-6bf0d9090f6d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OE-Bezeichnung]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="112" y="20" width="120" height="28" uuid="85dd7099-8882-4fc8-9ce0-d3c61f91a4af"/>
+				<textElement verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cust_K4602} == null || $F{cust_K4602}.trim().isEmpty() ? "-" : $F{cust_K4602}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="50" width="120" height="14" uuid="fbe5c3a4-3955-4ed4-b79a-422655c8d5cd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kostenstelle]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="112" y="64" width="120" height="18" uuid="31b4a303-6cd2-4e74-bf63-8e4244dcb70c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cust_K4601} == null || $F{cust_K4601}.trim().isEmpty() ? "-" : $F{cust_K4601}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="84" width="120" height="14" uuid="44c9064b-2f5d-4d75-966f-b9914949a8b3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gebäude / Raum]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="112" y="98" width="120" height="20" uuid="a1b3a44d-4c9b-4e4e-88e6-04675c9d260d"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{loc_L2801} == null && ($F{loc_L2802} == null || $F{loc_L2802}.trim().isEmpty())
                         ? "-"
                         : ($F{loc_L2801} == null || $F{loc_L2801}.trim().isEmpty()
                             ? ""
                             : $F{loc_L2801}.trim())
                             + (($F{loc_L2802} == null || $F{loc_L2802}.trim().isEmpty())
                                 ? ""
-                                : ($F{loc_L2801} == null || $F{loc_L2801}.trim().isEmpty() ? "" : " / ") + $F{loc_L2802}.trim())
-                ]]></textFieldExpression>
-            </textField>
-        </band>
-    </detail>
+                                : ($F{loc_L2801} == null || $F{loc_L2801}.trim().isEmpty() ? "" : " / ") + $F{loc_L2802}.trim())]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
 </jasperReport>

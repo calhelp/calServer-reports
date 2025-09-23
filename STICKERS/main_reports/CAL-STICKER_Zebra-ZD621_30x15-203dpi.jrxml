@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-    name="CAL_STICKER_Zebra_ZD621_30x15_203dpi" pageWidth="240" pageHeight="120" columnWidth="240" leftMargin="0" rightMargin="0"
-    topMargin="0" bottomMargin="0" uuid="92a76325-9f24-4ca8-9f50-2d46ed416312">
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="calServer"/>
-    <property name="com.jaspersoft.studio.unit." value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-    <parameter name="PrefixTable" class="java.lang.String">
-        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
-    <parameter name="Sprache" class="java.lang.String">
-        <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
-    </parameter>
-    <parameter name="QR_Code_Value" class="java.lang.String">
-        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
-
-    <parameter name="P_MTAG" class="java.lang.String">
-        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-    </parameter>
-    
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CAL_STICKER_Zebra_ZD621_30x15_203dpi" pageWidth="240" pageHeight="120" columnWidth="240" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="92a76325-9f24-4ca8-9f50-2d46ed416312">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="calServer"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Sprache" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QR_Code_Value" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_MTAG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT 
   i.`I4201` AS inv_I4201,
@@ -39,7 +34,7 @@
   i.`I4209` AS inv_I4209,
   i.`I4210` AS inv_I4210,
   i.`I4211` AS inv_I4211,
-  i.`I4212` AS inv_I4212,
+  CAST(i.`I4212` AS CHAR) AS inv_I4212,
   i.`I4213` AS inv_I4213,
   i.`I4214` AS inv_I4214,
   i.`I4215` AS inv_I4215,
@@ -591,87 +586,83 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_user_zipcity" class="java.lang.String"/>
 	<field name="loc_user_country" class="java.lang.String"/>
 	<variable name="FormattedLastCalibration" class="java.lang.String">
-        <variableExpression><![CDATA[$F{cal_C2301} == null
+		<variableExpression><![CDATA[$F{cal_C2301} == null
     ? "-"
     : ($F{cal_C2301} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
         : $F{cal_C2301}.toString())]]></variableExpression>
-    </variable>
-    <variable name="FormattedNextCalibration" class="java.lang.String">
-        <variableExpression><![CDATA[$F{cal_C2303} == null
+	</variable>
+	<variable name="FormattedNextCalibration" class="java.lang.String">
+		<variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
     : ($F{cal_C2303} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
         : $F{cal_C2303}.toString())]]></variableExpression>
-    </variable>
-    <background>
-        <band height="120" splitType="Stretch">
-            <rectangle>
-                <reportElement x="0" y="0" width="240" height="120" backcolor="#FFFFFF" uuid="a53d301f-3c72-4dea-bac7-3bcd708dd05b"/>
-            </rectangle>
-        </band>
-    </background>
-    <detail>
-        <band height="120" splitType="Prevent">
-            <staticText>
-                <reportElement x="10" y="6" width="120" height="16" uuid="4545f2f6-7fc4-40ea-892a-b523f2f8977f"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Inventar-Nr.]]></text>
-            </staticText>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="10" y="22" width="220" height="20" uuid="06673d21-a482-4f75-9f77-e8cfba39fb9d"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="14" isBold="true"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{inv_I4201} == null || $F{inv_I4201}.trim().isEmpty() ? "-" : $F{inv_I4201}.trim()]]></textFieldExpression>
-            </textField>
-            <line>
-                <reportElement x="10" y="46" width="220" height="1" forecolor="#999999" uuid="8fd1a020-d369-429f-a9bc-1b5d3d7e6d14"/>
-            </line>
-            <staticText>
-                <reportElement x="10" y="54" width="100" height="14" uuid="eaa02de8-2860-4014-b648-11fd57878cf8"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Kalibriert durch]]></text>
-            </staticText>
-            <textField textAdjust="StretchHeight">
-                <reportElement x="10" y="68" width="220" height="16" uuid="ad8d8d46-086b-47c7-a768-453ad62c611f"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{cal_C2307} == null || $F{cal_C2307}.trim().isEmpty() ? "-" : $F{cal_C2307}.trim()]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="10" y="86" width="100" height="14" uuid="4a545430-9e64-4553-bf43-c531529041a9"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Letzte Kalibrierung]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="130" y="86" width="100" height="14" uuid="ae815cd6-0426-4dca-87a5-22ba3c87bdf3"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="8" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Nächste Kalibrierung]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="10" y="100" width="100" height="16" uuid="15c4ec13-28de-40aa-a25c-1d8cc0deac1f"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$V{FormattedLastCalibration}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="130" y="100" width="100" height="16" uuid="8a407c4f-b7e9-4049-95bb-6fd82e1f2b1a"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
-            </textField>
-        </band>
-    </detail>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="120" splitType="Prevent">
+			<staticText>
+				<reportElement x="10" y="6" width="120" height="16" uuid="4545f2f6-7fc4-40ea-892a-b523f2f8977f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="10" y="22" width="220" height="20" uuid="06673d21-a482-4f75-9f77-e8cfba39fb9d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_I4201} == null || $F{inv_I4201}.trim().isEmpty() ? "-" : $F{inv_I4201}.trim()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="46" width="220" height="1" forecolor="#999999" uuid="8fd1a020-d369-429f-a9bc-1b5d3d7e6d14"/>
+			</line>
+			<staticText>
+				<reportElement x="10" y="54" width="100" height="14" uuid="eaa02de8-2860-4014-b648-11fd57878cf8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kalibriert durch]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="10" y="68" width="220" height="16" uuid="ad8d8d46-086b-47c7-a768-453ad62c611f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cal_C2307} == null || $F{cal_C2307}.trim().isEmpty() ? "-" : $F{cal_C2307}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="86" width="100" height="14" uuid="4a545430-9e64-4553-bf43-c531529041a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Letzte Kalibrierung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="86" width="100" height="14" uuid="ae815cd6-0426-4dca-87a5-22ba3c87bdf3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nächste Kalibrierung]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="100" width="100" height="16" uuid="15c4ec13-28de-40aa-a25c-1d8cc0deac1f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{FormattedLastCalibration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="100" width="100" height="16" uuid="8a407c4f-b7e9-4049-95bb-6fd82e1f2b1a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
 </jasperReport>
