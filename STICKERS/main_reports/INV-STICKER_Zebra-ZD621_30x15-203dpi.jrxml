@@ -38,7 +38,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
     <field name="LOC_L2801" class="java.lang.String"/>
     <field name="LOC_L2802" class="java.lang.String"/>
     <background>
-        <band splitType="Stretch">
+        <band height="120" splitType="Stretch">
             <rectangle>
                 <reportElement x="0" y="0" width="240" height="120" backcolor="#FFFFFF" uuid="f06892b2-713d-41ab-b880-d1201d3e0a83"/>
             </rectangle>
