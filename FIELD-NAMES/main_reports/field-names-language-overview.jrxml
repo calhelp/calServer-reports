@@ -15,15 +15,18 @@
 	<parameter name="ReportVersion" class="java.lang.String">
 		<defaultValueExpression><![CDATA["v1.0"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="TableList" class="java.lang.String">
+		<defaultValueExpression><![CDATA["customers, inventory, calibration, location, repair, tickets, booking, article"]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT
   fc.table_name,
   fc.column_name,
   fc.field_type,
   fc.edit_mandatory,
-  COALESCE(m1.language_code, m2.language_code)                           AS language_code,
-  COALESCE(m1.message_to,   m2.message_to)                               AS translation_label,
-  COALESCE(m1.tooltip,      m2.tooltip)                                  AS translation_hint
+  COALESCE(m1.language_code, m2.language_code) AS language_code,
+  COALESCE(m1.message_to,   m2.message_to)     AS translation_label,
+  COALESCE(m1.tooltip,      m2.tooltip)        AS translation_hint
 FROM $P!{PrefixTable}field_configuration fc
 
 /* 1) Exakter Key: table.column */
@@ -44,7 +47,17 @@ LEFT JOIN $P!{PrefixTable}messages m2
     OR LOWER(m2.language_code) LIKE CONCAT(LOWER($P{LanguageCode}), '%')
  )
 
-WHERE (COALESCE($P{SchemaName}, '') = '' OR fc.table_name LIKE CONCAT($P{SchemaName}, '%'))
+WHERE
+  /* Optional: alter Prefix-Filter (beibehalten, falls genutzt) */
+  (COALESCE($P{SchemaName}, '') = '' OR fc.table_name LIKE CONCAT($P{SchemaName}, '%'))
+  /* NEU: CSV-Tabellenliste, case-insensitiv; entfernt nur Komma-Leerzeichen */
+  AND (
+    COALESCE($P{TableList}, '') = ''
+    OR FIND_IN_SET(
+         LOWER(fc.table_name),
+         REPLACE(LOWER($P{TableList}), ', ', ',')
+       ) > 0
+  )
 ORDER BY fc.table_name, fc.column_name]]>
 	</queryString>
 	<field name="table_name" class="java.lang.String"/>
@@ -69,7 +82,7 @@ ORDER BY fc.table_name, fc.column_name]]>
 		</groupHeader>
 	</group>
 	<title>
-		<band height="80">
+		<band height="98">
 			<staticText>
 				<reportElement x="0" y="0" width="360" height="24" uuid="6601c03a-af0a-4b8d-bc61-227e545d66b8"/>
 				<textElement>
@@ -90,6 +103,13 @@ ORDER BY fc.table_name, fc.column_name]]>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Sprache: " + ($P{LanguageCode} == null || $P{LanguageCode}.isEmpty() ? "(alle)" : $P{LanguageCode})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="72" width="360" height="18" uuid="f0b4a5e3-2f96-4a89-9a2b-4d2f6fc6f0a3"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tabellenliste: " + ($P{TableList} == null || $P{TableList}.isEmpty() ? "(alle)" : $P{TableList})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="400" y="0" width="135" height="18" uuid="2350c9ac-3c03-49fb-9e04-f417ded7c6bc"/>
@@ -116,21 +136,21 @@ ORDER BY fc.table_name, fc.column_name]]>
 				</box>
 				<staticText>
 					<reportElement x="0" y="4" width="110" height="16" uuid="f3e368e4-f970-493b-9832-a3caec53b41b"/>
-					<textElement textAlignment="Left">
+					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Feld]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="110" y="4" width="240" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
-					<textElement textAlignment="Left">
+					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Übersetzung]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="350" y="4" width="70" height="16" uuid="da06ebe6-cffc-448d-8a6f-b556c7a6990e"/>
-					<textElement textAlignment="Left">
+					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Datentyp]]></text>
@@ -144,7 +164,7 @@ ORDER BY fc.table_name, fc.column_name]]>
 				</staticText>
 				<staticText>
 					<reportElement x="470" y="4" width="85" height="16" uuid="9c763896-d996-4a6c-9a4e-751ce901ddc6"/>
-					<textElement textAlignment="Left">
+					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Hinweis]]></text>
