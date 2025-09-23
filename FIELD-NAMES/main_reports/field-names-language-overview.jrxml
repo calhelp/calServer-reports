@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter"/>
 	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
 	<parameter name="SchemaName" class="java.lang.String">
-		<defaultValueExpression><![CDATA["inventory"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="LanguageCode" class="java.lang.String">
 		<defaultValueExpression><![CDATA["de"]]></defaultValueExpression>
@@ -15,43 +15,29 @@
 	<parameter name="ReportVersion" class="java.lang.String">
 		<defaultValueExpression><![CDATA["v1.0"]]></defaultValueExpression>
 	</parameter>
-        <queryString language="SQL">
-                <![CDATA[SELECT
-    fc.schema_name,
-    fc.table_name,
-    fc.field_key,
-    fc.column_name,
-    fc.data_type,
-    fc.required_flag,
-    fc.default_label,
-    fc.default_hint,
-    lang.language_code,
-    msg.message_to,
-    msg.tooltip,
-    msg.updated_at
+	<queryString language="SQL">
+		<![CDATA[SELECT
+  fc.table_name,
+  fc.column_name,
+  fc.field_type,
+  fc.edit_mandatory,
+  m.language_code,
+  m.message_to      AS translation_label,
+  m.tooltip         AS translation_hint
 FROM $P!{PrefixTable}field_configuration fc
-LEFT JOIN $P!{PrefixTable}messages msg
-       ON msg.schema_name = fc.schema_name
-      AND msg.table_name = fc.table_name
-      AND msg.column_name = fc.column_name
-LEFT JOIN $P!{PrefixTable}languages lang
-       ON lang.language_id = msg.language_id
-WHERE ( $P{SchemaName} IS NULL OR $P{SchemaName} = '' OR fc.schema_name = $P{SchemaName} )
-  AND ( $P{LanguageCode} IS NULL OR $P{LanguageCode} = '' OR lang.language_code = $P{LanguageCode} OR lang.language_code IS NULL )
+LEFT JOIN $P!{PrefixTable}messages m
+       ON m.message_from = CONCAT(fc.table_name, '.', fc.column_name)
+      AND (COALESCE($P{LanguageCode}, '') = '' OR m.language_code = $P{LanguageCode})
+WHERE (COALESCE($P{SchemaName}, '') = '' OR fc.table_name LIKE CONCAT($P{SchemaName}, '%'))
 ORDER BY fc.table_name, fc.column_name]]>
-        </queryString>
-        <field name="schema_name" class="java.lang.String"/>
-        <field name="table_name" class="java.lang.String"/>
-        <field name="field_key" class="java.lang.String"/>
-        <field name="column_name" class="java.lang.String"/>
-        <field name="data_type" class="java.lang.String"/>
-        <field name="required_flag" class="java.lang.String"/>
-        <field name="default_label" class="java.lang.String"/>
-        <field name="default_hint" class="java.lang.String"/>
-        <field name="language_code" class="java.lang.String"/>
-        <field name="message_to" class="java.lang.String"/>
-        <field name="tooltip" class="java.lang.String"/>
-        <field name="updated_at" class="java.sql.Timestamp"/>
+	</queryString>
+	<field name="table_name" class="java.lang.String"/>
+	<field name="column_name" class="java.lang.String"/>
+	<field name="field_type" class="java.lang.String"/>
+	<field name="edit_mandatory" class="java.lang.Integer"/>
+	<field name="language_code" class="java.lang.String"/>
+	<field name="translation_label" class="java.lang.String"/>
+	<field name="translation_hint" class="java.lang.String"/>
 	<group name="TableGroup">
 		<groupExpression><![CDATA[$F{table_name}]]></groupExpression>
 		<groupHeader>
@@ -80,7 +66,7 @@ ORDER BY fc.table_name, fc.column_name]]>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Schema: " + ($P{SchemaName} == null || $P{SchemaName}.isEmpty() ? "(alle)" : $P{SchemaName})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Schema/Filter: " + ($P{SchemaName} == null || $P{SchemaName}.isEmpty() ? "(alle)" : $P{SchemaName})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="52" width="360" height="18" uuid="ce8a01dc-7cde-4a14-903a-9f7be6f8c1f2"/>
@@ -120,14 +106,7 @@ ORDER BY fc.table_name, fc.column_name]]>
 					<text><![CDATA[Feld]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="110" y="4" width="120" height="16" uuid="5c307570-07f9-4c16-9f29-3ce994ed3a2a"/>
-					<textElement textAlignment="Left">
-						<font size="10" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Standardlabel]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="230" y="4" width="120" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
+					<reportElement x="110" y="4" width="240" height="16" uuid="6134d94f-16bf-4152-8ad0-b9fb88429efe"/>
 					<textElement textAlignment="Left">
 						<font size="10" isBold="true"/>
 					</textElement>
@@ -169,52 +148,43 @@ ORDER BY fc.table_name, fc.column_name]]>
 					<textElement>
 						<font size="9"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$F{column_name} == null || $F{column_name}.isEmpty() ? "(Unbekannte Spalte)" : $F{column_name}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{column_name} == null || $F{column_name}.isEmpty()
+  ? "(Unbekannte Spalte)"
+  : $F{column_name}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="110" y="4" width="120" height="16" uuid="6debb1a0-2b0d-4dbd-8ad7-11541834cf55"/>
+					<reportElement x="110" y="4" width="240" height="16" uuid="c1a523af-38d0-46c0-934e-0a1e68832f31"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$F{default_label} == null || $F{default_label}.isEmpty() ? "" : $F{default_label}]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="230" y="4" width="120" height="16" uuid="c1a523af-38d0-46c0-934e-0a1e68832f31"/>
-					<textElement>
-						<font size="9"/>
-					</textElement>
-                                        <textFieldExpression><![CDATA[$F{message_to} != null && !$F{message_to}.isEmpty() ? $F{message_to} : ($F{default_label} != null && !$F{default_label}.isEmpty() ? $F{default_label} : "(keine Übersetzung)")]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{translation_label} != null && !$F{translation_label}.isEmpty()
+  ? $F{translation_label}
+  : "(keine Übersetzung)"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="350" y="4" width="70" height="16" uuid="9adcc709-33fb-48d9-8698-e5b66d1bd1a1"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{data_type}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{field_type}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="420" y="4" width="50" height="16" uuid="fd48e7b9-3d9f-4bb0-bc74-2df4f65a9f1d"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{required_flag} == null ? "" :
-( "Y".equalsIgnoreCase($F{required_flag})
-  || "1".equals($F{required_flag})
-  || "true".equalsIgnoreCase($F{required_flag}) ) ? "Ja" : "Nein"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{edit_mandatory} == null
+  ? ""
+  : (java.lang.Integer.valueOf(1).equals($F{edit_mandatory}) ? "Ja" : "Nein")]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="470" y="4" width="85" height="16" uuid="1991fde8-ff16-4f28-b3fe-0b5ff8b17aea"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$F{tooltip} != null && !$F{tooltip}.isEmpty() ? $F{tooltip} : ($F{default_hint} != null && !$F{default_hint}.isEmpty() ? $F{default_hint} : "")]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="0" y="24" width="555" height="18" uuid="7b9434ab-5463-4850-9d37-992bfb45d51c"/>
-					<textElement>
-						<font size="8" isItalic="true"/>
-					</textElement>
-                                        <textFieldExpression><![CDATA[$F{updated_at} == null ? "" : ("Zuletzt aktualisiert: " + new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format($F{updated_at}))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{translation_hint} != null && !$F{translation_hint}.isEmpty()
+  ? $F{translation_hint}
+  : ""]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
