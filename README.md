@@ -44,6 +44,14 @@ DAKKS-SAMPLE/
 ├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
 └── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
 
+FIELD-NAMES/
+├── main_reports/       # Übersichten zu Feldbezeichnungen & Sprachvarianten
+└── subreports/         # Platz für optionale Detail- oder Ergänzungsreports
+
+INVENTORY-SAMPLE/
+├── main_reports/       # Messmittelberichte & Inventarlisten
+└── subreports/         # Unterberichte für Messwerte, Historien usw.
+
 ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder

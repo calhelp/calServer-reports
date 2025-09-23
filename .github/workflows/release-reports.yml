@@ -67,6 +67,7 @@ jobs:
           }
 
           create_zip "DAKKS-SAMPLE" "dakks-sample"
+          create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
 
