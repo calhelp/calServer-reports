@@ -165,8 +165,8 @@ ORDER BY fn.table_name, fn.field_name
     </pageHeader>
     <detail>
         <band height="48" splitType="Stretch">
-            <frame stretchType="RelativeToTallestObject">
-                <reportElement x="0" y="0" width="555" height="48" uuid="69ff56d8-b64a-4552-9e72-83a8749d41f8"/>
+            <frame>
+                <reportElement x="0" y="0" width="555" height="48" stretchType="RelativeToTallestObject" uuid="69ff56d8-b64a-4552-9e72-83a8749d41f8"/>
                 <box>
                     <bottomPen lineWidth="0.2" lineStyle="Dotted"/>
                 </box>
