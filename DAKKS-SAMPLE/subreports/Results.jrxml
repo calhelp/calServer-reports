@@ -121,8 +121,8 @@
           : $F{tol_err}
         )]]></variableExpression>
 	</variable>
-	<variable name="FormattedUncertainty" class="java.lang.String">
-		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
+        <variable name="FormattedUncertainty" class="java.lang.String">
+                <variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
       : (
           $F{exp_uncert_iso_e}.trim().contains("<sup>")
@@ -133,7 +133,38 @@
               : $F{exp_uncert_iso_e}.trim()
             )
         )]]></variableExpression>
-	</variable>
+        </variable>
+        <variable name="DisplayUncertainty" class="java.lang.String">
+                <variableExpression><![CDATA[
+      (
+          $F{exp_uncert_u} != null
+          && (
+                 $F{exp_uncert_u}.contains("°C")
+              || $F{exp_uncert_u}.contains("%fF")
+             )
+      )
+      ? (
+            ($F{exp_uncert} == null ? "" : $F{exp_uncert})
+          + (
+                $F{exp_uncert_u} == null || $F{exp_uncert_u}.isEmpty()
+                ? ""
+                : " " + $F{exp_uncert_u}
+            )
+        )
+      : (
+            $V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty()
+            ? (
+                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                + (
+                      $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                      ? ""
+                      : " " + $F{exp_uncert_u}.trim()
+                  )
+              )
+            : $V{FormattedUncertainty}
+        )
+    ]]></variableExpression>
+        </variable>
 	<variable name="HasMeasurementData" class="java.lang.Boolean">
 		<variableExpression><![CDATA[Boolean.valueOf(
             ($F{fixq} != null && !$F{fixq}.trim().isEmpty())
@@ -427,14 +458,13 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{FormattedUncertainty}==null || $V{FormattedUncertainty}.trim().isEmpty()
-              ? "" : $V{FormattedUncertainty}]]></textFieldExpression>
-				</textField>
+                                <textField>
+                                        <reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{DisplayUncertainty}]]></textFieldExpression>
+                                </textField>
 				<textField>
 					<reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
