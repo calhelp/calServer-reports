@@ -666,9 +666,8 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
                         </textField>
-                        <break>
+                        <break type="Page">
                                 <reportElement x="0" y="118" width="1" height="2" uuid="6d7d4bbd-b692-4a47-a0e7-efb8b61c5232"/>
-                                <breakType>Page</breakType>
                         </break>
                         <componentElement>
                                 <reportElement x="10" y="8" width="80" height="80" uuid="1740c4f3-03f7-4c6c-89d3-5c6a5d24a4d2"/>
