@@ -595,17 +595,13 @@ WHERE i.MTAG = $P{P_MTAG}]]>
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
         : $F{cal_C2301}.toString())]]></variableExpression>
 	</variable>
-	<variable name="FormattedNextCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2303} == null
+        <variable name="FormattedNextCalibration" class="java.lang.String">
+                <variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
     : ($F{cal_C2303} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
         : $F{cal_C2303}.toString())]]></variableExpression>
-	</variable>
-
-        <background>
-                <band splitType="Stretch"/>
-        </background>
+        </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
                 <groupHeader>
@@ -741,6 +737,9 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                         </band>
                 </groupHeader>
         </group>
+        <background>
+                <band splitType="Stretch"/>
+        </background>
         <detail>
                 <band height="0" splitType="Stretch"/>
         </detail>
