@@ -606,6 +606,30 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
                 <groupHeader>
                         <band height="120" splitType="Prevent">
+                                <line>
+                                        <reportElement x="2" y="2" width="12" height="0" forecolor="#B3B3B3" uuid="4d3e4c07-8797-4ee8-8763-1c330f24eb51"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="2" width="0" height="12" forecolor="#B3B3B3" uuid="4b94e5f8-3cf8-4f8a-8f9c-2ec3a3c1f24d"/>
+                                </line>
+                                <line>
+                                        <reportElement x="226" y="2" width="12" height="0" forecolor="#B3B3B3" uuid="2ea0e6a5-0081-4b79-8846-6c51f8de62c0"/>
+                                </line>
+                                <line>
+                                        <reportElement x="238" y="2" width="0" height="12" forecolor="#B3B3B3" uuid="2b2e781b-5f57-4f0e-8ebd-77ad32d05c74"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="118" width="12" height="0" forecolor="#B3B3B3" uuid="a8d69a1f-50b2-49d5-b9e1-ef06f3709483"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="108" width="0" height="12" forecolor="#B3B3B3" uuid="2ce3cf59-28de-47a4-808c-b3fe3a5f3d88"/>
+                                </line>
+                                <line>
+                                        <reportElement x="226" y="118" width="12" height="0" forecolor="#B3B3B3" uuid="c96e2c25-36bc-4bb0-b637-55117c7b59bc"/>
+                                </line>
+                                <line>
+                                        <reportElement x="238" y="108" width="0" height="12" forecolor="#B3B3B3" uuid="2d0e36a4-62c5-4a64-9d4f-6fb5d1d4a6dd"/>
+                                </line>
                                 <componentElement>
                                         <reportElement x="10" y="8" width="80" height="80" uuid="1740c4f3-03f7-4c6c-89d3-5c6a5d24a4d2"/>
                                         <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -675,6 +699,30 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
                 <groupHeader>
                         <band height="120" splitType="Prevent">
+                                <line>
+                                        <reportElement x="2" y="2" width="12" height="0" forecolor="#B3B3B3" uuid="f81b8e49-7b34-4159-bc7c-532dfb3b6ae9"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="2" width="0" height="12" forecolor="#B3B3B3" uuid="89218bcc-7e09-4675-bdd8-63c07bfb19a1"/>
+                                </line>
+                                <line>
+                                        <reportElement x="226" y="2" width="12" height="0" forecolor="#B3B3B3" uuid="13dbfd6f-ef9c-489e-a918-8a92ef1b0a2f"/>
+                                </line>
+                                <line>
+                                        <reportElement x="238" y="2" width="0" height="12" forecolor="#B3B3B3" uuid="aa9b809a-9ab9-45ec-bbf4-8ce9c4360e62"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="118" width="12" height="0" forecolor="#B3B3B3" uuid="9666615a-7fb5-495a-9aa1-00bf338a87b6"/>
+                                </line>
+                                <line>
+                                        <reportElement x="2" y="108" width="0" height="12" forecolor="#B3B3B3" uuid="868d9cac-4c80-489a-924e-9b3766e93fa7"/>
+                                </line>
+                                <line>
+                                        <reportElement x="226" y="118" width="12" height="0" forecolor="#B3B3B3" uuid="f734650e-0200-406d-9539-b181cfa137ee"/>
+                                </line>
+                                <line>
+                                        <reportElement x="238" y="108" width="0" height="12" forecolor="#B3B3B3" uuid="88c063a9-d814-4863-a8b1-7268f8445f63"/>
+                                </line>
                                 <staticText>
                                         <reportElement x="10" y="6" width="120" height="16" uuid="4545f2f6-7fc4-40ea-892a-b523f2f8977f"/>
                                         <textElement verticalAlignment="Middle">
