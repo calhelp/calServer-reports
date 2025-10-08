@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="545" pageHeight="818" columnWidth="545" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="555" pageHeight="818" orientation="Landscape" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -234,7 +225,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="460" y="0" width="84" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -248,7 +239,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="460" y="17" width="84" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -316,7 +307,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="0" width="75" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="460" y="0" width="84" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
