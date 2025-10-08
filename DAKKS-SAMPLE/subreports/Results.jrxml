@@ -73,14 +73,30 @@
       : $F{varq}.trim()]]></variableExpression>
 	</variable>
 	<variable name="PosLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_pos}==null || $F{tol_pos}.trim().isEmpty()
-      ? ""
-      : $F{tol_pos}.trim()]]></variableExpression>
+		<variableExpression><![CDATA[($F{tol_pos} == null || $F{tol_pos}.trim().isEmpty())
+ ? ""
+ : $F{tol_pos}.trim()
+   + (
+       (($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty())
+     || ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty()))
+       ? " " : ""
+     )
+   + ($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty() ? $F{tol_pos_p}.trim() : "")
+   + ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty() ? $F{tol_pos_u}.trim() : "")
+]]></variableExpression>
 	</variable>
 	<variable name="NegLimit" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_neg}==null || $F{tol_neg}.trim().isEmpty()
-      ? ""
-      : $F{tol_neg}.trim()]]></variableExpression>
+		<variableExpression><![CDATA[($F{tol_neg} == null || $F{tol_neg}.trim().isEmpty())
+ ? ""
+ : $F{tol_neg}.trim()
+   + (
+       (($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty())
+     || ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty()))
+       ? " " : ""
+     )
+   + ($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty() ? $F{tol_neg_p}.trim() : "")
+   + ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty() ? $F{tol_neg_u}.trim() : "")
+]]></variableExpression>
 	</variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[(
@@ -102,27 +118,33 @@
         )]]></variableExpression>
 	</variable>
 	<variable name="RoundedRelError" class="java.lang.String">
-		<variableExpression><![CDATA[$F{error}==null || $F{error}.trim().isEmpty()
-      ? ""
-      : (
-          $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-          ? new java.text.DecimalFormat("0.0")
-              .format(Double.parseDouble($F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
-          : $F{error}
-        )]]></variableExpression>
+		<variableExpression><![CDATA[($F{error}==null || $F{error}.trim().isEmpty())
+ ? ""
+ : (
+     $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+     ? new java.text.DecimalFormat("0.0",
+         new java.text.DecimalFormatSymbols(java.util.Locale.US))
+         .format(
+           Double.parseDouble(
+             $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
+           )
+         )
+     : $F{error}
+   )
+]]></variableExpression>
 	</variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
 		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
       : (
           $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-          ? new java.text.DecimalFormat("0.0")
+          ? new java.text.DecimalFormat("0")
               .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
           : $F{tol_err}
         )]]></variableExpression>
 	</variable>
-        <variable name="FormattedUncertainty" class="java.lang.String">
-                <variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
+	<variable name="FormattedUncertainty" class="java.lang.String">
+		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
       : (
           $F{exp_uncert_iso_e}.trim().contains("<sup>")
@@ -133,10 +155,9 @@
               : $F{exp_uncert_iso_e}.trim()
             )
         )]]></variableExpression>
-        </variable>
-        <variable name="DisplayUncertainty" class="java.lang.String">
-                <variableExpression><![CDATA[
-      (
+	</variable>
+	<variable name="DisplayUncertainty" class="java.lang.String">
+		<variableExpression><![CDATA[(
           $F{exp_uncert_u} != null
           && (
                  $F{exp_uncert_u}.contains("°C")
@@ -162,9 +183,8 @@
                   )
               )
             : $V{FormattedUncertainty}
-        )
-    ]]></variableExpression>
-        </variable>
+        )]]></variableExpression>
+	</variable>
 	<variable name="HasMeasurementData" class="java.lang.Boolean">
 		<variableExpression><![CDATA[Boolean.valueOf(
             ($F{fixq} != null && !$F{fixq}.trim().isEmpty())
@@ -421,7 +441,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc}
-              : $F{test_step2}]]></textFieldExpression>
+              : ""]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="100" y="0" width="60" height="14" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
@@ -430,7 +450,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{NominalValue}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="160" y="0" width="68" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
@@ -444,7 +464,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="293" y="0" width="72" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
@@ -458,13 +478,13 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
 				</textField>
-                                <textField>
-                                        <reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
-                                        <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-                                                <font fontName="SansSerif" size="8"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[$V{DisplayUncertainty}]]></textFieldExpression>
-                                </textField>
+				<textField>
+					<reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DisplayUncertainty}]]></textFieldExpression>
+				</textField>
 				<textField>
 					<reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
