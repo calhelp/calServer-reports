@@ -547,7 +547,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="25" width="536" height="20" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026"/>
+					<reportElement x="16" y="25" width="545" height="20" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -749,7 +751,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement mode="Transparent" x="437" y="257" width="48" height="48" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="458d3628-6bfd-46c0-89be-0bc6a5f1eae9"/>
+				<reportElement mode="Transparent" x="440" y="237" width="47" height="47" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="458d3628-6bfd-46c0-89be-0bc6a5f1eae9"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[($P{QR_Code_Value} == null || $P{QR_Code_Value}.trim().isEmpty()) ? "" : $P{QR_Code_Value}]]></jr:codeExpression>
 				</jr:QRCode>
@@ -760,13 +762,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="371" y="313" width="115" height="20" uuid="dc0bbf1c-965c-4463-946b-4175962c6f4c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{mark}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>
@@ -1055,6 +1050,20 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="395" y="296" width="90" height="14" uuid="f06142e5-e22b-449b-bf4d-9078c56651e7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Kalibrierzeichen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="310" width="90" height="12" uuid="0dfa57a6-2083-497e-b47e-05f45bf1fd0c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Calibration mark]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
