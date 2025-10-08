@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="545" pageHeight="818" orientation="Landscape" columnWidth="545" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="535" pageHeight="818" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -57,7 +66,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<columnHeader>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="7d913788-7f1a-47f8-b1ed-61821264a611"/>
+				<reportElement x="0" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="7d913788-7f1a-47f8-b1ed-61821264a611"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -71,7 +80,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Inv.Nr]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="c7f65ae6-9a2c-4c41-8acb-07b8fb87ba34"/>
+				<reportElement x="0" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="c7f65ae6-9a2c-4c41-8acb-07b8fb87ba34"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -85,7 +94,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Inventory No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="75" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="3de199d1-63f1-49e4-9f4d-41284b1b1d24"/>
+				<reportElement x="70" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="3de199d1-63f1-49e4-9f4d-41284b1b1d24"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -99,7 +108,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Beschreibung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="75" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="ed254a3b-9128-498a-8f43-72d57dd85871"/>
+				<reportElement x="70" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="ed254a3b-9128-498a-8f43-72d57dd85871"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -113,7 +122,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="47826ff7-5663-49b1-ae0b-e1447701c763"/>
+				<reportElement x="155" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="47826ff7-5663-49b1-ae0b-e1447701c763"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -127,7 +136,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Hersteller]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="ad739623-fe43-438d-b259-c25de96b2854"/>
+				<reportElement x="155" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="ad739623-fe43-438d-b259-c25de96b2854"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -141,7 +150,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Manufacturer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="235" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="e8248c6a-a7f7-448b-b94e-88f297e53df6"/>
+				<reportElement x="230" y="0" width="85" height="17" backcolor="#F2F2F2" uuid="e8248c6a-a7f7-448b-b94e-88f297e53df6"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -155,7 +164,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Typ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="235" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="9b5efa6a-1729-4a8e-81cc-2e9f59a5666a"/>
+				<reportElement x="230" y="17" width="85" height="15" backcolor="#F2F2F2" uuid="9b5efa6a-1729-4a8e-81cc-2e9f59a5666a"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -169,7 +178,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
+				<reportElement x="315" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -183,7 +192,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[letzte Kal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
+				<reportElement x="315" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -197,7 +206,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Last Cal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+				<reportElement x="385" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -211,7 +220,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+				<reportElement x="385" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -225,7 +234,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="0" width="84" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="455" y="0" width="90" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -239,7 +248,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="17" width="84" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="455" y="17" width="90" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -257,35 +266,35 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<detail>
 		<band height="16">
 			<textField>
-				<reportElement x="0" y="0" width="75" height="16" uuid="777648ed-7c4b-4078-baaa-64ad5962ad8f"/>
+				<reportElement x="0" y="0" width="70" height="16" uuid="777648ed-7c4b-4078-baaa-64ad5962ad8f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="75" y="0" width="85" height="16" uuid="d008f271-68f5-4a7c-8d8c-4c15ad5e0210"/>
+				<reportElement x="70" y="0" width="85" height="16" uuid="d008f271-68f5-4a7c-8d8c-4c15ad5e0210"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="0" width="75" height="16" uuid="9c298e7d-09e9-497c-8d26-07a2be6f16ff"/>
+				<reportElement x="155" y="0" width="75" height="16" uuid="9c298e7d-09e9-497c-8d26-07a2be6f16ff"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="235" y="0" width="85" height="16" uuid="f327e31e-ed27-4cb8-af23-a482dc4cebc1"/>
+				<reportElement x="230" y="0" width="85" height="16" uuid="f327e31e-ed27-4cb8-af23-a482dc4cebc1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="320" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
+				<reportElement x="315" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
@@ -296,7 +305,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2301})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="390" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+				<reportElement x="385" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
@@ -307,7 +316,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="0" width="84" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="455" y="0" width="90" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
