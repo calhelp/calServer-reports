@@ -1050,6 +1050,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="496" y="260" width="55" height="19" uuid="2a566f7c-747b-41b9-93d9-8f1f4e51fee2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
