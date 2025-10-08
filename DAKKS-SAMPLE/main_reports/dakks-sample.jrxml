@@ -1139,12 +1139,12 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER} + " of  " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="493" y="8" width="55" height="19" uuid="5f2ce3f4-6844-4bbd-90a4-ff31f96afcf8"/>
+				<reportElement x="495" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="492" y="27" width="57" height="33" uuid="571a74a2-6240-4e55-be63-14f507283a54"/>
+				<reportElement x="495" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
 			</textField>
