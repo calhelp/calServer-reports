@@ -264,9 +264,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
         )]]></variableExpression>
 	</variable>
 	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($F{measurement_conditions} != null && !$F{measurement_conditions}.trim().isEmpty())
-        ? $F{measurement_conditions}
-        : "im permanenten Labor"]]></variableExpression>
+		<variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
+  ? ($P{Sprache}.equals("Deutsch") ? "im permanenten Labor" : "in the permanent laboratory")
+  : $F{measurement_conditions}
+]]></variableExpression>
 	</variable>
 	<variable name="procedure_standards_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{standards} != null && !$F{standards}.trim().isEmpty())
