@@ -546,8 +546,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
 				</textField>
-				<subreport>
-					<reportElement x="16" y="25" width="545" height="20" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
+				<subreport overflowType="NoStretch">
+					<reportElement x="16" y="25" width="535" height="20" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<subreportParameter name="PrefixTable">
