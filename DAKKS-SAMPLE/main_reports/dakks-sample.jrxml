@@ -42,8 +42,7 @@
 	<parameter name="Measurements_description_1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
-: "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."
-]]></defaultValueExpression>
+: "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Conformity_description_1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\n" +
@@ -71,20 +70,17 @@
 	<parameter name="Calibration_procedure_1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
-: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."
-]]></defaultValueExpression>
+: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_document" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
-: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."
-]]></defaultValueExpression>
+: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_2" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
-: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."
-]]></defaultValueExpression>
+: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_field" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C2396"]]></defaultValueExpression>
@@ -97,6 +93,12 @@
 	</parameter>
 	<parameter name="ReportVersion" class="java.lang.String">
 		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkNumber1" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkNumber2" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT COALESCE(c.$P!{Cert_field}, "") AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
@@ -266,8 +268,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
   ? ($P{Sprache}.equals("Deutsch") ? "im permanenten Labor" : "in the permanent laboratory")
-  : $F{measurement_conditions}
-]]></variableExpression>
+  : $F{measurement_conditions}]]></variableExpression>
 	</variable>
 	<variable name="procedure_standards_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{standards} != null && !$F{standards}.trim().isEmpty())
@@ -303,6 +304,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="Page_count" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
+	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
 			<band height="58">
@@ -334,8 +336,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 .replace("_n_","\n")
 .replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
 .replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü")
-.replace("_00DF_","ß")
-]]></textFieldExpression>
+.replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="48">
@@ -414,8 +415,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 .replace("_n_","\n")
 .replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
 .replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü")
-.replace("_00DF_","ß")
-]]></textFieldExpression>
+.replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
@@ -1038,13 +1038,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<line>
 				<reportElement x="495" y="312" width="57" height="1" uuid="81d49edb-e44c-4c2d-92ce-113066cefb21"/>
 			</line>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="498" y="262" width="51" height="15" uuid="79e98b0e-d9bd-4157-816e-9ae74288304b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{cert_field} == null || $F{cert_field}.trim().isEmpty()) ? "" : $F{cert_field}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="498" y="315" width="51" height="15" uuid="ddc3a39d-cd0f-4bbc-9037-f2d353ae7633"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -1053,11 +1046,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[($F{cal_date} == null || $F{cal_date}.trim().isEmpty()) ? "" : $F{cal_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="498" y="284" width="51" height="24" uuid="436ba98b-cf01-41fe-8417-03d875b9f4d3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{type_mark}]]></textFieldExpression>
+				<reportElement x="495" y="279" width="57" height="33" uuid="60fddce2-e8d5-44ad-996f-6df91281c5ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
