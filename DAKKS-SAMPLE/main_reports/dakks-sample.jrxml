@@ -427,7 +427,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["MEASUREMENT CONDITIONE"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["MEASUREMENT CONDITION"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="6ded0141-e53b-4462-98e5-268ebd431caf"/>
