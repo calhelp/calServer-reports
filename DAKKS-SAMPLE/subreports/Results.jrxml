@@ -81,8 +81,7 @@
      || ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty()))
        ? " " : ""
      )
-   + ($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty() ? $F{tol_pos_p}.trim() : "")
-   + ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty() ? $F{tol_pos_u}.trim() : "")
+
 ]]></variableExpression>
 	</variable>
 	<variable name="NegLimit" class="java.lang.String">
@@ -94,8 +93,6 @@
      || ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty()))
        ? " " : ""
      )
-   + ($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty() ? $F{tol_neg_p}.trim() : "")
-   + ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty() ? $F{tol_neg_u}.trim() : "")
 ]]></variableExpression>
 	</variable>
 	<variable name="ToleranceRange" class="java.lang.String" resetType="None">
@@ -365,7 +362,7 @@
 				<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="0" width="25" height="18" uuid="42b6ddce-c26d-4176-bad0-ad7c5ba311ab"/>
+				<reportElement x="475" y="0" width="22" height="18" uuid="42b6ddce-c26d-4176-bad0-ad7c5ba311ab"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -377,7 +374,7 @@
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="18" width="25" height="15" uuid="4b7181f7-6f15-4ab7-8366-60e34fa86fda"/>
+				<reportElement x="475" y="18" width="22" height="15" uuid="4b7181f7-6f15-4ab7-8366-60e34fa86fda"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -389,7 +386,7 @@
 				<text><![CDATA[% Tol]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="500" y="0" width="35" height="18" uuid="bcbd02e7-375c-458f-b6bf-e7f832f6b5ad"/>
+				<reportElement x="497" y="0" width="38" height="18" uuid="bcbd02e7-375c-458f-b6bf-e7f832f6b5ad"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -401,7 +398,7 @@
 				<text><![CDATA[Konformität]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="500" y="18" width="35" height="15" uuid="95a9d488-0a25-4f7f-9a41-6b3a566768f6"/>
+				<reportElement x="497" y="18" width="38" height="15" uuid="95a9d488-0a25-4f7f-9a41-6b3a566768f6"/>
 				<box>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
@@ -486,14 +483,14 @@
 					<textFieldExpression><![CDATA[$V{DisplayUncertainty}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="475" y="0" width="25" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
+					<reportElement x="475" y="0" width="22" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedTolErr}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="500" y="0" width="35" height="14" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
+					<reportElement x="497" y="0" width="38" height="14" uuid="c18126c3-0208-4ea4-99a4-e5534f9a7679"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
