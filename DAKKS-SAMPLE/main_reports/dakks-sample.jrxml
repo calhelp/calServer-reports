@@ -40,7 +40,10 @@
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall." : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Measurements_description_1" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Die Messunsicherheiten wurden mit der Software ‚GUM-Workbench' abgeschätzt, die Ergebnisse werden dokumentiert." : "The calculations of uncertainty were performed using the software ‚GUM-Workbench‘, the results are documented."]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
+: "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Conformity_description_1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\n" +
@@ -66,13 +69,22 @@
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen." : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_1" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Die Kalibrierung erfolgte durch Vergleich der durch die Normale dargestellten Werten mit der Anzeige des Digitalmultimeters. Bezug ist die Realisierung der Einheiten in der PTB. Die Kalibrierung erfolgte gemäß den Vorgaben des Herstellers im Service Guide 34401A (Part Nr. 34401-90013 Ed7.)" : "Calibration was performed by comparing the values represented by the normal values with the display of the digital multimeter. Reference is the realization of the units in the PTB. The calibration was carried out according to the specifications of the manufacturer in Service Guide 34401A (Part No. 34401-90013 Ed7.)"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
+: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_document" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "GA3 02xx VA Kalibrieren von Digitalmultimetern" : "GA3 02xx VA Calibration of digital multimeters"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
+: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_2" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "GA3 0224  AA- Computergestützte Kalibrierung von Digitalmultimetern" : "GA3 0224 AA- Computer based calibration of digital multimeters"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
+: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_field" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C2396"]]></defaultValueExpression>
