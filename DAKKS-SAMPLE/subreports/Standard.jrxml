@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="535" pageHeight="818" orientation="Landscape" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="545" pageHeight="818" columnWidth="545" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -30,8 +39,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-        <field name="C2301" class="java.lang.String"/>
-        <field name="C2303" class="java.lang.String"/>
+	<field name="C2301" class="java.lang.String"/>
+	<field name="C2303" class="java.lang.String"/>
 	<field name="C2356" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
@@ -168,8 +177,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="320" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
+			<staticText>
+				<reportElement x="320" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -182,8 +191,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[letzte Kal]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="320" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
+			<staticText>
+				<reportElement x="320" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -196,8 +205,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Last Cal]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="390" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+			<staticText>
+				<reportElement x="390" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -210,8 +219,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="390" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+			<staticText>
+				<reportElement x="390" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -224,8 +233,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="460" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+			<staticText>
+				<reportElement x="460" y="0" width="75" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -238,8 +247,8 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="460" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+			<staticText>
+				<reportElement x="460" y="17" width="75" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -284,34 +293,30 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
-                        <textField isBlankWhenNull="true">
-                                <reportElement x="320" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
-                                <textElement textAlignment="Center" verticalAlignment="Middle">
-                                        <font fontName="SansSerif" size="8"/>
-                                </textElement>
-                        <textFieldExpression><![CDATA[
-($F{C2301} == null || $F{C2301}.trim().isEmpty())
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{C2301} == null || $F{C2301}.trim().isEmpty())
 ? ""
 : (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2301}.trim())
         ? java.time.LocalDate.parse($F{C2301}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{REPORT_LOCALE}))
-        : $F{C2301})
-]]></textFieldExpression>
-                        </textField>
-                        <textField isBlankWhenNull="true">
-                                <reportElement x="390" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
-                                <textElement textAlignment="Center" verticalAlignment="Middle">
-                                        <font fontName="SansSerif" size="8"/>
-                                </textElement>
-                        <textFieldExpression><![CDATA[
-($F{C2303} == null || $F{C2303}.trim().isEmpty())
+        : $F{C2301})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="390" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{C2303} == null || $F{C2303}.trim().isEmpty())
 ? ""
 : (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2303}.trim())
         ? java.time.LocalDate.parse($F{C2303}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{REPORT_LOCALE}))
-        : $F{C2303})
-]]></textFieldExpression>
-                        </textField>
-                        <textField>
-                                <reportElement x="460" y="0" width="75" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+        : $F{C2303})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="75" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
