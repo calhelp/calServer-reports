@@ -103,9 +103,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<field name="C2311" class="java.lang.String"/>
 	<field name="C2312" class="java.lang.String"/>
 	<field name="C2314" class="java.lang.String"/>
-        <field name="C2327" class="java.lang.String"/>
-        <field name="C2320" class="java.lang.String"/>
-        <field name="cert_field" class="java.lang.String"/>
+	<field name="C2327" class="java.lang.String"/>
+	<field name="C2320" class="java.lang.String"/>
+	<field name="cert_field" class="java.lang.String"/>
 	<field name="cal_date" class="java.lang.String"/>
 	<field name="customer" class="java.lang.String"/>
 	<field name="I4201" class="java.lang.String"/>
@@ -113,14 +113,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
 	<field name="I4206" class="java.lang.String"/>
-        <field name="I4224" class="java.util.Date"/>
-        <field name="procedure_name" class="java.lang.String"/>
-        <field name="calibration_item" class="java.lang.String"/>
-        <field name="calibration_method" class="java.lang.String"/>
-        <field name="procedure_description" class="java.lang.String"/>
-        <field name="measurement_conditions" class="java.lang.String"/>
-        <field name="standards" class="java.lang.String"/>
-        <field name="scope" class="java.lang.String"/>
+	<field name="I4224" class="java.util.Date"/>
+	<field name="procedure_name" class="java.lang.String"/>
+	<field name="calibration_item" class="java.lang.String"/>
+	<field name="calibration_method" class="java.lang.String"/>
+	<field name="procedure_description" class="java.lang.String"/>
+	<field name="measurement_conditions" class="java.lang.String"/>
+	<field name="standards" class="java.lang.String"/>
+	<field name="scope" class="java.lang.String"/>
 	<variable name="title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein" : "Calibration Certificate"]]></variableExpression>
 	</variable>
@@ -214,22 +214,22 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<variable name="Group_header_4a" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSERGEBNISSE" : "MEASUREMENTS RESULTS"]]></variableExpression>
 	</variable>
-        <variable name="Foundleft" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{C2308} != null && $F{C2308}.equals("AS-FOUND")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang nicht jedoch bei Ausgang."
+	<variable name="Foundleft" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{C2308} != null && $F{C2308}.equals("AS-FOUND")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang nicht jedoch bei Ausgang."
 : ( ($F{C2308} != null && $F{C2308}.equals("AS-LEFT")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Ausgang nicht jedoch bei Eingang." : "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang und bei Ausgang.")]]></variableExpression>
-        </variable>
-        <variable name="procedure_name_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{procedure_name} != null && !$F{procedure_name}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_name_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{procedure_name} != null && !$F{procedure_name}.trim().isEmpty())
         ? $F{procedure_name}
         : ($F{C2320} != null ? $F{C2320} : "")]]></variableExpression>
-        </variable>
-        <variable name="procedure_calibration_item_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_calibration_item_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
         ? $F{calibration_item}
         : ""]]></variableExpression>
-        </variable>
-        <variable name="procedure_description_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{procedure_description} != null && !$F{procedure_description}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_description_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{procedure_description} != null && !$F{procedure_description}.trim().isEmpty())
         ? $F{procedure_description}
         : (
             ($P{Calibration_procedure_1} == null || $P{Calibration_procedure_1}.trim().isEmpty())
@@ -240,28 +240,28 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                 )
                 : $P{Calibration_procedure_1}
         )]]></variableExpression>
-        </variable>
-        <variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
         ? $F{calibration_method}
         : (
             ($P{Calibration_document} == null || $P{Calibration_document}.trim().isEmpty())
                 ? ($P{Sprache}.equals("Deutsch") ? "GA3 02xx VA Kalibrieren von Digitalmultimetern" : "GA3 02xx VA Calibration of digital multimeters")
                 : $P{Calibration_document}
         )]]></variableExpression>
-        </variable>
-        <variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{measurement_conditions} != null && !$F{measurement_conditions}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{measurement_conditions} != null && !$F{measurement_conditions}.trim().isEmpty())
         ? $F{measurement_conditions}
         : "im permanenten Labor"]]></variableExpression>
-        </variable>
-        <variable name="procedure_standards_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{standards} != null && !$F{standards}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_standards_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{standards} != null && !$F{standards}.trim().isEmpty())
         ? $F{standards}
         : ""]]></variableExpression>
-        </variable>
-        <variable name="procedure_scope_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{scope} != null && !$F{scope}.trim().isEmpty())
+	</variable>
+	<variable name="procedure_scope_var" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($F{scope} != null && !$F{scope}.trim().isEmpty())
         ? $F{scope}
         : (
             ($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
@@ -276,10 +276,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                         )
                 )
         )]]></variableExpression>
-        </variable>
-        <variable name="Group_header_1h_1" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></variableExpression>
-        </variable>
+	</variable>
+	<variable name="Group_header_1h_1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></variableExpression>
+	</variable>
 	<variable name="Group_header_1i_1" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Umgebungstemperatur:" : "Temperature"]]></variableExpression>
 	</variable>
@@ -314,7 +314,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA[new String(
     (
       ($P{Asset_description} == null || $P{Asset_description}.trim().isEmpty())
-        ? "Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich-und Wechselstrom, Gleichstromwiderstand und Frequenz."
+        ? $V{procedure_calibration_item_var}
         : $P{Asset_description}
     ).replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8"
 ).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
@@ -387,7 +387,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
@@ -410,7 +410,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
@@ -419,21 +419,21 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["ARBEITSANWEISUNG"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["MESSBEDINGUNGEN"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="161" y="4" width="184" height="20" uuid="7af38058-6014-4954-b822-0a558c8bc540"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8" isItalic="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["MEASUREMENT CONDITIONE"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="6ded0141-e53b-4462-98e5-268ebd431caf"/>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_scope_var}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="54">
