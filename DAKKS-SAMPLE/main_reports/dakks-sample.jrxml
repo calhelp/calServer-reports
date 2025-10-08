@@ -94,10 +94,10 @@
 	<parameter name="ReportVersion" class="java.lang.String">
 		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="MarkNumber1" class="java.math.BigDecimal">
+	<parameter name="MarkNumber1" class="java.lang.String">
 		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="MarkNumber2" class="java.math.BigDecimal">
+	<parameter name="MarkNumber2" class="java.lang.String">
 		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
