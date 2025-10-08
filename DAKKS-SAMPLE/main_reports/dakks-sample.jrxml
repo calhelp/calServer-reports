@@ -316,7 +316,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     (
       ($V{procedure_calibration_item_var}== null || $V{procedure_calibration_item_var}.trim().isEmpty())
         ? $V{procedure_calibration_item_var}
-        : $F{C2320}
+        : $P{Asset_description}
     ).replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8"
 ).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
@@ -388,7 +388,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new String(
+    (
+      ($V{procedure_description_var}.trim().isEmpty())
+        ? $V{procedure_description_var}
+        : $F{C2320}
+    ).replace("_s_"," ").replace("_n_","\n").getBytes("ISO-8859-1"), "UTF-8"
+).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
