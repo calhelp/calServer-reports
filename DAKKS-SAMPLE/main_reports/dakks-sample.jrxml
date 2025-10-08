@@ -1031,6 +1031,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{type_mark}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="58" y="319" width="312" height="14" uuid="54973b11-6591-4746-b4db-e4c09ad20cef"/>
+				<textFieldExpression><![CDATA[$F{C2320}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
