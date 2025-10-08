@@ -234,7 +234,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="0" width="90" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="440" y="0" width="95" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -248,7 +248,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="17" width="90" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="440" y="17" width="95" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -316,7 +316,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="90" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="440" y="0" width="95" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
