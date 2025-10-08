@@ -1097,16 +1097,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 			</line>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="495" y="10" width="51" height="15" uuid="5713e1f6-e91c-48d9-bada-b49b9a2778f3">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{cert_field} == null || $F{cert_field}.trim().isEmpty()) ? "" : $F{cert_field}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="495" y="63" width="51" height="15" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -1116,16 +1106,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{cal_date} == null || $F{cal_date}.trim().isEmpty()) ? "" : $F{cal_date}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="495" y="32" width="51" height="24" uuid="75a2e336-7a08-4793-bc32-5801fb896088">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{type_mark}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="14" y="83" width="535" height="1" uuid="203c6e8e-1e07-4bd2-8936-c6e05e7bbcde">
@@ -1148,6 +1128,16 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<font size="8" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER} + " of  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="493" y="8" width="55" height="19" uuid="5f2ce3f4-6844-4bbd-90a4-ff31f96afcf8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="492" y="27" width="57" height="33" uuid="571a74a2-6240-4e55-be63-14f507283a54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
