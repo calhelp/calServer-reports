@@ -162,11 +162,35 @@
              )
       )
       ? (
-            ($F{exp_uncert} == null ? "" : $F{exp_uncert})
+            ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
           + (
-                $F{exp_uncert_u} == null || $F{exp_uncert_u}.isEmpty()
+                $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
                 ? ""
-                : " " + $F{exp_uncert_u}
+                : (
+                      (
+                          ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                              .endsWith(
+                                  (
+                                      ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                      + (
+                                              $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                           || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                                          ? ""
+                                          : " "
+                                        )
+                                      + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                                  ).trim()
+                              )
+                          || (
+                                  $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                                ? false
+                                : ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                    .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                             )
+                      )
+                      ? ""
+                      : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                  )
             )
         )
       : (
@@ -176,7 +200,27 @@
                 + (
                       $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
                       ? ""
-                      : " " + $F{exp_uncert_u}.trim()
+                      : (
+                            (
+                                ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                    .endsWith(
+                                        (
+                                            ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                            + (
+                                                    $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                                 || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                                                ? ""
+                                                : " "
+                                              )
+                                            + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                                        ).trim()
+                                    )
+                                || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                    .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                            )
+                            ? ""
+                            : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                        )
                   )
               )
             : $V{FormattedUncertainty}
