@@ -99,21 +99,34 @@ WHERE  c.CTAG = $P{P_CTAG};
 * Beide Unterberichte benötigen dieselben Parameter (`PrefixTable`, `Sprache`,
   `P_CTAG`, optional `P_Image_Path`) und denselben Datenbank-Connection-Context.
 
-### Parameterübersicht (Auswahl)
+### Vollständige Parameterübersicht
 
-| Parameter | Funktion |
-| --- | --- |
-| `P_CTAG` | **Pflicht** – eindeutige Kalibrierungs-ID. |
-| `Reportpath` | Basisverzeichnis für Unterberichte (`.../DAKKS-SAMPLE`). |
-| `PrefixTable` | Optionales Tabellenpräfix (z. B. `cal_`). |
-| `Sprache` | Setzt Labels/Textbausteine (`Deutsch` / `Englisch`). |
-| `QR_Code_Value` | Inhalt für QR-/Barcode-Elemente. |
-| `Cert_description*`, `Measurements_description*`, `Conformity_description*`, `Additional_information` | Textbausteine für normative Abschnitte. |
-| `Calibration_procedure_*`, `Calibration_document` | Hinweise auf verwendete Verfahren/Dokumente. |
-| `Cert_field` | Datenbankfeld, aus dem die Zertifikatsnummer gelesen wird (Standard: `C2396`). |
-| `P_Image_Path` | Pfad für Logos/Siegel, die im Bericht eingebunden werden. |
-| `ExpUncType` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
-| `ReportVersion` | Ausgabe der Reportversion im Titelbereich. |
+| Parameter | Pflicht | Standardwert | Zweck |
+| --- | --- | --- | --- |
+| `P_CTAG` | ✅ | leer | Schlüssel der Kalibrierung, steuert alle Haupt- und Unterberichte. |
+| `Reportpath` | ✅ | `""` | Basisverzeichnis für Unterberichte (`.../DAKKS-SAMPLE`) inkl. kompilierten `.jasper`-Dateien. |
+| `PrefixTable` | ➖ | `""` | Tabellenpräfix für mandantenfähige Installationen (z. B. `cal_`). |
+| `Sprache` | ➖ | `Deutsch` | Sprache der Labels und Textbausteine (`Deutsch` / `Englisch`). |
+| `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
+| `Cert_field` | ➖ | `C2396` | Datenbankfeld, aus dem die Zertifikatsnummer gelesen wird. |
+| `Cert_field_validated` | ❌ | dynamisch | Intern validiertes Feld aus `Cert_field` (Pattern `^C\d{4}$`, Fallback `C2396`). |
+| `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
+| `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
+| `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock. |
+| `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
+| `Cert_description`, `Cert_description_1` | ➖ | vordefiniert | Normativer Vorspann zur Rückführbarkeit und Verbreitung. |
+| `Asset_description` | ➖ | vordefiniert | Kurzbeschreibung des kalibrierten Messmittels. |
+| `Results_description` | ➖ | sprachabhängig | Hinweis auf Seitenverweise der Messergebnisse. |
+| `Measurements_description`, `Measurements_description_1` | ➖ | sprachabhängig | Erläuterungen zur Messunsicherheit/GUM. |
+| `Conformity_description_1..3` | ➖ | sprachabhängig | Legenden für Konformitätsaussagen und Symbolik. |
+| `Additional_information` | ➖ | sprachabhängig | Hinweise zur DAkkS-Anerkennung. |
+| `Calibration_procedure_1`, `Calibration_procedure_2` | ➖ | sprachabhängig | Textbausteine zu den angewendeten Verfahren. |
+| `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrensanweisung bzw. QMS-Dokument. |
+
+**Unterberichte**
+
+* `Standard.jrxml`: erwartet `PrefixTable`, `Sprache`, `P_CTAG` (Default: `Deutsch`, Beispiel-CTAG) für die Tabelle der eingesetzten Normale.
+* `Results.jrxml`: erwartet `PrefixTable`, `P_CTAG`; optional `Debug` (`N`) für zusätzliche Protokolle.
 
 ### Typische Anpassungen
 
