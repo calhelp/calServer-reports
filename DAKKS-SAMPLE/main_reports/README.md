@@ -36,8 +36,8 @@ Unterberichte für Normale und Messergebnisse ein.
 ### Was zeigt der Bericht?
 
 * **Titel- und Kopfbereich** – dynamischer Titel (`Kalibrierschein` /
-  `Calibration Certificate`) inkl. Zertifikatsnummer aus dem Feld
-  `C2396` (`Cert_field`).
+  `Calibration Certificate`) inkl. Zertifikatsnummer aus `C2396`,
+  optional über `Cert_field` überschreibbar.
 * **Messmittel-Stammdaten** – Bezeichnung, Typ, Serien- und Inventarnummern
   (`I4204`, `I4203`, `I4202`, `I4201`) sowie optionaler QR-/Barcode-Wert.
 * **Auftraggeber:in** – Kund:innenname und Adresse (`customer`), Datum der
@@ -79,7 +79,7 @@ Die Hauptabfrage kombiniert drei Kernbereiche der calServer-Datenbank:
 ### SQL-Auszug
 
 ```sql
-SELECT COALESCE(c.$P!{Cert_field}, "") AS cert_field,
+SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field,
        DATE_FORMAT(C2301, '%Y-%m')       AS cal_date,
        COALESCE(i.I4204, "")            AS I4204,
        COALESCE(i.I4201, "")            AS I4201,
@@ -108,8 +108,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `PrefixTable` | ➖ | `""` | Tabellenpräfix für mandantenfähige Installationen (z. B. `cal_`). |
 | `Sprache` | ➖ | `Deutsch` | Sprache der Labels und Textbausteine (`Deutsch` / `Englisch`). |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
-| `Cert_field` | ➖ | `C2396` | Datenbankfeld, aus dem die Zertifikatsnummer gelesen wird. |
-| `Cert_field_validated` | ❌ | dynamisch | Intern validiertes Feld aus `Cert_field` (Pattern `^C\d{4}$`, Fallback `C2396`). |
+| `Cert_field` | ➖ | `""` | Optionaler Text für die angezeigte Zertifikatsnummer; leer lassen für den Wert aus `C2396`. |
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock. |
@@ -149,8 +148,8 @@ WHERE  c.CTAG = $P{P_CTAG};
   den kompilierten `.jasper`-Dateien zeigt.
 * **Falsche Sprache:** der Parameterwert muss exakt `Deutsch` oder `Englisch`
   lauten; ansonsten greift der deutsche Default.
-* **Zertifikatsnummer fehlt:** ggf. anderes Feld über `Cert_field` wählen (z. B.
-  `C2307` für externe Referenzen).
+* **Zertifikatsnummer fehlt:** optionalen Text über `Cert_field` setzen oder den
+  Datenbankwert in `C2396` prüfen.
 * **Seitenumbrüche anpassen:** der Haupttitel nutzt `isTitleNewPage="true"` –
   bei Bedarf kann die Startseite über den Report-Parameter `isTitleNewPage`
   angepasst werden.
