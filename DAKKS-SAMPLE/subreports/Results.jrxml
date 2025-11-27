@@ -18,7 +18,6 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT
       COALESCE(remark,'')              AS remark,
-      COALESCE(feld,'')                AS feld,
       COALESCE(test_desc,'')           AS test_desc,
       COALESCE(test_step2,'')          AS test_step2,
       COALESCE(fixq,'')                AS fixq,
@@ -47,9 +46,8 @@
     WHERE ctag = $P{P_CTAG}
     ORDER BY row_num]]>
 	</queryString>
-	<field name="remark" class="java.lang.String"/>
-	<field name="feld" class="java.lang.String"/>
-	<field name="test_desc" class="java.lang.String"/>
+        <field name="remark" class="java.lang.String"/>
+        <field name="test_desc" class="java.lang.String"/>
 	<field name="test_step2" class="java.lang.String"/>
 	<field name="fixq" class="java.lang.String"/>
 	<field name="fixq_p" class="java.lang.String"/>
@@ -1257,37 +1255,26 @@
 				<reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
 					<printWhenExpression><![CDATA[( $P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
-				<textField>
-					<reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
+                                <textField>
+                                        <reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
               ? $F{test_desc}
               : ""]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="100" y="0" width="60" height="14" uuid="ef00ee49-5e6f-4b1d-b0a5-c874df11c65d"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(
-              $F{feld} == null || $F{feld}.trim().isEmpty()
-              ? ""
-              : $F{feld}.trim()
-            )]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="160" y="0" width="68" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{tol_neg} == null ? "" : $F{tol_neg}.trim()]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
+                                </textField>
+                                <textField isBlankWhenNull="true">
+                                        <reportElement x="160" y="0" width="68" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{tol_neg} == null ? "" : $F{tol_neg}.trim()]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim()]]></textFieldExpression>
 				</textField>
