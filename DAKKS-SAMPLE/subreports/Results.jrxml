@@ -18,7 +18,7 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT
       COALESCE(remark,'')              AS remark,
-      COALESCE(field,'')               AS feld,
+      COALESCE(feld,'')                AS feld,
       COALESCE(test_desc,'')           AS test_desc,
       COALESCE(test_step2,'')          AS test_step2,
       COALESCE(fixq,'')                AS fixq,
