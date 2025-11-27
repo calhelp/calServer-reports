@@ -67,6 +67,39 @@ Unterberichte für Normale und Messergebnisse ein.
 
 ## 2. Für Administrator:innen & Entwickler:innen
 
+### Messwert-Frames im Results-Unterbericht
+
+Der Parameter `MeasurementDetails` (Integer, Default: `1`) steuert vier
+alternative Messwert-Layouts im Subreport `Results.jasper`. Alle Varianten
+werden nur gedruckt, wenn Messdaten vorhanden sind (`HasMeasurementData`):
+
+1. **Frame 1 – Basisdarstellung (`null`/`1`)**
+   * Spalten: Messbedingungen, Sollwert, untere & obere Spezifikationsgrenze,
+     Messwert, relative Abweichung, erweiterte Messunsicherheit, `% Tol`,
+     Konformität.
+   * Nutzt die Rohfelder (`tol_neg`/`tol_pos`, `exp_uncert`, `test_status`) und
+     gibt sie ohne zusätzliche Formatierung aus.
+2. **Frame 2 – formatierte Eingaben (`2`)**
+   * Gleiche Spalten wie Frame 1, aber alle Soll-, Toleranz- und
+     Unsicherheitswerte werden zusammengesetzt aus Wert, Präfix und Einheit
+     (z. B. `fixq`, `fixq_p`, `fixq_u`). So lassen sich Vorzeichen, Prozent- und
+     Einheitentexte kontrolliert übergeben.
+3. **Frame 3 – autoformatierte Anzeige (`3`)**
+   * Verwendet vorberechnete Variablen (`NominalValue`, `NegLimit`,
+     `PosLimit`, `MeasuredValue`, `RoundedRelError`, `DisplayUncertainty`), die
+     Einheiten zusammenführen und wissenschaftliche Schreibweisen berücksichtigen.
+   * Eignet sich, wenn die Datenbankwerte minimal gepflegt sind und das Layout
+     die Formatierung übernehmen soll.
+4. **Frame 4 – ISO-konforme Unsicherheit (`4`)**
+   * Identisch zu Frame 3, ersetzt die Unsicherheitsspalte jedoch durch
+     `DisplayUncertaintyIsoP` und nutzt damit ISO-konforme Schreibweise mit
+     explizitem `p`-Wert.
+
+Alle Frames teilen sich den gleichen Spaltenkopf (de/en) und die gleiche
+Konformitätslogik (`i.T`, `?`, `!?`, `!` plus Akkreditierungsstern). Die Auswahl
+erfolgt ausschließlich über den Parameterwert, wodurch zwischen Rohdaten- und
+Darstellungsvarianten gewechselt werden kann, ohne den Report umzubauen.
+
 ### Datenquellen & Tabellen
 
 Die Hauptabfrage kombiniert drei Kernbereiche der calServer-Datenbank:
