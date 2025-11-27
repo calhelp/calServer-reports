@@ -1269,7 +1269,7 @@
                                                 <font fontName="SansSerif" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
-              ? $F{test_desc}
+              ? $F{test_desc}.trim().replaceAll("(?i)ohm","Ω")
               : ""]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
@@ -1277,36 +1277,36 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="SansSerif" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{tol_neg} == null ? "" : $F{tol_neg}.trim()]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{tol_neg} == null ? "" : $F{tol_neg}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim()]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="293" y="0" width="72" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{tol_pos} == null ? "" : $F{tol_pos}.trim()]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="365" y="0" width="45" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{error} == null ? "" : $F{error}.trim()]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{exp_uncert} == null ? "" : $F{exp_uncert}.trim()]]></textFieldExpression>
-				</textField>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                </textField>
+                                <textField isBlankWhenNull="true">
+                                        <reportElement x="293" y="0" width="72" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{tol_pos} == null ? "" : $F{tol_pos}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="365" y="0" width="45" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{error} == null ? "" : $F{error}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{exp_uncert} == null ? "" : $F{exp_uncert}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                </textField>
 				<textField>
 					<reportElement x="475" y="0" width="22" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
