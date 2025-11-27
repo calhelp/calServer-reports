@@ -34,9 +34,13 @@
                 <parameterDescription><![CDATA[Kalibrierungs-ID, über die Haupt- und Unterberichte gefiltert werden.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
-	<parameter name="Cert_description" class="java.lang.String">
+        <parameter name="MeasurementDetails" class="java.lang.Integer">
+                <parameterDescription><![CDATA[Steuert das Layout der Messwertdarstellung im Results-Unterbericht (1 = Standard, 2 = alternative Spalten).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+        </parameter>
+        <parameter name="Cert_description" class="java.lang.String">
                 <parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\n" +
+                <defaultValueExpression><![CDATA["Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\n" +
 "Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\n" +
 "Die den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."]]></defaultValueExpression>
 	</parameter>
@@ -762,12 +766,15 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<subreportParameter name="Sprache">
 						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
 					</subreportParameter>
-					<subreportParameter name="P_CTAG">
-						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
-					</subreportParameter>
-					<subreportParameter name="P_Image_Path">
-						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
-					</subreportParameter>
+                                        <subreportParameter name="P_CTAG">
+                                                <subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <subreportParameter name="MeasurementDetails">
+                                                <subreportParameterExpression><![CDATA[$P{MeasurementDetails}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <subreportParameter name="P_Image_Path">
+                                                <subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
+                                        </subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
