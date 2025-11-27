@@ -1269,7 +1269,7 @@
                                                 <font fontName="SansSerif" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
-              ? $F{test_desc}
+              ? $F{test_desc}.trim().replaceAll("(?i)ohm","Ω")
               : ""]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
