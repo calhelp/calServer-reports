@@ -40,7 +40,7 @@
       COALESCE(tol_err,'')             AS tol_err,
       COALESCE(error,'')               AS error,
       COALESCE(test_status,'')         AS test_status,
-      COALESCE(fsc,'')                 AS fsc,
+      COALESCE(fsc,'')                 AS Fsc,
       COALESCE(accred, 0)              AS accred,
       row_num
     FROM $P!{PrefixTable}results
@@ -70,7 +70,7 @@
 	<field name="tol_err" class="java.lang.String"/>
         <field name="error" class="java.lang.String"/>
         <field name="test_status" class="java.lang.String"/>
-        <field name="fsc" class="java.lang.String"/>
+        <field name="Fsc" class="java.lang.String"/>
         <field name="accred" class="java.lang.String"/>
         <field name="row_num" class="java.lang.Number"/>
         <variable name="NominalValue" class="java.lang.String">
@@ -1225,14 +1225,31 @@
 					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{HasMeasurementData})
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
 				</reportElement>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="497" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="SansSerif" size="9" isBold="true"/>
-						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="442" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
+                                        <textElement verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="9" isBold="true"/>
+                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+                                        </textElement>
                                         <textFieldExpression><![CDATA[
             ($F{remark} == null ? "" : $F{remark}.trim())]]></textFieldExpression>
+                                </textField>
+                                <textField isBlankWhenNull="true">
+                                        <reportElement x="442" y="0" width="55" height="14" uuid="cbf72c1c-23a6-47e1-a7f5-201c1832af7d"/>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="8" isBold="true"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[
+            ($F{test_status} == null || $F{test_status}.trim().isEmpty())
+                || ($F{Fsc} == null
+                    ? true
+                    : !(
+                        $F{Fsc}.toUpperCase().contains("EVAL")
+                        || $F{Fsc}.toUpperCase().contains("PICE")
+                    )
+                )
+                ? ""
+                : $F{test_status}.trim()]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="497" y="0" width="38" height="14" uuid="ea36bf98-c2df-4cc6-a3cd-769bc0b4420a"/>
