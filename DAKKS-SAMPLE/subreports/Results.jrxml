@@ -112,7 +112,6 @@
              Math.abs(Double.parseDouble($F{tol_neg}.replace(",", "."))) -
              Math.abs(Double.parseDouble($F{tol_pos}.replace(",", ".")))
            ) < 1e-9
-      )
       ? ( "± " + $F{tol_pos}.trim().replaceFirst("^[+-]","")
           + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
           + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})
@@ -121,7 +120,7 @@
           ($V{NegLimit}==null ? "" : $V{NegLimit}.trim()) + "\n" +
           ($V{PosLimit}==null ? "" : $V{PosLimit}.trim())
           )
- ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+      ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
 	<variable name="RoundedRelError" class="java.lang.String">
 		<variableExpression><![CDATA[($F{error}==null || $F{error}.trim().isEmpty())
