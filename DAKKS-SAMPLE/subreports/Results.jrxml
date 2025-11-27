@@ -7,9 +7,13 @@
         <parameter name="P_CTAG" class="java.lang.String">
                 <parameterDescription><![CDATA[Kalibrierungs-ID als Filter für alle Messwerte.]]></parameterDescription>
         </parameter>
-	<parameter name="Debug" class="java.lang.String" isForPrompting="false">
+        <parameter name="MeasurementDetails" class="java.lang.Integer">
+                <parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2 = Alternative).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+        </parameter>
+        <parameter name="Debug" class="java.lang.String" isForPrompting="false">
                 <parameterDescription><![CDATA[Interner Schalter für Protokollzwecke (Y/N).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT
@@ -240,233 +244,363 @@
 	<variable name="AccredMark" class="java.lang.String">
 		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
 	</variable>
-	<columnHeader>
-		<band height="35">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Messbedingungen]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="18" width="100" height="15" uuid="b60abc68-076c-493d-a3f3-9195326664bd"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Measuring Condition]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="0" width="60" height="18" uuid="7880a955-3d0e-47e0-b0ca-86f6808ec459"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Sollwert]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="18" width="60" height="15" uuid="bd32f354-0a23-4f84-8c54-8742d8eda0a9"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[True Value]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="160" y="0" width="68" height="18" uuid="b8aaaf0e-818f-4cb7-bc68-d6f5bccef281"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[untere Spezifikationsgrenze]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="160" y="18" width="68" height="15" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Lower Limit]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="228" y="0" width="65" height="18" uuid="ab19233c-cc95-4e62-8907-3b85cd8a99ba"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Messwert]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="228" y="18" width="65" height="15" uuid="c2ef9866-31f4-4f4c-a509-99fbbaa5e2a7"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Measured Value]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="293" y="0" width="72" height="18" uuid="6cfc31ec-8210-4030-ac0b-9345ad984c2a"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[obere Spezifikationsgrenze]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="293" y="18" width="72" height="15" uuid="c2956eb9-f42e-4a14-aeac-aec17661d608"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Upper Limit]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="365" y="0" width="45" height="18" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[% rel. Abweichung]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="365" y="18" width="45" height="15" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[% rel. Deviation]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="410" y="0" width="65" height="18" uuid="70528edb-30a7-46d4-af65-e17aa067d645"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[erweiterte Messunsicherheit]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="410" y="18" width="65" height="15" uuid="41fa5341-396a-4209-91b3-92c6d3498388"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="475" y="0" width="22" height="18" uuid="42b6ddce-c26d-4176-bad0-ad7c5ba311ab"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[% Tol]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="475" y="18" width="22" height="15" uuid="4b7181f7-6f15-4ab7-8366-60e34fa86fda"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[% Tol]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="497" y="0" width="38" height="18" uuid="bcbd02e7-375c-458f-b6bf-e7f832f6b5ad"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Konformität]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="497" y="18" width="38" height="15" uuid="95a9d488-0a25-4f7f-9a41-6b3a566768f6"/>
-				<box>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="5" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Conformity]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
+        <columnHeader>
+                <band height="35">
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="35" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
+                                        <printWhenExpression><![CDATA[$P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1]]></printWhenExpression>
+                                </reportElement>
+                                <staticText>
+                                        <reportElement x="0" y="0" width="100" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Messbedingungen]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="0" y="18" width="100" height="15" uuid="b60abc68-076c-493d-a3f3-9195326664bd"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Measuring Condition]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="100" y="0" width="60" height="18" uuid="7880a955-3d0e-47e0-b0ca-86f6808ec459"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Sollwert]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="100" y="18" width="60" height="15" uuid="bd32f354-0a23-4f84-8c54-8742d8eda0a9"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[True Value]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="160" y="0" width="68" height="18" uuid="b8aaaf0e-818f-4cb7-bc68-d6f5bccef281"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[untere Spezifikationsgrenze]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="160" y="18" width="68" height="15" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Lower Limit]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="228" y="0" width="65" height="18" uuid="ab19233c-cc95-4e62-8907-3b85cd8a99ba"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Messwert]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="228" y="18" width="65" height="15" uuid="c2ef9866-31f4-4f4c-a509-99fbbaa5e2a7"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Measured Value]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="293" y="0" width="72" height="18" uuid="6cfc31ec-8210-4030-ac0b-9345ad984c2a"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[obere Spezifikationsgrenze]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="293" y="18" width="72" height="15" uuid="c2956eb9-f42e-4a14-aeac-aec17661d608"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Upper Limit]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="365" y="0" width="45" height="18" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[% rel. Abweichung]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="365" y="18" width="45" height="15" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[% rel. Deviation]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="410" y="0" width="65" height="18" uuid="70528edb-30a7-46d4-af65-e17aa067d645"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[erweiterte Messunsicherheit]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="410" y="18" width="65" height="15" uuid="41fa5341-396a-4209-91b3-92c6d3498388"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Expanded Uncertainty of Measurement]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="475" y="0" width="22" height="18" uuid="42b6ddce-c26d-4176-bad0-ad7c5ba311ab"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[% Tol]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="475" y="18" width="22" height="15" uuid="4b7181f7-6f15-4ab7-8366-60e34fa86fda"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[% Tol]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="497" y="0" width="38" height="18" uuid="bcbd02e7-375c-458f-b6bf-e7f832f6b5ad"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Konformität]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="497" y="18" width="38" height="15" uuid="95a9d488-0a25-4f7f-9a41-6b3a566768f6"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Conformity]]></text>
+                                </staticText>
+                        </frame>
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="35" uuid="0e30b70c-1f1a-4a39-b02c-800e348721ba">
+                                        <printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 2]]></printWhenExpression>
+                                </reportElement>
+                                <staticText>
+                                        <reportElement x="0" y="0" width="150" height="18" uuid="22089e64-0afb-4b6f-9f06-167f265b6019"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Beschreibung]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="0" y="18" width="150" height="15" uuid="d20dddf1-2712-42c1-8b13-7a2f4385eaba"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Description]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="150" y="0" width="100" height="18" uuid="58ef4870-35bc-4d40-bb3a-f17f5ef0f002"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Messwert]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="150" y="18" width="100" height="15" uuid="1dfe2d6a-7f7e-4f56-a3d1-f88f599a4b37"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Measurement]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="250" y="0" width="80" height="18" uuid="44e0a5e9-38ec-4d1a-8a3b-206b0c44f10e"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Messunsicherheit]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="250" y="18" width="80" height="15" uuid="964c6118-d574-43b8-8d9e-40a78cdddfc9"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Uncertainty]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="330" y="0" width="165" height="18" uuid="3d767db4-7c04-4b9f-bb4b-e2be24573b7c"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Bemerkung]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="330" y="18" width="165" height="15" uuid="6f5987ed-403b-4e2f-8c00-f3aae2f5ee3f"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Remark]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="495" y="0" width="40" height="18" uuid="90f4c54c-a7ed-4253-8d1b-6d04612da54d"/>
+                                        <box>
+                                                <topPen lineWidth="0.75"/>
+                                                <leftPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="6" isBold="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Konformität]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="495" y="18" width="40" height="15" uuid="30e09ad0-56ed-4f2a-ac11-51fc18c2ff76"/>
+                                        <box>
+                                                <leftPen lineWidth="0.75"/>
+                                                <bottomPen lineWidth="0.75"/>
+                                                <rightPen lineWidth="0.75"/>
+                                        </box>
+                                        <textElement textAlignment="Center" verticalAlignment="Middle">
+                                                <font fontName="SansSerif" size="5" isItalic="true"/>
+                                        </textElement>
+                                        <text><![CDATA[Conformity]]></text>
+                                </staticText>
+                        </frame>
+                </band>
+        </columnHeader>
 	<detail>
 		<band height="14" splitType="Stretch">
-			<frame>
-				<reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
-					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{HasMeasurementData})
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
+                                        <printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{HasMeasurementData})
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
-				</reportElement>
+                                </reportElement>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="535" height="14" uuid="cc326fbe-92cd-4865-b61a-f75a52aabf5a"/>
 					<textElement verticalAlignment="Middle">
@@ -476,12 +610,12 @@
 					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
 				</textField>
 			</frame>
-			<frame>
-				<reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
-					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
-				</reportElement>
-				<textField>
-					<reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
+                                        <printWhenExpression><![CDATA[( $P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                </reportElement>
+                                <textField>
+                                        <reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
@@ -543,7 +677,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
@@ -555,8 +689,61 @@
                 )
             )
             + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-	</detail>
+                                </textField>
+                        </frame>
+                        <frame>
+                                <reportElement x="0" y="0" width="535" height="14" uuid="e189fb39-c3a5-4a2c-8ece-6c4acbc6b4ba">
+                                        <printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 2 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                </reportElement>
+                                <textField>
+                                        <reportElement x="6" y="0" width="144" height="14" uuid="fca9ff77-e7dd-40f4-81ec-995c0f9132ff"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
+              ? $F{test_desc}
+              : ""]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="150" y="0" width="100" height="14" uuid="3b4dad87-3835-4f84-8e3b-0e84ab9bf9bb"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{MeasuredValue}]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="250" y="0" width="80" height="14" uuid="a9bda64c-5ff9-4baa-a76d-3c47dc35c9cd"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{DisplayUncertainty}]]></textFieldExpression>
+                                </textField>
+                                <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                                        <reportElement positionType="Float" stretchType="RelativeToTallestObject" x="330" y="0" width="165" height="14" uuid="a0f1c7a9-6ef0-4931-909f-36c72389ac35"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{remark}]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="495" y="0" width="40" height="14" uuid="e707cf4a-45be-488b-86f4-75b362a653a1"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[(
+              ($F{test_status}==null || $F{test_status}.trim().isEmpty())
+              ? ""
+              : (
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
+                  $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
+                  $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
+                  ""
+                )
+            )
+            + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
+                                </textField>
+                        </frame>
+                </band>
+        </detail>
 </jasperReport>
