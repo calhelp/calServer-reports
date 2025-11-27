@@ -1232,38 +1232,16 @@
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
                                         <textFieldExpression><![CDATA[
-            ($F{remark} == null ? "" : $F{remark}.trim())
-            + (
-                $F{fsc} != null
-                && (
-                        $F{fsc}.equalsIgnoreCase("EVAL")
-                     || $F{fsc}.equalsIgnoreCase("PICE")
-                   )
-                && $F{test_status} != null
-                && !$F{test_status}.trim().isEmpty()
-              ? "\n" + $F{test_status}.trim()
-              : ""
-              )]]></textFieldExpression>
+            ($F{remark} == null ? "" : $F{remark}.trim())]]></textFieldExpression>
                                 </textField>
-				<textField>
-					<reportElement x="497" y="0" width="38" height="14" uuid="ea36bf98-c2df-4cc6-a3cd-769bc0b4420a"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="SansSerif" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{test_status}==null || $F{test_status}.trim().isEmpty())
-              ? ""
-              : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
-                  $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
-                  $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
-                  $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
-                  ""
-                )
-            )
-            + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
-				</textField>
-			</frame>
+                                <textField>
+                                        <reportElement x="497" y="0" width="38" height="14" uuid="ea36bf98-c2df-4cc6-a3cd-769bc0b4420a"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="SansSerif" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{AccredMark}==null ? "" : $V{AccredMark}]]></textFieldExpression>
+                                </textField>
+                        </frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
 					<printWhenExpression><![CDATA[( $P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
