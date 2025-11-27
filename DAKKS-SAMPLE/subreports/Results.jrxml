@@ -40,6 +40,7 @@
       COALESCE(tol_err,'')             AS tol_err,
       COALESCE(error,'')               AS error,
       COALESCE(test_status,'')         AS test_status,
+      COALESCE(fsc,'')                 AS fsc,
       COALESCE(accred, 0)              AS accred,
       row_num
     FROM $P!{PrefixTable}results
@@ -67,10 +68,11 @@
 	<field name="exp_uncert_iso_e" class="java.lang.String"/>
 	<field name="exp_uncert_iso_p" class="java.lang.String"/>
 	<field name="tol_err" class="java.lang.String"/>
-	<field name="error" class="java.lang.String"/>
-	<field name="test_status" class="java.lang.String"/>
-	<field name="accred" class="java.lang.String"/>
-	<field name="row_num" class="java.lang.Number"/>
+        <field name="error" class="java.lang.String"/>
+        <field name="test_status" class="java.lang.String"/>
+        <field name="fsc" class="java.lang.String"/>
+        <field name="accred" class="java.lang.String"/>
+        <field name="row_num" class="java.lang.Number"/>
         <variable name="NominalValue" class="java.lang.String">
                 <variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
@@ -1229,8 +1231,20 @@
 						<font fontName="SansSerif" size="9" isBold="true"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{remark}.trim()]]></textFieldExpression>
-				</textField>
+                                        <textFieldExpression><![CDATA[
+            ($F{remark} == null ? "" : $F{remark}.trim())
+            + (
+                $F{fsc} != null
+                && (
+                        $F{fsc}.equalsIgnoreCase("EVAL")
+                     || $F{fsc}.equalsIgnoreCase("PICE")
+                   )
+                && $F{test_status} != null
+                && !$F{test_status}.trim().isEmpty()
+              ? "\n" + $F{test_status}.trim()
+              : ""
+              )]]></textFieldExpression>
+                                </textField>
 				<textField>
 					<reportElement x="497" y="0" width="38" height="14" uuid="ea36bf98-c2df-4cc6-a3cd-769bc0b4420a"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
