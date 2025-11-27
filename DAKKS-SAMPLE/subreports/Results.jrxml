@@ -82,29 +82,29 @@
       : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="PosLimit" class="java.lang.String">
-                <variableExpression><![CDATA[(($F{tol_pos} == null || $F{tol_pos}.trim().isEmpty())
+                <variableExpression><![CDATA[($F{tol_pos} == null || $F{tol_pos}.trim().isEmpty()
   ? ""
   : $F{tol_pos}.trim()
-    + (
-        (($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty())
-      || ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty()))
-        ? " " : ""
-      )
- )).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+      + (
+          (($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty())
+        || ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty()))
+            ? " " : ""
+        )
+ ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="NegLimit" class="java.lang.String">
-                <variableExpression><![CDATA[(($F{tol_neg} == null || $F{tol_neg}.trim().isEmpty())
+                <variableExpression><![CDATA[($F{tol_neg} == null || $F{tol_neg}.trim().isEmpty()
   ? ""
   : $F{tol_neg}.trim()
-    + (
-        (($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty())
-      || ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty()))
-        ? " " : ""
-      )
- )).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+      + (
+          (($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty())
+        || ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty()))
+            ? " " : ""
+        )
+ ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="ToleranceRange" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[((
+                <variableExpression><![CDATA[(
         $F{tol_neg}!=null && $F{tol_pos}!=null
         && $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
         && $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
@@ -120,8 +120,8 @@
       : (
           ($V{NegLimit}==null ? "" : $V{NegLimit}.trim()) + "\n" +
           ($V{PosLimit}==null ? "" : $V{PosLimit}.trim())
-        )
- )).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+          )
+ ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
 	<variable name="RoundedRelError" class="java.lang.String">
 		<variableExpression><![CDATA[($F{error}==null || $F{error}.trim().isEmpty())
@@ -175,7 +175,7 @@
         )]]></variableExpression>
 	</variable>
         <variable name="DisplayUncertainty" class="java.lang.String">
-                <variableExpression><![CDATA[((
+                <variableExpression><![CDATA[(
           $F{exp_uncert_u} != null
           && (
                  $F{exp_uncert_u}.contains("°C")
@@ -214,44 +214,44 @@
                   )
             )
         )
-      : (
-            $V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty()
-            ? (
-                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                + (
-                      $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
-                      ? ""
-                      : (
-                            (
-                                ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith(
-                                        (
-                                            ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
-                                            + (
-                                                    $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
-                                                 || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
-                                                ? ""
-                                                : " "
-                                              )
-                                            + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                                        ).trim()
-                                    )
-                                || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                            )
-                            ? ""
-                            : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                        )
-                  )
-              )
+        : (
+              $V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty()
+              ? (
+                    ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                  + (
+                        $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                        ? ""
+                        : (
+                              (
+                                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                      .endsWith(
+                                          (
+                                              ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                              + (
+                                                      $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                                   || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                                                  ? ""
+                                                  : " "
+                                                )
+                                              + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                                          ).trim()
+                                      )
+                                  || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                      .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                              )
+                              ? ""
+                              : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                          )
+                    )
+                )
               : $V{FormattedUncertainty}
-          )).replaceAll("(?i)ohm","Ω")]]></variableExpression>
-        </variable>
+          ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+          </variable>
         <variable name="DisplayUncertaintyIsoP" class="java.lang.String">
-                <variableExpression><![CDATA[((
-          $F{exp_uncert_u} != null
-          && (
-                 $F{exp_uncert_u}.contains("°C")
+                <variableExpression><![CDATA[(
+            $F{exp_uncert_u} != null
+            && (
+                   $F{exp_uncert_u}.contains("°C")
               || $F{exp_uncert_u}.contains("%fF")
              )
       )
@@ -287,38 +287,38 @@
                   )
             )
         )
-      : (
-            $V{FormattedUncertaintyIsoP} == null || $V{FormattedUncertaintyIsoP}.trim().isEmpty()
-            ? (
-                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                + (
-                      $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
-                      ? ""
-                      : (
-                            (
-                                ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith(
-                                        (
-                                            ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
-                                            + (
-                                                    $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
-                                                 || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
-                                                ? ""
-                                                : " "
-                                              )
-                                            + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                                        ).trim()
-                                    )
-                                || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                            )
-                            ? ""
-                            : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
-                        )
-                  )
-              )
+        : (
+              $V{FormattedUncertaintyIsoP} == null || $V{FormattedUncertaintyIsoP}.trim().isEmpty()
+              ? (
+                    ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                  + (
+                        $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                        ? ""
+                        : (
+                              (
+                                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                      .endsWith(
+                                          (
+                                              ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                              + (
+                                                      $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                                   || $F{exp_uncert_u} == null || $F{exp_uncert_u}.trim().isEmpty()
+                                                  ? ""
+                                                  : " "
+                                                )
+                                              + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                                          ).trim()
+                                      )
+                                  || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                      .endsWith($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                              )
+                              ? ""
+                              : " " + ($F{exp_uncert_u} == null ? "" : $F{exp_uncert_u}.trim())
+                          )
+                    )
+                )
               : $V{FormattedUncertaintyIsoP}
-          )).replaceAll("(?i)ohm","Ω")]]></variableExpression>
+          ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
 	<variable name="HasMeasurementData" class="java.lang.Boolean">
 		<variableExpression><![CDATA[Boolean.valueOf(
