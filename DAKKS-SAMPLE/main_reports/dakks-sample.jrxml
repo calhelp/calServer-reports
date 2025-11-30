@@ -34,9 +34,9 @@
                 <parameterDescription><![CDATA[Kalibrierungs-ID, über die Haupt- und Unterberichte gefiltert werden.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
-        <parameter name="MeasurementDetails" class="java.lang.Integer">
+        <parameter name="MeasurementDetails" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert das Layout der Messwertdarstellung im Results-Unterbericht (1 = Standard, 2 = alternative Spalten).]]></parameterDescription>
-                <defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
         </parameter>
         <parameter name="Cert_description" class="java.lang.String">
                 <parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>

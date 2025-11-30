@@ -8,10 +8,10 @@
 	<parameter name="P_CTAG" class="java.lang.String">
 		<parameterDescription><![CDATA[Kalibrierungs-ID als Filter für alle Messwerte.]]></parameterDescription>
 	</parameter>
-	<parameter name="MeasurementDetails" class="java.lang.Integer">
-		<parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/3/4 = alternative Layouts).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
-	</parameter>
+        <parameter name="MeasurementDetails" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/3/4 = alternative Layouts).]]></parameterDescription>
+                <defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Debug" class="java.lang.String" isForPrompting="false">
 		<parameterDescription><![CDATA[Interner Schalter für Protokollzwecke (Y/N).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
@@ -74,6 +74,13 @@
         <field name="Fsc" class="java.lang.String"/>
         <field name="accred" class="java.lang.String"/>
         <field name="row_num" class="java.lang.Number"/>
+        <variable name="MeasurementDetailsValue" class="java.lang.Integer" resetType="None">
+                <variableExpression><![CDATA[(
+    $P{MeasurementDetails} != null
+    && !$P{MeasurementDetails}.toString().trim().isEmpty()
+    && $P{MeasurementDetails}.toString().trim().matches("^-?\\d+$")
+) ? Integer.valueOf($P{MeasurementDetails}.toString().trim()) : Integer.valueOf(1)]]></variableExpression>
+        </variable>
         <variable name="NominalValue" class="java.lang.String">
                 <variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
       ? ""
@@ -335,7 +342,7 @@
 		<band height="35">
 			<frame>
 				<reportElement x="0" y="0" width="535" height="35" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} == null || $V{MeasurementDetailsValue}.intValue() == 1]]></printWhenExpression>
 				</reportElement>
 				<staticText>
 					<reportElement x="0" y="0" width="100" height="18" uuid="eafff26f-da66-47aa-9620-067984e7623d"/>
@@ -556,7 +563,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="35" uuid="0e30b70c-1f1a-4a39-b02c-800e348721ba">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 2]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 2]]></printWhenExpression>
 				</reportElement>
 				<staticText>
 					<reportElement x="0" y="0" width="100" height="18" uuid="5c5dcb15-89a6-40c4-9cdf-0868be2c0c8a"/>
@@ -777,7 +784,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="35" uuid="77c05213-e84f-4b75-8bc6-f427caa33ce1">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 3]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 3]]></printWhenExpression>
 				</reportElement>
 				<staticText>
 					<reportElement x="0" y="0" width="100" height="18" uuid="cd0b237b-3723-4f2c-84cf-4ea5bf4b6858"/>
@@ -998,7 +1005,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="35" uuid="e68489b7-5b78-45b5-9587-bd87d4db3533">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 4]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 4]]></printWhenExpression>
 				</reportElement>
 				<staticText>
 					<reportElement x="0" y="0" width="100" height="18" uuid="4eb67baf-b479-45de-9329-2c31681bf56c"/>
@@ -1262,7 +1269,7 @@
                         </frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="bbb659c9-636a-4ef4-9d25-6212b8241919">
-					<printWhenExpression><![CDATA[( $P{MeasurementDetails} == null || $P{MeasurementDetails}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[( $V{MeasurementDetailsValue} == null || $V{MeasurementDetailsValue}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
                                 <textField>
                                         <reportElement x="6" y="0" width="94" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
@@ -1336,7 +1343,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="f0d6d51a-7a0c-4b1e-94a1-7e7af6b10f9b">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 2 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 2 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
 				<textField>
 					<reportElement x="6" y="0" width="94" height="14" uuid="4df395e9-bc78-4e7c-9bc6-f5341ef545f2"/>
@@ -1433,7 +1440,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="a66d1645-54b1-4c6e-bd18-a1129e662cf2">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 3 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 3 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
 				<textField>
 					<reportElement x="6" y="0" width="94" height="14" uuid="c8570f49-7ebf-4317-9a25-a2fb0092a427"/>
@@ -1514,7 +1521,7 @@
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="db716c5d-15fb-4e1c-8686-9a4aa1e1cfe2">
-					<printWhenExpression><![CDATA[$P{MeasurementDetails} != null && $P{MeasurementDetails}.intValue() == 4 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+                                    <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 4 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
 				<textField>
 					<reportElement x="6" y="0" width="94" height="14" uuid="5781d584-4ea4-450d-bb90-00931855550d"/>

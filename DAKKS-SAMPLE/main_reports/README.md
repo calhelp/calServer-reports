@@ -69,9 +69,13 @@ Unterberichte für Normale und Messergebnisse ein.
 
 ### Messwert-Frames im Results-Unterbericht
 
-Der Parameter `MeasurementDetails` (Integer, Default: `1`) steuert vier
+Der Parameter `MeasurementDetails` (String, Default: `"1"`) steuert vier
 alternative Messwert-Layouts im Subreport `Results.jasper`. Alle Varianten
 werden nur gedruckt, wenn Messdaten vorhanden sind (`HasMeasurementData`):
+
+* Leere oder nicht-numerische Eingaben werden automatisch als `1` behandelt,
+  sodass auch Aufrufe mit `MeasurementDetails=""` nicht mehr mit einer
+  `NumberFormatException` abbrechen.
 
 1. **Frame 1 – Basisdarstellung (`null`/`1`)**
    * Spalten: Messbedingungen, Sollwert, untere & obere Spezifikationsgrenze,
