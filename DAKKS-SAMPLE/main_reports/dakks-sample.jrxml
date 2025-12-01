@@ -483,7 +483,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 <band height="121">
 				<property name="com.calserver.bandLabel" value="Kalibrierverfahren"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1Procedure})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1Procedure})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="4" width="164" height="20" uuid="6d5d544f-d505-4b79-9d74-593d66a90c4d"/>
@@ -527,7 +527,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ProcedureDocument})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ProcedureDocument})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="4" width="179" height="20" uuid="23a91972-c2d9-4e9d-97d8-4c707f2e3716"/>
@@ -554,7 +554,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Messbedingungen"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1MeasurementConditions})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1MeasurementConditions})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="4" width="148" height="20" uuid="d065e56b-4659-4e10-9f22-abf7d29ea9f2"/>
@@ -581,7 +581,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="54">
 				<property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1CalibrationPlace})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1CalibrationPlace})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="7" width="167" height="20" uuid="e7ec25f5-e842-4f1c-8025-580b36acff9c"/>
@@ -608,7 +608,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="75">
 				<property name="com.calserver.bandLabel" value="Umgebungsbedingungen"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1EnvironmentalConditions})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1EnvironmentalConditions})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="5" width="188" height="20" uuid="9bdc7711-a3da-4bad-8519-56f15638c2da"/>
@@ -656,7 +656,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="49">
 				<property name="com.calserver.bandLabel" value="Verwendete Normale"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1StandardsTraceability})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1StandardsTraceability})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="1" width="284" height="20" uuid="706a0561-44a9-4723-9717-b15d00e4b1e2"/>
@@ -692,7 +692,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="135" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ResultsIntro})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ResultsIntro})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
@@ -834,7 +834,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<band height="132" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression>
-				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ResultsDetails})))]></printWhenExpression>]]>
+				<![CDATA[!Boolean.FALSE.equals(Boolean.valueOf(String.valueOf($P{ShowGroup1ResultsDetails})))]>
 				</printWhenExpression>
 				<textField>
 					<reportElement x="16" y="26" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
