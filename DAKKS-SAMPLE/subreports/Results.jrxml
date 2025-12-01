@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Results" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="12" bottomMargin="12" uuid="98765abc-1234-4ef7-9f12-9876543210ab">
-        <style name="UnicodeDefault" isDefault="true" fontName="Helvetica" pdfFontName="Helvetica" pdfEncoding="Cp1252"/>
+        <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
         <parameter name="PrefixTable" class="java.lang.String">
 		<parameterDescription><![CDATA[Tabellenpräfix für die Results-Tabelle.]]></parameterDescription>
 	</parameter>
