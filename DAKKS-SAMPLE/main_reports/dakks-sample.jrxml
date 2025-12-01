@@ -3,11 +3,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-sample" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
-	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
-	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+        <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
+        <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
+        <property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
+        <property name="resourceBundle" value="messages"/>
+        <property name="net.sf.jasperreports.default.resource.bundle.encoding" value="UTF-8"/>
+        <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 	<parameter name="Reportpath" class="java.lang.String">
 		<parameterDescription><![CDATA[Pfad zum gemeinsamen Report-Verzeichnis; wird für Subreports und Assets genutzt.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -58,105 +60,82 @@
 "Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich- und Wechselstrom, Gleichstromwiderstand und Frequenz."
 ]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Results_description" class="java.lang.String">
-		<parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        <parameter name="Results_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
-: "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
+? $R{results.description.de}
+: $R{results.description.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Measurements_description" class="java.lang.String">
-		<parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Measurements_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
-: "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
+? $R{measurements.description.de}
+: $R{measurements.description.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Measurements_description_1" class="java.lang.String">
-		<parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Measurements_description_1" class="java.lang.String">
+                <parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
-: "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."
+? $R{measurements.description.1.de}
+: $R{measurements.description.1.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Conformity_description_1" class="java.lang.String">
-		<parameterDescription><![CDATA[Einleitungstext für Konformitätsaussagen unter Berücksichtigung der Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Conformity_description_1" class="java.lang.String">
+                <parameterDescription><![CDATA[Einleitungstext für Konformitätsaussagen unter Berücksichtigung der Messunsicherheit.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.
-" + "Einschränkungen werden wie folgt gekennzeichnet:"
-: "If statements of conformity are made, they consider the uncertainty of measurement.
-" + "Limitations are marked as follows:"
+? $R{conformity.description.1.de}
+: $R{conformity.description.1.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Conformity_description_2" class="java.lang.String">
-		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["?\n\n\n" +
-		"!?\n\n\n" +
-		"!\n\n" +
-		"*"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Conformity_description_3" class="java.lang.String">
-		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Conformity_description_2" class="java.lang.String">
+                <parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$R{conformity.description.2}]]></defaultValueExpression>
+        </parameter>
+        <parameter name="Conformity_description_3" class="java.lang.String">
+                <parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.
-
-" +
-  "Messwert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.
-
-" +
-  "Messwert außerhalb der Herstellerspezifikationen.
-
-" +
-  "Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
-: "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.
-
-" +
-  "Measured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.
-
-" +
-  "Measured value out of tolerance.
-
-" +
-  "Measurement results that are not covered by the DAkkS accreditation."
+? $R{conformity.description.3.de}
+: $R{conformity.description.3.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Additional_information" class="java.lang.String">
-		<parameterDescription><![CDATA[Zusatzinformationen zur DAkkS-Anerkennung und internationalen Abkommen.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Additional_information" class="java.lang.String">
+                <parameterDescription><![CDATA[Zusatzinformationen zur DAkkS-Anerkennung und internationalen Abkommen.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
-: "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
+? $R{additional.information.de}
+: $R{additional.information.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Calibration_procedure_1" class="java.lang.String">
-		<parameterDescription><![CDATA[Freitext für den beschriebenen Kalibrierablauf (vergleichende Messung).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Calibration_procedure_1" class="java.lang.String">
+                <parameterDescription><![CDATA[Freitext für den beschriebenen Kalibrierablauf (vergleichende Messung).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
-: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."
+? $R{calibration.procedure.1.de}
+: $R{calibration.procedure.1.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Calibration_document" class="java.lang.String">
-		<parameterDescription><![CDATA[Referenz auf die verwendete Verfahrensanweisung bzw. QMS-Dokumentation.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Calibration_document" class="java.lang.String">
+                <parameterDescription><![CDATA[Referenz auf die verwendete Verfahrensanweisung bzw. QMS-Dokumentation.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
-: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."
+? $R{calibration.document.de}
+: $R{calibration.document.en}
 ]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Calibration_procedure_2" class="java.lang.String">
-		<parameterDescription><![CDATA[Optionaler Freitext für computergestützte Kalibrierverfahren.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
+        </parameter>
+        <parameter name="Calibration_procedure_2" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionaler Freitext für computergestützte Kalibrierverfahren.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
-? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
-: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."
+? $R{calibration.procedure.2.de}
+: $R{calibration.procedure.2.en}
 ]]></defaultValueExpression>
-	</parameter>
+        </parameter>
 	<parameter name="Cert_field" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Text, der als Zertifikatsnummer angezeigt wird. Leer lassen, um den Standardwert aus C2396 zu verwenden.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
