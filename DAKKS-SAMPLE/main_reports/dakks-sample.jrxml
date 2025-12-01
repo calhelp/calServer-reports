@@ -842,7 +842,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 : $P{Additional_information}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="132" splitType="Prevent">
+                        <band height="90" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1ResultsDetails} == null || !"N".equalsIgnoreCase((($P{ShowGroup1ResultsDetails} == null ? "Y" : $P{ShowGroup1ResultsDetails}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 				<textField>
