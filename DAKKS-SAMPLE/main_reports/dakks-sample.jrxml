@@ -1142,9 +1142,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="498" y="261" width="51" height="17" uuid="2a566f7c-747b-41b9-93d9-8f1f4e51fee2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
-				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
-			</textField>
-			<staticText>
+                                <textFieldExpression><![CDATA[
+($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
+    ? ""
+    : $P{MarkNumber1}.trim().split("\\s+")[0]
+]]></textFieldExpression>
+                        </textField>
+                        <staticText>
 				<reportElement x="395" y="296" width="90" height="14" uuid="f06142e5-e22b-449b-bf4d-9078c56651e7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="10" isBold="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
@@ -1277,9 +1281,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="495" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
-				<textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="ScaleFont">
+                                <textFieldExpression><![CDATA[
+($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
+    ? ""
+    : $P{MarkNumber1}.trim().split("\\s+")[0]
+]]></textFieldExpression>
+                        </textField>
+                        <textField textAdjust="ScaleFont">
 				<reportElement x="495" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
