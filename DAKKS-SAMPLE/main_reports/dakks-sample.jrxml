@@ -129,61 +129,61 @@
                 <parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
                 <defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1CalibrationItem" class="java.lang.Boolean">
+        <parameter name="ShowGroup1CalibrationItem" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1IncomingDate" class="java.lang.Boolean">
+        <parameter name="ShowGroup1IncomingDate" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Datum der Anlieferung.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1Condition" class="java.lang.Boolean">
+        <parameter name="ShowGroup1Condition" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Zustand bei Eingang/Ausgang.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1Spacer" class="java.lang.Boolean">
+        <parameter name="ShowGroup1Spacer" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert den optionalen Zwischenabstand innerhalb des Group-Headers.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1Procedure" class="java.lang.Boolean">
+        <parameter name="ShowGroup1Procedure" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibrierverfahren.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1ProcedureDocument" class="java.lang.Boolean">
+        <parameter name="ShowGroup1ProcedureDocument" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Verfahrensanweisung.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1MeasurementConditions" class="java.lang.Boolean">
+        <parameter name="ShowGroup1MeasurementConditions" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Messbedingungen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1CalibrationPlace" class="java.lang.Boolean">
+        <parameter name="ShowGroup1CalibrationPlace" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Ort der Kalibrierung.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.Boolean">
+        <parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Umgebungsbedingungen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1StandardsTraceability" class="java.lang.Boolean">
+        <parameter name="ShowGroup1StandardsTraceability" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu verwendeten Normalen und Rückführung.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1ResultsIntro" class="java.lang.Boolean">
+        <parameter name="ShowGroup1ResultsIntro" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1Conformity" class="java.lang.Boolean">
+        <parameter name="ShowGroup1Conformity" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1AdditionalInformation" class="java.lang.Boolean">
+        <parameter name="ShowGroup1AdditionalInformation" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu weiteren Hinweisen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
-        <parameter name="ShowGroup1ResultsDetails" class="java.lang.Boolean">
+        <parameter name="ShowGroup1ResultsDetails" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Tabellenabschnitts zu den Messergebnissen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
         <queryString language="SQL">
 		<![CDATA[SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
@@ -394,7 +394,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<groupHeader>
                         <band height="58">
                                 <property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1CalibrationItem} == null || Boolean.TRUE.equals($P{ShowGroup1CalibrationItem})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1CalibrationItem} == null || !"N".equalsIgnoreCase($P{ShowGroup1CalibrationItem})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="0" width="164" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
@@ -428,7 +428,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="48">
                                 <property name="com.calserver.bandLabel" value="Datum der Anlieferung"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1IncomingDate} == null || Boolean.TRUE.equals($P{ShowGroup1IncomingDate})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1IncomingDate} == null || !"N".equalsIgnoreCase($P{ShowGroup1IncomingDate})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="6" width="184" height="20" uuid="caa4ddc8-a908-4edd-84e1-6e28ae3dce41"/>
 					<textElement verticalAlignment="Bottom">
@@ -453,7 +453,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="56">
                                 <property name="com.calserver.bandLabel" value="Zustand Eingang/Ausgang"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1Condition} == null || Boolean.TRUE.equals($P{ShowGroup1Condition})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1Condition} == null || !"N".equalsIgnoreCase($P{ShowGroup1Condition})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="8" width="228" height="20" uuid="2a9b8f77-21df-46c6-8550-0dbfc6c5bbe9"/>
 					<textElement verticalAlignment="Bottom">
@@ -478,11 +478,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="0">
                                 <property name="com.calserver.bandLabel" value="Zwischenraum"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1Spacer} == null || Boolean.TRUE.equals($P{ShowGroup1Spacer})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1Spacer} == null || !"N".equalsIgnoreCase($P{ShowGroup1Spacer})]]></printWhenExpression>
                         </band>
                         <band height="72">
                                 <property name="com.calserver.bandLabel" value="Kalibrierverfahren"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1Procedure} == null || Boolean.TRUE.equals($P{ShowGroup1Procedure})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1Procedure} == null || !"N".equalsIgnoreCase($P{ShowGroup1Procedure})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="164" height="20" uuid="6d5d544f-d505-4b79-9d74-593d66a90c4d"/>
 					<textElement verticalAlignment="Bottom">
@@ -516,7 +516,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="62">
                                 <property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1ProcedureDocument} == null || Boolean.TRUE.equals($P{ShowGroup1ProcedureDocument})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1ProcedureDocument} == null || !"N".equalsIgnoreCase($P{ShowGroup1ProcedureDocument})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="179" height="20" uuid="23a91972-c2d9-4e9d-97d8-4c707f2e3716"/>
 					<textElement verticalAlignment="Bottom">
@@ -541,7 +541,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="62">
                                 <property name="com.calserver.bandLabel" value="Messbedingungen"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1MeasurementConditions} == null || Boolean.TRUE.equals($P{ShowGroup1MeasurementConditions})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1MeasurementConditions} == null || !"N".equalsIgnoreCase($P{ShowGroup1MeasurementConditions})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="148" height="20" uuid="d065e56b-4659-4e10-9f22-abf7d29ea9f2"/>
 					<textElement verticalAlignment="Bottom">
@@ -566,7 +566,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="54">
                                 <property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1CalibrationPlace} == null || Boolean.TRUE.equals($P{ShowGroup1CalibrationPlace})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1CalibrationPlace} == null || !"N".equalsIgnoreCase($P{ShowGroup1CalibrationPlace})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="7" width="167" height="20" uuid="e7ec25f5-e842-4f1c-8025-580b36acff9c"/>
 					<textElement verticalAlignment="Bottom">
@@ -591,7 +591,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="75">
                                 <property name="com.calserver.bandLabel" value="Umgebungsbedingungen"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1EnvironmentalConditions} == null || Boolean.TRUE.equals($P{ShowGroup1EnvironmentalConditions})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1EnvironmentalConditions} == null || !"N".equalsIgnoreCase($P{ShowGroup1EnvironmentalConditions})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="5" width="188" height="20" uuid="9bdc7711-a3da-4bad-8519-56f15638c2da"/>
 					<textElement verticalAlignment="Bottom">
@@ -637,7 +637,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="49">
                                 <property name="com.calserver.bandLabel" value="Verwendete Normale"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1StandardsTraceability} == null || Boolean.TRUE.equals($P{ShowGroup1StandardsTraceability})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1StandardsTraceability} == null || !"N".equalsIgnoreCase($P{ShowGroup1StandardsTraceability})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="1" width="284" height="20" uuid="706a0561-44a9-4723-9717-b15d00e4b1e2"/>
 					<textElement verticalAlignment="Middle">
@@ -671,7 +671,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="135" splitType="Stretch">
                                 <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1ResultsIntro} == null || Boolean.TRUE.equals($P{ShowGroup1ResultsIntro})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1ResultsIntro} == null || !"N".equalsIgnoreCase($P{ShowGroup1ResultsIntro})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
 					<textElement verticalAlignment="Bottom">
@@ -733,7 +733,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</break>
 			</band>
                         <band height="74">
-                                <printWhenExpression><![CDATA[$P{ShowGroup1Conformity} == null || Boolean.TRUE.equals($P{ShowGroup1Conformity})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1Conformity} == null || !"N".equalsIgnoreCase($P{ShowGroup1Conformity})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
                                         <textElement verticalAlignment="Bottom">
@@ -783,7 +783,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textField>
 			</band>
                         <band height="54">
-                                <printWhenExpression><![CDATA[$P{ShowGroup1AdditionalInformation} == null || Boolean.TRUE.equals($P{ShowGroup1AdditionalInformation})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1AdditionalInformation} == null || !"N".equalsIgnoreCase($P{ShowGroup1AdditionalInformation})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="0" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
                                         <textElement verticalAlignment="Bottom">
@@ -813,7 +813,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="132" splitType="Prevent">
                                 <property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-                                <printWhenExpression><![CDATA[$P{ShowGroup1ResultsDetails} == null || Boolean.TRUE.equals($P{ShowGroup1ResultsDetails})]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1ResultsDetails} == null || !"N".equalsIgnoreCase($P{ShowGroup1ResultsDetails})]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="26" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
 					<textElement verticalAlignment="Bottom">

@@ -165,7 +165,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 
 ### Abschnittsumschalter (ShowGroup1...)
 
-Alle Abschnitts-Parameter sind Booleans (Default: `true`) und können je nach Bedarf gesetzt werden, um einzelne Bereiche anzuzeigen bzw. auszublenden:
+Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`) und können je nach Bedarf auf `"Y"` (anzeigen) oder `"N"` (ausblenden) gesetzt werden:
 
 * `ShowGroup1CalibrationItem` – Kalibriergegenstand / Unit under test
 * `ShowGroup1IncomingDate` – Datum der Anlieferung / Incoming Date
