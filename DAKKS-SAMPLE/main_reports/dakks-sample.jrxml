@@ -38,76 +38,59 @@
 	</parameter>
 	<parameter name="Cert_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-"Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\n" +
-"Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\n" +
-"Die den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall.")
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+"Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.
+" +
+"Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.
+" +
+"Die den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Hinweis zur zulässigen Weitergabe des Kalibrierscheins.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-"Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit.")
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+"Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Asset_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Kurzbeschreibung des kalibrierten Mess- oder Prüfmittels.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-"Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich-und Wechselstrom, Gleichstromwiderstand und Frequenz.")
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+"Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich- und Wechselstrom, Gleichstromwiderstand und Frequenz."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Results_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-$P{Sprache}.equals("Deutsch") ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden." : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+$P{Sprache}.equals("Deutsch")
+? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
+: "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Measurements_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-$P{Sprache}.equals("Deutsch") ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall." : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+$P{Sprache}.equals("Deutsch")
+? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
+: "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Measurements_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
+		<defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
 ? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
 : "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Conformity_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Einleitungstext für Konformitätsaussagen unter Berücksichtigung der Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-$P{Sprache}.equals("Deutsch") ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\n" +
-                "Einschränkungen werden wie folgt gekennzeichnet:" : "If statements of conformity are made, they consider the uncertainty of measurement.\n" +
-                "Limitations are marked as follows:"
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+$P{Sprache}.equals("Deutsch")
+? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.
+" + "Einschränkungen werden wie folgt gekennzeichnet:"
+: "If statements of conformity are made, they consider the uncertainty of measurement.
+" + "Limitations are marked as follows:"
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Conformity_description_2" class="java.lang.String">
 		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
@@ -118,65 +101,61 @@ $P{Sprache}.equals("Deutsch") ? "Sofern Konformitätsaussagen erfolgen, werden d
 	</parameter>
 	<parameter name="Conformity_description_3" class="java.lang.String">
 		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-$P{Sprache}.equals("Deutsch") ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\n" +
-                "Messwert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\n" +
-                "Messwert außerhalb der Herstellerspezifikationen.\n\n" +
-                "Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums." : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\n" +
-                "Measured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\n" +
-                "Measured value out of tolerance.\n\n" +
-                "Measurement results that are not covered by the DAkkS accreditation."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+$P{Sprache}.equals("Deutsch")
+? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.
+
+" +
+  "Messwert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.
+
+" +
+  "Messwert außerhalb der Herstellerspezifikationen.
+
+" +
+  "Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
+: "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.
+
+" +
+  "Measured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.
+
+" +
+  "Measured value out of tolerance.
+
+" +
+  "Measurement results that are not covered by the DAkkS accreditation."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Additional_information" class="java.lang.String">
 		<parameterDescription><![CDATA[Zusatzinformationen zur DAkkS-Anerkennung und internationalen Abkommen.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
-$P{Sprache}.equals("Deutsch") ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen." : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[
+$P{Sprache}.equals("Deutsch")
+? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
+: "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Freitext für den beschriebenen Kalibrierablauf (vergleichende Messung).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
+		<defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
 ? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
 : "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_document" class="java.lang.String">
 		<parameterDescription><![CDATA[Referenz auf die verwendete Verfahrensanweisung bzw. QMS-Dokumentation.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
+		<defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
 ? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
 : "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_2" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Freitext für computergestützte Kalibrierverfahren.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[(
+		<defaultValueExpression><![CDATA[
 $P{Sprache}.equals("Deutsch")
 ? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
 : "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."
-)
-.replace("_s_", " ").replace("_n_", "\n")
-.replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü")
-.replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü")
-.replace("_00DF_", "ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></defaultValueExpression>
+]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_field" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Text, der als Zertifikatsnummer angezeigt wird. Leer lassen, um den Standardwert aus C2396 zu verwenden.]]></parameterDescription>
@@ -492,11 +471,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? $P{Asset_description}    // bei leer: Parameter nutzen
     : $V{procedure_calibration_item_var}
 )
-.replace("_s_"," ")
-.replace("_n_","\n")
-.replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
-.replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü")
-.replace("_00DF_","ß")]]></textFieldExpression>
+
+
+
+
+]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="48">
@@ -580,11 +559,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? $F{C2320}   // bei leer: Feld verwenden
     : $V{procedure_description_var}
 )
-.replace("_s_"," ")
-.replace("_n_","\n")
-.replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü")
-.replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü")
-.replace("_00DF_","ß")]]></textFieldExpression>
+
+
+
+
+]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
@@ -1142,8 +1121,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ($P{Cert_description} == null || $P{Cert_description}.trim().isEmpty())
     ? "Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\nFür die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\nDie den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."
     : $P{Cert_description}
-  ).replace("_s_", " ").replace("_n_", "\n")
-).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></textFieldExpression>
+  )
+)]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="16" y="618" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
@@ -1155,8 +1134,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ($P{Cert_description_1} == null || $P{Cert_description_1}.trim().isEmpty())
     ? "Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit."
     : $P{Cert_description_1}
-  ).replace("_s_", " ").replace("_n_", "\n")
-).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></textFieldExpression>
+  )
+)]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="16" y="660" width="535" height="1" uuid="7180f2cc-b318-42fe-8297-222a27072378"/>
