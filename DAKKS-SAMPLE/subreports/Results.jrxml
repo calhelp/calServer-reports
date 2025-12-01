@@ -361,14 +361,8 @@
                         <frame>
                                 <reportElement x="0" y="0" width="535" height="35" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
                                     <printWhenExpression><![CDATA[
-    (
-        $V{MeasurementDetailsValue} == null
-        || $V{MeasurementDetailsValue}.intValue() == 1
-    )
-    && !(
-        $P{ModernResultsHeader} != null
-        && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
-    )
+    $P{ModernResultsHeader} == null
+    || !$P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
 ]]></printWhenExpression>
                                 </reportElement>
 				<staticText>
@@ -591,11 +585,7 @@
                         <frame>
                                 <reportElement x="0" y="0" width="535" height="35" uuid="9b0b621c-5db8-4b1a-a781-fc377ac87c0f">
                                     <printWhenExpression><![CDATA[
-    (
-        $V{MeasurementDetailsValue} == null
-        || $V{MeasurementDetailsValue}.intValue() == 1
-    )
-    && $P{ModernResultsHeader} != null
+    $P{ModernResultsHeader} != null
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
 ]]></printWhenExpression>
                                 </reportElement>
