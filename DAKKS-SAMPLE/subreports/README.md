@@ -58,8 +58,10 @@ zusätzlich `P_Image_Path`, um Grafiken oder Symbole anzuzeigen.
 
 ## Integration & Pflege
 
-* Unterberichte werden direkt aus den `.jrxml`-Dateien geladen; JasperReports
-  kompiliert sie zur Laufzeit, wenn sie nicht als `.jasper` vorliegen.
+* Unterberichte werden im Hauptreport als kompiliertes `.jasper` referenziert
+  (`Standard.jasper` bzw. `Results.jasper`). Stelle sicher, dass die
+  `.jrxml`-Dateien vor dem Ausführen kompiliert werden (z. B. per Build- oder
+  Deploy-Schritt), damit die Subreport-Pfade auflösbar sind.
 * Struktur oder Parameteränderungen sollten sowohl im Haupt- als auch im
   jeweiligen Unterreport gepflegt werden.
 * Durch die konsequente Nutzung von `PrefixTable` lassen sich die Reports in
