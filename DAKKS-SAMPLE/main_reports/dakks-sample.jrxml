@@ -1305,17 +1305,17 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="16" y="8" width="314" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
-				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Seite  " + $V{PAGE_NUMBER} + " von  " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="16" y="26" width="314" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
-				<textElement textAlignment="Left">
-					<font size="8" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER} + " of  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                        <textField evaluationTime="Report">
+                                <reportElement x="16" y="8" width="314" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
+                                <textElement textAlignment="Left"/>
+                                <textFieldExpression><![CDATA["Seite  " + $V{PAGE_NUMBER} + " von  " + $V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+                        </textField>
+                        <textField evaluationTime="Report">
+                                <reportElement x="16" y="26" width="314" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
+                                <textElement textAlignment="Left">
+                                        <font size="8" isItalic="true"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER} + " of  " + $V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="495" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
