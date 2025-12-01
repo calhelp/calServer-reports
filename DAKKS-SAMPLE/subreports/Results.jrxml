@@ -594,7 +594,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -607,7 +607,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -620,7 +620,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -633,7 +633,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -646,7 +646,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -659,7 +659,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -672,7 +672,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -685,7 +685,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -698,7 +698,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -711,7 +711,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -724,7 +724,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -737,7 +737,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -750,7 +750,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -763,7 +763,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -776,7 +776,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -789,7 +789,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -802,7 +802,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -815,7 +815,7 @@
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.5" lineColor="#CBD5E1"/>
+                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
                                                 <rightPen lineWidth="0.0"/>
                                         </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
