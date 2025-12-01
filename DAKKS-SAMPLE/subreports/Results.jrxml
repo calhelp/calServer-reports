@@ -33,12 +33,12 @@
       COALESCE(uut_ind,'')             AS uut_ind,
       COALESCE(uut_ind_p,'')           AS uut_ind_p,
       COALESCE(uut_ind_u,'')           AS uut_ind_u,
-      COALESCE(tol_pos,'')             AS tol_pos,
-      COALESCE(tol_pos_p,'')           AS tol_pos_p,
-      COALESCE(tol_pos_u,'')           AS tol_pos_u,
-      COALESCE(tol_neg,'')             AS tol_neg,
-      COALESCE(tol_neg_p,'')           AS tol_neg_p,
-      COALESCE(tol_neg_u,'')           AS tol_neg_u,
+      COALESCE(upper_limit,'')         AS upper_limit,
+      COALESCE(upper_limit_p,'')       AS upper_limit_p,
+      COALESCE(upper_limit_u,'')       AS upper_limit_u,
+      COALESCE(lower_limit,'')         AS lower_limit,
+      COALESCE(lower_limit_p,'')       AS lower_limit_p,
+      COALESCE(lower_limit_u,'')       AS lower_limit_u,
       COALESCE(exp_uncert,'')          AS exp_uncert,
       COALESCE(exp_uncert_p,'')        AS exp_uncert_p,
       COALESCE(exp_uncert_u,'')        AS exp_uncert_u,
@@ -69,12 +69,12 @@
         <field name="uut_ind" class="java.lang.String"/>
         <field name="uut_ind_p" class="java.lang.String"/>
         <field name="uut_ind_u" class="java.lang.String"/>
-        <field name="tol_pos" class="java.lang.String"/>
-	<field name="tol_pos_p" class="java.lang.String"/>
-	<field name="tol_pos_u" class="java.lang.String"/>
-	<field name="tol_neg" class="java.lang.String"/>
-	<field name="tol_neg_p" class="java.lang.String"/>
-	<field name="tol_neg_u" class="java.lang.String"/>
+        <field name="upper_limit" class="java.lang.String"/>
+        <field name="upper_limit_p" class="java.lang.String"/>
+        <field name="upper_limit_u" class="java.lang.String"/>
+        <field name="lower_limit" class="java.lang.String"/>
+        <field name="lower_limit_p" class="java.lang.String"/>
+        <field name="lower_limit_u" class="java.lang.String"/>
 	<field name="exp_uncert" class="java.lang.String"/>
 	<field name="exp_uncert_p" class="java.lang.String"/>
 	<field name="exp_uncert_u" class="java.lang.String"/>
@@ -104,39 +104,39 @@
       : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="PosLimit" class="java.lang.String">
-                <variableExpression><![CDATA[($F{tol_pos} == null || $F{tol_pos}.trim().isEmpty()
+                <variableExpression><![CDATA[($F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
   ? ""
-  : $F{tol_pos}.trim()
+  : $F{upper_limit}.trim()
       + (
-          (($F{tol_pos_p} != null && !$F{tol_pos_p}.trim().isEmpty())
-        || ($F{tol_pos_u} != null && !$F{tol_pos_u}.trim().isEmpty()))
+          (($F{upper_limit_p} != null && !$F{upper_limit_p}.trim().isEmpty())
+        || ($F{upper_limit_u} != null && !$F{upper_limit_u}.trim().isEmpty()))
             ? " " : ""
         )
  ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="NegLimit" class="java.lang.String">
-                <variableExpression><![CDATA[($F{tol_neg} == null || $F{tol_neg}.trim().isEmpty()
+                <variableExpression><![CDATA[($F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
   ? ""
-  : $F{tol_neg}.trim()
+  : $F{lower_limit}.trim()
       + (
-          (($F{tol_neg_p} != null && !$F{tol_neg_p}.trim().isEmpty())
-        || ($F{tol_neg_u} != null && !$F{tol_neg_u}.trim().isEmpty()))
+          (($F{lower_limit_p} != null && !$F{lower_limit_p}.trim().isEmpty())
+        || ($F{lower_limit_u} != null && !$F{lower_limit_u}.trim().isEmpty()))
             ? " " : ""
         )
  ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
         <variable name="ToleranceRange" class="java.lang.String" resetType="None">
                 <variableExpression><![CDATA[(
-        $F{tol_neg}!=null && $F{tol_pos}!=null
-        && $F{tol_neg}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-        && $F{tol_pos}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+        $F{lower_limit}!=null && $F{upper_limit}!=null
+        && $F{lower_limit}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
+        && $F{upper_limit}.replace(",", ".").matches("-?\\d+(\\.\\d+)?")
         && Math.abs(
-             Math.abs(Double.parseDouble($F{tol_neg}.replace(",", "."))) -
-             Math.abs(Double.parseDouble($F{tol_pos}.replace(",", ".")))
+             Math.abs(Double.parseDouble($F{lower_limit}.replace(",", "."))) -
+             Math.abs(Double.parseDouble($F{upper_limit}.replace(",", ".")))
            ) < 1e-9
-      ? ( "± " + $F{tol_pos}.trim().replaceFirst("^[+-]","")
-          + ($F{tol_pos_p}==null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
-          + ($F{tol_pos_u}==null ? "" : $F{tol_pos_u})
+      ? ( "± " + $F{upper_limit}.trim().replaceFirst("^[+-]","")
+          + ($F{upper_limit_p}==null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
+          + ($F{upper_limit_u}==null ? "" : $F{upper_limit_u})
         )
       : (
           ($V{NegLimit}==null ? "" : $V{NegLimit}.trim()) + "\n" +
@@ -1520,7 +1520,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{tol_neg} == null ? "" : $F{tol_neg}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{lower_limit} == null ? "" : $F{lower_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="228" y="0" width="65" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
@@ -1534,7 +1534,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{tol_pos} == null ? "" : $F{tol_pos}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{upper_limit} == null ? "" : $F{upper_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="365" y="0" width="45" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
@@ -1606,9 +1606,9 @@
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[(
-              ($F{tol_neg} == null ? "" : $F{tol_neg}.trim())
-            + ($F{tol_neg_p} == null || $F{tol_neg_p}.trim().isEmpty() ? "" : " " + $F{tol_neg_p}.trim())
-            + ($F{tol_neg_u} == null || $F{tol_neg_u}.trim().isEmpty() ? "" : " " + $F{tol_neg_u}.trim())
+              ($F{lower_limit} == null ? "" : $F{lower_limit}.trim())
+            + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
+            + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -1624,9 +1624,9 @@
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[(
-              ($F{tol_pos} == null ? "" : $F{tol_pos}.trim())
-            + ($F{tol_pos_p} == null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
-            + ($F{tol_pos_u} == null || $F{tol_pos_u}.trim().isEmpty() ? "" : " " + $F{tol_pos_u}.trim())
+              ($F{upper_limit} == null ? "" : $F{upper_limit}.trim())
+            + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
+            + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -1703,9 +1703,9 @@
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[(
-              ($F{tol_neg} == null ? "" : $F{tol_neg}.trim())
-            + ($F{tol_neg_p} == null || $F{tol_neg_p}.trim().isEmpty() ? "" : " " + $F{tol_neg_p}.trim())
-            + ($F{tol_neg_u} == null || $F{tol_neg_u}.trim().isEmpty() ? "" : " " + $F{tol_neg_u}.trim())
+              ($F{lower_limit} == null ? "" : $F{lower_limit}.trim())
+            + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
+            + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
@@ -1721,9 +1721,9 @@
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[(
-              ($F{tol_pos} == null ? "" : $F{tol_pos}.trim())
-            + ($F{tol_pos_p} == null || $F{tol_pos_p}.trim().isEmpty() ? "" : " " + $F{tol_pos_p}.trim())
-            + ($F{tol_pos_u} == null || $F{tol_pos_u}.trim().isEmpty() ? "" : " " + $F{tol_pos_u}.trim())
+              ($F{upper_limit} == null ? "" : $F{upper_limit}.trim())
+            + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
+            + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
