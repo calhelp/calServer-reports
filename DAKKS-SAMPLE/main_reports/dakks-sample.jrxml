@@ -345,7 +345,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["KALIBRIERGEGENSTAND"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="180" y="0" width="191" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
+					<reportElement x="181" y="0" width="191" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -377,7 +377,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["DATUM DER ANLIEFERUNG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="192" y="6" width="191" height="20" uuid="d046ecfa-ab08-4938-bfc7-f6ffc7e4be7d"/>
+					<reportElement x="195" y="6" width="191" height="20" uuid="d046ecfa-ab08-4938-bfc7-f6ffc7e4be7d"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -400,7 +400,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["ZUSTAND BEI EINGANG/AUSGANG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="240" y="8" width="201" height="20" uuid="fc656972-ed40-4334-aa91-0058b02bf0c1"/>
+					<reportElement x="245" y="8" width="201" height="20" uuid="fc656972-ed40-4334-aa91-0058b02bf0c1"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
