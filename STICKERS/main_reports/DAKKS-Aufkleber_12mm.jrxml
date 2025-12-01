@@ -88,7 +88,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                 <textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
                     <font size="8"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
+    ? ""
+    : $P{MarkNumber1}.trim().split("\\s+")[0]]]></textFieldExpression>
             </textField>
             <textField textAdjust="ScaleFont">
                 <reportElement x="2" y="16" width="29" height="15" uuid="571a74a2-6240-4e55-be63-14f507283a54">
