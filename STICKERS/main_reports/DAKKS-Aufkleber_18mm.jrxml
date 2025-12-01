@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DAkkS-Aufkleber-18mm" pageWidth="51" pageHeight="70" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="51" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="156"/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
+    <property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
+    <property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+    <property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+    <parameter name="Reportpath" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PrefixTable" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Sprache" class="java.lang.String">
+        <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="QR_Code_Value" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="P_CTAG" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Cert_description" class="java.lang.String">
+        <defaultValueExpression><![CDATA["Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\n" +
+"Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\n" +
+"Die den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Cert_description_1" class="java.lang.String">
+        <defaultValueExpression><![CDATA["Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Asset_description" class="java.lang.String">
+        <defaultValueExpression><![CDATA["Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich-und Wechselstrom, Gleichstromwiderstand und Frequenz."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Results_description" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden." : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Measurements_description" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall." : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%. "]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Measurements_description_1" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
+: "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Conformity_description_1" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\n" +
+        "Einschränkungen werden wie folgt gekennzeichnet:" : "If statements of conformity are made, they consider the uncertainty of measurement.\n" +
+        "Limitations are marked as follows:"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Conformity_description_2" class="java.lang.String">
+        <defaultValueExpression><![CDATA["?\n\n\n" +
+        "!?\n\n\n" +
+        "!\n\n" +
+        "*"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Conformity_description_3" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\n" +
+        "Messwert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\n" +
+        "Messwert außerhalb der Herstellerspezifikationen.\n\n" +
+        "Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums." : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\n" +
+        "Measured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\n" +
+        "Measured value out of tolerance.\n\n" +
+        "Measurement results that are not covered by the DAkkS accreditation."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Additional_information" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen." : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Calibration_procedure_1" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
+: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Calibration_document" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
+: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Calibration_procedure_2" class="java.lang.String">
+        <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
+: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Cert_field" class="java.lang.String">
+        <defaultValueExpression><![CDATA["C2396"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="P_Image_Path" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="ExpUncType" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="ReportVersion" class="java.lang.String">
+        <defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MarkNumber1" class="java.lang.String">
+        <defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MarkNumber2" class="java.lang.String">
+        <defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
+    </parameter>
+    <queryString language="SQL">
+        <![CDATA[SELECT COALESCE(c.$P!{Cert_field}, "") AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
+COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", DATE_FORMAT(i.I4224, '%Y-%m-%d'), NULL) AS I4224,
+c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
+p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope
+FROM $P!{PrefixTable}calibration c
+LEFT JOIN $P!{PrefixTable}inventory i on i.MTAG=c.MTAG
+LEFT JOIN $P!{PrefixTable}customers cu on cu.KTAG=i.ktag
+LEFT JOIN $P!{PrefixTable}procedures p ON p.procedure_name = c.C2320
+WHERE c.CTAG=$P{P_CTAG}]]>
+    </queryString>
+    <field name="C2301" class="java.util.Date"/>
+    <field name="C2307" class="java.lang.String"/>
+    <field name="C2308" class="java.lang.String"/>
+    <field name="C2311" class="java.lang.String"/>
+    <field name="C2312" class="java.lang.String"/>
+    <field name="C2313" class="java.lang.String"/>
+    <field name="C2314" class="java.lang.String"/>
+    <field name="C2327" class="java.lang.String"/>
+    <field name="C2320" class="java.lang.String"/>
+    <field name="cert_field" class="java.lang.String"/>
+    <field name="cal_date" class="java.lang.String"/>
+    <field name="customer" class="java.lang.String"/>
+    <field name="I4201" class="java.lang.String"/>
+    <field name="I4202" class="java.lang.String"/>
+    <field name="I4203" class="java.lang.String"/>
+    <field name="I4204" class="java.lang.String"/>
+    <field name="I4206" class="java.lang.String"/>
+    <field name="I4224" class="java.util.Date"/>
+    <field name="procedure_name" class="java.lang.String"/>
+    <field name="calibration_item" class="java.lang.String"/>
+    <field name="calibration_method" class="java.lang.String"/>
+    <field name="procedure_description" class="java.lang.String"/>
+    <field name="measurement_conditions" class="java.lang.String"/>
+    <field name="standards" class="java.lang.String"/>
+    <field name="scope" class="java.lang.String"/>
+    <variable name="title" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein" : "Calibration Certificate"]]></variableExpression>
+    </variable>
+    <variable name="mark" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierzeichen" : "Calibration mark"]]></variableExpression>
+    </variable>
+    <variable name="type_mark" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{I4201} == null || $F{I4201}.trim().isEmpty()) ? "DAkkS-K-" : "DAkkS-K-" + $F{I4201}]]></variableExpression>
+    </variable>
+    <variable name="object" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Gegenstand" : "Object"]]></variableExpression>
+    </variable>
+    <variable name="manufacturer" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Hersteller" : "Manufacturer"]]></variableExpression>
+    </variable>
+    <variable name="type" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Typ" : "Type"]]></variableExpression>
+    </variable>
+    <variable name="serial_number" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Fabrikat/Serien-Nr." : "Serial number"]]></variableExpression>
+    </variable>
+    <variable name="inv_number" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{I4201} == null || $F{I4201}.trim().isEmpty()) ? "" : "(Inv. Nr.: " + $F{I4201} + ")"]]></variableExpression>
+    </variable>
+    <variable name="customer" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Auftraggeber" : "Customer"]]></variableExpression>
+    </variable>
+    <variable name="order_no" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Auftragsnummer" : "Order No."]]></variableExpression>
+    </variable>
+    <variable name="page_number" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Anzahl Seiten des Kalibrierscheines" : "Number of Pages of the certificate"]]></variableExpression>
+    </variable>
+    <variable name="date_of_cal" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Datum der Kalibrierung" : "Date of calibration"]]></variableExpression>
+    </variable>
+    <variable name="Datum" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Datum:" : "Date:"]]></variableExpression>
+    </variable>
+    <variable name="Person_in_charge" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Bearbeiter:" : "Person in charge:"]]></variableExpression>
+    </variable>
+    <variable name="Kalibrierlabor" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Leiter des Kalibrierlabors:" : "Head of calibration laboratory:"]]></variableExpression>
+    </variable>
+    <variable name="Page_text" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Seite  " : "Page  ") + ($V{PAGE_NUMBER} + 1)]]></variableExpression>
+    </variable>
+    <variable name="Cert_calibration" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein Nr." : "Calibration Certificate Nr."]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1b" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "DATUM DER ANLIEFERUNG" : "INCOMING DATE"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1c" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "ZUSTAND BEI EINGANG/AUSGANG" : "INCOMING/OUTGOING CONDITION"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1d" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "ZUSTAND BEI AUSGANG" : "OUTGOING CONDITION"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1e" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "KALIBRIERVERFAHREN" : "CALIBRATION PROCEDURE"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1f" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "VERFAHRENSANWEISUNG" : "PROCEDURALE DOCUMENT"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1g" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "ARBEITSANWEISUNG" : "CALIBRATION PROCEDURE"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1h" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "ORT DER KALIBRIERUNG" : "PLACE OF CALIBRATION"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1i" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "UMGEBUNGSBEDINGUNGEN" : "ENVIRONMENTAL CONDITIONS"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_2" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "VERWENDETE NORMALE / RÜCKFÜHRUNG" : "STANDARDS USED / TRACEBILITY"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_3a" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSERGEBNISSE" : "MEASUREMENTS RESULTS"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_3a_1" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSUNSICHERHEITEN" : "UNCERTAINTY OF MEASUREMENTS"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_3c" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "KONFORMITÄT" : "CONFORMITY"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_3d" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "WEITERE HINWEISE" : "ADDITIONAL INFORMATIONS"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_4a" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSERGEBNISSE" : "MEASUREMENTS RESULTS"]]></variableExpression>
+    </variable>
+    <variable name="Foundleft" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{C2308} != null && $F{C2308}.equals("AS-FOUND")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang nicht jedoch bei Ausgang."
+: ( ($F{C2308} != null && $F{C2308}.equals("AS-LEFT")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Ausgang nicht jedoch bei Eingang." : "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang und bei Ausgang.")]]></variableExpression>
+    </variable>
+    <variable name="procedure_name_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{procedure_name} != null && !$F{procedure_name}.trim().isEmpty())
+        ? $F{procedure_name}
+        : ($F{C2320} != null ? $F{C2320} : "")]]></variableExpression>
+    </variable>
+    <variable name="procedure_calibration_item_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
+        ? $F{calibration_item}
+        : ""]]></variableExpression>
+    </variable>
+    <variable name="procedure_description_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{procedure_description} != null && !$F{procedure_description}.trim().isEmpty())
+        ? $F{procedure_description}
+        : (
+            ($P{Calibration_procedure_1} == null || $P{Calibration_procedure_1}.trim().isEmpty())
+                ? (
+                    $P{Sprache}.equals("Deutsch")
+                        ? "Die Kalibrierung erfolgte durch Vergleich der durch die Normale dargestellten Werten mit der Anzeige des Digitalmultimeters. Bezug ist die Realisierung der Einheiten in der PTB. Die Kalibrierung erfolgte gemäß den Vorgaben des Herstellers im Service Guide 34401A (Part Nr. 34401-90013 Ed7.)"
+                        : "Calibration was performed by comparing the values represented by the normal values with the display of the digital multimeter. Reference is the realization of the units in the PTB. The calibration was carried out according to the specifications of the manufacturer in Service Guide 34401A (Part No. 34401-90013 Ed7.)"
+                )
+                : $P{Calibration_procedure_1}
+        )]]></variableExpression>
+    </variable>
+    <variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
+        ? $F{calibration_method}
+        : (
+            ($P{Calibration_document} == null || $P{Calibration_document}.trim().isEmpty())
+                ? ($P{Sprache}.equals("Deutsch") ? "GA3 02xx VA Kalibrieren von Digitalmultimetern" : "GA3 02xx VA Calibration of digital multimeters")
+                : $P{Calibration_document}
+        )]]></variableExpression>
+    </variable>
+    <variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
+  ? ($P{Sprache}.equals("Deutsch") ? "im permanenten Labor" : "in the permanent laboratory")
+  : $F{measurement_conditions}]]></variableExpression>
+    </variable>
+    <variable name="procedure_standards_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{standards} != null && !$F{standards}.trim().isEmpty())
+        ? $F{standards}
+        : ""]]></variableExpression>
+    </variable>
+    <variable name="procedure_scope_var" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[($F{scope} != null && !$F{scope}.trim().isEmpty())
+        ? $F{scope}
+        : (
+            ($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
+                ? $F{calibration_item}
+                : (
+                    ($F{standards} != null && !$F{standards}.trim().isEmpty())
+                        ? $F{standards}
+                        : (
+                            ($P{Calibration_procedure_2} == null || $P{Calibration_procedure_2}.trim().isEmpty())
+                                ? ($P{Sprache}.equals("Deutsch") ? "GA3 0224  AA- Computergestützte Kalibrierung von Digitalmultimetern" : "GA3 0224 AA- Computer based calibration of digital multimeters")
+                                : $P{Calibration_procedure_2}
+                        )
+                )
+        )]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1h_1" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1i_1" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Umgebungstemperatur:" : "Temperature"]]></variableExpression>
+    </variable>
+    <variable name="Group_header_1i_2" class="java.lang.String" resetType="None">
+        <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Relative Luftfeuchte:" : "Humidity"]]></variableExpression>
+    </variable>
+    <variable name="Page_count" class="java.lang.Integer">
+        <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+    </variable>
+    <variable name="CertNumber_var" class="java.lang.String"/>
+    <detail>
+        <band height="69" splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <line>
+                <reportElement x="2" y="2" width="47" height="1" uuid="531f85e8-3ca4-4b8f-b75c-e5133a718333">
+                    <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="2" y="65" width="47" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="2" y="20" width="47" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="2" y="2" width="1" height="64" uuid="e7d3c686-65de-42be-b99d-f6e6ef4d8a4e">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="48" y="2" width="1" height="64" uuid="cf1fba74-b971-480b-865d-faba195c6210">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="2" y="47" width="47" height="1" uuid="44ac9db4-cafc-475b-a626-17a6475d0bc3">
+                    <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+            </line>
+            <textField>
+                <reportElement x="2" y="48" width="47" height="17" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
+                    <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[($F{cal_date} == null || $F{cal_date}.trim().isEmpty()) ? "" : $F{cal_date}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="ScaleFont">
+                <reportElement x="2" y="3" width="47" height="17" uuid="5f2ce3f4-6844-4bbd-90a4-ff31f96afcf8">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+                <textFieldExpression><![CDATA[$P{MarkNumber1}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="ScaleFont">
+                <reportElement x="2" y="21" width="47" height="26" uuid="571a74a2-6240-4e55-be63-14f507283a54">
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>
