@@ -163,6 +163,25 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `Calibration_procedure_1`, `Calibration_procedure_2` | ➖ | sprachabhängig | Textbausteine zu den angewendeten Verfahren. |
 | `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrensanweisung bzw. QMS-Dokument. |
 
+### Abschnittsumschalter (ShowGroup1...)
+
+Alle Abschnitts-Parameter sind Booleans (Default: `true`) und können je nach Bedarf gesetzt werden, um einzelne Bereiche anzuzeigen bzw. auszublenden:
+
+* `ShowGroup1CalibrationItem` – Kalibriergegenstand / Unit under test
+* `ShowGroup1IncomingDate` – Datum der Anlieferung / Incoming Date
+* `ShowGroup1Condition` – Zustand bei Eingang/Ausgang
+* `ShowGroup1Spacer` – optionaler Abstand vor dem Verfahren
+* `ShowGroup1Procedure` – Kalibrierverfahren
+* `ShowGroup1ProcedureDocument` – Verfahrensanweisung / QMS-Dokument
+* `ShowGroup1MeasurementConditions` – Messbedingungen
+* `ShowGroup1CalibrationPlace` – Ort der Kalibrierung
+* `ShowGroup1EnvironmentalConditions` – Umgebungsbedingungen
+* `ShowGroup1StandardsTraceability` – Verwendete Normale / Rückführung
+* `ShowGroup1ResultsIntro` – Einleitung zu den Messergebnissen
+* `ShowGroup1Conformity` – Abschnitt „KONFORMITÄT / CONFORMITY“
+* `ShowGroup1AdditionalInformation` – Abschnitt „WEITERE HINWEISE / ADDITIONAL INFORMATION“
+* `ShowGroup1ResultsDetails` – Tabellenabschnitt „MESSERGEBNISSE / MEASUREMENTS RESULTS“
+
 **Unterberichte**
 
 * `Standard.jrxml`: erwartet `PrefixTable`, `Sprache`, `P_CTAG` (Default: `Deutsch`, Beispiel-CTAG) für die Tabelle der eingesetzten Normale.

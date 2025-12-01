@@ -173,6 +173,14 @@
                 <parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
         </parameter>
+        <parameter name="ShowGroup1Conformity" class="java.lang.Boolean">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1AdditionalInformation" class="java.lang.Boolean">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu weiteren Hinweisen.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+        </parameter>
         <parameter name="ShowGroup1ResultsDetails" class="java.lang.Boolean">
                 <parameterDescription><![CDATA[Steuert die Anzeige des Tabellenabschnitts zu den Messergebnissen.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
@@ -724,10 +732,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<reportElement x="0" y="10" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
 				</break>
 			</band>
-			<band height="74">
-				<textField>
-					<reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
-					<textElement verticalAlignment="Bottom">
+                        <band height="74">
+                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1Conformity} != null && !$P{ShowGroup1Conformity}.toString().trim().isEmpty() ? $P{ShowGroup1Conformity}.toString() : "true")]]></printWhenExpression>
+                                <textField>
+                                        <reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
+                                        <textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["KONFORMITÄT"]]></textFieldExpression>
@@ -773,10 +782,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 : $P{Conformity_description_2}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="54">
-				<textField>
-					<reportElement x="16" y="0" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
-					<textElement verticalAlignment="Bottom">
+                        <band height="54">
+                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1AdditionalInformation} != null && !$P{ShowGroup1AdditionalInformation}.toString().trim().isEmpty() ? $P{ShowGroup1AdditionalInformation}.toString() : "true")]]></printWhenExpression>
+                                <textField>
+                                        <reportElement x="16" y="0" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
+                                        <textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["WEITERE HINWEISE"]]></textFieldExpression>
