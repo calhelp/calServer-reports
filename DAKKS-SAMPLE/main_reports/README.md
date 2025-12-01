@@ -154,6 +154,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock; bei `MarkNumber1` wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
+| `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
 | `Cert_description`, `Cert_description_1` | ➖ | vordefiniert | Normativer Vorspann zur Rückführbarkeit und Verbreitung. |
 | `Asset_description` | ➖ | vordefiniert | Kurzbeschreibung des kalibrierten Messmittels. |
 | `Results_description` | ➖ | sprachabhängig | Hinweis auf Seitenverweise der Messergebnisse. |
@@ -185,7 +186,7 @@ Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`)
 **Unterberichte**
 
 * `Standard.jrxml`: erwartet `PrefixTable`, `Sprache`, `P_CTAG` (Default: `Deutsch`, Beispiel-CTAG) für die Tabelle der eingesetzten Normale.
-* `Results.jrxml`: erwartet `PrefixTable`, `P_CTAG`; optional `Debug` (`N`) für zusätzliche Protokolle.
+* `Results.jrxml`: erwartet `PrefixTable`, `P_CTAG`; optional `MeasurementDetails`, `ModernResultsHeader` (Standard: `"N"`) sowie `Debug` (`N`) für zusätzliche Protokolle.
 
 ### Typische Anpassungen
 
