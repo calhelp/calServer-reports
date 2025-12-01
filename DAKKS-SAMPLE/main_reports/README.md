@@ -57,6 +57,10 @@ Unterberichte für Normale und Messergebnisse ein.
   auf Deutsch oder Englisch gesetzt.
 * **QR-Code & Bilder:** `QR_Code_Value` sowie `P_Image_Path` erlauben das
   Einbinden von QR-Codes und Logos (z. B. DAkkS-Logo in der Fußzeile).
+* **Unicode-Schrift:** Der Report nutzt die von JasperStarter mitgelieferten
+  **DejaVu-Schriften** mit Identity-H-Encoding, sodass Umlaute und Sonderzeichen
+  ohne eingebettete TTF-Datei erhalten bleiben. Zusätzliche Fonts lassen sich bei
+  Bedarf als Font-Extension-JAR (z. B. im JDBC-Verzeichnis) nachrüsten.
 * **Beschreibungstexte:** Parameter wie `Cert_description_1` oder
   `Measurements_description_1` enthalten bereits abgestimmte Formulierungen und
   können pro Kunde / Messmittel angepasst werden.
