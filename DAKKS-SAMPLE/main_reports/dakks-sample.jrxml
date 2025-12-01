@@ -386,7 +386,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<groupHeader>
                         <band height="58">
                                 <property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1CalibrationItem} != null ? $P{ShowGroup1CalibrationItem}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1CalibrationItem}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="0" width="164" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
@@ -420,7 +420,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="48">
                                 <property name="com.calserver.bandLabel" value="Datum der Anlieferung"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1IncomingDate} != null ? $P{ShowGroup1IncomingDate}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1IncomingDate}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="6" width="184" height="20" uuid="caa4ddc8-a908-4edd-84e1-6e28ae3dce41"/>
 					<textElement verticalAlignment="Bottom">
@@ -445,7 +445,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="56">
                                 <property name="com.calserver.bandLabel" value="Zustand Eingang/Ausgang"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1Condition} != null ? $P{ShowGroup1Condition}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1Condition}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="8" width="228" height="20" uuid="2a9b8f77-21df-46c6-8550-0dbfc6c5bbe9"/>
 					<textElement verticalAlignment="Bottom">
@@ -470,11 +470,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="0">
                                 <property name="com.calserver.bandLabel" value="Zwischenraum"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1Spacer} != null ? $P{ShowGroup1Spacer}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1Spacer}).trim().toLowerCase())]]></printWhenExpression>
                         </band>
                         <band height="72">
                                 <property name="com.calserver.bandLabel" value="Kalibrierverfahren"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1Procedure} != null ? $P{ShowGroup1Procedure}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1Procedure}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="164" height="20" uuid="6d5d544f-d505-4b79-9d74-593d66a90c4d"/>
 					<textElement verticalAlignment="Bottom">
@@ -508,7 +508,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="62">
                                 <property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1ProcedureDocument} != null ? $P{ShowGroup1ProcedureDocument}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1ProcedureDocument}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="179" height="20" uuid="23a91972-c2d9-4e9d-97d8-4c707f2e3716"/>
 					<textElement verticalAlignment="Bottom">
@@ -533,7 +533,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="62">
                                 <property name="com.calserver.bandLabel" value="Messbedingungen"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1MeasurementConditions} != null ? $P{ShowGroup1MeasurementConditions}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1MeasurementConditions}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="4" width="148" height="20" uuid="d065e56b-4659-4e10-9f22-abf7d29ea9f2"/>
 					<textElement verticalAlignment="Bottom">
@@ -558,7 +558,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="54">
                                 <property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1CalibrationPlace} != null ? $P{ShowGroup1CalibrationPlace}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1CalibrationPlace}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="7" width="167" height="20" uuid="e7ec25f5-e842-4f1c-8025-580b36acff9c"/>
 					<textElement verticalAlignment="Bottom">
@@ -583,7 +583,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="75">
                                 <property name="com.calserver.bandLabel" value="Umgebungsbedingungen"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1EnvironmentalConditions} != null ? $P{ShowGroup1EnvironmentalConditions}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1EnvironmentalConditions}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="5" width="188" height="20" uuid="9bdc7711-a3da-4bad-8519-56f15638c2da"/>
 					<textElement verticalAlignment="Bottom">
@@ -629,7 +629,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="49">
                                 <property name="com.calserver.bandLabel" value="Verwendete Normale"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1StandardsTraceability} != null ? $P{ShowGroup1StandardsTraceability}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1StandardsTraceability}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="1" width="284" height="20" uuid="706a0561-44a9-4723-9717-b15d00e4b1e2"/>
 					<textElement verticalAlignment="Middle">
@@ -663,7 +663,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="135" splitType="Stretch">
                                 <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1ResultsIntro} != null ? $P{ShowGroup1ResultsIntro}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1ResultsIntro}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
 					<textElement verticalAlignment="Bottom">
@@ -803,7 +803,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</band>
                         <band height="132" splitType="Prevent">
                                 <property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-                                <printWhenExpression><![CDATA[Boolean.valueOf($P{ShowGroup1ResultsDetails} != null ? $P{ShowGroup1ResultsDetails}.toString() : "true")]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("false","0").contains(String.valueOf($P{ShowGroup1ResultsDetails}).trim().toLowerCase())]]></printWhenExpression>
                                 <textField>
                                         <reportElement x="16" y="26" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
 					<textElement verticalAlignment="Bottom">
