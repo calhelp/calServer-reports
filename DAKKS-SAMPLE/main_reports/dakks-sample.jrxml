@@ -991,7 +991,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? "Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\nFür die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\nDie den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."
     : $P{Cert_description}
   ).replace("_s_", " ").replace("_n_", "\n")
-).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
+).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="16" y="618" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
@@ -1004,7 +1004,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? "Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit."
     : $P{Cert_description_1}
   ).replace("_s_", " ").replace("_n_", "\n")
-).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß")]]></textFieldExpression>
+).replace("_00E4_","ä").replace("_00F6_","ö").replace("_00FC_","ü").replace("_00C4_","Ä").replace("_00D6_","Ö").replace("_00DC_","Ü").replace("_00DF_","ß").replace("ﬁ", "fi").replace("ﬂ", "fl")]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="16" y="660" width="535" height="1" uuid="7180f2cc-b318-42fe-8297-222a27072378"/>
