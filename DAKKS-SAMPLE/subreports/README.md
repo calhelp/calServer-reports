@@ -2,7 +2,7 @@
 
 Der Hauptbericht `dakks-sample.jrxml` bindet zwei Unterberichte ein. Beide
 verwenden die gleiche Datenbankverbindung wie der Hauptreport und erwarten die
-Parameter `PrefixTable`, `Sprache` und `P_CTAG`. `Results.jasper` erhält
+Parameter `PrefixTable`, `Sprache` und `P_CTAG`. `Results.jrxml` erhält
 zusätzlich `P_Image_Path`, um Grafiken oder Symbole anzuzeigen.
 
 ---
@@ -58,7 +58,8 @@ zusätzlich `P_Image_Path`, um Grafiken oder Symbole anzuzeigen.
 
 ## Integration & Pflege
 
-* Unterberichte müssen vor dem Einsatz kompiliert vorliegen (`*.jasper`).
+* Unterberichte werden direkt aus den `.jrxml`-Dateien geladen; JasperReports
+  kompiliert sie zur Laufzeit, wenn sie nicht als `.jasper` vorliegen.
 * Struktur oder Parameteränderungen sollten sowohl im Haupt- als auch im
   jeweiligen Unterreport gepflegt werden.
 * Durch die konsequente Nutzung von `PrefixTable` lassen sich die Reports in

@@ -48,8 +48,8 @@ Unterberichte für Normale und Messergebnisse ein.
   Messunsicherheit, Konformität und Zusatzinformationen, um DAkkS-Anforderungen
   zu erfüllen.
 * **Unterberichte** – Abschnitt „Eingesetzte Normale“ (Subreport
-  `Standard.jasper`) und die mehrseitige Ergebnisdokumentation (Subreport
-  `Results.jasper`).
+  `Standard.jrxml`) und die mehrseitige Ergebnisdokumentation (Subreport
+  `Results.jrxml`).
 
 ### Hinweise für den Alltag
 
@@ -74,7 +74,7 @@ Unterberichte für Normale und Messergebnisse ein.
 ### Messwert-Frames im Results-Unterbericht
 
 Der Parameter `MeasurementDetails` (String, Default: `"1"`) steuert vier
-alternative Messwert-Layouts im Subreport `Results.jasper`. Alle Varianten
+alternative Messwert-Layouts im Subreport `Results.jrxml`. Alle Varianten
 werden nur gedruckt, wenn Messdaten vorhanden sind (`HasMeasurementData`):
 
 * Leere oder nicht-numerische Eingaben werden automatisch als `1` behandelt,
@@ -133,9 +133,9 @@ WHERE  c.CTAG = $P{P_CTAG};
 
 ### Subreports & Ressourcen
 
-* **`subreports/Standard.jasper`** – listet die eingesetzten Normale inklusive
+* **`subreports/Standard.jrxml`** – listet die eingesetzten Normale inklusive
   Inventarnummer, Hersteller, Typ und Kalibrierstatus.
-* **`subreports/Results.jasper`** – erstellt die tabellarische
+* **`subreports/Results.jrxml`** – erstellt die tabellarische
   Messergebnis-Dokumentation mit Toleranzen, Messunsicherheit und Symbolik.
 * Beide Unterberichte benötigen dieselben Parameter (`PrefixTable`, `Sprache`,
   `P_CTAG`, optional `P_Image_Path`) und denselben Datenbank-Connection-Context.
@@ -145,7 +145,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | Parameter | Pflicht | Standardwert | Zweck |
 | --- | --- | --- | --- |
 | `P_CTAG` | ✅ | leer | Schlüssel der Kalibrierung, steuert alle Haupt- und Unterberichte. |
-| `Reportpath` | ✅ | `""` | Basisverzeichnis für Unterberichte (`.../DAKKS-SAMPLE`) inkl. kompilierten `.jasper`-Dateien. |
+| `Reportpath` | ✅ | `""` | Basisverzeichnis für Unterberichte (`.../DAKKS-SAMPLE`) mit den `.jrxml`-Dateien für Haupt- und Unterberichte. |
 | `PrefixTable` | ➖ | `""` | Tabellenpräfix für mandantenfähige Installationen (z. B. `cal_`). |
 | `Sprache` | ➖ | `Deutsch` | Sprache der Labels und Textbausteine (`Deutsch` / `Englisch`). |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
@@ -205,7 +205,8 @@ Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`)
 * **Leere Ausgabe?** – prüfen, ob `P_CTAG` auf eine vorhandene Kalibrierung
   zeigt und ob der angemeldete Benutzer Zugriff auf die Tabellen hat.
 * **Unterberichte fehlen:** sicherstellen, dass `Reportpath` auf den Ordner mit
-  den kompilierten `.jasper`-Dateien zeigt.
+  den `.jrxml`-Dateien zeigt (JasperReports kompiliert sie zur Laufzeit, falls
+  keine `.jasper`-Dateien bereitliegen).
 * **Falsche Sprache:** der Parameterwert muss exakt `Deutsch` oder `Englisch`
   lauten; ansonsten greift der deutsche Default.
 * **Zertifikatsnummer fehlt:** optionalen Text über `Cert_field` setzen oder den
