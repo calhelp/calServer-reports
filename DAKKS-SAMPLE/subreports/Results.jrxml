@@ -1817,7 +1817,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -1914,7 +1914,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -2011,7 +2011,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -2092,7 +2092,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -2172,7 +2172,7 @@
 					<textFieldExpression><![CDATA[($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
