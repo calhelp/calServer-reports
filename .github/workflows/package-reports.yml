@@ -132,7 +132,7 @@ jobs:
           HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
           HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
         run: |
-          REPORT_URL="https://${DOMAIN}/api/report/cd5797da-e7a9-0bc6-fc73-dedc595bd59b"
+          REPORT_URL="https://${DOMAIN}/api/report/20f5a9a6-294d-71e5-36f1-c81bea82a615"
           QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
           QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
