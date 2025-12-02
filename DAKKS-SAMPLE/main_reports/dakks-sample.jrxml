@@ -142,10 +142,14 @@ $P{Sprache}.equals("Deutsch")
 		<parameterDescription><![CDATA[Dateipfad für eingebundene Logos, Siegel oder QR-Grafiken.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ExpUncType" class="java.lang.String">
-		<parameterDescription><![CDATA[Freitext für alternative Darstellung der erweiterten Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
+        <parameter name="ExpUncType" class="java.lang.String">
+                <parameterDescription><![CDATA[Freitext für alternative Darstellung der erweiterten Messunsicherheit.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ReportBuildDate" class="java.util.Date">
+                <parameterDescription><![CDATA[Builddatum des Reports, das in der Titelsektion angezeigt wird.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+        </parameter>
 	<parameter name="ReportVersion" class="java.lang.String">
 		<parameterDescription><![CDATA[Versionsstring des Reports, der im Titel angezeigt wird.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
@@ -897,22 +901,29 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		<band height="755" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<componentElement>
-				<reportElement mode="Transparent" x="440" y="237" width="47" height="47" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="458d3628-6bfd-46c0-89be-0bc6a5f1eae9"/>
-				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<jr:codeExpression><![CDATA[($P{QR_Code_Value} == null || $P{QR_Code_Value}.trim().isEmpty()) ? "" : $P{QR_Code_Value}]]></jr:codeExpression>
-				</jr:QRCode>
-			</componentElement>
-			<textField>
-				<reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="09fbdd07-84e0-421a-8062-48071b34af67"/>
-				<textElement>
-					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>
-			</line>
+                        <componentElement>
+                                <reportElement mode="Transparent" x="440" y="237" width="47" height="47" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="458d3628-6bfd-46c0-89be-0bc6a5f1eae9"/>
+                                <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                                        <jr:codeExpression><![CDATA[($P{QR_Code_Value} == null || $P{QR_Code_Value}.trim().isEmpty()) ? "" : $P{QR_Code_Value}]]></jr:codeExpression>
+                                </jr:QRCode>
+                        </componentElement>
+                        <textField>
+                                <reportElement x="0" y="0" width="100" height="10" forecolor="#808080" uuid="09fbdd07-84e0-421a-8062-48071b34af67"/>
+                                <textElement>
+                                        <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
+                        </textField>
+                        <textField isBlankWhenNull="true">
+                                <reportElement x="351" y="0" width="200" height="10" forecolor="#808080" uuid="5b5df42c-1e50-4dba-bd78-d7153ae25bda"/>
+                                <textElement textAlignment="Right">
+                                        <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$P{ReportBuildDate} == null ? "" : "Builddatum: " + new java.text.SimpleDateFormat("yyyy-MM-dd").format($P{ReportBuildDate})]]></textFieldExpression>
+                        </textField>
+                        <line>
+                                <reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>
+                        </line>
 			<staticText>
 				<reportElement x="16" y="356" width="180" height="14" uuid="61dea76f-0ff0-400d-92a0-1cf4757c98e3"/>
 				<textElement verticalAlignment="Middle">
