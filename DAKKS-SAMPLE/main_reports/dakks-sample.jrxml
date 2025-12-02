@@ -374,15 +374,17 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                 : $P{Calibration_procedure_1}
         )]]></variableExpression>
 	</variable>
-	<variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
+        <variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
         ? $F{calibration_method}
         : (
             ($P{Calibration_document} == null || $P{Calibration_document}.trim().isEmpty())
-                ? ($P{Sprache}.equals("Deutsch") ? "--")
+                ? ($P{Sprache}.equals("Deutsch")
+                        ? "Verfahrensanweisung nicht angegeben"
+                        : "Procedure document not provided")
                 : $P{Calibration_document}
         )]]></variableExpression>
-	</variable>
+        </variable>
 	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
   ? ($P{Sprache}.equals("Deutsch") ? "im permanenten Labor" : "in the permanent laboratory")
