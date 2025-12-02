@@ -53,8 +53,11 @@ Unterberichte für Normale und Messergebnisse ein.
 
 ### Hinweise für den Alltag
 
-* **Sprachwechsel:** Über `Sprache` werden alle Labels und Absätze automatisch
-  auf Deutsch oder Englisch gesetzt.
+* **Sprachwechsel & Textblöcke:** Über `Sprache` werden alle Labels und Absätze
+  automatisch auf Deutsch oder Englisch gesetzt. Die JRXML-Datei enthält die
+  vollständigen Standardformulierungen inline, sodass keine externe
+  `messages.properties` mehr notwendig ist und Sonderzeichen unverfälscht
+  erhalten bleiben.
 * **QR-Code & Bilder:** `QR_Code_Value` sowie `P_Image_Path` erlauben das
   Einbinden von QR-Codes und Logos (z. B. DAkkS-Logo in der Fußzeile).
 * **Unicode-Schrift:** Der Report nutzt die von JasperStarter mitgelieferten
@@ -201,8 +204,9 @@ Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`)
 
 ### Typische Anpassungen
 
-* **Weitere Sprachen** – zusätzliche Locale-Logik über `Sprache` und
-  `resourceBundles` ergänzen.
+* **Weitere Sprachen** – zusätzliche Locale-Logik über `Sprache` ergänzen; die
+  eingebetteten Default-Texte lassen sich bei Bedarf durch eigene Parameter-
+  Werte oder optionale `resourceBundles` überschreiben.
 * **Kundenspezifische Logos** – Bildplatzhalter mit `P_Image_Path` befüllen
   oder eigene Bildkomponenten einfügen.
 * **Erweiterte Datenfelder** – zusätzliche Felder via `LEFT JOIN` in der
