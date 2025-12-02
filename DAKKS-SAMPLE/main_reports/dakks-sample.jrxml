@@ -36,16 +36,14 @@
 		<parameterDescription><![CDATA[Schaltet den modernen Tabellenkopf im Results-Unterbericht ein (Y/N).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Cert_description" class="java.lang.String">
-		<parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[
-"Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.
-" +
-"Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.
-" +
+        <parameter name="Cert_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[
+"Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine." +
+"Für die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich." +
 "Die den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."
 ]]></defaultValueExpression>
-	</parameter>
+        </parameter>
 	<parameter name="Cert_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Hinweis zur zulässigen Weitergabe des Kalibrierscheins.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[
