@@ -71,7 +71,7 @@ jobs:
             local rsync_excludes=()
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
-              rsync_excludes+=(--exclude='config/**')
+              rsync_excludes+=(--exclude='config/**' --exclude='messages.properties')
             fi
 
             rm -rf "${stage_dir}"
