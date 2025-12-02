@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-sample" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-sample" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isTitleNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Blank" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
         <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
         <property name="com.jaspersoft.studio.unit." value="pixel"/>
         <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -8,10 +8,10 @@
         <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
         <property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
         <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-	<parameter name="Reportpath" class="java.lang.String">
-		<parameterDescription><![CDATA[Pfad zum gemeinsamen Report-Verzeichnis; wird für Subreports und Assets genutzt.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
+        <parameter name="Reportpath" class="java.lang.String">
+                <parameterDescription><![CDATA[Pfad zum gemeinsamen Report-Verzeichnis; wird für Subreports und Assets genutzt.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["DAKKS-SAMPLE"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionales Tabellenpräfix (z. B. cal_), um mandantenfähige Datenbank-Schemata anzusprechen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -701,7 +701,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+                                    <subreportExpression><![CDATA[
+java.nio.file.Paths.get(
+        ($P{Reportpath} == null || $P{Reportpath}.trim().isEmpty()) ? "DAKKS-SAMPLE" : $P{Reportpath}.trim(),
+        "subreports",
+        "Standard.jasper"
+).toString()
+                                    ]]></subreportExpression>
 				</subreport>
 			</band>
 			<band height="135" splitType="Stretch">
@@ -891,7 +897,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+                                    <subreportExpression><![CDATA[
+java.nio.file.Paths.get(
+        ($P{Reportpath} == null || $P{Reportpath}.trim().isEmpty()) ? "DAKKS-SAMPLE" : $P{Reportpath}.trim(),
+        "subreports",
+        "Results.jasper"
+).toString()
+                                    ]]></subreportExpression>
 				</subreport>
 				<break>
 					<reportElement x="0" y="13" width="100" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
