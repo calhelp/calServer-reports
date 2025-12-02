@@ -1254,13 +1254,12 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</textField>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="88" splitType="Prevent">
-			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
-			<line>
-				<reportElement x="492" y="7" width="57" height="1" uuid="531f85e8-3ca4-4b8f-b75c-e5133a718333">
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<pageHeader>
+<band height="88" splitType="Prevent">
+<line>
+<reportElement x="492" y="7" width="57" height="1" uuid="531f85e8-3ca4-4b8f-b75c-e5133a718333">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 			</line>
