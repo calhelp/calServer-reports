@@ -731,16 +731,18 @@ java.nio.file.Paths.get(
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[msg(
-  ( $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
-    ? ( $P{Sprache}.equals("Deutsch")
+                                        <textFieldExpression><![CDATA[(
+  (
+    $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
+    ? (
+        $P{Sprache}.equals("Deutsch")
         ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
-        : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included.")
+        : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
+      )
     : $P{Results_description}
-  ),
-  $V{PAGE_NUMBER} + 1
-)]]></textFieldExpression>
-				</textField>
+  )
+).replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
+                                </textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
 					<textElement>
