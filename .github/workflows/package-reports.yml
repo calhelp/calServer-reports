@@ -68,6 +68,11 @@ jobs:
             local sample="$1"
             local zip_name="$2"
             local stage_dir="staging/${zip_name}"
+            local rsync_excludes=()
+
+            if [ "$sample" = "DAKKS-SAMPLE" ]; then
+              rsync_excludes+=(--exclude='config/**')
+            fi
 
             rm -rf "${stage_dir}"
             mkdir -p "${stage_dir}"
@@ -75,7 +80,7 @@ jobs:
 
             for folder in main_reports subreports; do
               if [ -d "${sample}/${folder}" ]; then
-                rsync -av \
+                rsync -av "${rsync_excludes[@]}" \
                   --include='*/' \
                   --include='*.jrxml' \
                   --exclude='*' \
