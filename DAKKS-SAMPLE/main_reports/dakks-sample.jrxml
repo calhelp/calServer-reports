@@ -803,7 +803,15 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<textFieldExpression><![CDATA[(
-  ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
+  (
+    $P{Conformity_description_2} == null
+    || $P{Conformity_description_2}.trim().isEmpty()
+    || $P{Conformity_description_2}
+        .replace("/n", "\\n")
+        .replace("\\\\n", "\\n")
+        .replace("\r", "")
+        .matches("(?s)^\\s*\\?\\s*!\\?\\s*!\\s*\\*\\s*$")
+  )
     ? ""
     : $P{Conformity_description_2}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
