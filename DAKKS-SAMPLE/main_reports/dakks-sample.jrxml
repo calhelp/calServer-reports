@@ -1367,7 +1367,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="27" splitType="Stretch">
+		<band height="53" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 		</band>
 	</pageFooter>
