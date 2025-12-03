@@ -502,7 +502,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<property name="com.calserver.bandLabel" value="Zwischenraum"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1Spacer} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Spacer} == null ? "Y" : $P{ShowGroup1Spacer}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 			</band>
-			<band height="72">
+			<band height="84">
 				<property name="com.calserver.bandLabel" value="Kalibrierverfahren"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1Procedure} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Procedure} == null ? "Y" : $P{ShowGroup1Procedure}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 				<textField>
@@ -529,6 +529,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? $F{C2320}   // bei leer: Feld verwenden
     : $V{procedure_description_var}
 )]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="16" y="70" width="536" height="12" uuid="ec9363f9-104c-498b-a677-9d12b86cb8ce"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{C2320}]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="62">
@@ -1254,13 +1261,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textElement>
 				<text><![CDATA[Person in charge]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="115" y="-1" width="323" height="12" uuid="ec9363f9-104c-498b-a677-9d12b86cb8ce"/>
-				<textElement>
-					<font size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{C2320}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -1328,7 +1328,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA["Seite  "  + $V{PAGE_NUMBER}  + " von  "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="71" y="8" width="53" height="17" uuid="dba679af-4d66-47cc-b5c2-1c8eeb980f2b"/>
+				<reportElement x="76" y="8" width="53" height="17" uuid="dba679af-4d66-47cc-b5c2-1c8eeb980f2b"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -1342,7 +1342,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
   + " of  "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="67" y="26" width="53" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
+				<reportElement x="62" y="26" width="53" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
@@ -1365,7 +1365,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="53" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 		</band>
 	</pageFooter>
