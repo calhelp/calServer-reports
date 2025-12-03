@@ -144,8 +144,8 @@ $P{Sprache}.equals("Deutsch")
                 <parameterDescription><![CDATA[Freitext für alternative Darstellung der erweiterten Messunsicherheit.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
-        <parameter name="ReportBuildDate" class="java.util.Date">
-                <parameterDescription><![CDATA[Builddatum des Reports, das in der Titelsektion angezeigt wird.]]></parameterDescription>
+        <parameter name="ReportBuildDate" class="java.lang.Object">
+                <parameterDescription><![CDATA[Builddatum des Reports (Date-Objekt oder ISO-String), das in der Titelsektion angezeigt wird.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
         </parameter>
 	<parameter name="ReportVersion" class="java.lang.String">
@@ -921,7 +921,15 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                 <textElement textAlignment="Right">
                                         <font fontName="SansSerif" size="8" pdfFontName="SansSerif" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                 </textElement>
-                                <textFieldExpression><![CDATA[$P{ReportBuildDate} == null ? "" : "Builddatum: " + new java.text.SimpleDateFormat("yyyy-MM-dd").format($P{ReportBuildDate})]]></textFieldExpression>
+                        <textFieldExpression><![CDATA[
+$P{ReportBuildDate} == null || $P{ReportBuildDate}.toString().trim().isEmpty()
+? ""
+: (
+        $P{ReportBuildDate} instanceof java.util.Date
+        ? "Builddatum: " + new java.text.SimpleDateFormat("yyyy-MM-dd").format((java.util.Date) $P{ReportBuildDate})
+        : "Builddatum: " + $P{ReportBuildDate}.toString()
+)
+]]></textFieldExpression>
                         </textField>
                         <line>
                                 <reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>
