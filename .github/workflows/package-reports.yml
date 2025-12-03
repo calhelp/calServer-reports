@@ -58,7 +58,7 @@ jobs:
           echo "📂 Inhalt von INVENTORY-SAMPLE:"
           find INVENTORY-SAMPLE
 
-      - name: Create ZIPs of all folders (JRXML only)
+      - name: Create ZIPs of all folders (JRXML, plus properties/MD for DAKKS)
         run: |
           set -euo pipefail
 
@@ -69,29 +69,38 @@ jobs:
             local zip_name="$2"
             local stage_dir="staging/${zip_name}"
             local rsync_excludes=()
+            local allowed_patterns=('*.jrxml')
+            local include_args=(--include='*/')
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
-              rsync_excludes+=(--exclude='config/**' --exclude='messages.properties')
+              rsync_excludes+=(--exclude='config/**')
+              allowed_patterns+=('*.properties' '*.md')
             fi
 
             rm -rf "${stage_dir}"
             mkdir -p "${stage_dir}"
             mkdir -p "${stage_dir}/main_reports" "${stage_dir}/subreports"
 
+            for pattern in "${allowed_patterns[@]}"; do
+              include_args+=(--include="$pattern")
+            done
+            include_args+=(--exclude='*')
+
             for folder in main_reports subreports; do
               if [ -d "${sample}/${folder}" ]; then
-                rsync -av "${rsync_excludes[@]}" \
-                  --include='*/' \
-                  --include='*.jrxml' \
-                  --exclude='*' \
+                rsync -av "${rsync_excludes[@]}" "${include_args[@]}" \
                   "${sample}/${folder}/" "${stage_dir}/${folder}/"
               fi
             done
 
-            # Falls trotz Filter noch andere Dateien vorhanden sind (z. B. README.md),
-            # werden sie vorsorglich entfernt, damit die ZIP-Archive ausschliesslich
-            # JRXML-Dateien enthalten.
-            find "${stage_dir}" -type f ! -name '*.jrxml' -delete
+            # Nicht erlaubte Dateien entfernen, damit nur die gewünschten Typen
+            # (JRXML und ggf. Properties/Markdown) enthalten bleiben.
+            local allowed_conditions=()
+            for pattern in "${allowed_patterns[@]}"; do
+              allowed_conditions+=(-name "$pattern" -o)
+            done
+            unset 'allowed_conditions[${#allowed_conditions[@]}-1]'
+            find "${stage_dir}" -type f ! \( "${allowed_conditions[@]}" \) -delete
 
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
               echo "❌ No JRXML files found in ${sample}" >&2
