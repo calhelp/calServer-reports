@@ -304,9 +304,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
         <variable name="Page_text" class="java.lang.String" resetType="None">
                 <variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Seite  " : "Page  ") + ($V{PAGE_NUMBER} + 1)]]></variableExpression>
         </variable>
-        <variable name="TotalPages" class="java.lang.Integer" resetType="Report" calculation="Highest">
-                <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
-        </variable>
         <variable name="Cert_calibration" class="java.lang.String" resetType="None">
                 <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein Nr." : "Calibration Certificate Nr."]]></variableExpression>
         </variable>
@@ -1361,17 +1358,21 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</graphicElement>
 			</line>
                         <textField>
-                                <reportElement x="16" y="8" width="314" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
+                                <reportElement x="16" y="8" width="200" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
                                 <textElement textAlignment="Left"/>
                                 <textFieldExpression><![CDATA[
   "Seite  "
   + $V{PAGE_NUMBER}
   + " von  "
-  + ($V{TotalPages} == null ? $V{PAGE_NUMBER} : $V{TotalPages})
 ]]></textFieldExpression>
                         </textField>
+                        <textField evaluationTime="Report">
+                                <reportElement x="216" y="8" width="90" height="17" uuid="dba679af-4d66-47cc-b5c2-1c8eeb980f2b"/>
+                                <textElement textAlignment="Left"/>
+                                <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+                        </textField>
                         <textField>
-                                <reportElement x="16" y="26" width="314" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
+                                <reportElement x="16" y="26" width="200" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
                                 <textElement textAlignment="Left">
                                         <font size="8" isItalic="true"/>
                                 </textElement>
@@ -1379,8 +1380,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
   "Page  "
   + $V{PAGE_NUMBER}
   + " of  "
-  + ($V{TotalPages} == null ? $V{PAGE_NUMBER} : $V{TotalPages})
 ]]></textFieldExpression>
+                        </textField>
+                        <textField evaluationTime="Report">
+                                <reportElement x="216" y="26" width="90" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
+                                <textElement textAlignment="Left">
+                                        <font size="8" isItalic="true"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
                         </textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="495" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
