@@ -172,10 +172,14 @@ $P{Sprache}.equals("Deutsch")
                 <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Zustand bei Eingang/Ausgang.]]></parameterDescription>
                 <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
         </parameter>
+        <parameter name="Condition_override" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionaler Freitext, der den Zustandstext bei Eingang/Ausgang überschreibt.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
         <parameter name="ShowGroup1Spacer" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert den optionalen Zwischenabstand innerhalb des Group-Headers.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
+                <parameterDescription><![CDATA[Steuert den optionalen Zwischenabstand innerhalb des Group-Headers.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="ShowGroup1Procedure" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibrierverfahren.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -509,12 +513,18 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="30" width="534" height="20" uuid="ab632ba7-a281-4727-8c0e-68902a8b15d0"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{Foundleft}]]></textFieldExpression>
-				</textField>
-			</band>
+                                        <textElement verticalAlignment="Middle">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[
+(
+  $P{Condition_override} != null && !$P{Condition_override}.trim().isEmpty()
+    ? $P{Condition_override}
+    : $V{Foundleft}
+)
+]]></textFieldExpression>
+                                </textField>
+                        </band>
 			<band>
 				<property name="com.calserver.bandLabel" value="Zwischenraum"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1Spacer} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Spacer} == null ? "Y" : $P{ShowGroup1Spacer}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
