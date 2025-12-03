@@ -53,8 +53,11 @@ Unterberichte für Normale und Messergebnisse ein.
 
 ### Hinweise für den Alltag
 
-* **Sprachwechsel:** Über `Sprache` werden alle Labels und Absätze automatisch
-  auf Deutsch oder Englisch gesetzt.
+* **Sprachwechsel & Textblöcke:** Über `Sprache` werden alle Labels und Absätze
+  automatisch auf Deutsch oder Englisch gesetzt. Die JRXML-Datei enthält die
+  vollständigen Standardformulierungen inline, sodass keine externe
+  `messages.properties` mehr notwendig ist und Sonderzeichen unverfälscht
+  erhalten bleiben.
 * **QR-Code & Bilder:** `QR_Code_Value` sowie `P_Image_Path` erlauben das
   Einbinden von QR-Codes und Logos (z. B. DAkkS-Logo in der Fußzeile).
 * **Unicode-Schrift:** Der Report nutzt die von JasperStarter mitgelieferten
@@ -149,12 +152,13 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `PrefixTable` | ➖ | `""` | Tabellenpräfix für mandantenfähige Installationen (z. B. `cal_`). |
 | `Sprache` | ➖ | `Deutsch` | Sprache der Labels und Textbausteine (`Deutsch` / `Englisch`). |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
+| `MeasurementDetails` | ➖ | `"1"` | Aktiviert eines der vier Frames im Results-Unterbericht (`1` = Standard; `2`/`3`/`4` siehe Abschnitt zu Messwert-Frames). |
+| `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
 | `Cert_field` | ➖ | `""` | Optionaler Text für die angezeigte Zertifikatsnummer; leer lassen für den Wert aus `C2396`. |
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock; bei `MarkNumber1` wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
-| `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
 | `Cert_description`, `Cert_description_1` | ➖ | vordefiniert | Normativer Vorspann zur Rückführbarkeit und Verbreitung. |
 | `Asset_description` | ➖ | vordefiniert | Kurzbeschreibung des kalibrierten Messmittels. |
 | `Results_description` | ➖ | sprachabhängig | Hinweis auf Seitenverweise der Messergebnisse. |
@@ -163,6 +167,16 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `Additional_information` | ➖ | sprachabhängig | Hinweise zur DAkkS-Anerkennung. |
 | `Calibration_procedure_1`, `Calibration_procedure_2` | ➖ | sprachabhängig | Textbausteine zu den angewendeten Verfahren. |
 | `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrensanweisung bzw. QMS-Dokument. |
+
+**Standardwerte aus der JRXML-Datei**
+
+* Bei fehlenden Eingaben greift immer die Default-Logik des Reports: leere Strings für Pfad-/Logo-/QR-Parameter, `Deutsch` für die
+  Sprachumschaltung und `"1"` für die Messwert-Frames.
+* `ModernResultsHeader` startet mit `"N"`; der traditionelle Tabellenkopf wird also beibehalten, bis `"Y"` gesetzt wird.
+* `MarkNumber1` (`123456`) und `MarkNumber2` (`D-K-\nYYYYY-ZZ-N`) liefern sofort druckbare Platzhalter, sodass der Report auch
+  ohne eigene DAkkS-Kennung testbar bleibt.
+* Alle Abschnittsumschalter (`ShowGroup1...`) stehen auf `"Y"` und blenden nur bei explizitem `"N"` einzelne Informationsblöcke
+  aus.
 
 ### Abschnittsumschalter (ShowGroup1...)
 
@@ -190,8 +204,9 @@ Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`)
 
 ### Typische Anpassungen
 
-* **Weitere Sprachen** – zusätzliche Locale-Logik über `Sprache` und
-  `resourceBundles` ergänzen.
+* **Weitere Sprachen** – zusätzliche Locale-Logik über `Sprache` ergänzen; die
+  eingebetteten Default-Texte lassen sich bei Bedarf durch eigene Parameter-
+  Werte oder optionale `resourceBundles` überschreiben.
 * **Kundenspezifische Logos** – Bildplatzhalter mit `P_Image_Path` befüllen
   oder eigene Bildkomponenten einfügen.
 * **Erweiterte Datenfelder** – zusätzliche Felder via `LEFT JOIN` in der
