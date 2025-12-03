@@ -49,7 +49,6 @@
       COALESCE(exp_uncert_iso_e,'')    AS exp_uncert_iso_e,
       COALESCE(exp_uncert_iso_p,'')    AS exp_uncert_iso_p,
       COALESCE(tol_err,'')             AS tol_err,
-      COALESCE(rel_err,'')             AS rel_err,
       COALESCE(error,'')               AS error,
       COALESCE(test_status,'')         AS test_status,
       COALESCE(fsc,'')                 AS Fsc,
@@ -85,8 +84,7 @@
 	<field name="exp_uncert_u" class="java.lang.String"/>
 	<field name="exp_uncert_iso_e" class="java.lang.String"/>
 	<field name="exp_uncert_iso_p" class="java.lang.String"/>
-        <field name="tol_err" class="java.lang.String"/>
-        <field name="rel_err" class="java.lang.String"/>
+	<field name="tol_err" class="java.lang.String"/>
         <field name="error" class="java.lang.String"/>
         <field name="test_status" class="java.lang.String"/>
         <field name="Fsc" class="java.lang.String"/>
@@ -150,21 +148,21 @@
           )
       ).replaceAll("(?i)ohm","Ω")]]></variableExpression>
         </variable>
-        <variable name="RoundedRelError" class="java.lang.String">
-                <variableExpression><![CDATA[($F{rel_err}==null || $F{rel_err}.trim().isEmpty())
+	<variable name="RoundedRelError" class="java.lang.String">
+		<variableExpression><![CDATA[($F{error}==null || $F{error}.trim().isEmpty())
  ? ""
  : (
-     $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+     $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
      ? new java.text.DecimalFormat("0.0",
          new java.text.DecimalFormatSymbols(java.util.Locale.US))
          .format(
            Double.parseDouble(
-             $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
+             $F{error}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
            )
          )
-     : $F{rel_err}
+     : $F{error}
    )]]></variableExpression>
-        </variable>
+	</variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
 		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
@@ -1792,7 +1790,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{error} == null ? "" : $F{error}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="410" y="0" width="65" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
@@ -1817,7 +1815,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -1885,7 +1883,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{error} == null ? "" : $F{error}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="410" y="0" width="65" height="14" uuid="b327d3a9-10b7-4b2c-acd3-efc946f5d590"/>
@@ -1914,7 +1912,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -1982,7 +1980,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$F{error} == null ? "" : $F{error}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="410" y="0" width="65" height="14" uuid="7e78e2a9-b21f-425f-9543-29346bf35cd9"/>
@@ -2011,7 +2009,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -2092,7 +2090,7 @@
               ($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
@@ -2172,7 +2170,7 @@
 					<textFieldExpression><![CDATA[($F{test_status}==null || $F{test_status}.trim().isEmpty())
               ? ""
               : (
-                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T." :
+                  $F{test_status}.trim().equalsIgnoreCase("pass")               ? "i.T" :
                   $F{test_status}.trim().equalsIgnoreCase("fail")               ? "!"  :
                   $F{test_status}.trim().equalsIgnoreCase("pass indeterminate") ? "?"  :
                   $F{test_status}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
