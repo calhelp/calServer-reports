@@ -160,15 +160,19 @@ $P{Sprache}.equals("Deutsch")
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ShowGroup1IncomingDate" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Datum der Anlieferung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ShowGroup1Condition" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Zustand bei Eingang/Ausgang.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ShowGroup1Spacer" class="java.lang.String">
+        <parameter name="ShowGroup1IncomingDate" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Datum der Anlieferung.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="IncomingDate_override" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionaler Freitext, der das Datum der Anlieferung überschreibt.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1Condition" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Zustand bei Eingang/Ausgang.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1Spacer" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert den optionalen Zwischenabstand innerhalb des Group-Headers.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
@@ -473,13 +477,19 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["INCOMING DATE"]]></textFieldExpression>
 				</textField>
                                 <textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement x="16" y="28" width="535" height="20" uuid="a4f739e8-2618-4e8f-95b3-e1a628b865e3"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-                                        <textFieldExpression><![CDATA[($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}]]></textFieldExpression>
+                                        <reportElement x="16" y="28" width="535" height="20" uuid="a4f739e8-2618-4e8f-95b3-e1a628b865e3"/>
+                                        <textElement verticalAlignment="Middle">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[
+(
+  $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+    ? $P{IncomingDate_override}
+    : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224})
+)
+]]></textFieldExpression>
                                 </textField>
-			</band>
+                        </band>
 			<band height="56">
 				<property name="com.calserver.bandLabel" value="Zustand Eingang/Ausgang"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1Condition} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Condition} == null ? "Y" : $P{ShowGroup1Condition}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
