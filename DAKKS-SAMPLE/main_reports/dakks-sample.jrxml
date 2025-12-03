@@ -366,8 +366,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
         ? $F{calibration_item}
         : ""]]></variableExpression>
 	</variable>
-	<variable name="procedure_description_var" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($F{procedure_description} != null && !$F{procedure_description}.trim().isEmpty())
+        <variable name="procedure_description_var" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[(
+    ($F{procedure_description} != null && !$F{procedure_description}.trim().isEmpty())
         ? $F{procedure_description}
         : (
             ($P{Calibration_procedure_1} == null || $P{Calibration_procedure_1}.trim().isEmpty())
@@ -377,10 +378,12 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                         : "Calibration was performed by comparing the values represented by the normal values with the display of the digital multimeter."
                 )
                 : $P{Calibration_procedure_1}
-        )]]></variableExpression>
-	</variable>
+        )
+).replace("/n", "\n").replace("\\n", "\n")]]></variableExpression>
+        </variable>
         <variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
+                <variableExpression><![CDATA[(
+    ($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
         ? $F{calibration_method}
         : (
             ($P{Calibration_document} == null || $P{Calibration_document}.trim().isEmpty())
@@ -388,7 +391,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                         ? "Verfahrensanweisung nicht angegeben"
                         : "Procedure document not provided")
                 : $P{Calibration_document}
-        )]]></variableExpression>
+        )
+).replace("/n", "\n").replace("\\n", "\n")]]></variableExpression>
         </variable>
 	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
@@ -400,8 +404,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
         ? $F{standards}
         : ""]]></variableExpression>
 	</variable>
-	<variable name="procedure_scope_var" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($F{scope} != null && !$F{scope}.trim().isEmpty())
+        <variable name="procedure_scope_var" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[(
+    ($F{scope} != null && !$F{scope}.trim().isEmpty())
         ? $F{scope}
         : (
             ($F{calibration_item} != null && !$F{calibration_item}.trim().isEmpty())
@@ -415,8 +420,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                 : $P{Calibration_procedure_2}
                         )
                 )
-        )]]></variableExpression>
-	</variable>
+        )
+).replace("/n", "\n").replace("\\n", "\n")]]></variableExpression>
+        </variable>
 	<variable name="Group_header_1h_1" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></variableExpression>
 	</variable>
@@ -454,18 +460,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement textAlignment="Left">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
   ($V{procedure_calibration_item_var} == null || $V{procedure_calibration_item_var}.trim().isEmpty())
     ? $P{Asset_description}    // bei leer: Parameter nutzen
     : $V{procedure_calibration_item_var}
-)
-
-
-
-
-]]></textFieldExpression>
-				</textField>
-			</band>
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                                </textField>
+                        </band>
 			<band height="48">
 				<property name="com.calserver.bandLabel" value="Datum der Anlieferung"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1IncomingDate} == null || !"N".equalsIgnoreCase((($P{ShowGroup1IncomingDate} == null ? "Y" : $P{ShowGroup1IncomingDate}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
@@ -493,7 +494,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
   $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
     ? $P{IncomingDate_override}
     : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224})
-)
+).replace("/n", "\n").replace("\\n", "\n")
 ]]></textFieldExpression>
                                 </textField>
                         </band>
@@ -524,7 +525,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
   $P{Condition_override} != null && !$P{Condition_override}.trim().isEmpty()
     ? $P{Condition_override}
     : $V{Foundleft}
-)
+).replace("/n", "\n").replace("\\n", "\n")
 ]]></textFieldExpression>
                                 </textField>
                         </band>
@@ -754,7 +755,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
       )
     : $P{Results_description}
   )
-).replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
+).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
                                 </textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
@@ -762,12 +763,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Measurements_description} == null || $P{Measurements_description}.trim().isEmpty() )
-? ( $P{Sprache}.equals("Deutsch")
-    ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
-    : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
-  )
-: $P{Measurements_description}]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Measurements_description} == null || $P{Measurements_description}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
+        : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
+      )
+    : $P{Measurements_description}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" x="16" y="103" width="535" height="24" uuid="0ec19fbc-5096-4311-845b-271f6bb617c7"/>
@@ -775,12 +778,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Measurements_description_1} == null || $P{Measurements_description_1}.trim().isEmpty() )
-? ( $P{Sprache}.equals("Deutsch")
-    ? "Die Messunsicherheiten wurden mit der Software ‚GUM-Workbench' abgeschätzt, die Ergebnisse werden dokumentiert."
-    : "The calculations of uncertainty were performed using the software ‚GUM-Workbench‘, the results are documented."
-  )
-: $P{Measurements_description_1}]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Measurements_description_1} == null || $P{Measurements_description_1}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Die Messunsicherheiten wurden mit der Software ‚GUM-Workbench' abgeschätzt, die Ergebnisse werden dokumentiert."
+        : "The calculations of uncertainty were performed using the software ‚GUM-Workbench‘, the results are documented."
+      )
+    : $P{Measurements_description_1}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 				<break>
 					<reportElement x="0" y="10" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
@@ -807,33 +812,39 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
-? ( $P{Sprache}.equals("Deutsch")
-    ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
-    : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"
-  )
-: $P{Conformity_description_1}]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
+        : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"
+      )
+    : $P{Conformity_description_1}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="50" y="48" width="501" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
-? ( $P{Sprache}.equals("Deutsch")
-    ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
-    : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
-  )
-: $P{Conformity_description_3}]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
+        : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
+      )
+    : $P{Conformity_description_3}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="16" y="48" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
-? "?\n\n\n!?\n\n\n!\n\n*"
-: $P{Conformity_description_2}]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
+    ? "?\n\n\n!?\n\n\n!\n\n*"
+    : $P{Conformity_description_2}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
                         <band height="54">
@@ -870,14 +881,16 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $P{Additional_information} == null || $P{Additional_information}.trim().isEmpty() )
-? ( $P{Sprache}.equals("Deutsch")
-    ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
-    : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
-  )
-: $P{Additional_information}]]></textFieldExpression>
-				</textField>
-			</band>
+                                        <textFieldExpression><![CDATA[(
+  ( $P{Additional_information} == null || $P{Additional_information}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
+        : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
+      )
+    : $P{Additional_information}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                                </textField>
+                        </band>
                         <band height="90" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1ResultsDetails} == null || !"N".equalsIgnoreCase((($P{ShowGroup1ResultsDetails} == null ? "Y" : $P{ShowGroup1ResultsDetails}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
@@ -900,8 +913,10 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{ExpUncType}]]></textFieldExpression>
-				</textField>
+                                        <textFieldExpression><![CDATA[$P{ExpUncType} == null
+  ? ""
+  : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                                </textField>
 				<subreport>
 					<reportElement x="16" y="66" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
 					<subreportParameter name="PrefixTable">
@@ -1137,7 +1152,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? "Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine.\nFür die Einhaltung einer angemessenen Frist zur Wiederholung der Kalibrierung ist der Benutzer verantwortlich.\nDie den Messwerten beigeordnete erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2. Sie wurde gemäß DAkkS DKD-3 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von 95% im zugeordneten Werteintervall."
     : $P{Cert_description}
   )
-)]]></textFieldExpression>
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="16" y="618" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
@@ -1150,7 +1165,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     ? "Dieser Kalibrierschein darf nur vollständig und unverändert weiterverbreitet werden. Auszüge oder Änderungen bedürfen der Genehmigung sowohl der Deutschen Akkreditierungsstelle als auch des ausstellenden Kalibrierlaboratoriums. Kalibrierscheine ohne Unterschrift haben keine Gültigkeit."
     : $P{Cert_description_1}
   )
-)]]></textFieldExpression>
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="16" y="660" width="535" height="1" uuid="7180f2cc-b318-42fe-8297-222a27072378"/>
@@ -1207,7 +1222,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="498" y="284" width="51" height="25" uuid="60fddce2-e8d5-44ad-996f-6df91281c5ea"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
-				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
+                                <textFieldExpression><![CDATA[$P{MarkNumber2} == null
+    ? ""
+    : $P{MarkNumber2}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="498" y="261" width="51" height="17" uuid="2a566f7c-747b-41b9-93d9-8f1f4e51fee2"/>
@@ -1372,9 +1389,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="495" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
-				<textFieldExpression><![CDATA[$P{MarkNumber2}]]></textFieldExpression>
-			</textField>
-		</band>
+                                <textFieldExpression><![CDATA[$P{MarkNumber2} == null
+    ? ""
+    : $P{MarkNumber2}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                        </textField>
+                </band>
 	</pageHeader>
 	<pageFooter>
 		<band height="27" splitType="Stretch">
