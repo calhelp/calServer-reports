@@ -176,7 +176,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 * `MarkNumber1` (`123456`) und `MarkNumber2` (`D-K-\nYYYYY-ZZ-N`) liefern sofort druckbare Platzhalter, sodass der Report auch
   ohne eigene DAkkS-Kennung testbar bleibt.
 * Alle Abschnittsumschalter (`ShowGroup1...`) stehen auf `"Y"` und blenden nur bei explizitem `"N"` einzelne Informationsblöcke
-  aus.
+  aus; `0`/`false`/`no` werden ebenfalls als „nicht anzeigen“ interpretiert.
 
 ### Abschnittsumschalter (ShowGroup1...)
 

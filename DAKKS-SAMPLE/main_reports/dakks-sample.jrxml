@@ -823,8 +823,21 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 : $P{Conformity_description_2}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="54">
-				<printWhenExpression><![CDATA[$P{ShowGroup1AdditionalInformation} == null || !"N".equalsIgnoreCase((($P{ShowGroup1AdditionalInformation} == null ? "Y" : $P{ShowGroup1AdditionalInformation}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+                        <band height="54">
+                                <printWhenExpression><![CDATA[
+(
+  (
+    ($P{ShowGroup1AdditionalInformation} == null ? "Y" : $P{ShowGroup1AdditionalInformation}.toString())
+      .replace(" ", " ")
+      .trim()
+      .replaceAll("[^A-Za-z0-9]", "")
+      .toLowerCase()
+  )
+  .matches("^(n|no|false|0)$")
+)
+? false
+: true
+]]></printWhenExpression>
 				<textField>
 					<reportElement x="16" y="0" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
 					<textElement verticalAlignment="Bottom">
