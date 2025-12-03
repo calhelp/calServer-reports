@@ -144,9 +144,9 @@ $P{Sprache}.equals("Deutsch")
                 <parameterDescription><![CDATA[Freitext für alternative Darstellung der erweiterten Messunsicherheit.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
-        <parameter name="ReportBuildDate" class="java.lang.Object">
-                <parameterDescription><![CDATA[Builddatum des Reports (Date-Objekt oder ISO-String), das in der Titelsektion angezeigt wird.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+        <parameter name="ReportBuildDate" class="java.lang.String">
+                <parameterDescription><![CDATA[Builddatum des Reports (ISO-String), das in der Titelsektion angezeigt wird.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())]]></defaultValueExpression>
         </parameter>
 	<parameter name="ReportVersion" class="java.lang.String">
 		<parameterDescription><![CDATA[Versionsstring des Reports, der im Titel angezeigt wird.]]></parameterDescription>
