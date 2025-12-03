@@ -10,7 +10,7 @@
         <style name="UnicodeDefault" isDefault="true" fontName="SansSerif" pdfFontName="SansSerif" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
         <parameter name="Reportpath" class="java.lang.String">
                 <parameterDescription><![CDATA[Pfad zum gemeinsamen Report-Verzeichnis; wird für Subreports und Assets genutzt.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["DAKKS-SAMPLE"]]></defaultValueExpression>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionales Tabellenpräfix (z. B. cal_), um mandantenfähige Datenbank-Schemata anzusprechen.]]></parameterDescription>
@@ -699,15 +699,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                    <subreportExpression><![CDATA[
-java.nio.file.Paths.get(
-        ($P{Reportpath} == null || $P{Reportpath}.trim().isEmpty()) ? "DAKKS-SAMPLE" : $P{Reportpath}.trim(),
-        "subreports",
-        "Standard.jasper"
-).toString()
-                                    ]]></subreportExpression>
-				</subreport>
-			</band>
+                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+                                </subreport>
+                        </band>
 			<band height="135" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
 				<printWhenExpression><![CDATA[$P{ShowGroup1ResultsIntro} == null || !"N".equalsIgnoreCase((($P{ShowGroup1ResultsIntro} == null ? "Y" : $P{ShowGroup1ResultsIntro}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
@@ -897,15 +891,9 @@ java.nio.file.Paths.get(
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                    <subreportExpression><![CDATA[
-java.nio.file.Paths.get(
-        ($P{Reportpath} == null || $P{Reportpath}.trim().isEmpty()) ? "DAKKS-SAMPLE" : $P{Reportpath}.trim(),
-        "subreports",
-        "Results.jasper"
-).toString()
-                                    ]]></subreportExpression>
-				</subreport>
-				<break>
+                                    <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+                                </subreport>
+                                <break>
 					<reportElement x="0" y="13" width="100" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
 				</break>
 			</band>
