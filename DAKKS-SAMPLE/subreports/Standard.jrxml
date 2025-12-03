@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Standard" pageWidth="535" pageHeight="818" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ff73abd8-b53d-41bb-b8b6-96000693b8ef">
-        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-        <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
-        <property name="com.jaspersoft.studio.unit." value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-        <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-        <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-        <parameter name="PrefixTable" class="java.lang.String">
-                <parameterDescription><![CDATA[Optionales Tabellenpräfix für den Zugriff auf die Standards-Tabelle.]]></parameterDescription>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+	<parameter name="PrefixTable" class="java.lang.String">
+		<parameterDescription><![CDATA[Optionales Tabellenpräfix für den Zugriff auf die Standards-Tabelle.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Sprache" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
+		<parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="P_CTAG" class="java.lang.String">
-                <parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
+		<parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
@@ -79,7 +79,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Inv.Nr]]></text>
 			</staticText>
@@ -93,7 +93,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Inventory No]]></text>
 			</staticText>
@@ -107,7 +107,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Beschreibung]]></text>
 			</staticText>
@@ -121,7 +121,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Description]]></text>
 			</staticText>
@@ -135,7 +135,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Hersteller]]></text>
 			</staticText>
@@ -149,7 +149,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Manufacturer]]></text>
 			</staticText>
@@ -163,7 +163,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Typ]]></text>
 			</staticText>
@@ -177,7 +177,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
@@ -191,7 +191,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[letzte Kal]]></text>
 			</staticText>
@@ -205,12 +205,12 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Last Cal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+				<reportElement x="370" y="0" width="67" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -219,12 +219,12 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+				<reportElement x="370" y="17" width="67" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -233,12 +233,12 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="0" width="95" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="437" y="0" width="98" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -247,12 +247,12 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8" isBold="true"/>
+					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Kalibrierkennzeichen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="17" width="95" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="437" y="17" width="98" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -261,7 +261,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="7" isItalic="true"/>
+					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Calibration Mark]]></text>
 			</staticText>
@@ -272,35 +272,35 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			<textField>
 				<reportElement x="0" y="0" width="70" height="16" uuid="777648ed-7c4b-4078-baaa-64ad5962ad8f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="70" y="0" width="85" height="16" uuid="d008f271-68f5-4a7c-8d8c-4c15ad5e0210"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="0" width="65" height="16" uuid="9c298e7d-09e9-497c-8d26-07a2be6f16ff"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="220" y="0" width="80" height="16" uuid="f327e31e-ed27-4cb8-af23-a482dc4cebc1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="300" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{C2301} == null || $F{C2301}.trim().isEmpty())
 ? ""
@@ -309,9 +309,9 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2301})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="370" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+				<reportElement x="370" y="0" width="67" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{C2303} == null || $F{C2303}.trim().isEmpty())
 ? ""
@@ -320,9 +320,9 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="95" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="437" y="0" width="98" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" size="8"/>
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
 			</textField>
