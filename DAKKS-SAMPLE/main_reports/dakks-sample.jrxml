@@ -1323,11 +1323,9 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="16" y="8" width="54" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
+				<reportElement x="16" y="8" width="64" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Seite  "
-  + $V{PAGE_NUMBER}
-  + " von  "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Seite  "  + $V{PAGE_NUMBER}  + " von  "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="71" y="8" width="53" height="17" uuid="dba679af-4d66-47cc-b5c2-1c8eeb980f2b"/>
@@ -1335,7 +1333,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="16" y="26" width="54" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
+				<reportElement x="16" y="26" width="55" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
@@ -1344,7 +1342,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
   + " of  "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="71" y="26" width="53" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
+				<reportElement x="67" y="26" width="53" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
