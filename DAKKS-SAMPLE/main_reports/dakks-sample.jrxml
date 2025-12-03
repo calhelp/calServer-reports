@@ -513,7 +513,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["KALIBRIERVERFAHREN"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="179" y="3" width="184" height="20" uuid="5bb0d52e-1abc-436d-bbb1-d673517ade7b"/>
+					<reportElement x="178" y="3" width="184" height="20" uuid="5bb0d52e-1abc-436d-bbb1-d673517ade7b"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -549,7 +549,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["VERFAHRENSANWEISUNG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="190" y="3" width="201" height="20" uuid="2111e1a6-4a5d-4abc-a34e-31f94e88654d"/>
+					<reportElement x="191" y="3" width="201" height="20" uuid="2111e1a6-4a5d-4abc-a34e-31f94e88654d"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -574,7 +574,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<textFieldExpression><![CDATA["MESSBEDINGUNGEN"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="160" y="3" width="184" height="20" uuid="7af38058-6014-4954-b822-0a558c8bc540"/>
+					<reportElement x="159" y="3" width="184" height="20" uuid="7af38058-6014-4954-b822-0a558c8bc540"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
