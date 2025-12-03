@@ -74,10 +74,9 @@
 ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
 : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Conformity_description_2" class="java.lang.String">
-		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["?\n\n\n!?\n\n\n!\n\n*"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="Conformity_description_2" class="java.lang.String">
+                <parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
+        </parameter>
 	<parameter name="Conformity_description_3" class="java.lang.String">
 		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
