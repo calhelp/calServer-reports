@@ -144,14 +144,10 @@ $P{Sprache}.equals("Deutsch")
                 <parameterDescription><![CDATA[Freitext für alternative Darstellung der erweiterten Messunsicherheit.]]></parameterDescription>
                 <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
         </parameter>
-        <parameter name="ReportBuildDate" class="java.lang.String">
-                <parameterDescription><![CDATA[Builddatum des Reports (ISO-String), das in der Titelsektion angezeigt wird.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())]]></defaultValueExpression>
+        <parameter name="ReportVersion" class="java.lang.String">
+                <parameterDescription><![CDATA[Versionsstring des Reports, der im Titel angezeigt wird.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
         </parameter>
-	<parameter name="ReportVersion" class="java.lang.String">
-		<parameterDescription><![CDATA[Versionsstring des Reports, der im Titel angezeigt wird.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
-	</parameter>
 	<parameter name="MarkNumber1" class="java.lang.String">
 		<parameterDescription><![CDATA[Text für die erste Kennziffer im Akkreditierungsblock (z. B. Auftragsnummer).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
@@ -915,21 +911,6 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                         <font fontName="SansSerif" size="8" pdfFontName="SansSerif" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$P{ReportVersion}]]></textFieldExpression>
-                        </textField>
-                        <textField isBlankWhenNull="true">
-                                <reportElement x="351" y="0" width="200" height="10" forecolor="#808080" uuid="5b5df42c-1e50-4dba-bd78-d7153ae25bda"/>
-                                <textElement textAlignment="Right">
-                                        <font fontName="SansSerif" size="8" pdfFontName="SansSerif" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                        <textFieldExpression><![CDATA[
-$P{ReportBuildDate} == null || $P{ReportBuildDate}.toString().trim().isEmpty()
-? ""
-: (
-        $P{ReportBuildDate} instanceof java.util.Date
-        ? "Builddatum: " + new java.text.SimpleDateFormat("yyyy-MM-dd").format((java.util.Date) $P{ReportBuildDate})
-        : "Builddatum: " + $P{ReportBuildDate}.toString()
-)
-]]></textFieldExpression>
                         </textField>
                         <line>
                                 <reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>

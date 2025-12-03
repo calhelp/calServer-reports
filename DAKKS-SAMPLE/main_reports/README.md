@@ -156,7 +156,6 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
 | `Cert_field` | ➖ | `""` | Optionaler Text für die angezeigte Zertifikatsnummer; leer lassen für den Wert aus `C2396`. |
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
-| `ReportBuildDate` | ➖ | aktuelles Datum | Build-Datum im Titel; akzeptiert Date-Objekte oder ISO-Strings, leere Strings werden ausgeblendet. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock; bei `MarkNumber1` wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
