@@ -807,11 +807,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="22" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
+                                <textField isStretchWithOverflow="true" textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" x="16" y="22" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+                                        <textElement>
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
                                         <textFieldExpression><![CDATA[(
   ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -821,12 +821,25 @@ WHERE c.CTAG=$P{P_CTAG}]]>
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="50" y="48" width="501" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-                                        <textFieldExpression><![CDATA[(
+                                <frame>
+                                        <reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
+                                        <textField isStretchWithOverflow="true" textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+                                                <textElement>
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
+                                                <textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
+    ? "?\n\n\n!?\n\n\n!\n\n*"
+    : $P{Conformity_description_2}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                                        </textField>
+                                        <textField isStretchWithOverflow="true" textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" x="34" y="0" width="501" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+                                                <textElement>
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
+                                                <textFieldExpression><![CDATA[(
   ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
@@ -834,18 +847,8 @@ WHERE c.CTAG=$P{P_CTAG}]]>
       )
     : $P{Conformity_description_3}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="48" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-                                        <textFieldExpression><![CDATA[(
-  ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
-    ? "?\n\n\n!?\n\n\n!\n\n*"
-    : $P{Conformity_description_2}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
+                                        </textField>
+                                </frame>
 			</band>
                         <band height="54">
                                 <printWhenExpression><![CDATA[
