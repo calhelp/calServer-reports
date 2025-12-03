@@ -372,10 +372,7 @@
     )
     && (
         $V{MeasurementDetailsValue} == null
-        || (
-            $V{MeasurementDetailsValue}.intValue() != 3
-            && $V{MeasurementDetailsValue}.intValue() != 4
-        )
+        || $V{MeasurementDetailsValue}.intValue() == 1
     )
 ]]></printWhenExpression>
                                 </reportElement>
@@ -603,11 +600,7 @@
         $P{ModernResultsHeader} == null
         || !$P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
     )
-    && $V{MeasurementDetailsValue} != null
-    && (
-        $V{MeasurementDetailsValue}.intValue() == 3
-        || $V{MeasurementDetailsValue}.intValue() == 4
-    )
+    && false
 ]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
@@ -786,10 +779,7 @@
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
     && (
         $V{MeasurementDetailsValue} == null
-        || (
-            $V{MeasurementDetailsValue}.intValue() != 3
-            && $V{MeasurementDetailsValue}.intValue() != 4
-        )
+        || $V{MeasurementDetailsValue}.intValue() == 1
     )
 ]]></printWhenExpression>
                                 </reportElement>
@@ -1033,11 +1023,7 @@
                                     <printWhenExpression><![CDATA[
     $P{ModernResultsHeader} != null
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
-    && $V{MeasurementDetailsValue} != null
-    && (
-        $V{MeasurementDetailsValue}.intValue() == 3
-        || $V{MeasurementDetailsValue}.intValue() == 4
-    )
+    && false
 ]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
