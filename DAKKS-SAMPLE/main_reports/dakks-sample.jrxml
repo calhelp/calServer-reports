@@ -168,14 +168,18 @@
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Messbedingungen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ShowGroup1CalibrationPlace" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Ort der Kalibrierung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Umgebungsbedingungen.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="ShowGroup1CalibrationPlace" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Ort der Kalibrierung.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="CalibrationPlace_override" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionaler Freitext, der den Ort der Kalibrierung überschreibt.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Umgebungsbedingungen.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="ShowGroup1StandardsTraceability" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu verwendeten Normalen und Rückführung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -607,11 +611,11 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				</textField>
 				<textField>
 					<reportElement x="16" y="29" width="535" height="20" uuid="9f84d931-64ae-4964-a8d0-aac197c3d9f0"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{C2313}]]></textFieldExpression>
-				</textField>
+                                        <textElement verticalAlignment="Middle">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[($P{CalibrationPlace_override} == null || $P{CalibrationPlace_override}.trim().isEmpty()) ? $F{C2313} : $P{CalibrationPlace_override}]]></textFieldExpression>
+                                </textField>
 			</band>
 			<band height="75">
 				<property name="com.calserver.bandLabel" value="Umgebungsbedingungen"/>
