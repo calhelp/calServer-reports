@@ -533,7 +533,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<textField>
 					<reportElement x="16" y="70" width="536" height="16" uuid="ec9363f9-104c-498b-a677-9d12b86cb8ce"/>
 					<textElement>
-						<font size="6"/>
+						<font size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{C2320}]]></textFieldExpression>
 				</textField>
