@@ -366,8 +366,10 @@
                         <frame>
                                 <reportElement x="0" y="0" width="535" height="35" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
                                     <printWhenExpression><![CDATA[
-    $P{ModernResultsHeader} == null
-    || !$P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
+    ($P{ModernResultsHeader} == null
+     || !$P{ModernResultsHeader}.toString().equalsIgnoreCase("Y"))
+    && ($V{MeasurementDetailsValue} == null
+        || $V{MeasurementDetailsValue}.intValue() == 1)
 ]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
@@ -592,6 +594,8 @@
                                     <printWhenExpression><![CDATA[
     $P{ModernResultsHeader} != null
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
+    && ($V{MeasurementDetailsValue} == null
+        || $V{MeasurementDetailsValue}.intValue() == 1)
 ]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
