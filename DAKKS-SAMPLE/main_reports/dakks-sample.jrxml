@@ -373,15 +373,17 @@ WHERE c.CTAG=$P{P_CTAG}]]>
         )]]></variableExpression>
 	</variable>
         <variable name="procedure_calibration_method_var" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
+                <variableExpression><![CDATA[
+        ($F{calibration_method} != null && !$F{calibration_method}.trim().isEmpty())
         ? $F{calibration_method}
         : (
             ($P{Calibration_document} == null || $P{Calibration_document}.trim().isEmpty())
                 ? ($P{Sprache}.equals("Deutsch")
-                        ? "Verfahrensanweisung nicht angegeben"
-                        : "Procedure document not provided")
+                    ? "GA3 02xx VA Kalibrieren von Digitalmultimetern"
+                    : "GA3 02xx VA Calibration of digital multimeters")
                 : $P{Calibration_document}
-        )]]></variableExpression>
+        )
+    ]]></variableExpression>
         </variable>
 	<variable name="procedure_measurement_conditions_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{measurement_conditions} == null || $F{measurement_conditions}.trim().isEmpty())
