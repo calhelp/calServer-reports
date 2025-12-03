@@ -755,7 +755,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					<reportElement x="0" y="10" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
 				</break>
 			</band>
-			<band height="100">
+			<band height="77">
 				<printWhenExpression><![CDATA[$P{ShowGroup1Conformity} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Conformity} == null ? "Y" : $P{ShowGroup1Conformity}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 				<textField>
 					<reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
@@ -788,18 +788,18 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 				<frame>
 					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="23" y="0" width="512" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+						<reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
 						<textElement>
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
-    ? "?\n\n\n!?\n\n\n!\n\n*"
+    ? ""
     : $P{Conformity_description_2}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="0" y="26" width="535" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+						<reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
 						<textElement>
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
