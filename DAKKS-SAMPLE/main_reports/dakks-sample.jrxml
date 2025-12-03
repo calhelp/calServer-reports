@@ -1108,7 +1108,7 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="329" y="356" width="222" height="253" uuid="e35b62e9-104b-4a7b-8ca9-bd42cc5c8396"/>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Justified">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[(
