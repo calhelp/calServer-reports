@@ -107,7 +107,7 @@ werden nur gedruckt, wenn Messdaten vorhanden sind (`HasMeasurementData`):
      explizitem `p`-Wert.
 
 Alle Frames teilen sich den gleichen Spaltenkopf (de/en) und die gleiche
-Konformitätslogik (`i.T`, `?`, `!?`, `!` plus Akkreditierungsstern). Die Auswahl
+Konformitätslogik (`i.T.`, `?`, `!?`, `!` plus Akkreditierungsstern). Die Auswahl
 erfolgt ausschließlich über den Parameterwert, wodurch zwischen Rohdaten- und
 Darstellungsvarianten gewechselt werden kann, ohne den Report umzubauen.
 
