@@ -443,9 +443,9 @@
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="2df318c6-d25b-48ed-80a6-10d27ebf6063"/>
-					<textElement textAlignment="Left">
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
+                                <textElement textAlignment="Left" markup="html">
+                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
 					<textFieldExpression><![CDATA[(
   ($V{procedure_calibration_item_var} == null || $V{procedure_calibration_item_var}.trim().isEmpty())
     ? $P{Asset_description}    // bei leer: Parameter nutzen
@@ -534,7 +534,7 @@
 				</textField>
                                 <textField textAdjust="StretchHeight">
                                         <reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
-                                        <textElement>
+                                        <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
@@ -559,7 +559,7 @@
 				</textField>
                                 <textField textAdjust="StretchHeight">
                                         <reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="f29249f2-b622-4b3a-9542-8722d8712376"/>
-                                        <textElement>
+                                        <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
@@ -756,12 +756,12 @@
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="43" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="43" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA[(
   (
     $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
@@ -774,12 +774,12 @@
   )
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Measurements_description} == null || $P{Measurements_description}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -789,12 +789,12 @@
     : $P{Measurements_description}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="103" width="535" height="24" uuid="0ec19fbc-5096-4311-845b-271f6bb617c7"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" x="16" y="103" width="535" height="24" uuid="0ec19fbc-5096-4311-845b-271f6bb617c7"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Measurements_description_1} == null || $P{Measurements_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -824,11 +824,11 @@
 					</textElement>
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="22" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" x="16" y="22" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -840,11 +840,11 @@
 				</textField>
 				<frame>
 					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
-					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
-						<textElement>
-							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						</textElement>
+                                        <textField textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+                                                <textElement markup="html">
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
 						<textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
@@ -859,11 +859,11 @@
     : $P{Conformity_description_2}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 					</textField>
-					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
-						<textElement>
-							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						</textElement>
+                                        <textField textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+                                                <textElement markup="html">
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
 						<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -902,11 +902,11 @@
 					</textElement>
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="22" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement x="16" y="22" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Additional_information} == null || $P{Additional_information}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -1169,9 +1169,9 @@
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="329" y="356" width="222" height="253" uuid="e35b62e9-104b-4a7b-8ca9-bd42cc5c8396"/>
-				<textElement textAlignment="Justified">
-					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
+                                <textElement textAlignment="Justified" markup="html">
+                                        <font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
 				<textFieldExpression><![CDATA[(
   (
     ($P{Cert_description} == null || $P{Cert_description}.trim().isEmpty())
@@ -1182,9 +1182,9 @@
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="16" y="618" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
-				<textElement textAlignment="Left">
-					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
+                                <textElement textAlignment="Left" markup="html">
+                                        <font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
 				<textFieldExpression><![CDATA[(
   (
     ($P{Cert_description_1} == null || $P{Cert_description_1}.trim().isEmpty())
