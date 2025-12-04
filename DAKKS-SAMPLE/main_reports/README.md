@@ -163,6 +163,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `Asset_description` | ➖ | vordefiniert | Kurzbeschreibung des kalibrierten Messmittels. |
 | `Results_description` | ➖ | sprachabhängig | Hinweis auf Seitenverweise der Messergebnisse. |
 | `Measurements_description`, `Measurements_description_1` | ➖ | sprachabhängig | Erläuterungen zur Messunsicherheit/GUM. |
+| `Uncertainty_description` | ➖ | sprachabhängig | Vollständiger Textblock zu Messunsicherheiten; überschreibt den Standardabschnitt. |
 | `Conformity_description_1..3` | ➖ | sprachabhängig | Legenden für Konformitätsaussagen und Symbolik. |
 | `Additional_information` | ➖ | sprachabhängig | Hinweise zur DAkkS-Anerkennung. |
 | `Calibration_procedure_1`, `Calibration_procedure_2` | ➖ | sprachabhängig | Textbausteine zu den angewendeten Verfahren. |
@@ -196,6 +197,7 @@ Alle Abschnitts-Parameter sind Strings (Default bzw. fehlender Parameter: `"Y"`)
 * `ShowGroup1EnvironmentalConditions` – Umgebungsbedingungen
 * `ShowGroup1StandardsTraceability` – Verwendete Normale / Rückführung
 * `ShowGroup1ResultsIntro` – Einleitung zu den Messergebnissen
+* `ShowGroup1MeasurementUncertainty` – Abschnitt „MESSUNSICHERHEITEN / UNCERTAINTY OF MEASUREMENTS“
 * `ShowGroup1Conformity` – Abschnitt „KONFORMITÄT / CONFORMITY“
 * `ShowGroup1AdditionalInformation` – Abschnitt „WEITERE HINWEISE / ADDITIONAL INFORMATION“
 * `ShowGroup1ResultsDetails` – Tabellenabschnitt „MESSERGEBNISSE / MEASUREMENTS RESULTS“

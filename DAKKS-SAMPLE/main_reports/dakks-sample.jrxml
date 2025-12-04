@@ -62,12 +62,18 @@
 ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
 : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Measurements_description_1" class="java.lang.String">
-		<parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+        <parameter name="Measurements_description_1" class="java.lang.String">
+                <parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
 : "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."]]></defaultValueExpression>
-	</parameter>
+        </parameter>
+        <parameter name="Uncertainty_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Standardtextblock zu Messunsicherheiten, optional überschreibbar.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation\nmit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß EA-4/02 M: 2022 Ermittlung der Messunsicherheit bei\nKalibrierungen und JCGM 104:2009 Leitfaden zur Angabe der Messunsicherheit (GUM) ermittelt. Der Wert der\nMessgröße liegt mit einer Wahrscheinlichkeit von > 95 % im zugeordneten Werteintervall.\n\n<i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a\ncoverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement\nin calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within\nthe corresponding interval with a probability of > 95%.</i>\n\nDie Messunsicherheiten wurden mit der Software „GUM-Workbench“ abgeschätzt, die Ergebnisse werden\ndokumentiert.\n\n<i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"
+: "<i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a\ncoverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement\nin calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within\nthe corresponding interval with a probability of > 95%.</i>\n\n<i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Conformity_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Einleitungstext für Konformitätsaussagen unter Berücksichtigung der Messunsicherheit.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
@@ -190,14 +196,18 @@
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu verwendeten Normalen und Rückführung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ShowGroup1ResultsIntro" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ShowGroup1Conformity" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="ShowGroup1ResultsIntro" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1MeasurementUncertainty" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Messunsicherheiten.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1Conformity" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="ShowGroup1AdditionalInformation" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu weiteren Hinweisen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -739,9 +749,9 @@
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-			<band height="135" splitType="Stretch">
-				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-				<printWhenExpression><![CDATA[$P{ShowGroup1ResultsIntro} == null || !"N".equalsIgnoreCase((($P{ShowGroup1ResultsIntro} == null ? "Y" : $P{ShowGroup1ResultsIntro}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+                        <band height="90" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1ResultsIntro} == null || !"N".equalsIgnoreCase((($P{ShowGroup1ResultsIntro} == null ? "Y" : $P{ShowGroup1ResultsIntro}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 				<textField>
 					<reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
 					<textElement verticalAlignment="Bottom">
@@ -762,7 +772,7 @@
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                                 <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
                                         </textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
   (
     $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
     ? (
@@ -773,42 +783,49 @@
     : $P{Results_description}
   )
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
-				</textField>
+                                </textField>
+                                <break>
+                                        <reportElement x="0" y="70" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
+                                </break>
+                        </band>
+                        <band height="200" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
+                                <printWhenExpression><![CDATA[$P{ShowGroup1MeasurementUncertainty} == null || !"N".equalsIgnoreCase((($P{ShowGroup1MeasurementUncertainty} == null ? "Y" : $P{ShowGroup1MeasurementUncertainty}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+                                <textField>
+                                        <reportElement x="16" y="0" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA["MESSUNSICHERHEITEN"]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="200" y="-1" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
+                                </textField>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" x="16" y="73" width="535" height="28" uuid="b5ba510c-c720-46d3-bc53-528de542efe4"/>
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="26" width="535" height="166" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                                 <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
                                         </textElement>
-					<textFieldExpression><![CDATA[(
-  ( $P{Measurements_description} == null || $P{Measurements_description}.trim().isEmpty() )
-    ? ( $P{Sprache}.equals("Deutsch")
-        ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
-        : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."
+                                        <textFieldExpression><![CDATA[(
+  ($P{Uncertainty_description} == null || $P{Uncertainty_description}.trim().isEmpty())
+    ? (
+        $P{Sprache}.equals("Deutsch")
+            ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation<br/>mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß EA-4/02 M: 2022 Ermittlung der Messunsicherheit bei<br/>Kalibrierungen und JCGM 104:2009 Leitfaden zur Angabe der Messunsicherheit (GUM) ermittelt. Der Wert der<br/>Messgröße liegt mit einer Wahrscheinlichkeit von > 95 % im zugeordneten Werteintervall.<br/><br/><i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a<br/>coverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement<br/>in calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within<br/>the corresponding interval with a probability of > 95%.</i><br/><br/>Die Messunsicherheiten wurden mit der Software „GUM-Workbench“ abgeschätzt, die Ergebnisse werden<br/>dokumentiert.<br/><br/><i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"
+            : "<i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a<br/>coverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement<br/>in calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within<br/>the corresponding interval with a probability of > 95%.</i><br/><br/><i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"
       )
-    : $P{Measurements_description}
+    : $P{Uncertainty_description}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" x="16" y="103" width="535" height="24" uuid="0ec19fbc-5096-4311-845b-271f6bb617c7"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-                                        </textElement>
-					<textFieldExpression><![CDATA[(
-  ( $P{Measurements_description_1} == null || $P{Measurements_description_1}.trim().isEmpty() )
-    ? ( $P{Sprache}.equals("Deutsch")
-        ? "Die Messunsicherheiten wurden mit der Software ‚GUM-Workbench' abgeschätzt, die Ergebnisse werden dokumentiert."
-        : "The calculations of uncertainty were performed using the software ‚GUM-Workbench‘, the results are documented."
-      )
-    : $P{Measurements_description_1}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
-				<break>
-					<reportElement x="0" y="10" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
-				</break>
-			</band>
-			<band height="77">
+                                </textField>
+                                <break>
+                                        <reportElement x="0" y="193" width="535" height="1" uuid="183a2511-8d5c-4ad3-ac7c-9d53f2e1eb0d"/>
+                                </break>
+                        </band>
+                        <band height="77">
 				<printWhenExpression><![CDATA[$P{ShowGroup1Conformity} == null || !"N".equalsIgnoreCase((($P{ShowGroup1Conformity} == null ? "Y" : $P{ShowGroup1Conformity}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
 				<textField>
 					<reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
