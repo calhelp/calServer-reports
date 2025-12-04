@@ -84,12 +84,12 @@
 ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
 : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Conformity_description_2" class="java.lang.String">
-		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "? innerhalb der Spezifikation\n!? außerhalb der Spezifikation (keine Aussage möglich)\n! außerhalb der Spezifikation\n* nicht im Akkreditierungsumfang"
-: "? within the specification\n!? out of specification (no statement possible)\n! out of specification\n* not covered by the accreditation scope"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="Conformity_description_2" class="java.lang.String">
+                <parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "? innerhalb der Spezifikation<br/>!? außerhalb der Spezifikation (keine Aussage möglich)<br/>! außerhalb der Spezifikation<br/>* nicht im Akkreditierungsumfang"
+: "? within the specification<br/>!? out of specification (no statement possible)<br/>! out of specification<br/>* not covered by the accreditation scope"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Conformity_description_3" class="java.lang.String">
 		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
@@ -882,8 +882,12 @@
   )
     ? ""
     : $P{Conformity_description_2}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-					</textField>
+)
+    .replace("/n", "\n")
+    .replace("\\n", "\n")
+    .replace("\r", "")
+    .replace("\n", "<br/>")]]></textFieldExpression>
+                                        </textField>
                                         <textField textAdjust="StretchHeight">
                                                 <reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
                                                 <textElement markup="html">
