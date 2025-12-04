@@ -16,6 +16,10 @@
                 <parameterDescription><![CDATA[Umschalter für einen modernen Tabellenkopf ohne umlaufende Rahmen (Y/N).]]></parameterDescription>
                 <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
         </parameter>
+        <parameter name="Results_end_note" class="java.lang.String">
+                <parameterDescription><![CDATA[Textbaustein, der das Ende des Ergebnisberichts markiert.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
+        </parameter>
         <parameter name="Debug" class="java.lang.String" isForPrompting="false">
                 <parameterDescription><![CDATA[Interner Schalter für Protokollzwecke (Y/N).]]></parameterDescription>
                 <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
@@ -2455,5 +2459,21 @@
                                 </textField>
                         </frame>
 		</band>
-	</detail>
+        </detail>
+        <summary>
+                <band height="28">
+                        <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                                <reportElement x="0" y="8" width="535" height="14" uuid="f3d9b7a5-0f45-4b1c-8a4b-2a3b8f1b9c2d"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                        <font fontName="DejaVu Sans" size="8"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[(
+    $P{Results_end_note} == null
+    || $P{Results_end_note}.trim().isEmpty()
+)
+    ? "---Ende des Ergebnisberichts--"
+    : $P{Results_end_note}]]></textFieldExpression>
+                        </textField>
+                </band>
+        </summary>
 </jasperReport>

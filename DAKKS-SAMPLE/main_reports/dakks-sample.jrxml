@@ -50,15 +50,19 @@
 		<parameterDescription><![CDATA[Kurzbeschreibung des kalibrierten Mess- oder Prüfmittels.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich- und Wechselstrom, Gleichstromwiderstand und Frequenz."]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Results_description" class="java.lang.String">
-		<parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+        <parameter name="Results_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
 : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Measurements_description" class="java.lang.String">
-		<parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+        </parameter>
+        <parameter name="Results_end_note" class="java.lang.String">
+                <parameterDescription><![CDATA[Abschließender Hinweis unterhalb der Messergebnisse.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="Measurements_description" class="java.lang.String">
+                <parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
 : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."]]></defaultValueExpression>
 	</parameter>
@@ -953,12 +957,15 @@
 					<subreportParameter name="MeasurementDetails">
 						<subreportParameterExpression><![CDATA[$P{MeasurementDetails}]]></subreportParameterExpression>
 					</subreportParameter>
-					<subreportParameter name="ModernResultsHeader">
-						<subreportParameterExpression><![CDATA[$P{ModernResultsHeader}]]></subreportParameterExpression>
-					</subreportParameter>
-					<subreportParameter name="P_Image_Path">
-						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
-					</subreportParameter>
+                                        <subreportParameter name="ModernResultsHeader">
+                                                <subreportParameterExpression><![CDATA[$P{ModernResultsHeader}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <subreportParameter name="Results_end_note">
+                                                <subreportParameterExpression><![CDATA[$P{Results_end_note}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <subreportParameter name="P_Image_Path">
+                                                <subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
+                                        </subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
