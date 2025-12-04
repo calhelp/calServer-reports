@@ -167,6 +167,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `Additional_information` | ➖ | sprachabhängig | Hinweise zur DAkkS-Anerkennung. |
 | `Calibration_procedure_1`, `Calibration_procedure_2` | ➖ | sprachabhängig | Textbausteine zu den angewendeten Verfahren. |
 | `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrensanweisung bzw. QMS-Dokument. |
+| `environmental_conditions` | ➖ | `""` | Optionaler Freitext für Umgebungstemperatur und relative Luftfeuchte im Format `Text_Temperatur | Text_Feuchte`; ersetzt die Werte aus `C2311`/`C2312`, wenn angegeben. |
 
 **Standardwerte aus der JRXML-Datei**
 
