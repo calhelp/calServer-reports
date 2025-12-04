@@ -158,6 +158,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock; bei `MarkNumber1` wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt. |
+| `sign_names` | ➖ | `Y` | Blendet die Namen im Unterschriftsbereich ein (`Y`, Standard auch bei fehlendem Parameter) oder aus (`N`). |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur Messunsicherheit. |
 | `Cert_description`, `Cert_description_1` | ➖ | vordefiniert | Normativer Vorspann zur Rückführbarkeit und Verbreitung. |
 | `Asset_description` | ➖ | vordefiniert | Kurzbeschreibung des kalibrierten Messmittels. |
@@ -178,6 +179,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 * `ModernResultsHeader` startet mit `"N"`; der traditionelle Tabellenkopf wird also beibehalten, bis `"Y"` gesetzt wird.
 * `MarkNumber1` (`123456`) und `MarkNumber2` (`D-K-\nYYYYY-ZZ-N`) liefern sofort druckbare Platzhalter, sodass der Report auch
   ohne eigene DAkkS-Kennung testbar bleibt.
+* `sign_names` steht standardmäßig auf `"Y"` und blendet nur bei `"N"` die gedruckten Namen im Unterschriftsbereich aus.
 * Alle Abschnittsumschalter (`ShowGroup1...`) stehen auf `"Y"` und blenden nur bei explizitem `"N"` einzelne Informationsblöcke
   aus; `0`/`false`/`no` werden ebenfalls als „nicht anzeigen“ interpretiert.
 

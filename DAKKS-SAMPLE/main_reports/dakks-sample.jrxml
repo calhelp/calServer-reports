@@ -130,14 +130,18 @@
 		<parameterDescription><![CDATA[Text für die erste Kennziffer im Akkreditierungsblock (z. B. Auftragsnummer).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="MarkNumber2" class="java.lang.String">
-		<parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ShowGroup1CalibrationItem" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="MarkNumber2" class="java.lang.String">
+                <parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="sign_names" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige der Namen im Unterschriftsbereich (Y/N).]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ShowGroup1CalibrationItem" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+        </parameter>
 	<parameter name="ShowGroup1IncomingDate" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Datum der Anlieferung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -1206,20 +1210,22 @@
 			<line>
 				<reportElement positionType="Float" x="14" y="748" width="535" height="1" uuid="171b4844-9214-4ce6-9660-9db0f48b9508"/>
 			</line>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" uuid="96f612ed-7910-45bf-9fe9-d55ab07a416e"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="ContainerHeight" x="416" y="720" width="135" height="20" uuid="ef713462-3042-4676-a852-2928d7eb4cf1"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{C2307} == null || $F{C2307}.trim().isEmpty()) ? "" : $F{C2307}]]></textFieldExpression>
-			</textField>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" uuid="96f612ed-7910-45bf-9fe9-d55ab07a416e"/>
+                                <printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+                                <textElement verticalAlignment="Middle">
+                                        <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327}]]></textFieldExpression>
+                        </textField>
+                        <textField textAdjust="StretchHeight">
+                                <reportElement positionType="Float" stretchType="ContainerHeight" x="416" y="720" width="135" height="20" uuid="ef713462-3042-4676-a852-2928d7eb4cf1"/>
+                                <printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+                                <textElement verticalAlignment="Middle">
+                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[($F{C2307} == null || $F{C2307}.trim().isEmpty()) ? "" : $F{C2307}]]></textFieldExpression>
+                        </textField>
 			<line>
 				<reportElement x="495" y="259" width="57" height="1" uuid="3ed42e77-2aa2-4be2-be0d-0ce223e06b89"/>
 			</line>
