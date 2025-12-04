@@ -202,7 +202,7 @@
         <variable name="ExpUncertaintyUnit" class="java.lang.String">
                 <variableExpression><![CDATA[$F{exp_uncert_u} == null
       ? ""
-      : $F{exp_uncert_u}.trim().replace("°C", "K")]]></variableExpression>
+      : $F{exp_uncert_u}.trim().replaceAll("(?i)°\\s*C", "K")]]></variableExpression>
         </variable>
         <variable name="DisplayUncertainty" class="java.lang.String">
                 <variableExpression><![CDATA[(
