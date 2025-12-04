@@ -172,6 +172,8 @@ WHERE  c.CTAG = $P{P_CTAG};
 
 * Bei fehlenden Eingaben greift immer die Default-Logik des Reports: leere Strings für Pfad-/Logo-/QR-Parameter, `Deutsch` für die
   Sprachumschaltung und `"1"` für die Messwert-Frames.
+* `Conformity_description_2` enthält jetzt eine mehrzeilige Kurzlegende (de/en), sodass statt der reinen Symbolfolge `? !? ! *`
+  direkt eine verständliche Vorgabe ausgegeben wird.
 * `ModernResultsHeader` startet mit `"N"`; der traditionelle Tabellenkopf wird also beibehalten, bis `"Y"` gesetzt wird.
 * `MarkNumber1` (`123456`) und `MarkNumber2` (`D-K-\nYYYYY-ZZ-N`) liefern sofort druckbare Platzhalter, sodass der Report auch
   ohne eigene DAkkS-Kennung testbar bleibt.
