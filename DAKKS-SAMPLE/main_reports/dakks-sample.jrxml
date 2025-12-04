@@ -207,15 +207,17 @@
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
-COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", i.I4224, NULL) AS I4224,
-c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
-p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope
-FROM $P!{PrefixTable}calibration c
-LEFT JOIN $P!{PrefixTable}inventory i on i.MTAG=c.MTAG
-LEFT JOIN $P!{PrefixTable}customers cu on cu.KTAG=i.ktag
-LEFT JOIN $P!{PrefixTable}procedures p ON p.procedure_name = c.C2320
-WHERE c.CTAG=$P{P_CTAG}]]>
+         <![CDATA[SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
+  COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", i.I4224, NULL) AS I4224,
+  c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
+  p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope,
+  r.working_hours AS resource_working_hours
+  FROM $P!{PrefixTable}calibration c
+  LEFT JOIN $P!{PrefixTable}inventory i on i.MTAG=c.MTAG
+  LEFT JOIN $P!{PrefixTable}customers cu on cu.KTAG=i.ktag
+  LEFT JOIN $P!{PrefixTable}procedures p ON p.procedure_name = c.C2320
+  LEFT JOIN $P!{PrefixTable}resource r ON r.name = $P{environmental_conditions}
+  WHERE c.CTAG=$P{P_CTAG}]]>
 	</queryString>
 	<field name="C2301" class="java.util.Date"/>
 	<field name="C2307" class="java.lang.String"/>
@@ -235,13 +237,14 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 	<field name="I4204" class="java.lang.String"/>
 	<field name="I4206" class="java.lang.String"/>
 	<field name="I4224" class="java.lang.String"/>
-	<field name="procedure_name" class="java.lang.String"/>
-	<field name="calibration_item" class="java.lang.String"/>
-	<field name="calibration_method" class="java.lang.String"/>
-	<field name="procedure_description" class="java.lang.String"/>
-	<field name="measurement_conditions" class="java.lang.String"/>
-	<field name="standards" class="java.lang.String"/>
-	<field name="scope" class="java.lang.String"/>
+         <field name="procedure_name" class="java.lang.String"/>
+         <field name="calibration_item" class="java.lang.String"/>
+         <field name="calibration_method" class="java.lang.String"/>
+         <field name="procedure_description" class="java.lang.String"/>
+         <field name="measurement_conditions" class="java.lang.String"/>
+         <field name="standards" class="java.lang.String"/>
+         <field name="scope" class="java.lang.String"/>
+         <field name="resource_working_hours" class="java.lang.String"/>
 	<variable name="title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein" : "Calibration Certificate"]]></variableExpression>
 	</variable>
@@ -648,42 +651,58 @@ WHERE c.CTAG=$P{P_CTAG}]]>
                                         <textElement verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[
-  (
+                                         <textFieldExpression><![CDATA[
     (
-      $P{environmental_conditions} != null
-      && $P{environmental_conditions}.split("\\|", -1).length > 0
-      && !$P{environmental_conditions}.split("\\|", -1)[0].trim().isEmpty()
+      (
+        $F{resource_working_hours} != null
+        && $F{resource_working_hours}.split("\\|", -1).length > 0
+        && !$F{resource_working_hours}.split("\\|", -1)[0].trim().isEmpty()
+      )
+        ? $F{resource_working_hours}.split("\\|", -1)[0].trim()
+        : (
+            (
+              $P{environmental_conditions} != null
+              && $P{environmental_conditions}.split("\\|", -1).length > 0
+              && !$P{environmental_conditions}.split("\\|", -1)[0].trim().isEmpty()
+            )
+              ? $P{environmental_conditions}.split("\\|", -1)[0].trim()
+              : (
+                  ($F{C2311} == null || $F{C2311}.trim().isEmpty())
+                    ? ""
+                    : $F{C2311} + " °C"
+                )
+          )
     )
-      ? $P{environmental_conditions}.split("\\|", -1)[0].trim()
-      : (
-          ($F{C2311} == null || $F{C2311}.trim().isEmpty())
-            ? ""
-            : $F{C2311} + " °C"
-        )
-  )
-]]></textFieldExpression>
+  ]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="164" y="48" width="100" height="20" uuid="3e596581-b0dc-4b2e-bba0-40438e5f6803"/>
                                         <textElement verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[
-  (
+                                         <textFieldExpression><![CDATA[
     (
-      $P{environmental_conditions} != null
-      && $P{environmental_conditions}.split("\\|", -1).length > 1
-      && !$P{environmental_conditions}.split("\\|", -1)[1].trim().isEmpty()
+      (
+        $F{resource_working_hours} != null
+        && $F{resource_working_hours}.split("\\|", -1).length > 1
+        && !$F{resource_working_hours}.split("\\|", -1)[1].trim().isEmpty()
+      )
+        ? $F{resource_working_hours}.split("\\|", -1)[1].trim()
+        : (
+            (
+              $P{environmental_conditions} != null
+              && $P{environmental_conditions}.split("\\|", -1).length > 1
+              && !$P{environmental_conditions}.split("\\|", -1)[1].trim().isEmpty()
+            )
+              ? $P{environmental_conditions}.split("\\|", -1)[1].trim()
+              : (
+                  ($F{C2312} == null || $F{C2312}.trim().isEmpty())
+                    ? ""
+                    : $F{C2312} + " %"
+                )
+          )
     )
-      ? $P{environmental_conditions}.split("\\|", -1)[1].trim()
-      : (
-          ($F{C2312} == null || $F{C2312}.trim().isEmpty())
-            ? ""
-            : $F{C2312} + " %"
-        )
-  )
-]]></textFieldExpression>
+  ]]></textFieldExpression>
                                 </textField>
                         </band>
 			<band height="49">
