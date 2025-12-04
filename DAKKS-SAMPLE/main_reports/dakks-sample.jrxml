@@ -84,12 +84,18 @@
 ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
 : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"]]></defaultValueExpression>
 	</parameter>
-        <parameter name="Conformity_description_2" class="java.lang.String">
-                <parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	<parameter name="Conformity_description_2" class="java.lang.String">
+		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+? "? innerhalb der Spezifikation\n!? außerhalb der Spezifikation (keine Aussage möglich)\n! außerhalb der Spezifikation\n* nicht im Akkreditierungsumfang"
+: "? within the specification\n!? out of specification (no statement possible)\n! out of specification\n* not covered by the accreditation scope"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Conformity_description_3" class="java.lang.String">
+		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
 : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."]]></defaultValueExpression>
-        </parameter>
+	</parameter>
 	<parameter name="Additional_information" class="java.lang.String">
 		<parameterDescription><![CDATA[Zusatzinformationen zur DAkkS-Anerkennung und internationalen Abkommen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
@@ -857,23 +863,42 @@
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-                                <frame>
-                                        <reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
+				<frame>
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
                                         <textField textAdjust="StretchHeight">
-                                                <reportElement positionType="Float" x="0" y="0" width="535" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+                                                <reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
                                                 <textElement markup="html">
                                                         <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                                 </textElement>
-                                                <textFieldExpression><![CDATA[(
-  ( $P{Conformity_description_2} == null || $P{Conformity_description_2}.trim().isEmpty() )
+						<textFieldExpression><![CDATA[(
+  (
+    $P{Conformity_description_2} == null
+    || $P{Conformity_description_2}.trim().isEmpty()
+    || $P{Conformity_description_2}
+        .replace("/n", "\\n")
+        .replace("\\\\n", "\\n")
+        .replace("\r", "")
+        .matches("(?s)^\\s*\\?\\s*!\\?\\s*!\\s*\\*\\s*$")
+  )
+    ? ""
+    : $P{Conformity_description_2}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+					</textField>
+                                        <textField textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+                                                <textElement markup="html">
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
+						<textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
         : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
       )
-    : $P{Conformity_description_2}
+    : $P{Conformity_description_3}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-                                        </textField>
-                                </frame>
+					</textField>
+				</frame>
 			</band>
 			<band height="54">
 				<printWhenExpression><![CDATA[(
