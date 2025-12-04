@@ -152,15 +152,24 @@
                 <variableExpression><![CDATA[($F{rel_err}==null || $F{rel_err}.trim().isEmpty())
  ? ""
  : (
-     $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-     ? new java.text.DecimalFormat("0.0",
-         new java.text.DecimalFormatSymbols(java.util.Locale.US))
-         .format(
-           Double.parseDouble(
-             $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
-           )
-         )
-     : $F{rel_err}
+     (
+       $F{fixq} != null
+       && !$F{fixq}.trim().isEmpty()
+       && $F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+       && Math.abs(Double.parseDouble($F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) < 1e-9
+     )
+     ? "--"
+     : (
+         $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+         ? new java.text.DecimalFormat("0.00",
+             new java.text.DecimalFormatSymbols(java.util.Locale.US))
+             .format(
+               Double.parseDouble(
+                 $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
+               )
+             )
+         : $F{rel_err}
+       )
    )]]></variableExpression>
         </variable>
 	<variable name="RoundedTolErr" class="java.lang.String">
