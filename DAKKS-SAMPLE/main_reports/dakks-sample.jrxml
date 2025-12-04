@@ -525,24 +525,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(
-  ($V{procedure_description_var} == null || $V{procedure_description_var}.trim().isEmpty())
-    ? $F{C2320}   // bei leer: Feld verwenden
-    : $V{procedure_description_var}
-)]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="16" y="70" width="536" height="16" uuid="ec9363f9-104c-498b-a677-9d12b86cb8ce"/>
-					<textElement>
-						<font size="10"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{C2320}]]></textFieldExpression>
-				</textField>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
+                                        <textElement>
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
+                                </textField>
 			</band>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
@@ -561,13 +550,13 @@ WHERE c.CTAG=$P{P_CTAG}]]>
 					</textElement>
 					<textFieldExpression><![CDATA["PROCEDURAL DOCUMENT"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="f29249f2-b622-4b3a-9542-8722d8712376"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
-				</textField>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="f29249f2-b622-4b3a-9542-8722d8712376"/>
+                                        <textElement>
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
+                                </textField>
 			</band>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Messbedingungen"/>
