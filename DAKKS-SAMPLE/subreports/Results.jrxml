@@ -204,6 +204,11 @@
       ? ""
       : $F{exp_uncert_u}.trim().replaceAll("(?i)°\\s*C", "K")]]></variableExpression>
         </variable>
+        <variable name="ExpUncertaintyValue" class="java.lang.String">
+                <variableExpression><![CDATA[$F{exp_uncert} == null
+      ? ""
+      : $F{exp_uncert}.trim().replaceAll("(?i)°\\s*C", "K")]]></variableExpression>
+        </variable>
         <variable name="DisplayUncertainty" class="java.lang.String">
                 <variableExpression><![CDATA[(
           $F{exp_uncert_u} != null
@@ -213,13 +218,13 @@
              )
       )
       ? (
-            ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+            $V{ExpUncertaintyValue}
           + (
                 $V{ExpUncertaintyUnit}.isEmpty()
                 ? ""
                 : (
                       (
-                          ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                          $V{ExpUncertaintyValue}
                               .endsWith(
                                   (
                                       ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
@@ -235,8 +240,7 @@
                           || (
                                   $V{ExpUncertaintyUnit}.isEmpty()
                                 ? false
-                                : ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith($V{ExpUncertaintyUnit})
+                                : $V{ExpUncertaintyValue}.endsWith($V{ExpUncertaintyUnit})
                              )
                       )
                       ? ""
@@ -247,27 +251,25 @@
         : (
               $V{FormattedUncertainty} == null || $V{FormattedUncertainty}.trim().isEmpty()
               ? (
-                    ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                    $V{ExpUncertaintyValue}
                   + (
                         $V{ExpUncertaintyUnit}.isEmpty()
                         ? ""
                         : (
                               (
-                                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                      .endsWith(
-                                          (
-                                              ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
-                                              + (
-                                                      $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
-                                                   || $V{ExpUncertaintyUnit}.isEmpty()
-                                                  ? ""
-                                                  : " "
-                                                )
-                                              + $V{ExpUncertaintyUnit}
-                                          ).trim()
-                                      )
-                                  || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                      .endsWith($V{ExpUncertaintyUnit})
+                                  $V{ExpUncertaintyValue}.endsWith(
+                                      (
+                                          ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                          + (
+                                                  $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                               || $V{ExpUncertaintyUnit}.isEmpty()
+                                              ? ""
+                                              : " "
+                                            )
+                                          + $V{ExpUncertaintyUnit}
+                                      ).trim()
+                                  )
+                                  || $V{ExpUncertaintyValue}.endsWith($V{ExpUncertaintyUnit})
                               )
                               ? ""
                               : " " + $V{ExpUncertaintyUnit}
@@ -286,13 +288,13 @@
              )
       )
       ? (
-            ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+            $V{ExpUncertaintyValue}
           + (
                 $V{ExpUncertaintyUnit}.isEmpty()
                 ? ""
                 : (
                       (
-                          ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                          $V{ExpUncertaintyValue}
                               .endsWith(
                                   (
                                       ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
@@ -308,8 +310,7 @@
                           || (
                                   $V{ExpUncertaintyUnit}.isEmpty()
                                 ? false
-                                : ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                    .endsWith($V{ExpUncertaintyUnit})
+                                : $V{ExpUncertaintyValue}.endsWith($V{ExpUncertaintyUnit})
                              )
                       )
                       ? ""
@@ -320,27 +321,25 @@
         : (
               $V{FormattedUncertaintyIsoP} == null || $V{FormattedUncertaintyIsoP}.trim().isEmpty()
               ? (
-                    ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                    $V{ExpUncertaintyValue}
                   + (
                         $V{ExpUncertaintyUnit}.isEmpty()
                         ? ""
                         : (
                               (
-                                  ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                      .endsWith(
-                                          (
-                                              ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
-                                              + (
-                                                      $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
-                                                   || $V{ExpUncertaintyUnit}.isEmpty()
-                                                  ? ""
-                                                  : " "
-                                                )
-                                              + $V{ExpUncertaintyUnit}
-                                          ).trim()
-                                      )
-                                  || ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
-                                      .endsWith($V{ExpUncertaintyUnit})
+                                  $V{ExpUncertaintyValue}.endsWith(
+                                      (
+                                          ($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim())
+                                          + (
+                                                  $F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty()
+                                               || $V{ExpUncertaintyUnit}.isEmpty()
+                                              ? ""
+                                              : " "
+                                            )
+                                          + $V{ExpUncertaintyUnit}
+                                      ).trim()
+                                  )
+                                  || $V{ExpUncertaintyValue}.endsWith($V{ExpUncertaintyUnit})
                               )
                               ? ""
                               : " " + $V{ExpUncertaintyUnit}
@@ -2182,7 +2181,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{exp_uncert} == null ? "" : $F{exp_uncert}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$V{ExpUncertaintyValue}.replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="468" y="0" width="16" height="14" uuid="7ed2ce10-dcc0-4b01-9feb-4f3f4b9b58b0"/>
@@ -2275,8 +2274,8 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-            ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+                                        <textFieldExpression><![CDATA[(
+            $V{ExpUncertaintyValue}
           + ($F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty() ? "" : " " + $F{exp_uncert_p}.trim())
             + ($V{ExpUncertaintyUnit}.isEmpty() ? "" : " " + $V{ExpUncertaintyUnit})
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
@@ -2373,7 +2372,7 @@
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[(
-            ($F{exp_uncert} == null ? "" : $F{exp_uncert}.trim())
+            $V{ExpUncertaintyValue}
           + ($F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty() ? "" : " " + $F{exp_uncert_p}.trim())
             + ($V{ExpUncertaintyUnit}.isEmpty() ? "" : " " + $V{ExpUncertaintyUnit})
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
