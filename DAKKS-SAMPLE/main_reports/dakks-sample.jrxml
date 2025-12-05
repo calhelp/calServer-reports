@@ -921,14 +921,26 @@
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-				<frame>
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
-					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="4" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
-						<textElement markup="html">
-							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[(
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="57" y="53" width="494" height="20" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
+        : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
+      )
+    : $P{Conformity_description_3}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="17" y="53" width="30" height="20" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
     || $P{Conformity_description_2}.trim().isEmpty()
@@ -945,24 +957,9 @@
     .replace("\\n", "\n")
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
-					</textField>
-					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="4" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
-						<textElement markup="html">
-							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[(
-  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
-    ? ( $P{Sprache}.equals("Deutsch")
-        ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
-        : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
-      )
-    : $P{Conformity_description_3}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-					</textField>
-				</frame>
+				</textField>
 			</band>
-			<band height="58" splitType="Stretch">
+			<band height="55" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1AdditionalInformation} == null ? "y" : $P{ShowGroup1AdditionalInformation}.toString())
     .replace(" ", " ")
@@ -984,7 +981,7 @@
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="25" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -998,7 +995,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="89" splitType="Prevent">
+			<band height="82" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
@@ -1007,21 +1004,21 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="26" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
+					<reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="149" y="24" width="195" height="20" uuid="485a1252-b6aa-4c57-b031-f535277c2af0"/>
+					<reportElement x="149" y="15" width="195" height="20" uuid="485a1252-b6aa-4c57-b031-f535277c2af0"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement x="16" y="48" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
+					<reportElement x="16" y="39" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
 					<textElement>
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -1030,7 +1027,7 @@
   : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="16" y="66" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
+					<reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -1056,7 +1053,7 @@
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
 				<break>
-					<reportElement x="0" y="13" width="100" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
+					<reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
 				</break>
 			</band>
 		</groupHeader>
