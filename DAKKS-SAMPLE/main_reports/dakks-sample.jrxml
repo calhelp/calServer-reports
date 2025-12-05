@@ -440,7 +440,7 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
-	<group name="Group1" keepTogether="true">
+	<group name="Group1">
 		<groupHeader>
 			<band height="58">
 				<property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
@@ -908,7 +908,7 @@
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="26" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="26" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -924,7 +924,7 @@
 				<frame>
 					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="0" y="4" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+						<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="4" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
 						<textElement markup="html">
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
@@ -947,7 +947,7 @@
     .replace("\n", "<br/>")]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="40" y="4" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+						<reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="4" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
 						<textElement markup="html">
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
@@ -984,7 +984,7 @@
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="25" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
