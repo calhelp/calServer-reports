@@ -822,7 +822,7 @@
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="146" y="6" width="191" height="20" uuid="969fe463-6949-4ac5-aa9e-2e2d77627712"/>
+					<reportElement x="147" y="6" width="191" height="20" uuid="969fe463-6949-4ac5-aa9e-2e2d77627712"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
