@@ -764,7 +764,7 @@
     )]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="55">
+			<band height="50">
 				<property name="com.calserver.bandLabel" value="Verwendete Normale"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
@@ -847,7 +847,7 @@
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="62" splitType="Stretch">
+			<band height="58" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementUncertainty} == null ? "y" : $P{ShowGroup1MeasurementUncertainty}.toString())
@@ -886,7 +886,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="81">
+			<band height="79">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
     .replace(" ", " ")
@@ -894,21 +894,21 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="6" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
+					<reportElement x="16" y="4" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["KONFORMITÄT"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="122" y="5" width="190" height="20" uuid="f7a96f12-2705-42db-bac4-ba4b90fb8d60"/>
+					<reportElement x="122" y="3" width="190" height="20" uuid="f7a96f12-2705-42db-bac4-ba4b90fb8d60"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="28" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+					<reportElement positionType="Float" x="16" y="26" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -924,7 +924,7 @@
 				<frame>
 					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="0" y="6" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+						<reportElement positionType="Float" x="0" y="4" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
 						<textElement markup="html">
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
@@ -947,7 +947,7 @@
     .replace("\n", "<br/>")]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" x="40" y="6" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+						<reportElement positionType="Float" x="40" y="4" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
 						<textElement markup="html">
 							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
@@ -970,21 +970,21 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="0" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
+					<reportElement x="16" y="3" width="138" height="20" uuid="ca559835-5634-430f-b1f4-ad2a7f338ca6"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["WEITERE HINWEISE"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="153" y="-1" width="191" height="20" uuid="fcea89d7-3ab6-424e-bd48-ce456ade4733"/>
+					<reportElement x="153" y="2" width="191" height="20" uuid="fcea89d7-3ab6-424e-bd48-ce456ade4733"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="16" y="22" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+					<reportElement x="16" y="25" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
