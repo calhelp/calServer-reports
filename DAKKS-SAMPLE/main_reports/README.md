@@ -29,6 +29,25 @@ Unterberichte für Normale und Messergebnisse ein.
 5. **Report ausgeben** – typischerweise als PDF, alternativ in jedem von
    JasperReports unterstützten Format.
 
+### Parameterdatei für JasperStarter
+
+Nutze die mitgelieferte Datei `dakks-sample_params.properties` als Vorlage,
+um Fehler wie `Parameter '05,' does not exist in report!` zu vermeiden. Die
+Datei akzeptiert einfache `name=value`-Zeilen ohne Kommata oder Semikolons als
+Trenner. Beispielaufruf:
+
+```bash
+cd /app/httpdocs/filemanager/reports/calibrations/main_reports
+jasperstarter process dakks-sample.jrxml \
+  -o ../pdf/56_250605_1 -f pdf \
+  -P REPORT_LOCALE=de_DE @dakks-sample_params.properties \
+  -t mysql -u <username> -p <password> -H mysql_db -n calserver
+```
+
+**Tipp:** Datumswerte im Properties-File im ISO-Format ohne Trennkomma
+eintragen (z. B. `IncomingDate_override=2025-12-05`), damit keine neuen
+Parameternamen entstehen.
+
 ---
 
 ## 1. Für normale Nutzer:innen
