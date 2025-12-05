@@ -13,10 +13,14 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-	<parameter name="PrefixTable" class="java.lang.String">
-		<parameterDescription><![CDATA[Optionales Tabellenpräfix für den Zugriff auf die Standards-Tabelle.]]></parameterDescription>
-		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
+        <parameter name="PrefixTable" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionales Tabellenpräfix für den Zugriff auf die Standards-Tabelle.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="REPORT_LOCALE" class="java.util.Locale">
+                <parameterDescription><![CDATA[Sprache und Ländereinstellungen für Datum- und Textelemente.]]></parameterDescription>
+                <defaultValueExpression><![CDATA[new java.util.Locale("de", "DE")]]></defaultValueExpression>
+        </parameter>
         <parameter name="Sprache" class="java.lang.String">
                 <parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
                 <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
