@@ -21,7 +21,6 @@
                 <parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
                 <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
         </parameter>
-        <parameter name="REPORT_LOCALE" class="java.util.Locale"/>
         <parameter name="P_CTAG" class="java.lang.String">
                 <parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
                 <defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
