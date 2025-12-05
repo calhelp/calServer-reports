@@ -17,14 +17,15 @@
 		<parameterDescription><![CDATA[Optionales Tabellenpräfix für den Zugriff auf die Standards-Tabelle.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Sprache" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="P_CTAG" class="java.lang.String">
-		<parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="Sprache" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
+                <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="REPORT_LOCALE" class="java.util.Locale"/>
+        <parameter name="P_CTAG" class="java.lang.String">
+                <parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
+                <defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
+        </parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT DISTINCT
   COALESCE(i.I4201, "") AS I4201,
