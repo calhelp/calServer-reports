@@ -893,7 +893,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
                                 </textField>
                                 <break>
-                                        <reportElement positionType="Float" x="0" y="0" width="535" height="1" uuid="183a2511-8d5c-4ad3-ac7c-9d53f2e1eb0d"/>
+                                        <reportElement positionType="Float" x="0" y="70" width="535" height="1" uuid="183a2511-8d5c-4ad3-ac7c-9d53f2e1eb0d"/>
                                 </break>
                         </band>
                         <band height="77">
