@@ -440,7 +440,7 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
-	<group name="Group1">
+	<group name="Group1" keepTogether="true">
 		<groupHeader>
 			<band height="58">
 				<property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
@@ -847,7 +847,7 @@
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="58" splitType="Stretch">
+			<band height="64" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementUncertainty} == null ? "y" : $P{ShowGroup1MeasurementUncertainty}.toString())
@@ -856,21 +856,21 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="0" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
+					<reportElement x="16" y="4" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MESSUNSICHERHEITEN"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="200" y="-1" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
+					<reportElement x="200" y="3" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="16" y="26" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
@@ -886,7 +886,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="79" splitType="Stretch">
+			<band height="78" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
     .replace(" ", " ")
