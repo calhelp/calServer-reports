@@ -374,9 +374,9 @@
 		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
 	</variable>
         <columnHeader>
-                <band height="28">
+                <band height="30">
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="4ed0627d-9fa2-4009-b007-8bec51d8fe39">
                                     <printWhenExpression><![CDATA[
     (
         $P{ModernResultsHeader} == null
@@ -606,7 +606,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="2a2dbf93-a3a0-4ca8-ac05-3a65f86b9b7c">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="2a2dbf93-a3a0-4ca8-ac05-3a65f86b9b7c">
                                     <printWhenExpression><![CDATA[
     (
         $P{ModernResultsHeader} == null
@@ -785,7 +785,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="9b0b621c-5db8-4b1a-a781-fc377ac87c0f">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="9b0b621c-5db8-4b1a-a781-fc377ac87c0f">
                                     <printWhenExpression><![CDATA[
     $P{ModernResultsHeader} != null
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
@@ -1031,7 +1031,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="f7eb2d2b-eb4d-41e5-ae4b-8ab7d1ada9f0">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="f7eb2d2b-eb4d-41e5-ae4b-8ab7d1ada9f0">
                                     <printWhenExpression><![CDATA[
     $P{ModernResultsHeader} != null
     && $P{ModernResultsHeader}.toString().equalsIgnoreCase("Y")
@@ -1228,7 +1228,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="0e30b70c-1f1a-4a39-b02c-800e348721ba">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="0e30b70c-1f1a-4a39-b02c-800e348721ba">
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 2]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
@@ -1449,7 +1449,7 @@
 				</staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="9999c849-8077-4df9-8890-26a93be0cd10">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="9999c849-8077-4df9-8890-26a93be0cd10">
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 22]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
@@ -1670,7 +1670,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="77c05213-e84f-4b75-8bc6-f427caa33ce1">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="77c05213-e84f-4b75-8bc6-f427caa33ce1">
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 3]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
@@ -1843,7 +1843,7 @@
                                 </staticText>
                         </frame>
                         <frame>
-                                <reportElement x="0" y="0" width="535" height="28" uuid="e68489b7-5b78-45b5-9587-bd87d4db3533">
+                                <reportElement x="0" y="0" width="535" height="30" uuid="e68489b7-5b78-45b5-9587-bd87d4db3533">
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 4]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
