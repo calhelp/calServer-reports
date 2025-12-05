@@ -446,7 +446,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="6" isBold="true"/>
 					</textElement>
-                                        <text><![CDATA[unterer Spezifikation]]></text>
+                                        <text><![CDATA[untere Spezifikation]]></text>
                                 </staticText>
                                 <staticText>
                                         <reportElement x="108" y="14" width="54" height="12" uuid="e7e8fe51-1d3f-47b4-bac7-4bc5ffdff4cf"/>
@@ -796,7 +796,7 @@
 ]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
-                                        <reportElement x="0" y="0" width="53" height="14" uuid="5b6d7c3a-2f5c-4e92-931d-6df20a74e3da" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="0" y="0" width="70" height="14" uuid="5b6d7c3a-2f5c-4e92-931d-6df20a74e3da" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -809,7 +809,7 @@
                                         <text><![CDATA[Messbedingungen]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="0" y="14" width="53" height="12" uuid="3675a9a7-f7b7-415a-bb0a-76dbf6058b7c" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="0" y="14" width="70" height="12" uuid="3675a9a7-f7b7-415a-bb0a-76dbf6058b7c" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -822,7 +822,7 @@
                                         <text><![CDATA[Measuring Condition]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="53" y="0" width="54" height="14" uuid="d5b19b41-f28e-4d1d-8fe3-c7d7698a0542" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="70" y="0" width="54" height="14" uuid="d5b19b41-f28e-4d1d-8fe3-c7d7698a0542" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -835,7 +835,7 @@
                                         <text><![CDATA[Sollwert]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="53" y="14" width="54" height="12" uuid="7e4f2e87-0aa8-4939-b2a2-b8f0b5ca5426" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="70" y="14" width="54" height="12" uuid="7e4f2e87-0aa8-4939-b2a2-b8f0b5ca5426" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -848,7 +848,7 @@
                                         <text><![CDATA[True Value]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="107" y="0" width="83" height="14" uuid="5c8289d8-393d-4d04-9d1e-f1c131329dd0" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="124" y="0" width="54" height="14" uuid="5c8289d8-393d-4d04-9d1e-f1c131329dd0" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -858,10 +858,10 @@
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="6" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[untere Spezifikationsgrenze]]></text>
+                                        <text><![CDATA[untere Spezifikation]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="107" y="14" width="83" height="12" uuid="d08052e6-32d9-4ed2-9bbf-94fc590e587d" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="124" y="14" width="54" height="12" uuid="d08052e6-32d9-4ed2-9bbf-94fc590e587d" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -874,7 +874,7 @@
                                         <text><![CDATA[Lower Limit]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="190" y="0" width="60" height="14" uuid="1162c675-8a4e-472b-a2db-9395966b5e7a" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="178" y="0" width="90" height="14" uuid="1162c675-8a4e-472b-a2db-9395966b5e7a" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -887,7 +887,7 @@
                                         <text><![CDATA[Messwert]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="190" y="14" width="60" height="12" uuid="98b8e6e7-23d2-46dd-83cd-59721016cc34" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="178" y="14" width="90" height="12" uuid="98b8e6e7-23d2-46dd-83cd-59721016cc34" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -900,7 +900,7 @@
                                         <text><![CDATA[Measured Value]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="250" y="0" width="83" height="14" uuid="3f2d01d2-cab5-45b6-8604-1a6fe8ab7008" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="268" y="0" width="54" height="14" uuid="3f2d01d2-cab5-45b6-8604-1a6fe8ab7008" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -910,10 +910,10 @@
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="6" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[obere Spezifikationsgrenze]]></text>
+                                        <text><![CDATA[obere Spezifikation]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="250" y="14" width="83" height="12" uuid="1ade2037-51c0-4c2f-a3c2-0f6a32ccfced" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="268" y="14" width="54" height="12" uuid="1ade2037-51c0-4c2f-a3c2-0f6a32ccfced" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -926,7 +926,7 @@
                                         <text><![CDATA[Upper Limit]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="333" y="0" width="54" height="14" uuid="4a5772b2-d12b-45d0-9ffe-5f44312b2db9" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="322" y="0" width="54" height="14" uuid="4a5772b2-d12b-45d0-9ffe-5f44312b2db9" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -939,7 +939,7 @@
                                         <text><![CDATA[% rel. Abweichung]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="333" y="14" width="54" height="12" uuid="0d3bc3fa-803f-4b7a-9a87-762f22de8705" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="322" y="14" width="54" height="12" uuid="0d3bc3fa-803f-4b7a-9a87-762f22de8705" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -952,7 +952,7 @@
                                         <text><![CDATA[% rel. Deviation]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="387" y="0" width="80" height="14" uuid="e9d94aa3-4b24-48e5-8ef0-9c510e4a6265" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="376" y="0" width="91" height="14" uuid="e9d94aa3-4b24-48e5-8ef0-9c510e4a6265" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -965,7 +965,7 @@
                                         <text><![CDATA[erweiterte Messunsicherheit]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="387" y="14" width="80" height="12" uuid="1bd63f28-78b3-4d3f-a71a-c1e3afac4c6a" mode="Opaque" backcolor="#F5F7FA"/>
+                                        <reportElement x="376" y="14" width="91" height="12" uuid="1bd63f28-78b3-4d3f-a71a-c1e3afac4c6a" mode="Opaque" backcolor="#F5F7FA"/>
                                         <box>
                                                 <topPen lineWidth="0.0"/>
                                                 <leftPen lineWidth="0.0"/>
@@ -1231,8 +1231,8 @@
                                 <reportElement x="0" y="0" width="535" height="28" uuid="0e30b70c-1f1a-4a39-b02c-800e348721ba">
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 2]]></printWhenExpression>
                                 </reportElement>
-				<staticText>
-					<reportElement x="0" y="0" width="100" height="14" uuid="5c5dcb15-89a6-40c4-9cdf-0868be2c0c8a"/>
+                                <staticText>
+                                        <reportElement x="0" y="0" width="110" height="14" uuid="5c5dcb15-89a6-40c4-9cdf-0868be2c0c8a"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1243,8 +1243,8 @@
 					</textElement>
 					<text><![CDATA[Messbedingungen]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="0" y="14" width="100" height="12" uuid="6e7d15e2-3cd1-4ae1-8e94-7ba23d43142d"/>
+                                <staticText>
+                                        <reportElement x="0" y="14" width="110" height="12" uuid="6e7d15e2-3cd1-4ae1-8e94-7ba23d43142d"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1255,8 +1255,8 @@
 					</textElement>
 					<text><![CDATA[Measuring Condition]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="100" y="0" width="60" height="14" uuid="78d2b44b-93b7-476f-9e4d-0977ab8f3288"/>
+                                <staticText>
+                                        <reportElement x="110" y="0" width="60" height="14" uuid="78d2b44b-93b7-476f-9e4d-0977ab8f3288"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1267,8 +1267,8 @@
 					</textElement>
 					<text><![CDATA[Sollwert]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="100" y="14" width="60" height="12" uuid="22c83c66-1520-4047-898d-93d90ce64cfe"/>
+                                <staticText>
+                                        <reportElement x="110" y="14" width="60" height="12" uuid="22c83c66-1520-4047-898d-93d90ce64cfe"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1279,8 +1279,8 @@
 					</textElement>
 					<text><![CDATA[True Value]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="160" y="0" width="68" height="14" uuid="e7f5bf15-845e-4ada-a4db-53f10781dfc3"/>
+                                <staticText>
+                                        <reportElement x="170" y="0" width="60" height="14" uuid="e7f5bf15-845e-4ada-a4db-53f10781dfc3"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1289,10 +1289,10 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="6" isBold="true"/>
 					</textElement>
-					<text><![CDATA[untere Spezifikationsgrenze]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="160" y="14" width="68" height="12" uuid="2e920011-3756-43ae-8ad9-053c8bc6756c"/>
+                                        <text><![CDATA[untere Spezifikation]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="170" y="14" width="60" height="12" uuid="2e920011-3756-43ae-8ad9-053c8bc6756c"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1303,8 +1303,8 @@
 					</textElement>
 					<text><![CDATA[Lower Limit]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="228" y="0" width="65" height="14" uuid="58c100bb-2cab-48b8-bcae-a5d2124b695a"/>
+                                <staticText>
+                                        <reportElement x="230" y="0" width="75" height="14" uuid="58c100bb-2cab-48b8-bcae-a5d2124b695a"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1315,8 +1315,8 @@
 					</textElement>
 					<text><![CDATA[Messwert]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="228" y="14" width="65" height="12" uuid="5d37b9fb-2068-4beb-8350-19757e74c7f9"/>
+                                <staticText>
+                                        <reportElement x="230" y="14" width="75" height="12" uuid="5d37b9fb-2068-4beb-8350-19757e74c7f9"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1327,8 +1327,8 @@
 					</textElement>
 					<text><![CDATA[Measured Value]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="293" y="0" width="72" height="14" uuid="80726e4e-4fdd-431a-8ab3-a7f649d4bfc4"/>
+                                <staticText>
+                                        <reportElement x="305" y="0" width="60" height="14" uuid="80726e4e-4fdd-431a-8ab3-a7f649d4bfc4"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1337,10 +1337,10 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="6" isBold="true"/>
 					</textElement>
-					<text><![CDATA[obere Spezifikationsgrenze]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="293" y="14" width="72" height="12" uuid="d0bfc6b8-1f1e-4df9-9d2b-666918f7d1f1"/>
+                                        <text><![CDATA[obere Spezifikation]]></text>
+                                </staticText>
+                                <staticText>
+                                        <reportElement x="305" y="14" width="60" height="12" uuid="d0bfc6b8-1f1e-4df9-9d2b-666918f7d1f1"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1351,8 +1351,8 @@
 					</textElement>
 					<text><![CDATA[Upper Limit]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="365" y="0" width="45" height="14" uuid="a59a6dc1-0e2f-4726-83ef-fc6482fec21b"/>
+                                <staticText>
+                                        <reportElement x="365" y="0" width="45" height="14" uuid="a59a6dc1-0e2f-4726-83ef-fc6482fec21b"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1363,8 +1363,8 @@
 					</textElement>
 					<text><![CDATA[% rel. Abweichung]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="365" y="14" width="45" height="12" uuid="5fbef31c-8da1-4657-94c4-0d7a8ac5e2d7"/>
+                                <staticText>
+                                        <reportElement x="365" y="14" width="45" height="12" uuid="5fbef31c-8da1-4657-94c4-0d7a8ac5e2d7"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1375,8 +1375,8 @@
 					</textElement>
 					<text><![CDATA[% rel. Deviation]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="410" y="0" width="65" height="14" uuid="ddf45851-f50a-4bcc-85c8-d841021c82d5"/>
+                                <staticText>
+                                        <reportElement x="410" y="0" width="65" height="14" uuid="ddf45851-f50a-4bcc-85c8-d841021c82d5"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1453,7 +1453,7 @@
                                     <printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 22]]></printWhenExpression>
                                 </reportElement>
                                 <staticText>
-                                        <reportElement x="0" y="0" width="100" height="14" uuid="9ef57134-a08d-4722-b5dc-88638fd1def8"/>
+                                        <reportElement x="0" y="0" width="110" height="14" uuid="9ef57134-a08d-4722-b5dc-88638fd1def8"/>
                                         <box>
                                                 <topPen lineWidth="0.75"/>
                                                 <leftPen lineWidth="0.75"/>
@@ -1465,7 +1465,7 @@
                                         <text><![CDATA[Messbedingungen]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="0" y="14" width="100" height="12" uuid="77893e8b-d6f5-4e75-832b-3b2cb50db9ef"/>
+                                        <reportElement x="0" y="14" width="110" height="12" uuid="77893e8b-d6f5-4e75-832b-3b2cb50db9ef"/>
                                         <box>
                                                 <leftPen lineWidth="0.75"/>
                                                 <bottomPen lineWidth="0.75"/>
@@ -1477,7 +1477,7 @@
                                         <text><![CDATA[Measuring Condition]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="100" y="0" width="60" height="14" uuid="a8728949-aa86-4a38-afc1-d4bce7e957be"/>
+                                        <reportElement x="110" y="0" width="60" height="14" uuid="a8728949-aa86-4a38-afc1-d4bce7e957be"/>
                                         <box>
                                                 <topPen lineWidth="0.75"/>
                                                 <leftPen lineWidth="0.75"/>
@@ -1489,7 +1489,7 @@
                                         <text><![CDATA[Sollwert]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="100" y="14" width="60" height="12" uuid="d4cb35b8-3639-4104-952f-44afa462c17b"/>
+                                        <reportElement x="110" y="14" width="60" height="12" uuid="d4cb35b8-3639-4104-952f-44afa462c17b"/>
                                         <box>
                                                 <leftPen lineWidth="0.75"/>
                                                 <bottomPen lineWidth="0.75"/>
@@ -1501,7 +1501,7 @@
                                         <text><![CDATA[True Value]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="160" y="0" width="68" height="14" uuid="cf055528-4ca7-4ff8-92f6-adf846768f55"/>
+                                        <reportElement x="170" y="0" width="60" height="14" uuid="cf055528-4ca7-4ff8-92f6-adf846768f55"/>
                                         <box>
                                                 <topPen lineWidth="0.75"/>
                                                 <leftPen lineWidth="0.75"/>
@@ -1510,10 +1510,10 @@
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="6" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[untere Spezifikationsgrenze]]></text>
+                                        <text><![CDATA[untere Spezifikation]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="160" y="14" width="68" height="12" uuid="1bc83d75-a21d-4d98-8422-623221a058a1"/>
+                                        <reportElement x="170" y="14" width="60" height="12" uuid="1bc83d75-a21d-4d98-8422-623221a058a1"/>
                                         <box>
                                                 <leftPen lineWidth="0.75"/>
                                                 <bottomPen lineWidth="0.75"/>
@@ -1525,7 +1525,7 @@
                                         <text><![CDATA[Lower Limit]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="228" y="0" width="65" height="14" uuid="140da21a-29e7-4daf-a389-6b3a9340597e"/>
+                                        <reportElement x="230" y="0" width="75" height="14" uuid="140da21a-29e7-4daf-a389-6b3a9340597e"/>
                                         <box>
                                                 <topPen lineWidth="0.75"/>
                                                 <leftPen lineWidth="0.75"/>
@@ -1537,7 +1537,7 @@
                                         <text><![CDATA[Messwert]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="228" y="14" width="65" height="12" uuid="b1dec267-7066-4c79-a041-b275d736db0d"/>
+                                        <reportElement x="230" y="14" width="75" height="12" uuid="b1dec267-7066-4c79-a041-b275d736db0d"/>
                                         <box>
                                                 <leftPen lineWidth="0.75"/>
                                                 <bottomPen lineWidth="0.75"/>
@@ -1549,7 +1549,7 @@
                                         <text><![CDATA[Measured Value]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="293" y="0" width="72" height="14" uuid="db3ff69a-9ba2-4663-b9c6-8ec76bad9de4"/>
+                                        <reportElement x="305" y="0" width="60" height="14" uuid="db3ff69a-9ba2-4663-b9c6-8ec76bad9de4"/>
                                         <box>
                                                 <topPen lineWidth="0.75"/>
                                                 <leftPen lineWidth="0.75"/>
@@ -1558,10 +1558,10 @@
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="6" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[obere Spezifikationsgrenze]]></text>
+                                        <text><![CDATA[obere Spezifikation]]></text>
                                 </staticText>
                                 <staticText>
-                                        <reportElement x="293" y="14" width="72" height="12" uuid="e929bc96-9d28-4d6f-9f84-d6b9fc98848b"/>
+                                        <reportElement x="305" y="14" width="60" height="12" uuid="e929bc96-9d28-4d6f-9f84-d6b9fc98848b"/>
                                         <box>
                                                 <leftPen lineWidth="0.75"/>
                                                 <bottomPen lineWidth="0.75"/>
@@ -2063,7 +2063,7 @@
                                     <printWhenExpression><![CDATA[( $V{MeasurementDetailsValue} == null || $V{MeasurementDetailsValue}.intValue() == 1 ) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
                                 <textField>
-                                        <reportElement x="0" y="0" width="53" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
+                                        <reportElement x="0" y="0" width="70" height="14" uuid="ff97d3b9-4461-450b-95f3-ae78d55379f4"/>
                                         <textElement verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
@@ -2072,35 +2072,35 @@
               : ""]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
-                                        <reportElement x="107" y="0" width="83" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
+                                        <reportElement x="124" y="0" width="54" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$F{lower_limit} == null ? "" : $F{lower_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
-                                        <reportElement x="190" y="0" width="60" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
+                                        <reportElement x="178" y="0" width="90" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
-                                        <reportElement x="250" y="0" width="83" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
+                                        <reportElement x="268" y="0" width="54" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$F{upper_limit} == null ? "" : $F{upper_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
-                                        <reportElement x="333" y="0" width="54" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+                                        <reportElement x="322" y="0" width="54" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
                                 </textField>
                                 <textField>
-                                        <reportElement x="387" y="0" width="80" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+                                        <reportElement x="376" y="0" width="91" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
@@ -2146,7 +2146,7 @@
               : ""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="100" y="0" width="60" height="14" uuid="2875736d-9a76-40bb-942c-bf74db52f6f1"/>
+                                        <reportElement x="110" y="0" width="60" height="14" uuid="2875736d-9a76-40bb-942c-bf74db52f6f1"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
@@ -2157,7 +2157,7 @@
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="160" y="0" width="68" height="14" uuid="d79dd33b-148a-40b6-8b79-af37ff461e3d"/>
+                                        <reportElement x="170" y="0" width="60" height="14" uuid="d79dd33b-148a-40b6-8b79-af37ff461e3d"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
@@ -2168,14 +2168,14 @@
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="228" y="0" width="65" height="14" uuid="d4d1b44f-4728-4747-a120-1c603f45f32a"/>
+                                        <reportElement x="230" y="0" width="75" height="14" uuid="d4d1b44f-4728-4747-a120-1c603f45f32a"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
                                         <textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="293" y="0" width="72" height="14" uuid="6f31626e-4a96-45a8-9871-b271b4c3de61"/>
+                                        <reportElement x="305" y="0" width="60" height="14" uuid="6f31626e-4a96-45a8-9871-b271b4c3de61"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
@@ -2243,7 +2243,7 @@
               : ""]]></textFieldExpression>
                                 </textField>
                                 <textField>
-                                        <reportElement x="100" y="0" width="60" height="14" uuid="19dc269b-362d-4d54-8de0-5f81bd2b4cb7"/>
+                                        <reportElement x="110" y="0" width="60" height="14" uuid="19dc269b-362d-4d54-8de0-5f81bd2b4cb7"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
@@ -2254,7 +2254,7 @@
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
-                                        <reportElement x="160" y="0" width="68" height="14" uuid="367f315b-912f-4eeb-a063-861b3591ac41"/>
+                                        <reportElement x="170" y="0" width="60" height="14" uuid="367f315b-912f-4eeb-a063-861b3591ac41"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
@@ -2265,14 +2265,14 @@
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
-                                        <reportElement x="228" y="0" width="65" height="14" uuid="d4f920cb-94fa-4b7c-a68b-abc7345b8a4e"/>
+                                        <reportElement x="230" y="0" width="75" height="14" uuid="d4f920cb-94fa-4b7c-a68b-abc7345b8a4e"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[$F{uut_ind} == null ? "" : $F{uut_ind}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
-                                        <reportElement x="293" y="0" width="72" height="14" uuid="787af295-5ab9-4457-b316-7d88e4431690"/>
+                                        <reportElement x="305" y="0" width="60" height="14" uuid="787af295-5ab9-4457-b316-7d88e4431690"/>
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
