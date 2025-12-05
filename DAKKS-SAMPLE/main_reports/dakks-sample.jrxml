@@ -440,7 +440,7 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
-	<group name="Group1" keepTogether="true">
+	<group name="Group1">
 		<groupHeader>
 			<band height="58">
 				<property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
@@ -886,7 +886,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="79">
+			<band height="79" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
     .replace(" ", " ")
@@ -962,7 +962,7 @@
 					</textField>
 				</frame>
 			</band>
-			<band height="58">
+			<band height="58" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1AdditionalInformation} == null ? "y" : $P{ShowGroup1AdditionalInformation}.toString())
     .replace(" ", " ")
