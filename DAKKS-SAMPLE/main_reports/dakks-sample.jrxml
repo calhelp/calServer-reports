@@ -50,46 +50,46 @@
 		<parameterDescription><![CDATA[Kurzbeschreibung des kalibrierten Mess- oder Prüfmittels.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für die Größen Gleich-Wechselspannung, Gleich- und Wechselstrom, Gleichstromwiderstand und Frequenz."]]></defaultValueExpression>
 	</parameter>
-        <parameter name="Results_description" class="java.lang.String">
-                <parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	<parameter name="Results_description" class="java.lang.String">
+		<parameterDescription><![CDATA[Hinweis auf Seitenverweise der Messergebnisse im Report.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
 : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."]]></defaultValueExpression>
-        </parameter>
-        <parameter name="Results_end_note" class="java.lang.String">
-                <parameterDescription><![CDATA[Abschließender Hinweis unterhalb der Messergebnisse.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="Measurements_description" class="java.lang.String">
-                <parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	</parameter>
+	<parameter name="Results_end_note" class="java.lang.String">
+		<parameterDescription><![CDATA[Abschließender Hinweis unterhalb der Messergebnisse.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Measurements_description" class="java.lang.String">
+		<parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß DAkkS-DKD-3 bzw. EA 4/2 ermittelt. Der Wert der Messgröße liegt mit einer Wahrscheinlichkeit von ca. 95 % im zugeordneten Werteintervall."
 : "The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a coverage factor k=2. They were calculated in accordance with DKD-3 and EA 4/2 and JCGM104:2008 / ISO/IEC Guide to the expression of uncertainty in measurement (GUM). The measured value is within the corresponding interval with a probability of about 95%."]]></defaultValueExpression>
 	</parameter>
-        <parameter name="Measurements_description_1" class="java.lang.String">
-                <parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	<parameter name="Measurements_description_1" class="java.lang.String">
+		<parameterDescription><![CDATA[Zusätzlicher Verweis auf GUM-basierte Unsicherheitsbewertung.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Die Messunsicherheit wurde gemäß GUM (Guide to the Expression of Uncertainty in Measurement) ermittelt; die Ergebnisse sind im Kalibrierschein dokumentiert."
 : "Measurement uncertainty was evaluated in accordance with the GUM (Guide to the Expression of Uncertainty in Measurement); the results are documented in the calibration certificate."]]></defaultValueExpression>
-        </parameter>
-        <parameter name="Uncertainty_description" class="java.lang.String">
-                <parameterDescription><![CDATA[Standardtextblock zu Messunsicherheiten, optional überschreibbar.]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	</parameter>
+	<parameter name="Uncertainty_description" class="java.lang.String">
+		<parameterDescription><![CDATA[Standardtextblock zu Messunsicherheiten, optional überschreibbar.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Angegeben ist die erweiterte Messunsicherheit, die sich aus der Standardmessunsicherheit durch Multiplikation<br/>mit dem Erweiterungsfaktor k = 2 ergibt. Sie wurde gemäß EA-4/02 M: 2022 Ermittlung der Messunsicherheit bei<br/>Kalibrierungen und JCGM 104:2009 Leitfaden zur Angabe der Messunsicherheit (GUM) ermittelt. Der Wert der<br/>Messgröße liegt mit einer Wahrscheinlichkeit von > 95 % im zugeordneten Werteintervall.<br/><br/><i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a<br/>coverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement<br/>in calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within<br/>the corresponding interval with a probability of > 95%.</i><br/><br/>Die Messunsicherheiten wurden mit der Software „GUM-Workbench“ abgeschätzt, die Ergebnisse werden<br/>dokumentiert.<br/><br/><i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"
 : "<i>The uncertainties shown are the expanded uncertainties, which are calculated from the standard uncertainties, multiplied by a<br/>coverage factor k = 2. They were calculated in accordance with EA-4/02 M: 2022 Evaluation of the uncertainty of measurement<br/>in calibration and JCGM104:2009 Guide to the expression of uncertainty in measurement (GUM). The measured value is within<br/>the corresponding interval with a probability of > 95%.</i><br/><br/><i>The calculations of uncertainty were performed using the software „GUM-Workbench“, the results are documented.</i>"]]></defaultValueExpression>
-        </parameter>
+	</parameter>
 	<parameter name="Conformity_description_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Einleitungstext für Konformitätsaussagen unter Berücksichtigung der Messunsicherheit.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
 : "If statements of conformity are made, they consider the uncertainty of measurement.\nLimitations are marked as follows:"]]></defaultValueExpression>
 	</parameter>
-        <parameter name="Conformity_description_2" class="java.lang.String">
-                <parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
-                <defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
+	<parameter name="Conformity_description_2" class="java.lang.String">
+		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
 ? "? innerhalb der Spezifikation<br/>!? außerhalb der Spezifikation (keine Aussage möglich)<br/>! außerhalb der Spezifikation<br/>* nicht im Akkreditierungsumfang"
 : "? within the specification<br/>!? out of specification (no statement possible)<br/>! out of specification<br/>* not covered by the accreditation scope"]]></defaultValueExpression>
-        </parameter>
+	</parameter>
 	<parameter name="Conformity_description_3" class="java.lang.String">
 		<parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
@@ -140,18 +140,18 @@
 		<parameterDescription><![CDATA[Text für die erste Kennziffer im Akkreditierungsblock (z. B. Auftragsnummer).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
 	</parameter>
-        <parameter name="MarkNumber2" class="java.lang.String">
-                <parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="sign_names" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige der Namen im Unterschriftsbereich (Y/N).]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="ShowGroup1CalibrationItem" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
+	<parameter name="MarkNumber2" class="java.lang.String">
+		<parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sign_names" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige der Namen im Unterschriftsbereich (Y/N).]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ShowGroup1CalibrationItem" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Kalibriergegenstand im Group-Header.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
 	<parameter name="ShowGroup1IncomingDate" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zum Datum der Anlieferung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -192,30 +192,30 @@
 		<parameterDescription><![CDATA[Optionaler Freitext, der den Ort der Kalibrierung überschreibt.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-        <parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Umgebungsbedingungen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="environmental_conditions" class="java.lang.String">
-                <parameterDescription><![CDATA[Optionaler Freitext für Umgebungstemperatur und relative Luftfeuchte im Format "Text_Temperatur | Text_Feuchte".]]></parameterDescription>
-                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-        </parameter>
+	<parameter name="ShowGroup1EnvironmentalConditions" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Umgebungsbedingungen.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="environmental_conditions" class="java.lang.String">
+		<parameterDescription><![CDATA[Optionaler Freitext für Umgebungstemperatur und relative Luftfeuchte im Format "Text_Temperatur | Text_Feuchte".]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<parameter name="ShowGroup1StandardsTraceability" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu verwendeten Normalen und Rückführung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
-        <parameter name="ShowGroup1ResultsIntro" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="ShowGroup1MeasurementUncertainty" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Messunsicherheiten.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
-        <parameter name="ShowGroup1Conformity" class="java.lang.String">
-                <parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
-                <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
-        </parameter>
+	<parameter name="ShowGroup1ResultsIntro" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des einleitenden Abschnitts zu den Messergebnissen.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ShowGroup1MeasurementUncertainty" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu den Messunsicherheiten.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ShowGroup1Conformity" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zur Konformität.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
 	<parameter name="ShowGroup1AdditionalInformation" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Abschnitts zu weiteren Hinweisen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -225,7 +225,7 @@
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-         <![CDATA[SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
+		<![CDATA[SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C2327, COALESCE(c.C2320, "") AS C2320, DATE_FORMAT(C2301, '%Y-%m') AS cal_date, CONCAT(cu.K4602, IF(cu.K4603 IS NOT NULL, CONCAT("\n", cu.K4603), ""), "\n", cu.K4606, " ", cu.k4604) AS customer,
   COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", i.I4224, NULL) AS I4224,
   c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
   p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope,
@@ -255,14 +255,14 @@
 	<field name="I4204" class="java.lang.String"/>
 	<field name="I4206" class="java.lang.String"/>
 	<field name="I4224" class="java.lang.String"/>
-         <field name="procedure_name" class="java.lang.String"/>
-         <field name="calibration_item" class="java.lang.String"/>
-         <field name="calibration_method" class="java.lang.String"/>
-         <field name="procedure_description" class="java.lang.String"/>
-         <field name="measurement_conditions" class="java.lang.String"/>
-         <field name="standards" class="java.lang.String"/>
-         <field name="scope" class="java.lang.String"/>
-         <field name="resource_working_hours" class="java.lang.String"/>
+	<field name="procedure_name" class="java.lang.String"/>
+	<field name="calibration_item" class="java.lang.String"/>
+	<field name="calibration_method" class="java.lang.String"/>
+	<field name="procedure_description" class="java.lang.String"/>
+	<field name="measurement_conditions" class="java.lang.String"/>
+	<field name="standards" class="java.lang.String"/>
+	<field name="scope" class="java.lang.String"/>
+	<field name="resource_working_hours" class="java.lang.String"/>
 	<variable name="title" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Kalibrierschein" : "Calibration Certificate"]]></variableExpression>
 	</variable>
@@ -440,11 +440,11 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
-	<group name="Group1">
+	<group name="Group1" keepTogether="true">
 		<groupHeader>
 			<band height="58">
 				<property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1CalibrationItem} == null ? "y" : $P{ShowGroup1CalibrationItem}.toString())
     .replace(" ", " ")
     .trim()
@@ -466,9 +466,9 @@
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="2df318c6-d25b-48ed-80a6-10d27ebf6063"/>
-                                <textElement textAlignment="Left" markup="html">
-                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
+					<textElement textAlignment="Left" markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
 					<textFieldExpression><![CDATA[(
   ($V{procedure_calibration_item_var} == null || $V{procedure_calibration_item_var}.trim().isEmpty())
     ? $P{Asset_description}    // bei leer: Parameter nutzen
@@ -478,7 +478,7 @@
 			</band>
 			<band height="48">
 				<property name="com.calserver.bandLabel" value="Datum der Anlieferung"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1IncomingDate} == null ? "y" : $P{ShowGroup1IncomingDate}.toString())
     .replace(" ", " ")
     .trim()
@@ -512,7 +512,7 @@
 			</band>
 			<band height="56">
 				<property name="com.calserver.bandLabel" value="Zustand Eingang/Ausgang"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Condition} == null ? "y" : $P{ShowGroup1Condition}.toString())
     .replace(" ", " ")
     .trim()
@@ -546,16 +546,16 @@
 			</band>
 			<band>
 				<property name="com.calserver.bandLabel" value="Zwischenraum"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Spacer} == null ? "y" : $P{ShowGroup1Spacer}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
 			</band>
-			<band height="90">
+			<band height="73">
 				<property name="com.calserver.bandLabel" value="Kalibrierverfahren"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Procedure} == null ? "y" : $P{ShowGroup1Procedure}.toString())
     .replace(" ", " ")
     .trim()
@@ -575,17 +575,17 @@
 					</textElement>
 					<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
-                                </textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
+				</textField>
 			</band>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ProcedureDocument} == null ? "y" : $P{ShowGroup1ProcedureDocument}.toString())
     .replace(" ", " ")
     .trim()
@@ -605,17 +605,17 @@
 					</textElement>
 					<textFieldExpression><![CDATA["PROCEDURAL DOCUMENT"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="f29249f2-b622-4b3a-9542-8722d8712376"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
-                                </textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="f29249f2-b622-4b3a-9542-8722d8712376"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
+				</textField>
 			</band>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Messbedingungen"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
     .replace(" ", " ")
     .trim()
@@ -645,7 +645,7 @@
 			</band>
 			<band height="54">
 				<property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1CalibrationPlace} == null ? "y" : $P{ShowGroup1CalibrationPlace}.toString())
     .replace(" ", " ")
     .trim()
@@ -675,7 +675,7 @@
 			</band>
 			<band height="75">
 				<property name="com.calserver.bandLabel" value="Umgebungsbedingungen"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1EnvironmentalConditions} == null ? "y" : $P{ShowGroup1EnvironmentalConditions}.toString())
     .replace(" ", " ")
     .trim()
@@ -709,13 +709,12 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{Group_header_1i_2}]]></textFieldExpression>
 				</textField>
-                                <textField>
-                                        <reportElement x="164" y="27" width="100" height="20" uuid="15e7cbf7-327c-4da5-aa37-ac719fbb7237"/>
-                                        <textElement verticalAlignment="Middle">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                         <textFieldExpression><![CDATA[
-    (
+				<textField>
+					<reportElement x="164" y="27" width="100" height="20" uuid="15e7cbf7-327c-4da5-aa37-ac719fbb7237"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
       (
         $F{resource_working_hours} != null
         && $F{resource_working_hours}.split("\\|", -1).length > 0
@@ -735,16 +734,14 @@
                     : $F{C2311} + " °C"
                 )
           )
-    )
-  ]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="164" y="48" width="100" height="20" uuid="3e596581-b0dc-4b2e-bba0-40438e5f6803"/>
-                                        <textElement verticalAlignment="Middle">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                         <textFieldExpression><![CDATA[
-    (
+    )]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="164" y="48" width="100" height="20" uuid="3e596581-b0dc-4b2e-bba0-40438e5f6803"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
       (
         $F{resource_working_hours} != null
         && $F{resource_working_hours}.split("\\|", -1).length > 1
@@ -764,62 +761,61 @@
                     : $F{C2312} + " %"
                 )
           )
-    )
-  ]]></textFieldExpression>
-                                </textField>
-                        </band>
-			<band height="49">
+    )]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="55">
 				<property name="com.calserver.bandLabel" value="Verwendete Normale"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="1" width="284" height="20" uuid="706a0561-44a9-4723-9717-b15d00e4b1e2"/>
+					<reportElement x="16" y="8" width="284" height="20" uuid="706a0561-44a9-4723-9717-b15d00e4b1e2"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["VERWENDETE NORMALE / RÜCKFÜHRUNG"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="300" y="1" width="208" height="20" uuid="4c90a3c8-294e-4591-be38-e045169820ae"/>
+					<reportElement x="300" y="8" width="208" height="20" uuid="4c90a3c8-294e-4591-be38-e045169820ae"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
 				</textField>
 				<subreport overflowType="Stretch">
-					<reportElement x="16" y="25" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
+					<reportElement x="16" y="32" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
-                                        <subreportParameter name="Sprache">
-                                                <subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
-                                        </subreportParameter>
-                                        <subreportParameter name="REPORT_LOCALE">
-                                                <subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
-                                        </subreportParameter>
-                                        <subreportParameter name="P_CTAG">
-                                                <subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
-                                        </subreportParameter>
+					<subreportParameter name="Sprache">
+						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_LOCALE">
+						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="P_CTAG">
+						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
+					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-                        <band height="90" splitType="Stretch">
-                                <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+			<band height="66" splitType="Stretch">
+				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="19" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
+					<reportElement x="16" y="8" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -832,13 +828,13 @@
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="43" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[(
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
   (
     $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
     ? (
@@ -849,40 +845,37 @@
     : $P{Results_description}
   )
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{PAGE_NUMBER} + 1))]]></textFieldExpression>
-                                </textField>
-                                <break>
-                                        <reportElement x="0" y="70" width="535" height="1" uuid="b5e563dc-fe8b-4493-ae64-a34c06e870fe"/>
-                                </break>
-                        </band>
-                        <band height="90" splitType="Stretch">
-                                <property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				</textField>
+			</band>
+			<band height="62" splitType="Stretch">
+				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementUncertainty} == null ? "y" : $P{ShowGroup1MeasurementUncertainty}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
-                                <textField>
-                                        <reportElement x="16" y="0" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
-                                        <textElement verticalAlignment="Bottom">
-                                                <font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA["MESSUNSICHERHEITEN"]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="200" y="-1" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
-                                        <textElement verticalAlignment="Bottom">
-                                                <font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
-                                </textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" x="16" y="26" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[(
+				<textField>
+					<reportElement x="16" y="0" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MESSUNSICHERHEITEN"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="200" y="-1" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="16" y="26" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
   ($P{Uncertainty_description} == null || $P{Uncertainty_description}.trim().isEmpty())
     ? (
         $P{Sprache}.equals("Deutsch")
@@ -891,37 +884,34 @@
       )
     : $P{Uncertainty_description}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-                                </textField>
-                                <break>
-                                        <reportElement positionType="Float" x="0" y="0" width="535" height="1" uuid="183a2511-8d5c-4ad3-ac7c-9d53f2e1eb0d"/>
-                                </break>
-                        </band>
-                        <band height="77">
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				</textField>
+			</band>
+			<band height="81">
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="0" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
+					<reportElement x="16" y="6" width="108" height="20" uuid="3226ab31-1958-4575-bb87-e001cd375799"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["KONFORMITÄT"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="122" y="-1" width="190" height="20" uuid="f7a96f12-2705-42db-bac4-ba4b90fb8d60"/>
+					<reportElement x="122" y="5" width="190" height="20" uuid="f7a96f12-2705-42db-bac4-ba4b90fb8d60"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" x="16" y="22" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="16" y="28" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -933,11 +923,11 @@
 				</textField>
 				<frame>
 					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="48" width="535" height="20" uuid="aacd5e8f-65e8-4fae-aeef-1fbf9c88c055"/>
-                                        <textField textAdjust="StretchHeight">
-                                                <reportElement positionType="Float" x="0" y="0" width="20" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
-                                                <textElement markup="html">
-                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                </textElement>
+					<textField textAdjust="StretchHeight">
+						<reportElement positionType="Float" x="0" y="6" width="30" height="20" uuid="8b46003c-6573-469e-9dfe-16a181d063b6"/>
+						<textElement markup="html">
+							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						</textElement>
 						<textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
@@ -955,12 +945,12 @@
     .replace("\\n", "\n")
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
-                                        </textField>
-                                        <textField textAdjust="StretchHeight">
-                                                <reportElement positionType="Float" x="24" y="0" width="510" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
-                                                <textElement markup="html">
-                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                </textElement>
+					</textField>
+					<textField textAdjust="StretchHeight">
+						<reportElement positionType="Float" x="40" y="6" width="494" height="20" uuid="2ee1bf17-ce17-40f2-9a49-4c6e129d0848"/>
+						<textElement markup="html">
+							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						</textElement>
 						<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -972,8 +962,8 @@
 					</textField>
 				</frame>
 			</band>
-			<band height="54">
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+			<band height="58">
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1AdditionalInformation} == null ? "y" : $P{ShowGroup1AdditionalInformation}.toString())
     .replace(" ", " ")
     .trim()
@@ -993,11 +983,11 @@
 					</textElement>
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement x="16" y="22" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="16" y="22" width="535" height="30" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
 					<textFieldExpression><![CDATA[(
   ( $P{Additional_information} == null || $P{Additional_information}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
@@ -1010,7 +1000,7 @@
 			</band>
 			<band height="89" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
     .replace(" ", " ")
     .trim()
@@ -1053,15 +1043,15 @@
 					<subreportParameter name="MeasurementDetails">
 						<subreportParameterExpression><![CDATA[$P{MeasurementDetails}]]></subreportParameterExpression>
 					</subreportParameter>
-                                        <subreportParameter name="ModernResultsHeader">
-                                                <subreportParameterExpression><![CDATA[$P{ModernResultsHeader}]]></subreportParameterExpression>
-                                        </subreportParameter>
-                                        <subreportParameter name="Results_end_note">
-                                                <subreportParameterExpression><![CDATA[$P{Results_end_note}]]></subreportParameterExpression>
-                                        </subreportParameter>
-                                        <subreportParameter name="P_Image_Path">
-                                                <subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
-                                        </subreportParameter>
+					<subreportParameter name="ModernResultsHeader">
+						<subreportParameterExpression><![CDATA[$P{ModernResultsHeader}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Results_end_note">
+						<subreportParameterExpression><![CDATA[$P{Results_end_note}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="P_Image_Path">
+						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
+					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
@@ -1268,9 +1258,9 @@
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="329" y="356" width="222" height="253" uuid="e35b62e9-104b-4a7b-8ca9-bd42cc5c8396"/>
-                                <textElement textAlignment="Justified" markup="html">
-                                        <font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[(
   (
     ($P{Cert_description} == null || $P{Cert_description}.trim().isEmpty())
@@ -1281,9 +1271,9 @@
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="16" y="618" width="535" height="38" uuid="e36caa70-ce71-4e66-bc0f-89540aeb9a43"/>
-                                <textElement textAlignment="Left" markup="html">
-                                        <font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
+				<textElement textAlignment="Left" markup="html">
+					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[(
   (
     ($P{Cert_description_1} == null || $P{Cert_description_1}.trim().isEmpty())
@@ -1305,24 +1295,24 @@
 			<line>
 				<reportElement positionType="Float" x="14" y="748" width="535" height="1" uuid="171b4844-9214-4ce6-9660-9db0f48b9508"/>
 			</line>
-                          <textField textAdjust="StretchHeight">
-                                  <reportElement positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" uuid="96f612ed-7910-45bf-9fe9-d55ab07a416e">
-                                          <printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
-                                  </reportElement>
-                                  <textElement verticalAlignment="Middle">
-                                          <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                  </textElement>
-                                  <textFieldExpression><![CDATA[($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327}]]></textFieldExpression>
-                          </textField>
-                          <textField textAdjust="StretchHeight">
-                                  <reportElement positionType="Float" stretchType="ContainerHeight" x="416" y="720" width="135" height="20" uuid="ef713462-3042-4676-a852-2928d7eb4cf1">
-                                          <printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
-                                  </reportElement>
-                                  <textElement verticalAlignment="Middle">
-                                          <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                  </textElement>
-                                  <textFieldExpression><![CDATA[($F{C2307} == null || $F{C2307}.trim().isEmpty()) ? "" : $F{C2307}]]></textFieldExpression>
-                          </textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" uuid="96f612ed-7910-45bf-9fe9-d55ab07a416e">
+					<printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="416" y="720" width="135" height="20" uuid="ef713462-3042-4676-a852-2928d7eb4cf1">
+					<printWhenExpression><![CDATA[$P{sign_names} == null || !"N".equalsIgnoreCase((($P{sign_names} == null ? "Y" : $P{sign_names}.toString()).replace(" ", " ").replaceAll("[^A-Za-z]", "").trim()))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{C2307} == null || $F{C2307}.trim().isEmpty()) ? "" : $F{C2307}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="495" y="259" width="57" height="1" uuid="3ed42e77-2aa2-4be2-be0d-0ce223e06b89"/>
 			</line>
