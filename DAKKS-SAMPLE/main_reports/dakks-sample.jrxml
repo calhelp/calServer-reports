@@ -876,7 +876,7 @@
                                         </textElement>
                                         <textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
                                 </textField>
-                                <textField isStretchWithOverflow="true">
+                                <textField textAdjust="StretchHeight">
                                         <reportElement positionType="Float" x="16" y="26" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
