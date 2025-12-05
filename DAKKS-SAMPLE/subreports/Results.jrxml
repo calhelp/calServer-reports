@@ -2097,7 +2097,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="387" y="0" width="80" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
@@ -2190,7 +2190,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="410" y="0" width="65" height="14" uuid="b327d3a9-10b7-4b2c-acd3-efc946f5d590"/>
@@ -2287,7 +2287,7 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{rel_err} == null ? "" : $F{rel_err}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
                                 </textField>
                                 <textField>
                                         <reportElement x="410" y="0" width="65" height="14" uuid="7e78e2a9-b21f-425f-9543-29346bf35cd9"/>
