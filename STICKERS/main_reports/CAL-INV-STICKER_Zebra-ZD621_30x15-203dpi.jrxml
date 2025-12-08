@@ -24,288 +24,288 @@
 	<parameter name="P_MTAG" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<queryString language="SQL">
-		<![CDATA[SELECT 
+	        <queryString language="SQL">
+                <![CDATA[SELECT
   i.`I4201` AS inv_I4201,
-  i.`I4202` AS inv_I4202,
-  i.`I4203` AS inv_I4203,
-  i.`I4204` AS inv_I4204,
-  i.`I4205` AS inv_I4205,
-  i.`I4206` AS inv_I4206,
-  i.`I4207` AS inv_I4207,
-  i.`I4208` AS inv_I4208,
-  i.`I4209` AS inv_I4209,
-  i.`I4210` AS inv_I4210,
-  i.`I4211` AS inv_I4211,
-  CAST(i.`I4212` AS CHAR) AS inv_I4212,
-  i.`I4213` AS inv_I4213,
-  i.`I4214` AS inv_I4214,
-  i.`I4215` AS inv_I4215,
-  i.`I4216` AS inv_I4216,
-  i.`I4217` AS inv_I4217,
-  i.`I4218` AS inv_I4218,
-  i.`I4219` AS inv_I4219,
-  i.`I4220` AS inv_I4220,
-  CAST(i.`I4221` AS CHAR) AS inv_I4221,
-  i.`I4222` AS inv_I4222,
-  i.`I4223` AS inv_I4223,
-  i.`I4224` AS inv_I4224,
-  i.`I4225` AS inv_I4225,
-  i.`I4226` AS inv_I4226,
-  i.`I4228` AS inv_I4228,
-  i.`I4229` AS inv_I4229,
-  i.`I4230` AS inv_I4230,
-  i.`I4231` AS inv_I4231,
-  i.`I4232` AS inv_I4232,
-  i.`I4233` AS inv_I4233,
-  i.`I4234` AS inv_I4234,
-  i.`I4235` AS inv_I4235,
-  CAST(i.`I4236` AS CHAR) AS inv_I4236,
-  i.`I4237` AS inv_I4237,
-  CAST(i.`I4238` AS CHAR) AS inv_I4238,
-  i.`I4239` AS inv_I4239,
-  i.`I4240` AS inv_I4240,
-  i.`I4299` AS inv_I4299,
-  i.`MTAG` AS inv_MTAG,
-  i.`nAssetUID` AS inv_nAssetUID,
-  i.`I4241` AS inv_I4241,
-  i.`I4242` AS inv_I4242,
-  i.`I4243` AS inv_I4243,
-  i.`idsrc` AS inv_idsrc,
-  i.`IPUBLISH` AS inv_IPUBLISH,
-  i.`ktag` AS inv_ktag,
-  i.`replic` AS inv_replic,
-  i.`I4258` AS inv_I4258,
-  i.`I4244` AS inv_I4244,
-  i.`I4245` AS inv_I4245,
-  i.`I4246` AS inv_I4246,
-  i.`I4247` AS inv_I4247,
-  i.`I4248` AS inv_I4248,
-  i.`I4249` AS inv_I4249,
-  CAST(i.`I4250` AS CHAR) AS inv_I4250,
-  CAST(i.`I4251` AS CHAR) AS inv_I4251,
-  CAST(i.`I4252` AS CHAR) AS inv_I4252,
-  CAST(i.`I4253` AS CHAR) AS inv_I4253,
-  i.`I4254` AS inv_I4254,
-  i.`I4255` AS inv_I4255,
-  i.`I4256` AS inv_I4256,
-  i.`I4257` AS inv_I4257,
-  i.`I4259` AS inv_I4259,
-  i.`I4260` AS inv_I4260,
-  i.`I4261` AS inv_I4261,
-  i.`I4262` AS inv_I4262,
-  i.`copied_to_mssql` AS inv_copied_to_mssql,
-  i.`path` AS inv_path,
-
-  c.`KTAG` AS cust_KTAG,
-  c.`nFacilityUID` AS cust_nFacilityUID,
-  c.`KPUBLISH` AS cust_KPUBLISH,
   c.`K4601` AS cust_K4601,
   c.`K4602` AS cust_K4602,
-  c.`K4603` AS cust_K4603,
-  c.`K4604` AS cust_K4604,
-  c.`K4605` AS cust_K4605,
-  c.`K4606` AS cust_K4606,
-  c.`K4607` AS cust_K4607,
-  c.`K4608` AS cust_K4608,
-  c.`K4609` AS cust_K4609,
-  c.`K4610` AS cust_K4610,
-  c.`K4611` AS cust_K4611,
-  c.`K4612` AS cust_K4612,
-  c.`K4613` AS cust_K4613,
-  c.`K4614` AS cust_K4614,
-  c.`K4615` AS cust_K4615,
-  c.`K4616` AS cust_K4616,
-  c.`K4617` AS cust_K4617,
-  c.`K4618` AS cust_K4618,
-  c.`K4619` AS cust_K4619,
-  c.`K4620` AS cust_K4620,
-  c.`K4621` AS cust_K4621,
-  c.`K4622` AS cust_K4622,
-  c.`K4623` AS cust_K4623,
-  c.`K4624` AS cust_K4624,
-  c.`K4625` AS cust_K4625,
-  c.`K4626` AS cust_K4626,
-  c.`K4627` AS cust_K4627,
-  c.`K4628` AS cust_K4628,
-  c.`K4640` AS cust_K4640,
-  c.`K4629` AS cust_K4629,
-  c.`K4630` AS cust_K4630,
-  c.`K4631` AS cust_K4631,
-  c.`K4632` AS cust_K4632,
-  c.`KDSRC` AS cust_KDSRC,
-  c.`kreplic` AS cust_kreplic,
-  c.`price_cat_uID` AS cust_price_cat_uID,
-  c.`K4633` AS cust_K4633,
-  c.`K4634` AS cust_K4634,
-  c.`K4635` AS cust_K4635,
-  c.`K4636` AS cust_K4636,
-  c.`K4637` AS cust_K4637,
-
-  b.`id` AS bc_id,
-  b.`barcode_key` AS bc_barcode_key,
-  b.`barcode_value` AS bc_barcode_value,
-  b.`barcode_image` AS bc_barcode_image,
-  b.`barcode_type` AS bc_barcode_type,
-  b.`type` AS bc_type,
-
-  l.`LTAG` AS loc_LTAG,
-  l.`nAssetUID` AS loc_nAssetUID,
-  l.`nToolAssignmentUID` AS loc_nToolAssignmentUID,
   l.`L2801` AS loc_L2801,
   l.`L2802` AS loc_L2802,
-  l.`L2803` AS loc_L2803,
-  l.`L2804` AS loc_L2804,
-  l.`L2805` AS loc_L2805,
-  l.`L2806` AS loc_L2806,
-  l.`L2807` AS loc_L2807,
-  l.`L2808` AS loc_L2808,
-  l.`L2809` AS loc_L2809,
-  l.`L2810` AS loc_L2810,
-  l.`L2811` AS loc_L2811,
-  l.`L2812` AS loc_L2812,
-  l.`L2813` AS loc_L2813,
-  l.`L2814` AS loc_L2814,
-  l.`L2815` AS loc_L2815,
-  l.`status` AS loc_status,
-  l.`MTAG` AS loc_MTAG,
-  l.`customer_KTAG` AS loc_customer_KTAG,
-  l.`delivery_customer_KTAG` AS loc_delivery_customer_KTAG,
-  l.`customer_contact_id` AS loc_customer_contact_id,
-  l.`delivery_contact_id` AS loc_delivery_contact_id,
-  l.`ldsrc` AS loc_ldsrc,
-  l.`L2816` AS loc_L2816,
-  l.`L2817` AS loc_L2817,
-  l.`LPUBLISH` AS loc_LPUBLISH,
-  l.`L2818` AS loc_L2818,
-  l.`L2819` AS loc_L2819,
-  l.`L2820` AS loc_L2820,
-  l.`L2821` AS loc_L2821,
-  l.`L2822` AS loc_L2822,
-  l.`L2823` AS loc_L2823,
-  l.`L2824` AS loc_L2824,
-  l.`L2825` AS loc_L2825,
-  l.`L2826` AS loc_L2826,
-  l.`L2827` AS loc_L2827,
-  l.`L2828` AS loc_L2828,
-  l.`L2829` AS loc_L2829,
-  l.`L2830` AS loc_L2830,
-  l.`L2831` AS loc_L2831,
-  l.`L2832` AS loc_L2832,
-  l.`L2833` AS loc_L2833,
-  l.`L2834` AS loc_L2834,
-  l.`L2835` AS loc_L2835,
-  l.`L2836` AS loc_L2836,
-  l.`L2837` AS loc_L2837,
-
-  cal.`CTAG` AS cal_CTAG,
-  cal.`nCallSheetUID` AS cal_nCallSheetUID,
   cal.`C2301` AS cal_C2301,
-  cal.`C2302` AS cal_C2302,
   cal.`C2303` AS cal_C2303,
-  cal.`C2304` AS cal_C2304,
-  cal.`C2306` AS cal_C2306,
-  cal.`C2307` AS cal_C2307,
-  cal.`C2309` AS cal_C2309,
-  cal.`C2310` AS cal_C2310,
-  cal.`C2311` AS cal_C2311,
-  cal.`C2312` AS cal_C2312,
-  cal.`C2313` AS cal_C2313,
-  cal.`C2314` AS cal_C2314,
-  cal.`C2316` AS cal_C2316,
-  cal.`C2320` AS cal_C2320,
-  cal.`C2321` AS cal_C2321,
-  cal.`C2322` AS cal_C2322,
-  cal.`C2323` AS cal_C2323,
-  cal.`C2324` AS cal_C2324,
-  cal.`C2326` AS cal_C2326,
-  cal.`C2327` AS cal_C2327,
-  cal.`C2328` AS cal_C2328,
-  cal.`C2329` AS cal_C2329,
-  cal.`C2330` AS cal_C2330,
-  cal.`C2331` AS cal_C2331,
-  cal.`C2332` AS cal_C2332,
-  cal.`C2333` AS cal_C2333,
-  cal.`C2334` AS cal_C2334,
-  cal.`C2335` AS cal_C2335,
-  cal.`C2336` AS cal_C2336,
-  cal.`C2337` AS cal_C2337,
-  cal.`C2338` AS cal_C2338,
-  cal.`C2339` AS cal_C2339,
-  cal.`status` AS cal_status,
-  cal.`C2341` AS cal_C2341,
-  cal.`MTAG` AS cal_MTAG,
-  cal.`C2362` AS cal_C2362,
-  cal.`C2308` AS cal_C2308,
-  cal.`C2315` AS cal_C2315,
-  cal.`C2342` AS cal_C2342,
-  cal.`C2343` AS cal_C2343,
-  cal.`C2317` AS cal_C2317,
-  cal.`C2318` AS cal_C2318,
-  cal.`C2319` AS cal_C2319,
-  cal.`C2325` AS cal_C2325,
-  cal.`C2350` AS cal_C2350,
-  cal.`C2351` AS cal_C2351,
-  cal.`C2352` AS cal_C2352,
-  cal.`C2353` AS cal_C2353,
-  cal.`C2354` AS cal_C2354,
-  cal.`C2355` AS cal_C2355,
-  cal.`C2356` AS cal_C2356,
-  cal.`C2357` AS cal_C2357,
-  cal.`C2358` AS cal_C2358,
-  cal.`C2359` AS cal_C2359,
-  cal.`C2360` AS cal_C2360,
-  cal.`C2361` AS cal_C2361,
-  cal.`C2363` AS cal_C2363,
-  cal.`cdsrc` AS cal_cdsrc,
-  cal.`CPUBLISH` AS cal_CPUBLISH,
-  cal.`C2381` AS cal_C2381,
-  cal.`C2382` AS cal_C2382,
-  cal.`C2364` AS cal_C2364,
-  cal.`C2365` AS cal_C2365,
-  cal.`C2366` AS cal_C2366,
-  cal.`C2367` AS cal_C2367,
-  cal.`C2368` AS cal_C2368,
-  cal.`C2369` AS cal_C2369,
-  cal.`C2370` AS cal_C2370,
-  cal.`C2371` AS cal_C2371,
-  cal.`C2372` AS cal_C2372,
-  cal.`C2373` AS cal_C2373,
-  cal.`C2374` AS cal_C2374,
-  cal.`C2375` AS cal_C2375,
-  cal.`C2376` AS cal_C2376,
-  cal.`C2377` AS cal_C2377,
-  cal.`C2378` AS cal_C2378,
-  cal.`C2379` AS cal_C2379,
-  cal.`C2380` AS cal_C2380,
-  cal.`C2383` AS cal_C2383,
-  cal.`C2384` AS cal_C2384,
-  cal.`C2385` AS cal_C2385,
-  cal.`C2344` AS cal_C2344,
-  cal.`C2345` AS cal_C2345,
-  cal.`C2346` AS cal_C2346,
-  cal.`C2347` AS cal_C2347,
-  cal.`C2386` AS cal_C2386,
-  cal.`C2387` AS cal_C2387,
-  cal.`C2388` AS cal_C2388,
-  cal.`C2389` AS cal_C2389,
-  cal.`C2390` AS cal_C2390,
-  cal.`C2391` AS cal_C2391,
-  cal.`C2392` AS cal_C2392,
-  cal.`C2393` AS cal_C2393,
-  cal.`C2394` AS cal_C2394,
-  cal.`C2395` AS cal_C2395,
-  cal.`C2396` AS cal_C2396,
-  cal.`combine` AS cal_combine,
-  cal.`copied_to_mssql` AS cal_copied_to_mssql,
+  cal.`C2307` AS cal_C2307
+/* Unused fields commented out to keep the report resilient when columns are missing:
+  , i.`I4202` AS inv_I4202,
+  , i.`I4203` AS inv_I4203,
+  , i.`I4204` AS inv_I4204,
+  , i.`I4205` AS inv_I4205,
+  , i.`I4206` AS inv_I4206,
+  , i.`I4207` AS inv_I4207,
+  , i.`I4208` AS inv_I4208,
+  , i.`I4209` AS inv_I4209,
+  , i.`I4210` AS inv_I4210,
+  , i.`I4211` AS inv_I4211,
+  , CAST(i.`I4212` AS CHAR) AS inv_I4212,
+  , i.`I4213` AS inv_I4213,
+  , i.`I4214` AS inv_I4214,
+  , i.`I4215` AS inv_I4215,
+  , i.`I4216` AS inv_I4216,
+  , i.`I4217` AS inv_I4217,
+  , i.`I4218` AS inv_I4218,
+  , i.`I4219` AS inv_I4219,
+  , i.`I4220` AS inv_I4220,
+  , CAST(i.`I4221` AS CHAR) AS inv_I4221,
+  , i.`I4222` AS inv_I4222,
+  , i.`I4223` AS inv_I4223,
+  , i.`I4224` AS inv_I4224,
+  , i.`I4225` AS inv_I4225,
+  , i.`I4226` AS inv_I4226,
+  , i.`I4228` AS inv_I4228,
+  , i.`I4229` AS inv_I4229,
+  , i.`I4230` AS inv_I4230,
+  , i.`I4231` AS inv_I4231,
+  , i.`I4232` AS inv_I4232,
+  , i.`I4233` AS inv_I4233,
+  , i.`I4234` AS inv_I4234,
+  , i.`I4235` AS inv_I4235,
+  , CAST(i.`I4236` AS CHAR) AS inv_I4236,
+  , i.`I4237` AS inv_I4237,
+  , CAST(i.`I4238` AS CHAR) AS inv_I4238,
+  , i.`I4239` AS inv_I4239,
+  , i.`I4240` AS inv_I4240,
+  , i.`I4299` AS inv_I4299,
+  , i.`MTAG` AS inv_MTAG,
+  , i.`nAssetUID` AS inv_nAssetUID,
+  , i.`I4241` AS inv_I4241,
+  , i.`I4242` AS inv_I4242,
+  , i.`I4243` AS inv_I4243,
+  , i.`idsrc` AS inv_idsrc,
+  , i.`IPUBLISH` AS inv_IPUBLISH,
+  , i.`ktag` AS inv_ktag,
+  , i.`replic` AS inv_replic,
+  , i.`I4258` AS inv_I4258,
+  , i.`I4244` AS inv_I4244,
+  , i.`I4245` AS inv_I4245,
+  , i.`I4246` AS inv_I4246,
+  , i.`I4247` AS inv_I4247,
+  , i.`I4248` AS inv_I4248,
+  , i.`I4249` AS inv_I4249,
+  , CAST(i.`I4250` AS CHAR) AS inv_I4250,
+  , CAST(i.`I4251` AS CHAR) AS inv_I4251,
+  , CAST(i.`I4252` AS CHAR) AS inv_I4252,
+  , CAST(i.`I4253` AS CHAR) AS inv_I4253,
+  , i.`I4254` AS inv_I4254,
+  , i.`I4255` AS inv_I4255,
+  , i.`I4256` AS inv_I4256,
+  , i.`I4257` AS inv_I4257,
+  , i.`I4259` AS inv_I4259,
+  , i.`I4260` AS inv_I4260,
+  , i.`I4261` AS inv_I4261,
+  , i.`I4262` AS inv_I4262,
+  , i.`copied_to_mssql` AS inv_copied_to_mssql,
+  , i.`path` AS inv_path,
 
-  uc.`KTAG`   AS loc_user_KTAG,
-  uc.`K4602`  AS loc_user_name,
-  uc.`K4603`  AS loc_user_name2,
-  uc.`K4604`  AS loc_user_street,
-  uc.`K4605`  AS loc_user_zipcity,
-  uc.`K4606`  AS loc_user_country
+  , c.`KTAG` AS cust_KTAG,
+  , c.`nFacilityUID` AS cust_nFacilityUID,
+  , c.`KPUBLISH` AS cust_KPUBLISH,
+  , c.`K4603` AS cust_K4603,
+  , c.`K4604` AS cust_K4604,
+  , c.`K4605` AS cust_K4605,
+  , c.`K4606` AS cust_K4606,
+  , c.`K4607` AS cust_K4607,
+  , c.`K4608` AS cust_K4608,
+  , c.`K4609` AS cust_K4609,
+  , c.`K4610` AS cust_K4610,
+  , c.`K4611` AS cust_K4611,
+  , c.`K4612` AS cust_K4612,
+  , c.`K4613` AS cust_K4613,
+  , c.`K4614` AS cust_K4614,
+  , c.`K4615` AS cust_K4615,
+  , c.`K4616` AS cust_K4616,
+  , c.`K4617` AS cust_K4617,
+  , c.`K4618` AS cust_K4618,
+  , c.`K4619` AS cust_K4619,
+  , c.`K4620` AS cust_K4620,
+  , c.`K4621` AS cust_K4621,
+  , c.`K4622` AS cust_K4622,
+  , c.`K4623` AS cust_K4623,
+  , c.`K4624` AS cust_K4624,
+  , c.`K4625` AS cust_K4625,
+  , c.`K4626` AS cust_K4626,
+  , c.`K4627` AS cust_K4627,
+  , c.`K4628` AS cust_K4628,
+  , c.`K4640` AS cust_K4640,
+  , c.`K4629` AS cust_K4629,
+  , c.`K4630` AS cust_K4630,
+  , c.`K4631` AS cust_K4631,
+  , c.`K4632` AS cust_K4632,
+  , c.`KDSRC` AS cust_KDSRC,
+  , c.`kreplic` AS cust_kreplic,
+  , c.`price_cat_uID` AS cust_price_cat_uID,
+  , c.`K4633` AS cust_K4633,
+  , c.`K4634` AS cust_K4634,
+  , c.`K4635` AS cust_K4635,
+  , c.`K4636` AS cust_K4636,
+  , c.`K4637` AS cust_K4637,
 
+  , b.`id` AS bc_id,
+  , b.`barcode_key` AS bc_barcode_key,
+  , b.`barcode_value` AS bc_barcode_value,
+  , b.`barcode_image` AS bc_barcode_image,
+  , b.`barcode_type` AS bc_barcode_type,
+  , b.`type` AS bc_type,
+
+  , l.`LTAG` AS loc_LTAG,
+  , l.`nAssetUID` AS loc_nAssetUID,
+  , l.`nToolAssignmentUID` AS loc_nToolAssignmentUID,
+  , l.`L2803` AS loc_L2803,
+  , l.`L2804` AS loc_L2804,
+  , l.`L2805` AS loc_L2805,
+  , l.`L2806` AS loc_L2806,
+  , l.`L2807` AS loc_L2807,
+  , l.`L2808` AS loc_L2808,
+  , l.`L2809` AS loc_L2809,
+  , l.`L2810` AS loc_L2810,
+  , l.`L2811` AS loc_L2811,
+  , l.`L2812` AS loc_L2812,
+  , l.`L2813` AS loc_L2813,
+  , l.`L2814` AS loc_L2814,
+  , l.`L2815` AS loc_L2815,
+  , l.`status` AS loc_status,
+  , l.`MTAG` AS loc_MTAG,
+  , l.`customer_KTAG` AS loc_customer_KTAG,
+  , l.`delivery_customer_KTAG` AS loc_delivery_customer_KTAG,
+  , l.`customer_contact_id` AS loc_customer_contact_id,
+  , l.`delivery_contact_id` AS loc_delivery_contact_id,
+  , l.`ldsrc` AS loc_ldsrc,
+  , l.`L2816` AS loc_L2816,
+  , l.`L2817` AS loc_L2817,
+  , l.`LPUBLISH` AS loc_LPUBLISH,
+  , l.`L2818` AS loc_L2818,
+  , l.`L2819` AS loc_L2819,
+  , l.`L2820` AS loc_L2820,
+  , l.`L2821` AS loc_L2821,
+  , l.`L2822` AS loc_L2822,
+  , l.`L2823` AS loc_L2823,
+  , l.`L2824` AS loc_L2824,
+  , l.`L2825` AS loc_L2825,
+  , l.`L2826` AS loc_L2826,
+  , l.`L2827` AS loc_L2827,
+  , l.`L2828` AS loc_L2828,
+  , l.`L2829` AS loc_L2829,
+  , l.`L2830` AS loc_L2830,
+  , l.`L2831` AS loc_L2831,
+  , l.`L2832` AS loc_L2832,
+  , l.`L2833` AS loc_L2833,
+  , l.`L2834` AS loc_L2834,
+  , l.`L2835` AS loc_L2835,
+  , l.`L2836` AS loc_L2836,
+  , l.`L2837` AS loc_L2837,
+
+  , cal.`CTAG` AS cal_CTAG,
+  , cal.`nCallSheetUID` AS cal_nCallSheetUID,
+  , cal.`C2302` AS cal_C2302,
+  , cal.`C2304` AS cal_C2304,
+  , cal.`C2306` AS cal_C2306,
+  , cal.`C2309` AS cal_C2309,
+  , cal.`C2310` AS cal_C2310,
+  , cal.`C2311` AS cal_C2311,
+  , cal.`C2312` AS cal_C2312,
+  , cal.`C2313` AS cal_C2313,
+  , cal.`C2314` AS cal_C2314,
+  , cal.`C2316` AS cal_C2316,
+  , cal.`C2320` AS cal_C2320,
+  , cal.`C2321` AS cal_C2321,
+  , cal.`C2322` AS cal_C2322,
+  , cal.`C2323` AS cal_C2323,
+  , cal.`C2324` AS cal_C2324,
+  , cal.`C2326` AS cal_C2326,
+  , cal.`C2327` AS cal_C2327,
+  , cal.`C2328` AS cal_C2328,
+  , cal.`C2329` AS cal_C2329,
+  , cal.`C2330` AS cal_C2330,
+  , cal.`C2331` AS cal_C2331,
+  , cal.`C2332` AS cal_C2332,
+  , cal.`C2333` AS cal_C2333,
+  , cal.`C2334` AS cal_C2334,
+  , cal.`C2335` AS cal_C2335,
+  , cal.`C2336` AS cal_C2336,
+  , cal.`C2337` AS cal_C2337,
+  , cal.`C2338` AS cal_C2338,
+  , cal.`status` AS cal_status,
+  , cal.`C2341` AS cal_C2341,
+  , cal.`MTAG` AS cal_MTAG,
+  , cal.`C2362` AS cal_C2362,
+  , cal.`C2308` AS cal_C2308,
+  , cal.`C2315` AS cal_C2315,
+  , cal.`C2342` AS cal_C2342,
+  , cal.`C2343` AS cal_C2343,
+  , cal.`C2317` AS cal_C2317,
+  , cal.`C2318` AS cal_C2318,
+  , cal.`C2319` AS cal_C2319,
+  , cal.`C2325` AS cal_C2325,
+  , cal.`C2350` AS cal_C2350,
+  , cal.`C2351` AS cal_C2351,
+  , cal.`C2352` AS cal_C2352,
+  , cal.`C2353` AS cal_C2353,
+  , cal.`C2354` AS cal_C2354,
+  , cal.`C2355` AS cal_C2355,
+  , cal.`C2356` AS cal_C2356,
+  , cal.`C2357` AS cal_C2357,
+  , cal.`C2358` AS cal_C2358,
+  , cal.`C2359` AS cal_C2359,
+  , cal.`C2360` AS cal_C2360,
+  , cal.`C2361` AS cal_C2361,
+  , cal.`C2363` AS cal_C2363,
+  , cal.`cdsrc` AS cal_cdsrc,
+  , cal.`CPUBLISH` AS cal_CPUBLISH,
+  , cal.`C2381` AS cal_C2381,
+  , cal.`C2382` AS cal_C2382,
+  , cal.`C2364` AS cal_C2364,
+  , cal.`C2365` AS cal_C2365,
+  , cal.`C2366` AS cal_C2366,
+  , cal.`C2367` AS cal_C2367,
+  , cal.`C2368` AS cal_C2368,
+  , cal.`C2369` AS cal_C2369,
+  , cal.`C2370` AS cal_C2370,
+  , cal.`C2371` AS cal_C2371,
+  , cal.`C2372` AS cal_C2372,
+  , cal.`C2373` AS cal_C2373,
+  , cal.`C2374` AS cal_C2374,
+  , cal.`C2375` AS cal_C2375,
+  , cal.`C2376` AS cal_C2376,
+  , cal.`C2377` AS cal_C2377,
+  , cal.`C2378` AS cal_C2378,
+  , cal.`C2379` AS cal_C2379,
+  , cal.`C2380` AS cal_C2380,
+  , cal.`C2383` AS cal_C2383,
+  , cal.`C2384` AS cal_C2384,
+  , cal.`C2385` AS cal_C2385,
+  , cal.`C2344` AS cal_C2344,
+  , cal.`C2345` AS cal_C2345,
+  , cal.`C2346` AS cal_C2346,
+  , cal.`C2347` AS cal_C2347,
+  , cal.`C2386` AS cal_C2386,
+  , cal.`C2387` AS cal_C2387,
+  , cal.`C2388` AS cal_C2388,
+  , cal.`C2389` AS cal_C2389,
+  , cal.`C2390` AS cal_C2390,
+  , cal.`C2391` AS cal_C2391,
+  , cal.`C2392` AS cal_C2392,
+  , cal.`C2393` AS cal_C2393,
+  , cal.`C2394` AS cal_C2394,
+  , cal.`C2395` AS cal_C2395,
+  , cal.`C2396` AS cal_C2396,
+  , cal.`combine` AS cal_combine,
+  , cal.`copied_to_mssql` AS cal_copied_to_mssql,
+
+  , uc.`KTAG`   AS loc_user_KTAG,
+  , uc.`K4602`  AS loc_user_name,
+  , uc.`K4603`  AS loc_user_name2,
+  , uc.`K4604`  AS loc_user_street,
+  , uc.`K4605`  AS loc_user_zipcity,
+  , uc.`K4606`  AS loc_user_country
+*/
 FROM $P!{PrefixTable}inventory i
 LEFT JOIN $P!{PrefixTable}customers c   ON i.KTAG = c.KTAG
 LEFT JOIN $P!{PrefixTable}barcode   b   ON i.MTAG = b.barcode_key
@@ -313,281 +313,283 @@ LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = i.MTAG AND l.L2815 = 1
 LEFT JOIN $P!{PrefixTable}customers uc  ON l.L2801 = uc.KTAG
 LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1
 WHERE i.MTAG = $P{P_MTAG}]]>
-	</queryString>
+        </queryString>
 	<field name="inv_I4201" class="java.lang.String"/>
-	<field name="inv_I4202" class="java.lang.String"/>
-	<field name="inv_I4203" class="java.lang.String"/>
-	<field name="inv_I4204" class="java.lang.String"/>
-	<field name="inv_I4205" class="java.lang.String"/>
-	<field name="inv_I4206" class="java.lang.String"/>
-	<field name="inv_I4207" class="java.lang.String"/>
-	<field name="inv_I4208" class="java.lang.String"/>
-	<field name="inv_I4209" class="java.lang.String"/>
-	<field name="inv_I4210" class="java.lang.String"/>
-	<field name="inv_I4211" class="java.lang.String"/>
-	<field name="inv_I4212" class="java.lang.String"/>
-	<field name="inv_I4213" class="java.lang.String"/>
-	<field name="inv_I4214" class="java.lang.String"/>
-	<field name="inv_I4215" class="java.lang.String"/>
-	<field name="inv_I4216" class="java.lang.String"/>
-	<field name="inv_I4217" class="java.lang.String"/>
-	<field name="inv_I4218" class="java.lang.String"/>
-	<field name="inv_I4219" class="java.lang.String"/>
-	<field name="inv_I4220" class="java.lang.String"/>
-	<field name="inv_I4221" class="java.lang.String"/>
-	<field name="inv_I4222" class="java.lang.String"/>
-	<field name="inv_I4223" class="java.lang.String"/>
-	<field name="inv_I4224" class="java.lang.String"/>
-	<field name="inv_I4225" class="java.lang.String"/>
-	<field name="inv_I4226" class="java.lang.String"/>
-	<field name="inv_I4228" class="java.lang.String"/>
-	<field name="inv_I4229" class="java.lang.String"/>
-	<field name="inv_I4230" class="java.lang.String"/>
-	<field name="inv_I4231" class="java.lang.String"/>
-	<field name="inv_I4232" class="java.lang.String"/>
-	<field name="inv_I4233" class="java.lang.String"/>
-	<field name="inv_I4234" class="java.lang.String"/>
-	<field name="inv_I4235" class="java.lang.String"/>
-	<field name="inv_I4236" class="java.lang.String"/>
-	<field name="inv_I4237" class="java.lang.String"/>
-	<field name="inv_I4238" class="java.lang.String"/>
-	<field name="inv_I4239" class="java.lang.String"/>
-	<field name="inv_I4240" class="java.lang.String"/>
-	<field name="inv_I4299" class="java.lang.String"/>
-	<field name="inv_MTAG" class="java.lang.String"/>
-	<field name="inv_nAssetUID" class="java.lang.String"/>
-	<field name="inv_I4241" class="java.lang.String"/>
-	<field name="inv_I4242" class="java.lang.String"/>
-	<field name="inv_I4243" class="java.lang.String"/>
-	<field name="inv_idsrc" class="java.lang.String"/>
-	<field name="inv_IPUBLISH" class="java.lang.String"/>
-	<field name="inv_ktag" class="java.lang.String"/>
-	<field name="inv_replic" class="java.lang.String"/>
-	<field name="inv_I4258" class="java.lang.String"/>
-	<field name="inv_I4244" class="java.lang.String"/>
-	<field name="inv_I4245" class="java.lang.String"/>
-	<field name="inv_I4246" class="java.lang.String"/>
-	<field name="inv_I4247" class="java.lang.String"/>
-	<field name="inv_I4248" class="java.lang.String"/>
-	<field name="inv_I4249" class="java.lang.String"/>
-	<field name="inv_I4250" class="java.lang.String"/>
-	<field name="inv_I4251" class="java.lang.String"/>
-	<field name="inv_I4252" class="java.lang.String"/>
-	<field name="inv_I4253" class="java.lang.String"/>
-	<field name="inv_I4254" class="java.lang.String"/>
-	<field name="inv_I4255" class="java.lang.String"/>
-	<field name="inv_I4256" class="java.lang.String"/>
-	<field name="inv_I4257" class="java.lang.String"/>
-	<field name="inv_I4259" class="java.lang.String"/>
-	<field name="inv_I4260" class="java.lang.String"/>
-	<field name="inv_I4261" class="java.lang.String"/>
-	<field name="inv_I4262" class="java.lang.String"/>
-	<field name="inv_copied_to_mssql" class="java.lang.String"/>
-	<field name="inv_path" class="java.lang.String"/>
-	<field name="cust_KTAG" class="java.lang.String"/>
-	<field name="cust_nFacilityUID" class="java.lang.String"/>
-	<field name="cust_KPUBLISH" class="java.lang.String"/>
 	<field name="cust_K4601" class="java.lang.String"/>
 	<field name="cust_K4602" class="java.lang.String"/>
-	<field name="cust_K4603" class="java.lang.String"/>
-	<field name="cust_K4604" class="java.lang.String"/>
-	<field name="cust_K4605" class="java.lang.String"/>
-	<field name="cust_K4606" class="java.lang.String"/>
-	<field name="cust_K4607" class="java.lang.String"/>
-	<field name="cust_K4608" class="java.lang.String"/>
-	<field name="cust_K4609" class="java.lang.String"/>
-	<field name="cust_K4610" class="java.lang.String"/>
-	<field name="cust_K4611" class="java.lang.String"/>
-	<field name="cust_K4612" class="java.lang.String"/>
-	<field name="cust_K4613" class="java.lang.String"/>
-	<field name="cust_K4614" class="java.lang.String"/>
-	<field name="cust_K4615" class="java.lang.String"/>
-	<field name="cust_K4616" class="java.lang.String"/>
-	<field name="cust_K4617" class="java.lang.String"/>
-	<field name="cust_K4618" class="java.lang.String"/>
-	<field name="cust_K4619" class="java.lang.String"/>
-	<field name="cust_K4620" class="java.lang.String"/>
-	<field name="cust_K4621" class="java.lang.String"/>
-	<field name="cust_K4622" class="java.lang.String"/>
-	<field name="cust_K4623" class="java.lang.String"/>
-	<field name="cust_K4624" class="java.lang.String"/>
-	<field name="cust_K4625" class="java.lang.String"/>
-	<field name="cust_K4626" class="java.lang.String"/>
-	<field name="cust_K4627" class="java.lang.String"/>
-	<field name="cust_K4628" class="java.lang.String"/>
-	<field name="cust_K4640" class="java.lang.String"/>
-	<field name="cust_K4629" class="java.lang.String"/>
-	<field name="cust_K4630" class="java.lang.String"/>
-	<field name="cust_K4631" class="java.lang.String"/>
-	<field name="cust_K4632" class="java.lang.String"/>
-	<field name="cust_KDSRC" class="java.lang.String"/>
-	<field name="cust_kreplic" class="java.lang.String"/>
-	<field name="cust_price_cat_uID" class="java.lang.String"/>
-	<field name="cust_K4633" class="java.lang.String"/>
-	<field name="cust_K4634" class="java.lang.String"/>
-	<field name="cust_K4635" class="java.lang.String"/>
-	<field name="cust_K4636" class="java.lang.String"/>
-	<field name="cust_K4637" class="java.lang.String"/>
-	<field name="bc_id" class="java.lang.String"/>
-	<field name="bc_barcode_key" class="java.lang.String"/>
-	<field name="bc_barcode_value" class="java.lang.String"/>
-	<field name="bc_barcode_image" class="java.lang.String"/>
-	<field name="bc_barcode_type" class="java.lang.String"/>
-	<field name="bc_type" class="java.lang.String"/>
-	<field name="loc_LTAG" class="java.lang.String"/>
-	<field name="loc_nAssetUID" class="java.lang.String"/>
-	<field name="loc_nToolAssignmentUID" class="java.lang.String"/>
 	<field name="loc_L2801" class="java.lang.String"/>
 	<field name="loc_L2802" class="java.lang.String"/>
-	<field name="loc_L2803" class="java.lang.String"/>
-	<field name="loc_L2804" class="java.lang.String"/>
-	<field name="loc_L2805" class="java.lang.String"/>
-	<field name="loc_L2806" class="java.lang.String"/>
-	<field name="loc_L2807" class="java.lang.String"/>
-	<field name="loc_L2808" class="java.lang.String"/>
-	<field name="loc_L2809" class="java.sql.Timestamp"/>
-	<field name="loc_L2810" class="java.lang.String"/>
-	<field name="loc_L2811" class="java.lang.String"/>
-	<field name="loc_L2812" class="java.lang.String"/>
-	<field name="loc_L2813" class="java.lang.String"/>
-	<field name="loc_L2814" class="java.lang.String"/>
-	<field name="loc_L2815" class="java.lang.String"/>
-	<field name="loc_status" class="java.lang.String"/>
-	<field name="loc_MTAG" class="java.lang.String"/>
-	<field name="loc_customer_KTAG" class="java.lang.String"/>
-	<field name="loc_delivery_customer_KTAG" class="java.lang.String"/>
-	<field name="loc_customer_contact_id" class="java.lang.String"/>
-	<field name="loc_delivery_contact_id" class="java.lang.String"/>
-	<field name="loc_ldsrc" class="java.lang.String"/>
-	<field name="loc_L2816" class="java.lang.String"/>
-	<field name="loc_L2817" class="java.lang.String"/>
-	<field name="loc_LPUBLISH" class="java.lang.String"/>
-	<field name="loc_L2818" class="java.lang.String"/>
-	<field name="loc_L2819" class="java.lang.String"/>
-	<field name="loc_L2820" class="java.lang.String"/>
-	<field name="loc_L2821" class="java.lang.String"/>
-	<field name="loc_L2822" class="java.lang.String"/>
-	<field name="loc_L2823" class="java.lang.String"/>
-	<field name="loc_L2824" class="java.lang.String"/>
-	<field name="loc_L2825" class="java.lang.String"/>
-	<field name="loc_L2826" class="java.lang.String"/>
-	<field name="loc_L2827" class="java.lang.String"/>
-	<field name="loc_L2828" class="java.lang.String"/>
-	<field name="loc_L2829" class="java.lang.String"/>
-	<field name="loc_L2830" class="java.lang.String"/>
-	<field name="loc_L2831" class="java.lang.String"/>
-	<field name="loc_L2832" class="java.lang.String"/>
-	<field name="loc_L2833" class="java.lang.String"/>
-	<field name="loc_L2834" class="java.lang.String"/>
-	<field name="loc_L2835" class="java.lang.String"/>
-	<field name="loc_L2836" class="java.lang.String"/>
-	<field name="loc_L2837" class="java.lang.String"/>
-	<field name="cal_CTAG" class="java.lang.String"/>
-	<field name="cal_nCallSheetUID" class="java.lang.String"/>
 	<field name="cal_C2301" class="java.sql.Date"/>
-	<field name="cal_C2302" class="java.lang.String"/>
 	<field name="cal_C2303" class="java.sql.Date"/>
-	<field name="cal_C2304" class="java.lang.String"/>
-	<field name="cal_C2306" class="java.lang.String"/>
 	<field name="cal_C2307" class="java.lang.String"/>
-	<field name="cal_C2309" class="java.lang.String"/>
-	<field name="cal_C2310" class="java.lang.String"/>
-	<field name="cal_C2311" class="java.lang.String"/>
-	<field name="cal_C2312" class="java.lang.String"/>
-	<field name="cal_C2313" class="java.lang.String"/>
-	<field name="cal_C2314" class="java.lang.String"/>
-	<field name="cal_C2316" class="java.lang.String"/>
-	<field name="cal_C2320" class="java.lang.String"/>
-	<field name="cal_C2321" class="java.lang.String"/>
-	<field name="cal_C2322" class="java.lang.String"/>
-	<field name="cal_C2323" class="java.lang.String"/>
-	<field name="cal_C2324" class="java.lang.String"/>
-	<field name="cal_C2326" class="java.lang.String"/>
-	<field name="cal_C2327" class="java.lang.String"/>
-	<field name="cal_C2328" class="java.lang.String"/>
-	<field name="cal_C2329" class="java.lang.String"/>
-	<field name="cal_C2330" class="java.lang.String"/>
-	<field name="cal_C2331" class="java.lang.String"/>
-	<field name="cal_C2332" class="java.lang.String"/>
-	<field name="cal_C2333" class="java.lang.String"/>
-	<field name="cal_C2334" class="java.lang.String"/>
-	<field name="cal_C2335" class="java.lang.String"/>
-	<field name="cal_C2336" class="java.lang.String"/>
-	<field name="cal_C2337" class="java.lang.String"/>
-	<field name="cal_C2338" class="java.lang.String"/>
-	<field name="cal_C2339" class="java.lang.String"/>
-	<field name="cal_status" class="java.lang.String"/>
-	<field name="cal_C2341" class="java.lang.String"/>
-	<field name="cal_MTAG" class="java.lang.String"/>
-	<field name="cal_C2362" class="java.lang.String"/>
-	<field name="cal_C2308" class="java.lang.String"/>
-	<field name="cal_C2315" class="java.lang.String"/>
-	<field name="cal_C2342" class="java.lang.String"/>
-	<field name="cal_C2343" class="java.lang.String"/>
-	<field name="cal_C2317" class="java.lang.String"/>
-	<field name="cal_C2318" class="java.lang.String"/>
-	<field name="cal_C2319" class="java.lang.String"/>
-	<field name="cal_C2325" class="java.lang.String"/>
-	<field name="cal_C2350" class="java.lang.String"/>
-	<field name="cal_C2351" class="java.lang.String"/>
-	<field name="cal_C2352" class="java.lang.String"/>
-	<field name="cal_C2353" class="java.lang.String"/>
-	<field name="cal_C2354" class="java.lang.String"/>
-	<field name="cal_C2355" class="java.lang.String"/>
-	<field name="cal_C2356" class="java.lang.String"/>
-	<field name="cal_C2357" class="java.lang.String"/>
-	<field name="cal_C2358" class="java.lang.String"/>
-	<field name="cal_C2359" class="java.lang.String"/>
-	<field name="cal_C2360" class="java.lang.String"/>
-	<field name="cal_C2361" class="java.lang.String"/>
-	<field name="cal_C2363" class="java.lang.String"/>
-	<field name="cal_cdsrc" class="java.lang.String"/>
-	<field name="cal_CPUBLISH" class="java.lang.String"/>
-	<field name="cal_C2381" class="java.lang.String"/>
-	<field name="cal_C2382" class="java.lang.String"/>
-	<field name="cal_C2364" class="java.lang.String"/>
-	<field name="cal_C2365" class="java.lang.String"/>
-	<field name="cal_C2366" class="java.lang.String"/>
-	<field name="cal_C2367" class="java.lang.String"/>
-	<field name="cal_C2368" class="java.lang.String"/>
-	<field name="cal_C2369" class="java.lang.String"/>
-	<field name="cal_C2370" class="java.lang.String"/>
-	<field name="cal_C2371" class="java.lang.String"/>
-	<field name="cal_C2372" class="java.lang.String"/>
-	<field name="cal_C2373" class="java.lang.String"/>
-	<field name="cal_C2374" class="java.lang.String"/>
-	<field name="cal_C2375" class="java.lang.String"/>
-	<field name="cal_C2376" class="java.lang.String"/>
-	<field name="cal_C2377" class="java.lang.String"/>
-	<field name="cal_C2378" class="java.lang.String"/>
-	<field name="cal_C2379" class="java.lang.String"/>
-	<field name="cal_C2380" class="java.lang.String"/>
-	<field name="cal_C2383" class="java.lang.String"/>
-	<field name="cal_C2384" class="java.lang.String"/>
-	<field name="cal_C2385" class="java.lang.String"/>
-	<field name="cal_C2344" class="java.lang.String"/>
-	<field name="cal_C2345" class="java.lang.String"/>
-	<field name="cal_C2346" class="java.lang.String"/>
-	<field name="cal_C2347" class="java.lang.String"/>
-	<field name="cal_C2386" class="java.lang.String"/>
-	<field name="cal_C2387" class="java.lang.String"/>
-	<field name="cal_C2388" class="java.lang.String"/>
-	<field name="cal_C2389" class="java.lang.String"/>
-	<field name="cal_C2390" class="java.lang.String"/>
-	<field name="cal_C2391" class="java.lang.String"/>
-	<field name="cal_C2392" class="java.lang.String"/>
-	<field name="cal_C2393" class="java.lang.String"/>
-	<field name="cal_C2394" class="java.lang.String"/>
-	<field name="cal_C2395" class="java.lang.String"/>
-	<field name="cal_C2396" class="java.lang.String"/>
-	<field name="cal_combine" class="java.lang.String"/>
-	<field name="cal_copied_to_mssql" class="java.lang.String"/>
-	<field name="loc_user_KTAG" class="java.lang.String"/>
-	<field name="loc_user_name" class="java.lang.String"/>
-	<field name="loc_user_name2" class="java.lang.String"/>
-	<field name="loc_user_street" class="java.lang.String"/>
-	<field name="loc_user_zipcity" class="java.lang.String"/>
-	<field name="loc_user_country" class="java.lang.String"/>
+        <!-- Unused field definitions commented out to avoid dependency on missing columns. -->
+        <!-- <field name="inv_I4202" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4203" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4204" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4205" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4206" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4207" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4208" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4209" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4210" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4211" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4212" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4213" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4214" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4215" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4216" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4217" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4218" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4219" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4220" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4221" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4222" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4223" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4224" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4225" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4226" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4228" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4229" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4230" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4231" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4232" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4233" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4234" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4235" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4236" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4237" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4238" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4239" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4240" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4299" class="java.lang.String"/> -->
+        <!-- <field name="inv_MTAG" class="java.lang.String"/> -->
+        <!-- <field name="inv_nAssetUID" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4241" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4242" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4243" class="java.lang.String"/> -->
+        <!-- <field name="inv_idsrc" class="java.lang.String"/> -->
+        <!-- <field name="inv_IPUBLISH" class="java.lang.String"/> -->
+        <!-- <field name="inv_ktag" class="java.lang.String"/> -->
+        <!-- <field name="inv_replic" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4258" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4244" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4245" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4246" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4247" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4248" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4249" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4250" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4251" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4252" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4253" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4254" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4255" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4256" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4257" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4259" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4260" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4261" class="java.lang.String"/> -->
+        <!-- <field name="inv_I4262" class="java.lang.String"/> -->
+        <!-- <field name="inv_copied_to_mssql" class="java.lang.String"/> -->
+        <!-- <field name="inv_path" class="java.lang.String"/> -->
+        <!-- <field name="cust_KTAG" class="java.lang.String"/> -->
+        <!-- <field name="cust_nFacilityUID" class="java.lang.String"/> -->
+        <!-- <field name="cust_KPUBLISH" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4603" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4604" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4605" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4606" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4607" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4608" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4609" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4610" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4611" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4612" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4613" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4614" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4615" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4616" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4617" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4618" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4619" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4620" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4621" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4622" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4623" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4624" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4625" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4626" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4627" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4628" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4640" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4629" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4630" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4631" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4632" class="java.lang.String"/> -->
+        <!-- <field name="cust_KDSRC" class="java.lang.String"/> -->
+        <!-- <field name="cust_kreplic" class="java.lang.String"/> -->
+        <!-- <field name="cust_price_cat_uID" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4633" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4634" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4635" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4636" class="java.lang.String"/> -->
+        <!-- <field name="cust_K4637" class="java.lang.String"/> -->
+        <!-- <field name="bc_id" class="java.lang.String"/> -->
+        <!-- <field name="bc_barcode_key" class="java.lang.String"/> -->
+        <!-- <field name="bc_barcode_value" class="java.lang.String"/> -->
+        <!-- <field name="bc_barcode_image" class="java.lang.String"/> -->
+        <!-- <field name="bc_barcode_type" class="java.lang.String"/> -->
+        <!-- <field name="bc_type" class="java.lang.String"/> -->
+        <!-- <field name="loc_LTAG" class="java.lang.String"/> -->
+        <!-- <field name="loc_nAssetUID" class="java.lang.String"/> -->
+        <!-- <field name="loc_nToolAssignmentUID" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2803" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2804" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2805" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2806" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2807" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2808" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2809" class="java.sql.Timestamp"/> -->
+        <!-- <field name="loc_L2810" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2811" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2812" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2813" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2814" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2815" class="java.lang.String"/> -->
+        <!-- <field name="loc_status" class="java.lang.String"/> -->
+        <!-- <field name="loc_MTAG" class="java.lang.String"/> -->
+        <!-- <field name="loc_customer_KTAG" class="java.lang.String"/> -->
+        <!-- <field name="loc_delivery_customer_KTAG" class="java.lang.String"/> -->
+        <!-- <field name="loc_customer_contact_id" class="java.lang.String"/> -->
+        <!-- <field name="loc_delivery_contact_id" class="java.lang.String"/> -->
+        <!-- <field name="loc_ldsrc" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2816" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2817" class="java.lang.String"/> -->
+        <!-- <field name="loc_LPUBLISH" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2818" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2819" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2820" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2821" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2822" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2823" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2824" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2825" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2826" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2827" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2828" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2829" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2830" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2831" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2832" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2833" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2834" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2835" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2836" class="java.lang.String"/> -->
+        <!-- <field name="loc_L2837" class="java.lang.String"/> -->
+        <!-- <field name="cal_CTAG" class="java.lang.String"/> -->
+        <!-- <field name="cal_nCallSheetUID" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2302" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2304" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2306" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2309" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2310" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2311" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2312" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2313" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2314" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2316" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2320" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2321" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2322" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2323" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2324" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2326" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2327" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2328" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2329" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2330" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2331" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2332" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2333" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2334" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2335" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2336" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2337" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2338" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2339" class="java.lang.String"/> -->
+        <!-- <field name="cal_status" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2341" class="java.lang.String"/> -->
+        <!-- <field name="cal_MTAG" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2362" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2308" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2315" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2342" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2343" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2317" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2318" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2319" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2325" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2350" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2351" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2352" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2353" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2354" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2355" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2356" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2357" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2358" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2359" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2360" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2361" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2363" class="java.lang.String"/> -->
+        <!-- <field name="cal_cdsrc" class="java.lang.String"/> -->
+        <!-- <field name="cal_CPUBLISH" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2381" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2382" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2364" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2365" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2366" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2367" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2368" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2369" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2370" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2371" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2372" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2373" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2374" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2375" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2376" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2377" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2378" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2379" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2380" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2383" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2384" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2385" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2344" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2345" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2346" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2347" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2386" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2387" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2388" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2389" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2390" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2391" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2392" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2393" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2394" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2395" class="java.lang.String"/> -->
+        <!-- <field name="cal_C2396" class="java.lang.String"/> -->
+        <!-- <field name="cal_combine" class="java.lang.String"/> -->
+        <!-- <field name="cal_copied_to_mssql" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_KTAG" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_name" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_name2" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_street" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_zipcity" class="java.lang.String"/> -->
+        <!-- <field name="loc_user_country" class="java.lang.String"/> -->
+        <!-- End of unused field definitions -->
 	<variable name="FormattedLastCalibration" class="java.lang.String">
 		<variableExpression><![CDATA[$F{cal_C2301} == null
     ? "-"
