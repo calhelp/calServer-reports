@@ -814,20 +814,61 @@
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-			<band height="1" splitType="Stretch">
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                        <band height="1" splitType="Stretch">
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
-				<break>
-					<reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
-				</break>
-			</band>
-			<band height="64" splitType="Stretch">
-				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                                <break>
+                                        <reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
+                                </break>
+                        </band>
+                        <band height="66" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+  ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
+    .replace(" ", " ")
+    .trim()
+    .toLowerCase()
+)]]></printWhenExpression>
+                                <textField>
+                                        <reportElement x="16" y="8" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
+                                </textField>
+                                <textField>
+                                        <reportElement x="147" y="6" width="191" height="20" uuid="969fe463-6949-4ac5-aa9e-2e2d77627712"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
+                                </textField>
+                                <textField textAdjust="StretchHeight" evaluationTime="Group" evaluationGroup="ResultsGroup">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+                                        <textElement markup="html">
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[(
+  (
+    $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
+    ? (
+        $P{Sprache}.equals("Deutsch")
+        ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
+        : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
+      )
+    : $P{Results_description}
+  )
+).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{Results_StartPage}))]]></textFieldExpression>
+                                </textField>
+                        </band>
+                        <band height="64" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementUncertainty} == null ? "y" : $P{ShowGroup1MeasurementUncertainty}.toString())
     .replace(" ", " ")
     .trim()
@@ -980,47 +1021,6 @@
 	</group>
 	<group name="ResultsGroup">
 		<groupHeader>
-			<band height="66" splitType="Stretch">
-				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
-  ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
-    .replace(" ", " ")
-    .trim()
-    .toLowerCase()
-)]]></printWhenExpression>
-				<textField>
-					<reportElement x="16" y="8" width="134" height="20" uuid="c36d41eb-af1d-4084-a275-4c55aead53a0"/>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="147" y="6" width="191" height="20" uuid="969fe463-6949-4ac5-aa9e-2e2d77627712"/>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight" evaluationTime="Group" evaluationGroup="ResultsGroup">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
-					<textElement markup="html">
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(
-  (
-    $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
-    ? (
-        $P{Sprache}.equals("Deutsch")
-        ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
-        : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
-      )
-    : $P{Results_description}
-  )
-).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{Results_StartPage}))]]></textFieldExpression>
-                                </textField>
-                        </band>
 			<band height="82" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
