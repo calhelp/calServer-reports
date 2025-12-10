@@ -439,13 +439,10 @@
 	<variable name="Page_count" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
-        <variable name="Results_StartPage" class="java.lang.Integer" resetType="Report">
-                <variableExpression><![CDATA[(
-    $V{Results_StartPage} == null || $V{Results_StartPage} == -1
-        ? $V{PAGE_NUMBER}
-        : $V{Results_StartPage}
-)]]></variableExpression>
-                <initialValueExpression><![CDATA[$V{PAGE_NUMBER}]]></initialValueExpression>
+        <variable name="Results_StartPage" class="java.lang.Integer" resetType="Group" calculation="Sum" resetGroup="ResultsGroup">
+                <variableExpression><![CDATA[
+    $V{ResultsGroup_COUNT} <= 1 ? $V{PAGE_NUMBER} : 0
+]]></variableExpression>
         </variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
@@ -864,7 +861,8 @@ String introText = (
     : $P{Results_description}
 ).replace("/n", "\n").replace("\\n", "\n");
 
-Object resultsStartPage = $V{Results_StartPage} == null ? $V{PAGE_NUMBER} : $V{Results_StartPage};
+Object resultsStartPage =
+    $V{Results_StartPage} == null || $V{Results_StartPage} == 0 ? 1 : $V{Results_StartPage};
 
 java.text.MessageFormat.format(introText, new Object[] { resultsStartPage });
 ]]></textFieldExpression>
@@ -1055,12 +1053,6 @@ java.text.MessageFormat.format(introText, new Object[] { resultsStartPage });
                                         <textFieldExpression><![CDATA[$P{ExpUncType} == null
   ? ""
   : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-                                </textField>
-                                <textField>
-                                        <reportElement x="16" y="56" width="1" height="1" uuid="ba1f89d3-50c1-4b6f-a715-86c1be9eb51e"/>
-                                        <textFieldExpression><![CDATA[
-    ($V{Results_StartPage} == -1 ? $V{PAGE_NUMBER} : $V{Results_StartPage})
-]]></textFieldExpression>
                                 </textField>
                                 <subreport>
                                         <reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
