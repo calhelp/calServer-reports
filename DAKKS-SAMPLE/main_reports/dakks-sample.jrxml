@@ -940,8 +940,8 @@
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
                                 </textField>
-                                <textField isRemoveLineWhenBlank="true" textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="70" width="535" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="70" width="535" height="30" isRemoveLineWhenBlank="true" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
@@ -963,8 +963,8 @@
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
                                 </textField>
-                                <textField isRemoveLineWhenBlank="true" textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="105" width="535" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="105" width="535" height="30" isRemoveLineWhenBlank="true" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
