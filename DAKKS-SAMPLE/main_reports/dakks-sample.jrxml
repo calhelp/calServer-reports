@@ -1052,7 +1052,7 @@
   ? ""
   : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
                                 </textField>
-                                <textField isPrintRepeatedValues="false">
+                                <textField>
                                         <reportElement x="16" y="56" width="1" height="1" uuid="ba1f89d3-50c1-4b6f-a715-86c1be9eb51e"/>
                                         <textFieldExpression><![CDATA[
     ($V{Results_StartPage} == -1 ? $V{PAGE_NUMBER} : $V{Results_StartPage})
