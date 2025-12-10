@@ -1364,20 +1364,20 @@
 				</textElement>
 				<text><![CDATA[Calibration mark]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="192" y="663" width="189" height="15" uuid="ec7e3162-9cf4-46a7-a728-ff1161f2c8e7"/>
-				<textElement>
-					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Freigabe des Kalibrierscheins durch]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="192" y="678" width="189" height="15" uuid="06a588dd-7977-4025-8913-03afa2c94195"/>
-				<textElement>
-					<font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Approval of the certificate of calibration by]]></text>
-			</staticText>
+                        <staticText>
+                                <reportElement x="192" y="674" width="189" height="15" uuid="ec7e3162-9cf4-46a7-a728-ff1161f2c8e7"/>
+                                <textElement>
+                                        <font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <text><![CDATA[Freigabe des Kalibrierscheins durch]]></text>
+                        </staticText>
+                        <staticText>
+                                <reportElement x="192" y="689" width="189" height="15" uuid="06a588dd-7977-4025-8913-03afa2c94195"/>
+                                <textElement>
+                                        <font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <text><![CDATA[Approval of the certificate of calibration by]]></text>
+                        </staticText>
                         <staticText>
                                 <reportElement x="16" y="674" width="134" height="15" uuid="08d9a9d8-f14e-4e97-b440-a83d833ef29d"/>
                                 <textElement>
