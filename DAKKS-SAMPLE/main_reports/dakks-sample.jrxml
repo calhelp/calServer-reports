@@ -439,7 +439,7 @@
         <variable name="Page_count" class="java.lang.Integer">
                 <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
         </variable>
-        <variable name="ResultsStartPage" class="java.lang.Integer" resetType="None" incrementType="None">
+        <variable name="ResultsStartPage" class="java.lang.Integer" resetType="None" incrementType="Group" incrementGroup="Group1">
                 <variableExpression><![CDATA[
   ($V{ResultsStartPage} != null && $V{ResultsStartPage} >= 0)
     ? $V{ResultsStartPage}
@@ -847,8 +847,8 @@
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+                                <textField textAdjust="StretchHeight" evaluationTime="Group" evaluationGroup="Group1">
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
