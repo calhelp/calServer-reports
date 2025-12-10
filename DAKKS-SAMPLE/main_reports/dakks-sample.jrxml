@@ -943,9 +943,10 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
                                 <frame>
-                                        <reportElement positionType="Float" x="16" y="70" width="535" height="190" uuid="b80b2d09-89e7-40b1-8912-60bf5e9a6a3b">
-                                                <box topPadding="6"/>
-                                        </reportElement>
+                                        <reportElement positionType="Float" x="16" y="70" width="535" height="190" uuid="b80b2d09-89e7-40b1-8912-60bf5e9a6a3b"/>
+
+                                        <box topPadding="6"/>
+
                                         <textField textAdjust="StretchHeight">
                                                 <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
                                                 <textElement markup="html">
@@ -969,6 +970,7 @@
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
                                         </textField>
+
                                         <textField textAdjust="StretchHeight">
                                                 <reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="0" width="495" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
                                                 <textElement markup="html">
@@ -981,7 +983,7 @@
         : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
       )
     : $P{Conformity_description_3}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+  ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
                                         </textField>
                                 </frame>
 			</band>
