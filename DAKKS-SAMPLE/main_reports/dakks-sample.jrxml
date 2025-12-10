@@ -862,11 +862,11 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="160" splitType="Stretch">
+			<band height="279" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
-    .replace(" ", " ")
+    .replace(" ", "")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
@@ -918,7 +918,7 @@
     .replace("\n", "<br/>")]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="71" y="70" width="480" height="80" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="177" y="70" width="374" height="80" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -930,6 +930,10 @@
       )
     : $P{Conformity_description_3}
   ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="71" y="70" width="91" height="41" uuid="9b781223-707c-4485-b5f1-cca496ab6360"/>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
 				</textField>
 			</band>
 			<band height="55" splitType="Stretch">
@@ -1423,10 +1427,6 @@
 				</textElement>
 				<text><![CDATA[Person in charge]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="100" y="233" width="91" height="41" uuid="40393222-773d-41eb-981e-a0ec4dd3a0a4"/>
-				<textFieldExpression><![CDATA["1"]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
