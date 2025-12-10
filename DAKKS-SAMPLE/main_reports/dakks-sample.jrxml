@@ -440,12 +440,12 @@
                 <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
         </variable>
         <variable name="ResultsStartPage" class="java.lang.Integer" resetType="None" incrementType="None">
-                <initialValueExpression><![CDATA[-1]]></initialValueExpression>
                 <variableExpression><![CDATA[
   ($V{ResultsStartPage} != null && $V{ResultsStartPage} >= 0)
     ? $V{ResultsStartPage}
     : $V{PAGE_NUMBER}
 ]]></variableExpression>
+                <initialValueExpression><![CDATA[-1]]></initialValueExpression>
         </variable>
         <variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
