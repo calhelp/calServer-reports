@@ -439,12 +439,14 @@
 	<variable name="Page_count" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 	</variable>
-	<variable name="ResultsStartPage" class="java.lang.Integer" resetType="None" incrementType="Group" incrementGroup="ResultsGroup">
-		<variableExpression><![CDATA[($V{ResultsStartPage} != null && $V{ResultsStartPage} >= 0)
-    ? $V{ResultsStartPage}
-    : $V{PAGE_NUMBER}]]></variableExpression>
-		<initialValueExpression><![CDATA[-1]]></initialValueExpression>
-	</variable>
+        <variable name="Results_StartPage" class="java.lang.Integer" resetType="Report">
+                <variableExpression><![CDATA[(
+    $V{Results_StartPage} == null || $V{Results_StartPage} == -1
+        ? $V{PAGE_NUMBER}
+        : $V{Results_StartPage}
+)]]></variableExpression>
+                <initialValueExpression><![CDATA[-1]]></initialValueExpression>
+        </variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
@@ -1016,9 +1018,9 @@
       )
     : $P{Results_description}
   )
-).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{ResultsStartPage}))]]></textFieldExpression>
-				</textField>
-			</band>
+).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{Results_StartPage}))]]></textFieldExpression>
+                                </textField>
+                        </band>
 			<band height="82" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
@@ -1041,20 +1043,26 @@
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement x="16" y="39" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{ExpUncType} == null
+                                <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                                        <reportElement x="16" y="39" width="535" height="20" uuid="43a3ec0c-21dd-45b6-9593-8390a750b894"/>
+                                        <textElement>
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$P{ExpUncType} == null
   ? ""
   : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
-				<subreport>
-					<reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
-					<subreportParameter name="PrefixTable">
-						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
-					</subreportParameter>
+                                </textField>
+                                <textField isPrintRepeatedValues="false">
+                                        <reportElement x="16" y="56" width="1" height="1" uuid="ba1f89d3-50c1-4b6f-a715-86c1be9eb51e"/>
+                                        <textFieldExpression><![CDATA[
+    ($V{Results_StartPage} == -1 ? $V{PAGE_NUMBER} : $V{Results_StartPage})
+]]></textFieldExpression>
+                                </textField>
+                                <subreport>
+                                        <reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
+                                        <subreportParameter name="PrefixTable">
+                                                <subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+                                        </subreportParameter>
 					<subreportParameter name="Sprache">
 						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
 					</subreportParameter>
