@@ -905,7 +905,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="240" splitType="Stretch">
+                        <band height="270" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
@@ -942,26 +942,16 @@
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="57" y="90" width="494" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[(
-  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
-    ? ( $P{Sprache}.equals("Deutsch")
-        ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
-        : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
-      )
-    : $P{Conformity_description_3}
-).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="17" y="90" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[(
+                                <frame>
+                                        <reportElement positionType="Float" x="16" y="70" width="535" height="190" uuid="b80b2d09-89e7-40b1-8912-60bf5e9a6a3b">
+                                                <box topPadding="6"/>
+                                        </reportElement>
+                                        <textField textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
+                                                <textElement markup="html">
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
+                                                <textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
     || $P{Conformity_description_2}.trim().isEmpty()
@@ -978,7 +968,22 @@
     .replace("\\n", "\n")
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
-				</textField>
+                                        </textField>
+                                        <textField textAdjust="StretchHeight">
+                                                <reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="0" width="495" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+                                                <textElement markup="html">
+                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                </textElement>
+                                                <textFieldExpression><![CDATA[(
+  ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
+    ? ( $P{Sprache}.equals("Deutsch")
+        ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
+        : "Measured value within tolerance limit. A statement of conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance. A statement of non-conformity is not possible, taking the measurement uncertainty into account.\n\nMeasured value out of tolerance.\n\nMeasurement results that are not covered by the DAkkS accreditation."
+      )
+    : $P{Conformity_description_3}
+).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
+                                        </textField>
+                                </frame>
 			</band>
 			<band height="55" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
