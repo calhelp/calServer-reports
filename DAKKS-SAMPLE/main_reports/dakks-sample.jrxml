@@ -886,7 +886,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="180" splitType="Stretch">
+                        <band height="240" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
@@ -909,11 +909,12 @@
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="16" y="30" width="535" height="20" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                                <paragraph spacingAfter="8"/>
                                         </textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
   ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
@@ -923,11 +924,11 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="57" y="70" width="494" height="20" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="57" y="90" width="494" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
   ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
@@ -937,11 +938,11 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
                                 <textField textAdjust="StretchHeight">
-                                        <reportElement stretchType="ContainerHeight" x="17" y="70" width="30" height="20" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
+                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="17" y="90" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
                                         <textElement markup="html">
                                                 <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                         </textElement>
-					<textFieldExpression><![CDATA[(
+                                        <textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
     || $P{Conformity_description_2}.trim().isEmpty()
