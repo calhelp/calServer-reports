@@ -436,18 +436,16 @@
 	<variable name="Group_header_1i_2" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Relative Luftfeuchte:" : "Humidity"]]></variableExpression>
 	</variable>
-        <variable name="Page_count" class="java.lang.Integer">
-                <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
-        </variable>
-        <variable name="ResultsStartPage" class="java.lang.Integer" resetType="None" incrementType="None">
-                <variableExpression><![CDATA[
-  ($V{ResultsStartPage} != null && $V{ResultsStartPage} >= 0)
+	<variable name="Page_count" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ResultsStartPage" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[($V{ResultsStartPage} != null && $V{ResultsStartPage} >= 0)
     ? $V{ResultsStartPage}
-    : $V{PAGE_NUMBER}
-]]></variableExpression>
-                <initialValueExpression><![CDATA[-1]]></initialValueExpression>
-        </variable>
-        <variable name="CertNumber_var" class="java.lang.String"/>
+    : $V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[-1]]></initialValueExpression>
+	</variable>
+	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
 			<band height="58">
@@ -459,14 +457,14 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="0" width="164" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
+					<reportElement x="16" y="0" width="176" height="20" uuid="774eba66-1584-414e-ab43-b9511bb8cae4"/>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["KALIBRIERGEGENSTAND"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="181" y="-1" width="191" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
+					<reportElement x="184" y="-1" width="191" height="20" uuid="f6710dc1-c960-4bbd-8237-88c9d77563ff"/>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -697,7 +695,7 @@
 					<textFieldExpression><![CDATA["UMGEBUNGSBEDINGUNGEN"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="206" y="4" width="197" height="20" uuid="a50d9524-b9c1-4e82-b0f6-e5da318ec700"/>
+					<reportElement x="207" y="4" width="197" height="20" uuid="a50d9524-b9c1-4e82-b0f6-e5da318ec700"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -772,9 +770,9 @@
     )]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="50" splitType="Prevent">
-                                <property name="com.calserver.bandLabel" value="Verwendete Normale"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+			<band height="50" splitType="Prevent">
+				<property name="com.calserver.bandLabel" value="Verwendete Normale"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
     .replace(" ", " ")
     .trim()
@@ -794,10 +792,10 @@
 					</textElement>
 					<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
 				</textField>
-                                <subreport overflowType="Stretch">
-                                        <reportElement x="16" y="32" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
-                                                <property name="com.jaspersoft.studio.unit.width" value="px"/>
-                                        </reportElement>
+				<subreport overflowType="Stretch">
+					<reportElement x="16" y="32" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -807,25 +805,25 @@
 					<subreportParameter name="REPORT_LOCALE">
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
-                                        <subreportParameter name="P_CTAG">
-                                                <subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
-                                        </subreportParameter>
-                                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
-                                </subreport>
-                        </band>
-                        <band height="1" splitType="Stretch">
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+					<subreportParameter name="P_CTAG">
+						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+			<band height="1" splitType="Stretch">
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
     .replace(" ", " ")
     .trim()
     .toLowerCase()
 )]]></printWhenExpression>
-                                <break>
-                                        <reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
-                                </break>
-                        </band>
-                        <band height="66" splitType="Stretch">
+				<break>
+					<reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
+				</break>
+			</band>
+			<band height="66" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
@@ -864,8 +862,8 @@
     : $P{Results_description}
   )
 ).replace("/n", "\n").replace("\\n", "\n").replace("{0}", String.valueOf($V{ResultsStartPage}))]]></textFieldExpression>
-                                </textField>
-                        </band>
+				</textField>
+			</band>
 			<band height="64" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
@@ -875,14 +873,14 @@
     .toLowerCase()
 )]]></printWhenExpression>
 				<textField>
-					<reportElement x="16" y="4" width="184" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
+					<reportElement x="16" y="4" width="178" height="20" uuid="bdbac1cd-9165-4f26-850d-93ee2e077cf1"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["MESSUNSICHERHEITEN"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="200" y="3" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
+					<reportElement x="194" y="3" width="230" height="20" uuid="e440f641-f5c7-4a7b-8a01-b2b8354c8b49"/>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -905,7 +903,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="270" splitType="Stretch">
+			<band height="270" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
@@ -927,13 +925,13 @@
 					</textElement>
 					<textFieldExpression><![CDATA["CONFORMITY"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                <paragraph spacingAfter="8"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[(
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="31c96311-b0e4-4b11-aa59-31a47ab08d2c"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						<paragraph spacingAfter="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_1} == null || $P{Conformity_description_1}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Sofern Konformitätsaussagen erfolgen, werden diese unter Berücksichtigung der Messunsicherheit gemacht.\nEinschränkungen werden wie folgt gekennzeichnet:"
@@ -942,17 +940,15 @@
     : $P{Conformity_description_1}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-                                <frame>
-                                        <reportElement positionType="Float" x="16" y="70" width="535" height="190" uuid="b80b2d09-89e7-40b1-8912-60bf5e9a6a3b"/>
-
-                                        <box topPadding="6"/>
-
-                                        <textField textAdjust="StretchHeight">
-                                                <reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
-                                                <textElement markup="html">
-                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                </textElement>
-                                                <textFieldExpression><![CDATA[(
+				<frame>
+					<reportElement positionType="Float" x="16" y="70" width="535" height="190" uuid="b80b2d09-89e7-40b1-8912-60bf5e9a6a3b"/>
+					<box topPadding="6"/>
+					<textField textAdjust="StretchHeight">
+						<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="30" height="30" uuid="3b81913b-5593-4d87-beae-0f980a612f46"/>
+						<textElement markup="html">
+							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(
   (
     $P{Conformity_description_2} == null
     || $P{Conformity_description_2}.trim().isEmpty()
@@ -969,14 +965,13 @@
     .replace("\\n", "\n")
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
-                                        </textField>
-
-                                        <textField textAdjust="StretchHeight">
-                                                <reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="0" width="495" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
-                                                <textElement markup="html">
-                                                        <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                </textElement>
-                                                <textFieldExpression><![CDATA[(
+					</textField>
+					<textField textAdjust="StretchHeight">
+						<reportElement positionType="Float" stretchType="ContainerHeight" x="40" y="0" width="495" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+						<textElement markup="html">
+							<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(
   ( $P{Conformity_description_3} == null || $P{Conformity_description_3}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
         ? "Messwert innerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen. Es kann jedoch unter Berücksichtigung der Messunsicherheit keine negative Konformitätsaussage gemacht werden.\n\nMesswert außerhalb der Herstellerspezifikationen.\n\nMessergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums."
@@ -984,8 +979,8 @@
       )
     : $P{Conformity_description_3}
   ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
-                                        </textField>
-                                </frame>
+					</textField>
+				</frame>
 			</band>
 			<band height="55" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
@@ -1391,48 +1386,48 @@
 				</textElement>
 				<text><![CDATA[Calibration mark]]></text>
 			</staticText>
-                        <staticText>
-                                <reportElement x="192" y="674" width="189" height="15" uuid="ec7e3162-9cf4-46a7-a728-ff1161f2c8e7"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Freigabe des Kalibrierscheins durch]]></text>
-                        </staticText>
-                        <staticText>
-                                <reportElement x="192" y="689" width="189" height="15" uuid="06a588dd-7977-4025-8913-03afa2c94195"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Approval of the certificate of calibration by]]></text>
-                        </staticText>
-                        <staticText>
-                                <reportElement x="16" y="674" width="134" height="15" uuid="08d9a9d8-f14e-4e97-b440-a83d833ef29d"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Datum]]></text>
-                        </staticText>
-                        <staticText>
-                                <reportElement x="16" y="689" width="134" height="15" uuid="8fbdba90-033b-41fc-8bb9-15df7f665488"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Date]]></text>
-                        </staticText>
-                        <staticText>
-                                <reportElement x="416" y="674" width="134" height="15" uuid="946acfe1-ffb7-431e-9274-0ad386a42ecc"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Bearbeiter]]></text>
-                        </staticText>
-                        <staticText>
-                                <reportElement x="416" y="689" width="135" height="15" uuid="91d2c743-3852-400c-a146-43ff6412c405"/>
-                                <textElement>
-                                        <font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                </textElement>
-                                <text><![CDATA[Person in charge]]></text>
-                        </staticText>
+			<staticText>
+				<reportElement x="192" y="674" width="189" height="15" uuid="ec7e3162-9cf4-46a7-a728-ff1161f2c8e7"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Freigabe des Kalibrierscheins durch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="689" width="189" height="15" uuid="06a588dd-7977-4025-8913-03afa2c94195"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Approval of the certificate of calibration by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="674" width="134" height="15" uuid="08d9a9d8-f14e-4e97-b440-a83d833ef29d"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Datum]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="689" width="134" height="15" uuid="8fbdba90-033b-41fc-8bb9-15df7f665488"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="674" width="134" height="15" uuid="946acfe1-ffb7-431e-9274-0ad386a42ecc"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Bearbeiter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="689" width="135" height="15" uuid="91d2c743-3852-400c-a146-43ff6412c405"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="7" isBold="false" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Person in charge]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
