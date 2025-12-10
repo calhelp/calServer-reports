@@ -764,7 +764,7 @@
     )]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="50">
+                        <band height="52" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Verwendete Normale"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1StandardsTraceability} == null ? "y" : $P{ShowGroup1StandardsTraceability}.toString())
@@ -786,10 +786,10 @@
 					</textElement>
 					<textFieldExpression><![CDATA["STANDARDS USED / TRACEABILITY"]]></textFieldExpression>
 				</textField>
-				<subreport overflowType="Stretch">
-					<reportElement x="16" y="32" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					</reportElement>
+                                <subreport overflowType="Stretch">
+                                        <reportElement x="16" y="32" width="535" height="15" uuid="5c0e39fe-edda-4f18-8240-9c3efc741026">
+                                                <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                                        </reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -803,9 +803,12 @@
 						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
-				</subreport>
-			</band>
+                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+                                </subreport>
+                                <break>
+                                        <reportElement x="0" y="48" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
+                                </break>
+                        </band>
 			<band height="66" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
