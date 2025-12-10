@@ -908,11 +908,6 @@
   (
     $P{Conformity_description_2} == null
     || $P{Conformity_description_2}.trim().isEmpty()
-    || $P{Conformity_description_2}
-        .replace("/n", "\\n")
-        .replace("\\\\n", "\\n")
-        .replace("\r", "")
-        .matches("(?s)^\\s*\\?\\s*!\\?\\s*!\\s*\\*\\s*$")
   )
     ? ""
     : $P{Conformity_description_2}
