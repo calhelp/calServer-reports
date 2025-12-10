@@ -862,7 +862,7 @@
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="112" splitType="Stretch">
+                        <band height="160" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1Conformity} == null ? "y" : $P{ShowGroup1Conformity}.toString())
@@ -922,8 +922,8 @@
     .replace("\r", "")
     .replace("\n", "<br/>")]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="71" y="70" width="480" height="30" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
+                                <textField textAdjust="StretchHeight">
+                                        <reportElement positionType="Float" stretchType="RelativeToTallestObject" x="71" y="70" width="480" height="80" uuid="7f248453-fe8b-4581-9a7b-f93b7919348f"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
