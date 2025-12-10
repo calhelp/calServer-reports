@@ -940,12 +940,6 @@
                                 </staticText>
                                 <staticText>
                                         <reportElement x="286" y="21" width="54" height="19" uuid="0d3bc3fa-803f-4b7a-9a87-762f22de8705" mode="Opaque" backcolor="#F5F7FA"/>
-                                        <box>
-                                                <topPen lineWidth="0.0"/>
-                                                <leftPen lineWidth="0.0"/>
-                                                <bottomPen lineWidth="0.25" lineColor="#E5E7EB"/>
-                                                <rightPen lineWidth="0.0"/>
-                                        </box>
                                         <textElement textAlignment="Center" verticalAlignment="Middle">
                                                 <font fontName="DejaVu Sans" size="5" isItalic="true"/>
                                         </textElement>
