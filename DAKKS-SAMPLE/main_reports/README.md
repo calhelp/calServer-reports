@@ -88,7 +88,7 @@ werden nur gedruckt, wenn Messdaten vorhanden sind (`HasMeasurementData`):
    * Spalten: Messbedingungen, Sollwert, untere & obere Spezifikationsgrenze,
      Messwert, relative Abweichung, erweiterte Messunsicherheit, `% Tol`,
      Konformität.
-   * Nutzt die Rohfelder (`lower_limit`/`upper_limit`, `exp_uncert`, `test_status`) und
+   * Nutzt die Rohfelder (`lower_limit`/`upper_limit`, `exp_uncert`, `pass_fail`) und
      gibt sie ohne zusätzliche Formatierung aus.
 2. **Frame 2 – formatierte Eingaben (`2`)**
    * Gleiche Spalten wie Frame 1, aber alle Soll-, Toleranz- und
