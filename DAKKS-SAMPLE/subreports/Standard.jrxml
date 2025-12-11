@@ -47,14 +47,14 @@ FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
 LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG` = i.`MTAG` AND c.C2339 = 1)
 WHERE t.CTAG = $P{P_CTAG}]]>
-	</queryString>
+        </queryString>
 	<field name="I4201" class="java.lang.String"/>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-	<field name="C2301" class="java.lang.String"/>
-	<field name="C2303" class="java.lang.String"/>
-	<field name="C2356" class="java.lang.String"/>
+        <field name="C2301" class="java.lang.String"/>
+        <field name="C2303" class="java.lang.String"/>
+        <field name="CalibrationMark" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Inv.Nr" : "Inventory-Nr"]]></variableExpression>
 	</variable>
@@ -330,11 +330,11 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 			</textField>
 			<textField>
 				<reportElement x="437" y="0" width="98" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{C2356}]]></textFieldExpression>
-			</textField>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                        <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{CalibrationMark}]]></textFieldExpression>
+                        </textField>
 		</band>
 	</detail>
 	<columnFooter>
