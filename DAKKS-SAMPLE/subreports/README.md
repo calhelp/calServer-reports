@@ -47,7 +47,7 @@ zusätzlich `P_Image_Path`, um Grafiken oder Symbole anzuzeigen.
     hängt `%` an.
   * `FormattedUncertainty` formatiert wissenschaftliche Schreibweisen (z. B.
     `×10<sup>n</sup>`), falls keine HTML-Markups vorhanden sind.
-  * `SymbolStatus` leitet aus dem Feld `test_status` die Symbolik (`iO`, `?`,
+  * `SymbolStatus` leitet aus dem Feld `pass_fail` die Symbolik (`iO`, `?`,
     `!?`, `!`) ab, sofern kein individueller Kommentar (`remark`) hinterlegt ist.
 * **Druckaufbereitung:** Der Spaltenkopf ist fest definiert (`Beschreibung`,
   `Sollwert`, `Messwert`, `Zul. Abweichung`, `Messunsicherheit`, `Bemerkung`).
