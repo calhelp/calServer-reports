@@ -640,9 +640,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
 				</textField>
 			</band>
-			<band height="62">
-				<property name="com.calserver.bandLabel" value="Messbedingungen"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                        <band height="62">
+                                <property name="com.calserver.bandLabel" value="Messbedingungen"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
     .replace(" ", " ")
     .trim()
@@ -664,15 +664,27 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="6ded0141-e53b-4462-98e5-268ebd431caf"/>
-					<textElement>
-						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
-				</textField>
-			</band>
-			<band height="54">
-				<property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                                        <textElement>
+                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
+                                </textField>
+                        </band>
+                        <band height="20">
+                                <property name="com.calserver.bandLabel" value="Messbedingungen – Platzhalter"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+  ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
+    .replace(" ", " ")
+    .trim()
+    .toLowerCase()
+)]]></printWhenExpression>
+                                <break type="Page">
+                                        <reportElement x="0" y="0" width="0" height="1" uuid="e35b6261-3b14-4c0d-a4c6-08e1deee364d"/>
+                                </break>
+                        </band>
+                        <band height="54">
+                                <property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1CalibrationPlace} == null ? "y" : $P{ShowGroup1CalibrationPlace}.toString())
     .replace(" ", " ")
     .trim()
