@@ -672,12 +672,16 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
                         </band>
                         <band height="20">
                                 <property name="com.calserver.bandLabel" value="Messbedingungen – Platzhalter"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
-  ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
-    .replace(" ", " ")
-    .trim()
-    .toLowerCase()
-)]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[(
+  $V{ReportVariantCodeNormalized} != null
+    && $V{ReportVariantCodeNormalized}.contains("Dim")
+)
+  && !java.util.Arrays.asList("n", "no", "false", "0").contains(
+    ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
+      .replace(" ", " ")
+      .trim()
+      .toLowerCase()
+  )]]></printWhenExpression>
                                 <break type="Page">
                                         <reportElement x="0" y="0" width="0" height="1" uuid="e35b6261-3b14-4c0d-a4c6-08e1deee364d"/>
                                 </break>
