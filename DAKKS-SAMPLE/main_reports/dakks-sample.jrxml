@@ -1092,8 +1092,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
                                         </subreportParameter>
                                         <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
                                         <returnValue subreportVariable="REPORT_COUNT" toVariable="ResultsRowCount"/>
+                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
                                 </subreport>
                                 <break>
                                         <printWhenExpression><![CDATA[!"dim".equalsIgnoreCase(
