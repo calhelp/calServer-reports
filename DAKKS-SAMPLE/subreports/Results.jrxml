@@ -2157,7 +2157,17 @@
                   : $F{fixq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{fixq_p} == null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
-            + ($F{fixq_u} == null || $F{fixq_u}.trim().isEmpty() ? "" : " " + $F{fixq_u}.trim())
+            + (
+                (
+                  $F{fixq} != null
+                    && !$F{fixq}.trim().isEmpty()
+                    && $F{fixq}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{fixq_u} == null
+                || $F{fixq_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{fixq_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2172,7 +2182,17 @@
                   : $F{lower_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
-            + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
+            + (
+                (
+                  $F{lower_limit} != null
+                    && !$F{lower_limit}.trim().isEmpty()
+                    && $F{lower_limit}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{lower_limit_u} == null
+                || $F{lower_limit_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{lower_limit_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -2198,7 +2218,17 @@
                   : $F{upper_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
-            + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
+            + (
+                (
+                  $F{upper_limit} != null
+                    && !$F{upper_limit}.trim().isEmpty()
+                    && $F{upper_limit}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{upper_limit_u} == null
+                || $F{upper_limit_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{upper_limit_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -2270,7 +2300,17 @@
                   : $F{sys_actual}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{sys_actual_p} == null || $F{sys_actual_p}.trim().isEmpty() ? "" : " " + $F{sys_actual_p}.trim())
-            + ($F{sys_actual_u} == null || $F{sys_actual_u}.trim().isEmpty() ? "" : " " + $F{sys_actual_u}.trim())
+            + (
+                (
+                  $F{sys_actual} != null
+                    && !$F{sys_actual}.trim().isEmpty()
+                    && $F{sys_actual}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{sys_actual_u} == null
+                || $F{sys_actual_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{sys_actual_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2285,7 +2325,17 @@
                   : $F{lower_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
-            + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
+            + (
+                (
+                  $F{lower_limit} != null
+                    && !$F{lower_limit}.trim().isEmpty()
+                    && $F{lower_limit}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{lower_limit_u} == null
+                || $F{lower_limit_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{lower_limit_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
                                 <textField>
@@ -2311,7 +2361,17 @@
                   : $F{upper_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
-            + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
+            + (
+                (
+                  $F{upper_limit} != null
+                    && !$F{upper_limit}.trim().isEmpty()
+                    && $F{upper_limit}.trim().matches(".*\\p{L}.*")
+                )
+                || $F{upper_limit_u} == null
+                || $F{upper_limit_u}.trim().isEmpty()
+                  ? ""
+                  : " " + $F{upper_limit_u}.trim()
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
                                 </textField>
 				<textField>
