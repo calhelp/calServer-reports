@@ -2246,7 +2246,15 @@
 					<textFieldExpression><![CDATA[(
             $V{ExpUncertaintyValue}
           + ($F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty() ? "" : " " + $F{exp_uncert_p}.trim())
-            + ($V{ExpUncertaintyUnit}.isEmpty() ? "" : " " + $V{ExpUncertaintyUnit})
+            + (
+                (
+                      $V{ExpUncertaintyValue} != null
+                  &&  $V{ExpUncertaintyValue}.matches(".*\\p{L}.*")
+                )
+                || $V{ExpUncertaintyUnit}.isEmpty()
+                  ? ""
+                  : " " + $V{ExpUncertaintyUnit}
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -2389,7 +2397,15 @@
 					<textFieldExpression><![CDATA[(
             $V{ExpUncertaintyValue}
           + ($F{exp_uncert_p} == null || $F{exp_uncert_p}.trim().isEmpty() ? "" : " " + $F{exp_uncert_p}.trim())
-            + ($V{ExpUncertaintyUnit}.isEmpty() ? "" : " " + $V{ExpUncertaintyUnit})
+            + (
+                (
+                      $V{ExpUncertaintyValue} != null
+                  &&  $V{ExpUncertaintyValue}.matches(".*\\p{L}.*")
+                )
+                || $V{ExpUncertaintyUnit}.isEmpty()
+                  ? ""
+                  : " " + $V{ExpUncertaintyUnit}
+              )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
 				<textField>
