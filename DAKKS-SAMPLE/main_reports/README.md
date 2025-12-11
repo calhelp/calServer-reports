@@ -123,7 +123,12 @@ Die Hauptabfrage kombiniert drei Kernbereiche der calServer-Datenbank:
 ### SQL-Auszug
 
 ```sql
-SELECT COALESCE(NULLIF($P{Cert_field}, ''), COALESCE(c.C2396, "")) AS cert_field,
+SELECT CASE UPPER(COALESCE($P{Cert_field}, ''))
+         WHEN 'C2396' THEN COALESCE(c.C2396, "")
+         WHEN 'C2364' THEN COALESCE(c.C2364, "")
+         WHEN 'C2356' THEN COALESCE(c.C2356, "")
+         ELSE COALESCE(c.C2356, "")
+       END AS cert_field,
        DATE_FORMAT(C2301, '%Y-%m')       AS cal_date,
        COALESCE(i.I4204, "")            AS I4204,
        COALESCE(i.I4201, "")            AS I4201,
@@ -141,7 +146,8 @@ WHERE  c.CTAG = $P{P_CTAG};
 * **`subreports/Results.jrxml`** – erstellt die tabellarische
   Messergebnis-Dokumentation mit Toleranzen, Messunsicherheit und Symbolik.
 * Beide Unterberichte benötigen dieselben Parameter (`PrefixTable`, `Sprache`,
-  `P_CTAG`, optional `P_Image_Path`) und denselben Datenbank-Connection-Context.
+  `P_CTAG`, optional `P_Image_Path`) und denselben Datenbank-Connection-Context;
+  `Cert_field` wird zusätzlich in den Standard-Unterbericht durchgereicht.
 
 ### Vollständige Parameterübersicht
 
@@ -154,7 +160,8 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
 | `MeasurementDetails` | ➖ | `"1"` | Aktiviert eines der vier Frames im Results-Unterbericht (`1` = Standard; `2`/`3`/`4` siehe Abschnitt zu Messwert-Frames). |
 | `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
-| `Cert_field` | ➖ | `""` | Optionaler Text für die angezeigte Zertifikatsnummer; leer lassen für den Wert aus `C2396`. |
+| `ReportVariantCode` | ➖ | `""` | Optionale Layoutvariante (z. B. `DIM` nutzt weiterhin Überschrift und Ergebnisse, blendet den Results-Unterbericht nur dann aus, wenn keine Messwerte vorliegen, und fügt in diesem Fall ein leeres Frame ein, das den restlichen Seitenbereich reserviert). |
+| `Cert_field` | ➖ | `""` | Steuert die Quelle der Zertifikatsnummer und das Kalibrierkennzeichen: optional `C2396`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Haupt- und Unterbericht (Kalibrierkennzeichen im Standard-Subreport) nutzen dieses Feld gemeinsam. |
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |
 | `MarkNumber1`, `MarkNumber2` | ➖ | `123456`, `D-K-\nYYYYY-ZZ-N` | Markierungsnummern im Akkreditierungsblock; bei `MarkNumber1` wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt. |
