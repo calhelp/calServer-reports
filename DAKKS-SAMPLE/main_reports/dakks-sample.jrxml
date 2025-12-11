@@ -32,10 +32,14 @@
 		<parameterDescription><![CDATA[Steuert das Layout der Messwertdarstellung im Results-Unterbericht (1 = Standard, 2 = alternative Spalten).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ModernResultsHeader" class="java.lang.String">
-		<parameterDescription><![CDATA[Schaltet den modernen Tabellenkopf im Results-Unterbericht ein (Y/N).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
-	</parameter>
+        <parameter name="ModernResultsHeader" class="java.lang.String">
+                <parameterDescription><![CDATA[Schaltet den modernen Tabellenkopf im Results-Unterbericht ein (Y/N).]]></parameterDescription>
+                <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ReportVariantCode" class="java.lang.String">
+                <parameterDescription><![CDATA[Optionaler Layoutschalter für vordefinierte Varianten (z. B. DIM).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
 	<parameter name="Cert_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Normativer Vorspann zur Rückführbarkeit und Wiederholung der Kalibrierung.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Dieser Kalibrierschein dokumentiert die Rückführung auf nationale Normale zur Darstellung der Einheiten in Übereinstimmung mit dem Internationalen Einheitensystem (SI). Die DAkkS ist Unterzeichner der multilateralen Übereinkommen der European co-operation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine." +
@@ -828,9 +832,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
 				</break>
 			</band>
-			<band height="66" splitType="Stretch">
-				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                        <band height="66" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
     .replace(" ", " ")
     .trim()
@@ -856,7 +860,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.text.MessageFormat(
+                                        <textFieldExpression><![CDATA[new java.text.MessageFormat(
    (
      $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
        ? (
@@ -871,11 +875,21 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
      ($V{Results_StartPage} == null || $V{Results_StartPage} == 0 ? 1 : $V{Results_StartPage})
    }
  );]]></textFieldExpression>
-				</textField>
-			</band>
-			<band height="64" splitType="Stretch">
-				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+                                </textField>
+                        </band>
+                        <band height="10" splitType="Stretch">
+                                <printWhenExpression><![CDATA["dim".equalsIgnoreCase(
+  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
+    .replace(" ", " ")
+    .trim()
+)]]></printWhenExpression>
+                                <break type="Page">
+                                        <reportElement x="0" y="0" width="1" height="1" uuid="ba25f26c-8ae5-481f-b157-5462fafc6fd6"/>
+                                </break>
+                        </band>
+                        <band height="64" splitType="Stretch">
+                                <property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementUncertainty} == null ? "y" : $P{ShowGroup1MeasurementUncertainty}.toString())
     .replace(" ", " ")
     .trim()
@@ -1030,12 +1044,19 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<groupHeader>
 			<band height="82" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
-  ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
-    .replace(" ", " ")
-    .trim()
-    .toLowerCase()
-)]]></printWhenExpression>
+                                <printWhenExpression><![CDATA[
+  !java.util.Arrays.asList("n", "no", "false", "0").contains(
+    ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
+      .replace(" ", " ")
+      .trim()
+      .toLowerCase()
+  )
+  && !"dim".equalsIgnoreCase(
+    ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
+      .replace(" ", " ")
+      .trim()
+  )
+]]></printWhenExpression>
 				<textField>
 					<reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
 					<textElement verticalAlignment="Bottom">
