@@ -1096,12 +1096,13 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
                                         <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
                                 </subreport>
                                 <break>
-                                        <printWhenExpression><![CDATA[!"dim".equalsIgnoreCase(
-  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
-    .replace(" ", " ")
-    .trim()
+                                        <reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e">
+                                                <printWhenExpression><![CDATA[!"dim".equalsIgnoreCase(
+($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
+.replace(" ", " ")
+.trim()
 )]]></printWhenExpression>
-                                        <reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
+                                        </reportElement>
                                 </break>
                         </band>
                 </groupHeader>
