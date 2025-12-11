@@ -1045,21 +1045,24 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</band>
 		</groupHeader>
 	</group>
-	<group name="ResultsGroup">
-		<groupHeader>
-			<band height="82" splitType="Prevent">
-				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+        <group name="ResultsGroup">
+                <groupHeader>
+                        <band height="82" splitType="Prevent">
+                                <property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
+                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
     ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
       .replace(" ", " ")
       .trim()
       .toLowerCase()
   )]]></printWhenExpression>
-				<textField>
-					<reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-					</textElement>
+                                <break type="Page">
+                                        <reportElement x="0" y="0" width="1" height="1" uuid="e0bd935a-bd25-418b-8a63-6012db20ca1e"/>
+                                </break>
+                                <textField>
+                                        <reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
+                                        <textElement verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                                        </textElement>
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
