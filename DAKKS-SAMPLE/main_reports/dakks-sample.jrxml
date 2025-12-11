@@ -463,7 +463,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
           .replaceAll("\\s+", " ")
   )
     .trim()
-    .toLowerCase()]]></variableExpression>
+]]></variableExpression>
                 <initialValueExpression><![CDATA[""]]></initialValueExpression>
         </variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
@@ -1110,7 +1110,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</subreport>
 				<frame>
 					<reportElement x="0" y="10" width="99" height="1" uuid="1f5dac54-83ce-44a3-9e76-168a3c09b35e">
-						<printWhenExpression><![CDATA[!"dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
+                                                <printWhenExpression><![CDATA[!"Dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
 					</reportElement>
 					<break>
 						<reportElement x="0" y="0" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
@@ -1123,7 +1123,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<groupExpression><![CDATA[1]]></groupExpression>
 		<groupHeader>
 			<band height="640" splitType="Stretch">
-				<printWhenExpression><![CDATA["dim".equals($V{ReportVariantCodeNormalized})
+                                <printWhenExpression><![CDATA["Dim".equals($V{ReportVariantCodeNormalized})
   && !java.util.Arrays.asList("n", "no", "false", "0").contains(
     ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
       .replace(" ", " ")
