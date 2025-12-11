@@ -160,7 +160,7 @@ WHERE  c.CTAG = $P{P_CTAG};
 | `QR_Code_Value` | ➖ | `""` | Inhalt für QR-/Barcode-Elemente. |
 | `MeasurementDetails` | ➖ | `"1"` | Aktiviert eines der vier Frames im Results-Unterbericht (`1` = Standard; `2`/`3`/`4` siehe Abschnitt zu Messwert-Frames). |
 | `ModernResultsHeader` | ➖ | `"N"` | Schaltet im `Results`-Unterbericht den modernen Tabellenkopf ein (`"Y"` für aktiv). |
-| `ReportVariantCode` | ➖ | `""` | Optionale Layoutvariante (z. B. `DIM` nutzt weiterhin Überschrift und Ergebnisse, blendet den Results-Unterbericht nur dann aus, wenn keine Messwerte vorliegen, und fügt in diesem Fall ein leeres Frame ein, das den restlichen Seitenbereich reserviert). |
+| `ReportVariantCode` | ➖ | `""` | Optionale Layoutvariante (z. B. `DIM`/`Dim`/`dim`; nutzt weiterhin Überschrift und Ergebnisse, blendet den Results-Unterbericht nur dann aus, wenn keine Messwerte vorliegen, und fügt in diesem Fall ein leeres Frame ein, das den restlichen Seitenbereich reserviert). |
 | `Cert_field` | ➖ | `""` | Steuert die Quelle der Zertifikatsnummer und das Kalibrierkennzeichen: optional `C2396`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Haupt- und Unterbericht (Kalibrierkennzeichen im Standard-Subreport) nutzen dieses Feld gemeinsam. |
 | `P_Image_Path` | ➖ | `""` | Pfad für Logos/Siegel im Kopf- und Fußbereich. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versionskennzeichnung im Titelbereich. |

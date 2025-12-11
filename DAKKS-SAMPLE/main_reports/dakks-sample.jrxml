@@ -454,6 +454,17 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
         <variable name="ResultsRowCount" class="java.lang.Integer">
                 <initialValueExpression><![CDATA[0]]></initialValueExpression>
         </variable>
+        <variable name="ReportVariantCodeNormalized" class="java.lang.String" resetType="None">
+                <initialValueExpression><![CDATA[""]]></initialValueExpression>
+                <variableExpression><![CDATA[(
+  $P{ReportVariantCode} == null
+    ? ""
+    : $P{ReportVariantCode}.toString()
+)
+  .replace(" ", " ")
+  .trim()
+  .toLowerCase()]]></variableExpression>
+        </variable>
         <variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
@@ -1092,17 +1103,12 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
                                         </subreportParameter>
                                         <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                                        <returnValue subreportVariable="REPORT_COUNT" toVariable="ResultsRowCount"/>
                                         <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+                                        <returnValue subreportVariable="REPORT_COUNT" toVariable="ResultsRowCount"/>
                                 </subreport>
                                 <break>
-                                        <reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e">
-                                                <printWhenExpression><![CDATA[!"dim".equalsIgnoreCase(
-($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
-.replace(" ", " ")
-.trim()
-)]]></printWhenExpression>
-                                        </reportElement>
+                                        <printWhenExpression><![CDATA[!"dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
+                                        <reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
                                 </break>
                         </band>
                 </groupHeader>
@@ -1111,18 +1117,14 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
                 <groupExpression><![CDATA[1]]></groupExpression>
                 <groupHeader>
                         <band height="640" splitType="Stretch">
-                                <printWhenExpression><![CDATA["dim".equalsIgnoreCase(
-  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
-    .replace(" ", " ")
-    .trim()
-)
-&& !java.util.Arrays.asList("n", "no", "false", "0").contains(
-  ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
-    .replace(" ", " ")
-    .trim()
-    .toLowerCase()
-)
-&& ($V{ResultsRowCount} == null || $V{ResultsRowCount}.intValue() == 0)
+                                <printWhenExpression><![CDATA["dim".equals($V{ReportVariantCodeNormalized})
+  && !java.util.Arrays.asList("n", "no", "false", "0").contains(
+    ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
+      .replace(" ", " ")
+      .trim()
+      .toLowerCase()
+  )
+  && ($V{ResultsRowCount} == null || $V{ResultsRowCount}.intValue() == 0)
 ]]></printWhenExpression>
                                 <frame>
                                         <reportElement x="16" y="0" width="535" height="640" uuid="c6e6f8d5-8baa-4b04-a430-5f5d5bf18609"/>
