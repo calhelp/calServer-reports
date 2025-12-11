@@ -25,15 +25,24 @@
                 <parameterDescription><![CDATA[Kalibrierungs-ID, um die Liste der eingesetzten Normale zu filtern.]]></parameterDescription>
                 <defaultValueExpression><![CDATA["d5bb8e240038b34eaa00d1f615c4b168"]]></defaultValueExpression>
         </parameter>
-	<queryString language="SQL">
-		<![CDATA[SELECT DISTINCT
+        <parameter name="Cert_field" class="java.lang.String">
+                <parameterDescription><![CDATA[Steuert das Kalibrierkennzeichen (z. B. C2396, C2364, C2356).]]></parameterDescription>
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <queryString language="SQL">
+                <![CDATA[SELECT DISTINCT
   COALESCE(i.I4201, "") AS I4201,
   COALESCE(i.I4202, "") AS I4202,
   COALESCE(i.I4203, "") AS I4203,
   COALESCE(i.I4204, "") AS I4204,
   c.C2301 AS C2301,
   c.C2303 AS C2303,
-  COALESCE(c.C2356, "") AS C2356
+  CASE UPPER(COALESCE($P{Cert_field}, ''))
+    WHEN 'C2396' THEN COALESCE(c.C2396, "")
+    WHEN 'C2364' THEN COALESCE(c.C2364, "")
+    WHEN 'C2356' THEN COALESCE(c.C2356, "")
+    ELSE COALESCE(c.C2356, "")
+  END AS C2356
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
 LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG` = i.`MTAG` AND c.C2339 = 1)
