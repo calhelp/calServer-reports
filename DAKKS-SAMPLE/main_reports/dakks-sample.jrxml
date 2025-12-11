@@ -802,12 +802,15 @@
 					<subreportParameter name="REPORT_LOCALE">
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
-					<subreportParameter name="P_CTAG">
-						<subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
-					</subreportParameter>
-					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
-				</subreport>
+                                        <subreportParameter name="P_CTAG">
+                                                <subreportParameterExpression><![CDATA[$P{P_CTAG}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <subreportParameter name="Cert_field">
+                                                <subreportParameterExpression><![CDATA[$P{Cert_field}]]></subreportParameterExpression>
+                                        </subreportParameter>
+                                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Standard.jasper"]]></subreportExpression>
+                                </subreport>
 			</band>
 			<band height="1" splitType="Stretch">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
