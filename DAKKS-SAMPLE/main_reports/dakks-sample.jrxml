@@ -463,9 +463,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
           .replaceAll("\\s+", " ")
   )
     .trim()
-    .toLowerCase(java.util.Locale.ROOT)]]></variableExpression>
-		<initialValueExpression><![CDATA[""]]></initialValueExpression>
-	</variable>
+    .toLowerCase()]]></variableExpression>
+                <initialValueExpression><![CDATA[""]]></initialValueExpression>
+        </variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
