@@ -455,14 +455,15 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<variable name="ReportVariantCodeNormalized" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[(
+                <variableExpression><![CDATA[(
     $P{ReportVariantCode} == null
       ? ""
       : $P{ReportVariantCode}.toString()
+          .replace(" ", " ")
+          .replaceAll("\\s+", " ")
   )
-    .replace(" ", " ")
     .trim()
-    .toLowerCase()]]></variableExpression>
+    .toLowerCase(java.util.Locale.ROOT)]]></variableExpression>
 		<initialValueExpression><![CDATA[""]]></initialValueExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
