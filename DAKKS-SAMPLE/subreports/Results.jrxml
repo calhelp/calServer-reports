@@ -2060,21 +2060,78 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{lower_limit} == null ? "" : $F{lower_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+              $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
+            ? ""
+            : (
+                $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                  ? new java.text.DecimalFormat(
+                      "0.######",
+                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    )
+                      .format(
+                        Double.parseDouble(
+                          $F{lower_limit}
+                            .replaceAll("[^0-9\\.,\\-+]", "")
+                            .replace(",", ".")
+                        )
+                      )
+                      + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                  : $F{lower_limit}.trim()
+              ).replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="178" y="0" width="54" height="14" uuid="ff6b31a9-cb50-420a-848b-d9609d183c32"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+              $F{varq} == null || $F{varq}.trim().isEmpty()
+            ? ""
+            : (
+                $F{varq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                  ? new java.text.DecimalFormat(
+                      "0.######",
+                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    )
+                      .format(
+                        Double.parseDouble(
+                          $F{varq}
+                            .replaceAll("[^0-9\\.,\\-+]", "")
+                            .replace(",", ".")
+                        )
+                      )
+                      + $F{varq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                  : $F{varq}.trim()
+              ).replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="232" y="0" width="54" height="14" uuid="ec3204b7-1cdf-4389-a2fd-ad844aaaf7a5"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{upper_limit} == null ? "" : $F{upper_limit}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+              $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
+            ? ""
+            : (
+                $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                  ? new java.text.DecimalFormat(
+                      "0.######",
+                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    )
+                      .format(
+                        Double.parseDouble(
+                          $F{upper_limit}
+                            .replaceAll("[^0-9\\.,\\-+]", "")
+                            .replace(",", ".")
+                        )
+                      )
+                      + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                  : $F{upper_limit}.trim()
+              ).replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="286" y="0" width="54" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
@@ -2134,8 +2191,27 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{fixq} == null ? "" : $F{fixq}.trim())
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{fixq} == null || $F{fixq}.trim().isEmpty()
+                  ? ""
+                  : (
+                      $F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                        ? new java.text.DecimalFormat(
+                            "0.######",
+                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                          )
+                            .format(
+                              Double.parseDouble(
+                                $F{fixq}
+                                  .replaceAll("[^0-9\\.,\\-+]", "")
+                                  .replace(",", ".")
+                              )
+                            )
+                            + $F{fixq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                        : $F{fixq}.trim()
+                    )
+              )
             + ($F{fixq_p} == null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
             + ($F{fixq_u} == null || $F{fixq_u}.trim().isEmpty() ? "" : " " + $F{fixq_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
@@ -2145,8 +2221,27 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{lower_limit} == null ? "" : $F{lower_limit}.trim())
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
+                  ? ""
+                  : (
+                      $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                        ? new java.text.DecimalFormat(
+                            "0.######",
+                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                          )
+                            .format(
+                              Double.parseDouble(
+                                $F{lower_limit}
+                                  .replaceAll("[^0-9\\.,\\-+]", "")
+                                  .replace(",", ".")
+                              )
+                            )
+                            + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                        : $F{lower_limit}.trim()
+                    )
+              )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
             + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
@@ -2156,15 +2251,53 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{varq} == null ? "" : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+              $F{varq} == null || $F{varq}.trim().isEmpty()
+            ? ""
+            : (
+                $F{varq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                  ? new java.text.DecimalFormat(
+                      "0.######",
+                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    )
+                      .format(
+                        Double.parseDouble(
+                          $F{varq}
+                            .replaceAll("[^0-9\\.,\\-+]", "")
+                            .replace(",", ".")
+                        )
+                      )
+                      + $F{varq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                  : $F{varq}.trim()
+              ).replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="290" y="0" width="60" height="14" uuid="6f31626e-4a96-45a8-9871-b271b4c3de61"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{upper_limit} == null ? "" : $F{upper_limit}.trim())
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
+                  ? ""
+                  : (
+                      $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                        ? new java.text.DecimalFormat(
+                            "0.######",
+                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                          )
+                            .format(
+                              Double.parseDouble(
+                                $F{upper_limit}
+                                  .replaceAll("[^0-9\\.,\\-+]", "")
+                                  .replace(",", ".")
+                              )
+                            )
+                            + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                        : $F{upper_limit}.trim()
+                    )
+              )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
             + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
@@ -2242,30 +2375,68 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{lower_limit} == null ? "" : $F{lower_limit}.trim())
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
+                  ? ""
+                  : (
+                      $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                        ? new java.text.DecimalFormat(
+                            "0.######",
+                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                          )
+                            .format(
+                              Double.parseDouble(
+                                $F{lower_limit}
+                                  .replaceAll("[^0-9\\.,\\-+]", "")
+                                  .replace(",", ".")
+                              )
+                            )
+                            + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                        : $F{lower_limit}.trim()
+                    )
+              )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
             + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="230" y="0" width="60" height="14" uuid="d4f920cb-94fa-4b7c-a68b-abc7345b8a4e"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="DejaVu Sans" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{uut_ind} == null ? "" : $F{uut_ind}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="290" y="0" width="60" height="14" uuid="787af295-5ab9-4457-b316-7d88e4431690"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font fontName="DejaVu Sans" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{upper_limit} == null ? "" : $F{upper_limit}.trim())
+                                </textField>
+                                <textField>
+                                        <reportElement x="230" y="0" width="60" height="14" uuid="d4f920cb-94fa-4b7c-a68b-abc7345b8a4e"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[$F{uut_ind} == null ? "" : $F{uut_ind}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                </textField>
+                                <textField isBlankWhenNull="true">
+                                        <reportElement x="290" y="0" width="60" height="14" uuid="787af295-5ab9-4457-b316-7d88e4431690"/>
+                                        <textElement textAlignment="Right" verticalAlignment="Bottom">
+                                                <font fontName="DejaVu Sans" size="8"/>
+                                        </textElement>
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
+                  ? ""
+                  : (
+                      $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+                        ? new java.text.DecimalFormat(
+                            "0.######",
+                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
+                          )
+                            .format(
+                              Double.parseDouble(
+                                $F{upper_limit}
+                                  .replaceAll("[^0-9\\.,\\-+]", "")
+                                  .replace(",", ".")
+                              )
+                            )
+                            + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
+                        : $F{upper_limit}.trim()
+                    )
+              )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
             + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
-				</textField>
+                                </textField>
 				<textField>
 					<reportElement x="350" y="0" width="45" height="14" uuid="85482ad1-5bc6-4786-8085-ee5ab165e2fe"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
