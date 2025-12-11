@@ -1423,7 +1423,7 @@
 				</textElement>
 				<text><![CDATA[Person in charge]]></text>
 			</staticText>
-			<textField pattern="MMMMM dd, yyyy">
+			<textField pattern="dd.mm.yyyy">
 				<reportElement x="16" y="720" width="134" height="19" uuid="044e752b-dca8-40fb-b616-ec3540122645"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
