@@ -445,13 +445,16 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	<variable name="Group_header_1i_2" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Relative Luftfeuchte:" : "Humidity"]]></variableExpression>
 	</variable>
-	<variable name="Page_count" class="java.lang.Integer">
-		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
-	</variable>
-	<variable name="Results_StartPage" class="java.lang.Integer" resetType="Group" resetGroup="ResultsGroup" calculation="Sum">
-		<variableExpression><![CDATA[$V{ResultsGroup_COUNT} <= 1 ? $V{PAGE_NUMBER} : 0]]></variableExpression>
-	</variable>
-	<variable name="CertNumber_var" class="java.lang.String"/>
+        <variable name="Page_count" class="java.lang.Integer">
+                <variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+        </variable>
+        <variable name="Results_StartPage" class="java.lang.Integer" resetType="Group" resetGroup="ResultsGroup" calculation="Sum">
+                <variableExpression><![CDATA[$V{ResultsGroup_COUNT} <= 1 ? $V{PAGE_NUMBER} : 0]]></variableExpression>
+        </variable>
+        <variable name="ResultsRowCount" class="java.lang.Integer">
+                <initialValueExpression><![CDATA[0]]></initialValueExpression>
+        </variable>
+        <variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
 			<band height="58">
@@ -654,16 +657,6 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
                                         <textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
                                 </textField>
-                        </band>
-                        <band height="10" splitType="Stretch">
-                                <printWhenExpression><![CDATA["dim".equalsIgnoreCase(
-  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
-    .replace(" ", " ")
-    .trim()
-)]]></printWhenExpression>
-                                <break type="Page">
-                                        <reportElement x="0" y="0" width="1" height="1" uuid="ba25f26c-8ae5-481f-b157-5462fafc6fd6"/>
-                                </break>
                         </band>
                         <band height="54">
                                 <property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
@@ -1040,9 +1033,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</band>
 		</groupHeader>
 	</group>
-	<group name="ResultsGroup">
-		<groupHeader>
-			<band height="82" splitType="Prevent">
+        <group name="ResultsGroup">
+                <groupHeader>
+                        <band height="82" splitType="Prevent">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
                                 <printWhenExpression><![CDATA[
   !java.util.Arrays.asList("n", "no", "false", "0").contains(
@@ -1050,11 +1043,6 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
       .replace(" ", " ")
       .trim()
       .toLowerCase()
-  )
-  && !"dim".equalsIgnoreCase(
-    ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
-      .replace(" ", " ")
-      .trim()
   )
 ]]></printWhenExpression>
 				<textField>
@@ -1080,10 +1068,10 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
   ? ""
   : $P{ExpUncType}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
-				<subreport>
-					<reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
-					<subreportParameter name="PrefixTable">
-						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+                                <subreport>
+                                        <reportElement x="16" y="57" width="535" height="18" uuid="9ab6860b-e0ee-47bd-8447-26892e8f7916"/>
+                                        <subreportParameter name="PrefixTable">
+                                                <subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
 					</subreportParameter>
 					<subreportParameter name="Sprache">
 						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
@@ -1102,18 +1090,50 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</subreportParameter>
 					<subreportParameter name="P_Image_Path">
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
-					</subreportParameter>
-					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
-				</subreport>
-				<break>
-					<reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
-				</break>
-			</band>
-		</groupHeader>
-	</group>
-	<title>
-		<band height="752" splitType="Stretch">
+                                        </subreportParameter>
+                                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                                        <subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
+                                        <returnValue subreportVariable="REPORT_COUNT" toVariable="ResultsRowCount"/>
+                                </subreport>
+                                <break>
+                                        <printWhenExpression><![CDATA[!"dim".equalsIgnoreCase(
+  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
+    .replace(" ", " ")
+    .trim()
+)]]></printWhenExpression>
+                                        <reportElement x="0" y="10" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
+                                </break>
+                        </band>
+                </groupHeader>
+        </group>
+        <group name="DimResultsSpacerGroup">
+                <groupExpression><![CDATA[1]]></groupExpression>
+                <groupHeader>
+                        <band height="640" splitType="Stretch">
+                                <printWhenExpression><![CDATA["dim".equalsIgnoreCase(
+  ($P{ReportVariantCode} == null ? "" : $P{ReportVariantCode}.toString())
+    .replace(" ", " ")
+    .trim()
+)
+&& !java.util.Arrays.asList("n", "no", "false", "0").contains(
+  ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
+    .replace(" ", " ")
+    .trim()
+    .toLowerCase()
+)
+&& ($V{ResultsRowCount} == null || $V{ResultsRowCount}.intValue() == 0)
+]]></printWhenExpression>
+                                <frame>
+                                        <reportElement x="16" y="0" width="535" height="640" uuid="c6e6f8d5-8baa-4b04-a430-5f5d5bf18609"/>
+                                </frame>
+                        </band>
+                </groupHeader>
+                <groupFooter>
+                        <band height="0"/>
+                </groupFooter>
+        </group>
+        <title>
+                <band height="752" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
