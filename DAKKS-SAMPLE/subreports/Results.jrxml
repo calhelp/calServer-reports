@@ -176,16 +176,11 @@
        )
    )]]></variableExpression>
 	</variable>
-	<variable name="RoundedTolErr" class="java.lang.String">
-		<variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
+        <variable name="RoundedTolErr" class="java.lang.String">
+                <variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
-      : (
-          $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("-?\\d+(\\.\\d+)?")
-          ? new java.text.DecimalFormat("0")
-              .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
-          : $F{tol_err}
-        )]]></variableExpression>
-	</variable>
+      : $F{tol_err}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")]]></variableExpression>
+        </variable>
 	<variable name="FormattedUncertainty" class="java.lang.String">
 		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
       ? ""
@@ -217,11 +212,20 @@
       ? ""
       : $F{exp_uncert_u}.trim().replaceAll("(?i)°\\s*C", "K")]]></variableExpression>
 	</variable>
-	<variable name="ExpUncertaintyValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{exp_uncert} == null
+        <variable name="ExpUncertaintyValue" class="java.lang.String">
+                <variableExpression><![CDATA[$F{exp_uncert} == null
       ? ""
-      : $F{exp_uncert}.trim().replaceAll("(?i)°\\s*C", "K")]]></variableExpression>
-	</variable>
+      : (
+          $F{exp_uncert}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+            ? (
+                $F{exp_uncert}
+                  .replaceAll("[^0-9\\.,\\-+]", "")
+                  .replaceAll("(?<=\\d),(?=\\d)", ".")
+                + $F{exp_uncert}.trim().replaceAll("(?i)°\\s*C", "K").replaceFirst("[+-]?[0-9.,]+", "")
+              )
+            : $F{exp_uncert}.trim().replaceAll("(?i)°\\s*C", "K")
+        )]]></variableExpression>
+        </variable>
 	<variable name="DisplayUncertainty" class="java.lang.String">
 		<variableExpression><![CDATA[(
           $F{exp_uncert_u} != null
@@ -2063,22 +2067,7 @@
                                         <textFieldExpression><![CDATA[(
               $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
             ? ""
-            : (
-                $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                  ? new java.text.DecimalFormat(
-                      "0.######",
-                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                    )
-                      .format(
-                        Double.parseDouble(
-                          $F{lower_limit}
-                            .replaceAll("[^0-9\\.,\\-+]", "")
-                            .replace(",", ".")
-                        )
-                      )
-                      + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                  : $F{lower_limit}.trim()
-              ).replaceAll("(?i)ohm","Ω")
+            : $F{lower_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -2089,22 +2078,7 @@
                                         <textFieldExpression><![CDATA[(
               $F{varq} == null || $F{varq}.trim().isEmpty()
             ? ""
-            : (
-                $F{varq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                  ? new java.text.DecimalFormat(
-                      "0.######",
-                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                    )
-                      .format(
-                        Double.parseDouble(
-                          $F{varq}
-                            .replaceAll("[^0-9\\.,\\-+]", "")
-                            .replace(",", ".")
-                        )
-                      )
-                      + $F{varq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                  : $F{varq}.trim()
-              ).replaceAll("(?i)ohm","Ω")
+            : $F{varq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2115,22 +2089,7 @@
                                         <textFieldExpression><![CDATA[(
               $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
             ? ""
-            : (
-                $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                  ? new java.text.DecimalFormat(
-                      "0.######",
-                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                    )
-                      .format(
-                        Double.parseDouble(
-                          $F{upper_limit}
-                            .replaceAll("[^0-9\\.,\\-+]", "")
-                            .replace(",", ".")
-                        )
-                      )
-                      + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                  : $F{upper_limit}.trim()
-              ).replaceAll("(?i)ohm","Ω")
+            : $F{upper_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -2195,22 +2154,7 @@
               (
                 $F{fixq} == null || $F{fixq}.trim().isEmpty()
                   ? ""
-                  : (
-                      $F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                        ? new java.text.DecimalFormat(
-                            "0.######",
-                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                          )
-                            .format(
-                              Double.parseDouble(
-                                $F{fixq}
-                                  .replaceAll("[^0-9\\.,\\-+]", "")
-                                  .replace(",", ".")
-                              )
-                            )
-                            + $F{fixq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                        : $F{fixq}.trim()
-                    )
+                  : $F{fixq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{fixq_p} == null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
             + ($F{fixq_u} == null || $F{fixq_u}.trim().isEmpty() ? "" : " " + $F{fixq_u}.trim())
@@ -2225,22 +2169,7 @@
               (
                 $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
                   ? ""
-                  : (
-                      $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                        ? new java.text.DecimalFormat(
-                            "0.######",
-                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                          )
-                            .format(
-                              Double.parseDouble(
-                                $F{lower_limit}
-                                  .replaceAll("[^0-9\\.,\\-+]", "")
-                                  .replace(",", ".")
-                              )
-                            )
-                            + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                        : $F{lower_limit}.trim()
-                    )
+                  : $F{lower_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
             + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
@@ -2254,22 +2183,7 @@
                                         <textFieldExpression><![CDATA[(
               $F{varq} == null || $F{varq}.trim().isEmpty()
             ? ""
-            : (
-                $F{varq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                  ? new java.text.DecimalFormat(
-                      "0.######",
-                      new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                    )
-                      .format(
-                        Double.parseDouble(
-                          $F{varq}
-                            .replaceAll("[^0-9\\.,\\-+]", "")
-                            .replace(",", ".")
-                        )
-                      )
-                      + $F{varq}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                  : $F{varq}.trim()
-              ).replaceAll("(?i)ohm","Ω")
+            : $F{varq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2281,22 +2195,7 @@
               (
                 $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
                   ? ""
-                  : (
-                      $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                        ? new java.text.DecimalFormat(
-                            "0.######",
-                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                          )
-                            .format(
-                              Double.parseDouble(
-                                $F{upper_limit}
-                                  .replaceAll("[^0-9\\.,\\-+]", "")
-                                  .replace(",", ".")
-                              )
-                            )
-                            + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                        : $F{upper_limit}.trim()
-                    )
+                  : $F{upper_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
             + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
@@ -2364,8 +2263,12 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
-              ($F{sys_actual} == null ? "" : $F{sys_actual}.trim())
+                                        <textFieldExpression><![CDATA[(
+              (
+                $F{sys_actual} == null || $F{sys_actual}.trim().isEmpty()
+                  ? ""
+                  : $F{sys_actual}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
+              )
             + ($F{sys_actual_p} == null || $F{sys_actual_p}.trim().isEmpty() ? "" : " " + $F{sys_actual_p}.trim())
             + ($F{sys_actual_u} == null || $F{sys_actual_u}.trim().isEmpty() ? "" : " " + $F{sys_actual_u}.trim())
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
@@ -2379,22 +2282,7 @@
               (
                 $F{lower_limit} == null || $F{lower_limit}.trim().isEmpty()
                   ? ""
-                  : (
-                      $F{lower_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                        ? new java.text.DecimalFormat(
-                            "0.######",
-                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                          )
-                            .format(
-                              Double.parseDouble(
-                                $F{lower_limit}
-                                  .replaceAll("[^0-9\\.,\\-+]", "")
-                                  .replace(",", ".")
-                              )
-                            )
-                            + $F{lower_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                        : $F{lower_limit}.trim()
-                    )
+                  : $F{lower_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{lower_limit_p} == null || $F{lower_limit_p}.trim().isEmpty() ? "" : " " + $F{lower_limit_p}.trim())
             + ($F{lower_limit_u} == null || $F{lower_limit_u}.trim().isEmpty() ? "" : " " + $F{lower_limit_u}.trim())
@@ -2405,7 +2293,11 @@
                                         <textElement textAlignment="Right" verticalAlignment="Bottom">
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
-                                        <textFieldExpression><![CDATA[$F{uut_ind} == null ? "" : $F{uut_ind}.trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
+                                        <textFieldExpression><![CDATA[(
+              $F{uut_ind} == null || $F{uut_ind}.trim().isEmpty()
+                ? ""
+                : $F{uut_ind}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
                                         <reportElement x="290" y="0" width="60" height="14" uuid="787af295-5ab9-4457-b316-7d88e4431690"/>
@@ -2416,22 +2308,7 @@
               (
                 $F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
                   ? ""
-                  : (
-                      $F{upper_limit}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-                        ? new java.text.DecimalFormat(
-                            "0.######",
-                            new java.text.DecimalFormatSymbols(java.util.Locale.US)
-                          )
-                            .format(
-                              Double.parseDouble(
-                                $F{upper_limit}
-                                  .replaceAll("[^0-9\\.,\\-+]", "")
-                                  .replace(",", ".")
-                              )
-                            )
-                            + $F{upper_limit}.trim().replaceFirst("[+-]?[0-9.,]+", "")
-                        : $F{upper_limit}.trim()
-                    )
+                  : $F{upper_limit}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
             + ($F{upper_limit_p} == null || $F{upper_limit_p}.trim().isEmpty() ? "" : " " + $F{upper_limit_p}.trim())
             + ($F{upper_limit_u} == null || $F{upper_limit_u}.trim().isEmpty() ? "" : " " + $F{upper_limit_u}.trim())
