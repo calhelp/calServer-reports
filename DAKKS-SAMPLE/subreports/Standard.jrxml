@@ -42,7 +42,7 @@
     WHEN 'C2364' THEN COALESCE(c.C2364, "")
     WHEN 'C2356' THEN COALESCE(c.C2356, "")
     ELSE COALESCE(c.C2356, "")
-  END AS C2356
+  END AS CalibrationMark
 FROM $P!{PrefixTable}standards t
 LEFT JOIN $P!{PrefixTable}inventory i ON (t.`C2430` = i.`MTAG`)
 LEFT JOIN $P!{PrefixTable}calibration c ON (c.`MTAG` = i.`MTAG` AND c.C2339 = 1)
