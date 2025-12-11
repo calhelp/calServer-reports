@@ -165,10 +165,10 @@
      ? "--"
      : (
          $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-         ? new java.text.DecimalFormat("0.00",
-             new java.text.DecimalFormatSymbols(java.util.Locale.US))
-             .format(
-               Double.parseDouble(
+        ? new java.text.DecimalFormat("0.0",
+            new java.text.DecimalFormatSymbols(java.util.Locale.US))
+            .format(
+              Double.parseDouble(
                  $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
                )
              )
