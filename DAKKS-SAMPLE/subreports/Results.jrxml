@@ -511,7 +511,7 @@
 					<text><![CDATA[Upper Limit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="270" y="0" width="54" height="21" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
+                                        <reportElement x="270" y="0" width="68" height="21" uuid="94f866dd-148e-41d4-a845-f3e0c1fee329"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -523,7 +523,7 @@
 					<text><![CDATA[% rel. Abweichung]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="270" y="21" width="54" height="19" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
+                                        <reportElement x="270" y="21" width="68" height="19" uuid="ea02a971-82f0-46b7-ad62-2e39139c7570"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -535,7 +535,7 @@
 					<text><![CDATA[% rel. Deviation]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="324" y="0" width="80" height="21" uuid="70528edb-30a7-46d4-af65-e17aa067d645"/>
+                                        <reportElement x="338" y="0" width="66" height="21" uuid="70528edb-30a7-46d4-af65-e17aa067d645"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -547,7 +547,7 @@
 					<text><![CDATA[erweiterte Messunsicherheit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="324" y="21" width="80" height="19" uuid="41fa5341-396a-4209-91b3-92c6d3498388"/>
+                                        <reportElement x="338" y="21" width="66" height="19" uuid="41fa5341-396a-4209-91b3-92c6d3498388"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -924,7 +924,7 @@
 					<text><![CDATA[Upper Limit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="286" y="0" width="54" height="21" backcolor="#F5F7FA" uuid="4a5772b2-d12b-45d0-9ffe-5f44312b2db9"/>
+                                        <reportElement mode="Opaque" x="286" y="0" width="68" height="21" backcolor="#F5F7FA" uuid="4a5772b2-d12b-45d0-9ffe-5f44312b2db9"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.0"/>
@@ -937,14 +937,14 @@
 					<text><![CDATA[% rel. Abweichung]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="286" y="21" width="54" height="19" backcolor="#F5F7FA" uuid="0d3bc3fa-803f-4b7a-9a87-762f22de8705"/>
+                                        <reportElement mode="Opaque" x="286" y="21" width="68" height="19" backcolor="#F5F7FA" uuid="0d3bc3fa-803f-4b7a-9a87-762f22de8705"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="5" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[% rel. Deviation]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="340" y="0" width="91" height="21" backcolor="#F5F7FA" uuid="e9d94aa3-4b24-48e5-8ef0-9c510e4a6265"/>
+                                        <reportElement mode="Opaque" x="354" y="0" width="77" height="21" backcolor="#F5F7FA" uuid="e9d94aa3-4b24-48e5-8ef0-9c510e4a6265"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.0"/>
@@ -957,7 +957,7 @@
 					<text><![CDATA[erweiterte Messunsicherheit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="340" y="21" width="91" height="19" backcolor="#F5F7FA" uuid="1bd63f28-78b3-4d3f-a71a-c1e3afac4c6a"/>
+                                        <reportElement mode="Opaque" x="354" y="21" width="77" height="19" backcolor="#F5F7FA" uuid="1bd63f28-78b3-4d3f-a71a-c1e3afac4c6a"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.0"/>
@@ -2093,14 +2093,14 @@
             )]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="286" y="0" width="54" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
+                                        <reportElement x="286" y="0" width="68" height="14" uuid="f90be87c-938e-42d9-bf47-f6e2928fd1c3"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{RoundedRelError}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="340" y="0" width="91" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
+                                        <reportElement x="354" y="0" width="77" height="14" uuid="8f950a3e-7c87-4768-a0c7-a52cbb0f864f"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
