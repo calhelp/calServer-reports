@@ -868,8 +868,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-				<textField textAdjust="StretchHeight" evaluationTime="Report">
-					<reportElement stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+                                <textField textAdjust="StretchHeight" evaluationTime="Report">
+                                        <reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
