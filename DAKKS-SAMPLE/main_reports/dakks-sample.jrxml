@@ -889,12 +889,13 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
       .replace("\\n", "\n");
 
     int startPage = ($V{Results_StartPage} == null || $V{Results_StartPage} == 0 ? 1 : $V{Results_StartPage});
+    String startPageText = Integer.toString(startPage);
 
     if (!resultsText.contains("{0}")) {
-      return resultsText + " " + startPage;
+      return resultsText + " " + startPageText;
     }
 
-    return new java.text.MessageFormat(resultsText).format(new Object[] { startPage });
+    return resultsText.replace("{0}", startPageText);
   }
 }.formatResultsNotice()]]></textFieldExpression>
                                 </textField>
