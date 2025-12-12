@@ -874,22 +874,32 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.text.MessageFormat(
-   (
-     $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
-       ? (
-           $P{Sprache}.equals("Deutsch")
-           ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
-           : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
-         )
-       : $P{Results_description}
-   ).replace("/n", "\n").replace("\\n", "\n")
- ).format(
-   new Object[] {
-     ($V{Results_StartPage} == null || $V{Results_StartPage} == 0 ? 1 : $V{Results_StartPage})
-   }
- );]]></textFieldExpression>
-				</textField>
+                                        <textFieldExpression><![CDATA[new Object() {
+  String formatResultsNotice() {
+    String resultsText = (
+      $P{Results_description} == null || $P{Results_description}.trim().isEmpty()
+        ? (
+            $P{Sprache}.equals("Deutsch")
+            ? "Die Messergebnisse sind ab Seite {0} wiedergegeben. Alle angegebenen Messergebnisse beschreiben den kalibrierten Gegenstand zum Zeitpunkt und am Ort der Kalibrierung. Eine Aussage über das Langzeitverhalten ist damit nicht verbunden."
+            : "The measurement results are listed from page {0} on. All listed results describe the unit under test at the time and site of the calibration. A statement about the long-term stability is not included."
+          )
+        : $P{Results_description}
+    )
+      .replace("/n", "\n")
+      .replace("\\n", "\n");
+
+    if (!resultsText.contains("{0}")) {
+      resultsText = resultsText + " {0}";
+    }
+
+    return new java.text.MessageFormat(resultsText).format(
+      new Object[] {
+        ($V{Results_StartPage} == null || $V{Results_StartPage} == 0 ? 1 : $V{Results_StartPage})
+      }
+    );
+  }
+}.formatResultsNotice()]]></textFieldExpression>
+                                </textField>
 			</band>
 			<band height="64" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
