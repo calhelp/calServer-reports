@@ -179,7 +179,13 @@
         <variable name="RoundedTolErr" class="java.lang.String">
                 <variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
-      : $F{tol_err}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")]]></variableExpression>
+      : (
+          $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+            ? new java.text.DecimalFormat("0",
+                new java.text.DecimalFormatSymbols(java.util.Locale.US))
+                .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
+            : $F{tol_err}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
+        )]]></variableExpression>
         </variable>
 	<variable name="FormattedUncertainty" class="java.lang.String">
 		<variableExpression><![CDATA[($F{exp_uncert_iso_e}==null || $F{exp_uncert_iso_e}.trim().isEmpty())
