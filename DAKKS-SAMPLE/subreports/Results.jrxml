@@ -181,9 +181,12 @@
       ? ""
       : (
           $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-            ? new java.text.DecimalFormat("0",
-                new java.text.DecimalFormatSymbols(java.util.Locale.US))
-                .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
+            ? (Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")) > 500
+                ? ">500"
+                : new java.text.DecimalFormat("0",
+                    new java.text.DecimalFormatSymbols(java.util.Locale.US))
+                    .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
+              )
             : $F{tol_err}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
         )]]></variableExpression>
         </variable>
