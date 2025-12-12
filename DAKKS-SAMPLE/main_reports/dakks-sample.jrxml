@@ -387,8 +387,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
             ($P{Calibration_procedure_1} == null || $P{Calibration_procedure_1}.trim().isEmpty())
                 ? (
                     $P{Sprache}.equals("Deutsch")
-                        ? "Die Kalibrierung erfolgte durch Vergleich der durch die Normale dargestellten Werten mit der Anzeige des Digitalmultimeters. Bezug ist die Realisierung der Einheiten in der PTB."
-                        : "Calibration was performed by comparing the values represented by the normal values with the display of the digital multimeter."
+                        ? "Die Kalibrierung erfolgte durch Vergleich der durch die Normale dargestellten Werten mit der Anzeige. Bezug ist die Realisierung der Einheiten in der PTB."
+                        : "Calibration was performed by comparing the values represented by the normal values with the display."
                 )
                 : $P{Calibration_procedure_1}
         )
@@ -455,17 +455,16 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<variable name="ReportVariantCodeNormalized" class="java.lang.String" resetType="None">
-                <variableExpression><![CDATA[(
+		<variableExpression><![CDATA[(
     $P{ReportVariantCode} == null
       ? ""
       : $P{ReportVariantCode}.toString()
-          .replace(" ", " ")
-          .replaceAll("\\s+", " ")
   )
+    .replace(" ", " ")
     .trim()
-]]></variableExpression>
-                <initialValueExpression><![CDATA[""]]></initialValueExpression>
-        </variable>
+    .toLowerCase()]]></variableExpression>
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
@@ -640,9 +639,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA[$V{procedure_description_var}]]></textFieldExpression>
 				</textField>
 			</band>
-                        <band height="62">
-                                <property name="com.calserver.bandLabel" value="Messbedingungen"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+			<band height="62">
+				<property name="com.calserver.bandLabel" value="Messbedingungen"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
     .replace(" ", " ")
     .trim()
@@ -664,31 +663,15 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="28" width="535" height="30" uuid="6ded0141-e53b-4462-98e5-268ebd431caf"/>
-                                        <textElement>
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
-                                </textField>
-                        </band>
-                        <band height="20">
-                                <property name="com.calserver.bandLabel" value="Messbedingungen – Platzhalter"/>
-                                <printWhenExpression><![CDATA[(
-  $V{ReportVariantCodeNormalized} != null
-    && $V{ReportVariantCodeNormalized}.contains("Dim")
-)
-  && !java.util.Arrays.asList("n", "no", "false", "0").contains(
-    ($P{ShowGroup1MeasurementConditions} == null ? "y" : $P{ShowGroup1MeasurementConditions}.toString())
-      .replace(" ", " ")
-      .trim()
-      .toLowerCase()
-  )]]></printWhenExpression>
-                                <break type="Page">
-                                        <reportElement x="0" y="0" width="0" height="1" uuid="e35b6261-3b14-4c0d-a4c6-08e1deee364d"/>
-                                </break>
-                        </band>
-                        <band height="54">
-                                <property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+					<textElement>
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="54">
+				<property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1CalibrationPlace} == null ? "y" : $P{ShowGroup1CalibrationPlace}.toString())
     .replace(" ", " ")
     .trim()
@@ -863,7 +846,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<reportElement x="0" y="0" width="1" height="1" uuid="14d98482-37f5-4c5b-a97d-5c707ab6f8a9"/>
 				</break>
 			</band>
-			<band height="66" splitType="Stretch">
+			<band height="78" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messergebnisse Einleitung"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1ResultsIntro} == null ? "y" : $P{ShowGroup1ResultsIntro}.toString())
@@ -885,8 +868,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight" evaluationTime="Report">
-                                        <reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
+				<textField textAdjust="StretchHeight" evaluationTime="Report">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
@@ -1061,24 +1044,21 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</band>
 		</groupHeader>
 	</group>
-        <group name="ResultsGroup">
-                <groupHeader>
-                        <band height="82" splitType="Prevent">
-                                <property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
-                                <printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
+	<group name="ResultsGroup">
+		<groupHeader>
+			<band height="82" splitType="Prevent">
+				<property name="com.calserver.bandLabel" value="Messergebnisse Tabelle"/>
+				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
     ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
       .replace(" ", " ")
       .trim()
       .toLowerCase()
   )]]></printWhenExpression>
-                                <break type="Page">
-                                        <reportElement x="0" y="0" width="1" height="1" uuid="e0bd935a-bd25-418b-8a63-6012db20ca1e"/>
-                                </break>
-                                <textField>
-                                        <reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
-                                        <textElement verticalAlignment="Bottom">
-                                                <font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                        </textElement>
+				<textField>
+					<reportElement x="16" y="17" width="134" height="20" uuid="cd0dd72a-a78f-4921-bcc7-b41be52313dc"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
 					<textFieldExpression><![CDATA["MESSERGEBNISSE"]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -1126,7 +1106,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</subreport>
 				<frame>
 					<reportElement x="0" y="10" width="99" height="1" uuid="1f5dac54-83ce-44a3-9e76-168a3c09b35e">
-                                                <printWhenExpression><![CDATA[!"Dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!"dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
 					</reportElement>
 					<break>
 						<reportElement x="0" y="0" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
@@ -1139,7 +1119,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<groupExpression><![CDATA[1]]></groupExpression>
 		<groupHeader>
 			<band height="640" splitType="Stretch">
-                                <printWhenExpression><![CDATA["Dim".equals($V{ReportVariantCodeNormalized})
+				<printWhenExpression><![CDATA["dim".equals($V{ReportVariantCodeNormalized})
   && !java.util.Arrays.asList("n", "no", "false", "0").contains(
     ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
       .replace(" ", " ")
