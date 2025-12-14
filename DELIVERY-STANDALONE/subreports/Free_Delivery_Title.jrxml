@@ -54,7 +54,8 @@
     </parameter>
 <queryString>
 <![CDATA[SELECT c.K4602, CONCAT_WS(" ", c.K4613, COALESCE(c.K4602, "")) AS customer_name, CONCAT_WS(" ", td.firstname, COALESCE(td.name, "")) AS contact_name, c.K4603, c.K4604, c.K4605, c.K4606,
-CONCAT_WS("\n", IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label), IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location), td.country) AS delivery_contact,
+IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label) AS label,
+CONCAT_WS("\n", IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location), td.country) AS delivery_contact,
 CONCAT_WS("\n", COALESCE(c.K4603, ""), CONCAT_WS(" ", c.K4606, c.K4604), c.K4605) AS delivery_customer,
 CONCAT_WS(" ", td.zip, td.location) AS customer_contact, 
 CONCAT_WS(" ", td.street, td.location) AS customer_street, CONCAT_WS(" ", td.zip, td.state) AS customer_address
@@ -67,6 +68,7 @@ WHERE c.KTAG=$P{KTAG} AND ($P{contactId} = "" OR td.uID=$P{contactId})]]>
 <field name="K4604" class="java.lang.String"/>
 <field name="K4605" class="java.lang.String"/>
 <field name="K4606" class="java.lang.String"/>
+<field name="label" class="java.lang.String"/>
 <field name="customer_name" class="java.lang.String"/>
 <field name="contact_name" class="java.lang.String"/>
 <field name="delivery_contact" class="java.lang.String"/>
@@ -227,6 +229,15 @@ WHERE c.KTAG=$P{KTAG} AND ($P{contactId} = "" OR td.uID=$P{contactId})]]>
                     <font fontName="DejaVu Sans" isBold="true"/>
 </textElement>
 <textFieldExpression><![CDATA[$V{Customer_Name}]]></textFieldExpression>
+</textField>
+<textField isBlankWhenNull="true">
+<reportElement x="31" y="61" width="238" height="8" forecolor="#B3B3B3" uuid="9f6053ac-0e7e-429b-aefb-96cc6418a93b">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="7"/>
+                </textElement>
+            <textFieldExpression><![CDATA[$F{label}]]></textFieldExpression>
 </textField>
 <textField isStretchWithOverflow="true">
 <reportElement x="31" y="69" width="238" height="65" uuid="389381ec-9b0f-44a2-b79e-316bf7b24d4d">
