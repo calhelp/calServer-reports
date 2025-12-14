@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Free_Delivery_Title" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="2b3e7567-2e1a-4170-aec9-c7121c173bd9">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+    <parameter name="Sprache" class="java.lang.String">
+        <parameterDescription><![CDATA[Steuert die Sprachtexte im Titelblock (Deutsch/Englisch).]]></parameterDescription>
+        <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PrefixTable" class="java.lang.String">
+        <parameterDescription><![CDATA[Optionales Tabellenpräfix (z. B. cal_) für mandantenfähige Schemata.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Header_Standard" class="java.lang.String">
+        <parameterDescription><![CDATA[Titelzeile im Kopfbereich.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Dokumentdatum_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[Lieferscheindatum (als String, UTF-8 kodiert).]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Dokumentnummer_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[Lieferscheinnummer (als String, UTF-8 kodiert).]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Kundennummer_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[Kunden-ID für den Kopfbereich.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Ansprechpartner_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[Ansprechpartner im Kopfbereich.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Email_Adresse_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[E-Mail-Adresse des Ansprechpartners.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Telefon_Val" class="java.lang.String">
+        <parameterDescription><![CDATA[Telefonnummer des Ansprechpartners.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="KTAG" class="java.lang.String">
+        <parameterDescription><![CDATA[Kunden-Tag zur Auswahl des Datensatzes.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="contactId" class="java.lang.String">
+        <parameterDescription><![CDATA[Optionale Contact-ID, falls ein spezifischer Ansprechpartner verwendet wird.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Return_address" class="java.lang.String">
+        <parameterDescription><![CDATA[Absender-/Retourenadresse im Kopfbereich.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+<queryString>
+<![CDATA[SELECT c.K4602, CONCAT_WS(" ", c.K4613, COALESCE(c.K4602, "")) AS customer_name, CONCAT_WS(" ", td.firstname, COALESCE(td.name, "")) AS contact_name, c.K4603, c.K4604, c.K4605, c.K4606,
+CONCAT_WS("\n", IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label), IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location), td.country) AS delivery_contact,
+CONCAT_WS("\n", COALESCE(c.K4603, ""), CONCAT_WS(" ", c.K4606, c.K4604), c.K4605) AS delivery_customer,
+CONCAT_WS(" ", td.zip, td.location) AS customer_contact, 
+CONCAT_WS(" ", td.street, td.location) AS customer_street, CONCAT_WS(" ", td.zip, td.state) AS customer_address
+FROM $P!{PrefixTable}customers c
+LEFT JOIN $P!{PrefixTable}contact td on (td.customer_uID=c.KTAG OR td.uID=$P{contactId})
+WHERE c.KTAG=$P{KTAG} AND ($P{contactId} = "" OR td.uID=$P{contactId})]]>
+</queryString>
+<field name="K4602" class="java.lang.String"/>
+<field name="K4603" class="java.lang.String"/>
+<field name="K4604" class="java.lang.String"/>
+<field name="K4605" class="java.lang.String"/>
+<field name="K4606" class="java.lang.String"/>
+<field name="customer_name" class="java.lang.String"/>
+<field name="contact_name" class="java.lang.String"/>
+<field name="delivery_contact" class="java.lang.String"/>
+<field name="delivery_customer" class="java.lang.String"/>
+<variable name="KOPF_Dokumentdatum" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? "Lieferdatum " : "Deliverydate ")]]></variableExpression>
+</variable>
+<variable name="KOPF_Dokumentnummer" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")? "Liefernummer " : "Deliverynumber ")]]></variableExpression>
+</variable>
+<variable name="KOPF_Kundennummer" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Kundennummer " : "Customer ID ")]]></variableExpression>
+</variable>
+<variable name="KOPF_Ansprechpartner" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Ihr Ansprechpartner " :($P{Sprache}.equals("Englisch")) ? "Your Contact ":""]]></variableExpression>
+</variable>
+<variable name="KOPF_Email_Adresse" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Emailadresse " :($P{Sprache}.equals("Englisch")) ? "Emailadress ":""]]></variableExpression>
+</variable>
+<variable name="KOPF_Telefon" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Telefon " :($P{Sprache}.equals("Englisch")) ? "Phone ":""]]></variableExpression>
+</variable>
+<variable name="Customer_Name" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[(!$P{contactId}.equals("") ? $F{contact_name} : ($F{customer_name} != null && !$F{customer_name}.equals("")) ? $F{customer_name} : "No name")]]></variableExpression>
+</variable>
+<variable name="Delivery_Contact" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[(!$P{contactId}.equals("")) ? $F{delivery_contact} : $F{delivery_customer}]]></variableExpression>
+</variable>
+<background>
+<band splitType="Stretch"/>
+</background>
+<title>
+<band height="178" splitType="Stretch">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<rectangle>
+<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="23" y="10" width="254" height="127" uuid="0ba94dfd-22b3-4d44-a5b2-62f27c9b4cf0">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+<graphicElement>
+<pen lineWidth="1.0" lineStyle="Solid"/>
+</graphicElement>
+</rectangle>
+<line>
+<reportElement x="23" y="35" width="254" height="1" uuid="7305482f-a273-4a6f-b0b8-4ac892fe552b">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+</reportElement>
+</line>
+<rectangle>
+<reportElement mode="Transparent" x="308" y="10" width="253" height="100" uuid="63451b65-e2d3-4557-ac02-dc13ee5cf54b">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+</rectangle>
+<textField>
+<reportElement x="315" y="15" width="105" height="15" uuid="4c158a0c-b1d4-4c6c-92d7-4c18ce9eb1ac">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Dokumentdatum}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="315" y="30" width="105" height="15" uuid="a579c384-6327-42e2-af15-8fe8730eaad3">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Dokumentnummer}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="315" y="45" width="105" height="15" uuid="46404f21-f71b-4414-8952-d0bba15273ec"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Kundennummer}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="315" y="60" width="105" height="15" uuid="9d066d04-c251-4d26-9c83-7e19fe12ceb2"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Ansprechpartner}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="315" y="75" width="105" height="15" uuid="76cc3264-0336-41a1-8952-6492f150d969">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Email_Adresse}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="315" y="90" width="105" height="15" uuid="78f002aa-6ef7-4ed2-8149-0a5be0d4dfeb">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{KOPF_Telefon}]]></textFieldExpression>
+</textField>
+<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+<reportElement x="420" y="15" width="136" height="15" uuid="055506ab-a1cc-46d0-a8b8-0c3cec6b7941">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+                </textElement>
+            <textFieldExpression><![CDATA[$P{Dokumentdatum_Val} == null ? "" : $P{Dokumentdatum_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField isBlankWhenNull="true">
+<reportElement x="420" y="30" width="136" height="15" uuid="a193d8be-0c39-4b9d-a44d-a5bef2cd7ed8">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+                </textElement>
+            <textFieldExpression><![CDATA[$P{Dokumentnummer_Val} == null ? "" : $P{Dokumentnummer_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField isBlankWhenNull="true">
+<reportElement x="420" y="45" width="136" height="15" uuid="6d019382-2d03-4d32-b5ec-70ee4588de65">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+                </textElement>
+            <textFieldExpression><![CDATA[$P{Kundennummer_Val} == null ? "" : $P{Kundennummer_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField isBlankWhenNull="true">
+<reportElement x="420" y="60" width="136" height="15" uuid="ef2e180c-45b3-43a1-98df-ebd651ac3401"/>
+<textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+</textElement>
+            <textFieldExpression><![CDATA[$P{Ansprechpartner_Val} == null ? "" : $P{Ansprechpartner_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement stretchType="RelativeToBandHeight" x="22" y="148" width="530" height="20" forecolor="#006BB3" uuid="c9aaf893-b09e-4d61-ba6e-1c3d688da1a7">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<printWhenExpression><![CDATA[$P{Sprache}.equals("Deutsch") || $P{Sprache}.equals("Englisch")]]></printWhenExpression>
+</reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="13" isBold="true"/>
+                </textElement>
+            <textFieldExpression><![CDATA[$P{Header_Standard} == null ? "" : $P{Header_Standard}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField isStretchWithOverflow="true">
+<reportElement x="31" y="41" width="238" height="20" uuid="64c94acb-91e1-4267-9599-37cefb7e84a5">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{Customer_Name}]]></textFieldExpression>
+</textField>
+<textField isStretchWithOverflow="true">
+<reportElement x="31" y="69" width="238" height="65" uuid="389381ec-9b0f-44a2-b79e-316bf7b24d4d">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textFieldExpression><![CDATA[$V{Delivery_Contact}]]></textFieldExpression>
+</textField>
+<textField isStretchWithOverflow="true">
+<reportElement x="28" y="13" width="244" height="20" uuid="1c8e5ed6-c465-4afc-af99-aa722ece13e9">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+</reportElement>
+<textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="7" isBold="true"/>
+</textElement>
+            <textFieldExpression><![CDATA[$P{Return_address} == null ? "" : $P{Return_address}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="342" y="75" width="214" height="15" uuid="646642a4-ee2f-408e-a132-ab854b11b190">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+</textElement>
+            <textFieldExpression><![CDATA[$P{Email_Adresse_Val} == null ? "" : $P{Email_Adresse_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="342" y="90" width="214" height="15" uuid="3076d17e-dc3e-431a-8bfc-0fbad64b13d1">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="true"/>
+</textElement>
+            <textFieldExpression><![CDATA[$P{Telefon_Val} == null ? "" : $P{Telefon_Val}.replace("_s_", " ")]]></textFieldExpression>
+</textField>
+</band>
+</title>
+</jasperReport>

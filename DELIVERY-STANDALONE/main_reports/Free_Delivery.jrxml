@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Free_Delivery" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="e59ec7b0-4a1b-436a-ac42-95f4c3c87ff8">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="CalHelp Data Adapter "/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+    <parameter name="Reportpath" class="java.lang.String">
+        <parameterDescription><![CDATA[Pfad zum Report-Verzeichnis, das den Subreport "subreports/Free_Delivery_Title.jasper" enthält.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PrefixTable" class="java.lang.String">
+        <parameterDescription><![CDATA[Optionales Tabellenpräfix (z. B. cal_) für mandantenfähige Schemata.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Sprache" class="java.lang.String">
+        <parameterDescription><![CDATA[Sichert die Sprachumschaltung für Labels und Textbausteine (Deutsch/Englisch).]]></parameterDescription>
+        <defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Header_Standard" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Dokumentdatum_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Dokumentnummer_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Kundennummer_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Ansprechpartner_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Email_Adresse_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="Telefon_Val" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="KTAG" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+<parameter name="contactId" class="java.lang.String">
+<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+</parameter>
+    <parameter name="Return_address" class="java.lang.String">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MTAGs" class="java.lang.String">
+        <parameterDescription><![CDATA[Kommagetrennte MTAG-Liste für die Auswahl der Inventarpositionen.]]></parameterDescription>
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+<queryString>
+<![CDATA[SELECT i.MTAG, COALESCE(ci.K4602, "") AS customer_ID, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4202,"") AS I4202, COALESCE(i.I4203,"") AS I4203, COALESCE( i.I4204, "") AS I4204, COALESCE( i.I4206,"") AS I4206
+FROM $P!{PrefixTable}inventory i
+LEFT JOIN $P!{PrefixTable}customers ci on i.ktag=ci.KTAG
+WHERE i.MTAG IN ($P!{MTAGs})]]>
+</queryString>
+<field name="MTAG" class="java.lang.String"/>
+<field name="I4201" class="java.lang.String"/>
+<field name="I4202" class="java.lang.String"/>
+<field name="I4203" class="java.lang.String"/>
+<field name="I4204" class="java.lang.String"/>
+<field name="I4206" class="java.lang.String"/>
+<field name="customer_ID" class="java.lang.String"/>
+<variable name="DETAIL_I4201" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Geräte-ID" : ($P{Sprache}.equals("Englisch")) ? "Asset-ID" : "Asset-ID"]]></variableExpression>
+</variable>
+<variable name="DETAIL_I4202" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Hersteller" : ($P{Sprache}.equals("Englisch")) ? "Manufacturer" : "Manufacturer"]]></variableExpression>
+</variable>
+<variable name="DETAIL_I4203" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Modell" : ($P{Sprache}.equals("Englisch")) ? "Model" : "Model"]]></variableExpression>
+</variable>
+<variable name="DETAIL_I4204" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Beschreibung" : ($P{Sprache}.equals("Englisch")) ? "Description" : "Description"]]></variableExpression>
+</variable>
+<variable name="DETAIL_Customer_ID" class="java.lang.String" resetType="None">
+<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch")) ? "Kunden-ID" : ($P{Sprache}.equals("Englisch")) ? "Customer-ID" : "Customer-ID"]]></variableExpression>
+</variable>
+<variable name="v_current_page" class="java.lang.Integer" resetType="Page">
+<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+</variable>
+<background>
+<band splitType="Stretch"/>
+</background>
+<title>
+<band height="116" splitType="Stretch">
+<subreport>
+<reportElement x="-17" y="98" width="595" height="16" uuid="34c80d9e-4d95-4f0d-ba41-9b8f99ab906b">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+<subreportParameter name="PrefixTable">
+<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Sprache">
+<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Header_Standard">
+<subreportParameterExpression><![CDATA[$P{Header_Standard}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Dokumentdatum_Val">
+<subreportParameterExpression><![CDATA[$P{Dokumentdatum_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Dokumentnummer_Val">
+<subreportParameterExpression><![CDATA[$P{Dokumentnummer_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Kundennummer_Val">
+<subreportParameterExpression><![CDATA[$P{Kundennummer_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Ansprechpartner_Val">
+<subreportParameterExpression><![CDATA[$P{Ansprechpartner_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Email_Adresse_Val">
+<subreportParameterExpression><![CDATA[$P{Email_Adresse_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Telefon_Val">
+<subreportParameterExpression><![CDATA[$P{Telefon_Val}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="KTAG">
+<subreportParameterExpression><![CDATA[$P{KTAG}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="contactId">
+<subreportParameterExpression><![CDATA[$P{contactId}]]></subreportParameterExpression>
+</subreportParameter>
+<subreportParameter name="Return_address">
+<subreportParameterExpression><![CDATA[$P{Return_address}]]></subreportParameterExpression>
+</subreportParameter>
+<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Free_Delivery_Title.jasper"]]></subreportExpression>
+</subreport>
+</band>
+</title>
+<pageHeader>
+<band height="18" splitType="Stretch">
+<printWhenExpression><![CDATA[$V{PAGE_NUMBER} >1]]></printWhenExpression>
+<textField>
+<reportElement x="25" y="0" width="56" height="18" uuid="c754994d-a223-4e56-96c6-7c390a48b004">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="10"/>
+                </textElement>
+<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite  " + $V{PAGE_NUMBER}+ " von ") : ("Page " + $V{PAGE_NUMBER}+ " of ")]]></textFieldExpression>
+</textField>
+<textField evaluationTime="Report">
+<reportElement x="82" y="0" width="60" height="18" uuid="12e9bdd2-ec6a-460c-bd6b-0ca489843f84">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + ($P{Sprache}.equals("Deutsch") ? " Seiten" : "")]]></textFieldExpression>
+</textField>
+</band>
+</pageHeader>
+<columnHeader>
+<band height="40">
+<staticText>
+<reportElement x="36" y="7" width="42" height="15" uuid="3acd8d43-e121-44dc-9399-33115b56368a">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<text><![CDATA[Pos]]></text>
+</staticText>
+<line>
+<reportElement x="36" y="30" width="516" height="1" uuid="31db4449-9493-4ce0-b3bf-6aa846ab8a84">
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+</line>
+<line>
+<reportElement x="25" y="0" width="1" height="40" uuid="64875f84-dfed-4529-b428-9e31b92d85ae">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+</line>
+<line>
+<reportElement x="25" y="0" width="536" height="1" uuid="9f652b88-66e8-4775-95bc-8e864195f099">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+</line>
+<line>
+<reportElement x="561" y="0" width="1" height="40" uuid="6ac37d0f-3198-4e5b-9d92-648a5e44c034">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+</line>
+<textField>
+<reportElement x="80" y="7" width="90" height="15" uuid="9b69a9cd-4d72-4788-8cb5-1ab0188dede0">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{DETAIL_I4202}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="173" y="7" width="100" height="15" uuid="e248a2d4-293e-48d5-9912-69e3f4f19e80">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{DETAIL_I4203}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="277" y="7" width="135" height="15" uuid="45451ffc-d873-4a69-b822-3586f2f2a086">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{DETAIL_I4204}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="415" y="7" width="73" height="15" uuid="32dcd8bb-0dd4-4469-b16e-62cb1908bbf5">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{DETAIL_I4201}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x="491" y="7" width="64" height="15" uuid="d436e126-e1a7-4be4-af3a-654ffe2cd520">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font isBold="true"/>
+</textElement>
+<textFieldExpression><![CDATA[$V{DETAIL_Customer_ID}]]></textFieldExpression>
+</textField>
+</band>
+</columnHeader>
+<detail>
+<band height="20" splitType="Stretch">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<line>
+<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="20" uuid="8bb19082-425e-4854-b621-5abcf19b35a2"/>
+</line>
+<line>
+<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="20" uuid="c1896946-6f35-4b37-9ff5-e37b6b25970a">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+</line>
+<textField pattern="#,##0.000">
+<reportElement x="36" y="0" width="42" height="20" uuid="a126ed98-ce5e-4609-9ebd-771b87c1dced"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="9"/>
+                </textElement>
+<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+</textField>
+<textField textAdjust="StretchHeight">
+<reportElement x="80" y="0" width="90" height="20" uuid="8b53b4ec-420e-4a8e-8735-39fa8b531e34">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$F{I4202}]]></textFieldExpression>
+</textField>
+<textField textAdjust="StretchHeight">
+<reportElement x="173" y="0" width="100" height="20" uuid="61f0fd5a-5e26-4025-9352-6df5dcea5113">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
+</textField>
+<textField textAdjust="StretchHeight">
+<reportElement x="277" y="0" width="135" height="20" uuid="4248cc9a-b74d-447c-988a-77d75d1e49b2">
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$F{I4204}]]></textFieldExpression>
+</textField>
+<textField textAdjust="StretchHeight">
+<reportElement x="415" y="0" width="84" height="20" uuid="19a61275-2c40-419d-a011-e674c415fe0c">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$F{I4201}]]></textFieldExpression>
+</textField>
+<textField textAdjust="StretchHeight">
+<reportElement x="503" y="0" width="53" height="20" uuid="3799a2f1-7762-485c-998a-59a91aa63b90">
+<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+</reportElement>
+<textElement verticalAlignment="Middle">
+<font size="8"/>
+</textElement>
+<textFieldExpression><![CDATA[$F{customer_ID}]]></textFieldExpression>
+</textField>
+</band>
+</detail>
+<columnFooter>
+<band height="11">
+<line>
+<reportElement x="25" y="10" width="536" height="1" uuid="cec03764-03ca-47f8-8639-837438170792">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+</reportElement>
+</line>
+<line>
+<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="10" uuid="6dbe126f-babf-4277-b909-2cbdc4bd00d4">
+<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+</reportElement>
+</line>
+<line>
+<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="11" uuid="70c23caf-6d36-46c9-8562-0e3b7b24ce62"/>
+</line>
+</band>
+</columnFooter>
+<pageFooter>
+<band height="70" splitType="Stretch">
+</band>
+</pageFooter>
+<lastPageFooter>
+<band height="74">
+</band>
+</lastPageFooter>
+</jasperReport>
