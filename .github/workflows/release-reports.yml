@@ -75,6 +75,7 @@ jobs:
           create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
+          create_zip "DELIVERY-STANDALONE" "delivery-standalone"
 
       - name: Determine release metadata
         id: release_meta
