@@ -47,6 +47,15 @@ jobs:
             INVENTORY-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload DELIVERY-STANDALONE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DELIVERY-STANDALONE
+          path: |
+            DELIVERY-STANDALONE/main_reports
+            DELIVERY-STANDALONE/subreports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -57,6 +66,8 @@ jobs:
           find ORDER-SAMPLE
           echo "📂 Inhalt von INVENTORY-SAMPLE:"
           find INVENTORY-SAMPLE
+          echo "📂 Inhalt von DELIVERY-STANDALONE:"
+          find DELIVERY-STANDALONE
 
       - name: Create ZIPs of all folders (JRXML, plus properties/MD for DAKKS)
         run: |
@@ -126,6 +137,7 @@ jobs:
           create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
+          create_zip "DELIVERY-STANDALONE" "delivery-standalone"
 
       - name: Show ZIP contents (Debug)
         run: |
@@ -133,6 +145,7 @@ jobs:
           unzip -l zip_output/field-names.zip
           unzip -l zip_output/order-sample.zip
           unzip -l zip_output/inventory-sample.zip
+          unzip -l zip_output/delivery-standalone.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
@@ -189,3 +202,17 @@ jobs:
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
           curl -X POST "$REPORT_URL?$QUERY" \
             -F "file=@zip_output/field-names.zip"
+
+      - name: Send DELIVERY-STANDALONE ZIP to API
+        env:
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
+        run: |
+          REPORT_URL="https://${DOMAIN}/api/report/ab625419-31d4-8603-1cb3-f768af3b9fb0"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
+            -F "file=@zip_output/delivery-standalone.zip"
