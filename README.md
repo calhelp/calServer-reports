@@ -44,6 +44,10 @@ DAKKS-SAMPLE/
 ├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
 └── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
 
+DCC/
+├── main_reports/       # Digitaler Kalibrierschein (DCC) mit XML-Schema
+└── subreports/         # Unterberichte analog zum DCC-Hauptreport
+
 FIELD-NAMES/
 ├── main_reports/       # Übersichten zu Feldbezeichnungen & Sprachvarianten
 └── subreports/         # Platz für optionale Detail- oder Ergänzungsreports

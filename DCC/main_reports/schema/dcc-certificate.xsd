@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://calhelp.de/dcc"
+           xmlns="https://calhelp.de/dcc"
+           elementFormDefault="qualified">
+  <xs:element name="CalibrationCertificate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ReportMeta">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReportName" type="xs:string"/>
+              <xs:element name="ReportId" type="xs:string"/>
+              <xs:element name="ReportPath" type="xs:string" minOccurs="0"/>
+              <xs:element name="Language" type="xs:string"/>
+              <xs:element name="GeneratedAt" type="xs:dateTime"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Calibration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CTag" type="xs:string"/>
+              <xs:element name="CertField" type="xs:string" minOccurs="0"/>
+              <xs:element name="CalDate" type="xs:string" minOccurs="0"/>
+              <xs:element name="Customer" type="xs:string" minOccurs="0"/>
+              <xs:element name="Device" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Type" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Manufacturer" type="xs:string" minOccurs="0"/>
+                    <xs:element name="SerialNumber" type="xs:string" minOccurs="0"/>
+                    <xs:element name="InventoryNumber" type="xs:string" minOccurs="0"/>
+                    <xs:element name="AdditionalId" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Description" type="xs:string" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Procedures" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ProcedureName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="ProcedureDescription" type="xs:string" minOccurs="0"/>
+                    <xs:element name="CalibrationMethod" type="xs:string" minOccurs="0"/>
+                    <xs:element name="CalibrationItem" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Standards" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Scope" type="xs:string" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Environment" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="IncomingDate" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Condition" type="xs:string" minOccurs="0"/>
+                    <xs:element name="CalibrationPlace" type="xs:string" minOccurs="0"/>
+                    <xs:element name="WorkingHours" type="xs:string" minOccurs="0"/>
+                    <xs:element name="EnvironmentalConditions" type="xs:string" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Results" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Result" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Row" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Remark" type="xs:string" minOccurs="0"/>
+                    <xs:element name="TestDescription" type="xs:string" minOccurs="0"/>
+                    <xs:element name="MeasurementStep" type="xs:string" minOccurs="0"/>
+                    <xs:element name="NominalValue" type="xs:string" minOccurs="0"/>
+                    <xs:element name="SystemActual" type="xs:string" minOccurs="0"/>
+                    <xs:element name="VariationValue" type="xs:string" minOccurs="0"/>
+                    <xs:element name="UpperLimit" type="xs:string" minOccurs="0"/>
+                    <xs:element name="LowerLimit" type="xs:string" minOccurs="0"/>
+                    <xs:element name="ExpandedUncertainty" type="xs:string" minOccurs="0"/>
+                    <xs:element name="ExpandedUncertaintyIsoE" type="xs:string" minOccurs="0"/>
+                    <xs:element name="ExpandedUncertaintyIsoP" type="xs:string" minOccurs="0"/>
+                    <xs:element name="ToleranceError" type="xs:string" minOccurs="0"/>
+                    <xs:element name="RelativeError" type="xs:string" minOccurs="0"/>
+                    <xs:element name="PassFail" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Fsc" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Accredited" type="xs:string" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="measurementOption" type="xs:string" use="required"/>
+      <xs:attribute name="schemaVersion" type="xs:string" default="1.0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

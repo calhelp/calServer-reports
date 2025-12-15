@@ -1,0 +1,73 @@
+{
+  "report": {
+    "name": "dcc-sample",
+    "language": "Deutsch",
+    "reportpath": "/calserver/reports/DCC"
+  },
+  "calibration": {
+    "ctag": "CTAG-EXAMPLE-001",
+    "cert_field": "DCC-2025-0001",
+    "customer": "Beispiel GmbH, Musterstraße 12, 01234 Beispielstadt",
+    "cal_date": "2025-06",
+    "incoming_date": "2025-06-20",
+    "condition": "Eingangszustand geprüft",
+    "calibration_place": "Labor 1",
+    "working_hours": "08:00-16:00",
+    "environmental_conditions": "22 °C | 45 % rF",
+    "asset": {
+      "name": "Digitalmultimeter",
+      "manufacturer": "Keysight",
+      "type": "34401A",
+      "serial_number": "MY12345678",
+      "inventory_number": "INV-1001",
+      "additional_id": "ALT-42",
+      "description": "Das Digitalmultimeter vom Typ 34401A ist ein Messgerät für Spannung, Strom und Widerstand."
+    },
+    "procedures": {
+      "procedure_name": "DC-Calibration",
+      "procedure_description": "Vergleichsmessung gegen rückgeführte Normale gemäß interner VA",
+      "calibration_method": "Vergleichsmessung",
+      "calibration_item": "DC-Volt",
+      "standards": "Normale DMM/10V Referenz",
+      "scope": "Spannung DC 1 mV … 10 V"
+    }
+  },
+  "results": [
+    {
+      "row_num": 1,
+      "remark": "Messpunkt 1",
+      "test_desc": "DC 10 V",
+      "test_step2": "Aufheizen",
+      "fixq": "10 V",
+      "varq": "10.0003 V",
+      "upper_limit": "0.020 V",
+      "lower_limit": "-0.020 V",
+      "exp_uncert": "0.001 V",
+      "exp_uncert_iso_e": "0.001 V",
+      "exp_uncert_iso_p": "p=95%",
+      "tol_err": "0.003",
+      "rel_err": "0.03",
+      "pass_fail": "OK",
+      "fsc": "*",
+      "accred": "1"
+    },
+    {
+      "row_num": 2,
+      "remark": "Messpunkt 2",
+      "test_desc": "DC 100 mV",
+      "test_step2": "Nullabgleich",
+      "fixq": "100 mV",
+      "varq": "100.01 mV",
+      "upper_limit": "0.50 mV",
+      "lower_limit": "-0.50 mV",
+      "exp_uncert": "0.05 mV",
+      "exp_uncert_iso_e": "0.05 mV",
+      "exp_uncert_iso_p": "p=95%",
+      "tol_err": "0.08",
+      "rel_err": "0.08",
+      "pass_fail": "OK",
+      "fsc": "*",
+      "accred": "0"
+    }
+  ]
+}
