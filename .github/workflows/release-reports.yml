@@ -32,6 +32,8 @@ jobs:
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
               rsync_excludes+=(--exclude='config/**' --exclude='messages.properties')
+            elif [ "$sample" = "DCC" ]; then
+              rsync_excludes+=()
             fi
 
             rm -rf "${stage_dir}"
@@ -42,13 +44,16 @@ jobs:
                 rsync -avm "${rsync_excludes[@]}" \
                   --include='*/' \
                   --include='*.jrxml' \
+                  --include='*.xsd' \
+                  --include='*.md' \
+                  --include='*.json' \
                   --exclude='*' \
                   "${sample}/${folder}/" "${stage_dir}/${folder}/"
               fi
             done
 
-            # Sicherstellen, dass nur JRXML-Dateien in den ZIPs landen
-            find "${stage_dir}" -type f ! -name '*.jrxml' -delete
+            # Sicherstellen, dass nur relevante Dateien (JRXML/XSD/MD/JSON) in den ZIPs landen
+            find "${stage_dir}" -type f ! \( -name '*.jrxml' -o -name '*.xsd' -o -name '*.md' -o -name '*.json' \) -delete
             find "${stage_dir}" -type d -empty -delete
 
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
@@ -72,6 +77,7 @@ jobs:
           }
 
           create_zip "DAKKS-SAMPLE" "dakks-sample"
+          create_zip "DCC" "dcc-sample"
           create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"

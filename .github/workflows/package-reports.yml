@@ -20,6 +20,15 @@ jobs:
             DAKKS-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload DCC as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DCC
+          path: |
+            DCC/main_reports
+            DCC/subreports
+          if-no-files-found: error
+
       - name: Upload FIELD-NAMES as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -60,6 +69,8 @@ jobs:
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
           find DAKKS-SAMPLE
+          echo "📂 Inhalt von DCC:"
+          find DCC
           echo "📂 Inhalt von FIELD-NAMES:"
           find FIELD-NAMES
           echo "📂 Inhalt von ORDER-SAMPLE:"
@@ -86,6 +97,8 @@ jobs:
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
               rsync_excludes+=(--exclude='config/**')
               allowed_patterns+=('*.properties' '*.md')
+            elif [ "$sample" = "DCC" ]; then
+              allowed_patterns+=('*.xsd' '*.md' '*.json')
             fi
 
             rm -rf "${stage_dir}"
@@ -134,6 +147,7 @@ jobs:
           }
 
           create_zip "DAKKS-SAMPLE" "dakks-sample"
+          create_zip "DCC" "dcc-sample"
           create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
@@ -142,6 +156,7 @@ jobs:
       - name: Show ZIP contents (Debug)
         run: |
           unzip -l zip_output/dakks-sample.zip
+          unzip -l zip_output/dcc-sample.zip
           unzip -l zip_output/field-names.zip
           unzip -l zip_output/order-sample.zip
           unzip -l zip_output/inventory-sample.zip
@@ -160,6 +175,20 @@ jobs:
           QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
           curl -X POST "$REPORT_URL?$QUERY" \
             -F "file=@zip_output/dakks-sample.zip"
+
+      - name: Send DCC ZIP to API
+        env:
+          DOMAIN: ${{ secrets.DOMAIN }}
+          HTTP_X_REST_USERNAME: ${{ secrets.HTTP_X_REST_USERNAME }}
+          HTTP_X_REST_PASSWORD: ${{ secrets.HTTP_X_REST_PASSWORD }}
+          HTTP_X_REST_API_KEY: ${{ secrets.HTTP_X_REST_API_KEY }}
+        run: |
+          REPORT_URL="https://${DOMAIN}/api/report/517d5a02-281b-4564-95c0-bdaf3cab5604"
+          QUERY="HTTP_X_REST_USERNAME=${HTTP_X_REST_USERNAME}&"
+          QUERY+="HTTP_X_REST_PASSWORD=${HTTP_X_REST_PASSWORD}&"
+          QUERY+="HTTP_X_REST_API_KEY=${HTTP_X_REST_API_KEY}"
+          curl -X POST "$REPORT_URL?$QUERY" \
+            -F "file=@zip_output/dcc-sample.zip"
 
       - name: Send ORDER-SAMPLE ZIP to API
         env:
