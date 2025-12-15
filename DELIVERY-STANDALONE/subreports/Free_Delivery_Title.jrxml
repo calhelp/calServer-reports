@@ -53,11 +53,11 @@
         <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
     </parameter>
 <queryString>
-<![CDATA[SELECT c.K4602, CONCAT_WS(" ", c.K4613, COALESCE(c.K4602, "")) AS customer_name, CONCAT_WS(" ", td.firstname, COALESCE(td.name, "")) AS contact_name, c.K4603, c.K4604, c.K4605, c.K4606,
+<![CDATA[SELECT c.K4602, CONCAT_WS(" ", c.K4613, COALESCE(c.K4602, "")) AS customer_name, CONCAT_WS(" ", td.firstname, COALESCE(td.name, "")) AS contact_name, c.K4603, c.K4604, c.K4605, c.K4606, c.K4619,
 IF(td.label IS NULL OR TRIM(td.label) = "", NULL, td.label) AS label,
-CONCAT_WS("\n", IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), td.street, CONCAT_WS(" ", td.zip, td.location), td.country) AS delivery_contact,
-CONCAT_WS("\n", COALESCE(c.K4603, ""), CONCAT_WS(" ", c.K4606, c.K4604), c.K4605) AS delivery_customer,
-CONCAT_WS(" ", td.zip, td.location) AS customer_contact, 
+CONCAT_WS("\n", IF(td.contact IS NULL OR TRIM(td.contact) = "", NULL, td.contact), IF(c.K4619 IS NULL OR TRIM(c.K4619) = "", NULL, c.K4619), td.street, CONCAT_WS(" ", td.zip, td.location), td.country) AS delivery_contact,
+CONCAT_WS("\n", COALESCE(c.K4603, ""), IF(c.K4619 IS NULL OR TRIM(c.K4619) = "", NULL, c.K4619), CONCAT_WS(" ", c.K4606, c.K4604), c.K4605) AS delivery_customer,
+CONCAT_WS(" ", td.zip, td.location) AS customer_contact,
 CONCAT_WS(" ", td.street, td.location) AS customer_street, CONCAT_WS(" ", td.zip, td.state) AS customer_address
 FROM $P!{PrefixTable}customers c
 LEFT JOIN $P!{PrefixTable}contact td on (td.customer_uID=c.KTAG OR td.uID=$P{contactId})
@@ -68,6 +68,7 @@ WHERE c.KTAG=$P{KTAG} AND ($P{contactId} = "" OR td.uID=$P{contactId})]]>
 <field name="K4604" class="java.lang.String"/>
 <field name="K4605" class="java.lang.String"/>
 <field name="K4606" class="java.lang.String"/>
+<field name="K4619" class="java.lang.String"/>
 <field name="label" class="java.lang.String"/>
 <field name="customer_name" class="java.lang.String"/>
 <field name="contact_name" class="java.lang.String"/>
