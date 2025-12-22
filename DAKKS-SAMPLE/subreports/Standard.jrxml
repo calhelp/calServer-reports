@@ -35,7 +35,6 @@
   COALESCE(i.I4202, "") AS I4202,
   COALESCE(i.I4203, "") AS I4203,
   COALESCE(i.I4204, "") AS I4204,
-  c.C2301 AS C2301,
   c.C2303 AS C2303,
   CASE UPPER(COALESCE($P{Cert_field}, ''))
     WHEN 'C2396' THEN COALESCE(c.C2396, "")
@@ -52,7 +51,6 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
 	<field name="I4204" class="java.lang.String"/>
-        <field name="C2301" class="java.lang.String"/>
         <field name="C2303" class="java.lang.String"/>
         <field name="CalibrationMark" class="java.lang.String"/>
 	<variable name="Inv_Nr" class="java.lang.String" resetType="None">
@@ -66,9 +64,6 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 	</variable>
 	<variable name="Type" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Typ" : "Type"]]></variableExpression>
-	</variable>
-	<variable name="Lastcal" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "letzte Kal" : "Last Cal"]]></variableExpression>
 	</variable>
 	<variable name="Duedate" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "nächste Kal" : "Cal Due"]]></variableExpression>
@@ -191,35 +186,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="27794792-9e51-43c7-8e8b-ae9555b6fda9"/>
-				<box>
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[letzte Kal]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="300" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="d0500b64-9982-4dac-93bd-75ae8134563f"/>
-				<box>
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Last Cal]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="370" y="0" width="67" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+				<reportElement x="300" y="0" width="67" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -233,7 +200,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="17" width="67" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+				<reportElement x="300" y="17" width="67" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -247,7 +214,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="437" y="0" width="98" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="367" y="0" width="168" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -258,10 +225,10 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="8" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Kalibrierkennzeichen]]></text>
+				<text><![CDATA[Kalibrierscheinnummer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="437" y="17" width="98" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="367" y="17" width="168" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -272,7 +239,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="7" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Calibration Mark]]></text>
+				<text><![CDATA[Calibration certificate no.]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -307,18 +274,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="300" y="0" width="70" height="16" uuid="ee5ba057-36d0-4cad-b62a-cb0e33a157d0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{C2301} == null || $F{C2301}.trim().isEmpty())
-? ""
-: (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2301}.trim())
-        ? java.time.LocalDate.parse($F{C2301}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", $P{REPORT_LOCALE}))
-        : $F{C2301})]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="370" y="0" width="67" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+				<reportElement x="300" y="0" width="67" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -329,7 +285,7 @@ WHERE t.CTAG = $P{P_CTAG}]]>
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="437" y="0" width="98" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="367" y="0" width="168" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                 </textElement>
