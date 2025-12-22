@@ -103,8 +103,8 @@
 	<parameter name="Additional_information" class="java.lang.String">
 		<parameterDescription><![CDATA[Zusatzinformationen zur DAkkS-Anerkennung und internationalen Abkommen.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
-: "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."]]></defaultValueExpression>
+? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der EA- und ILAC-Abkommen zur gegenseitigen Anerkennung von Kalibrierscheinen. Weitere Unterzeichner sind auf den Seiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) gelistet."
+: "The Deutsche Akkreditierungsstelle GmbH is a signatory to the EA and ILAC agreements on mutual recognition of calibration certificates. Other signatories are listed on the EA (www.european-accreditation.org) and ILAC (www.ilac.org) websites."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Freitext für den beschriebenen Kalibrierablauf (vergleichende Messung).]]></parameterDescription>
@@ -1022,7 +1022,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textField>
 				</frame>
 			</band>
-			<band height="55" splitType="Stretch">
+			<band height="55" splitType="Prevent">
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1AdditionalInformation} == null ? "y" : $P{ShowGroup1AdditionalInformation}.toString())
     .replace(" ", " ")
@@ -1051,8 +1051,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA[(
   ( $P{Additional_information} == null || $P{Additional_information}.trim().isEmpty() )
     ? ( $P{Sprache}.equals("Deutsch")
-        ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der multilateralen Übereinkommen der European Cooperation for Accreditation (EA) und der International Laboratory Accreditation Cooperation (ILAC) zur gegenseitigen Anerkennung der Kalibrierscheine. Die weiteren Unterzeichner innerhalb und außerhalb Europas sind den Internetseiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) zu entnehmen."
-        : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the multilateral agreements of the European Cooperation for Accreditation (EA) and the International Laboratory Accreditation Cooperation (ILAC) for the mutual recognition of the calibration certificates. The other signatories inside and outside Europe can be found on the websites of EA (www.european-accreditation.org) and ILAC (www.ilac.org)."
+        ? "Die Deutsche Akkreditierungsstelle GmbH ist Unterzeichner der EA- und ILAC-Abkommen zur gegenseitigen Anerkennung von Kalibrierscheinen. Weitere Unterzeichner sind auf den Seiten von EA (www.european-accreditation.org) und ILAC (www.ilac.org) gelistet."
+        : "The Deutsche Akkreditierungsstelle GmbH is a signatory to the EA and ILAC agreements on mutual recognition of calibration certificates. Other signatories are listed on the EA (www.european-accreditation.org) and ILAC (www.ilac.org) websites."
       )
     : $P{Additional_information}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
