@@ -359,16 +359,24 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	<variable name="Group_header_3c" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "KONFORMITÄT" : "CONFORMITY"]]></variableExpression>
 	</variable>
-	<variable name="Group_header_3d" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "WEITERE HINWEISE" : "ADDITIONAL INFORMATIONS"]]></variableExpression>
-	</variable>
-	<variable name="Group_header_4a" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSERGEBNISSE" : "MEASUREMENTS RESULTS"]]></variableExpression>
-	</variable>
-	<variable name="Foundleft" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($F{C2308} != null && $F{C2308}.equals("AS-FOUND")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang nicht jedoch bei Ausgang."
-: ( ($F{C2308} != null && $F{C2308}.equals("AS-LEFT")) ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Ausgang nicht jedoch bei Eingang." : "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang und bei Ausgang.")]]></variableExpression>
-	</variable>
+        <variable name="Group_header_3d" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "WEITERE HINWEISE" : "ADDITIONAL INFORMATIONS"]]></variableExpression>
+        </variable>
+        <variable name="Group_header_4a" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "MESSERGEBNISSE" : "MEASUREMENTS RESULTS"]]></variableExpression>
+        </variable>
+        <variable name="Condition_state_lower" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[$F{C2308} != null ? $F{C2308}.toLowerCase() : ""]]></variableExpression>
+        </variable>
+        <variable name="Foundleft" class="java.lang.String" resetType="None">
+                <variableExpression><![CDATA[("as-found".equals($V{Condition_state_lower}))
+  ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang, nicht jedoch bei Ausgang."
+  : (("as-left".equals($V{Condition_state_lower}))
+    ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Ausgang, nicht jedoch bei Eingang."
+    : (("found-left".equals($V{Condition_state_lower}))
+      ? "Der Ergebnisbericht beschreibt den Zustand des Gerätes bei Eingang und bei Ausgang."
+      : ""))]]></variableExpression>
+        </variable>
 	<variable name="procedure_name_var" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($F{procedure_name} != null && !$F{procedure_name}.trim().isEmpty())
         ? $F{procedure_name}
