@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marketing Landing – Design Preview</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
+  <link rel="stylesheet" href="../assets/design-preview.css" />
+</head>
+<body class="design-preview">
+  <header class="design-preview__hero" uk-scrollspy="cls: is-visible; repeat: true">
+    <div class="design-preview__container">
+      <p class="design-preview__eyebrow">CMS Marketing</p>
+      <h1 class="design-preview__headline">Klare Produktstories mit ruhigem Layout</h1>
+      <p class="design-preview__lede">
+        Die Landing-Page führt Besucher sachlich durch Nutzen, Features und eine kompakte CTA-Gruppe – optimiert für den Editor-Preview.
+      </p>
+      <div class="design-preview__cta-group" uk-scrollspy="cls: is-visible; repeat: true">
+        <a class="uk-button uk-button-primary" href="#">Jetzt anfragen</a>
+        <a class="uk-button uk-button-default" href="#">Produktdetails</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="design-preview__container">
+    <section class="design-preview__section" uk-scrollspy="cls: is-visible; repeat: true">
+      <div class="design-preview__cards" data-preview-slider>
+        <article class="design-preview__card" data-slider-item>
+          <p class="design-preview__badge">01</p>
+          <h2 class="design-preview__card-title">Übersichtliches Layout</h2>
+          <p>Ein statischer Slider-Frame zeigt die wichtigsten Aussagen ohne automatische Ablenkung.</p>
+          <div class="design-preview__chips">
+            <span class="design-preview__chip">ruhig</span>
+            <span class="design-preview__chip">sachlich</span>
+            <span class="design-preview__chip">fokussiert</span>
+          </div>
+        </article>
+        <article class="design-preview__card" data-slider-item>
+          <p class="design-preview__badge">02</p>
+          <h2 class="design-preview__card-title">Design-Tokens geladen</h2>
+          <p>Alle Abstände, Farben und Schriften kommen aus dem Namespace <code>.design-preview</code> und stehen sofort im Template bereit.</p>
+          <div class="design-preview__chips">
+            <span class="design-preview__chip">Tokens</span>
+            <span class="design-preview__chip">Namespace</span>
+          </div>
+        </article>
+        <article class="design-preview__card" data-slider-item>
+          <p class="design-preview__badge">03</p>
+          <h2 class="design-preview__card-title">Scroll-Einblendungen</h2>
+          <p>IntersectionObserver blendet Karten behutsam ein – in Storybook oder der CMS-Preview sofort prüfbar.</p>
+          <div class="design-preview__chips">
+            <span class="design-preview__chip">Preview</span>
+            <span class="design-preview__chip">Storybook</span>
+          </div>
+        </article>
+      </div>
+      <div class="design-preview__slider-dots" aria-label="Statischer Slider" data-slider-dots></div>
+    </section>
+
+    <section class="design-preview__section design-preview__section--neutral" uk-scrollspy="cls: is-visible; repeat: true">
+      <div class="design-preview__two-column">
+        <div>
+          <h3 class="design-preview__section-title">Redakteurs-Preview</h3>
+          <p>Die Vorschau nutzt die gleichen Tokens und Effekte wie die Live-Seite. So sehen Redakteur:innen die gestaltete Landing-Page schon im CMS.</p>
+        </div>
+        <div class="design-preview__editor-frame" aria-label="Editor Preview">
+          <p class="design-preview__eyebrow">Preview-Rahmen</p>
+          <p class="design-preview__lede">Integriert in das CMS-Frontend oder als Storybook-Story nutzbar.</p>
+          <div class="design-preview__cta-group">
+            <button class="uk-button uk-button-primary" type="button">CTA prüfen</button>
+            <button class="uk-button uk-button-default" type="button">Layout vergleichen</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
+  <script src="../assets/design-preview.js"></script>
+</body>
+</html>
