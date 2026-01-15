@@ -238,7 +238,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
   COALESCE(i.I4204, "") AS I4204, COALESCE(i.I4202, "") AS I4202, COALESCE(i.I4203, "") AS I4203, COALESCE(i.I4201, "") AS I4201, COALESCE(i.I4206, "") AS I4206, IF(i.I4224 IS NOT NULL AND i.I4224 != "", i.I4224, NULL) AS I4224,
   c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
   p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope,
-  r.working_hours AS resource_working_hours
+  r.environment_resources AS resource_working_hours
   FROM $P!{PrefixTable}calibration c
   LEFT JOIN $P!{PrefixTable}inventory i on i.MTAG=c.MTAG
   LEFT JOIN $P!{PrefixTable}customers cu on cu.KTAG=i.ktag
