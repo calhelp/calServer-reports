@@ -592,26 +592,22 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<variable name="FormattedLastCalibration" class="java.lang.String">
 		<variableExpression><![CDATA[$F{cal_C2301} == null
     ? "-"
-    : ($F{cal_C2301} instanceof java.util.Date
-        ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
-        : ($F{cal_C2301}.toString().trim().isEmpty() || $F{cal_C2301}.toString().trim().equalsIgnoreCase("null")
-            ? "-"
-            : ($F{cal_C2301}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
-                ? java.time.LocalDate.parse($F{cal_C2301}.toString().trim().substring(0, 10))
-                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-                : $F{cal_C2301}.toString().trim())))]]></variableExpression>
+    : ($F{cal_C2301}.trim().isEmpty() || $F{cal_C2301}.trim().equalsIgnoreCase("null")
+        ? "-"
+        : (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{cal_C2301}.trim())
+            ? java.time.LocalDate.parse($F{cal_C2301}.trim())
+                .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            : $F{cal_C2301}.trim()))]]></variableExpression>
 	</variable>
         <variable name="FormattedNextCalibration" class="java.lang.String">
                 <variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
-    : ($F{cal_C2303} instanceof java.util.Date
-        ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
-        : ($F{cal_C2303}.toString().trim().isEmpty() || $F{cal_C2303}.toString().trim().equalsIgnoreCase("null")
-            ? "-"
-            : ($F{cal_C2303}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
-                ? java.time.LocalDate.parse($F{cal_C2303}.toString().trim().substring(0, 10))
-                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-                : $F{cal_C2303}.toString().trim())))]]></variableExpression>
+    : ($F{cal_C2303}.trim().isEmpty() || $F{cal_C2303}.trim().equalsIgnoreCase("null")
+        ? "-"
+        : (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{cal_C2303}.trim())
+            ? java.time.LocalDate.parse($F{cal_C2303}.trim())
+                .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            : $F{cal_C2303}.trim()))]]></variableExpression>
         </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
