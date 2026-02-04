@@ -191,9 +191,9 @@
 
   cal.`CTAG` AS cal_CTAG,
   cal.`nCallSheetUID` AS cal_nCallSheetUID,
-  cal.`C2301` AS cal_C2301,
+  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2301`, '%Y-%m-%d')), ''), '-') AS cal_C2301,
   cal.`C2302` AS cal_C2302,
-  cal.`C2303` AS cal_C2303,
+  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2303`, '%Y-%m-%d')), ''), '-') AS cal_C2303,
   cal.`C2304` AS cal_C2304,
   cal.`C2306` AS cal_C2306,
   cal.`C2307` AS cal_C2307,
