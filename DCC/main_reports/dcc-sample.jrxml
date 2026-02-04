@@ -487,7 +487,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	<variable name="CertNumber_var" class="java.lang.String"/>
 	<group name="Group1">
 		<groupHeader>
-			<band height="58">
+			<band height="58" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Kalibriergegenstand"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
   ($P{ShowGroup1CalibrationItem} == null ? "y" : $P{ShowGroup1CalibrationItem}.toString())
@@ -509,8 +509,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA["UNIT UNDER TEST"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight" evaluationTime="Report">
-					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="2df318c6-d25b-48ed-80a6-10d27ebf6063"/>
+                                <textField textAdjust="StretchHeight" isStretchWithOverflow="true" evaluationTime="Report">
+					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="2df318c6-d25b-48ed-80a6-10d27ebf6063" positionType="Float"/>
 					<textElement textAlignment="Left" markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
