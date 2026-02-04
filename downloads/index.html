@@ -60,6 +60,9 @@
       const renderDownloads = (payload) => {
         const body = document.getElementById("downloads-body");
         const meta = document.getElementById("page-meta");
+        const basePath = window.location.pathname.endsWith("/")
+          ? window.location.pathname
+          : `${window.location.pathname}/`;
         const buildDate = payload.generatedAt
           ? new Date(payload.generatedAt).toLocaleString()
           : "Unbekannt";
@@ -76,6 +79,17 @@
           const date = payload.generatedAt
             ? new Date(payload.generatedAt).toLocaleDateString()
             : "-";
+          const downloadUrl = (() => {
+            if (!artifact.url) return "#";
+            try {
+              return new URL(
+                artifact.url,
+                `${window.location.origin}${basePath}`
+              ).toString();
+            } catch (error) {
+              return artifact.url;
+            }
+          })();
           return `
             <tr data-name="${artifact.name.toLowerCase()}">
               <td>
@@ -85,7 +99,7 @@
               <td>${bytesToSize(artifact.sizeBytes)}</td>
               <td>${date}</td>
               <td>
-                <a class="button" href="${artifact.url}" download>Download</a>
+                <a class="button" href="${downloadUrl}" download>Download</a>
               </td>
             </tr>
           `;
