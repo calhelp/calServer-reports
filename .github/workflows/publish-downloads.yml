@@ -6,6 +6,23 @@ on:
     workflows: ["Package Reports"]
     types: [completed]
   workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Workflow run ID for the artifacts to publish"
+        required: true
+        type: string
+      run_number:
+        description: "Workflow run number for metadata"
+        required: false
+        type: string
+      commit_sha:
+        description: "Commit SHA for metadata"
+        required: false
+        type: string
+      workflow_name:
+        description: "Workflow name for metadata"
+        required: false
+        type: string
 
 jobs:
   publish:
@@ -21,16 +38,16 @@ jobs:
       - name: Download artifacts from build
         uses: actions/download-artifact@v4
         with:
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: artifacts
 
       - name: Build downloads site
         env:
-          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
-          COMMIT_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_NAME: ${{ github.event.workflow_run.name || github.event.inputs.workflow_name }}
+          RUN_ID: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
+          RUN_NUMBER: ${{ github.event.workflow_run.run_number || github.event.inputs.run_number }}
+          COMMIT_SHA: ${{ github.event.workflow_run.head_sha || github.event.inputs.commit_sha }}
         run: |
           set -euo pipefail
 
