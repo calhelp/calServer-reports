@@ -595,16 +595,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
         <!-- <field name="loc_user_zipcity" class="java.lang.String"/> -->
         <!-- <field name="loc_user_country" class="java.lang.String"/> -->
         <!-- End of unused field definitions -->
-	<variable name="FormattedLastCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2301} == null
-    ? "-"
-    : new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{cal_C2301})]]></variableExpression>
-	</variable>
-        <variable name="FormattedNextCalibration" class="java.lang.String">
-                <variableExpression><![CDATA[$F{cal_C2303} == null
-    ? "-"
-    : new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{cal_C2303})]]></variableExpression>
-        </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
                 <groupHeader>
@@ -777,7 +767,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 												<textElement textAlignment="Left" verticalAlignment="Middle">
 														<font size="10"/>
 												</textElement>
-												<textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
+												<textFieldExpression><![CDATA[$F{cal_C2303}]]></textFieldExpression>
 										</textField>
 								</frame>
 								<textField textAdjust="ScaleFont">
@@ -785,7 +775,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 										<textElement textAlignment="Left" verticalAlignment="Middle">
 												<font size="10"/>
 										</textElement>
-										<textFieldExpression><![CDATA[$V{FormattedLastCalibration}]]></textFieldExpression>
+										<textFieldExpression><![CDATA[$F{cal_C2301}]]></textFieldExpression>
 								</textField>
                         </band>
                 </groupHeader>
