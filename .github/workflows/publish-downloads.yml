@@ -61,6 +61,7 @@ jobs:
 
           cp -R downloads/index.html downloads/assets "${DOWNLOADS_DIR}/"
           cp pages/index.html "${SITE_DIR}/index.html"
+          touch "${SITE_DIR}/.nojekyll"
 
           : > "${METADATA_FILE}"
           shopt -s nullglob
