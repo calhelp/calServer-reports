@@ -43,6 +43,7 @@ jobs:
           mkdir -p "${FILES_DIR}"
 
           cp -R downloads/index.html downloads/assets "${DOWNLOADS_DIR}/"
+          cp pages/index.html "${SITE_DIR}/index.html"
 
           : > "${METADATA_FILE}"
           shopt -s nullglob
