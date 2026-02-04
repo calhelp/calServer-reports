@@ -71,6 +71,7 @@ jobs:
           name: STICKERS-CAL-INV
           path: |
             STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS CAL as artifact
@@ -79,6 +80,7 @@ jobs:
           name: STICKERS-CAL
           path: |
             STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS DAKKS 12mm as artifact
@@ -87,6 +89,7 @@ jobs:
           name: STICKERS-DAKKS-12MM
           path: |
             STICKERS/DAKKS-Aufkleber_12mm/main_reports
+            STICKERS/DAKKS-Aufkleber_12mm/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS DAKKS 18mm as artifact
@@ -95,6 +98,7 @@ jobs:
           name: STICKERS-DAKKS-18MM
           path: |
             STICKERS/DAKKS-Aufkleber_18mm/main_reports
+            STICKERS/DAKKS-Aufkleber_18mm/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS INV as artifact
@@ -103,6 +107,7 @@ jobs:
           name: STICKERS-INV
           path: |
             STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS Vorlage as artifact
@@ -111,6 +116,7 @@ jobs:
           name: STICKERS-VORLAGE
           path: |
             STICKERS/Sticker_Vorlage/main_reports
+            STICKERS/Sticker_Vorlage/subreports
           if-no-files-found: error
 
       - name: List files before zipping (Debug)
