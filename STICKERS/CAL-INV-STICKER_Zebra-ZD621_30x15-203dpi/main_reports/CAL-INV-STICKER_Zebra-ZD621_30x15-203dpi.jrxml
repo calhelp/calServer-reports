@@ -31,8 +31,14 @@
   COALESCE(TRIM(c.`K4602`), '-') AS cust_K4602,
   COALESCE(TRIM(l.`L2801`), '') AS loc_L2801,
   COALESCE(TRIM(l.`L2802`), '') AS loc_L2802,
-  cal.`C2301` AS cal_C2301,
-  cal.`C2303` AS cal_C2303,
+  CASE
+    WHEN cal.`C2301` LIKE '%/%' THEN STR_TO_DATE(cal.`C2301`, '%m/%d/%Y')
+    ELSE cal.`C2301`
+  END AS cal_C2301,
+  CASE
+    WHEN cal.`C2303` LIKE '%/%' THEN STR_TO_DATE(cal.`C2303`, '%m/%d/%Y')
+    ELSE cal.`C2303`
+  END AS cal_C2303,
   cal.`C2307` AS cal_C2307
 /* Unused fields commented out to keep the report resilient when columns are missing:
   , i.`I4202` AS inv_I4202,
@@ -739,7 +745,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                         <textElement verticalAlignment="Middle">
                                                 <font size="8" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[Kalibriert durch]]></text>
+                                        <text><![CDATA[Kalibriert durch:]]></text>
                                 </staticText>
                                 <textField textAdjust="StretchHeight">
                                         <reportElement x="10" y="68" width="220" height="16" uuid="ad8d8d46-086b-47c7-a768-453ad62c611f"/>
