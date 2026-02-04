@@ -767,7 +767,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 												<textElement textAlignment="Left" verticalAlignment="Middle">
 														<font size="10"/>
 												</textElement>
-												<textFieldExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yy").format($F{cal_C2303})]]></textFieldExpression>
+												<textFieldExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2303})]]></textFieldExpression>
 										</textField>
 								</frame>
 								<textField textAdjust="ScaleFont">
@@ -775,7 +775,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 										<textElement textAlignment="Left" verticalAlignment="Middle">
 												<font size="10"/>
 										</textElement>
-										<textFieldExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yy").format($F{cal_C2301})]]></textFieldExpression>
+										<textFieldExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2301})]]></textFieldExpression>
 								</textField>
                         </band>
                 </groupHeader>
