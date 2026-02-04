@@ -31,8 +31,8 @@
   COALESCE(TRIM(c.`K4602`), '-') AS cust_K4602,
   COALESCE(TRIM(l.`L2801`), '') AS loc_L2801,
   COALESCE(TRIM(l.`L2802`), '') AS loc_L2802,
-  cal.`C2301` AS cal_C2301,
-  cal.`C2303` AS cal_C2303,
+  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2301`, '%Y-%m-%d')), ''), '-') AS cal_C2301,
+  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2303`, '%Y-%m-%d')), ''), '-') AS cal_C2303,
   cal.`C2307` AS cal_C2307
 /* Unused fields commented out to keep the report resilient when columns are missing:
   , i.`I4202` AS inv_I4202,
