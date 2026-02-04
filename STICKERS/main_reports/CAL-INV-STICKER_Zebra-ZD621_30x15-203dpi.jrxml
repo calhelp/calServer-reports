@@ -31,8 +31,8 @@
   COALESCE(TRIM(c.`K4602`), '-') AS cust_K4602,
   COALESCE(TRIM(l.`L2801`), '') AS loc_L2801,
   COALESCE(TRIM(l.`L2802`), '') AS loc_L2802,
-  COALESCE(DATE_FORMAT(cal.`C2301`, '%Y-%m-%d'), '-') AS cal_C2301,
-  COALESCE(DATE_FORMAT(cal.`C2303`, '%Y-%m-%d'), '-') AS cal_C2303,
+  cal.`C2301` AS cal_C2301,
+  cal.`C2303` AS cal_C2303,
   cal.`C2307` AS cal_C2307
 /* Unused fields commented out to keep the report resilient when columns are missing:
   , i.`I4202` AS inv_I4202,
@@ -319,8 +319,8 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="cust_K4602" class="java.lang.String"/>
 	<field name="loc_L2801" class="java.lang.String"/>
 	<field name="loc_L2802" class="java.lang.String"/>
-	<field name="cal_C2301" class="java.lang.String"/>
-	<field name="cal_C2303" class="java.lang.String"/>
+	<field name="cal_C2301" class="java.sql.Date"/>
+	<field name="cal_C2303" class="java.sql.Date"/>
 	<field name="cal_C2307" class="java.lang.String"/>
         <!-- Unused field definitions commented out to avoid dependency on missing columns. -->
         <!-- <field name="inv_I4202" class="java.lang.String"/> -->
@@ -592,16 +592,12 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<variable name="FormattedLastCalibration" class="java.lang.String">
 		<variableExpression><![CDATA[$F{cal_C2301} == null
     ? "-"
-    : ($F{cal_C2301}.trim().isEmpty() || $F{cal_C2301}.trim().equalsIgnoreCase("null")
-        ? "-"
-        : $F{cal_C2301})]]></variableExpression>
+    : new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{cal_C2301})]]></variableExpression>
 	</variable>
         <variable name="FormattedNextCalibration" class="java.lang.String">
                 <variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
-    : ($F{cal_C2303}.trim().isEmpty() || $F{cal_C2303}.trim().equalsIgnoreCase("null")
-        ? "-"
-        : $F{cal_C2303})]]></variableExpression>
+    : new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{cal_C2303})]]></variableExpression>
         </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
@@ -649,7 +645,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                         <textElement verticalAlignment="Middle">
                                                 <font size="10" isBold="true"/>
                                         </textElement>
-                                        <text><![CDATA[OE-Bezeichnung]]></text>
+                                        <text><![CDATA[OE-Bezeichnung TEST-123]]></text>
                                 </staticText>
                                 <textField textAdjust="StretchHeight">
                                         <reportElement x="110" y="22" width="120" height="26" uuid="df874fdc-40ef-4f5c-97bb-2148ff477b21"/>
