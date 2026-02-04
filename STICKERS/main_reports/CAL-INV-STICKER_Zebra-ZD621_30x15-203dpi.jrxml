@@ -319,8 +319,8 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="cust_K4602" class="java.lang.String"/>
 	<field name="loc_L2801" class="java.lang.String"/>
 	<field name="loc_L2802" class="java.lang.String"/>
-	<field name="cal_C2301" class="java.lang.String"/>
-	<field name="cal_C2303" class="java.lang.String"/>
+	<field name="cal_C2301" class="java.lang.Object"/>
+	<field name="cal_C2303" class="java.lang.Object"/>
 	<field name="cal_C2307" class="java.lang.String"/>
         <!-- Unused field definitions commented out to avoid dependency on missing columns. -->
         <!-- <field name="inv_I4202" class="java.lang.String"/> -->
