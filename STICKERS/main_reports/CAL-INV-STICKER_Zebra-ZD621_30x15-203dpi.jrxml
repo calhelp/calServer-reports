@@ -206,7 +206,6 @@
   , cal.`nCallSheetUID` AS cal_nCallSheetUID,
   , cal.`C2302` AS cal_C2302,
   , cal.`C2304` AS cal_C2304,
-  , cal.`C2306` AS cal_C2306,
   , cal.`C2309` AS cal_C2309,
   , cal.`C2310` AS cal_C2310,
   , cal.`C2311` AS cal_C2311,
@@ -509,7 +508,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
         <!-- <field name="cal_nCallSheetUID" class="java.lang.String"/> -->
         <!-- <field name="cal_C2302" class="java.lang.String"/> -->
         <!-- <field name="cal_C2304" class="java.lang.String"/> -->
-        <!-- <field name="cal_C2306" class="java.lang.String"/> -->
         <!-- <field name="cal_C2309" class="java.lang.String"/> -->
         <!-- <field name="cal_C2310" class="java.lang.String"/> -->
         <!-- <field name="cal_C2311" class="java.lang.String"/> -->
