@@ -5,6 +5,7 @@ on:
   workflow_run:
     workflows: ["Package Reports"]
     types: [completed]
+  workflow_dispatch:
 
 jobs:
   publish:

@@ -168,6 +168,13 @@ Alle aktuellen und früheren ZIP-Archive mit Reportvorlagen stehen als Release-P
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
 - [Alle Releases durchsuchen](https://github.com/calhelp/calServer-reports/releases)
 
+**Hinweis für GitHub Pages:** Die Downloads-Seite funktioniert nur, wenn GitHub Pages auf den Branch `gh-pages` zeigt und der Workflow `publish-downloads` mindestens einmal erfolgreich gelaufen ist.
+
+**Troubleshooting-Checkliste (optional):**
+- Existiert der Branch `gh-pages`?
+- War der letzte `publish-downloads`-Run erfolgreich?
+- Ist die Pages-Source auf `gh-pages` gesetzt?
+
 Für Entwickler:innen und zum Testen der jeweils frisch gebauten Version gibt es zusätzlich temporäre „Artifacts“ im Bereich  
 [GitHub Actions](https://github.com/calhelp/calServer-reports/actions).
 
