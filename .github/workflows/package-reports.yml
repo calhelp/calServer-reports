@@ -65,6 +65,60 @@ jobs:
             DELIVERY-STANDALONE/subreports
           if-no-files-found: error
 
+      - name: Upload STICKERS CAL-INV as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-CAL-INV
+          path: |
+            STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKERS CAL as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-CAL
+          path: |
+            STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKERS DAKKS 12mm as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-DAKKS-12MM
+          path: |
+            STICKERS/DAKKS-Aufkleber_12mm/main_reports
+            STICKERS/DAKKS-Aufkleber_12mm/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKERS DAKKS 18mm as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-DAKKS-18MM
+          path: |
+            STICKERS/DAKKS-Aufkleber_18mm/main_reports
+            STICKERS/DAKKS-Aufkleber_18mm/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKERS INV as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-INV
+          path: |
+            STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKERS Vorlage as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-VORLAGE
+          path: |
+            STICKERS/Sticker_Vorlage/main_reports
+            STICKERS/Sticker_Vorlage/subreports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -79,6 +133,8 @@ jobs:
           find INVENTORY-SAMPLE
           echo "📂 Inhalt von DELIVERY-STANDALONE:"
           find DELIVERY-STANDALONE
+          echo "📂 Inhalt von STICKERS:"
+          find STICKERS
 
       - name: Create ZIPs of all folders (JRXML, plus properties/MD for DAKKS)
         run: |
@@ -152,6 +208,12 @@ jobs:
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
           create_zip "DELIVERY-STANDALONE" "delivery-standalone"
+          create_zip "STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-inv-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/DAKKS-Aufkleber_12mm" "sticker-dakks-aufkleber-12mm"
+          create_zip "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
+          create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
       - name: Show ZIP contents (Debug)
         run: |
@@ -161,6 +223,12 @@ jobs:
           unzip -l zip_output/order-sample.zip
           unzip -l zip_output/inventory-sample.zip
           unzip -l zip_output/delivery-standalone.zip
+          unzip -l zip_output/sticker-cal-inv-zebra-zd621-30x15-203dpi.zip
+          unzip -l zip_output/sticker-cal-zebra-zd621-30x15-203dpi.zip
+          unzip -l zip_output/sticker-dakks-aufkleber-12mm.zip
+          unzip -l zip_output/sticker-dakks-aufkleber-18mm.zip
+          unzip -l zip_output/sticker-inv-zebra-zd621-30x15-203dpi.zip
+          unzip -l zip_output/sticker-vorlage.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
