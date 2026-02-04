@@ -22,6 +22,9 @@ Unterberichte für Normale und Messergebnisse ein.
 3. **Pfad & Sprache setzen** – `Reportpath` auf das gemeinsame Verzeichnis mit
    den Unterberichten zeigen lassen und bei Bedarf `Sprache` (`Deutsch` /
    `Englisch`) anpassen.
+   * Für JasperStarter steht unter
+     `DAKKS-SAMPLE/main_reports/dakks-sample_params.properties` eine
+     Vorlage bereit (je Parameter eine `key=value`-Zeile).
 4. **Textbausteine prüfen** – optionale Parameter wie
    `Cert_description`, `Measurements_description` oder
    `Conformity_description_*` enthalten bereits DAkkS-konforme Standardtexte
