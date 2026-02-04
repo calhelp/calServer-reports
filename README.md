@@ -164,6 +164,7 @@ Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API d
 
 Alle aktuellen und früheren ZIP-Archive mit Reportvorlagen stehen als Release-Pakete zur Verfügung:
 
+- [Latest Downloads (immer aktuelle Artefakte)](https://calhelp.github.io/calServer-reports/downloads/)
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
 - [Alle Releases durchsuchen](https://github.com/calhelp/calServer-reports/releases)
 
