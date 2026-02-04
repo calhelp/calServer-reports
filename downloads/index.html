@@ -106,28 +106,27 @@
         });
       };
 
-      const isGhPages = window.location.pathname.includes("/calServer-reports/");
       const primaryUrl = "./latest.json";
-      const fallbackUrl =
-        "https://calhelp.github.io/calServer-reports/downloads/latest.json";
+      const fallbackUrls = [
+        "https://calhelp.github.io/calServer-reports/downloads/latest.json",
+        "https://raw.githubusercontent.com/calhelp/calServer-reports/gh-pages/downloads/latest.json",
+      ];
 
       const fetchLatest = async () => {
-        try {
-          const response = await fetch(primaryUrl);
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+        const urls = [primaryUrl, ...fallbackUrls];
+        let lastError;
+        for (const url of urls) {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+            return await response.json();
+          } catch (error) {
+            lastError = error;
           }
-          return await response.json();
-        } catch (error) {
-          if (isGhPages) {
-            throw error;
-          }
-          const response = await fetch(fallbackUrl);
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-          }
-          return await response.json();
         }
+        throw lastError;
       };
 
       fetchLatest()
