@@ -308,28 +308,19 @@
 FROM $P!{PrefixTable}inventory i
 LEFT JOIN $P!{PrefixTable}customers c   ON i.KTAG = c.KTAG
 LEFT JOIN $P!{PrefixTable}barcode   b   ON i.MTAG = b.barcode_key
-LEFT JOIN (
-  SELECT
-    MTAG,
-    MAX(id) AS max_id
-  FROM $P!{PrefixTable}location
-  WHERE L2815 = 1
-  GROUP BY MTAG
-) loc_max ON loc_max.MTAG = i.MTAG
-LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = loc_max.MTAG AND l.id = loc_max.max_id
+LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = i.MTAG AND l.L2815 = 1
 LEFT JOIN $P!{PrefixTable}customers uc  ON l.L2801 = uc.KTAG
 LEFT JOIN (
   SELECT
     MTAG,
-    MAX(C2301) AS max_C2301,
-    MAX(C2303) AS max_C2303
+    MAX(COALESCE(C2303, C2301)) AS max_cal_date
   FROM $P!{PrefixTable}calibration
   WHERE C2339 = 1
   GROUP BY MTAG
 ) cal_max ON cal_max.MTAG = i.MTAG
 LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = cal_max.MTAG
   AND cal.C2339 = 1
-  AND (cal.C2301 = cal_max.max_C2301 OR cal.C2303 = cal_max.max_C2303)
+  AND (cal.C2303 = cal_max.max_cal_date OR cal.C2301 = cal_max.max_cal_date)
 WHERE i.MTAG = $P{P_MTAG}]]>
         </queryString>
 	<field name="inv_I4201" class="java.lang.String"/>
@@ -612,14 +603,24 @@ WHERE i.MTAG = $P{P_MTAG}]]>
     ? "-"
     : ($F{cal_C2301} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
-        : $F{cal_C2301}.toString())]]></variableExpression>
+        : ($F{cal_C2301}.toString().trim().isEmpty() || $F{cal_C2301}.toString().trim().equalsIgnoreCase("null")
+            ? "-"
+            : ($F{cal_C2301}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
+                ? java.time.LocalDate.parse($F{cal_C2301}.toString().trim().substring(0, 10))
+                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                : $F{cal_C2301}.toString().trim())))]]></variableExpression>
 	</variable>
         <variable name="FormattedNextCalibration" class="java.lang.String">
                 <variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
     : ($F{cal_C2303} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
-        : $F{cal_C2303}.toString())]]></variableExpression>
+        : ($F{cal_C2303}.toString().trim().isEmpty() || $F{cal_C2303}.toString().trim().equalsIgnoreCase("null")
+            ? "-"
+            : ($F{cal_C2303}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
+                ? java.time.LocalDate.parse($F{cal_C2303}.toString().trim().substring(0, 10))
+                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                : $F{cal_C2303}.toString().trim())))]]></variableExpression>
         </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
@@ -772,7 +773,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                 </textField>
 								<staticText>
 										<reportElement x="10" y="86" width="100" height="14" uuid="4a545430-9e64-4553-bf43-c531529041a9"/>
-										<box leftPadding="2"/>
 										<textElement verticalAlignment="Middle">
 												<font size="8" isBold="true"/>
 										</textElement>
@@ -788,7 +788,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 												</textElement>
 												<text><![CDATA[Nächste Kalibrierung]]></text>
 										</staticText>
-										<textField textAdjust="ScaleFont" isStretchWithOverflow="false">
+										<textField textAdjust="ScaleFont">
 												<reportElement x="0" y="16" width="100" height="16" uuid="8a407c4f-b7e9-4049-95bb-6fd82e1f2b1a"/>
 												<box leftPadding="2"/>
 												<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -797,9 +797,8 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 												<textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
 										</textField>
 								</frame>
-								<textField textAdjust="ScaleFont" isStretchWithOverflow="false">
+								<textField textAdjust="ScaleFont">
 										<reportElement x="10" y="102" width="100" height="16" uuid="15c4ec13-28de-40aa-a25c-1d8cc0deac1f"/>
-										<box leftPadding="2"/>
 										<textElement textAlignment="Left" verticalAlignment="Middle">
 												<font size="10"/>
 										</textElement>
