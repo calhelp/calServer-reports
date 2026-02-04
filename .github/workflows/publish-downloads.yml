@@ -51,7 +51,7 @@ jobs:
               artifact_name="$(basename "${artifact}")"
               safe_name="$(echo "${artifact_name}" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g' | sed -E 's/^-+|-+$//g')"
               filename="${safe_name}.zip"
-              zip_path="${FILES_DIR}/${filename}"
+              zip_path="${GITHUB_WORKSPACE}/${FILES_DIR}/${filename}"
               (cd "${artifact}" && zip -r "${zip_path}" .)
               size_bytes="$(stat -c%s "${zip_path}")"
               sha256="$(sha256sum "${zip_path}" | awk '{print $1}')"
