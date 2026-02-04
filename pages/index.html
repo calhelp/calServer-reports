@@ -42,12 +42,19 @@
       <section class="card">
         <h2>Projektstruktur &amp; Beispielberichte</h2>
         <pre><code>DAKKS-SAMPLE/
+├── fonts/              # Schriftarten (DejaVu) für konsistente PDF-Ausgabe
 ├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
-└── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+├── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+└── preview.jpg         # Vorschaubild des Beispielreports
 
 DCC/
+├── fonts/              # Schriftarten für den DCC-Report
 ├── main_reports/       # Digitaler Kalibrierschein (DCC) mit XML-Schema
 └── subreports/         # Unterberichte analog zum DCC-Hauptreport
+
+DELIVERY-STANDALONE/
+├── main_reports/       # Eigenständiger Lieferschein-Report
+└── subreports/         # Unterbericht für Kopf-/Adressblock
 
 FIELD-NAMES/
 ├── main_reports/       # Übersichten zu Feldbezeichnungen &amp; Sprachvarianten
@@ -61,8 +68,20 @@ ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
 
+STICKERS/
+└── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
+
+downloads/
+└── ...                 # GitHub-Pages-Downloads (generiert durch Workflow)
+
+pages/
+└── index.html          # Projekt-Landing-Page für GitHub Pages
+
 scripts/
-└── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+├── check_jasper_version.sh  # Prüft JRXML-Versionen auf 6.20.6
+├── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+├── dcc_upload_sample.bat    # Upload-Beispiel für DCC-Reports
+└── dcc_xml_writer.py        # Hilfsskript zum Erzeugen von DCC-XML
 </code></pre>
         <p>
           Die Beispiele sind bewusst generisch gehalten und können direkt als
@@ -110,14 +129,19 @@ scripts/
         <p>
           Im Ordner <code>scripts</code> liegt das Batch-Skript
           <code>dakks_upload_sample.bat</code>, das Beispielberichte als ZIP
-          an die calServer-API sendet. Vor der Ausführung müssen Domain, Nutzer,
-          Passwort, API-Key und Report-ID gesetzt werden.
+          an die calServer-API sendet. Zusätzlich gibt es Prüf- und
+          Hilfsskripte für DCC-Reports und die JRXML-Version.
         </p>
         <pre><code>set DOMAIN=deine.domain.tld
 set HTTP_X_REST_USERNAME=deinUser
 set HTTP_X_REST_PASSWORD=deinPasswort
 set HTTP_X_REST_API_KEY=deinApiKey
 set REPORT_ID=cd5797da-e7a9-0bc6-fc73-dedc595bd59b</code></pre>
+        <ul>
+          <li><code>check_jasper_version.sh</code> prüft JRXML-Dateien auf Version 6.20.6.</li>
+          <li><code>dcc_upload_sample.bat</code> zeigt einen Upload für DCC-Reports.</li>
+          <li><code>dcc_xml_writer.py</code> unterstützt beim Erzeugen von DCC-XML.</li>
+        </ul>
       </section>
 
       <section class="card">
@@ -198,7 +222,7 @@ set REPORT_ID=cd5797da-e7a9-0bc6-fc73-dedc595bd59b</code></pre>
           Danke an alle Mitwirkenden und an die gesamte calServer-Community für
           Ideen, Feedback und gemeinsames Vorankommen!
         </p>
-        <p><em>Letzte Aktualisierung: 2025-06-26</em></p>
+        <p><em>Letzte Aktualisierung: 2026-02-04</em></p>
       </section>
     </main>
   </body>

@@ -41,12 +41,19 @@ Die bereitgestellten Verzeichnisse gliedern sich wie folgt:
 
 ```text
 DAKKS-SAMPLE/
+├── fonts/              # Schriftarten (DejaVu) für konsistente PDF-Ausgabe
 ├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
-└── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+├── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+└── preview.jpg         # Vorschaubild des Beispielreports
 
 DCC/
+├── fonts/              # Schriftarten für den DCC-Report
 ├── main_reports/       # Digitaler Kalibrierschein (DCC) mit XML-Schema
 └── subreports/         # Unterberichte analog zum DCC-Hauptreport
+
+DELIVERY-STANDALONE/
+├── main_reports/       # Eigenständiger Lieferschein-Report
+└── subreports/         # Unterbericht für Kopf-/Adressblock
 
 FIELD-NAMES/
 ├── main_reports/       # Übersichten zu Feldbezeichnungen & Sprachvarianten
@@ -60,8 +67,20 @@ ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
 
+STICKERS/
+└── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
+
+downloads/
+└── ...                 # GitHub-Pages-Downloads (generiert durch Workflow)
+
+pages/
+└── index.html          # Projekt-Landing-Page für GitHub Pages
+
 scripts/
-└── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+├── check_jasper_version.sh  # Prüft JRXML-Versionen auf 6.20.6
+├── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+├── dcc_upload_sample.bat    # Upload-Beispiel für DCC-Reports
+└── dcc_xml_writer.py        # Hilfsskript zum Erzeugen von DCC-XML
 ````
 
 **Hinweis:** Die Beispiele sind bewusst generisch gehalten. Sie können direkt als Grundlage für eigene Anpassungen verwendet werden.
@@ -108,7 +127,11 @@ Nutze Versionierung für Reports, um bei Fehlern jederzeit auf eine frühere Var
 
 ## Skripte für Upload und Automatisierung
 
-Im Ordner `scripts` findest du das Batch-Skript `dakks_upload_sample.bat`, das Beispielberichte als ZIP-Archiv an die calServer-API sendet.
+Im Ordner `scripts` findest du neben dem Batch-Skript `dakks_upload_sample.bat` weitere Hilfen:
+
+- `check_jasper_version.sh` prüft alle JRXML-Dateien auf die erwartete JasperReports-Version 6.20.6.
+- `dcc_upload_sample.bat` zeigt einen Upload-Workflow für DCC-Reports.
+- `dcc_xml_writer.py` unterstützt bei der Erzeugung von DCC-XML.
 
 ### Vorbereitung:
 
@@ -227,6 +250,6 @@ E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
 
 ---
 
-*Letzte Aktualisierung: 2025-06-26*
+*Letzte Aktualisierung: 2026-02-04*
 
 ```
