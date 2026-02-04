@@ -31,8 +31,8 @@
   COALESCE(TRIM(c.`K4602`), '-') AS cust_K4602,
   COALESCE(TRIM(l.`L2801`), '') AS loc_L2801,
   COALESCE(TRIM(l.`L2802`), '') AS loc_L2802,
-  CAST(cal.`C2301` AS DATE) AS cal_C2301,
-  CAST(cal.`C2303` AS DATE) AS cal_C2303,
+  cal.`C2301` AS cal_C2301,
+  cal.`C2303` AS cal_C2303,
   cal.`C2307` AS cal_C2307
 /* Unused fields commented out to keep the report resilient when columns are missing:
   , i.`I4202` AS inv_I4202,
@@ -319,8 +319,8 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="cust_K4602" class="java.lang.String"/>
 	<field name="loc_L2801" class="java.lang.String"/>
 	<field name="loc_L2802" class="java.lang.String"/>
-	<field name="cal_C2301" class="java.sql.Date"/>
-	<field name="cal_C2303" class="java.sql.Date"/>
+	<field name="cal_C2301" class="java.lang.String"/>
+	<field name="cal_C2303" class="java.lang.String"/>
 	<field name="cal_C2307" class="java.lang.String"/>
         <!-- Unused field definitions commented out to avoid dependency on missing columns. -->
         <!-- <field name="inv_I4202" class="java.lang.String"/> -->

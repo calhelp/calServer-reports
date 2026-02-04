@@ -246,7 +246,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
   LEFT JOIN $P!{PrefixTable}resource r ON r.name = $P{environmental_conditions}
   WHERE c.CTAG=$P{P_CTAG}]]>
 	</queryString>
-	<field name="C2301" class="java.util.Date"/>
+	<field name="C2301" class="java.lang.String"/>
 	<field name="C2307" class="java.lang.String"/>
 	<field name="C2308" class="java.lang.String"/>
 	<field name="C2311" class="java.lang.String"/>
