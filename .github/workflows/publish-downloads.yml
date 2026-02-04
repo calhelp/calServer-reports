@@ -1,0 +1,102 @@
+---
+name: Publish Downloads
+
+on:
+  workflow_run:
+    workflows: ["Package Reports"]
+    types: [completed]
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download artifacts from build
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: artifacts
+
+      - name: Build downloads site
+        env:
+          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
+          COMMIT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+
+          SITE_DIR="site"
+          DOWNLOADS_DIR="${SITE_DIR}/downloads"
+          FILES_DIR="${DOWNLOADS_DIR}/files"
+          METADATA_FILE="${DOWNLOADS_DIR}/metadata.tsv"
+
+          rm -rf "${SITE_DIR}"
+          mkdir -p "${FILES_DIR}"
+
+          cp -R downloads/index.html downloads/assets "${DOWNLOADS_DIR}/"
+
+          : > "${METADATA_FILE}"
+          shopt -s nullglob
+
+          for artifact in artifacts/*; do
+            if [ -d "${artifact}" ]; then
+              artifact_name="$(basename "${artifact}")"
+              safe_name="$(echo "${artifact_name}" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g' | sed -E 's/^-+|-+$//g')"
+              filename="${safe_name}.zip"
+              zip_path="${GITHUB_WORKSPACE}/${FILES_DIR}/${filename}"
+              (cd "${artifact}" && zip -r "${zip_path}" .)
+              size_bytes="$(stat -c%s "${zip_path}")"
+              sha256="$(sha256sum "${zip_path}" | awk '{print $1}')"
+              printf "%s\t%s\t%s\t%s\n" "${artifact_name}" "${filename}" "${size_bytes}" "${sha256}" >> "${METADATA_FILE}"
+            fi
+          done
+
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import os
+
+          metadata_path = Path("site/downloads/metadata.tsv")
+          artifacts = []
+          if metadata_path.exists():
+              for line in metadata_path.read_text().splitlines():
+                  name, filename, size_bytes, sha256 = line.split("\t")
+                  artifacts.append(
+                      {
+                          "name": name,
+                          "filename": filename,
+                          "sizeBytes": int(size_bytes),
+                          "sha256": sha256,
+                          "url": f"files/{filename}",
+                      }
+                  )
+
+          payload = {
+              "generatedAt": datetime.now(timezone.utc).isoformat(),
+              "workflow": os.environ.get("WORKFLOW_NAME"),
+              "runId": os.environ.get("RUN_ID"),
+              "runNumber": os.environ.get("RUN_NUMBER"),
+              "commitSha": os.environ.get("COMMIT_SHA"),
+              "artifacts": artifacts,
+          }
+
+          output_path = Path("site/downloads/latest.json")
+          output_path.write_text(json.dumps(payload, indent=2))
+          PY
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
+          force_orphan: true

@@ -150,6 +150,7 @@ Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API d
 
 4. **Automatisiertes Deployment:**
    Der Workflow `.github/workflows/package-reports.yml` erstellt bei jedem Push automatisch ZIP-Archive der Haupt- und Unterberichte und lädt diese – sofern eingerichtet – über die API an deine calServer-Instanz hoch.
+   **Regel für Reportpakete ohne Subreports:** Das ZIP enthält immer einen `subreports/`-Ordner. Wenn es keine Unterberichte gibt, wird ein Platzhalter `subreports/.keep` erzeugt, damit der Ordner im Archiv vorhanden bleibt.
    Die dafür notwendigen Zugangsdaten werden sicher als GitHub Secrets verwaltet:
 
    * `DOMAIN`
@@ -163,6 +164,7 @@ Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API d
 
 Alle aktuellen und früheren ZIP-Archive mit Reportvorlagen stehen als Release-Pakete zur Verfügung:
 
+- [Latest Downloads (immer aktuelle Artefakte)](https://calhelp.github.io/calServer-reports/downloads/)
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
 - [Alle Releases durchsuchen](https://github.com/calhelp/calServer-reports/releases)
 
@@ -221,4 +223,3 @@ E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
 *Letzte Aktualisierung: 2025-06-26*
 
 ```
-
