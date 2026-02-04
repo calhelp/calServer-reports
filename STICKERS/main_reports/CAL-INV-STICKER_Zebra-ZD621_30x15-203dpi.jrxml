@@ -308,28 +308,9 @@
 FROM $P!{PrefixTable}inventory i
 LEFT JOIN $P!{PrefixTable}customers c   ON i.KTAG = c.KTAG
 LEFT JOIN $P!{PrefixTable}barcode   b   ON i.MTAG = b.barcode_key
-LEFT JOIN (
-  SELECT
-    MTAG,
-    MAX(id) AS max_id
-  FROM $P!{PrefixTable}location
-  WHERE L2815 = 1
-  GROUP BY MTAG
-) loc_max ON loc_max.MTAG = i.MTAG
-LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = loc_max.MTAG AND l.id = loc_max.max_id
+LEFT JOIN $P!{PrefixTable}location  l   ON l.MTAG = i.MTAG AND l.L2815 = 1
 LEFT JOIN $P!{PrefixTable}customers uc  ON l.L2801 = uc.KTAG
-LEFT JOIN (
-  SELECT
-    MTAG,
-    MAX(C2301) AS max_C2301,
-    MAX(C2303) AS max_C2303
-  FROM $P!{PrefixTable}calibration
-  WHERE C2339 = 1
-  GROUP BY MTAG
-) cal_max ON cal_max.MTAG = i.MTAG
-LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = cal_max.MTAG
-  AND cal.C2339 = 1
-  AND (cal.C2301 = cal_max.max_C2301 OR cal.C2303 = cal_max.max_C2303)
+LEFT JOIN $P!{PrefixTable}calibration cal ON cal.MTAG = i.MTAG AND cal.C2339 = 1
 WHERE i.MTAG = $P{P_MTAG}]]>
         </queryString>
 	<field name="inv_I4201" class="java.lang.String"/>
