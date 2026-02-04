@@ -57,7 +57,7 @@
         return `${(bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0)} ${sizes[i]}`;
       };
 
-      const renderDownloads = (payload) => {
+      const renderDownloads = (payload, downloadsRoot) => {
         const body = document.getElementById("downloads-body");
         const meta = document.getElementById("page-meta");
         const basePath = window.location.pathname.endsWith("/")
@@ -82,10 +82,8 @@
           const downloadUrl = (() => {
             if (!artifact.url) return "#";
             try {
-              return new URL(
-                artifact.url,
-                `${window.location.origin}${basePath}`
-              ).toString();
+              const relativeUrl = artifact.url.replace(/^\/+/, "");
+              return new URL(relativeUrl, downloadsRoot).toString();
             } catch (error) {
               return artifact.url;
             }
@@ -143,8 +141,11 @@
         throw lastError;
       };
 
+      const latestUrl = new URL(primaryUrl, window.location.href);
+      const downloadsRoot = new URL(".", latestUrl);
+
       fetchLatest()
-        .then((payload) => renderDownloads(payload))
+        .then((payload) => renderDownloads(payload, downloadsRoot))
         .catch(() => {
           const body = document.getElementById("downloads-body");
           body.innerHTML = `
