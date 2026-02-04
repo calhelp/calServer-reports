@@ -106,13 +106,45 @@
         });
       };
 
-      fetch("./latest.json")
-        .then((response) => response.json())
+      const isGhPages = window.location.pathname.includes("/calServer-reports/");
+      const primaryUrl = "./latest.json";
+      const fallbackUrl =
+        "https://calhelp.github.io/calServer-reports/downloads/latest.json";
+
+      const fetchLatest = async () => {
+        try {
+          const response = await fetch(primaryUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return await response.json();
+        } catch (error) {
+          if (isGhPages) {
+            throw error;
+          }
+          const response = await fetch(fallbackUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return await response.json();
+        }
+      };
+
+      fetchLatest()
         .then((payload) => renderDownloads(payload))
         .catch(() => {
           const body = document.getElementById("downloads-body");
-          body.innerHTML =
-            '<tr><td colspan="5">Fehler beim Laden der Artefakte.</td></tr>';
+          body.innerHTML = `
+            <tr>
+              <td colspan="5">
+                <strong>Die Datei latest.json wurde nicht gefunden.</strong>
+                Bitte stelle sicher, dass GitHub Pages auf den <code>gh-pages</code>-Branch zeigt
+                und der Workflow <code>publish-downloads</code> erfolgreich gelaufen ist.
+                Mehr Infos: <a href="https://github.com/calhelp/calServer-reports#readme">README</a>
+                oder <a href="https://github.com/calhelp/calServer-reports/actions/workflows/publish-downloads.yml">Workflow-Status</a>.
+              </td>
+            </tr>
+          `;
         });
     </script>
   </body>
