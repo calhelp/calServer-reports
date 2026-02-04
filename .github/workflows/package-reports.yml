@@ -182,6 +182,11 @@ jobs:
             unset 'allowed_conditions[${#allowed_conditions[@]}-1]'
             find "${stage_dir}" -type f ! \( "${allowed_conditions[@]}" \) -delete
 
+            if [ -d "${stage_dir}/subreports" ] \
+              && [ -z "$(find "${stage_dir}/subreports" -type f -name '*.jrxml' -print -quit)" ]; then
+              touch "${stage_dir}/subreports/.keep"
+            fi
+
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
               echo "❌ No JRXML files found in ${sample}" >&2
               exit 1
