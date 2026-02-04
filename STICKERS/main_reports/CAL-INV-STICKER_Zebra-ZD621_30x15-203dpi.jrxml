@@ -603,14 +603,24 @@ WHERE i.MTAG = $P{P_MTAG}]]>
     ? "-"
     : ($F{cal_C2301} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
-        : $F{cal_C2301}.toString())]]></variableExpression>
+        : ($F{cal_C2301}.toString().trim().isEmpty() || $F{cal_C2301}.toString().trim().equalsIgnoreCase("null")
+            ? "-"
+            : ($F{cal_C2301}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
+                ? java.time.LocalDate.parse($F{cal_C2301}.toString().trim().substring(0, 10))
+                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                : $F{cal_C2301}.toString().trim())))]]></variableExpression>
 	</variable>
         <variable name="FormattedNextCalibration" class="java.lang.String">
                 <variableExpression><![CDATA[$F{cal_C2303} == null
     ? "-"
     : ($F{cal_C2303} instanceof java.util.Date
         ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
-        : $F{cal_C2303}.toString())]]></variableExpression>
+        : ($F{cal_C2303}.toString().trim().isEmpty() || $F{cal_C2303}.toString().trim().equalsIgnoreCase("null")
+            ? "-"
+            : ($F{cal_C2303}.toString().trim().matches("\\d{4}-\\d{2}-\\d{2}.*")
+                ? java.time.LocalDate.parse($F{cal_C2303}.toString().trim().substring(0, 10))
+                    .format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                : $F{cal_C2303}.toString().trim())))]]></variableExpression>
         </variable>
         <group name="InventorySticker" isStartNewPage="true">
                 <groupExpression><![CDATA[$F{inv_I4201}]]></groupExpression>
@@ -763,7 +773,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
                                 </textField>
 								<staticText>
 										<reportElement x="10" y="86" width="100" height="14" uuid="4a545430-9e64-4553-bf43-c531529041a9"/>
-										<box leftPadding="2"/>
 										<textElement verticalAlignment="Middle">
 												<font size="8" isBold="true"/>
 										</textElement>
@@ -790,7 +799,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 								</frame>
 								<textField textAdjust="ScaleFont">
 										<reportElement x="10" y="102" width="100" height="16" uuid="15c4ec13-28de-40aa-a25c-1d8cc0deac1f"/>
-										<box leftPadding="2"/>
 										<textElement textAlignment="Left" verticalAlignment="Middle">
 												<font size="10"/>
 										</textElement>
