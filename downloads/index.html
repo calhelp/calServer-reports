@@ -60,6 +60,9 @@
       const renderDownloads = (payload, downloadsRoot) => {
         const body = document.getElementById("downloads-body");
         const meta = document.getElementById("page-meta");
+        const basePath = window.location.pathname.endsWith("/")
+          ? window.location.pathname
+          : `${window.location.pathname}/`;
         const buildDate = payload.generatedAt
           ? new Date(payload.generatedAt).toLocaleString()
           : "Unbekannt";
