@@ -96,7 +96,7 @@ jobs:
                           "filename": filename,
                           "sizeBytes": int(size_bytes),
                           "sha256": sha256,
-                          "url": f"files/{filename}",
+                  "url": f"https://calhelp.github.io/calServer-reports/downloads/files/{filename}",
                       }
                   )
 
