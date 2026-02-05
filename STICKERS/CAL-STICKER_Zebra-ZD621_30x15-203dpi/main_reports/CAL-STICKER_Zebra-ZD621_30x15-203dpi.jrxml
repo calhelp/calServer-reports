@@ -594,12 +594,6 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_user_street" class="java.lang.String"/>
 	<field name="loc_user_zipcity" class="java.lang.String"/>
 	<field name="loc_user_country" class="java.lang.String"/>
-	<variable name="FormattedLastCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2301})]]></variableExpression>
-	</variable>
-	<variable name="FormattedNextCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2303})]]></variableExpression>
-	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -655,14 +649,14 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{FormattedLastCalibration}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2301})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="130" y="100" width="100" height="16" uuid="8a407c4f-b7e9-4049-95bb-6fd82e1f2b1a"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{FormattedNextCalibration}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2303})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
