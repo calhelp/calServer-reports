@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create ZIP archives (JRXML only)
+      - name: Create ZIP archives
         run: |
           set -euo pipefail
 
@@ -29,32 +29,44 @@ jobs:
             local zip_name="$2"
             local stage_dir="staging/${zip_name}"
             local rsync_excludes=()
+            local allowed_patterns=('*.jrxml')
+            local include_args=(--include='*/')
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
-              rsync_excludes+=(--exclude='config/**' --exclude='messages.properties')
+              rsync_excludes+=(--exclude='config/**')
+              allowed_patterns+=('*.properties' '*.md')
             elif [ "$sample" = "DCC" ]; then
-              rsync_excludes+=()
+              allowed_patterns+=('*.xsd' '*.md' '*.json')
             fi
 
             rm -rf "${stage_dir}"
             mkdir -p "${stage_dir}"
+            mkdir -p "${stage_dir}/main_reports" "${stage_dir}/subreports"
+
+            for pattern in "${allowed_patterns[@]}"; do
+              include_args+=(--include="$pattern")
+            done
+            include_args+=(--exclude='*')
 
             for folder in main_reports subreports; do
               if [ -d "${sample}/${folder}" ]; then
-                rsync -avm "${rsync_excludes[@]}" \
-                  --include='*/' \
-                  --include='*.jrxml' \
-                  --include='*.xsd' \
-                  --include='*.md' \
-                  --include='*.json' \
-                  --exclude='*' \
+                rsync -av "${rsync_excludes[@]}" "${include_args[@]}" \
                   "${sample}/${folder}/" "${stage_dir}/${folder}/"
               fi
             done
 
-            # Sicherstellen, dass nur relevante Dateien (JRXML/XSD/MD/JSON) in den ZIPs landen
-            find "${stage_dir}" -type f ! \( -name '*.jrxml' -o -name '*.xsd' -o -name '*.md' -o -name '*.json' \) -delete
-            find "${stage_dir}" -type d -empty -delete
+            # Sicherstellen, dass nur explizit erlaubte Dateitypen in den ZIPs landen.
+            local allowed_conditions=()
+            for pattern in "${allowed_patterns[@]}"; do
+              allowed_conditions+=(-name "$pattern" -o)
+            done
+            unset 'allowed_conditions[${#allowed_conditions[@]}-1]'
+            find "${stage_dir}" -type f ! \( "${allowed_conditions[@]}" \) -delete
+
+            if [ -d "${stage_dir}/subreports" ] \
+              && [ -z "$(find "${stage_dir}/subreports" -type f -name '*.jrxml' -print -quit)" ]; then
+              touch "${stage_dir}/subreports/.keep"
+            fi
 
             if [ -z "$(find "${stage_dir}" -type f -name '*.jrxml' -print -quit)" ]; then
               echo "❌ No JRXML files found in ${sample}" >&2
@@ -82,6 +94,13 @@ jobs:
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
           create_zip "DELIVERY-STANDALONE" "delivery-standalone"
+          create_zip "STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-inv-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/DAKKS-Aufkleber_12mm" "sticker-dakks-aufkleber-12mm"
+          create_zip "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
+          create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
       - name: Determine release metadata
         id: release_meta
