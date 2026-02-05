@@ -35,12 +35,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download artifacts from build
+      - name: Download report ZIP artifacts from build
         uses: actions/download-artifact@v4
         with:
           run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path: artifacts
+          name: report-zips
+          path: artifacts/report-zips
 
       - name: Validate downloaded artifacts
         run: |
@@ -80,15 +81,14 @@ jobs:
           : > "${METADATA_FILE}"
           shopt -s nullglob
 
-          for artifact in artifacts/*; do
-            if [ -d "${artifact}" ]; then
-              artifact_name="$(basename "${artifact}")"
-              safe_name="$(echo "${artifact_name}" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g' | sed -E 's/^-+|-+$//g')"
-              filename="${safe_name}.zip"
-              zip_path="${GITHUB_WORKSPACE}/${FILES_DIR}/${filename}"
-              (cd "${artifact}" && zip -r "${zip_path}" .)
-              size_bytes="$(stat -c%s "${zip_path}")"
-              sha256="$(sha256sum "${zip_path}" | awk '{print $1}')"
+          for zip_file in artifacts/report-zips/*.zip; do
+            if [ -f "${zip_file}" ]; then
+              filename="$(basename "${zip_file}")"
+              artifact_name="${filename%.zip}"
+              target_path="${GITHUB_WORKSPACE}/${FILES_DIR}/${filename}"
+              cp "${zip_file}" "${target_path}"
+              size_bytes="$(stat -c%s "${target_path}")"
+              sha256="$(sha256sum "${target_path}" | awk '{print $1}')"
               printf "%s\t%s\t%s\t%s\n" "${artifact_name}" "${filename}" "${size_bytes}" "${sha256}" >> "${METADATA_FILE}"
             fi
           done

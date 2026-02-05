@@ -220,6 +220,14 @@ jobs:
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
+
+      - name: Upload report ZIPs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-zips
+          path: zip_output/*.zip
+          if-no-files-found: error
+
       - name: Show ZIP contents (Debug)
         run: |
           unzip -l zip_output/dakks-sample.zip
