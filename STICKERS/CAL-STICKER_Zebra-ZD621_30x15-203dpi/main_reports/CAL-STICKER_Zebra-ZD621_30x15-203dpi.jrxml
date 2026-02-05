@@ -200,9 +200,15 @@
 
   cal.`CTAG` AS cal_CTAG,
   cal.`nCallSheetUID` AS cal_nCallSheetUID,
-  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2301`, '%Y-%m-%d')), ''), '-') AS cal_C2301,
+  CASE
+    WHEN cal.`C2301` LIKE '%/%' THEN STR_TO_DATE(cal.`C2301`, '%m/%d/%Y')
+    ELSE cal.`C2301`
+  END AS cal_C2301,
   cal.`C2302` AS cal_C2302,
-  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2303`, '%Y-%m-%d')), ''), '-') AS cal_C2303,
+  CASE
+    WHEN cal.`C2303` LIKE '%/%' THEN STR_TO_DATE(cal.`C2303`, '%m/%d/%Y')
+    ELSE cal.`C2303`
+  END AS cal_C2303,
   cal.`C2304` AS cal_C2304,
   cal.`C2306` AS cal_C2306,
   cal.`C2307` AS cal_C2307,
@@ -484,9 +490,9 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_L2837" class="java.lang.String"/>
 	<field name="cal_CTAG" class="java.lang.String"/>
 	<field name="cal_nCallSheetUID" class="java.lang.String"/>
-	<field name="cal_C2301" class="java.lang.String"/>
+	<field name="cal_C2301" class="java.sql.Date"/>
 	<field name="cal_C2302" class="java.lang.String"/>
-	<field name="cal_C2303" class="java.lang.String"/>
+	<field name="cal_C2303" class="java.sql.Date"/>
 	<field name="cal_C2304" class="java.lang.String"/>
 	<field name="cal_C2306" class="java.lang.String"/>
 	<field name="cal_C2307" class="java.lang.String"/>
@@ -589,18 +595,10 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_user_zipcity" class="java.lang.String"/>
 	<field name="loc_user_country" class="java.lang.String"/>
 	<variable name="FormattedLastCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2301} == null
-    ? "-"
-    : ($F{cal_C2301} instanceof java.util.Date
-        ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2301})
-        : $F{cal_C2301}.toString())]]></variableExpression>
+		<variableExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2301})]]></variableExpression>
 	</variable>
 	<variable name="FormattedNextCalibration" class="java.lang.String">
-		<variableExpression><![CDATA[$F{cal_C2303} == null
-    ? "-"
-    : ($F{cal_C2303} instanceof java.util.Date
-        ? new java.text.SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) $F{cal_C2303})
-        : $F{cal_C2303}.toString())]]></variableExpression>
+		<variableExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2303})]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>

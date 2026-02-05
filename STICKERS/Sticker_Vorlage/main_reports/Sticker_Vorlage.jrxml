@@ -191,9 +191,15 @@
 
   cal.`CTAG` AS cal_CTAG,
   cal.`nCallSheetUID` AS cal_nCallSheetUID,
-  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2301`, '%Y-%m-%d')), ''), '-') AS cal_C2301,
+  CASE
+    WHEN cal.`C2301` LIKE '%/%' THEN STR_TO_DATE(cal.`C2301`, '%m/%d/%Y')
+    ELSE cal.`C2301`
+  END AS cal_C2301,
   cal.`C2302` AS cal_C2302,
-  COALESCE(NULLIF(TRIM(DATE_FORMAT(cal.`C2303`, '%Y-%m-%d')), ''), '-') AS cal_C2303,
+  CASE
+    WHEN cal.`C2303` LIKE '%/%' THEN STR_TO_DATE(cal.`C2303`, '%m/%d/%Y')
+    ELSE cal.`C2303`
+  END AS cal_C2303,
   cal.`C2304` AS cal_C2304,
   cal.`C2306` AS cal_C2306,
   cal.`C2307` AS cal_C2307,
@@ -475,9 +481,9 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 	<field name="loc_L2837" class="java.lang.String"/>
 	<field name="cal_CTAG" class="java.lang.String"/>
 	<field name="cal_nCallSheetUID" class="java.lang.String"/>
-	<field name="cal_C2301" class="java.lang.String"/>
+	<field name="cal_C2301" class="java.sql.Date"/>
 	<field name="cal_C2302" class="java.lang.String"/>
-	<field name="cal_C2303" class="java.lang.String"/>
+	<field name="cal_C2303" class="java.sql.Date"/>
 	<field name="cal_C2304" class="java.lang.String"/>
 	<field name="cal_C2306" class="java.lang.String"/>
 	<field name="cal_C2307" class="java.lang.String"/>
@@ -741,7 +747,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField pattern="dd.MM.yyyy">
 				<reportElement x="150" y="258" width="160" height="18" uuid="c082c8b4-95e9-4229-a5a2-302d6f938600"/>
-				<textFieldExpression><![CDATA[$F{cal_C2301}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cal_C2301} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2301})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="320" y="258" width="80" height="18" uuid="06725674-e99b-4c27-a86f-0b05e84820a4"/>
@@ -807,7 +813,7 @@ WHERE i.MTAG = $P{P_MTAG}]]>
 			</staticText>
 			<textField pattern="dd.MM.yyyy">
 				<reportElement x="150" y="235" width="160" height="18" uuid="a00ba110-80f4-4d12-8c76-89335d2f9fe4"/>
-				<textFieldExpression><![CDATA[$F{cal_C2303}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cal_C2303} == null ? "-" : new java.text.SimpleDateFormat("dd.MM.yyyy").format($F{cal_C2303})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
