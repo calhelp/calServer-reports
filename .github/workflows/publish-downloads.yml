@@ -5,11 +5,13 @@ on:
   workflow_run:
     workflows: ["Package Reports"]
     types: [completed]
+  schedule:
+    - cron: "17 3 * * *"
   workflow_dispatch:
     inputs:
       run_id:
         description: "Workflow run ID for the artifacts to publish"
-        required: true
+        required: false
         type: string
       run_number:
         description: "Workflow run number for metadata"
@@ -26,7 +28,7 @@ on:
 
 jobs:
   publish:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,19 +37,68 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Resolve source workflow run
+        id: resolve_run
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+          INPUT_RUN_ID: ${{ github.event.inputs.run_id }}
+        run: |
+          set -euo pipefail
+
+          fetch_run() {
+            local run_id="$1"
+            curl -fsSL \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${REPO}/actions/runs/${run_id}"
+          }
+
+          if [[ "${EVENT_NAME}" == "workflow_run" ]]; then
+            run_json="$(fetch_run "${WORKFLOW_RUN_ID}")"
+          elif [[ -n "${INPUT_RUN_ID:-}" ]]; then
+            run_json="$(fetch_run "${INPUT_RUN_ID}")"
+          else
+            runs_json="$(curl -fsSL \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${REPO}/actions/runs?status=success&per_page=100")"
+
+            run_json="$(echo "${runs_json}" | jq -c '.workflow_runs[] | select(.name == "Package Reports")' | head -n1)"
+
+            if [[ -z "${run_json}" ]]; then
+              echo "No successful workflow run found for 'Package Reports'."
+              exit 1
+            fi
+          fi
+
+          run_id="$(echo "${run_json}" | jq -r '.id')"
+          run_number="$(echo "${run_json}" | jq -r '.run_number')"
+          commit_sha="$(echo "${run_json}" | jq -r '.head_sha')"
+          workflow_name="$(echo "${run_json}" | jq -r '.name')"
+
+          {
+            echo "run_id=${run_id}"
+            echo "run_number=${run_number}"
+            echo "commit_sha=${commit_sha}"
+            echo "workflow_name=${workflow_name}"
+          } >> "${GITHUB_OUTPUT}"
+
       - name: Download artifacts from build
         uses: actions/download-artifact@v4
         with:
-          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
+          run-id: ${{ steps.resolve_run.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: artifacts
 
       - name: Build downloads site
         env:
-          WORKFLOW_NAME: ${{ github.event.workflow_run.name || github.event.inputs.workflow_name }}
-          RUN_ID: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
-          RUN_NUMBER: ${{ github.event.workflow_run.run_number || github.event.inputs.run_number }}
-          COMMIT_SHA: ${{ github.event.workflow_run.head_sha || github.event.inputs.commit_sha }}
+          WORKFLOW_NAME: ${{ steps.resolve_run.outputs.workflow_name }}
+          RUN_ID: ${{ steps.resolve_run.outputs.run_id }}
+          RUN_NUMBER: ${{ steps.resolve_run.outputs.run_number }}
+          COMMIT_SHA: ${{ steps.resolve_run.outputs.commit_sha }}
         run: |
           set -euo pipefail
 
