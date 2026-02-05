@@ -110,6 +110,15 @@ jobs:
             STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi/subreports
           if-no-files-found: error
 
+      - name: Upload STICKERS INV CAL LOC as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKERS-INV-CAL-LOC
+          path: |
+            STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi/main_reports
+            STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi/subreports
+          if-no-files-found: error
+
       - name: Upload STICKERS Vorlage as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -218,6 +227,7 @@ jobs:
           create_zip "STICKERS/DAKKS-Aufkleber_12mm" "sticker-dakks-aufkleber-12mm"
           create_zip "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
+          create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
 
@@ -241,6 +251,7 @@ jobs:
           unzip -l zip_output/sticker-dakks-aufkleber-12mm.zip
           unzip -l zip_output/sticker-dakks-aufkleber-18mm.zip
           unzip -l zip_output/sticker-inv-zebra-zd621-30x15-203dpi.zip
+          unzip -l zip_output/sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-vorlage.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
