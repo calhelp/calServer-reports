@@ -29,7 +29,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="MeasurementDetails" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert das Layout der Messwertdarstellung im Results-Unterbericht (1 = Standard, 2 = alternative Spalten).]]></parameterDescription>
+		<parameterDescription><![CDATA[Steuert das Layout der Messwertdarstellung im Results-Unterbericht (1 = Standard, 2/21/22/3/4 = alternative Spalten).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ModernResultsHeader" class="java.lang.String">
