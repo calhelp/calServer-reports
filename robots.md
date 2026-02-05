@@ -16,6 +16,15 @@ A report is only "valid" if it:
 
 ---
 
+## 0.1) JasperReports version (MUST)
+Use and target **JasperReports 6.20.6** for JRXML compatibility.
+
+### Implication
+- Do not introduce JRXML features requiring a newer Jasper version unless version policy is explicitly updated.
+- When validating report execution/rendering, assume runtime/compiler behavior of 6.20.6.
+
+---
+
 ## 1) Required bundle structure (MUST)
 For every report bundle folder (e.g. DAKKS-SAMPLE, DCC, ORDER-SAMPLE, STICKERS-*):
 - `main_reports/`  → contains the entry-point JRXML(s) users execute
