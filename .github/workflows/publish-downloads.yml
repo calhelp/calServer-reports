@@ -42,6 +42,20 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: artifacts
 
+      - name: Validate downloaded artifacts
+        run: |
+          set -euo pipefail
+
+          if [ ! -d artifacts ]; then
+            echo "ERROR: artifacts/ directory was not created by actions/download-artifact."
+            exit 1
+          fi
+
+          if ! find artifacts -mindepth 1 -maxdepth 1 -type d | grep -q .; then
+            echo "ERROR: artifacts/ contains no artifact subdirectories; aborting publish."
+            exit 1
+          fi
+
       - name: Build downloads site
         env:
           WORKFLOW_NAME: ${{ github.event.workflow_run.name || github.event.inputs.workflow_name }}
@@ -78,6 +92,11 @@ jobs:
               printf "%s\t%s\t%s\t%s\n" "${artifact_name}" "${filename}" "${size_bytes}" "${sha256}" >> "${METADATA_FILE}"
             fi
           done
+
+          if [ ! -s "${METADATA_FILE}" ]; then
+            echo "ERROR: ${METADATA_FILE} is empty; no download metadata was generated."
+            exit 1
+          fi
 
           python - <<'PY'
           import json
