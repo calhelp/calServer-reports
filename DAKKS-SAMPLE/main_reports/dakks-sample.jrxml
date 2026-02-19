@@ -549,9 +549,48 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[(
-  $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
-    ? $P{IncomingDate_override}
-    : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224})
+  (
+    $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+      ? $P{IncomingDate_override}.trim()
+      : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+  )
+).matches("^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}:\\d{2})?$")
+  ? (
+      (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(8, 10)
+      + "."
+      + (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(5, 7)
+      + "."
+      + (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(0, 4)
+    )
+  : (
+      (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).matches("^\\d{2}\\.\\d{2}\\.\\d{4}$")
+        ? (
+            $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+              ? $P{IncomingDate_override}.trim()
+              : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+          )
+        : (
+            $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+              ? $P{IncomingDate_override}.trim()
+              : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+          ) // Normiert auf deutsches Datumsformat dd.MM.yyyy; nicht parsebarer Freitext bleibt unverändert.
+    )
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
