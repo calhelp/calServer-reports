@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-02-19T22:01:31.013809+00:00",
+  "workflow": "Package Reports",
+  "runId": "22201871513",
+  "runNumber": "588",
+  "commitSha": "ce1eaee7aa38193edcffc8f4b1943bd7705c0515",
+  "artifacts": [
+    {
+      "name": "dakks-sample",
+      "filename": "dakks-sample.zip",
+      "sizeBytes": 42142,
+      "sha256": "5b401d2af5338d5e2165b74795e23607ca365115053dee994d5f8e1ba855ae16",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/dakks-sample.zip"
+    },
+    {
+      "name": "dcc-sample",
+      "filename": "dcc-sample.zip",
+      "sizeBytes": 36564,
+      "sha256": "8d98b0e46892b2d4758a490fc9896bbe9f205d707cf10e9c650d53904ea05870",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/dcc-sample.zip"
+    },
+    {
+      "name": "delivery-standalone",
+      "filename": "delivery-standalone.zip",
+      "sizeBytes": 6897,
+      "sha256": "955592ca4077a87b148f4cfea5a424bf4609403fb2238aa4d7e1e088a8238e96",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/delivery-standalone.zip"
+    },
+    {
+      "name": "field-names",
+      "filename": "field-names.zip",
+      "sizeBytes": 3607,
+      "sha256": "c73dbee38dcd799aaa0d354550ee0133a39404ae42145ee3f37cbfa24897a512",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/field-names.zip"
+    },
+    {
+      "name": "inventory-sample",
+      "filename": "inventory-sample.zip",
+      "sizeBytes": 6670,
+      "sha256": "2e0372ee3301a2bb016aeb2f9b6e10a3c0aacf65737b57cd8ccee935d7d03af2",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/inventory-sample.zip"
+    },
+    {
+      "name": "order-sample",
+      "filename": "order-sample.zip",
+      "sizeBytes": 13735,
+      "sha256": "64dbc2d487d03725ff8d0a773968d1b244d0329a7f6268b00050fd53fc6b05ba",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/order-sample.zip"
+    },
+    {
+      "name": "sticker-cal-inv-zebra-zd621-30x15-203dpi",
+      "filename": "sticker-cal-inv-zebra-zd621-30x15-203dpi.zip",
+      "sizeBytes": 6702,
+      "sha256": "31bd2d172c3fef78e0549d71bfdd0681a6bd72ecffa627fc89174d9969c98a58",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-cal-inv-zebra-zd621-30x15-203dpi.zip"
+    },
+    {
+      "name": "sticker-cal-zebra-zd621-30x15-203dpi",
+      "filename": "sticker-cal-zebra-zd621-30x15-203dpi.zip",
+      "sizeBytes": 5037,
+      "sha256": "ca2869191595419b84e7bcd615b6b058b7806254fb9e6af2d0d8c976af893070",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-cal-zebra-zd621-30x15-203dpi.zip"
+    },
+    {
+      "name": "sticker-dakks-aufkleber-12mm",
+      "filename": "sticker-dakks-aufkleber-12mm.zip",
+      "sizeBytes": 2210,
+      "sha256": "97dd9465726347bf9e7fd0b1be915aa0db18929f284756c67f07c21b75c7a08b",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-dakks-aufkleber-12mm.zip"
+    },
+    {
+      "name": "sticker-dakks-aufkleber-18mm",
+      "filename": "sticker-dakks-aufkleber-18mm.zip",
+      "sizeBytes": 2192,
+      "sha256": "24449085523dc3a5ff13e63edcb738decc5a147ee8d2b8a883cd405974d7f51c",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-dakks-aufkleber-18mm.zip"
+    },
+    {
+      "name": "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi",
+      "filename": "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip",
+      "sizeBytes": 3170,
+      "sha256": "0e58c8bc8e2295b8b0dacdac2866924ba1a69a8261083a754d3c0256880d89ba",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip"
+    },
+    {
+      "name": "sticker-inv-zebra-zd621-30x15-203dpi",
+      "filename": "sticker-inv-zebra-zd621-30x15-203dpi.zip",
+      "sizeBytes": 5095,
+      "sha256": "fbea489c00081ae7caaa500810ebdb9bdc70096673654d2366c6d96abaf2d69f",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-inv-zebra-zd621-30x15-203dpi.zip"
+    },
+    {
+      "name": "sticker-vorlage",
+      "filename": "sticker-vorlage.zip",
+      "sizeBytes": 6668,
+      "sha256": "52666b67d6eeed9aeb26c2a2b79cb7fc1a530c330e4449ec5a943cbaf03d418d",
+      "url": "https://calhelp.github.io/calServer-reports/downloads/files/sticker-vorlage.zip"
+    }
+  ]
+}
