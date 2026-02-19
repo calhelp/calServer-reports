@@ -549,32 +549,48 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[(
-  new Object() {
-    String normalizeIncomingDate(String input) {
-      if (input == null) return "";
-      String value = input.trim();
-      if (value.isEmpty()) return "";
-
-      java.text.SimpleDateFormat outputFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
-      String[] patterns = new String[] {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "dd.MM.yyyy"};
-
-      for (int i = 0; i < patterns.length; i++) {
-        java.text.SimpleDateFormat parser = new java.text.SimpleDateFormat(patterns[i]);
-        parser.setLenient(false);
-        java.text.ParsePosition parsePosition = new java.text.ParsePosition(0);
-        java.util.Date parsedDate = parser.parse(value, parsePosition);
-        if (parsedDate != null && parsePosition.getIndex() == value.length()) {
-          return outputFormat.format(parsedDate);
-        }
-      }
-
-      return value; // Nicht parsebarer Freitext bleibt erhalten (optionale strikte Validierung extern steuerbar).
-    }
-  }
-).normalizeIncomingDate(
-  $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
-    ? $P{IncomingDate_override}
-    : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224})
+  (
+    $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+      ? $P{IncomingDate_override}.trim()
+      : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+  )
+).matches("^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}:\\d{2})?$")
+  ? (
+      (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(8, 10)
+      + "."
+      + (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(5, 7)
+      + "."
+      + (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).substring(0, 4)
+    )
+  : (
+      (
+        $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+          ? $P{IncomingDate_override}.trim()
+          : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+      ).matches("^\\d{2}\\.\\d{2}\\.\\d{4}$")
+        ? (
+            $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+              ? $P{IncomingDate_override}.trim()
+              : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+          )
+        : (
+            $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
+              ? $P{IncomingDate_override}.trim()
+              : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
+          ) // Normiert auf deutsches Datumsformat dd.MM.yyyy; nicht parsebarer Freitext bleibt unverändert.
+    )
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
 			</band>
