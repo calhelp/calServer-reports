@@ -24,13 +24,21 @@ on:
         required: false
         type: string
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   publish:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      pages: write
+      id-token: write
       actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -115,7 +123,7 @@ jobs:
                           "filename": filename,
                           "sizeBytes": int(size_bytes),
                           "sha256": sha256,
-                  "url": f"https://calhelp.github.io/calServer-reports/downloads/files/{filename}",
+                  "url": f"files/{filename}",
                       }
                   )
 
@@ -132,10 +140,14 @@ jobs:
           output_path.write_text(json.dumps(payload, indent=2))
           PY
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: site
-          publish_branch: gh-pages
-          force_orphan: true
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
