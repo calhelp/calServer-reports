@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>calServer Reports</title>
+    <link rel="stylesheet" href="./downloads/assets/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page__header">
+        <div>
+          <p class="page__eyebrow">Community-Projekt</p>
+          <h1>📑 calServer Reports</h1>
+          <p class="page__subhead">
+            Beispielberichte (JRXML) für den calServer, gemeinsames Bugfixing und
+            eine stetige Weiterentwicklung der Reportvorlagen.
+          </p>
+        </div>
+        <div class="page__meta">
+          <div><strong>Downloads:</strong> <a href="./downloads/">Aktuelle Artefakte</a></div>
+          <div>
+            <strong>Releases:</strong>
+            <a href="https://github.com/calhelp/calServer-reports/releases/latest"
+              >Letztes Release</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Was ist dieses Projekt?</h2>
+        <p>
+          Dieses Repository ist der zentrale Ort zur gemeinsamen Entwicklung,
+          Pflege und Verbesserung von JasperReports-Vorlagen (JRXML) für den
+          calServer. Es bietet Beispielreports, strukturierte Ordner für
+          verschiedene Anwendungsfälle und Hilfestellung beim Hochladen,
+          Testen und Deployen von Reports.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Projektstruktur &amp; Beispielberichte</h2>
+        <pre><code>DAKKS-SAMPLE/
+├── fonts/              # Schriftarten (DejaVu) für konsistente PDF-Ausgabe
+├── main_reports/       # Hauptberichte, z. B. vollständige Kalibrierscheine
+├── subreports/         # Unterberichte, z. B. Tabellen, Fußzeilen, Messwerte
+└── preview.jpg         # Vorschaubild des Beispielreports
+
+DCC/
+├── fonts/              # Schriftarten für den DCC-Report
+├── main_reports/       # Digitaler Kalibrierschein (DCC) mit XML-Schema
+└── subreports/         # Unterberichte analog zum DCC-Hauptreport
+
+DELIVERY-STANDALONE/
+├── main_reports/       # Eigenständiger Lieferschein-Report
+└── subreports/         # Unterbericht für Kopf-/Adressblock
+
+FIELD-NAMES/
+├── main_reports/       # Übersichten zu Feldbezeichnungen &amp; Sprachvarianten
+└── subreports/         # Platz für optionale Detail- oder Ergänzungsreports
+
+INVENTORY-SAMPLE/
+├── main_reports/       # Messmittelberichte &amp; Inventarlisten
+└── subreports/         # Unterberichte für Messwerte, Historien usw.
+
+ORDER-SAMPLE/
+├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
+└── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
+
+STICKERS/
+└── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
+
+downloads/
+└── ...                 # GitHub-Pages-Downloads (generiert durch Workflow)
+
+pages/
+└── index.html          # Projekt-Landing-Page für GitHub Pages
+
+scripts/
+├── check_jasper_version.sh  # Prüft JRXML-Versionen auf 6.20.6
+├── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
+├── dcc_upload_sample.bat    # Upload-Beispiel für DCC-Reports
+└── dcc_xml_writer.py        # Hilfsskript zum Erzeugen von DCC-XML
+</code></pre>
+        <p>
+          Die Beispiele sind bewusst generisch gehalten und können direkt als
+          Grundlage für eigene Anpassungen verwendet werden.
+        </p>
+        <p>
+          Die Parameterreferenz für den DAkkS-Report findest du im
+          <a href="./DAKKS-SAMPLE/main_reports/README.md#vollst%C3%A4ndige-parameter%C3%BCbersicht"
+            >README des DAkkS-Hauptberichts</a
+          >.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Voraussetzungen</h2>
+        <ul>
+          <li>Aktive calServer-Instanz (Cloud oder On-Premise).</li>
+          <li>Zugang zur Reportverwaltung im calServer (Admin-Berechtigung).</li>
+          <li>
+            JasperReports Editor (z. B. Jaspersoft Studio) – Vorlagen müssen mit
+            JasperReports Library 6.20.6 exportiert werden.
+          </li>
+          <li>Grundkenntnisse in Git und (optional) GitHub Actions.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Berichte im calServer hochladen</h2>
+        <ol>
+          <li>Im Admin-Backend die Reportverwaltung öffnen.</li>
+          <li>
+            JRXML-Datei(en) hochladen und Metadaten pflegen (Grid Name,
+            Schaltflächenname, Vorlagenname, Format, Enabled).
+          </li>
+          <li>Speichern und die Dateien im angegebenen Verzeichnis ablegen.</li>
+        </ol>
+        <p>
+          Tipp: Nutze Versionierung, um bei Fehlern jederzeit auf frühere
+          Varianten zurückzugreifen.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Skripte für Upload und Automatisierung</h2>
+        <p>
+          Im Ordner <code>scripts</code> liegt das Batch-Skript
+          <code>dakks_upload_sample.bat</code>, das Beispielberichte als ZIP
+          an die calServer-API sendet. Zusätzlich gibt es Prüf- und
+          Hilfsskripte für DCC-Reports und die JRXML-Version.
+        </p>
+        <pre><code>set DOMAIN=deine.domain.tld
+set HTTP_X_REST_USERNAME=deinUser
+set HTTP_X_REST_PASSWORD=deinPasswort
+set HTTP_X_REST_API_KEY=deinApiKey
+set REPORT_ID=cd5797da-e7a9-0bc6-fc73-dedc595bd59b</code></pre>
+        <ul>
+          <li><code>check_jasper_version.sh</code> prüft JRXML-Dateien auf Version 6.20.6.</li>
+          <li><code>dcc_upload_sample.bat</code> zeigt einen Upload für DCC-Reports.</li>
+          <li><code>dcc_xml_writer.py</code> unterstützt beim Erzeugen von DCC-XML.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Repository klonen &amp; GitHub Actions</h2>
+        <ol>
+          <li>
+            <strong>Repository klonen</strong>
+            <pre><code>git clone https://github.com/calhelp/calServer-reports.git</code></pre>
+          </li>
+          <li>JRXML-Dateien bearbeiten.</li>
+          <li>Änderungen committen &amp; pushen (Pull Request erstellen).</li>
+          <li>
+            Der Workflow <code>package-reports.yml</code> erzeugt automatisch
+            ZIP-Archive der Reports und lädt sie – wenn konfiguriert – über die
+            API hoch.
+          </li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h2>📦 Download der aktuellen Reportpakete</h2>
+        <ul>
+          <li><a href="./downloads/">Latest Downloads (immer aktuelle Artefakte)</a></li>
+          <li>
+            <a href="https://github.com/calhelp/calServer-reports/releases/latest"
+              >Letztes Release herunterladen</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/calhelp/calServer-reports/releases"
+              >Alle Releases durchsuchen</a
+            >
+          </li>
+        </ul>
+        <p>
+          Hinweis: Die Downloads-Seite funktioniert nur, wenn GitHub Pages auf
+          den Branch <code>gh-pages</code> zeigt und der Workflow
+          <code>publish-downloads</code> erfolgreich gelaufen ist.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Contributing &amp; Community</h2>
+        <p>
+          Beiträge sind willkommen – ob Bugfix, Feature, Report-Idee oder
+          Feedback. Forke das Repository, arbeite in einem Branch und sende
+          einen Pull Request.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Fehler melden &amp; Support</h2>
+        <ul>
+          <li>Nutze GitHub Issues und beschreibe das Problem detailliert.</li>
+          <li>
+            Für individuellen Support: <a href="https://calhelp.de">calHelp</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Lizenz</h2>
+        <p>
+          Dieses Projekt steht unter der
+          <a href="./LICENSE">MIT-Lizenz</a>, sofern in Unterordnern nichts
+          anderes vermerkt ist.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Kontakt &amp; Dank</h2>
+        <p>
+          <strong>calHelp / René Buske</strong><br />
+          Web: <a href="https://calhelp.de">calhelp.de</a><br />
+          E-Mail: <a href="mailto:info@calhelp.de">info@calhelp.de</a>
+        </p>
+        <p>
+          Danke an alle Mitwirkenden und an die gesamte calServer-Community für
+          Ideen, Feedback und gemeinsames Vorankommen!
+        </p>
+        <p><em>Letzte Aktualisierung: 2026-02-04</em></p>
+      </section>
+    </main>
+  </body>
+</html>

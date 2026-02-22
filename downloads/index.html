@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Downloads</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page__header">
+        <div>
+          <p class="page__eyebrow">Always latest build artifacts</p>
+          <h1>Downloads</h1>
+          <p class="page__subhead">
+            Diese Seite listet automatisch die neuesten Report-Artefakte aus GitHub Actions.
+          </p>
+        </div>
+        <div class="page__meta" id="page-meta"></div>
+      </header>
+
+      <section class="toolbar">
+        <label class="search">
+          <span>Suche</span>
+          <input id="search" type="search" placeholder="Artefakte filtern…" />
+        </label>
+      </section>
+
+      <section class="card">
+        <table class="downloads">
+          <thead>
+            <tr>
+              <th>Artefakt</th>
+              <th>Dateiname</th>
+              <th>Größe</th>
+              <th>Build-Datum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="downloads-body">
+            <tr>
+              <td colspan="5">Lade Daten…</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script>
+      const bytesToSize = (bytes) => {
+        if (!bytes && bytes !== 0) return "-";
+        const sizes = ["B", "KB", "MB", "GB"];
+        const i = Math.min(
+          Math.floor(Math.log(bytes) / Math.log(1024)),
+          sizes.length - 1
+        );
+        return `${(bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0)} ${sizes[i]}`;
+      };
+
+      const renderDownloads = (payload, downloadsRoot) => {
+        const body = document.getElementById("downloads-body");
+        const meta = document.getElementById("page-meta");
+        const basePath = window.location.pathname.endsWith("/")
+          ? window.location.pathname
+          : `${window.location.pathname}/`;
+        const buildDate = payload.generatedAt
+          ? new Date(payload.generatedAt).toLocaleString()
+          : "Unbekannt";
+        meta.innerHTML = `
+          <div><strong>Workflow:</strong> ${payload.workflow || "-"}</div>
+          <div><strong>Run:</strong> ${payload.runNumber || "-"}</div>
+          <div><strong>Commit:</strong> ${
+            payload.commitSha ? payload.commitSha.slice(0, 7) : "-"
+          }</div>
+          <div><strong>Build:</strong> ${buildDate}</div>
+        `;
+
+        const rows = (payload.artifacts || []).map((artifact) => {
+          const date = payload.generatedAt
+            ? new Date(payload.generatedAt).toLocaleDateString()
+            : "-";
+          const downloadUrl = (() => {
+            if (!artifact.url) return "#";
+            try {
+              const relativeUrl = artifact.url.replace(/^\/+/, "");
+              return new URL(relativeUrl, downloadsRoot).toString();
+            } catch (error) {
+              return artifact.url;
+            }
+          })();
+          return `
+            <tr data-name="${artifact.name.toLowerCase()}">
+              <td>
+                <div class="artifact-name">${artifact.name}</div>
+              </td>
+              <td>${artifact.filename}</td>
+              <td>${bytesToSize(artifact.sizeBytes)}</td>
+              <td>${date}</td>
+              <td>
+                <a class="button" href="${downloadUrl}" download>Download</a>
+              </td>
+            </tr>
+          `;
+        });
+
+        body.innerHTML =
+          rows.join("") ||
+          `<tr><td colspan="5">Keine Artefakte gefunden.</td></tr>`;
+
+        const search = document.getElementById("search");
+        search.addEventListener("input", (event) => {
+          const query = event.target.value.toLowerCase();
+          document
+            .querySelectorAll("#downloads-body tr[data-name]")
+            .forEach((row) => {
+              row.hidden = !row.dataset.name.includes(query);
+            });
+        });
+      };
+
+      const primaryUrl = "./latest.json";
+      const fallbackUrls = [
+        "https://calhelp.github.io/calServer-reports/downloads/latest.json",
+        "https://raw.githubusercontent.com/calhelp/calServer-reports/gh-pages/downloads/latest.json",
+      ];
+
+      const fetchLatest = async () => {
+        const urls = [primaryUrl, ...fallbackUrls];
+        let lastError;
+        for (const url of urls) {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+            return await response.json();
+          } catch (error) {
+            lastError = error;
+          }
+        }
+        throw lastError;
+      };
+
+      const latestUrl = new URL(primaryUrl, window.location.href);
+      const downloadsRoot = new URL(".", latestUrl);
+
+      fetchLatest()
+        .then((payload) => renderDownloads(payload, downloadsRoot))
+        .catch(() => {
+          const body = document.getElementById("downloads-body");
+          body.innerHTML = `
+            <tr>
+              <td colspan="5">
+                <strong>Die Datei latest.json wurde nicht gefunden.</strong>
+                Bitte stelle sicher, dass GitHub Pages auf den <code>gh-pages</code>-Branch zeigt
+                und der Workflow <code>publish-downloads</code> erfolgreich gelaufen ist.
+                Mehr Infos: <a href="https://github.com/calhelp/calServer-reports#readme">README</a>
+                oder <a href="https://github.com/calhelp/calServer-reports/actions/workflows/publish-downloads.yml">Workflow-Status</a>.
+              </td>
+            </tr>
+          `;
+        });
+    </script>
+  </body>
+</html>
