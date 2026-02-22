@@ -516,7 +516,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA[(
   ($V{procedure_calibration_item_var} == null || $V{procedure_calibration_item_var}.trim().isEmpty())
-    ? $P{Asset_description}    // bei leer: Parameter nutzen
+    ? $P{Asset_description}
     : $V{procedure_calibration_item_var}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
@@ -548,7 +548,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(
+					<textFieldExpression><![CDATA[((
   (
     $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
       ? $P{IncomingDate_override}.trim()
@@ -589,7 +589,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
             $P{IncomingDate_override} != null && !$P{IncomingDate_override}.trim().isEmpty()
               ? $P{IncomingDate_override}.trim()
               : (($F{I4224} == null || $F{I4224}.trim().isEmpty()) ? "" : $F{I4224}.trim())
-          ) // Normiert auf deutsches Datumsformat dd.MM.yyyy; nicht parsebarer Freitext bleibt unverändert.
+          )
     )
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
