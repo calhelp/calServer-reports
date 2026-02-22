@@ -1373,12 +1373,16 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</textElement>
 				<textFieldExpression><![CDATA[($F{customer} == null || $F{customer}.trim().isEmpty()) ? "--" : $F{customer}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="dd.MM.yyyy" isBlankWhenNull="true">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement x="202" y="531" width="116" height="20" uuid="44b06eae-f04d-4355-b948-2686dd51230f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{C2301}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{C2301} == null || $F{C2301}.trim().isEmpty())
+? ""
+: (java.util.regex.Pattern.matches("\\d{4}-\\d{2}-\\d{2}", $F{C2301}.trim())
+    ? java.time.LocalDate.parse($F{C2301}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+    : $F{C2301})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="202" y="560" width="116" height="20" uuid="4822b3e2-e452-4dfe-8fcb-e74ed065820a"/>
