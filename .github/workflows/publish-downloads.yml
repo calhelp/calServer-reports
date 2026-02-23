@@ -42,6 +42,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Download report ZIP artifacts from build
         uses: actions/download-artifact@v4
@@ -64,6 +66,39 @@ jobs:
             echo "ERROR: artifacts/ contains no artifact subdirectories; aborting publish."
             exit 1
           fi
+
+      - name: Collect last-modified dates
+        run: |
+          set -euo pipefail
+          : > artifacts/last-modified.tsv
+
+          get_last_modified() {
+            local source_dir="$1"
+            local zip_name="$2"
+            local date
+            date="$(git log -1 --format=%cI -- "${source_dir}")"
+            if [ -z "$date" ]; then
+              date="unknown"
+            fi
+            printf "%s\t%s\n" "${zip_name}" "${date}" >> artifacts/last-modified.tsv
+          }
+
+          get_last_modified "DAKKS-SAMPLE" "dakks-sample"
+          get_last_modified "DCC" "dcc-sample"
+          get_last_modified "FIELD-NAMES" "field-names"
+          get_last_modified "ORDER-SAMPLE" "order-sample"
+          get_last_modified "INVENTORY-SAMPLE" "inventory-sample"
+          get_last_modified "DELIVERY-STANDALONE" "delivery-standalone"
+          get_last_modified "STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-inv-zebra-zd621-30x15-203dpi"
+          get_last_modified "STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-zebra-zd621-30x15-203dpi"
+          get_last_modified "STICKERS/DAKKS-Aufkleber_12mm" "sticker-dakks-aufkleber-12mm"
+          get_last_modified "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
+          get_last_modified "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
+          get_last_modified "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
+          get_last_modified "STICKERS/Sticker_Vorlage" "sticker-vorlage"
+
+          echo "Last-modified dates:"
+          cat artifacts/last-modified.tsv
 
       - name: Build downloads site
         env:
@@ -112,6 +147,14 @@ jobs:
           from pathlib import Path
           import os
 
+          last_modified = {}
+          lm_path = Path("artifacts/last-modified.tsv")
+          if lm_path.exists():
+              for line in lm_path.read_text().splitlines():
+                  parts = line.split("\t")
+                  if len(parts) == 2:
+                      last_modified[parts[0]] = parts[1]
+
           metadata_path = Path("site/downloads/metadata.tsv")
           artifacts = []
           if metadata_path.exists():
@@ -123,7 +166,8 @@ jobs:
                           "filename": filename,
                           "sizeBytes": int(size_bytes),
                           "sha256": sha256,
-                  "url": f"files/{filename}",
+                          "url": f"files/{filename}",
+                          "lastModified": last_modified.get(name),
                       }
                   )
 
