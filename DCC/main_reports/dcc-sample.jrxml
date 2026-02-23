@@ -509,7 +509,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA["UNIT UNDER TEST"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight" isStretchWithOverflow="true">
+                                <textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="16" y="24" width="535" height="30" uuid="2df318c6-d25b-48ed-80a6-10d27ebf6063" positionType="Float"/>
 					<textElement textAlignment="Left" markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
