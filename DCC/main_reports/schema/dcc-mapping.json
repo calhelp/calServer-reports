@@ -18,6 +18,7 @@
         "countryCode": { "source": "static", "value": "DE" },
         "uniqueIdentifier": { "source": "field", "key": "cert_field" },
         "beginPerformanceDate": { "source": "field", "key": "C2301" },
+        "endPerformanceDate": { "source": "field", "key": "C2301" },
         "performanceDate": { "source": "field", "key": "cal_date" },
         "performanceLocation": { "source": "reportVariable", "key": "calibration_place" }
       },
@@ -28,12 +29,27 @@
         "serialNumber": { "source": "field", "key": "I4206" },
         "inventoryNumber": { "source": "field", "key": "I4201" },
         "additionalIdentifier": { "source": "field", "key": "I4224" },
-        "description": { "source": "reportVariable", "key": "calibration_asset_description" }
+        "description": { "source": "parameter", "key": "Asset_description" }
       },
       "customer": { "source": "field", "key": "customer" },
       "respPersons": {
         "personInCharge": { "source": "field", "key": "C2311" },
         "approvedBy": { "source": "field", "key": "C2312" }
+      },
+      "procedures": {
+        "procedureName": { "source": "field", "key": "procedure_name" },
+        "procedureDescription": { "source": "field", "key": "procedure_description" },
+        "calibrationMethod": { "source": "field", "key": "calibration_method" },
+        "calibrationItem": { "source": "field", "key": "calibration_item" },
+        "standards": { "source": "field", "key": "standards" },
+        "scope": { "source": "field", "key": "scope" }
+      },
+      "environment": {
+        "incomingDate": { "source": "field", "key": "C2307" },
+        "condition": { "source": "field", "key": "C2308" },
+        "calibrationPlace": { "source": "field", "key": "C2320" },
+        "workingHours": { "source": "field", "key": "resource_working_hours" },
+        "environmentalConditions": { "source": "field", "key": "measurement_conditions" }
       }
     },
     "measurementResults": {
@@ -43,8 +59,15 @@
         "nominalValue": "fixq",
         "measuredValue": "varq",
         "expandedUncertainty": "exp_uncert",
+        "expandedUncertaintyIsoE": "exp_uncert_iso_e",
         "coverageProbability": "exp_uncert_iso_p",
-        "conformity": "pass_fail"
+        "upperLimit": "upper_limit",
+        "lowerLimit": "lower_limit",
+        "toleranceError": "tol_err",
+        "relativeError": "rel_err",
+        "conformity": "pass_fail",
+        "fsc": "fsc",
+        "accredited": "accred"
       }
     }
   }
