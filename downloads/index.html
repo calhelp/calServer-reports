@@ -34,7 +34,7 @@
               <th>Beschreibung</th>
               <th>Dateiname</th>
               <th>Größe</th>
-              <th>Build-Datum</th>
+              <th>Letzte Änderung</th>
               <th></th>
             </tr>
           </thead>
@@ -77,8 +77,8 @@
         `;
 
         const rows = (payload.artifacts || []).map((artifact) => {
-          const date = payload.generatedAt
-            ? new Date(payload.generatedAt).toLocaleDateString()
+          const date = artifact.lastModified
+            ? new Date(artifact.lastModified).toLocaleDateString()
             : "-";
           const downloadUrl = (() => {
             if (!artifact.url) return "#";
