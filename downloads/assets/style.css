@@ -111,6 +111,14 @@ h1 {
   font-weight: 600;
 }
 
+.artifact-description {
+  font-size: 0.875rem;
+  color: #4e5d78;
+  max-width: 380px;
+  display: inline-block;
+  line-height: 1.45;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -135,10 +143,10 @@ h1 {
     flex-direction: column;
   }
 
-  .downloads th:nth-child(2),
-  .downloads td:nth-child(2),
   .downloads th:nth-child(3),
-  .downloads td:nth-child(3) {
+  .downloads td:nth-child(3),
+  .downloads th:nth-child(4),
+  .downloads td:nth-child(4) {
     display: none;
   }
 }

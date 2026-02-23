@@ -108,22 +108,61 @@ jobs:
 
           python - <<'PY'
           import json
+          import re
           from datetime import datetime, timezone
           from pathlib import Path
           import os
+
+          README_MAP = {
+              "dakks-sample":       "DAKKS-SAMPLE/main_reports/README.md",
+              "dcc-sample":         "DCC/main_reports/README.md",
+              "field-names":        "FIELD-NAMES/main_reports/README.md",
+              "order-sample":       "ORDER-SAMPLE/main_reports/README.md",
+              "inventory-sample":   "INVENTORY-SAMPLE/main_reports/README.md",
+              "delivery-standalone":"DELIVERY-STANDALONE/README.md",
+          }
+
+          def extract_description(readme_path):
+              """Return the first text paragraph from a README, stripped of Markdown."""
+              try:
+                  lines = Path(readme_path).read_text(encoding="utf-8").splitlines()
+              except OSError:
+                  return ""
+              # skip H1 title and leading blank lines
+              i = 0
+              while i < len(lines) and (lines[i].startswith("#") or not lines[i].strip()):
+                  i += 1
+              # collect paragraph lines until blank line, next heading, ---, or table
+              para = []
+              while i < len(lines):
+                  line = lines[i].strip()
+                  if not line or line.startswith("#") or line.startswith("---") or line.startswith("|"):
+                      break
+                  para.append(line)
+                  i += 1
+              text = " ".join(para)
+              # strip markdown bold/italic and inline code
+              text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+              text = re.sub(r"\*(.+?)\*",     r"\1", text)
+              text = re.sub(r"`(.+?)`",        r"\1", text)
+              # strip leading emoji/non-word characters
+              text = re.sub(r"^[^\w\s]+\s*",  "",    text)
+              return text.strip()
 
           metadata_path = Path("site/downloads/metadata.tsv")
           artifacts = []
           if metadata_path.exists():
               for line in metadata_path.read_text().splitlines():
                   name, filename, size_bytes, sha256 = line.split("\t")
+                  description = extract_description(README_MAP.get(name, ""))
                   artifacts.append(
                       {
                           "name": name,
                           "filename": filename,
                           "sizeBytes": int(size_bytes),
                           "sha256": sha256,
-                  "url": f"files/{filename}",
+                          "url": f"files/{filename}",
+                          "description": description,
                       }
                   )
 

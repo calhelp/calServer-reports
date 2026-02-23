@@ -31,6 +31,7 @@
           <thead>
             <tr>
               <th>Artefakt</th>
+              <th>Beschreibung</th>
               <th>Dateiname</th>
               <th>Größe</th>
               <th>Build-Datum</th>
@@ -39,7 +40,7 @@
           </thead>
           <tbody id="downloads-body">
             <tr>
-              <td colspan="5">Lade Daten…</td>
+              <td colspan="6">Lade Daten…</td>
             </tr>
           </tbody>
         </table>
@@ -93,6 +94,9 @@
               <td>
                 <div class="artifact-name">${artifact.name}</div>
               </td>
+              <td>
+                <span class="artifact-description">${artifact.description || ""}</span>
+              </td>
               <td>${artifact.filename}</td>
               <td>${bytesToSize(artifact.sizeBytes)}</td>
               <td>${date}</td>
@@ -105,7 +109,7 @@
 
         body.innerHTML =
           rows.join("") ||
-          `<tr><td colspan="5">Keine Artefakte gefunden.</td></tr>`;
+          `<tr><td colspan="6">Keine Artefakte gefunden.</td></tr>`;
 
         const search = document.getElementById("search");
         search.addEventListener("input", (event) => {
@@ -150,7 +154,7 @@
           const body = document.getElementById("downloads-body");
           body.innerHTML = `
             <tr>
-              <td colspan="5">
+              <td colspan="6">
                 <strong>Die Datei latest.json wurde nicht gefunden.</strong>
                 Bitte stelle sicher, dass GitHub Pages auf den <code>gh-pages</code>-Branch zeigt
                 und der Workflow <code>publish-downloads</code> erfolgreich gelaufen ist.
