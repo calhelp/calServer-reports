@@ -161,7 +161,7 @@ jobs:
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
               rsync_excludes+=(--exclude='config/**')
-              allowed_patterns+=('*.properties' '*.md')
+              allowed_patterns+=('*.properties' '*.md' '*.json' '*.xsd')
             elif [ "$sample" = "DCC" ]; then
               allowed_patterns+=('*.xsd' '*.md' '*.json')
             fi

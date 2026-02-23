@@ -46,7 +46,7 @@ Baseline allowed:
 - `*.jrxml`
 
 Special-case allowlists:
-- For `DAKKS-SAMPLE`: allow additionally `*.properties`, `*.md`
+- For `DAKKS-SAMPLE`: allow additionally `*.properties`, `*.md`, `*.json`, `*.xsd`
 - For `DCC`: allow additionally `*.xsd`, `*.md`, `*.json`
 
 ### Implication (MUST)

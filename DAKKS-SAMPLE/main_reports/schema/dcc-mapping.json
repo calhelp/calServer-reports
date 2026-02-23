@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "dccVersion": "3.3.0",
+  "xsdFile": "dcc-v3.3.0.xsd",
+  "mapping": {
+    "administrativeData": {
+      "calibrationLaboratory": {
+        "name": { "source": "reportVariable", "key": "lab_name" },
+        "code": { "source": "reportVariable", "key": "lab_code" },
+        "location": {
+          "street": { "source": "reportVariable", "key": "lab_street" },
+          "city": { "source": "reportVariable", "key": "lab_city" },
+          "postCode": { "source": "reportVariable", "key": "lab_postcode" },
+          "countryCode": { "source": "static", "value": "DE" }
+        }
+      },
+      "coreData": {
+        "countryCode": { "source": "static", "value": "DE" },
+        "uniqueIdentifier": { "source": "field", "key": "cert_field" },
+        "beginPerformanceDate": { "source": "field", "key": "C2301" },
+        "performanceDate": { "source": "field", "key": "cal_date" },
+        "performanceLocation": { "source": "reportVariable", "key": "calibration_place" }
+      },
+      "calibrationItem": {
+        "name": { "source": "field", "key": "I4204" },
+        "manufacturer": { "source": "field", "key": "I4202" },
+        "model": { "source": "field", "key": "I4203" },
+        "serialNumber": { "source": "field", "key": "I4206" },
+        "inventoryNumber": { "source": "field", "key": "I4201" },
+        "additionalIdentifier": { "source": "field", "key": "I4224" },
+        "description": { "source": "reportVariable", "key": "calibration_asset_description" }
+      },
+      "customer": { "source": "field", "key": "customer" },
+      "respPersons": {
+        "personInCharge": { "source": "field", "key": "C2311" },
+        "approvedBy": { "source": "field", "key": "C2312" }
+      }
+    },
+    "measurementResults": {
+      "source": "results",
+      "fields": {
+        "testDescription": "test_desc",
+        "nominalValue": "fixq",
+        "measuredValue": "varq",
+        "expandedUncertainty": "exp_uncert",
+        "coverageProbability": "exp_uncert_iso_p",
+        "conformity": "pass_fail"
+      }
+    }
+  }
+}
