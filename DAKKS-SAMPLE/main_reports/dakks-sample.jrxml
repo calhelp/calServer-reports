@@ -1654,6 +1654,13 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	<pageFooter>
 		<band height="63" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement x="430" y="49" width="121" height="10" forecolor="#999999" uuid="d5f5a6c1-1f7a-45a1-a1d8-1d8c87be9f66"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="6" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["dbg variant(report_template): " + $V{ReportVariantCodeNormalized}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
