@@ -37,7 +37,7 @@
 		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ReportVariantCode" class="java.lang.String">
-		<parameterDescription><![CDATA[Optionaler Ressourcenname für Layoutvarianten. Wenn die gefundene Ressource report_template = 1 hat, wird die DIM-Variante aktiviert, sonst Standard.]]></parameterDescription>
+		<parameterDescription><![CDATA[Optionaler Ressourcenname für Layoutvarianten. Wenn die gefundene Ressource report_template = 1 hat, wird Variante 1 aktiviert, sonst Variante 0 (Standard).]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_description" class="java.lang.String">
@@ -239,7 +239,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
   c.C2301, COALESCE(c.C2313, "--") AS C2313, COALESCE(c.C2314, "--") AS C2314, COALESCE(c.C2308, "") AS C2308, COALESCE(c.C2311, "--") AS C2311, COALESCE(c.C2312, "--") AS C2312,
   p.procedure_name, p.calibration_item, p.calibration_method, p.procedure_description, p.measurement_conditions, p.standards, p.scope,
   r.environment_resources AS resource_working_hours,
-  COALESCE(CAST(r_variant.report_template AS CHAR), "") AS report_variant_template
+  CASE WHEN COALESCE(r_variant.report_template, 0) = 1 THEN "1" ELSE "0" END AS report_variant_template
   FROM $P!{PrefixTable}calibration c
   LEFT JOIN $P!{PrefixTable}inventory i on i.MTAG=c.MTAG
   LEFT JOIN $P!{PrefixTable}customers cu on cu.KTAG=i.ktag
@@ -479,10 +479,10 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	<variable name="ReportVariantCodeNormalized" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[(
     $F{report_variant_template} != null
-      && "1".equals($F{report_variant_template}.trim())
+      && "1".equals($F{report_variant_template})
   )
-    ? "dim"
-    : ""]]></variableExpression>
+    ? "1"
+    : "0"]]></variableExpression>
 		<initialValueExpression><![CDATA[""]]></initialValueExpression>
 	</variable>
 	<variable name="CertNumber_var" class="java.lang.String"/>
@@ -1170,7 +1170,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</subreport>
 				<frame>
 					<reportElement x="0" y="10" width="99" height="1" uuid="1f5dac54-83ce-44a3-9e76-168a3c09b35e">
-						<printWhenExpression><![CDATA[!"dim".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!"1".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
 					</reportElement>
 					<break>
 						<reportElement x="0" y="0" width="99" height="1" uuid="8d8125fe-6922-4e2a-b08a-fa9cadb3f17e"/>
@@ -1183,7 +1183,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 		<groupExpression><![CDATA[1]]></groupExpression>
 		<groupHeader>
 			<band height="640" splitType="Stretch">
-				<printWhenExpression><![CDATA["dim".equals($V{ReportVariantCodeNormalized})
+				<printWhenExpression><![CDATA["1".equals($V{ReportVariantCodeNormalized})
   && !java.util.Arrays.asList("n", "no", "false", "0").contains(
     ($P{ShowGroup1ResultsDetails} == null ? "y" : $P{ShowGroup1ResultsDetails}.toString())
       .replace(" ", " ")
