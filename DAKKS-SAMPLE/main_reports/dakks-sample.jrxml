@@ -728,6 +728,12 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA[$V{procedure_measurement_conditions_var}]]></textFieldExpression>
 				</textField>
 			</band>
+			<band height="640" splitType="Stretch">
+				<printWhenExpression><![CDATA["1".equals($V{ReportVariantCodeNormalized})]]></printWhenExpression>
+				<frame>
+					<reportElement x="16" y="0" width="535" height="640" uuid="fe3ee8ec-242c-4e81-b207-8fd374947977"/>
+				</frame>
+			</band>
 			<band height="54">
 				<property name="com.calserver.bandLabel" value="Ort der Kalibrierung"/>
 				<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(
