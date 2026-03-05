@@ -1568,28 +1568,14 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			<textField>
 				<reportElement x="16" y="8" width="74" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Seite  "  + $V{PAGE_NUMBER}  + " von  "]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="80" y="8" width="53" height="17" uuid="dba679af-4d66-47cc-b5c2-1c8eeb980f2b"/>
-				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Seite  "  + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="16" y="26" width="55" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Page  "
-  + $V{PAGE_NUMBER}
-  + " of  "]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="64" y="26" width="53" height="17" uuid="6c63151b-8091-4db1-87d5-8bfa0c81741d"/>
-				<textElement textAlignment="Left">
-					<font size="8" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="496" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
