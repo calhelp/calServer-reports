@@ -159,18 +159,18 @@
      (
        $F{fixq} != null
        && !$F{fixq}.trim().isEmpty()
-       && $F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-       && Math.abs(Double.parseDouble($F{fixq}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", "."))) < 1e-9
+       && $F{fixq}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?([eE][+-]?\\d+)?")
+       && Math.abs(Double.parseDouble($F{fixq}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", "."))) < 1e-9
      )
      ? "--"
      : (
-         $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
+         $F{rel_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?([eE][+-]?\\d+)?")
         ? new java.text.DecimalFormat("0.0",
             new java.text.DecimalFormatSymbols(java.util.Locale.US))
             .format(
               Math.abs(
                 Double.parseDouble(
-                  $F{rel_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")
+                  $F{rel_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".")
                 )
               )
             )
