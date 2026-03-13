@@ -109,20 +109,20 @@
 	<parameter name="Calibration_procedure_1" class="java.lang.String">
 		<parameterDescription><![CDATA[Freitext für den beschriebenen Kalibrierablauf (vergleichende Messung).]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "Die Kalibrierung erfolgte als vergleichende Messung zwischen den durch rückgeführte Normale dargestellten Messgrößen und den Anzeigen bzw. Abgaben des Prüflings. Die Rückführbarkeit ist über nationale Normale (z. B. PTB) sichergestellt. Soweit zutreffend, wurden Herstellervorgaben sowie interne Verfahrensanweisungen angewendet. Umgebungsbedingungen und Messunsicherheit sind im Kalibrierschein angegeben."
-: "Calibration was performed as a comparative measurement between the quantities represented by traceable reference standards and the indications or outputs of the unit under test. Traceability is ensured via national standards (e.g. PTB). Where applicable, manufacturer specifications and internal procedures were applied. Environmental conditions and measurement uncertainty are stated in the calibration certificate."]]></defaultValueExpression>
+? "Kalibrierung gemäß interner Verfahrensanweisung unter Verwendung rückgeführter Normale."
+: "Calibration according to internal procedure using traceable standards."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_document" class="java.lang.String">
 		<parameterDescription><![CDATA[Referenz auf die verwendete Verfahrensanweisung bzw. QMS-Dokumentation.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "Verfahrensanweisung: Kalibrieren von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision), unter Berücksichtigung einschlägiger Normen und Herstellervorgaben; Dokumentation gemäß QM-System."
-: "Procedure: Calibration of measuring and test equipment in accordance with the valid internal procedure (current revision), considering applicable standards and manufacturer specifications; documentation according to the QMS."]]></defaultValueExpression>
+? "Kalibrierung gemäß gültiger interner Verfahrensanweisung."
+: "Calibration according to the applicable internal procedure."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Calibration_procedure_2" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Freitext für computergestützte Kalibrierverfahren.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "Verfahrensanweisung: Computergestützte Kalibrierung von Mess- und Prüfmitteln gemäß gültiger interner Verfahrensanweisung (aktuelle Revision); Einsatz rückgeführter Normale, geeigneter Kalibriersoftware und Dokumentation gemäß QM-System."
-: "Procedure: Computer-assisted calibration of measuring and test equipment in accordance with the valid internal procedure (current revision); use of traceable standards, appropriate calibration software, and documentation according to the QMS."]]></defaultValueExpression>
+? "Computergestützte Kalibrierung gemäß gültiger interner Verfahrensanweisung."
+: "Computer-assisted calibration according to the applicable internal procedure."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_field" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Text, der als Zertifikatsnummer angezeigt wird. Leer lassen, um den Standardwert aus C2396 zu verwenden.]]></parameterDescription>
@@ -395,8 +395,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
             ($P{Calibration_procedure_1} == null || $P{Calibration_procedure_1}.trim().isEmpty())
                 ? (
                     $P{Sprache}.equals("Deutsch")
-                        ? "Die Kalibrierung erfolgte durch Vergleich der durch die Normale dargestellten Werten mit der Anzeige. Bezug ist die Realisierung der Einheiten in der PTB."
-                        : "Calibration was performed by comparing the values represented by the normal values with the display."
+                        ? "Kalibrierverfahren nicht angegeben"
+                        : "Calibration procedure not specified"
                 )
                 : $P{Calibration_procedure_1}
         )
