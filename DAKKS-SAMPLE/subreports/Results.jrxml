@@ -168,11 +168,9 @@
         ? new java.text.DecimalFormat("0.0",
             new java.text.DecimalFormatSymbols(java.util.Locale.US))
             .format(
-              Math.abs(
                 Double.parseDouble(
                   $F{rel_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".")
                 )
-              )
             )
          : $F{rel_err}
        )
