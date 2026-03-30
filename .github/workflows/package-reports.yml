@@ -65,6 +65,15 @@ jobs:
             DELIVERY-STANDALONE/subreports
           if-no-files-found: error
 
+      - name: Upload TRACEABILITY as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TRACEABILITY
+          path: |
+            TRACEABILITY/main_reports
+            TRACEABILITY/subreports
+          if-no-files-found: error
+
       - name: Upload STICKERS CAL-INV as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -142,6 +151,8 @@ jobs:
           find INVENTORY-SAMPLE
           echo "📂 Inhalt von DELIVERY-STANDALONE:"
           find DELIVERY-STANDALONE
+          echo "📂 Inhalt von TRACEABILITY:"
+          find TRACEABILITY
           echo "📂 Inhalt von STICKERS:"
           find STICKERS
 
@@ -229,6 +240,7 @@ jobs:
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
+          create_zip "TRACEABILITY" "traceability"
 
 
       - name: Upload report ZIPs as artifact
@@ -253,6 +265,7 @@ jobs:
           unzip -l zip_output/sticker-inv-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-vorlage.zip
+          unzip -l zip_output/traceability.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:
