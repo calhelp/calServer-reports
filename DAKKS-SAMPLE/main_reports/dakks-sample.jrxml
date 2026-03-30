@@ -1378,7 +1378,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement verticalAlignment="Top">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{customer} == null || $F{customer}.trim().isEmpty()) ? "--" : $F{customer}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{customer} == null || $F{customer}.trim().isEmpty()) ? "intern" : $F{customer}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement x="202" y="531" width="116" height="20" uuid="44b06eae-f04d-4355-b948-2686dd51230f"/>
