@@ -100,8 +100,8 @@ jobs:
           create_zip "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
-          create_zip "FORWARD-TRACE" "forward-trace"
-          create_zip "BACKWARD-TRACE" "backward-trace"
+          create_zip "TRACE-FORWARD" "trace-forward"
+          create_zip "TRACE-BACKWARD" "trace-backward"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
       - name: Determine release metadata
