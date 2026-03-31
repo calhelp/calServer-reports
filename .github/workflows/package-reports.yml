@@ -65,13 +65,22 @@ jobs:
             DELIVERY-STANDALONE/subreports
           if-no-files-found: error
 
-      - name: Upload TRACEABILITY as artifact
+      - name: Upload FORWARD-TRACE as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TRACEABILITY
+          name: FORWARD-TRACE
           path: |
-            TRACEABILITY/main_reports
-            TRACEABILITY/subreports
+            FORWARD-TRACE/main_reports
+            FORWARD-TRACE/subreports
+          if-no-files-found: error
+
+      - name: Upload BACKWARD-TRACE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BACKWARD-TRACE
+          path: |
+            BACKWARD-TRACE/main_reports
+            BACKWARD-TRACE/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS CAL-INV as artifact
@@ -151,8 +160,10 @@ jobs:
           find INVENTORY-SAMPLE
           echo "📂 Inhalt von DELIVERY-STANDALONE:"
           find DELIVERY-STANDALONE
-          echo "📂 Inhalt von TRACEABILITY:"
-          find TRACEABILITY
+          echo "📂 Inhalt von FORWARD-TRACE:"
+          find FORWARD-TRACE
+          echo "📂 Inhalt von BACKWARD-TRACE:"
+          find BACKWARD-TRACE
           echo "📂 Inhalt von STICKERS:"
           find STICKERS
 
@@ -240,7 +251,8 @@ jobs:
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
-          create_zip "TRACEABILITY" "traceability"
+          create_zip "FORWARD-TRACE" "forward-trace"
+          create_zip "BACKWARD-TRACE" "backward-trace"
 
 
       - name: Upload report ZIPs as artifact
@@ -265,7 +277,8 @@ jobs:
           unzip -l zip_output/sticker-inv-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-vorlage.zip
-          unzip -l zip_output/traceability.zip
+          unzip -l zip_output/forward-trace.zip
+          unzip -l zip_output/backward-trace.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:

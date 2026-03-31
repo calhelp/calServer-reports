@@ -95,7 +95,8 @@ jobs:
           get_last_modified "STICKERS/DAKKS-Aufkleber_18mm" "sticker-dakks-aufkleber-18mm"
           get_last_modified "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           get_last_modified "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
-          get_last_modified "TRACEABILITY" "traceability"
+          get_last_modified "FORWARD-TRACE" "forward-trace"
+          get_last_modified "BACKWARD-TRACE" "backward-trace"
           get_last_modified "STICKERS/Sticker_Vorlage" "sticker-vorlage"
 
           echo "Last-modified dates:"
@@ -156,7 +157,8 @@ jobs:
               "order-sample":       "ORDER-SAMPLE/main_reports/README.md",
               "inventory-sample":   "INVENTORY-SAMPLE/main_reports/README.md",
               "delivery-standalone":"DELIVERY-STANDALONE/README.md",
-              "traceability":      "TRACEABILITY/main_reports/README.md",
+              "forward-trace":     "FORWARD-TRACE/main_reports/README.md",
+              "backward-trace":    "BACKWARD-TRACE/main_reports/README.md",
           }
 
           def extract_description(readme_path):
