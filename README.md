@@ -67,6 +67,12 @@ ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
 
+TRACEABILITY/
+├── main_reports/       # Rückführbarkeitsberichte (Forward Trace & Backward Trace)
+│   ├── Forward_Trace.jrxml   # Wirkungsanalyse: betroffene Geräte bei Normalen-Abweichung
+│   └── Backward_Trace.jrxml  # Rückführungskette: lückenloser Audit-Nachweis
+└── subreports/         # Platz für optionale Ergänzungsreports
+
 STICKERS/
 └── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
 
