@@ -22,16 +22,15 @@
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT depth, instrument_id,
-       I4201, I4204, I4202, I4203, I4207,
+       I4201, I4204, I4202, I4203, I4206,
        calibration_date, next_calibration_date,
-       certificate_number, cal_result, cal_mark
+       cal_result, cal_mark
 FROM (
   SELECT 0 AS depth, i0.MTAG AS instrument_id,
     COALESCE(i0.I4201,'') AS I4201, COALESCE(i0.I4204,'') AS I4204,
     COALESCE(i0.I4202,'') AS I4202, COALESCE(i0.I4203,'') AS I4203,
-    COALESCE(i0.I4207,'') AS I4207,
+    COALESCE(i0.I4206,'') AS I4206,
     c0.C2301 AS calibration_date, c0.C2303 AS next_calibration_date,
-    COALESCE(c0.C2308,'') AS certificate_number,
     COALESCE(c0.C2323,'') AS cal_result,
     COALESCE(c0.C2364,'') AS cal_mark
   FROM $P!{PrefixTable}inventory i0
@@ -43,9 +42,9 @@ FROM (
   SELECT 1, s1.C2430,
     COALESCE(i1.I4201,''), COALESCE(i1.I4204,''),
     COALESCE(i1.I4202,''), COALESCE(i1.I4203,''),
-    COALESCE(i1.I4207,''),
+    COALESCE(i1.I4206,''),
     cs1.C2301, cs1.C2303,
-    COALESCE(cs1.C2308,''), COALESCE(cs1.C2323,''), COALESCE(cs1.C2364,'')
+    COALESCE(cs1.C2323,''), COALESCE(cs1.C2364,'')
   FROM $P!{PrefixTable}calibration cd1
   JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
   JOIN $P!{PrefixTable}inventory i1      ON i1.MTAG = s1.C2430
@@ -57,9 +56,9 @@ FROM (
   SELECT 2, s2.C2430,
     COALESCE(i2.I4201,''), COALESCE(i2.I4204,''),
     COALESCE(i2.I4202,''), COALESCE(i2.I4203,''),
-    COALESCE(i2.I4207,''),
+    COALESCE(i2.I4206,''),
     cs2.C2301, cs2.C2303,
-    COALESCE(cs2.C2308,''), COALESCE(cs2.C2323,''), COALESCE(cs2.C2364,'')
+    COALESCE(cs2.C2323,''), COALESCE(cs2.C2364,'')
   FROM $P!{PrefixTable}calibration cd1
   JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
   JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
@@ -74,9 +73,9 @@ FROM (
   SELECT 3, s3.C2430,
     COALESCE(i3.I4201,''), COALESCE(i3.I4204,''),
     COALESCE(i3.I4202,''), COALESCE(i3.I4203,''),
-    COALESCE(i3.I4207,''),
+    COALESCE(i3.I4206,''),
     cs3.C2301, cs3.C2303,
-    COALESCE(cs3.C2308,''), COALESCE(cs3.C2323,''), COALESCE(cs3.C2364,'')
+    COALESCE(cs3.C2323,''), COALESCE(cs3.C2364,'')
   FROM $P!{PrefixTable}calibration cd1
   JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
   JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
@@ -94,9 +93,9 @@ FROM (
   SELECT 4, s4.C2430,
     COALESCE(i4.I4201,''), COALESCE(i4.I4204,''),
     COALESCE(i4.I4202,''), COALESCE(i4.I4203,''),
-    COALESCE(i4.I4207,''),
+    COALESCE(i4.I4206,''),
     cs4.C2301, cs4.C2303,
-    COALESCE(cs4.C2308,''), COALESCE(cs4.C2323,''), COALESCE(cs4.C2364,'')
+    COALESCE(cs4.C2323,''), COALESCE(cs4.C2364,'')
   FROM $P!{PrefixTable}calibration cd1
   JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
   JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
@@ -117,9 +116,9 @@ FROM (
   SELECT 5, s5.C2430,
     COALESCE(i5.I4201,''), COALESCE(i5.I4204,''),
     COALESCE(i5.I4202,''), COALESCE(i5.I4203,''),
-    COALESCE(i5.I4207,''),
+    COALESCE(i5.I4206,''),
     cs5.C2301, cs5.C2303,
-    COALESCE(cs5.C2308,''), COALESCE(cs5.C2323,''), COALESCE(cs5.C2364,'')
+    COALESCE(cs5.C2323,''), COALESCE(cs5.C2364,'')
   FROM $P!{PrefixTable}calibration cd1
   JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
   JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
@@ -147,10 +146,9 @@ ORDER BY depth ASC, I4204 ASC]]>
 	<field name="I4204" class="java.lang.String"/>
 	<field name="I4202" class="java.lang.String"/>
 	<field name="I4203" class="java.lang.String"/>
-	<field name="I4207" class="java.lang.String"/>
+	<field name="I4206" class="java.lang.String"/>
 	<field name="calibration_date" class="java.sql.Date"/>
 	<field name="next_calibration_date" class="java.sql.Date"/>
-	<field name="certificate_number" class="java.lang.String"/>
 	<field name="cal_result" class="java.lang.String"/>
 	<field name="cal_mark" class="java.lang.String"/>
 	<group name="instrumentGroup">
@@ -183,7 +181,7 @@ ORDER BY depth ASC, I4204 ASC]]>
 					<textField isBlankWhenNull="true">
 						<reportElement x="260" y="18" width="260" height="14" uuid="a2000001-0002-0006-0001-000000000001"/>
 						<textElement><font size="8"/></textElement>
-						<textFieldExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Seriennr.: " : "Serial No.: ") + $F{I4207}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Seriennr.: " : "Serial No.: ") + $F{I4206}]]></textFieldExpression>
 					</textField>
 					<textField isBlankWhenNull="true">
 						<reportElement x="0" y="34" width="520" height="14" uuid="a2000001-0002-0007-0001-000000000001"/>
@@ -264,62 +262,52 @@ ORDER BY depth ASC, I4204 ASC]]>
 					<text><![CDATA[Type]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="340" y="0" width="70" height="17" uuid="a2000001-0004-0601-0001-000000000001"/>
+					<reportElement x="340" y="0" width="80" height="17" uuid="a2000001-0004-0601-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 					<text><![CDATA[Seriennr.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="340" y="17" width="70" height="15" uuid="a2000001-0004-0602-0001-000000000001"/>
+					<reportElement x="340" y="17" width="80" height="15" uuid="a2000001-0004-0602-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
 					<text><![CDATA[Serial No]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="410" y="0" width="60" height="17" uuid="a2000001-0004-0701-0001-000000000001"/>
+					<reportElement x="420" y="0" width="65" height="17" uuid="a2000001-0004-0701-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 					<text><![CDATA[Kal.-Datum]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="410" y="17" width="60" height="15" uuid="a2000001-0004-0702-0001-000000000001"/>
+					<reportElement x="420" y="17" width="65" height="15" uuid="a2000001-0004-0702-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
 					<text><![CDATA[Cal. Date]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="470" y="0" width="30" height="17" uuid="a2000001-0004-0801-0001-000000000001"/>
+					<reportElement x="485" y="0" width="30" height="17" uuid="a2000001-0004-0801-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 					<text><![CDATA[Erg.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="470" y="17" width="30" height="15" uuid="a2000001-0004-0802-0001-000000000001"/>
+					<reportElement x="485" y="17" width="30" height="15" uuid="a2000001-0004-0802-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
 					<text><![CDATA[Result]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="500" y="0" width="80" height="17" uuid="a2000001-0004-0901-0001-000000000001"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
-					<text><![CDATA[Zertifikat-Nr.]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="500" y="17" width="80" height="15" uuid="a2000001-0004-0902-0001-000000000001"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
-					<text><![CDATA[Certificate No]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="580" y="0" width="60" height="17" uuid="a2000001-0004-1001-0001-000000000001"/>
+					<reportElement x="515" y="0" width="65" height="17" uuid="a2000001-0004-1001-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 					<text><![CDATA[Fälligkeit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="580" y="17" width="60" height="15" uuid="a2000001-0004-1002-0001-000000000001"/>
+					<reportElement x="515" y="17" width="65" height="15" uuid="a2000001-0004-1002-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
 					<text><![CDATA[Due Date]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="640" y="0" width="162" height="17" uuid="a2000001-0004-1101-0001-000000000001"/>
+					<reportElement x="580" y="0" width="222" height="17" uuid="a2000001-0004-1101-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 					<text><![CDATA[Kal.-Kennz.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="640" y="17" width="162" height="15" uuid="a2000001-0004-1102-0001-000000000001"/>
+					<reportElement x="580" y="17" width="222" height="15" uuid="a2000001-0004-1102-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isItalic="true"/></textElement>
 					<text><![CDATA[Cal. Mark]]></text>
 				</staticText>
@@ -358,32 +346,27 @@ ORDER BY depth ASC, I4204 ASC]]>
 					<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="340" y="0" width="70" height="14" uuid="a2000001-0005-0007-0001-000000000001"/>
+					<reportElement x="340" y="0" width="80" height="14" uuid="a2000001-0005-0007-0001-000000000001"/>
 					<textElement verticalAlignment="Middle"><font size="7"/></textElement>
-					<textFieldExpression><![CDATA[$F{I4207}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{I4206}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true" pattern="dd.MM.yyyy">
-					<reportElement x="410" y="0" width="60" height="14" uuid="a2000001-0005-0008-0001-000000000001"/>
+					<reportElement x="420" y="0" width="65" height="14" uuid="a2000001-0005-0008-0001-000000000001"/>
 					<textElement verticalAlignment="Middle"><font size="7"/></textElement>
 					<textFieldExpression><![CDATA[$F{calibration_date}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="470" y="0" width="30" height="14" uuid="a2000001-0005-0009-0001-000000000001"/>
+					<reportElement x="485" y="0" width="30" height="14" uuid="a2000001-0005-0009-0001-000000000001"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement>
 					<textFieldExpression><![CDATA[$F{cal_result}]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="500" y="0" width="80" height="14" uuid="a2000001-0005-0010-0001-000000000001"/>
-					<textElement verticalAlignment="Middle"><font size="7"/></textElement>
-					<textFieldExpression><![CDATA[$F{certificate_number}]]></textFieldExpression>
-				</textField>
 				<textField isBlankWhenNull="true" pattern="dd.MM.yyyy">
-					<reportElement x="580" y="0" width="60" height="14" uuid="a2000001-0005-0011-0001-000000000001"/>
+					<reportElement x="515" y="0" width="65" height="14" uuid="a2000001-0005-0011-0001-000000000001"/>
 					<textElement verticalAlignment="Middle"><font size="7"/></textElement>
 					<textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true" textAdjust="StretchHeight">
-					<reportElement x="640" y="0" width="162" height="14" uuid="a2000001-0005-0012-0001-000000000001"/>
+					<reportElement x="580" y="0" width="222" height="14" uuid="a2000001-0005-0012-0001-000000000001"/>
 					<textElement verticalAlignment="Middle"><font size="7"/></textElement>
 					<textFieldExpression><![CDATA[$F{cal_mark}]]></textFieldExpression>
 				</textField>
