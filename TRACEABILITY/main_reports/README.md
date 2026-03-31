@@ -2,8 +2,8 @@
 
 Dieses Verzeichnis enthält zwei eigenständige Berichte zur rekursiven
 Rückführbarkeits-Analyse von Kalibrierungen. Beide Reports nutzen
-MySQL-8-CTEs (`WITH RECURSIVE`) und können direkt über JasperStarter oder den
-calServer ausgeführt werden.
+gestufte `UNION ALL`-Queries (kompatibel mit MySQL 5.7+) und können direkt
+über JasperStarter oder den calServer ausgeführt werden.
 
 | Zielgruppe | Nutzen |
 | --- | --- |
