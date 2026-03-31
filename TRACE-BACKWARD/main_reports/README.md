@@ -1,34 +1,54 @@
 # Traceability Reports (Rückführbarkeit)
 
-Dieses Verzeichnis enthält zwei eigenständige Berichte zur rekursiven
-Rückführbarkeits-Analyse von Kalibrierungen. Beide Reports nutzen
-gestufte `UNION ALL`-Queries (kompatibel mit MySQL 5.7+) und können direkt
-über JasperStarter oder den calServer ausgeführt werden.
+Kalibrierungen verknüpfen ein **Messmittel** (DUT – Device Under Test) mit
+einem oder mehreren **Referenznormalen** (Standards). Jedes Normal besitzt
+selbst eine Kalibrier-Historie und kann wiederum mit höherwertigen Normalen
+kalibriert worden sein. So entsteht eine Kette – die **messtechnische
+Rückführbarkeit (Traceability)**.
 
-| Zielgruppe | Nutzen |
-| --- | --- |
-| **Qualitätsmanagement** | Lückenlose Rückführbarkeit für Audits nachweisen oder betroffene Geräte bei Normalen-Abweichungen identifizieren. |
-| **Administrator:innen / Entwickler:innen** | Dokumentierte SQL-Rekursion, Parametrisierung und Layout für eigene Erweiterungen. |
+Diese beiden Berichte machen die Kette in beide Richtungen sichtbar:
 
 ---
 
-## Berichte im Überblick
+## Wirkungsanalyse / Impact Analysis (`Forward_Trace.jrxml`)
 
-### `Forward_Trace.jrxml` – Wirkungsanalyse / Impact Analysis
+> *„Unser Referenznormal zeigt Abweichungen – welche Geräte sind betroffen?"*
 
-* **Eingabe:** MTAG eines Standards (Referenznormal).
-* **Ergebnis:** Alle Instrumente (DUTs), die direkt oder indirekt mit diesem
-  Standard kalibriert wurden – rekursiv über beliebig viele Stufen.
-* **Anwendungsfall:** Ein Standard fällt aus der Toleranz. Welche Geräte sind
-  potenziell betroffen und müssen nachkalibriert werden?
+Ausgehend von einem **Normal** listet der Bericht alle Messmittel auf, die
+direkt oder indirekt damit kalibriert wurden. Das ist z. B. nötig, wenn:
 
-### `Backward_Trace.jrxml` – Rückführungskette / Traceability Chain
+* ein Normal **außerhalb der Toleranz** liegt und geprüft werden muss,
+  welche Kalibrierungen möglicherweise ungültig sind,
+* ein Normal **aus dem Verkehr gezogen** wird und die betroffenen Geräte
+  einem anderen Normal zugeordnet werden sollen,
+* im Rahmen einer **Rückrufaktion** schnell alle abhängigen Instrumente
+  ermittelt werden müssen.
 
-* **Eingabe:** MTAG eines DUT (Device Under Test).
-* **Ergebnis:** Die vollständige Standardkette aufwärts bis zum höchsten
-  Referenznormal – rekursiv über beliebig viele Stufen.
-* **Anwendungsfall:** Audit-Nachweis der lückenlosen messtechnischen
-  Rückführbarkeit eines kalibrierten Instruments.
+Der Bericht zeigt im Kopfbereich die Stammdaten des Normals (Inv.-Nr.,
+Seriennummer, Beschreibung, Typ, Hersteller, Modell) und darunter die
+betroffenen Geräte, gegliedert nach Tiefenstufe.
+
+---
+
+## Rückführungskette / Traceability Chain (`Backward_Trace.jrxml`)
+
+> *„Mit welchen Normalen wurde dieses Gerät kalibriert – und wer hat die
+> Normale kalibriert?"*
+
+Ausgehend von einem **Messmittel** zeigt der Bericht die vollständige
+Normalkette aufwärts bis zum höchsten Referenznormal. Typische Einsatz-
+situationen:
+
+* **Audit-Nachweis:** Prüfer:innen und Akkreditierungsstellen verlangen
+  den lückenlosen Nachweis der messtechnischen Rückführbarkeit.
+* **Kalibrierzertifikate:** Beim Erstellen eines Zertifikats soll
+  dokumentiert werden, mit welchen Normalen (und deren eigener
+  Kalibrier-Historie) das Gerät kalibriert wurde.
+* **Qualitätssicherung:** Sicherstellen, dass alle eingesetzten Normale
+  selbst gültig kalibriert sind.
+
+Der Bericht zeigt im Kopfbereich die Stammdaten des Messmittels und
+darunter die Normalkette, gegliedert nach Tiefenstufe.
 
 ---
 
@@ -36,10 +56,10 @@ gestufte `UNION ALL`-Queries (kompatibel mit MySQL 5.7+) und können direkt
 
 | Name | Typ | Pflicht | Standard | Beschreibung |
 | --- | --- | --- | --- | --- |
-| `P_MTAG` | String | Ja | `""` | MTAG des Start-Instruments (Standard bei Forward Trace, DUT bei Backward Trace). |
-| `maxDepth` | String | Nein | `5` | Maximale Rekursionstiefe (1–5). |
+| `P_MTAG` | String | Ja | `""` | MTAG des Start-Instruments (Normal bei Forward Trace, DUT bei Backward Trace). |
+| `maxDepth` | String | Nein | `5` | Maximale Tiefe der Analyse (1–5 Stufen). |
 | `PrefixTable` | String | Nein | `""` | Tabellenpräfix für Mandantentrennung (z. B. `thermo_`). |
-| `Sprache` | String | Nein | `Deutsch` | Steuert die Spaltenüberschriften (`Deutsch` / `Englisch`). |
+| `Sprache` | String | Nein | `Deutsch` | Spaltenüberschriften auf Deutsch oder Englisch. |
 
 ### Beispiel: JasperStarter
 
@@ -56,62 +76,47 @@ jasperstarter process Forward_Trace.jrxml \
 
 ---
 
-## Spalten-Layout (A4 Querformat)
+## Was zeigt der Bericht?
 
-Beide Reports verwenden dasselbe Layout mit elf Spalten:
+### Kopfbereich (Geräte-Stammdaten)
 
-| # | DE-Bezeichnung | EN-Bezeichnung | Datenquelle | Breite (px) |
-| --- | --- | --- | --- | --- |
-| 1 | Tiefe | Depth | `depth` | 35 |
-| 2 | Inv.-Nr. | Asset No. | `I4201` | 70 |
-| 3 | Seriennr. | Serial No. | `I4202` | 65 |
-| 4 | Beschreibung | Description | `I4203` | 120 |
-| 5 | Hersteller | Manufacturer | `I4206` | 65 |
-| 6 | Modell | Model | `I4207` | 55 |
-| 7 | Kal.-Datum | Cal. Date | `C2301` | 65 |
-| 8 | Erg. | Result | `C2323` | 40 |
-| 9 | Zertifikat-Nr. | Certificate No. | `C2308` | 75 |
-| 10 | Fälligkeit | Due Date | `C2303` | 65 |
-| 11 | Kal.-Kennz. | Cal. Mark | `C2364` | 147 |
+Beide Berichte zeigen im Kopf die Stammdaten des analysierten Instruments:
+Inventar-Nr., Seriennummer, Beschreibung, Typ, Hersteller, Modell und MTAG.
 
-Die Beschreibungsspalte wird je Tiefenstufe automatisch eingerückt.
+### Ergebnistabelle
 
----
+Die Tabelle listet die gefundenen Instrumente mit folgenden Spalten
+(zweisprachig Deutsch/Englisch):
 
-## SQL-Logik
+| Spalte | Inhalt |
+| --- | --- |
+| Stufe | Wie viele Schritte vom Start-Instrument entfernt |
+| Inv.-Nr. | Inventar-/Asset-Nummer des Instruments |
+| Seriennr. | Seriennummer |
+| Beschreibung | Gerätebeschreibung (eingerückt je Stufe) |
+| Hersteller | Hersteller des Instruments |
+| Modell | Modellbezeichnung |
+| Kal.-Datum | Datum der letzten Kalibrierung |
+| Ergebnis | Kalibrierungsergebnis (z. B. bestanden/nicht bestanden) |
+| Zertifikat-Nr. | Nummer des Kalibrierzertifikats |
+| Fälligkeit | Nächstes Kalibrierdatum |
+| Kal.-Kennz. | Kalibrierkennzeichnung |
 
-Beide Berichte verwenden gestufte `UNION ALL`-Queries mit expliziten JOINs pro
-Tiefenstufe (kompatibel mit **MySQL 5.7+**, keine CTEs erforderlich). Maximal
-5 Stufen sind fest im SQL hinterlegt; der Parameter `maxDepth` (1–5) filtert
-das Ergebnis auf die gewünschte Tiefe.
+### Fußzeile
 
-* **Forward Trace:** Stufe 1 = alle DUTs, deren aktive Kalibrierung (`C2339 = 1`)
-  den gegebenen Standard referenziert (`C2430`). Jede weitere Stufe folgt den
-  DUTs, die selbst als Standard gedient haben.
-
-* **Backward Trace:** Stufe 1 = alle Standards der aktiven Kalibrierung des
-  gegebenen DUTs. Jede weitere Stufe folgt den Standards der Standards aufwärts.
-
-### Zyklen-Vermeidung
-
-Zirkuläre Verweise (A kalibriert B, B kalibriert A) werden pro Stufe durch
-explizite `!= `Bedingungen auf alle bereits besuchten MTAGs verhindert.
-
-### Performance-Hinweise
-
-* Die `standards`-Tabelle hat Indizes auf `C2430`, `CTAG` und `MTAG`.
-* `calibration` hat einen kombinierten Index auf (`C2339`, `MTAG`).
-* Tiefere Stufen erzeugen natürlich weniger Treffer, da die JOIN-Ketten
-  immer selektiver werden.
+Anzahl der gefundenen Instrumente und Seitennummerierung.
 
 ---
 
-## Technische Details
+## Hinweise
 
-* **JasperReports:** 6.20.6 / Jaspersoft Studio 7.0.2
-* **Schrift:** DejaVu Sans, Identity-H-Encoding (nicht eingebettet)
-* **Seitenformat:** A4 Querformat (842 × 595 px), Ränder 20 px
-* **NULL-Sicherheit:** `COALESCE()` in SQL, `isBlankWhenNull="true"` im Layout
-* **Zweisprachige Spaltenköpfe:** Deutsch (fett, 8 pt) + Englisch (kursiv, 7 pt)
-* **Datumformat:** `dd.MM.yyyy`
-* **Paginierung:** „Seite X / Y" in der Fußzeile
+* **Seitenformat:** A4 Querformat – genug Platz für alle elf Spalten.
+* **Nur aktive Kalibrierungen:** Beide Berichte berücksichtigen
+  ausschließlich die jeweils aktive Kalibrierung eines Instruments
+  (`C2339 = 1`).
+* **Zyklen-Schutz:** Zirkuläre Verweise (A kalibriert B, B kalibriert A)
+  werden erkannt und ausgeschlossen.
+* **Max. 5 Stufen:** In der Praxis sind Kalibrierungsketten selten tiefer
+  als 3–4 Stufen. Der Parameter `maxDepth` begrenzt die Tiefe auf
+  maximal 5.
+* **MySQL 5.7+:** Kompatibel ab MySQL 5.7 (keine CTEs erforderlich).
