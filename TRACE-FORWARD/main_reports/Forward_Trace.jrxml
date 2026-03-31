@@ -42,7 +42,7 @@ FROM (
     COALESCE(c0.status, '') AS cal_status
   FROM $P!{PrefixTable}inventory i0
   LEFT JOIN $P!{PrefixTable}calibration c0 ON c0.MTAG = i0.MTAG AND c0.C2339 = 1
-  WHERE i0.MTAG = $P{P_MTAG}
+  WHERE i0.MTAG = '$P!{P_MTAG}'
 
   UNION ALL
 
@@ -58,7 +58,7 @@ FROM (
   FROM $P!{PrefixTable}standards s1
   JOIN $P!{PrefixTable}calibration c1 ON c1.CTAG = s1.CTAG AND c1.C2339 = 1
   JOIN $P!{PrefixTable}inventory i1   ON i1.MTAG = s1.MTAG
-  WHERE s1.C2430 = $P{P_MTAG}
+  WHERE s1.C2430 = '$P!{P_MTAG}'
 
   UNION ALL
 
@@ -76,8 +76,8 @@ FROM (
   JOIN $P!{PrefixTable}standards s2   ON s2.C2430 = s1.MTAG
   JOIN $P!{PrefixTable}calibration c2 ON c2.CTAG = s2.CTAG AND c2.C2339 = 1
   JOIN $P!{PrefixTable}inventory i2   ON i2.MTAG = s2.MTAG
-  WHERE s1.C2430 = $P{P_MTAG}
-    AND s2.MTAG != $P{P_MTAG}
+  WHERE s1.C2430 = '$P!{P_MTAG}'
+    AND s2.MTAG != '$P!{P_MTAG}'
 
   UNION ALL
 
@@ -97,9 +97,9 @@ FROM (
   JOIN $P!{PrefixTable}standards s3   ON s3.C2430 = s2.MTAG
   JOIN $P!{PrefixTable}calibration c3 ON c3.CTAG = s3.CTAG AND c3.C2339 = 1
   JOIN $P!{PrefixTable}inventory i3   ON i3.MTAG = s3.MTAG
-  WHERE s1.C2430 = $P{P_MTAG}
-    AND s2.MTAG != $P{P_MTAG}
-    AND s3.MTAG != $P{P_MTAG} AND s3.MTAG != s1.MTAG
+  WHERE s1.C2430 = '$P!{P_MTAG}'
+    AND s2.MTAG != '$P!{P_MTAG}'
+    AND s3.MTAG != '$P!{P_MTAG}' AND s3.MTAG != s1.MTAG
 
   UNION ALL
 
@@ -121,10 +121,10 @@ FROM (
   JOIN $P!{PrefixTable}standards s4   ON s4.C2430 = s3.MTAG
   JOIN $P!{PrefixTable}calibration c4 ON c4.CTAG = s4.CTAG AND c4.C2339 = 1
   JOIN $P!{PrefixTable}inventory i4   ON i4.MTAG = s4.MTAG
-  WHERE s1.C2430 = $P{P_MTAG}
-    AND s2.MTAG != $P{P_MTAG}
-    AND s3.MTAG != $P{P_MTAG} AND s3.MTAG != s1.MTAG
-    AND s4.MTAG != $P{P_MTAG} AND s4.MTAG != s1.MTAG AND s4.MTAG != s2.MTAG
+  WHERE s1.C2430 = '$P!{P_MTAG}'
+    AND s2.MTAG != '$P!{P_MTAG}'
+    AND s3.MTAG != '$P!{P_MTAG}' AND s3.MTAG != s1.MTAG
+    AND s4.MTAG != '$P!{P_MTAG}' AND s4.MTAG != s1.MTAG AND s4.MTAG != s2.MTAG
 
   UNION ALL
 
@@ -148,13 +148,13 @@ FROM (
   JOIN $P!{PrefixTable}standards s5   ON s5.C2430 = s4.MTAG
   JOIN $P!{PrefixTable}calibration c5 ON c5.CTAG = s5.CTAG AND c5.C2339 = 1
   JOIN $P!{PrefixTable}inventory i5   ON i5.MTAG = s5.MTAG
-  WHERE s1.C2430 = $P{P_MTAG}
-    AND s2.MTAG != $P{P_MTAG}
-    AND s3.MTAG != $P{P_MTAG} AND s3.MTAG != s1.MTAG
-    AND s4.MTAG != $P{P_MTAG} AND s4.MTAG != s1.MTAG AND s4.MTAG != s2.MTAG
-    AND s5.MTAG != $P{P_MTAG} AND s5.MTAG != s1.MTAG AND s5.MTAG != s2.MTAG AND s5.MTAG != s3.MTAG
+  WHERE s1.C2430 = '$P!{P_MTAG}'
+    AND s2.MTAG != '$P!{P_MTAG}'
+    AND s3.MTAG != '$P!{P_MTAG}' AND s3.MTAG != s1.MTAG
+    AND s4.MTAG != '$P!{P_MTAG}' AND s4.MTAG != s1.MTAG AND s4.MTAG != s2.MTAG
+    AND s5.MTAG != '$P!{P_MTAG}' AND s5.MTAG != s1.MTAG AND s5.MTAG != s2.MTAG AND s5.MTAG != s3.MTAG
 ) AS trace
-WHERE depth <= IFNULL(NULLIF($P!{maxDepth},''),5)
+WHERE depth <= IFNULL(NULLIF('$P!{maxDepth}',''),5)
 ORDER BY depth ASC, description ASC]]>
 	</queryString>
 	<field name="depth" class="java.lang.Integer"/>
