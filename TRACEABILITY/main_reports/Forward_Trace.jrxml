@@ -7,9 +7,9 @@
 	<parameter name="instrumentId" class="java.lang.String">
 		<parameterDescription><![CDATA[MTAG des Start-Standards fuer die Wirkungsanalyse.]]></parameterDescription>
 	</parameter>
-	<parameter name="maxDepth" class="java.lang.Integer">
+	<parameter name="maxDepth" class="java.lang.String">
 		<parameterDescription><![CDATA[Maximale Rekursionstiefe (Standard: 10).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[10]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["10"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionales Tabellenpräfix fuer Mandantentrennung.]]></parameterDescription>
@@ -71,7 +71,7 @@
         ON c2.CTAG = s2.CTAG AND c2.C2339 = 1
     JOIN $P!{PrefixTable}inventory i2
         ON i2.MTAG = s2.MTAG
-    WHERE t.depth < $P{maxDepth}
+    WHERE t.depth < CAST($P{maxDepth} AS SIGNED)
       AND FIND_IN_SET(s2.MTAG, t.visited_path) = 0
 )
 SELECT
