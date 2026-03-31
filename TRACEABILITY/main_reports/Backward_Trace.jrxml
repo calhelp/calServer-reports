@@ -8,8 +8,8 @@
 		<parameterDescription><![CDATA[MTAG des DUT fuer die Rueckfuehrungskette.]]></parameterDescription>
 	</parameter>
 	<parameter name="maxDepth" class="java.lang.String">
-		<parameterDescription><![CDATA[Maximale Rekursionstiefe (Standard: 10).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["10"]]></defaultValueExpression>
+		<parameterDescription><![CDATA[Maximale Rekursionstiefe 1-5 (Standard: 5).]]></parameterDescription>
+		<defaultValueExpression><![CDATA["5"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="PrefixTable" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionales Tabellenpräfix fuer Mandantentrennung.]]></parameterDescription>
@@ -19,82 +19,134 @@
 		<parameterDescription><![CDATA[Steuert die Spaltentitel (Deutsch/Englisch).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="_safeMaxDepth" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{maxDepth} != null && !$P{maxDepth}.trim().isEmpty()) ? $P{maxDepth}.trim() : "5"]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
-		<![CDATA[WITH RECURSIVE trace AS (
-    SELECT
-        1 AS depth,
-        s.C2430 AS instrument_id,
-        s.CTAG AS calibration_id,
-        COALESCE(i.I4201, "") AS asset_number,
-        COALESCE(i.I4202, "") AS serial_number,
-        COALESCE(i.I4203, "") AS description,
-        COALESCE(i.I4204, "") AS type_code,
-        COALESCE(i.I4206, "") AS manufacturer,
-        COALESCE(i.I4207, "") AS model,
-        c_std.C2301 AS calibration_date,
-        c_std.C2303 AS next_calibration_date,
-        COALESCE(c_std.C2308, "") AS certificate_number,
-        COALESCE(c_std.C2323, "") AS cal_result,
-        COALESCE(c_std.C2364, "") AS cal_mark,
-        COALESCE(c_std.status, "") AS cal_status,
-        CAST(s.C2430 AS CHAR(10000)) AS visited_path
-    FROM $P!{PrefixTable}calibration c_dut
-    JOIN $P!{PrefixTable}standards s
-        ON s.CTAG = c_dut.CTAG
-    JOIN $P!{PrefixTable}inventory i
-        ON i.MTAG = s.C2430
-    LEFT JOIN $P!{PrefixTable}calibration c_std
-        ON c_std.MTAG = s.C2430 AND c_std.C2339 = 1
-    WHERE c_dut.MTAG = $P{instrumentId}
-      AND c_dut.C2339 = 1
+		<![CDATA[SELECT depth, instrument_id, asset_number, serial_number, description,
+       type_code, manufacturer, model, calibration_date, next_calibration_date,
+       certificate_number, cal_result, cal_mark, cal_status
+FROM (
+  /* ---- Stufe 1: Standards der aktiven Kalibrierung des DUT ---- */
+  SELECT 1 AS depth,
+    s1.C2430 AS instrument_id,
+    COALESCE(i1.I4201, '') AS asset_number,
+    COALESCE(i1.I4202, '') AS serial_number,
+    COALESCE(i1.I4203, '') AS description,
+    COALESCE(i1.I4204, '') AS type_code,
+    COALESCE(i1.I4206, '') AS manufacturer,
+    COALESCE(i1.I4207, '') AS model,
+    cs1.C2301 AS calibration_date,
+    cs1.C2303 AS next_calibration_date,
+    COALESCE(cs1.C2308, '') AS certificate_number,
+    COALESCE(cs1.C2323, '') AS cal_result,
+    COALESCE(cs1.C2364, '') AS cal_mark,
+    COALESCE(cs1.status, '') AS cal_status
+  FROM $P!{PrefixTable}calibration cd1
+  JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
+  JOIN $P!{PrefixTable}inventory i1      ON i1.MTAG = s1.C2430
+  LEFT JOIN $P!{PrefixTable}calibration cs1 ON cs1.MTAG = s1.C2430 AND cs1.C2339 = 1
+  WHERE cd1.MTAG = '$P!{instrumentId}' AND cd1.C2339 = 1
 
-    UNION ALL
+  UNION ALL
 
-    SELECT
-        t.depth + 1,
-        s2.C2430,
-        s2.CTAG,
-        COALESCE(i2.I4201, ""),
-        COALESCE(i2.I4202, ""),
-        COALESCE(i2.I4203, ""),
-        COALESCE(i2.I4204, ""),
-        COALESCE(i2.I4206, ""),
-        COALESCE(i2.I4207, ""),
-        c_std2.C2301,
-        c_std2.C2303,
-        COALESCE(c_std2.C2308, ""),
-        COALESCE(c_std2.C2323, ""),
-        COALESCE(c_std2.C2364, ""),
-        COALESCE(c_std2.status, ""),
-        CONCAT(t.visited_path, ',', s2.C2430)
-    FROM trace t
-    JOIN $P!{PrefixTable}calibration c_parent
-        ON c_parent.MTAG = t.instrument_id AND c_parent.C2339 = 1
-    JOIN $P!{PrefixTable}standards s2
-        ON s2.CTAG = c_parent.CTAG
-    JOIN $P!{PrefixTable}inventory i2
-        ON i2.MTAG = s2.C2430
-    LEFT JOIN $P!{PrefixTable}calibration c_std2
-        ON c_std2.MTAG = s2.C2430 AND c_std2.C2339 = 1
-    WHERE t.depth < CAST($P{maxDepth} AS SIGNED)
-      AND FIND_IN_SET(s2.C2430, t.visited_path) = 0
-)
-SELECT
-    depth,
-    instrument_id,
-    asset_number,
-    serial_number,
-    description,
-    type_code,
-    manufacturer,
-    model,
-    calibration_date,
-    next_calibration_date,
-    certificate_number,
-    cal_result,
-    cal_mark,
-    cal_status
-FROM trace
+  /* ---- Stufe 2: Standards der Standards aus Stufe 1 ---- */
+  SELECT 2,
+    s2.C2430,
+    COALESCE(i2.I4201, ''), COALESCE(i2.I4202, ''),
+    COALESCE(i2.I4203, ''), COALESCE(i2.I4204, ''),
+    COALESCE(i2.I4206, ''), COALESCE(i2.I4207, ''),
+    cs2.C2301, cs2.C2303,
+    COALESCE(cs2.C2308, ''), COALESCE(cs2.C2323, ''),
+    COALESCE(cs2.C2364, ''), COALESCE(cs2.status, '')
+  FROM $P!{PrefixTable}calibration cd1
+  JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
+  JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
+  JOIN $P!{PrefixTable}standards s2      ON s2.CTAG = cp1.CTAG
+  JOIN $P!{PrefixTable}inventory i2      ON i2.MTAG = s2.C2430
+  LEFT JOIN $P!{PrefixTable}calibration cs2 ON cs2.MTAG = s2.C2430 AND cs2.C2339 = 1
+  WHERE cd1.MTAG = '$P!{instrumentId}' AND cd1.C2339 = 1
+    AND s2.C2430 != '$P!{instrumentId}'
+
+  UNION ALL
+
+  /* ---- Stufe 3 ---- */
+  SELECT 3,
+    s3.C2430,
+    COALESCE(i3.I4201, ''), COALESCE(i3.I4202, ''),
+    COALESCE(i3.I4203, ''), COALESCE(i3.I4204, ''),
+    COALESCE(i3.I4206, ''), COALESCE(i3.I4207, ''),
+    cs3.C2301, cs3.C2303,
+    COALESCE(cs3.C2308, ''), COALESCE(cs3.C2323, ''),
+    COALESCE(cs3.C2364, ''), COALESCE(cs3.status, '')
+  FROM $P!{PrefixTable}calibration cd1
+  JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
+  JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
+  JOIN $P!{PrefixTable}standards s2      ON s2.CTAG = cp1.CTAG
+  JOIN $P!{PrefixTable}calibration cp2   ON cp2.MTAG = s2.C2430 AND cp2.C2339 = 1
+  JOIN $P!{PrefixTable}standards s3      ON s3.CTAG = cp2.CTAG
+  JOIN $P!{PrefixTable}inventory i3      ON i3.MTAG = s3.C2430
+  LEFT JOIN $P!{PrefixTable}calibration cs3 ON cs3.MTAG = s3.C2430 AND cs3.C2339 = 1
+  WHERE cd1.MTAG = '$P!{instrumentId}' AND cd1.C2339 = 1
+    AND s2.C2430 != '$P!{instrumentId}'
+    AND s3.C2430 != '$P!{instrumentId}' AND s3.C2430 != s1.C2430
+
+  UNION ALL
+
+  /* ---- Stufe 4 ---- */
+  SELECT 4,
+    s4.C2430,
+    COALESCE(i4.I4201, ''), COALESCE(i4.I4202, ''),
+    COALESCE(i4.I4203, ''), COALESCE(i4.I4204, ''),
+    COALESCE(i4.I4206, ''), COALESCE(i4.I4207, ''),
+    cs4.C2301, cs4.C2303,
+    COALESCE(cs4.C2308, ''), COALESCE(cs4.C2323, ''),
+    COALESCE(cs4.C2364, ''), COALESCE(cs4.status, '')
+  FROM $P!{PrefixTable}calibration cd1
+  JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
+  JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
+  JOIN $P!{PrefixTable}standards s2      ON s2.CTAG = cp1.CTAG
+  JOIN $P!{PrefixTable}calibration cp2   ON cp2.MTAG = s2.C2430 AND cp2.C2339 = 1
+  JOIN $P!{PrefixTable}standards s3      ON s3.CTAG = cp2.CTAG
+  JOIN $P!{PrefixTable}calibration cp3   ON cp3.MTAG = s3.C2430 AND cp3.C2339 = 1
+  JOIN $P!{PrefixTable}standards s4      ON s4.CTAG = cp3.CTAG
+  JOIN $P!{PrefixTable}inventory i4      ON i4.MTAG = s4.C2430
+  LEFT JOIN $P!{PrefixTable}calibration cs4 ON cs4.MTAG = s4.C2430 AND cs4.C2339 = 1
+  WHERE cd1.MTAG = '$P!{instrumentId}' AND cd1.C2339 = 1
+    AND s2.C2430 != '$P!{instrumentId}'
+    AND s3.C2430 != '$P!{instrumentId}' AND s3.C2430 != s1.C2430
+    AND s4.C2430 != '$P!{instrumentId}' AND s4.C2430 != s1.C2430 AND s4.C2430 != s2.C2430
+
+  UNION ALL
+
+  /* ---- Stufe 5 ---- */
+  SELECT 5,
+    s5.C2430,
+    COALESCE(i5.I4201, ''), COALESCE(i5.I4202, ''),
+    COALESCE(i5.I4203, ''), COALESCE(i5.I4204, ''),
+    COALESCE(i5.I4206, ''), COALESCE(i5.I4207, ''),
+    cs5.C2301, cs5.C2303,
+    COALESCE(cs5.C2308, ''), COALESCE(cs5.C2323, ''),
+    COALESCE(cs5.C2364, ''), COALESCE(cs5.status, '')
+  FROM $P!{PrefixTable}calibration cd1
+  JOIN $P!{PrefixTable}standards s1      ON s1.CTAG = cd1.CTAG
+  JOIN $P!{PrefixTable}calibration cp1   ON cp1.MTAG = s1.C2430 AND cp1.C2339 = 1
+  JOIN $P!{PrefixTable}standards s2      ON s2.CTAG = cp1.CTAG
+  JOIN $P!{PrefixTable}calibration cp2   ON cp2.MTAG = s2.C2430 AND cp2.C2339 = 1
+  JOIN $P!{PrefixTable}standards s3      ON s3.CTAG = cp2.CTAG
+  JOIN $P!{PrefixTable}calibration cp3   ON cp3.MTAG = s3.C2430 AND cp3.C2339 = 1
+  JOIN $P!{PrefixTable}standards s4      ON s4.CTAG = cp3.CTAG
+  JOIN $P!{PrefixTable}calibration cp4   ON cp4.MTAG = s4.C2430 AND cp4.C2339 = 1
+  JOIN $P!{PrefixTable}standards s5      ON s5.CTAG = cp4.CTAG
+  JOIN $P!{PrefixTable}inventory i5      ON i5.MTAG = s5.C2430
+  LEFT JOIN $P!{PrefixTable}calibration cs5 ON cs5.MTAG = s5.C2430 AND cs5.C2339 = 1
+  WHERE cd1.MTAG = '$P!{instrumentId}' AND cd1.C2339 = 1
+    AND s2.C2430 != '$P!{instrumentId}'
+    AND s3.C2430 != '$P!{instrumentId}' AND s3.C2430 != s1.C2430
+    AND s4.C2430 != '$P!{instrumentId}' AND s4.C2430 != s1.C2430 AND s4.C2430 != s2.C2430
+    AND s5.C2430 != '$P!{instrumentId}' AND s5.C2430 != s1.C2430 AND s5.C2430 != s2.C2430 AND s5.C2430 != s3.C2430
+) AS trace
+WHERE depth <= $P!{_safeMaxDepth}
 ORDER BY depth ASC, description ASC]]>
 	</queryString>
 	<field name="depth" class="java.lang.Integer"/>

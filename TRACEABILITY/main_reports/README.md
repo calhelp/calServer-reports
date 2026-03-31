@@ -37,7 +37,7 @@ calServer ausgeführt werden.
 | Name | Typ | Pflicht | Standard | Beschreibung |
 | --- | --- | --- | --- | --- |
 | `instrumentId` | String | Ja | — | MTAG des Start-Instruments (Standard bei Forward Trace, DUT bei Backward Trace). |
-| `maxDepth` | String | Nein | `10` | Maximale Rekursionstiefe. Wird in der SQL-Abfrage per `CAST(... AS SIGNED)` konvertiert. |
+| `maxDepth` | String | Nein | `5` | Maximale Rekursionstiefe (1–5). |
 | `PrefixTable` | String | Nein | `""` | Tabellenpräfix für Mandantentrennung (z. B. `thermo_`). |
 | `Sprache` | String | Nein | `Deutsch` | Steuert die Spaltenüberschriften (`Deutsch` / `Englisch`). |
 
@@ -48,7 +48,7 @@ jasperstarter process Forward_Trace.jrxml \
   -o "../pdf/Forward-Trace" -f pdf \
   -t mysql -H mysql_db -n calserver -u user -p pass \
   -P instrumentId=0038e950-df7f-bf73-f5d7-fc371a1a94f0 \
-     maxDepth=10 \
+     maxDepth=5 \
      PrefixTable=thermo_ \
      Sprache=Deutsch \
      REPORT_LOCALE=de_DE
@@ -80,32 +80,29 @@ Die Beschreibungsspalte wird je Tiefenstufe automatisch eingerückt.
 
 ## SQL-Logik
 
-Beide Berichte nutzen `WITH RECURSIVE`-CTEs (MySQL 8+):
+Beide Berichte verwenden gestufte `UNION ALL`-Queries mit expliziten JOINs pro
+Tiefenstufe (kompatibel mit **MySQL 5.7+**, keine CTEs erforderlich). Maximal
+5 Stufen sind fest im SQL hinterlegt; der Parameter `maxDepth` (1–5) filtert
+das Ergebnis auf die gewünschte Tiefe.
 
-* **Forward Trace:** Anker = alle DUTs, deren aktive Kalibrierung (`C2339 = 1`)
-  den gegebenen Standard in der `standards`-Tabelle referenziert (`C2430`).
-  Rekursion: Jedes gefundene DUT kann selbst als Standard gedient haben.
+* **Forward Trace:** Stufe 1 = alle DUTs, deren aktive Kalibrierung (`C2339 = 1`)
+  den gegebenen Standard referenziert (`C2430`). Jede weitere Stufe folgt den
+  DUTs, die selbst als Standard gedient haben.
 
-* **Backward Trace:** Anker = alle Standards der aktiven Kalibrierung des
-  gegebenen DUTs. Rekursion: Jeder Standard hat selbst eine aktive Kalibrierung,
-  deren eingesetzte Standards ermittelt werden.
+* **Backward Trace:** Stufe 1 = alle Standards der aktiven Kalibrierung des
+  gegebenen DUTs. Jede weitere Stufe folgt den Standards der Standards aufwärts.
 
 ### Zyklen-Vermeidung
 
-Theoretisch kann ein zirkulärer Verweis auftreten (A kalibriert B, B kalibriert A).
-Die Queries verhindern Endlosschleifen durch:
-
-1. **`visited_path`** – kommaseparierter String aller bereits besuchten MTAGs.
-2. **`FIND_IN_SET(neuer_MTAG, visited_path) = 0`** – prüft, ob ein MTAG bereits
-   besucht wurde.
-3. **`depth < CAST($P{maxDepth} AS SIGNED)`** – Hard-Limit als zusätzliche
-   Sicherheit.
+Zirkuläre Verweise (A kalibriert B, B kalibriert A) werden pro Stufe durch
+explizite `!= `Bedingungen auf alle bereits besuchten MTAGs verhindert.
 
 ### Performance-Hinweise
 
 * Die `standards`-Tabelle hat Indizes auf `C2430`, `CTAG` und `MTAG`.
 * `calibration` hat einen kombinierten Index auf (`C2339`, `MTAG`).
-* Bei großen Datenbeständen kann `maxDepth` auf 5–7 begrenzt werden.
+* Tiefere Stufen erzeugen natürlich weniger Treffer, da die JOIN-Ketten
+  immer selektiver werden.
 
 ---
 
