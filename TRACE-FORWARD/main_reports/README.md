@@ -36,7 +36,7 @@ gestufte `UNION ALL`-Queries (kompatibel mit MySQL 5.7+) und können direkt
 
 | Name | Typ | Pflicht | Standard | Beschreibung |
 | --- | --- | --- | --- | --- |
-| `instrumentId` | String | Ja | — | MTAG des Start-Instruments (Standard bei Forward Trace, DUT bei Backward Trace). |
+| `P_MTAG` | String | Ja | `""` | MTAG des Start-Instruments (Standard bei Forward Trace, DUT bei Backward Trace). |
 | `maxDepth` | String | Nein | `5` | Maximale Rekursionstiefe (1–5). |
 | `PrefixTable` | String | Nein | `""` | Tabellenpräfix für Mandantentrennung (z. B. `thermo_`). |
 | `Sprache` | String | Nein | `Deutsch` | Steuert die Spaltenüberschriften (`Deutsch` / `Englisch`). |
@@ -47,7 +47,7 @@ gestufte `UNION ALL`-Queries (kompatibel mit MySQL 5.7+) und können direkt
 jasperstarter process Forward_Trace.jrxml \
   -o "../pdf/Forward-Trace" -f pdf \
   -t mysql -H mysql_db -n calserver -u user -p pass \
-  -P instrumentId=0038e950-df7f-bf73-f5d7-fc371a1a94f0 \
+  -P P_MTAG=0038e950-df7f-bf73-f5d7-fc371a1a94f0 \
      maxDepth=5 \
      PrefixTable=thermo_ \
      Sprache=Deutsch \
