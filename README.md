@@ -256,6 +256,6 @@ E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
 
 ---
 
-*Letzte Aktualisierung: 2026-02-04*
+*Letzte Aktualisierung: 2026-03-31*
 
 ```
