@@ -65,22 +65,22 @@ jobs:
             DELIVERY-STANDALONE/subreports
           if-no-files-found: error
 
-      - name: Upload FORWARD-TRACE as artifact
+      - name: Upload TRACE-FORWARD as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FORWARD-TRACE
+          name: TRACE-FORWARD
           path: |
-            FORWARD-TRACE/main_reports
-            FORWARD-TRACE/subreports
+            TRACE-FORWARD/main_reports
+            TRACE-FORWARD/subreports
           if-no-files-found: error
 
-      - name: Upload BACKWARD-TRACE as artifact
+      - name: Upload TRACE-BACKWARD as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: BACKWARD-TRACE
+          name: TRACE-BACKWARD
           path: |
-            BACKWARD-TRACE/main_reports
-            BACKWARD-TRACE/subreports
+            TRACE-BACKWARD/main_reports
+            TRACE-BACKWARD/subreports
           if-no-files-found: error
 
       - name: Upload STICKERS CAL-INV as artifact
@@ -160,10 +160,10 @@ jobs:
           find INVENTORY-SAMPLE
           echo "📂 Inhalt von DELIVERY-STANDALONE:"
           find DELIVERY-STANDALONE
-          echo "📂 Inhalt von FORWARD-TRACE:"
-          find FORWARD-TRACE
-          echo "📂 Inhalt von BACKWARD-TRACE:"
-          find BACKWARD-TRACE
+          echo "📂 Inhalt von TRACE-FORWARD:"
+          find TRACE-FORWARD
+          echo "📂 Inhalt von TRACE-BACKWARD:"
+          find TRACE-BACKWARD
           echo "📂 Inhalt von STICKERS:"
           find STICKERS
 
@@ -251,8 +251,8 @@ jobs:
           create_zip "STICKERS/INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/INV-CAL-LOC-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-inv-cal-loc-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
-          create_zip "FORWARD-TRACE" "forward-trace"
-          create_zip "BACKWARD-TRACE" "backward-trace"
+          create_zip "TRACE-FORWARD" "trace-forward"
+          create_zip "TRACE-BACKWARD" "trace-backward"
 
 
       - name: Upload report ZIPs as artifact
@@ -277,8 +277,8 @@ jobs:
           unzip -l zip_output/sticker-inv-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-inv-cal-loc-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-vorlage.zip
-          unzip -l zip_output/forward-trace.zip
-          unzip -l zip_output/backward-trace.zip
+          unzip -l zip_output/trace-forward.zip
+          unzip -l zip_output/trace-backward.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:

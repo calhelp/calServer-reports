@@ -67,12 +67,12 @@ ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder
 
-FORWARD-TRACE/
+TRACE-FORWARD/
 ├── main_reports/       # Wirkungsanalyse: betroffene Geräte bei Normalen-Abweichung
 │   └── Forward_Trace.jrxml
 └── subreports/
 
-BACKWARD-TRACE/
+TRACE-BACKWARD/
 ├── main_reports/       # Rückführungskette: lückenloser Audit-Nachweis
 │   └── Backward_Trace.jrxml
 └── subreports/
