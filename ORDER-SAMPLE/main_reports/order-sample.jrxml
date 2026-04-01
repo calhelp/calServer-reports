@@ -37,13 +37,13 @@
 	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Return_address" class="java.lang.String">
+	<parameter name="return_address" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Report_mail_address" class="java.lang.String">
+	<parameter name="report_mail_address" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Report_phone_number" class="java.lang.String">
+	<parameter name="report_phone_number" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 <parameter name="Report_description" class="java.lang.String">
@@ -418,19 +418,19 @@ ORDER BY a.pos_number ASC,
 				<line>
 					<reportElement x="25" y="10" width="536" height="1" uuid="cec03764-03ca-47f8-8639-837438170792">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<line>
 					<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="10" uuid="6dbe126f-babf-4277-b909-2cbdc4bd00d4">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<line>
 					<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="11" uuid="70c23caf-6d36-46c9-8562-0e3b7b24ce62">
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<subreport overflowType="Stretch">
@@ -712,7 +712,7 @@ ORDER BY a.pos_number ASC,
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new String($P{Return_address}.replace("_s_", " ").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new String($P{return_address}.replace("_s_", " ").getBytes("ISO-8859-1"), "UTF-8").replace("_00E4_", "ä").replace("_00F6_", "ö").replace("_00FC_", "ü").replace("_00C4_", "Ä").replace("_00D6_", "Ö").replace("_00DC_", "Ü").replace("_00DF_", "ß")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="341" y="173" width="216" height="15" uuid="9ce74528-ab23-4e19-94bb-53cd81bcc151">
@@ -723,7 +723,7 @@ ORDER BY a.pos_number ASC,
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Report_mail_address}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{report_mail_address}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="341" y="188" width="216" height="15" uuid="e719020b-d56b-4283-8759-a6a8d58f871c">
@@ -734,7 +734,7 @@ ORDER BY a.pos_number ASC,
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Report_phone_number}.replace("_s_", " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{report_phone_number}.replace("_s_", " ")]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -920,7 +920,7 @@ ORDER BY a.pos_number ASC,
 					<printWhenExpression><![CDATA[$F{article_type}.equals("inventory")]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inventory_name} != null ? $F{inventory_name}.replace("\n", " | ") : ""]]></textFieldExpression>
 			</textField>
