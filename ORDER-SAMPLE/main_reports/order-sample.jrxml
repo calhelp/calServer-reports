@@ -350,6 +350,7 @@ ORDER BY a.pos_number ASC,
 				<textField>
 					<reportElement x="330" y="8" width="54" height="15" uuid="9a54ad27-65ab-49c7-ae66-8cd7587c54fa">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<printWhenExpression><![CDATA[!$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Arial" size="10" isBold="true"/>
@@ -833,7 +834,7 @@ ORDER BY a.pos_number ASC,
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
@@ -914,14 +915,14 @@ ORDER BY a.pos_number ASC,
 				<textFieldExpression><![CDATA[$F{type_name}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="RelativeToBandHeight" x="80" y="0" width="242" height="20" uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+				<reportElement stretchType="RelativeToBandHeight" x="80" y="0" width="450" height="20" uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<printWhenExpression><![CDATA[$F{article_type}.equals("inventory")]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{inventory_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{inventory_name} != null ? $F{inventory_name}.replace("\n", " | ") : ""]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
