@@ -360,6 +360,7 @@ ORDER BY a.pos_number ASC,
 					<reportElement x="370" y="8" width="78" height="15" uuid="91c7cbfd-e8c8-4821-9bfa-47695a7e7184">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<printWhenExpression><![CDATA[!$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" isBold="true"/>
@@ -371,6 +372,7 @@ ORDER BY a.pos_number ASC,
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<printWhenExpression><![CDATA[!$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" isBold="true"/>
@@ -401,6 +403,7 @@ ORDER BY a.pos_number ASC,
 					<reportElement x="519" y="8" width="32" height="15" uuid="5d83c08d-271e-4ac7-b3c2-69ecf4f3c7e8">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<printWhenExpression><![CDATA[!$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -433,7 +436,7 @@ ORDER BY a.pos_number ASC,
 					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="561" height="15" uuid="05b7be9c-e170-40cc-ba23-ea1580e8c81f">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} > 0]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} > 0 && !$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 					<subreportParameter name="PrefixTable">
 						<subreportParameterExpression><![CDATA[$P{PrefixTable}]]></subreportParameterExpression>
@@ -769,7 +772,7 @@ ORDER BY a.pos_number ASC,
 	</pageHeader>
 	<columnHeader>
 		<band height="31" splitType="Immediate">
-			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1 && !$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 			<line>
 				<reportElement x="26" y="0" width="536" height="1" uuid="66451b6d-4259-47bd-bdf3-620946926954">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -894,7 +897,9 @@ ORDER BY a.pos_number ASC,
 				<textFieldExpression><![CDATA[$V{Rabatt}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="519" y="0" width="32" height="20" uuid="b6b4d172-5525-48d6-b7d9-105a311ddf29"/>
+				<reportElement x="519" y="0" width="32" height="20" uuid="b6b4d172-5525-48d6-b7d9-105a311ddf29">
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{MwST_Single}]]></textFieldExpression>
 			</textField>
@@ -922,7 +927,7 @@ ORDER BY a.pos_number ASC,
 	</detail>
 	<columnFooter>
 		<band height="30" splitType="Stretch">
-			<printWhenExpression><![CDATA[(($V{PAGE_NUMBER} == 1 && $V{PAGE_COUNT} > 14) || ($V{PAGE_NUMBER} > 1 && $V{PAGE_COUNT} > 27))]]></printWhenExpression>
+			<printWhenExpression><![CDATA[!$P{Dokumenttyp}.equals("Lieferung") && !$P{Dokumenttyp}.equals("Delivery") && (($V{PAGE_NUMBER} == 1 && $V{PAGE_COUNT} > 14) || ($V{PAGE_NUMBER} > 1 && $V{PAGE_COUNT} > 27))]]></printWhenExpression>
 			<textField>
 				<reportElement x="35" y="2" width="404" height="25" uuid="e3617674-5cbf-4534-889e-71e413a84f44">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
