@@ -418,19 +418,19 @@ ORDER BY a.pos_number ASC,
 				<line>
 					<reportElement x="25" y="10" width="536" height="1" uuid="cec03764-03ca-47f8-8639-837438170792">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<line>
 					<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="10" uuid="6dbe126f-babf-4277-b909-2cbdc4bd00d4">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<line>
 					<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="1" height="11" uuid="70c23caf-6d36-46c9-8562-0e3b7b24ce62">
-						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$V{PAGE_COUNT} == 0 || $F{article_id} == null || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")]]></printWhenExpression>
 					</reportElement>
 				</line>
 				<subreport overflowType="Stretch">
@@ -920,7 +920,7 @@ ORDER BY a.pos_number ASC,
 					<printWhenExpression><![CDATA[$F{article_type}.equals("inventory")]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inventory_name} != null ? $F{inventory_name}.replace("\n", " | ") : ""]]></textFieldExpression>
 			</textField>
