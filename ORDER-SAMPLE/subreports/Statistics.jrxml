@@ -71,7 +71,7 @@ GROUP BY tax]]>
 		<variableExpression><![CDATA["USt. " + $F{tax} + "%"]]></variableExpression>
 	</variable>
 	<variable name="DETAIL_Rechnungssumme" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? ($P{Dokumenttyp}.equals("Angebot")) ? "Angebotssumme":($P{Dokumenttyp}.equals("Auftrag")) ? "Auftragssumme ":($P{Dokumenttyp}.equals("Rechnung")) ? "Rechnungssumme ":"Summe " : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "Offer Total ":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Order Total ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Total ":"Total ")]]></variableExpression>
+		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? ($P{Dokumenttyp}.equals("Angebot")) ? "Angebotssumme":($P{Dokumenttyp}.equals("Auftrag")) ? "Auftragssumme ":($P{Dokumenttyp}.equals("Rechnung")) ? "Rechnungssumme ":($P{Dokumenttyp}.equals("Lieferung")) ? "Liefersumme ":"Summe " : ($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer")) ? "Offer Total ":($P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) ? "Order Total ":($P{Dokumenttyp}.equals("Rechnung") || $P{Dokumenttyp}.equals("Billing")) ? "Total ":($P{Dokumenttyp}.equals("Delivery")) ? "Delivery Total ":"Total ")]]></variableExpression>
 	</variable>
 	<variable name="DETAIL_Discount" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[($P{Sprache}.equals("Deutsch") ? "Gesamtrabatt " : "Discount ") + "-" + $F{W4114} + "%"]]></variableExpression>

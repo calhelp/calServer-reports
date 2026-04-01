@@ -830,7 +830,7 @@ ORDER BY a.pos_number ASC,
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
@@ -841,7 +841,7 @@ ORDER BY a.pos_number ASC,
 				<reportElement x="385" y="0" width="62" height="20" uuid="e3c6a6ea-b112-4c92-8215-f58f9bc815fb">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial"/>
@@ -864,7 +864,7 @@ ORDER BY a.pos_number ASC,
 				<reportElement x="330" y="0" width="54" height="20" uuid="30b66047-b70e-4b57-a6fc-bff5f8fc53f0">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
@@ -875,7 +875,7 @@ ORDER BY a.pos_number ASC,
 				<reportElement x="478" y="0" width="40" height="20" uuid="9b469f92-c811-4446-9488-0ab59f198289">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial"/>
@@ -886,7 +886,7 @@ ORDER BY a.pos_number ASC,
 				<reportElement x="448" y="0" width="30" height="20" uuid="237ec9a3-591e-4255-9851-b5ce87afd733">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{Dokumenttyp}.equals("Angebot") || $P{Dokumenttyp}.equals("Offer") || $P{Dokumenttyp}.equals("Auftrag") || $P{Dokumenttyp}.equals("Order") || $P{Dokumenttyp}.equals("Lieferung") || $P{Dokumenttyp}.equals("Delivery")) && $F{article_type}.equals( "inventory" ) ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
@@ -907,6 +907,16 @@ ORDER BY a.pos_number ASC,
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{type_name}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToBandHeight" x="80" y="0" width="242" height="20" uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{article_type}.equals("inventory")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inventory_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
