@@ -101,7 +101,7 @@
               <td>${bytesToSize(artifact.sizeBytes)}</td>
               <td>${date}</td>
               <td>
-                <a class="button" href="${downloadUrl}" download>Download</a>
+                <a class="button" href="${downloadUrl}" download="${artifact.filename}">Download</a>
               </td>
             </tr>
           `;
