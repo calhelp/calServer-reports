@@ -2563,7 +2563,8 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($F{pass_fail}==null || $F{pass_fail}.trim().isEmpty())
+					<textFieldExpression><![CDATA[(
+              ($F{pass_fail}==null || $F{pass_fail}.trim().isEmpty())
               ? ""
               : (
                   $F{pass_fail}.trim().equalsIgnoreCase("pass")               ? "i.T." :
@@ -2572,6 +2573,7 @@
                   $F{pass_fail}.trim().equalsIgnoreCase("fail indeterminate") ? "!?" :
                   ""
                 )
+            )
             + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
 				</textField>
 			</frame>
