@@ -26,25 +26,17 @@
         </label>
       </section>
 
-      <section class="card">
-        <table class="downloads">
-          <thead>
-            <tr>
-              <th>Artefakt</th>
-              <th>Beschreibung</th>
-              <th>Dateiname</th>
-              <th>Größe</th>
-              <th>Letzte Änderung</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="downloads-body">
-            <tr>
-              <td colspan="6">Lade Daten…</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <div id="downloads-sections">
+        <section class="card">
+          <table class="downloads">
+            <tbody id="downloads-body">
+              <tr>
+                <td colspan="6">Lade Daten…</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
     </main>
 
     <script>
@@ -59,7 +51,7 @@
       };
 
       const renderDownloads = (payload, downloadsRoot) => {
-        const body = document.getElementById("downloads-body");
+        const sectionsRoot = document.getElementById("downloads-sections");
         const meta = document.getElementById("page-meta");
         const basePath = window.location.pathname.endsWith("/")
           ? window.location.pathname
@@ -76,7 +68,48 @@
           <div><strong>Build:</strong> ${buildDate}</div>
         `;
 
-        const rows = (payload.artifacts || []).map((artifact) => {
+        const getCategory = (artifactName = "") => {
+          const name = artifactName.toLowerCase();
+
+          if (name.includes("sticker")) return "Sticker";
+          if (name.includes("trace-forward") || name.includes("trace-backward")) {
+            return "Trace";
+          }
+          if (
+            name.includes("dakks-sample") ||
+            name.includes("dcc-sample") ||
+            name.includes("kalibrierkontrollblatt")
+          ) {
+            return "Kalibrier-/Zertifikatsberichte";
+          }
+          if (name.includes("delivery-standalone")) return "Lieferung";
+          if (name.includes("field-names")) return "Feldnamen";
+
+          return "Weitere";
+        };
+
+        const groupedArtifacts = (payload.artifacts || []).reduce(
+          (groups, artifact) => {
+            const category = getCategory(artifact.name);
+            if (!groups[category]) {
+              groups[category] = [];
+            }
+            groups[category].push(artifact);
+            return groups;
+          },
+          {}
+        );
+
+        const categoryOrder = [
+          "Sticker",
+          "Trace",
+          "Kalibrier-/Zertifikatsberichte",
+          "Lieferung",
+          "Feldnamen",
+          "Weitere",
+        ];
+
+        const renderRow = (artifact) => {
           const date = artifact.lastModified
             ? new Date(artifact.lastModified).toLocaleDateString()
             : "-";
@@ -105,20 +138,53 @@
               </td>
             </tr>
           `;
-        });
+        };
 
-        body.innerHTML =
-          rows.join("") ||
-          `<tr><td colspan="6">Keine Artefakte gefunden.</td></tr>`;
+        const sections = categoryOrder
+          .filter((category) => groupedArtifacts[category]?.length)
+          .map((category) => {
+            const artifacts = groupedArtifacts[category];
+            const rows = artifacts.map((artifact) => renderRow(artifact)).join("");
+
+            return `
+              <section class="card">
+                <h2>${category} (${artifacts.length})</h2>
+                <table class="downloads">
+                  <thead>
+                    <tr>
+                      <th>Artefakt</th>
+                      <th>Beschreibung</th>
+                      <th>Dateiname</th>
+                      <th>Größe</th>
+                      <th>Letzte Änderung</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${rows}
+                  </tbody>
+                </table>
+              </section>
+            `;
+          });
+
+        sectionsRoot.innerHTML =
+          sections.join("") ||
+          `<section class="card"><table class="downloads"><tbody><tr><td colspan="6">Keine Artefakte gefunden.</td></tr></tbody></table></section>`;
 
         const search = document.getElementById("search");
         search.addEventListener("input", (event) => {
           const query = event.target.value.toLowerCase();
-          document
-            .querySelectorAll("#downloads-body tr[data-name]")
-            .forEach((row) => {
-              row.hidden = !row.dataset.name.includes(query);
-            });
+          document.querySelectorAll("tbody tr[data-name]").forEach((row) => {
+            row.hidden = !row.dataset.name.includes(query);
+          });
+
+          document.querySelectorAll("#downloads-sections section.card").forEach((section) => {
+            const rows = section.querySelectorAll("tbody tr[data-name]");
+            if (!rows.length) return;
+            const visibleCount = Array.from(rows).filter((row) => !row.hidden).length;
+            section.hidden = visibleCount === 0;
+          });
         });
       };
 
@@ -151,17 +217,23 @@
       fetchLatest()
         .then((payload) => renderDownloads(payload, downloadsRoot))
         .catch(() => {
-          const body = document.getElementById("downloads-body");
-          body.innerHTML = `
-            <tr>
-              <td colspan="6">
-                <strong>Die Datei latest.json wurde nicht gefunden.</strong>
-                Bitte stelle sicher, dass GitHub Pages auf den <code>gh-pages</code>-Branch zeigt
-                und der Workflow <code>publish-downloads</code> erfolgreich gelaufen ist.
-                Mehr Infos: <a href="https://github.com/calhelp/calServer-reports#readme">README</a>
-                oder <a href="https://github.com/calhelp/calServer-reports/actions/workflows/publish-downloads.yml">Workflow-Status</a>.
-              </td>
-            </tr>
+          const sectionsRoot = document.getElementById("downloads-sections");
+          sectionsRoot.innerHTML = `
+            <section class="card">
+              <table class="downloads">
+                <tbody>
+                  <tr>
+                    <td colspan="6">
+                      <strong>Die Datei latest.json wurde nicht gefunden.</strong>
+                      Bitte stelle sicher, dass GitHub Pages auf den <code>gh-pages</code>-Branch zeigt
+                      und der Workflow <code>publish-downloads</code> erfolgreich gelaufen ist.
+                      Mehr Infos: <a href="https://github.com/calhelp/calServer-reports#readme">README</a>
+                      oder <a href="https://github.com/calhelp/calServer-reports/actions/workflows/publish-downloads.yml">Workflow-Status</a>.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
           `;
         });
     </script>
