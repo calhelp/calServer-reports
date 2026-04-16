@@ -88,6 +88,7 @@ jobs:
           get_last_modified "FIELD-NAMES" "field-names"
           get_last_modified "ORDER-SAMPLE" "order-sample"
           get_last_modified "INVENTORY-SAMPLE" "inventory-sample"
+          get_last_modified "KALIBRIERKONTROLLBLATT" "kalibrierkontrollblatt"
           get_last_modified "DELIVERY-STANDALONE" "delivery-standalone"
           get_last_modified "STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-inv-zebra-zd621-30x15-203dpi"
           get_last_modified "STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-zebra-zd621-30x15-203dpi"
@@ -156,6 +157,7 @@ jobs:
               "field-names":        "FIELD-NAMES/main_reports/README.md",
               "order-sample":       "ORDER-SAMPLE/main_reports/README.md",
               "inventory-sample":   "INVENTORY-SAMPLE/main_reports/README.md",
+              "kalibrierkontrollblatt": "KALIBRIERKONTROLLBLATT/main_reports/README.md",
               "delivery-standalone":"DELIVERY-STANDALONE/README.md",
               "trace-forward":     "TRACE-FORWARD/main_reports/README.md",
               "trace-backward":    "TRACE-BACKWARD/main_reports/README.md",
