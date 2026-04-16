@@ -21,6 +21,12 @@
 
       <section class="toolbar">
         <label class="search">
+          <span>Kategorie</span>
+          <select id="category-filter" aria-label="Kategorie filtern">
+            <option value="">Alle</option>
+          </select>
+        </label>
+        <label class="search">
           <span>Suche</span>
           <input id="search" type="search" placeholder="Artefakte filtern…" />
         </label>
@@ -109,10 +115,11 @@
           "Weitere",
         ];
 
-        const renderRow = (artifact) => {
+        const renderRow = (artifact, category) => {
           const date = artifact.lastModified
             ? new Date(artifact.lastModified).toLocaleDateString()
             : "-";
+          const description = artifact.description || "";
           const downloadUrl = (() => {
             if (!artifact.url) return "#";
             try {
@@ -123,12 +130,16 @@
             }
           })();
           return `
-            <tr data-name="${artifact.name.toLowerCase()}">
+            <tr
+              data-name="${artifact.name.toLowerCase()}"
+              data-category="${category.toLowerCase()}"
+              data-description="${description.toLowerCase()}"
+            >
               <td>
                 <div class="artifact-name">${artifact.name}</div>
               </td>
               <td>
-                <span class="artifact-description">${artifact.description || ""}</span>
+                <span class="artifact-description">${description}</span>
               </td>
               <td>${artifact.filename}</td>
               <td>${bytesToSize(artifact.sizeBytes)}</td>
@@ -144,7 +155,9 @@
           .filter((category) => groupedArtifacts[category]?.length)
           .map((category) => {
             const artifacts = groupedArtifacts[category];
-            const rows = artifacts.map((artifact) => renderRow(artifact)).join("");
+            const rows = artifacts
+              .map((artifact) => renderRow(artifact, category))
+              .join("");
 
             return `
               <section class="card">
@@ -172,20 +185,47 @@
           sections.join("") ||
           `<section class="card"><table class="downloads"><tbody><tr><td colspan="6">Keine Artefakte gefunden.</td></tr></tbody></table></section>`;
 
+        const categoryFilter = document.getElementById("category-filter");
+        categoryFilter.innerHTML = `
+          <option value="">Alle</option>
+          ${categoryOrder
+            .filter((category) => groupedArtifacts[category]?.length)
+            .map(
+              (category) =>
+                `<option value="${category.toLowerCase()}">${category}</option>`
+            )
+            .join("")}
+        `;
+
         const search = document.getElementById("search");
-        search.addEventListener("input", (event) => {
-          const query = event.target.value.toLowerCase();
+        const applyFilters = () => {
+          const query = search.value.trim().toLowerCase();
+          const selectedCategory = categoryFilter.value;
           document.querySelectorAll("tbody tr[data-name]").forEach((row) => {
-            row.hidden = !row.dataset.name.includes(query);
+            const matchesQuery =
+              !query ||
+              row.dataset.name.includes(query) ||
+              row.dataset.category.includes(query) ||
+              row.dataset.description.includes(query);
+            const matchesCategory =
+              !selectedCategory || row.dataset.category === selectedCategory;
+            row.hidden = !(matchesQuery && matchesCategory);
           });
 
-          document.querySelectorAll("#downloads-sections section.card").forEach((section) => {
-            const rows = section.querySelectorAll("tbody tr[data-name]");
-            if (!rows.length) return;
-            const visibleCount = Array.from(rows).filter((row) => !row.hidden).length;
-            section.hidden = visibleCount === 0;
-          });
-        });
+          document
+            .querySelectorAll("#downloads-sections section.card")
+            .forEach((section) => {
+              const rows = section.querySelectorAll("tbody tr[data-name]");
+              if (!rows.length) return;
+              const visibleCount = Array.from(rows).filter(
+                (row) => !row.hidden
+              ).length;
+              section.hidden = visibleCount === 0;
+            });
+        };
+
+        search.addEventListener("input", applyFilters);
+        categoryFilter.addEventListener("change", applyFilters);
       };
 
       const primaryUrl = "./latest.json";
