@@ -100,12 +100,6 @@ WHERE i.MTAG=$P{P_MTAG}]]>
 	<variable name="Zip" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "PLZ" : "Zip"]]></variableExpression>
 	</variable>
-	<variable name="Tel" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Tel. 02402-900180" : "Tel. 02402-900180"]]></variableExpression>
-	</variable>
-	<variable name="Fax" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Fax. 02402-27615" : "Fax. 02402-27615"]]></variableExpression>
-	</variable>
 	<title>
 		<band height="164" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
@@ -316,20 +310,6 @@ WHERE i.MTAG=$P{P_MTAG}]]>
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Asset_number}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="39" y="135" width="98" height="20" uuid="c343b77f-dffa-443a-a87e-fc876bb3889c"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Tel}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="40" y="146" width="97" height="10" uuid="0dfca516-e58f-4d2f-b401-c7aa5cecebcb"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Fax}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="220" y="37" width="169" height="30" uuid="7e63fbed-8d0b-420c-a619-4ad1aa6184e5">
