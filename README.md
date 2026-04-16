@@ -63,6 +63,10 @@ INVENTORY-SAMPLE/
 ├── main_reports/       # Messmittelberichte & Inventarlisten
 └── subreports/         # Unterberichte für Messwerte, Historien usw.
 
+KALIBRIERKONTROLLBLATT/
+├── main_reports/       # Kalibrierkontrollblatt (Geräte- und Kundendaten)
+└── subreports/         # Kalibrierhistorie als Unterbericht
+
 ORDER-SAMPLE/
 ├── main_reports/       # Berichte für Aufträge, z. B. Angebots- oder Auftragsdokumente
 └── subreports/         # Unterberichte wie Positionslisten oder Summenfelder

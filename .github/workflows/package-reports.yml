@@ -56,6 +56,15 @@ jobs:
             INVENTORY-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload KALIBRIERKONTROLLBLATT as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KALIBRIERKONTROLLBLATT
+          path: |
+            KALIBRIERKONTROLLBLATT/main_reports
+            KALIBRIERKONTROLLBLATT/subreports
+          if-no-files-found: error
+
       - name: Upload DELIVERY-STANDALONE as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -243,6 +252,7 @@ jobs:
           create_zip "FIELD-NAMES" "field-names"
           create_zip "ORDER-SAMPLE" "order-sample"
           create_zip "INVENTORY-SAMPLE" "inventory-sample"
+          create_zip "KALIBRIERKONTROLLBLATT" "kalibrierkontrollblatt"
           create_zip "DELIVERY-STANDALONE" "delivery-standalone"
           create_zip "STICKERS/CAL-INV-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-inv-zebra-zd621-30x15-203dpi"
           create_zip "STICKERS/CAL-STICKER_Zebra-ZD621_30x15-203dpi" "sticker-cal-zebra-zd621-30x15-203dpi"
@@ -269,6 +279,7 @@ jobs:
           unzip -l zip_output/field-names.zip
           unzip -l zip_output/order-sample.zip
           unzip -l zip_output/inventory-sample.zip
+          unzip -l zip_output/kalibrierkontrollblatt.zip
           unzip -l zip_output/delivery-standalone.zip
           unzip -l zip_output/sticker-cal-inv-zebra-zd621-30x15-203dpi.zip
           unzip -l zip_output/sticker-cal-zebra-zd621-30x15-203dpi.zip
