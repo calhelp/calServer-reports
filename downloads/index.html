@@ -145,7 +145,14 @@
               <td>${bytesToSize(artifact.sizeBytes)}</td>
               <td>${date}</td>
               <td>
-                <a class="button" href="${downloadUrl}" download>Download</a>
+                <div class="actions">
+                  ${
+                    artifact.infoUrl
+                      ? `<a class="button button--ghost" href="${artifact.infoUrl}">Info</a>`
+                      : ""
+                  }
+                  <a class="button" href="${downloadUrl}" download>Download</a>
+                </div>
               </td>
             </tr>
           `;
