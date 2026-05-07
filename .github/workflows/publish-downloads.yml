@@ -182,23 +182,23 @@ jobs:
           }
 
           INFO_TEMPLATE = """<!doctype html>
-          <html lang=\"de\">
+          <html lang="de">
             <head>
-              <meta charset=\"utf-8\" />
-              <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
               <title>{title} – Info</title>
-              <link rel=\"stylesheet\" href=\"../assets/style.css\" />
+              <link rel="stylesheet" href="../assets/style.css" />
             </head>
             <body>
-              <main class=\"page\">
-                <header class=\"page__header\">
+              <main class="page">
+                <header class="page__header">
                   <div>
-                    <p class=\"page__eyebrow\"><a href=\"../\">&larr; Zurück zu den Downloads</a></p>
+                    <p class="page__eyebrow"><a href="../">&larr; Zurück zu den Downloads</a></p>
                     <h1>{title}</h1>
-                    <p class=\"page__subhead\">Artefakt: <code>{artifact}</code></p>
+                    <p class="page__subhead">Artefakt: <code>{artifact}</code></p>
                   </div>
                 </header>
-                <section class=\"card report-info\">
+                <section class="card report-info">
                   {body}
                 </section>
               </main>
@@ -208,13 +208,13 @@ jobs:
 
           def render_info_page(artifact_name, readme_path):
               try:
-                  text = Path(readme_path).read_text(encoding=\"utf-8\")
+                  text = Path(readme_path).read_text(encoding="utf-8")
               except OSError:
                   return None
               body = md.markdown(
                   text,
-                  extensions=[\"extra\", \"sane_lists\", \"toc\", \"fenced_code\", \"tables\", \"codehilite\"],
-                  output_format=\"html5\",
+                  extensions=["extra", "sane_lists", "toc", "fenced_code", "tables", "codehilite"],
+                  output_format="html5",
               )
               title = TITLE_MAP.get(artifact_name, artifact_name)
               return INFO_TEMPLATE.format(
