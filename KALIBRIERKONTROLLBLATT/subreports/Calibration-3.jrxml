@@ -25,7 +25,7 @@
 		<![CDATA[SELECT C2301, COALESCE(C2314, "") AS C2314, COALESCE(C2341, "") AS C2341, COALESCE(C2307, "") AS C2307, COALESCE(C2303, "") AS C2303 
 FROM calibration	
 WHERE MTAG=$P{P_MTAG}
-order by  calserver.calibration.`C2301`  ASC]]>
+order by  calibration.`C2301`  ASC]]>
 	</queryString>
 	<field name="C2301" class="java.lang.String"/>
 	<field name="C2314" class="java.lang.String"/>
