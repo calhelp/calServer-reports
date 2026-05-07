@@ -1,0 +1,90 @@
+{
+  "_comment": "Region-Koordinaten beziehen sich auf die Originalauflösung von preview.jpg (2379×8263). Werte sind eine Erstkalibrierung – falls einzelne Marker daneben sitzen, hier nachjustieren. Das SVG-Overlay skaliert automatisch mit; keine weiteren Änderungen nötig.",
+  "image": "preview.jpg",
+  "originalUrl": "https://github.com/calhelp/calServer-reports/blob/main/DAKKS-SAMPLE/preview.jpg",
+  "viewBox": { "width": 2379, "height": 8263 },
+  "regions": [
+    {
+      "id": "header",
+      "label": "Titel & Zertifikatsnummer",
+      "x": 120, "y": 60, "w": 2140, "h": 320,
+      "anchor": "#params-images",
+      "params": ["Cert_field", "QR_Code_Value", "ReportVersion"]
+    },
+    {
+      "id": "asset",
+      "label": "Messmittel-Stammdaten & Auftraggeber:in",
+      "x": 120, "y": 420, "w": 2140, "h": 520,
+      "anchor": "#params-textblocks",
+      "params": ["Asset_description", "P_CTAG"]
+    },
+    {
+      "id": "status",
+      "label": "Eingang, Zustand & Kalibrierdaten",
+      "x": 120, "y": 970, "w": 2140, "h": 380,
+      "anchor": "#params-showgroup",
+      "params": ["ShowGroup1IncomingDate", "ShowGroup1Condition"]
+    },
+    {
+      "id": "procedure",
+      "label": "Verfahren, Messbedingungen & Umgebung",
+      "x": 120, "y": 1380, "w": 2140, "h": 900,
+      "anchor": "#params-showgroup",
+      "params": [
+        "ShowGroup1Procedure",
+        "ShowGroup1ProcedureDocument",
+        "ShowGroup1MeasurementConditions",
+        "ShowGroup1EnvironmentalConditions",
+        "Calibration_procedure_1",
+        "Calibration_procedure_2",
+        "Calibration_document",
+        "environmental_conditions"
+      ]
+    },
+    {
+      "id": "standards",
+      "label": "Eingesetzte Normale (Subreport Standard)",
+      "x": 120, "y": 2310, "w": 2140, "h": 620,
+      "anchor": "#5-unterberichte",
+      "params": ["ShowGroup1StandardsTraceability"]
+    },
+    {
+      "id": "results",
+      "label": "Messergebnisse (Subreport Results)",
+      "x": 120, "y": 2960, "w": 2140, "h": 2400,
+      "anchor": "#params-content",
+      "params": [
+        "MeasurementDetails",
+        "ModernResultsHeader",
+        "ShowGroup1ResultsDetails",
+        "Results_description"
+      ]
+    },
+    {
+      "id": "conformity",
+      "label": "Messunsicherheit, Konformität & Zusatzhinweise",
+      "x": 120, "y": 5390, "w": 2140, "h": 1200,
+      "anchor": "#params-textblocks",
+      "params": [
+        "Uncertainty_description",
+        "Measurements_description",
+        "Measurements_description_1",
+        "Conformity_description_1",
+        "Conformity_description_2",
+        "Conformity_description_3",
+        "Additional_information",
+        "ExpUncType",
+        "ShowGroup1MeasurementUncertainty",
+        "ShowGroup1Conformity",
+        "ShowGroup1AdditionalInformation"
+      ]
+    },
+    {
+      "id": "accreditation",
+      "label": "DAkkS-Akkreditierung & Unterschriften",
+      "x": 120, "y": 6620, "w": 2140, "h": 1560,
+      "anchor": "#params-images",
+      "params": ["MarkNumber1", "MarkNumber2", "P_Image_Path", "sign_names"]
+    }
+  ]
+}
