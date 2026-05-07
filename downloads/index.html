@@ -135,16 +135,16 @@
               data-category="${category.toLowerCase()}"
               data-description="${description.toLowerCase()}"
             >
-              <td>
+              <td data-label="Artefakt">
                 <div class="artifact-name">${artifact.name}</div>
               </td>
-              <td>
+              <td data-label="Beschreibung">
                 <span class="artifact-description">${description}</span>
               </td>
-              <td>${artifact.filename}</td>
-              <td>${bytesToSize(artifact.sizeBytes)}</td>
-              <td>${date}</td>
-              <td>
+              <td data-label="Dateiname">${artifact.filename}</td>
+              <td data-label="Größe">${bytesToSize(artifact.sizeBytes)}</td>
+              <td data-label="Letzte Änderung">${date}</td>
+              <td data-label="">
                 <div class="actions">
                   ${
                     artifact.infoUrl

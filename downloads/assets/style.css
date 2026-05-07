@@ -472,19 +472,22 @@ h1 {
   font-size: 0.9rem;
 }
 
-@media (max-width: 860px) {
-  .report-schema__layout {
-    grid-template-columns: minmax(0, 1fr);
+@media (max-width: 900px) {
+  .page {
+    padding: 32px 16px 56px;
   }
 
-  .report-schema {
-    padding: 18px 16px;
+  h1 {
+    font-size: 2rem;
   }
-}
 
-@media (max-width: 860px) {
   .page__header {
     flex-direction: column;
+  }
+
+  .page__meta {
+    width: 100%;
+    min-width: 0;
   }
 
   .toolbar {
@@ -501,18 +504,104 @@ h1 {
     width: 100%;
   }
 
+  .report-schema__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .report-schema {
+    padding: 18px 16px;
+  }
+
+  .report-info {
+    padding: 22px 18px;
+  }
+
+  /* Long parameter tables in info pages: allow horizontal scroll */
+  .report-info table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Phones: turn the downloads table into stacked cards. */
+@media (max-width: 640px) {
+  .page {
+    padding: 24px 12px 48px;
+  }
+
   #downloads-sections {
     gap: 14px;
   }
 
   .downloads-category__header {
-    padding: 12px 14px;
+    padding: 14px 14px 4px;
   }
 
-  .downloads th:nth-child(3),
-  .downloads td:nth-child(3),
-  .downloads th:nth-child(4),
-  .downloads td:nth-child(4) {
+  .downloads,
+  .downloads thead,
+  .downloads tbody,
+  .downloads tr,
+  .downloads td {
+    display: block;
+    width: 100%;
+  }
+
+  .downloads thead {
     display: none;
+  }
+
+  .downloads tbody tr {
+    background: #ffffff !important;
+    border: 1px solid #e6ebf2;
+    border-radius: 12px;
+    margin: 12px 14px;
+    padding: 6px 0;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+  }
+
+  .downloads td {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #f1f4f9;
+    font-size: 0.92rem;
+  }
+
+  .downloads td:last-child {
+    border-bottom: 0;
+  }
+
+  .downloads td::before {
+    content: attr(data-label);
+    flex: 0 0 110px;
+    font-weight: 600;
+    color: #3b4b66;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .downloads td[data-label=""]::before {
+    display: none;
+  }
+
+  .downloads td .artifact-name {
+    font-size: 1rem;
+  }
+
+  .downloads td .artifact-description {
+    max-width: none;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .actions .button {
+    flex: 1;
+    padding: 12px 14px;
   }
 }
