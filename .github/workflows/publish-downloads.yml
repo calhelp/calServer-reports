@@ -223,8 +223,6 @@ jobs:
               vw = 600
               pad_outer = 24
               gap = 12
-              total_h = pad_outer + sum(b.get("height", 100) for b in blocks) + gap * (len(blocks) - 1) + pad_outer
-              vh = total_h
 
               tone_styles = {
                   "default":  ("#ffffff",      "#cdd6e4"),
@@ -232,11 +230,61 @@ jobs:
                   "highlight":("#fff7e6",      "#e6b86a"),
               }
 
+              # Chip-Layout-Konstanten.
+              CHIP_HEIGHT = 22
+              CHIP_ROW_STEP = 26          # Höhe + 4 px Reihenabstand
+              CHIP_GAP_X = 6
+              CHIP_TOP_OFFSET = 64        # Abstand Block-Top → erste Chip-Reihe (unter Subtitle)
+              CHIP_BOTTOM_PAD = 12        # Reserve unter der letzten Chip-Reihe innerhalb der Box
+              MORE_CHIP_WIDTH = 56
+
+              def chip_width_for(label_text):
+                  return max(60, round(6.6 * len(label_text)) + 20)
+
+              def layout_chips(visible, remaining_count, chip_left, chip_right):
+                  """Bricht Chips in mehrere Reihen um. Liefert (rows, leftover_count).
+                  rows: Liste von Reihen, jede Reihe ist Liste von (text, width, is_more)."""
+                  rows = [[]]
+                  cur_x = chip_left
+                  for p in visible:
+                      width = min(chip_width_for(p), chip_right - chip_left)
+                      if cur_x + width > chip_right and rows[-1]:
+                          rows.append([])
+                          cur_x = chip_left
+                      rows[-1].append((p, width, False))
+                      cur_x += width + CHIP_GAP_X
+                  if remaining_count > 0:
+                      width = MORE_CHIP_WIDTH
+                      if cur_x + width > chip_right and rows[-1]:
+                          rows.append([])
+                          cur_x = chip_left
+                      rows[-1].append((f"+{remaining_count}", width, True))
+                  if rows and not rows[-1]:
+                      rows.pop()
+                  return rows
+
+              # Pass 1: effektive Höhen berechnen, damit total_h passt.
+              effective_heights = []
+              for b in blocks:
+                  raw_h = b.get("height", 100)
+                  params = b.get("params", []) or []
+                  visible = params[:5]
+                  remaining = len(params) - len(visible)
+                  chip_left = pad_outer + 78
+                  chip_right = (vw - pad_outer) - 16
+                  rows = layout_chips(visible, remaining, chip_left, chip_right)
+                  needed = CHIP_TOP_OFFSET + len(rows) * CHIP_ROW_STEP + CHIP_BOTTOM_PAD if rows else 0
+                  effective_heights.append(max(raw_h, needed))
+
+              total_h = pad_outer + sum(effective_heights) + gap * (len(blocks) - 1) + pad_outer
+              vh = total_h
+
               hotspots, legend_items = [], []
               y = pad_outer
-              for idx, b in enumerate(blocks, start=1):
-                  bh = b.get("height", 100)
-                  label = b.get("label", b.get("id", f"Block {idx}"))
+              for idx, b in enumerate(blocks):
+                  bh = effective_heights[idx]
+                  human_idx = idx + 1
+                  label = b.get("label", b.get("id", f"Block {human_idx}"))
                   subtitle = b.get("subtitle", "")
                   anchor = b.get("anchor", "")
                   params = b.get("params", []) or []
@@ -251,34 +299,32 @@ jobs:
                   # Parameter-Chips: nur die ersten 4–5 anzeigen, Rest mit "+N".
                   visible = params[:5]
                   remaining = len(params) - len(visible)
+                  chip_left = x + 78
+                  chip_right = (x + w) - 16
+                  rows = layout_chips(visible, remaining, chip_left, chip_right)
+
                   chips_svg = []
-                  chip_x = x + 78
-                  chip_y = y + bh - 26
-                  for p in visible:
-                      width = max(60, 9 * len(p) + 18)
-                      chips_svg.append(
-                          f'<g class="schema-chip">'
-                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="{width}" height="22" rx="11" />'
-                          f'<text x="{chip_x + width/2:.1f}" y="{chip_y - 1}" text-anchor="middle">{html.escape(p)}</text>'
-                          f'</g>'
-                      )
-                      chip_x += width + 6
-                  if remaining > 0:
-                      chips_svg.append(
-                          f'<g class="schema-chip schema-chip--more">'
-                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="56" height="22" rx="11" />'
-                          f'<text x="{chip_x + 28}" y="{chip_y - 1}" text-anchor="middle">+{remaining}</text>'
-                          f'</g>'
-                      )
+                  for row_i, row in enumerate(rows):
+                      row_y = y + CHIP_TOP_OFFSET + row_i * CHIP_ROW_STEP
+                      cur_x = chip_left
+                      for text, width, is_more in row:
+                          cls = "schema-chip schema-chip--more" if is_more else "schema-chip"
+                          chips_svg.append(
+                              f'<g class="{cls}">'
+                              f'<rect x="{cur_x}" y="{row_y}" width="{width}" height="{CHIP_HEIGHT}" rx="11" />'
+                              f'<text x="{cur_x + width/2:.1f}" y="{row_y + CHIP_HEIGHT - 7}" text-anchor="middle">{html.escape(text)}</text>'
+                              f'</g>'
+                          )
+                          cur_x += width + CHIP_GAP_X
 
                   hotspots.append(
                       f'<a href="{esc_anchor}" class="report-schema__link">'
-                      f'<title>{idx}. {esc_label}</title>'
+                      f'<title>{human_idx}. {esc_label}</title>'
                       f'<rect class="schema-block" x="{x}" y="{y}" width="{w}" height="{bh}" rx="14" '
                       f'fill="{fill}" stroke="{stroke}" />'
                       f'<circle class="marker" cx="{cx}" cy="{cy}" r="22" />'
                       f'<text class="marker-label" x="{cx}" y="{cy}" text-anchor="middle" '
-                      f'dominant-baseline="central">{idx}</text>'
+                      f'dominant-baseline="central">{human_idx}</text>'
                       f'<text class="schema-title" x="{x + 78}" y="{y + 32}">{esc_label}</text>'
                       + (f'<text class="schema-subtitle" x="{x + 78}" y="{y + 54}">{esc_subtitle}</text>' if subtitle else '')
                       + f'{"".join(chips_svg)}'
@@ -288,7 +334,7 @@ jobs:
                   param_summary = ", ".join(params[:3]) + (f" …" if len(params) > 3 else "")
                   legend_items.append(
                       f'<li><a href="{esc_anchor}">'
-                      f'<span class="legend-num">{idx}</span>'
+                      f'<span class="legend-num">{human_idx}</span>'
                       f'<span class="legend-text"><strong>{esc_label}</strong>'
                       + (f'<span class="legend-params">{html.escape(param_summary)}</span>' if param_summary else '')
                       + f'</span></a></li>'
