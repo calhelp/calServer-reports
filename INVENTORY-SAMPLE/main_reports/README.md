@@ -144,7 +144,3 @@ WHERE i.MTAG = $P{P_MTAG};
 * **Leere Felder?** – Prüfen, ob die Werte in der Datenbank gepflegt sind.
 * **Mehrere Standort- oder Kalibrierungseinträge?** – Der Report holt immer nur den aktuellsten (`L2815 = 1`, `C2339 = 1`).
 * **Performance optimieren** – bei großen Datenmengen empfiehlt sich ein vorbereiteter View in MySQL.
-
----
-
-Damit ist der Bericht sowohl für **Endanwender:innen verständlich** als auch für **Administrator:innen/Entwickler:innen** leicht anpassbar dokumentiert.
