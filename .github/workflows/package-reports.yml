@@ -187,14 +187,14 @@ jobs:
             local zip_name="$2"
             local stage_dir="staging/${zip_name}"
             local rsync_excludes=()
-            local allowed_patterns=('*.jrxml')
+            local allowed_patterns=('*.jrxml' '*.md')
             local include_args=(--include='*/')
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
               rsync_excludes+=(--exclude='config/**')
-              allowed_patterns+=('*.properties' '*.md')
+              allowed_patterns+=('*.properties')
             elif [ "$sample" = "DCC" ]; then
-              allowed_patterns+=('*.xsd' '*.md' '*.json')
+              allowed_patterns+=('*.xsd' '*.json')
             fi
 
             rm -rf "${stage_dir}"
@@ -213,8 +213,13 @@ jobs:
               fi
             done
 
+            # Top-level README.md des Samples mitnehmen, falls vorhanden.
+            if [ -f "${sample}/README.md" ]; then
+              cp "${sample}/README.md" "${stage_dir}/README.md"
+            fi
+
             # Nicht erlaubte Dateien entfernen, damit nur die gewünschten Typen
-            # (JRXML und ggf. Properties/Markdown) enthalten bleiben.
+            # (JRXML, Markdown und ggf. Properties/XSD/JSON) enthalten bleiben.
             local allowed_conditions=()
             for pattern in "${allowed_patterns[@]}"; do
               allowed_conditions+=(-name "$pattern" -o)
@@ -233,17 +238,16 @@ jobs:
             fi
 
             pushd "${stage_dir}" >/dev/null
-            if [ -d main_reports ] && [ -d subreports ]; then
-              zip -r "../../zip_output/${zip_name}.zip" main_reports subreports
-            elif [ -d main_reports ]; then
-              zip -r "../../zip_output/${zip_name}.zip" main_reports
-            elif [ -d subreports ]; then
-              zip -r "../../zip_output/${zip_name}.zip" subreports
-            else
-              echo "❌ No report folders found for ${sample}" >&2
+            local zip_targets=()
+            [ -d main_reports ] && zip_targets+=(main_reports)
+            [ -d subreports ] && zip_targets+=(subreports)
+            [ -f README.md ] && zip_targets+=(README.md)
+            if [ "${#zip_targets[@]}" -eq 0 ]; then
+              echo "❌ No report content found for ${sample}" >&2
               popd >/dev/null
               exit 1
             fi
+            zip -r "../../zip_output/${zip_name}.zip" "${zip_targets[@]}"
             popd >/dev/null
           }
 
