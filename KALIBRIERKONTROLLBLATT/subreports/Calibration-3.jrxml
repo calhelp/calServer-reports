@@ -160,6 +160,17 @@ order by  calibration.`C2301`  ASC]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{C2307}]]></textFieldExpression>
 			</textField>
+			<textField textAdjust="StretchHeight" pattern="dd.mm.yyyy">
+				<reportElement stretchType="ContainerHeight" x="481" y="3" width="65" height="25" uuid="b6f3a2c5-1a4d-4e3b-9b7a-5b1c2e8d4a01">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C2303}]]></textFieldExpression>
+				<patternExpression><![CDATA[$F{C2303}]]></patternExpression>
+			</textField>
 			<line>
 				<reportElement stretchType="ContainerHeight" x="3" y="-30" width="1" height="61" uuid="590b409e-3b07-4add-9b17-cd4ecfe920b7">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
