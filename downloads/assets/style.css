@@ -279,6 +279,209 @@ h1 {
   margin: 2em 0;
 }
 
+.report-schema {
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+
+.report-schema__panel > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 4px 0 12px;
+  color: #1f2a44;
+  list-style: none;
+}
+
+.report-schema__panel > summary::-webkit-details-marker {
+  display: none;
+}
+
+.report-schema__panel > summary::before {
+  content: "▾";
+  display: inline-block;
+  margin-right: 8px;
+  transition: transform 0.2s ease;
+}
+
+.report-schema__panel:not([open]) > summary::before {
+  transform: rotate(-90deg);
+}
+
+.report-schema__hint {
+  margin: 0 0 16px;
+  color: #4e5d78;
+  font-size: 0.95rem;
+}
+
+.report-schema__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  gap: 24px;
+  align-items: start;
+}
+
+.report-schema__stage {
+  width: 100%;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  border-radius: 14px;
+  border: 1px solid #e1e7f0;
+  padding: 14px;
+}
+
+.report-schema__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.report-schema__link {
+  cursor: pointer;
+  outline: none;
+}
+
+.report-schema__link .schema-block {
+  stroke-width: 1.5;
+  transition: filter 0.15s ease, stroke 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.08));
+}
+
+.report-schema__link:hover .schema-block,
+.report-schema__link:focus .schema-block {
+  stroke: #1d4ed8;
+  filter: drop-shadow(0 6px 14px rgba(29, 78, 216, 0.22));
+}
+
+.report-schema__link .marker {
+  fill: #1d4ed8;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  transition: fill 0.15s ease, transform 0.15s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.report-schema__link:hover .marker,
+.report-schema__link:focus .marker {
+  fill: #15348a;
+  transform: scale(1.1);
+}
+
+.report-schema__link .marker-label {
+  fill: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+  pointer-events: none;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.report-schema__link .schema-title {
+  fill: #1f2a44;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-subtitle {
+  fill: #4e5d78;
+  font-size: 12px;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-chip rect {
+  fill: rgba(29, 78, 216, 0.1);
+  stroke: rgba(29, 78, 216, 0.35);
+  stroke-width: 1;
+}
+
+.report-schema__link .schema-chip text {
+  fill: #1d4ed8;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-chip--more rect {
+  fill: rgba(75, 85, 99, 0.1);
+  stroke: rgba(75, 85, 99, 0.35);
+}
+
+.report-schema__link .schema-chip--more text {
+  fill: #475569;
+}
+
+.report-schema__legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+
+.report-schema__legend a {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1f2a44;
+  background: #f5f7fb;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  line-height: 1.35;
+}
+
+.report-schema__legend .legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.report-schema__legend .legend-params {
+  font-size: 0.8rem;
+  color: #4e5d78;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.report-schema__legend a:hover {
+  background: #eaf0fb;
+  border-color: rgba(29, 78, 216, 0.4);
+}
+
+.report-schema__legend .legend-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.report-schema__original {
+  margin: 16px 0 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .report-schema__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .report-schema {
+    padding: 18px 16px;
+  }
+}
+
 @media (max-width: 860px) {
   .page__header {
     flex-direction: column;

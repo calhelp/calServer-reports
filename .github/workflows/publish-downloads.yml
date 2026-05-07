@@ -169,6 +169,10 @@ jobs:
               "trace-backward":    "TRACE-BACKWARD/main_reports/README.md",
           }
 
+          SCHEMA_MAP = {
+              "dakks-sample": "DAKKS-SAMPLE/schema.json",
+          }
+
           TITLE_MAP = {
               "dakks-sample":           "DAkkS-Kalibrierschein",
               "dcc-sample":             "DCC – Digitaler Kalibrierschein",
@@ -182,23 +186,24 @@ jobs:
           }
 
           INFO_TEMPLATE = """<!doctype html>
-          <html lang=\"de\">
+          <html lang="de">
             <head>
-              <meta charset=\"utf-8\" />
-              <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
               <title>{title} – Info</title>
-              <link rel=\"stylesheet\" href=\"../assets/style.css\" />
+              <link rel="stylesheet" href="../assets/style.css" />
             </head>
             <body>
-              <main class=\"page\">
-                <header class=\"page__header\">
+              <main class="page">
+                <header class="page__header">
                   <div>
-                    <p class=\"page__eyebrow\"><a href=\"../\">&larr; Zurück zu den Downloads</a></p>
+                    <p class="page__eyebrow"><a href="../">&larr; Zurück zu den Downloads</a></p>
                     <h1>{title}</h1>
-                    <p class=\"page__subhead\">Artefakt: <code>{artifact}</code></p>
+                    <p class="page__subhead">Artefakt: <code>{artifact}</code></p>
                   </div>
                 </header>
-                <section class=\"card report-info\">
+                {schema}
+                <section class="card report-info">
                   {body}
                 </section>
               </main>
@@ -206,20 +211,127 @@ jobs:
           </html>
           """
 
-          def render_info_page(artifact_name, readme_path):
+          def render_schema(artifact_name, schema_path):
+              if not schema_path or not Path(schema_path).exists():
+                  return ""
+              data = json.loads(Path(schema_path).read_text(encoding="utf-8"))
+              blocks = data.get("blocks", [])
+              if not blocks:
+                  return ""
+
+              # Layout constants for the wireframe SVG.
+              vw = 600
+              pad_outer = 24
+              gap = 12
+              total_h = pad_outer + sum(b.get("height", 100) for b in blocks) + gap * (len(blocks) - 1) + pad_outer
+              vh = total_h
+
+              tone_styles = {
+                  "default":  ("#ffffff",      "#cdd6e4"),
+                  "accent":   ("#eaf0fb",      "#9bb3e8"),
+                  "highlight":("#fff7e6",      "#e6b86a"),
+              }
+
+              hotspots, legend_items = [], []
+              y = pad_outer
+              for idx, b in enumerate(blocks, start=1):
+                  bh = b.get("height", 100)
+                  label = b.get("label", b.get("id", f"Block {idx}"))
+                  subtitle = b.get("subtitle", "")
+                  anchor = b.get("anchor", "")
+                  params = b.get("params", []) or []
+                  fill, stroke = tone_styles.get(b.get("tone", "default"), tone_styles["default"])
+                  esc_label = html.escape(label)
+                  esc_subtitle = html.escape(subtitle)
+                  esc_anchor = html.escape(anchor, quote=True)
+                  x = pad_outer
+                  w = vw - 2 * pad_outer
+                  cx, cy = x + 36, y + 36
+
+                  # Parameter-Chips: nur die ersten 4–5 anzeigen, Rest mit "+N".
+                  visible = params[:5]
+                  remaining = len(params) - len(visible)
+                  chips_svg = []
+                  chip_x = x + 78
+                  chip_y = y + bh - 26
+                  for p in visible:
+                      width = max(60, 9 * len(p) + 18)
+                      chips_svg.append(
+                          f'<g class="schema-chip">'
+                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="{width}" height="22" rx="11" />'
+                          f'<text x="{chip_x + width/2:.1f}" y="{chip_y - 1}" text-anchor="middle">{html.escape(p)}</text>'
+                          f'</g>'
+                      )
+                      chip_x += width + 6
+                  if remaining > 0:
+                      chips_svg.append(
+                          f'<g class="schema-chip schema-chip--more">'
+                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="56" height="22" rx="11" />'
+                          f'<text x="{chip_x + 28}" y="{chip_y - 1}" text-anchor="middle">+{remaining}</text>'
+                          f'</g>'
+                      )
+
+                  hotspots.append(
+                      f'<a href="{esc_anchor}" class="report-schema__link">'
+                      f'<title>{idx}. {esc_label}</title>'
+                      f'<rect class="schema-block" x="{x}" y="{y}" width="{w}" height="{bh}" rx="14" '
+                      f'fill="{fill}" stroke="{stroke}" />'
+                      f'<circle class="marker" cx="{cx}" cy="{cy}" r="22" />'
+                      f'<text class="marker-label" x="{cx}" y="{cy}" text-anchor="middle" '
+                      f'dominant-baseline="central">{idx}</text>'
+                      f'<text class="schema-title" x="{x + 78}" y="{y + 32}">{esc_label}</text>'
+                      + (f'<text class="schema-subtitle" x="{x + 78}" y="{y + 54}">{esc_subtitle}</text>' if subtitle else '')
+                      + f'{"".join(chips_svg)}'
+                      f'</a>'
+                  )
+
+                  param_summary = ", ".join(params[:3]) + (f" …" if len(params) > 3 else "")
+                  legend_items.append(
+                      f'<li><a href="{esc_anchor}">'
+                      f'<span class="legend-num">{idx}</span>'
+                      f'<span class="legend-text"><strong>{esc_label}</strong>'
+                      + (f'<span class="legend-params">{html.escape(param_summary)}</span>' if param_summary else '')
+                      + f'</span></a></li>'
+                  )
+                  y += bh + gap
+
+              schema_title = html.escape(data.get("title", "Aufbau des Berichts"))
+              return (
+                  '<section class="card report-schema">'
+                  '<details open class="report-schema__panel">'
+                  f'<summary>{schema_title} – Parameter im Bericht verorten</summary>'
+                  '<p class="report-schema__hint">Klicke auf eine Region oder auf einen Eintrag in der Legende, '
+                  'um zur passenden Parametergruppe in der Tabelle zu springen.</p>'
+                  '<div class="report-schema__layout">'
+                  f'<div class="report-schema__stage">'
+                  f'<svg viewBox="0 0 {vw} {vh}" preserveAspectRatio="xMidYMid meet" '
+                  f'class="report-schema__svg" role="img" aria-label="{schema_title}">'
+                  f'{"".join(hotspots)}'
+                  f'</svg>'
+                  f'</div>'
+                  '<ol class="report-schema__legend">'
+                  f'{"".join(legend_items)}'
+                  '</ol>'
+                  '</div>'
+                  '</details>'
+                  '</section>'
+              )
+
+          def render_info_page(artifact_name, readme_path, schema_html):
               try:
-                  text = Path(readme_path).read_text(encoding=\"utf-8\")
+                  text = Path(readme_path).read_text(encoding="utf-8")
               except OSError:
                   return None
               body = md.markdown(
                   text,
-                  extensions=[\"extra\", \"sane_lists\", \"toc\", \"fenced_code\", \"tables\", \"codehilite\"],
-                  output_format=\"html5\",
+                  extensions=["extra", "sane_lists", "toc", "fenced_code", "tables", "codehilite", "attr_list"],
+                  output_format="html5",
               )
               title = TITLE_MAP.get(artifact_name, artifact_name)
               return INFO_TEMPLATE.format(
                   title=html.escape(title),
                   artifact=html.escape(artifact_name),
+                  schema=schema_html,
                   body=body,
               )
 
@@ -268,8 +380,9 @@ jobs:
                   readme_path = README_MAP.get(name, "")
                   description = extract_description(readme_path)
                   info_url = None
+                  schema_html = render_schema(name, SCHEMA_MAP.get(name, ""))
                   if readme_path and Path(readme_path).exists():
-                      page = render_info_page(name, readme_path)
+                      page = render_info_page(name, readme_path, schema_html)
                       if page:
                           info_file = info_dir / f"{name}.html"
                           info_file.write_text(page, encoding="utf-8")

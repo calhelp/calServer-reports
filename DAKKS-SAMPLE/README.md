@@ -93,14 +93,14 @@ der JRXML-Datei und greifen automatisch, wenn der Parameter beim Aufruf nicht
 gesetzt wird. Die Spalte „Pflicht“ verwendet ✅ für zwingend erforderliche und ➖
 für optionale Parameter.
 
-### 4.1 Pflichtparameter
+### 4.1 Pflichtparameter {#params-required}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `P_CTAG` | ✅ | – | Schlüssel (CTAG) der Kalibrierung in der calServer-Datenbank. Steuert sämtliche Datenbank­abfragen im Haupt- und in den Unterberichten und entscheidet damit, welche Kalibrierung gedruckt wird. |
 | `Reportpath` | ✅ | `""` | Absolutes Basis­verzeichnis, in dem Haupt- und Unterberichte als `.jrxml`/`.jasper` liegen (typischerweise `.../DAKKS-SAMPLE`). Wird vom Hauptreport benötigt, um die Subreports `Standard` und `Results` zur Laufzeit auflösen zu können. |
 
-### 4.2 Mandanten-, Sprach- und Anzeige­parameter
+### 4.2 Mandanten-, Sprach- und Anzeige­parameter {#params-locale}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
@@ -109,7 +109,7 @@ für optionale Parameter.
 | `ReportVersion` | ➖ | `V0.8.2` | Versions­kennzeichnung, die im Titelbereich des Berichts ausgegeben wird. |
 | `ReportVariantCode` | ➖ | `""` | Ressourcenname für die Layout­steuerung. Steht in `resource.report_template` für diesen Namen der Wert `1`, wird Variante `1` (mit Lücken) aktiviert; sonst läuft Variante `0` (Standard). Leer = Variante `0`. |
 
-### 4.3 Bilder, Codes und Akkreditierungs­block
+### 4.3 Bilder, Codes und Akkreditierungs­block {#params-images}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
@@ -119,7 +119,7 @@ für optionale Parameter.
 | `MarkNumber2` | ➖ | `D-K-\nYYYYY-ZZ-N` | Zweite Markennummer (Akkreditierungs­kennung). `\n` erzeugt einen Zeilenumbruch im gedruckten Block. |
 | `sign_names` | ➖ | `Y` | Steuert die Anzeige der Namen im Unterschriftsbereich. Werte: `Y` (anzeigen, Default auch bei fehlendem Parameter) oder `N` (ausblenden). |
 
-### 4.4 Zertifikats- und Inhaltssteuerung
+### 4.4 Zertifikats- und Inhaltssteuerung {#params-content}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
@@ -129,7 +129,7 @@ für optionale Parameter.
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
 | `environmental_conditions` | ➖ | `""` | Optionaler Freitext für Umgebungs­temperatur und relative Luft­feuchte im Format `Text_Temperatur \| Text_Feuchte`. Ersetzt die Werte aus `C2311`/`C2312`, wenn angegeben. Ist ein Ressourcen­name übergeben, werden Temperatur und Feuchte aus `resource.environment_resources` derselben Zeile übernommen. |
 
-### 4.5 Normative Textbausteine
+### 4.5 Normative Textbausteine {#params-textblocks}
 
 Alle Textbaustein-Parameter sind optional. Sie sind im JRXML mit DAkkS-konformen
 Standard­formulierungen (de/en gemäß `Sprache`) vorbelegt; durch Übergabe eines
@@ -152,7 +152,7 @@ eigenen Werts wird der Standard überschrieben.
 | `Calibration_procedure_2` | ➖ | sprachabhängig | Zweiter Textbaustein zum Kalibrier­verfahren (z. B. Verweis auf Norm). |
 | `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrens­anweisung bzw. QMS-Dokument. |
 
-### 4.6 Abschnittsumschalter (`ShowGroup1*`)
+### 4.6 Abschnittsumschalter (`ShowGroup1*`) {#params-showgroup}
 
 Alle Abschnitts­parameter sind Strings (Default bzw. fehlender Parameter: `Y`)
 und können auf `Y` (anzeigen) oder `N` (ausblenden) gesetzt werden. Die Werte

@@ -1,0 +1,102 @@
+{
+  "_comment": "Stilisiertes Wireframe der Berichtsstruktur. Blöcke werden zur Build-Zeit vertikal als SVG gestapelt; height ist das Höhenverhältnis innerhalb der Skizze. anchor verlinkt auf die passende Parametergruppe in der Info-Seite.",
+  "title": "Aufbau des DAkkS-Kalibrierscheins",
+  "blocks": [
+    {
+      "id": "header",
+      "label": "Titel & Zertifikatsnummer",
+      "subtitle": "Kopfbereich, Akkreditierungssiegel",
+      "anchor": "#params-images",
+      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path"],
+      "height": 90,
+      "tone": "accent"
+    },
+    {
+      "id": "asset",
+      "label": "Messmittel-Stammdaten",
+      "subtitle": "Bezeichnung, Typ, Inventar-/Seriennummer",
+      "anchor": "#params-textblocks",
+      "params": ["Asset_description"],
+      "height": 110
+    },
+    {
+      "id": "customer",
+      "label": "Auftraggeber:in & Kalibrierdatum",
+      "subtitle": "Kunde, Adresse, interne Referenzen",
+      "anchor": "#params-required",
+      "params": ["P_CTAG", "PrefixTable", "Sprache"],
+      "height": 100
+    },
+    {
+      "id": "procedure",
+      "label": "Verfahren · Messbedingungen · Umgebung",
+      "subtitle": "Eingang, Zustand, Ort, Umgebungsbedingungen",
+      "anchor": "#params-showgroup",
+      "params": [
+        "ShowGroup1Procedure",
+        "ShowGroup1ProcedureDocument",
+        "ShowGroup1MeasurementConditions",
+        "ShowGroup1EnvironmentalConditions",
+        "ShowGroup1IncomingDate",
+        "ShowGroup1Condition",
+        "Calibration_procedure_1",
+        "Calibration_procedure_2",
+        "Calibration_document",
+        "environmental_conditions"
+      ],
+      "height": 150
+    },
+    {
+      "id": "standards",
+      "label": "Eingesetzte Normale",
+      "subtitle": "Subreport Standard.jrxml · Rückführbarkeit",
+      "anchor": "#5-unterberichte",
+      "params": ["ShowGroup1StandardsTraceability", "Cert_description", "Cert_description_1"],
+      "height": 110
+    },
+    {
+      "id": "results",
+      "label": "Messergebnisse",
+      "subtitle": "Subreport Results.jrxml · Toleranzen, Unsicherheit",
+      "anchor": "#params-content",
+      "params": [
+        "MeasurementDetails",
+        "ModernResultsHeader",
+        "ShowGroup1ResultsDetails",
+        "ShowGroup1ResultsIntro",
+        "Results_description"
+      ],
+      "height": 200,
+      "tone": "highlight"
+    },
+    {
+      "id": "uncertainty",
+      "label": "Messunsicherheit & Konformität",
+      "subtitle": "GUM-Hinweise, Symbol-Legende, weitere Hinweise",
+      "anchor": "#params-textblocks",
+      "params": [
+        "Uncertainty_description",
+        "Measurements_description",
+        "Measurements_description_1",
+        "Conformity_description_1",
+        "Conformity_description_2",
+        "Conformity_description_3",
+        "Additional_information",
+        "ExpUncType",
+        "ShowGroup1MeasurementUncertainty",
+        "ShowGroup1Conformity",
+        "ShowGroup1AdditionalInformation"
+      ],
+      "height": 140
+    },
+    {
+      "id": "footer",
+      "label": "Akkreditierung & Unterschriften",
+      "subtitle": "Markennummern, DAkkS-Logo, Signaturen",
+      "anchor": "#params-images",
+      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path"],
+      "height": 100,
+      "tone": "accent"
+    }
+  ]
+}
