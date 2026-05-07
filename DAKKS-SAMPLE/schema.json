@@ -1,69 +1,78 @@
 {
-  "_comment": "Region-Koordinaten beziehen sich auf die Originalauflösung von preview.jpg (2379×8263). Werte sind eine Erstkalibrierung – falls einzelne Marker daneben sitzen, hier nachjustieren. Das SVG-Overlay skaliert automatisch mit; keine weiteren Änderungen nötig.",
-  "image": "preview.jpg",
-  "originalUrl": "https://github.com/calhelp/calServer-reports/blob/main/DAKKS-SAMPLE/preview.jpg",
-  "viewBox": { "width": 2379, "height": 8263 },
-  "regions": [
+  "_comment": "Stilisiertes Wireframe der Berichtsstruktur. Blöcke werden zur Build-Zeit vertikal als SVG gestapelt; height ist das Höhenverhältnis innerhalb der Skizze. anchor verlinkt auf die passende Parametergruppe in der Info-Seite.",
+  "title": "Aufbau des DAkkS-Kalibrierscheins",
+  "blocks": [
     {
       "id": "header",
       "label": "Titel & Zertifikatsnummer",
-      "x": 120, "y": 60, "w": 2140, "h": 320,
+      "subtitle": "Kopfbereich, Akkreditierungssiegel",
       "anchor": "#params-images",
-      "params": ["Cert_field", "QR_Code_Value", "ReportVersion"]
+      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path"],
+      "height": 90,
+      "tone": "accent"
     },
     {
       "id": "asset",
-      "label": "Messmittel-Stammdaten & Auftraggeber:in",
-      "x": 120, "y": 420, "w": 2140, "h": 520,
+      "label": "Messmittel-Stammdaten",
+      "subtitle": "Bezeichnung, Typ, Inventar-/Seriennummer",
       "anchor": "#params-textblocks",
-      "params": ["Asset_description", "P_CTAG"]
+      "params": ["Asset_description"],
+      "height": 110
     },
     {
-      "id": "status",
-      "label": "Eingang, Zustand & Kalibrierdaten",
-      "x": 120, "y": 970, "w": 2140, "h": 380,
-      "anchor": "#params-showgroup",
-      "params": ["ShowGroup1IncomingDate", "ShowGroup1Condition"]
+      "id": "customer",
+      "label": "Auftraggeber:in & Kalibrierdatum",
+      "subtitle": "Kunde, Adresse, interne Referenzen",
+      "anchor": "#params-required",
+      "params": ["P_CTAG", "PrefixTable", "Sprache"],
+      "height": 100
     },
     {
       "id": "procedure",
-      "label": "Verfahren, Messbedingungen & Umgebung",
-      "x": 120, "y": 1380, "w": 2140, "h": 900,
+      "label": "Verfahren · Messbedingungen · Umgebung",
+      "subtitle": "Eingang, Zustand, Ort, Umgebungsbedingungen",
       "anchor": "#params-showgroup",
       "params": [
         "ShowGroup1Procedure",
         "ShowGroup1ProcedureDocument",
         "ShowGroup1MeasurementConditions",
         "ShowGroup1EnvironmentalConditions",
+        "ShowGroup1IncomingDate",
+        "ShowGroup1Condition",
         "Calibration_procedure_1",
         "Calibration_procedure_2",
         "Calibration_document",
         "environmental_conditions"
-      ]
+      ],
+      "height": 150
     },
     {
       "id": "standards",
-      "label": "Eingesetzte Normale (Subreport Standard)",
-      "x": 120, "y": 2310, "w": 2140, "h": 620,
+      "label": "Eingesetzte Normale",
+      "subtitle": "Subreport Standard.jrxml · Rückführbarkeit",
       "anchor": "#5-unterberichte",
-      "params": ["ShowGroup1StandardsTraceability"]
+      "params": ["ShowGroup1StandardsTraceability", "Cert_description", "Cert_description_1"],
+      "height": 110
     },
     {
       "id": "results",
-      "label": "Messergebnisse (Subreport Results)",
-      "x": 120, "y": 2960, "w": 2140, "h": 2400,
+      "label": "Messergebnisse",
+      "subtitle": "Subreport Results.jrxml · Toleranzen, Unsicherheit",
       "anchor": "#params-content",
       "params": [
         "MeasurementDetails",
         "ModernResultsHeader",
         "ShowGroup1ResultsDetails",
+        "ShowGroup1ResultsIntro",
         "Results_description"
-      ]
+      ],
+      "height": 200,
+      "tone": "highlight"
     },
     {
-      "id": "conformity",
-      "label": "Messunsicherheit, Konformität & Zusatzhinweise",
-      "x": 120, "y": 5390, "w": 2140, "h": 1200,
+      "id": "uncertainty",
+      "label": "Messunsicherheit & Konformität",
+      "subtitle": "GUM-Hinweise, Symbol-Legende, weitere Hinweise",
       "anchor": "#params-textblocks",
       "params": [
         "Uncertainty_description",
@@ -77,14 +86,17 @@
         "ShowGroup1MeasurementUncertainty",
         "ShowGroup1Conformity",
         "ShowGroup1AdditionalInformation"
-      ]
+      ],
+      "height": 140
     },
     {
-      "id": "accreditation",
-      "label": "DAkkS-Akkreditierung & Unterschriften",
-      "x": 120, "y": 6620, "w": 2140, "h": 1560,
+      "id": "footer",
+      "label": "Akkreditierung & Unterschriften",
+      "subtitle": "Markennummern, DAkkS-Logo, Signaturen",
       "anchor": "#params-images",
-      "params": ["MarkNumber1", "MarkNumber2", "P_Image_Path", "sign_names"]
+      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path"],
+      "height": 100,
+      "tone": "accent"
     }
   ]
 }

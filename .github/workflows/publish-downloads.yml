@@ -103,8 +103,8 @@ jobs:
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
 
-      - name: Install Markdown + image renderer
-        run: python -m pip install --upgrade "markdown==3.6" "Pygments==2.17.2" "Pillow==10.4.0"
+      - name: Install Markdown renderer
+        run: python -m pip install --upgrade "markdown==3.6" "Pygments==2.17.2"
 
       - name: Build downloads site
         env:
@@ -211,76 +211,101 @@ jobs:
           </html>
           """
 
-          def render_schema(artifact_name, schema_path, info_assets_dir):
+          def render_schema(artifact_name, schema_path):
               if not schema_path or not Path(schema_path).exists():
                   return ""
               data = json.loads(Path(schema_path).read_text(encoding="utf-8"))
-              vb = data.get("viewBox", {})
-              vw, vh = vb.get("width", 1000), vb.get("height", 1000)
-              regions = data.get("regions", [])
-              image_rel = data.get("image", "preview.jpg")
-              report_root = Path(schema_path).parent
-              image_src = report_root / image_rel
+              blocks = data.get("blocks", [])
+              if not blocks:
+                  return ""
 
-              # Scaled preview destination (relative to info_dir)
-              dest_dir = info_assets_dir / artifact_name
-              dest_dir.mkdir(parents=True, exist_ok=True)
-              dest_image = dest_dir / "preview.jpg"
-              try:
-                  from PIL import Image
-                  img = Image.open(image_src)
-                  img.thumbnail((1100, 6000))
-                  img.convert("RGB").save(dest_image, "JPEG", quality=80, optimize=True)
-              except Exception as exc:
-                  print(f"WARN: could not scale preview for {artifact_name}: {exc}")
-                  if image_src.exists():
-                      dest_image.write_bytes(Path(image_src).read_bytes())
-                  else:
-                      return ""
+              # Layout constants for the wireframe SVG.
+              vw = 600
+              pad_outer = 24
+              gap = 12
+              total_h = pad_outer + sum(b.get("height", 100) for b in blocks) + gap * (len(blocks) - 1) + pad_outer
+              vh = total_h
 
-              image_url = f"assets/{artifact_name}/preview.jpg"
-              original_url = data.get("originalUrl", "")
+              tone_styles = {
+                  "default":  ("#ffffff",      "#cdd6e4"),
+                  "accent":   ("#eaf0fb",      "#9bb3e8"),
+                  "highlight":("#fff7e6",      "#e6b86a"),
+              }
 
               hotspots, legend_items = [], []
-              for idx, r in enumerate(regions, start=1):
-                  rid = r.get("id", f"region-{idx}")
-                  label = r.get("label", rid)
-                  anchor = r.get("anchor", "")
-                  x, y, w, h = r.get("x", 0), r.get("y", 0), r.get("w", 0), r.get("h", 0)
-                  cx, cy = x + 70, y + 70
+              y = pad_outer
+              for idx, b in enumerate(blocks, start=1):
+                  bh = b.get("height", 100)
+                  label = b.get("label", b.get("id", f"Block {idx}"))
+                  subtitle = b.get("subtitle", "")
+                  anchor = b.get("anchor", "")
+                  params = b.get("params", []) or []
+                  fill, stroke = tone_styles.get(b.get("tone", "default"), tone_styles["default"])
                   esc_label = html.escape(label)
+                  esc_subtitle = html.escape(subtitle)
                   esc_anchor = html.escape(anchor, quote=True)
+                  x = pad_outer
+                  w = vw - 2 * pad_outer
+                  cx, cy = x + 36, y + 36
+
+                  # Parameter-Chips: nur die ersten 4–5 anzeigen, Rest mit "+N".
+                  visible = params[:5]
+                  remaining = len(params) - len(visible)
+                  chips_svg = []
+                  chip_x = x + 78
+                  chip_y = y + bh - 26
+                  for p in visible:
+                      width = max(60, 9 * len(p) + 18)
+                      chips_svg.append(
+                          f'<g class="schema-chip">'
+                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="{width}" height="22" rx="11" />'
+                          f'<text x="{chip_x + width/2:.1f}" y="{chip_y - 1}" text-anchor="middle">{html.escape(p)}</text>'
+                          f'</g>'
+                      )
+                      chip_x += width + 6
+                  if remaining > 0:
+                      chips_svg.append(
+                          f'<g class="schema-chip schema-chip--more">'
+                          f'<rect x="{chip_x}" y="{chip_y - 16}" width="56" height="22" rx="11" />'
+                          f'<text x="{chip_x + 28}" y="{chip_y - 1}" text-anchor="middle">+{remaining}</text>'
+                          f'</g>'
+                      )
+
                   hotspots.append(
                       f'<a href="{esc_anchor}" class="report-schema__link">'
                       f'<title>{idx}. {esc_label}</title>'
-                      f'<rect class="hotspot" x="{x}" y="{y}" width="{w}" height="{h}" rx="18" />'
-                      f'<circle class="marker" cx="{cx}" cy="{cy}" r="55" />'
+                      f'<rect class="schema-block" x="{x}" y="{y}" width="{w}" height="{bh}" rx="14" '
+                      f'fill="{fill}" stroke="{stroke}" />'
+                      f'<circle class="marker" cx="{cx}" cy="{cy}" r="22" />'
                       f'<text class="marker-label" x="{cx}" y="{cy}" text-anchor="middle" '
                       f'dominant-baseline="central">{idx}</text>'
+                      f'<text class="schema-title" x="{x + 78}" y="{y + 32}">{esc_label}</text>'
+                      + (f'<text class="schema-subtitle" x="{x + 78}" y="{y + 54}">{esc_subtitle}</text>' if subtitle else '')
+                      + f'{"".join(chips_svg)}'
                       f'</a>'
                   )
+
+                  param_summary = ", ".join(params[:3]) + (f" …" if len(params) > 3 else "")
                   legend_items.append(
-                      f'<li><a href="{esc_anchor}"><span class="legend-num">{idx}</span> {esc_label}</a></li>'
+                      f'<li><a href="{esc_anchor}">'
+                      f'<span class="legend-num">{idx}</span>'
+                      f'<span class="legend-text"><strong>{esc_label}</strong>'
+                      + (f'<span class="legend-params">{html.escape(param_summary)}</span>' if param_summary else '')
+                      + f'</span></a></li>'
                   )
+                  y += bh + gap
 
-              original_link_html = (
-                  f'<p class="report-schema__original">'
-                  f'<a href="{html.escape(original_url, quote=True)}" target="_blank" rel="noopener">'
-                  f'Originalvorschau in voller Auflösung &rarr;</a></p>'
-                  if original_url else ""
-              )
-
+              schema_title = html.escape(data.get("title", "Aufbau des Berichts"))
               return (
                   '<section class="card report-schema">'
                   '<details open class="report-schema__panel">'
-                  '<summary>Schemabild – Parameter im Bericht verorten</summary>'
-                  '<p class="report-schema__hint">Klicke auf eine markierte Region oder auf eine Nummer in der Legende, '
-                  'um zur passenden Parametergruppe zu springen.</p>'
+                  f'<summary>{schema_title} – Parameter im Bericht verorten</summary>'
+                  '<p class="report-schema__hint">Klicke auf eine Region oder auf einen Eintrag in der Legende, '
+                  'um zur passenden Parametergruppe in der Tabelle zu springen.</p>'
                   '<div class="report-schema__layout">'
                   f'<div class="report-schema__stage">'
-                  f'<img src="{image_url}" alt="Schematische Vorschau des Berichts" loading="lazy" />'
                   f'<svg viewBox="0 0 {vw} {vh}" preserveAspectRatio="xMidYMid meet" '
-                  f'class="report-schema__svg" aria-label="Interaktives Schema">'
+                  f'class="report-schema__svg" role="img" aria-label="{schema_title}">'
                   f'{"".join(hotspots)}'
                   f'</svg>'
                   f'</div>'
@@ -288,7 +313,6 @@ jobs:
                   f'{"".join(legend_items)}'
                   '</ol>'
                   '</div>'
-                  f'{original_link_html}'
                   '</details>'
                   '</section>'
               )
@@ -349,8 +373,6 @@ jobs:
           metadata_path = Path("site/downloads/metadata.tsv")
           info_dir = Path("site/downloads/info")
           info_dir.mkdir(parents=True, exist_ok=True)
-          info_assets_dir = info_dir / "assets"
-          info_assets_dir.mkdir(parents=True, exist_ok=True)
           artifacts = []
           if metadata_path.exists():
               for line in metadata_path.read_text().splitlines():
@@ -358,7 +380,7 @@ jobs:
                   readme_path = README_MAP.get(name, "")
                   description = extract_description(readme_path)
                   info_url = None
-                  schema_html = render_schema(name, SCHEMA_MAP.get(name, ""), info_assets_dir)
+                  schema_html = render_schema(name, SCHEMA_MAP.get(name, ""))
                   if readme_path and Path(readme_path).exists():
                       page = render_info_page(name, readme_path, schema_html)
                       if page:

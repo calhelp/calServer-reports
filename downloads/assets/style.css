@@ -322,25 +322,17 @@ h1 {
 }
 
 .report-schema__stage {
-  position: relative;
   width: 100%;
-  background: #f5f7fb;
-  border-radius: 12px;
-  overflow: hidden;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  border-radius: 14px;
   border: 1px solid #e1e7f0;
-}
-
-.report-schema__stage img {
-  width: 100%;
-  display: block;
-  height: auto;
+  padding: 14px;
 }
 
 .report-schema__svg {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
 }
 
 .report-schema__link {
@@ -348,25 +340,22 @@ h1 {
   outline: none;
 }
 
-.report-schema__link .hotspot {
-  fill: rgba(29, 78, 216, 0.06);
-  stroke: rgba(29, 78, 216, 0.55);
-  stroke-width: 6;
-  stroke-dasharray: 14 8;
-  transition: fill 0.15s ease, stroke 0.15s ease;
+.report-schema__link .schema-block {
+  stroke-width: 1.5;
+  transition: filter 0.15s ease, stroke 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.08));
 }
 
-.report-schema__link:hover .hotspot,
-.report-schema__link:focus .hotspot {
-  fill: rgba(29, 78, 216, 0.18);
-  stroke: rgba(29, 78, 216, 0.95);
+.report-schema__link:hover .schema-block,
+.report-schema__link:focus .schema-block {
+  stroke: #1d4ed8;
+  filter: drop-shadow(0 6px 14px rgba(29, 78, 216, 0.22));
 }
 
 .report-schema__link .marker {
   fill: #1d4ed8;
   stroke: #ffffff;
-  stroke-width: 6;
-  filter: drop-shadow(0 6px 14px rgba(15, 23, 42, 0.25));
+  stroke-width: 2.5;
   transition: fill 0.15s ease, transform 0.15s ease;
   transform-origin: center;
   transform-box: fill-box;
@@ -375,15 +364,53 @@ h1 {
 .report-schema__link:hover .marker,
 .report-schema__link:focus .marker {
   fill: #15348a;
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .report-schema__link .marker-label {
   fill: #ffffff;
   font-weight: 700;
-  font-size: 64px;
+  font-size: 18px;
   pointer-events: none;
   font-family: "Inter", system-ui, sans-serif;
+}
+
+.report-schema__link .schema-title {
+  fill: #1f2a44;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-subtitle {
+  fill: #4e5d78;
+  font-size: 12px;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-chip rect {
+  fill: rgba(29, 78, 216, 0.1);
+  stroke: rgba(29, 78, 216, 0.35);
+  stroke-width: 1;
+}
+
+.report-schema__link .schema-chip text {
+  fill: #1d4ed8;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: "Inter", system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.report-schema__link .schema-chip--more rect {
+  fill: rgba(75, 85, 99, 0.1);
+  stroke: rgba(75, 85, 99, 0.35);
+}
+
+.report-schema__link .schema-chip--more text {
+  fill: #475569;
 }
 
 .report-schema__legend {
@@ -399,13 +426,26 @@ h1 {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 10px;
   text-decoration: none;
   color: #1f2a44;
   background: #f5f7fb;
   border: 1px solid transparent;
   transition: background 0.15s ease, border-color 0.15s ease;
+  line-height: 1.35;
+}
+
+.report-schema__legend .legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.report-schema__legend .legend-params {
+  font-size: 0.8rem;
+  color: #4e5d78;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 }
 
 .report-schema__legend a:hover {
