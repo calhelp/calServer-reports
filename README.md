@@ -101,7 +101,7 @@ scripts/
 
 ### Parameterreferenz für den DAkkS-Report
 
-Der Hauptbericht `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml` akzeptiert alle gängigen calServer-Parameter (z. B. `P_CTAG`, `Reportpath`, `Sprache`, optionale Textbausteine). Eine detaillierte Tabelle mit Pflichtfeldern, Standardwerten und Unterbericht-Parametern findest du im [README des DAkkS-Hauptberichts](DAKKS-SAMPLE/main_reports/README.md#vollständige-parameterübersicht).
+Der Hauptbericht `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml` akzeptiert alle gängigen calServer-Parameter (z. B. `P_CTAG`, `Reportpath`, `Sprache`, optionale Textbausteine). Eine detaillierte Tabelle mit Pflichtfeldern, Standardwerten und Unterbericht-Parametern findest du im [README des DAkkS-Berichts](DAKKS-SAMPLE/README.md#4-parameter).
 
 ---
 
