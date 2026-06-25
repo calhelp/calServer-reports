@@ -1894,7 +1894,7 @@
 					<text><![CDATA[% rel. Deviation]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="370" y="0" width="100" height="21" uuid="8c6894ab-80a7-45eb-9dcc-5b39c939d9c7"/>
+					<reportElement x="350" y="0" width="100" height="21" uuid="8c6894ab-80a7-45eb-9dcc-5b39c939d9c7"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1906,7 +1906,7 @@
 					<text><![CDATA[erweiterte Messunsicherheit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="370" y="21" width="100" height="19" uuid="bdbe7508-292f-463e-b8a3-45c91a07d169"/>
+					<reportElement x="350" y="21" width="100" height="19" uuid="bdbe7508-292f-463e-b8a3-45c91a07d169"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1918,7 +1918,7 @@
 					<text><![CDATA[Expanded Uncertainty of Measurement]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="470" y="0" width="25" height="21" uuid="d5599b28-05ae-41c8-9ff2-6c319f60be39"/>
+					<reportElement x="450" y="0" width="25" height="21" uuid="d5599b28-05ae-41c8-9ff2-6c319f60be39"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1930,7 +1930,7 @@
 					<text><![CDATA[% Tol]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="470" y="21" width="25" height="19" uuid="90a651d4-5514-4fd5-8a0a-1723f3d434db"/>
+					<reportElement x="450" y="21" width="25" height="19" uuid="90a651d4-5514-4fd5-8a0a-1723f3d434db"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
@@ -1942,7 +1942,7 @@
 					<text><![CDATA[% Tol]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="495" y="0" width="40" height="21" uuid="8dbac63f-7c0c-4a6a-a3ab-4b035453deab"/>
+					<reportElement x="475" y="0" width="60" height="21" uuid="8dbac63f-7c0c-4a6a-a3ab-4b035453deab"/>
 					<box>
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -1954,7 +1954,7 @@
 					<text><![CDATA[Konformität]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="495" y="21" width="40" height="19" uuid="f876b3de-9f36-40e0-beee-3e76efcbd2d5"/>
+					<reportElement x="475" y="21" width="60" height="19" uuid="f876b3de-9f36-40e0-beee-3e76efcbd2d5"/>
 					<box>
 						<leftPen lineWidth="0.75"/>
 						<bottomPen lineWidth="0.75"/>
