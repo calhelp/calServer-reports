@@ -125,7 +125,7 @@
 : "Computer-assisted calibration according to the applicable internal procedure."]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Cert_field" class="java.lang.String">
-		<parameterDescription><![CDATA[Optionaler Text, der als Zertifikatsnummer angezeigt wird. Leer lassen, um den Standardwert aus C2396 zu verwenden.]]></parameterDescription>
+		<parameterDescription><![CDATA[Quelle der Zertifikatsnummer bzw. des Kalibrierkennzeichens. Erlaubte Werte: C2396, C2395, C2364 oder C2356; andere oder leere Werte fallen auf C2356 zurück.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="P_Image_Path" class="java.lang.String">
@@ -239,6 +239,7 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT CASE UPPER(COALESCE($P{Cert_field}, ''))
   WHEN 'C2396' THEN COALESCE(c.C2396, "")
+  WHEN 'C2395' THEN COALESCE(c.C2395, "")
   WHEN 'C2364' THEN COALESCE(c.C2364, "")
   WHEN 'C2356' THEN COALESCE(c.C2356, "")
   ELSE COALESCE(c.C2356, "")
