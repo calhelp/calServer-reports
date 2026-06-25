@@ -1586,14 +1586,14 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</line>
 			<textField>
 				<reportElement x="16" y="8" width="70" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000001">
-					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="86" y="8" width="30" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000002">
-					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
@@ -1646,7 +1646,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</textField>
 			<textField>
 				<reportElement x="16" y="25" width="70" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000001">
-					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")) && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
@@ -1655,7 +1655,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="86" y="25" width="30" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000002">
-					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")) && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
