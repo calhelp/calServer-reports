@@ -105,6 +105,7 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `PageNumberPosition` | ➖ | `HeaderLeft` | Position der Seitenzahl »Seite x von y« (Sprachwahl über `Sprache`). Erlaubte Werte: `HeaderLeft`, `HeaderCenter`, `HeaderRight`, `FooterLeft`, `FooterCenter`, `FooterRight` oder `None` (Seitenzahl ausblenden). `HeaderLeft` (Default) entspricht der bisherigen Anzeige oben links; bei einer `Footer*`-Wahl wird die Seitenzahl auch auf Seite 1 in der Fußzeile gedruckt. |
+| `PageNumberBilingual` | ➖ | `Y` | Zweisprachige Seitenzahl. `Y` (Default) = zweizeilig: primäre Sprache (gemäß `Sprache`) oben, die andere Sprache darunter (kleiner/kursiv), z. B. »Seite 3 von 7« über »Page 3 of 7«. `N` = nur eine Sprache gemäß `Sprache`. Wirkt an der über `PageNumberPosition` gewählten Position; `None` blendet weiterhin alles aus. |
 | `PrefixTable` | ➖ | `""` | Tabellen­präfix für mandanten­fähige Installationen (z. B. `cal_`). Wird per `$P!{PrefixTable}` direkt in die SQL-Statements eingesetzt und gilt zugleich für die Unterberichte. |
 | `Sprache` | ➖ | `Deutsch` | Sprache aller Labels und eingebetteten Textbausteine. Erlaubte Werte: exakt `Deutsch` oder `Englisch`; abweichende Werte fallen auf `Deutsch` zurück. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versions­kennzeichnung, die im Titelbereich des Berichts ausgegeben wird. |
