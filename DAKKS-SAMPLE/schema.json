@@ -7,7 +7,7 @@
       "label": "Titel & Zertifikatsnummer",
       "subtitle": "Kopfbereich, Akkreditierungssiegel",
       "anchor": "#params-images",
-      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path"],
+      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path", "PageNumberPosition"],
       "height": 90,
       "tone": "accent"
     },
@@ -94,7 +94,7 @@
       "label": "Akkreditierung & Unterschriften",
       "subtitle": "Markennummern, DAkkS-Logo, Signaturen",
       "anchor": "#params-images",
-      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path"],
+      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path", "ShowMarkOnFollowingPages"],
       "height": 100,
       "tone": "accent"
     }
