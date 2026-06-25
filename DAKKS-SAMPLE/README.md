@@ -125,7 +125,7 @@ für optionale Parameter.
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
-| `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
+| `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
 | `MeasurementDetails` | ➖ | `1` | Wählt eines der vier Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2` formatierte Eingaben, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere oder nicht-numerische Eingaben werden als `1` behandelt. |
 | `ModernResultsHeader` | ➖ | `N` | Schaltet im `Results`-Unterbericht den modernen Tabellen­kopf ein (`Y`) oder behält den klassischen Kopf bei (`N`). |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
