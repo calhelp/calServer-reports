@@ -7,7 +7,7 @@
       "label": "Titel & Zertifikatsnummer",
       "subtitle": "Kopfbereich, Akkreditierungssiegel",
       "anchor": "#params-images",
-      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path", "PageNumberPosition"],
+      "params": ["Cert_field", "QR_Code_Value", "ReportVersion", "P_Image_Path", "PageNumberPosition", "PageNumberBilingual"],
       "height": 90,
       "tone": "accent"
     },

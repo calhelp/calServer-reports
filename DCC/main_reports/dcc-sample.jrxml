@@ -152,6 +152,10 @@
 		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["HeaderLeft"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="PageNumberBilingual" class="java.lang.String">
+		<parameterDescription><![CDATA[Zweisprachige Seitenzahl. Y = zweizeilig: primäre Sprache (gemäß Sprache) oben, die andere Sprache darunter (kleiner/kursiv) (Standard). N = nur eine Sprache gemäß Sprache. Greift an der über PageNumberPosition gewählten Position; None blendet weiterhin alles aus.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
 	<parameter name="ShowMarkOnFollowingPages" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Kennzeichnungs-/Akkreditierungsblocks (Markennummern, digitales Kalibrierzeichen, Kalibrierdatum) auf Folgeseiten. Y = auf allen Seiten anzeigen (Standard). N = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -1640,6 +1644,60 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
     ? ""
     : $P{MarkNumber2}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="16" y="25" width="70" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000001">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="86" y="25" width="30" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000002">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="25" width="100" height="15" uuid="a2b2c3d4-0002-4a01-8e01-000000000003">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderCenter") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="25" width="40" height="15" uuid="a2b2c3d4-0002-4a01-8e01-000000000004">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderCenter") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="25" width="150" height="15" uuid="a2b2c3d4-0003-4a01-8e01-000000000005">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderRight") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="452" y="25" width="36" height="15" uuid="a2b2c3d4-0003-4a01-8e01-000000000006">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderRight") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<pageFooter>
@@ -1685,6 +1743,60 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="70" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000007">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="70" y="25" width="30" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000008">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="25" width="100" height="15" uuid="a2b2c3d4-0005-4a01-8e01-000000000009">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterCenter") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="320" y="25" width="40" height="15" uuid="a2b2c3d4-0005-4a01-8e01-00000000000a">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterCenter") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="25" width="138" height="15" uuid="a2b2c3d4-0006-4a01-8e01-00000000000b">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="538" y="25" width="23" height="15" uuid="a2b2c3d4-0006-4a01-8e01-00000000000c">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
