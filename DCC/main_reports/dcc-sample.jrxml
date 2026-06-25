@@ -149,11 +149,11 @@
                 <defaultValueExpression><![CDATA["DCC-\nYYYYY-ZZ-N"]]></defaultValueExpression>
         </parameter>
 	<parameter name="PageNumberPosition" class="java.lang.String">
-		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus.]]></parameterDescription>
+		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus. Hinweis: Header-Positionen (HeaderLeft/HeaderCenter/HeaderRight) erscheinen erst ab Seite 2, da die Titelseite (Seite 1) keinen Seitenkopf besitzt; dort wird nur die Gesamtseitenzahl (Anzahl Seiten des Kalibrierscheines) ausgewiesen. Footer-Positionen werden auch auf Seite 1 (Fußzeile) gedruckt.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["HeaderLeft"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="PageNumberBilingual" class="java.lang.String">
-		<parameterDescription><![CDATA[Zweisprachige Seitenzahl. Y = zweizeilig: primäre Sprache (gemäß Sprache) oben, die andere Sprache darunter (kleiner/kursiv) (Standard). N = nur eine Sprache gemäß Sprache. Greift an der über PageNumberPosition gewählten Position; None blendet weiterhin alles aus.]]></parameterDescription>
+		<parameterDescription><![CDATA[Zweisprachige Seitenzahl. Y = zweizeilig: primäre Sprache (gemäß Sprache) oben, die andere Sprache darunter (kleiner/kursiv) (Standard). N = nur eine Sprache gemäß Sprache. Greift an der über PageNumberPosition gewählten Position; None blendet weiterhin alles aus. Wie PageNumberPosition wirkt dies bei Header-Positionen erst ab Seite 2 (die Titelseite hat keinen Seitenkopf).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ShowMarkOnFollowingPages" class="java.lang.String">
