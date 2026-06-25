@@ -104,6 +104,7 @@ für optionale Parameter.
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
+| `PageNumberPosition` | ➖ | `HeaderLeft` | Position der Seitenzahl »Seite x von y« (Sprachwahl über `Sprache`). Erlaubte Werte: `HeaderLeft`, `HeaderCenter`, `HeaderRight`, `FooterLeft`, `FooterCenter`, `FooterRight` oder `None` (Seitenzahl ausblenden). `HeaderLeft` (Default) entspricht der bisherigen Anzeige oben links; bei einer `Footer*`-Wahl wird die Seitenzahl auch auf Seite 1 in der Fußzeile gedruckt. |
 | `PrefixTable` | ➖ | `""` | Tabellen­präfix für mandanten­fähige Installationen (z. B. `cal_`). Wird per `$P!{PrefixTable}` direkt in die SQL-Statements eingesetzt und gilt zugleich für die Unterberichte. |
 | `Sprache` | ➖ | `Deutsch` | Sprache aller Labels und eingebetteten Textbausteine. Erlaubte Werte: exakt `Deutsch` oder `Englisch`; abweichende Werte fallen auf `Deutsch` zurück. |
 | `ReportVersion` | ➖ | `V0.8.2` | Versions­kennzeichnung, die im Titelbereich des Berichts ausgegeben wird. |
@@ -113,6 +114,7 @@ für optionale Parameter.
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
+| `ShowMarkOnFollowingPages` | ➖ | `Y` | Blendet den Kennzeichnungs-/Akkreditierungsblock (`MarkNumber1`, `MarkNumber2`, Kalibrierdatum oben rechts) auf Folgeseiten ein/aus. `Y` = auf allen Seiten anzeigen (Default). `N` = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden. |
 | `P_Image_Path` | ➖ | `""` | Pfad zu Logos/Siegeln, die im Kopf- und Fußbereich (z. B. DAkkS-Logo) eingeblendet werden. Wird auch an den Subreport `Results` durchgereicht. |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für das QR-/Barcode-Element (z. B. URL zum digitalen Zertifikat). Bleibt der Wert leer, wird kein QR-Code gerendert. |
 | `MarkNumber1` | ➖ | `123456` | Erste Markennummer im Akkreditierungs­block. Es wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt, sodass z. B. `123456 (intern)` zu `123456` reduziert wird. |

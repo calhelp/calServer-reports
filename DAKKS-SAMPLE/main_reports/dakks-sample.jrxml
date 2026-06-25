@@ -148,6 +148,14 @@
 		<parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="PageNumberPosition" class="java.lang.String">
+		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["HeaderLeft"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ShowMarkOnFollowingPages" class="java.lang.String">
+		<parameterDescription><![CDATA[Steuert die Anzeige des Kennzeichnungs-/Akkreditierungsblocks (Markennummern, DAkkS-Kalibrierzeichen, Kalibrierdatum) auf Folgeseiten. Y = auf allen Seiten anzeigen (Standard). N = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
 	<parameter name="sign_names" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige der Namen im Unterschriftsbereich (Y/N).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
@@ -1563,11 +1571,13 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="493" y="80" width="57" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
@@ -1575,17 +1585,20 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="549" y="7" width="1" height="74" uuid="cf1fba74-b971-480b-865d-faba195c6210">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="493" y="27" width="57" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
@@ -1593,12 +1606,14 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<textField>
 				<reportElement x="496" y="63" width="51" height="15" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
@@ -1616,26 +1631,60 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="16" y="8" width="74" height="17" uuid="64db6463-420c-4209-9657-68afcf99652f"/>
+				<reportElement x="16" y="8" width="70" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000001">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Seite  "  + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="86" y="8" width="30" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000002">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="16" y="26" width="55" height="17" uuid="502ff312-d98d-4edc-9258-b3a559065a7a"/>
-				<textElement textAlignment="Left">
-					<font size="8" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Page  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<reportElement x="180" y="8" width="100" height="17" uuid="a1b2c3d4-0002-4a01-8e01-000000000003">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderCenter")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="8" width="40" height="17" uuid="a1b2c3d4-0002-4a01-8e01-000000000004">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderCenter")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="8" width="150" height="17" uuid="a1b2c3d4-0003-4a01-8e01-000000000005">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderRight")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="452" y="8" width="36" height="17" uuid="a1b2c3d4-0003-4a01-8e01-000000000006">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderRight")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="496" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333"/>
+				<reportElement x="496" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
     ? ""
     : $P{MarkNumber1}.trim().split("\\s+")[0]]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="496" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b"/>
+				<reportElement x="496" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2} == null
     ? ""
@@ -1645,7 +1694,49 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 	</pageHeader>
 	<pageFooter>
 		<band height="63" splitType="Stretch">
-			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1 || ($P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().toLowerCase().startsWith("footer"))]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="8" width="70" height="17" uuid="a1b2c3d4-0004-4a01-8e01-000000000007">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="70" y="8" width="30" height="17" uuid="a1b2c3d4-0004-4a01-8e01-000000000008">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="8" width="100" height="17" uuid="a1b2c3d4-0005-4a01-8e01-000000000009">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterCenter")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="320" y="8" width="40" height="17" uuid="a1b2c3d4-0005-4a01-8e01-00000000000a">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterCenter")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="8" width="138" height="17" uuid="a1b2c3d4-0006-4a01-8e01-00000000000b">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="538" y="8" width="23" height="17" uuid="a1b2c3d4-0006-4a01-8e01-00000000000c">
+					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
