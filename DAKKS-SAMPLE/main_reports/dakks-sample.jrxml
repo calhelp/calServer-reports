@@ -1661,7 +1661,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderCenter")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="8" width="150" height="17" uuid="a1b2c3d4-0003-4a01-8e01-000000000005">
@@ -1675,7 +1675,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderRight")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="496" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333">
@@ -1729,7 +1729,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="25" width="150" height="15" uuid="a2b2c3d4-0003-4a01-8e01-000000000005">
@@ -1747,7 +1747,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -1780,7 +1780,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterCenter")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="400" y="8" width="138" height="17" uuid="a1b2c3d4-0006-4a01-8e01-00000000000b">
@@ -1794,7 +1794,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterRight")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="25" width="70" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000007">
@@ -1830,7 +1830,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="400" y="25" width="138" height="15" uuid="a2b2c3d4-0006-4a01-8e01-00000000000b">
@@ -1848,7 +1848,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
