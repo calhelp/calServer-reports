@@ -15,6 +15,7 @@ In diesem Repository bündeln wir Beispielberichte (JRXML) für den calServer, s
 - [Berichte im calServer hochladen](#berichte-im-calserver-hochladen)
 - [Skripte für Upload und Automatisierung](#skripte-für-upload-und-automatisierung)
 - [Repository klonen & Arbeiten mit GitHub Actions](#repository-klonen--arbeiten-mit-github-actions)
+- [Ausblick: calServer V2 und die Zukunft der Reportvorlagen](#ausblick-calserver-v2-und-die-zukunft-der-reportvorlagen)
 - [Contributing & Community](#contributing--community)
 - [Fehler melden & Support](#fehler-melden--support)
 - [Lizenz](#lizenz)
@@ -217,6 +218,17 @@ Für Entwickler:innen und zum Testen der jeweils frisch gebauten Version gibt es
 
 ---
 
+## Ausblick: calServer V2 und die Zukunft der Reportvorlagen
+
+calServer V2 verwendet ein neues Datenbankschema mit **lesbaren Feldnamen** (`serial_number`, `next_calibration_date`) statt der bisherigen Metrologie-Codes (`I4202`, `C2303`). Für die Reportvorlagen bedeutet das:
+
+- **Die bestehenden Bundles in diesem Repository bleiben der stabile V1-Stand** (eingebettetes SQL über JDBC mit den Codespalten). Sie laufen unverändert auf allen V1-Systemen und werden weiter mit Bugfixes gepflegt.
+- **Neue V2-Bundles** erscheinen künftig als Varianten mit **JSON-Datasource** und lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert dann das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
+- Bestehende Vorlagen bitte **nicht** auf das V2-Schema-SQL umschreiben — die Strategie und der Migrationspfad sind hier dokumentiert: [Evaluierung: JasperReports-Strategie für calServer V2](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md).
+- Als Übersetzungshilfe zwischen alten Codes und neuen Feldnamen dient weiterhin der [FIELD-NAMES-Report](FIELD-NAMES/) sowie die Mapping-Referenz in der Strategie-Dokumentation.
+
+---
+
 ## Contributing & Community
 
 **Wir freuen uns auf deine Beiträge!**
@@ -264,6 +276,6 @@ E-Mail: [info@calhelp.de](mailto:info@calhelp.de)
 
 ---
 
-*Letzte Aktualisierung: 2026-03-31*
+*Letzte Aktualisierung: 2026-07-15*
 
 ```
