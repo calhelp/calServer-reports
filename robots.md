@@ -25,6 +25,17 @@ Use and target **JasperReports 6.20.6** for JRXML compatibility.
 
 ---
 
+## 0.2) V2 direction (announced)
+The existing bundles in this repo are the stable **V1 contract**: embedded SQL executed over a JDBC connection (`$P{REPORT_CONNECTION}`) against the V1 column codes (`I42xx`, `C23xx`, ...).
+
+### Rules
+- Do **NOT** rewrite existing bundles to query the calServer V2 schema (readable column names). They stay on the V1 contract and receive bug fixes only.
+- Future **V2 bundles** will use **JSON datasources** with readable API field names (`$F{serial_number}` instead of `$F{I4202}`); the data is supplied by the calServer backend, not by SQL inside the template. Structure and packaging rules for V2 bundles will be added here when the first V2 bundle lands.
+- Strategy and migration path: https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md
+- JasperReports 6.20.6 (section 0.1) remains binding for all bundles until the version policy is explicitly updated.
+
+---
+
 ## 1) Required bundle structure (MUST)
 For every report bundle folder (e.g. DAKKS-SAMPLE, DCC, ORDER-SAMPLE, STICKERS-*):
 - `main_reports/`  → contains the entry-point JRXML(s) users execute
