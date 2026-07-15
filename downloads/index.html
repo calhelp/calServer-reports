@@ -77,6 +77,11 @@
         const getCategory = (artifactName = "") => {
           const name = artifactName.toLowerCase();
 
+          // V2 (APEX) bundles use a JSON data source (readable api_name fields,
+          // no SQL). Grouped separately from the V1 (BASE) reports.
+          if (name.includes("-json-sample")) {
+            return "APEX · V2 (JSON-Datenquelle)";
+          }
           if (name.includes("sticker")) return "Sticker";
           if (name.includes("trace-forward") || name.includes("trace-backward")) {
             return "Trace";
@@ -107,6 +112,7 @@
         );
 
         const categoryOrder = [
+          "APEX · V2 (JSON-Datenquelle)",
           "Sticker",
           "Trace",
           "Kalibrier-/Zertifikatsberichte",

@@ -155,6 +155,25 @@ jobs:
             STICKERS/Sticker_Vorlage/subreports
           if-no-files-found: error
 
+      # V2 (APEX) — JSON-Datasource-Bundles
+      - name: Upload DAKKS-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DAKKS-JSON-SAMPLE
+          path: |
+            DAKKS-JSON-SAMPLE/main_reports
+            DAKKS-JSON-SAMPLE/subreports
+          if-no-files-found: error
+
+      - name: Upload INVENTORY-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: INVENTORY-JSON-SAMPLE
+          path: |
+            INVENTORY-JSON-SAMPLE/main_reports
+            INVENTORY-JSON-SAMPLE/subreports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -195,6 +214,10 @@ jobs:
               allowed_patterns+=('*.properties')
             elif [ "$sample" = "DCC" ]; then
               allowed_patterns+=('*.xsd' '*.json')
+            elif [[ "$sample" == *-JSON-SAMPLE ]]; then
+              # V2 (APEX) bundles ship a JSON data-adapter sample (sample-data.json)
+              # next to the JRXML — keep *.json in the ZIP.
+              allowed_patterns+=('*.json')
             fi
 
             rm -rf "${stage_dir}"
@@ -267,6 +290,10 @@ jobs:
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
           create_zip "TRACE-FORWARD" "trace-forward"
           create_zip "TRACE-BACKWARD" "trace-backward"
+
+          # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL)
+          create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"
+          create_zip "INVENTORY-JSON-SAMPLE" "inventory-json-sample"
 
 
       - name: Upload report ZIPs as artifact
