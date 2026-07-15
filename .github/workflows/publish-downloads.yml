@@ -101,6 +101,10 @@ jobs:
           get_last_modified "STICKERS/Sticker_Vorlage" "sticker-vorlage"
           get_last_modified "DAKKS-JSON-SAMPLE" "dakks-json-sample"
           get_last_modified "INVENTORY-JSON-SAMPLE" "inventory-json-sample"
+          get_last_modified "KALIBRIERKONTROLLBLATT-JSON-SAMPLE" "kalibrierkontrollblatt-json-sample"
+          get_last_modified "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
+          get_last_modified "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
+          get_last_modified "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -171,6 +175,10 @@ jobs:
               "trace-backward":    "TRACE-BACKWARD/main_reports/README.md",
               "dakks-json-sample":     "DAKKS-JSON-SAMPLE/README.md",
               "inventory-json-sample": "INVENTORY-JSON-SAMPLE/README.md",
+              "kalibrierkontrollblatt-json-sample": "KALIBRIERKONTROLLBLATT-JSON-SAMPLE/README.md",
+              "sticker-dakks-12mm-json-sample":     "STICKER-DAKKS-12MM-JSON-SAMPLE/README.md",
+              "sticker-dakks-18mm-json-sample":     "STICKER-DAKKS-18MM-JSON-SAMPLE/README.md",
+              "sticker-cal-inv-zebra-json-sample":  "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/README.md",
           }
 
           SCHEMA_MAP = {
@@ -189,6 +197,10 @@ jobs:
               "trace-backward":         "Trace-Backward (Rückführungskette)",
               "dakks-json-sample":      "DAkkS-Kalibrierschein (APEX · V2)",
               "inventory-json-sample":  "Geräte-Datenblatt (APEX · V2)",
+              "kalibrierkontrollblatt-json-sample": "Kalibrierkontrollblatt (APEX · V2)",
+              "sticker-dakks-12mm-json-sample":     "DAkkS-Aufkleber 12 mm (APEX · V2)",
+              "sticker-dakks-18mm-json-sample":     "DAkkS-Aufkleber 18 mm (APEX · V2)",
+              "sticker-cal-inv-zebra-json-sample":  "Zebra Inventar-/Kalibrier-Sticker (APEX · V2)",
           }
 
           INFO_TEMPLATE = """<!doctype html>

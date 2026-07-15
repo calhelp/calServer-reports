@@ -174,6 +174,36 @@ jobs:
             INVENTORY-JSON-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload KALIBRIERKONTROLLBLATT-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KALIBRIERKONTROLLBLATT-JSON-SAMPLE
+          path: |
+            KALIBRIERKONTROLLBLATT-JSON-SAMPLE/main_reports
+            KALIBRIERKONTROLLBLATT-JSON-SAMPLE/subreports
+          if-no-files-found: error
+
+      - name: Upload STICKER-DAKKS-12MM-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKER-DAKKS-12MM-JSON-SAMPLE
+          path: STICKER-DAKKS-12MM-JSON-SAMPLE/main_reports
+          if-no-files-found: error
+
+      - name: Upload STICKER-DAKKS-18MM-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKER-DAKKS-18MM-JSON-SAMPLE
+          path: STICKER-DAKKS-18MM-JSON-SAMPLE/main_reports
+          if-no-files-found: error
+
+      - name: Upload STICKER-CAL-INV-ZEBRA-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STICKER-CAL-INV-ZEBRA-JSON-SAMPLE
+          path: STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/main_reports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -295,6 +325,10 @@ jobs:
           # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL)
           create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"
           create_zip "INVENTORY-JSON-SAMPLE" "inventory-json-sample"
+          create_zip "KALIBRIERKONTROLLBLATT-JSON-SAMPLE" "kalibrierkontrollblatt-json-sample"
+          create_zip "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
+          create_zip "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
+          create_zip "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
 
 
       - name: Upload report ZIPs as artifact

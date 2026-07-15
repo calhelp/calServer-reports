@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "contract": "calibration-certificate",
+    "schema_version": "1.1",
+    "generated_at": "2026-07-15T10:00:00+00:00",
+    "locale": "de-DE",
+    "certificate_number": "DAkkS-K-2026-0042"
+  },
+  "accreditation": {
+    "mark_number_1": "D-K-12345-01-00",
+    "mark_number_2": "Deutsche Akkreditierungsstelle",
+    "calibration_mark": "DAkkS-K-12345"
+  },
+  "calibration": {
+    "calibration_date": "2026-06-30",
+    "next_calibration_date": "2027-06-30"
+  },
+  "device": {
+    "asset_number": "INV-9001"
+  }
+}
