@@ -1,10 +1,27 @@
 {
   "meta": {
     "contract": "calibration-certificate",
-    "schema_version": "1.0",
+    "schema_version": "1.1",
     "generated_at": "2026-07-15T10:00:00+00:00",
     "locale": "de-DE",
     "certificate_number": "DAkkS-K-2026-0042"
+  },
+  "laboratory": {
+    "name": "Kalibrierlabor Musterstadt GmbH",
+    "code": "D-K-12345-01-00",
+    "email": "labor@muster.example",
+    "phone": "+49 30 1234500",
+    "street": "Laborstraße 5",
+    "zip": "12345",
+    "city": "Musterstadt",
+    "country": "DE",
+    "calibration_place": "im Labor",
+    "company_name": "Kalibrierlabor Musterstadt GmbH"
+  },
+  "accreditation": {
+    "mark_number_1": "D-K-12345-01-00",
+    "mark_number_2": "Deutsche Akkreditierungsstelle",
+    "calibration_mark": "DAkkS-K-12345"
   },
   "calibration": {
     "id": "c1a2b3c4-0000-4000-8000-000000000001",
@@ -14,11 +31,7 @@
     "technician": "Erika Musterfrau",
     "temperature": 21.5,
     "humidity": 45.0,
-    "status": 1,
-    "calibration_time": "10:15",
-    "custom_fields": {
-      "lab_reference": "LAB-4711"
-    }
+    "custom_fields": { "lab_reference": "LAB-4711" }
   },
   "device": {
     "asset_number": "INV-9001",
@@ -28,21 +41,19 @@
     "model": "87V",
     "type_code": "DMM",
     "accuracy_class": "0.05",
-    "custom_fields": {
-      "customer_tag": "KND-DMM-7"
-    }
+    "custom_fields": { "customer_tag": "KND-DMM-7" }
   },
   "customer": {
     "name": "Muster GmbH",
     "customer_number": "K-1001",
     "street": "Musterstraße 1",
-    "zip": "12345",
-    "city": "Musterstadt",
-    "country": "DE",
-    "email": "kontakt@muster.example",
-    "phone": "+49 30 1234567",
-    "contact_person": "Max Muster",
-    "custom_fields": []
+    "zip": "54321",
+    "city": "Beispielstadt"
+  },
+  "procedure": {
+    "procedure_name": "Kalibrierung Gleichspannung/Gleichstrom",
+    "calibration_method": "Vergleich mit Referenznormal",
+    "measurement_conditions": "(23 ± 2) °C, (45 ± 10) % r.F."
   },
   "standards": [
     {
@@ -50,38 +61,63 @@
       "serial_number": "N-778899",
       "description": "Referenz-Kalibrator",
       "manufacturer": "Keysight",
-      "model": "3458A"
+      "model": "3458A",
+      "next_calibration_date": "2027-03-31",
+      "certificate_number": "DAkkS-K-2026-0100"
     },
     {
       "asset_number": "REF-002",
       "serial_number": "N-112233",
       "description": "Normalwiderstand 100 Ω",
       "manufacturer": "Fluke",
-      "model": "742A"
+      "model": "742A",
+      "next_calibration_date": "2027-05-15",
+      "certificate_number": "DAkkS-K-2026-0101"
     }
   ],
   "results": [
     {
       "row_num": 1,
       "test_desc": "Gleichspannung 10 V",
-      "fixq": "10.000",
-      "varq": "10.001",
-      "lower_limit": "9.995",
-      "upper_limit": "10.005",
-      "exp_uncert": "0.002",
-      "std_uncert": "0.001",
-      "pass_fail": "i.O."
+      "accred": "1",
+      "pass_fail": "i.O.",
+      "fixq": "10.000", "fixq_p": "", "fixq_u": "V",
+      "varq": "10.001", "varq_p": "", "varq_u": "V",
+      "lower_limit": "9.995", "lower_limit_p": "", "lower_limit_u": "V",
+      "upper_limit": "10.005", "upper_limit_p": "", "upper_limit_u": "V",
+      "exp_uncert": "2.0", "exp_uncert_p": "m", "exp_uncert_u": "V"
     },
     {
       "row_num": 2,
+      "test_desc": "Gleichspannung 100 mV",
+      "accred": "1",
+      "pass_fail": "i.O.",
+      "fixq": "100.0", "fixq_p": "m", "fixq_u": "V",
+      "varq": "100.2", "varq_p": "m", "varq_u": "V",
+      "lower_limit": "99.5", "lower_limit_p": "m", "lower_limit_u": "V",
+      "upper_limit": "100.5", "upper_limit_p": "m", "upper_limit_u": "V",
+      "exp_uncert": "50", "exp_uncert_p": "µ", "exp_uncert_u": "V"
+    },
+    {
+      "row_num": 3,
       "test_desc": "Gleichstrom 1 A",
-      "fixq": "1.0000",
-      "varq": "0.9998",
-      "lower_limit": "0.9990",
-      "upper_limit": "1.0010",
-      "exp_uncert": "0.0003",
-      "std_uncert": "0.00015",
-      "pass_fail": "i.O."
+      "accred": "0",
+      "pass_fail": "i.O.",
+      "fixq": "1.0000", "fixq_p": "", "fixq_u": "A",
+      "varq": "0.9998", "varq_p": "", "varq_u": "A",
+      "lower_limit": "0.9990", "lower_limit_p": "", "lower_limit_u": "A",
+      "upper_limit": "1.0010", "upper_limit_p": "", "upper_limit_u": "A",
+      "exp_uncert": "0.3", "exp_uncert_p": "m", "exp_uncert_u": "A"
     }
-  ]
+  ],
+  "signatures": [
+    { "role": "technician", "name": "Erika Musterfrau" },
+    { "role": "approver", "name": "Dr. Max Mustermann" }
+  ],
+  "texts": {
+    "cert_description": null,
+    "traceability": "Die Kalibrierung erfolgte rückführbar auf nationale Normale der PTB.",
+    "uncertainty": "Die angegebene erweiterte Messunsicherheit ergibt sich aus der Standardmessunsicherheit multipliziert mit dem Erweiterungsfaktor k=2.",
+    "conformity_legend": "* im Akkreditierungsumfang"
+  }
 }
