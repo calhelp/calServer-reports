@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 standards subreport: fed the "standards" array of the
+  calibration-certificate contract via
+  ((JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("standards").
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="standards" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b1a7c0de-0003-4a10-9c03-000000000003">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="8"/>
+	<field name="asset_number" class="java.lang.String">
+		<fieldDescription><![CDATA[asset_number]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="manufacturer" class="java.lang.String">
+		<fieldDescription><![CDATA[manufacturer]]></fieldDescription>
+	</field>
+	<field name="model" class="java.lang.String">
+		<fieldDescription><![CDATA[model]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="14">
+			<textField>
+				<reportElement x="0" y="0" width="90" height="13"/>
+				<textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="90" y="0" width="245" height="13"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="200" height="13"/>
+				<textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
