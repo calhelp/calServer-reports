@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "contract": "calibration-certificate",
+    "schema_version": "1.0",
+    "generated_at": "2026-07-15T10:00:00+00:00",
+    "locale": "de-DE",
+    "certificate_number": "DAkkS-K-2026-0042"
+  },
+  "calibration": {
+    "id": "c1a2b3c4-0000-4000-8000-000000000001",
+    "certificate_number": "DAkkS-K-2026-0042",
+    "calibration_date": "2026-06-30",
+    "next_calibration_date": "2027-06-30",
+    "technician": "Erika Musterfrau",
+    "temperature": 21.5,
+    "humidity": 45.0,
+    "status": 1,
+    "calibration_time": "10:15",
+    "custom_fields": {
+      "lab_reference": "LAB-4711"
+    }
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Digitalmultimeter Fluke 87V",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "type_code": "DMM",
+    "accuracy_class": "0.05",
+    "custom_fields": {
+      "customer_tag": "KND-DMM-7"
+    }
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "12345",
+    "city": "Musterstadt",
+    "country": "DE",
+    "email": "kontakt@muster.example",
+    "phone": "+49 30 1234567",
+    "contact_person": "Max Muster",
+    "custom_fields": []
+  },
+  "standards": [
+    {
+      "asset_number": "REF-001",
+      "serial_number": "N-778899",
+      "description": "Referenz-Kalibrator",
+      "manufacturer": "Keysight",
+      "model": "3458A"
+    },
+    {
+      "asset_number": "REF-002",
+      "serial_number": "N-112233",
+      "description": "Normalwiderstand 100 Ω",
+      "manufacturer": "Fluke",
+      "model": "742A"
+    }
+  ],
+  "results": [
+    {
+      "row_num": 1,
+      "test_desc": "Gleichspannung 10 V",
+      "fixq": "10.000",
+      "varq": "10.001",
+      "lower_limit": "9.995",
+      "upper_limit": "10.005",
+      "exp_uncert": "0.002",
+      "std_uncert": "0.001",
+      "pass_fail": "i.O."
+    },
+    {
+      "row_num": 2,
+      "test_desc": "Gleichstrom 1 A",
+      "fixq": "1.0000",
+      "varq": "0.9998",
+      "lower_limit": "0.9990",
+      "upper_limit": "1.0010",
+      "exp_uncert": "0.0003",
+      "std_uncert": "0.00015",
+      "pass_fail": "i.O."
+    }
+  ]
+}
