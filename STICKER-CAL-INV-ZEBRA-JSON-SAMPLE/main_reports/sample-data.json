@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "contract": "inventory-datasheet",
+    "schema_version": "1.1",
+    "generated_at": "2026-07-15T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Digitalmultimeter Fluke 87V",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "type_code": "DMM",
+    "accuracy_class": "0.05",
+    "location": "Labor 1",
+    "active_location": {
+      "location_1": "Gebäude A",
+      "location_2": "Raum 101",
+      "location_3": "Regal 3",
+      "custom_fields": {}
+    },
+    "cost_center": "K-42",
+    "status": 1,
+    "calibration_interval": 12,
+    "last_calibration_date": "2026-06-30",
+    "next_calibration_date": "2027-06-30",
+    "custom_fields": { "customer_tag": "KND-DMM-7" }
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "custom_fields": {}
+  },
+  "calibrations": [
+    { "calibration_date": "2026-06-30", "next_calibration_date": "2027-06-30", "certificate_number": "DAkkS-K-2026-0042", "technician": "Erika Musterfrau" }
+  ]
+}

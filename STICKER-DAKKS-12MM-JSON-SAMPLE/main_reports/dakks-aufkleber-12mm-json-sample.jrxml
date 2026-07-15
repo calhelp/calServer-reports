@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 DAkkS calibration label 12 mm (ADR-009, contract "calibration-certificate"
+  v1.1). Filled from a JSON data source — NO SQL. Reproduces the V1
+  DAKKS-Aufkleber_12mm micro-label (34x47 pt ≈ 12x16.6 mm) against readable
+  api_name fields: accreditation.mark_number_1/_2 + calibration.calibration_date.
+  No QR, no report-level variables. See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-aufkleber-12mm-json-sample" pageWidth="34" pageHeight="47" columnWidth="34" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" whenNoDataType="AllSectionsNoDetail" uuid="c4cae300-0210-4c40-9e30-000000000210">
+	<property name="com.jaspersoft.studio.data.defadapter" value="dakks-aufkleber-12mm-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="4"/>
+	<field name="mark_number_1" class="java.lang.String"><fieldDescription><![CDATA[accreditation.mark_number_1]]></fieldDescription></field>
+	<field name="mark_number_2" class="java.lang.String"><fieldDescription><![CDATA[accreditation.mark_number_2]]></fieldDescription></field>
+	<field name="cal_date" class="java.lang.String"><fieldDescription><![CDATA[calibration.calibration_date]]></fieldDescription></field>
+	<detail>
+		<band height="47">
+			<line><reportElement x="1" y="1" width="32" height="1"/></line>
+			<line><reportElement x="1" y="46" width="32" height="1"/></line>
+			<line><reportElement x="1" y="1" width="1" height="45"/></line>
+			<line><reportElement x="33" y="1" width="1" height="45"/></line>
+			<staticText><reportElement x="2" y="3" width="30" height="6"/><textElement textAlignment="Center"><font size="5" isBold="true"/></textElement><text><![CDATA[DAkkS]]></text></staticText>
+			<textField><reportElement x="2" y="11" width="30" height="12"/><textElement textAlignment="Center"><font size="4"/></textElement><textFieldExpression><![CDATA[$F{mark_number_1}]]></textFieldExpression></textField>
+			<staticText><reportElement x="2" y="26" width="30" height="6"/><textElement textAlignment="Center"><font size="4"/></textElement><text><![CDATA[Kalibriert:]]></text></staticText>
+			<textField><reportElement x="2" y="33" width="30" height="8"/><textElement textAlignment="Center"><font size="5" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{cal_date}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Jaspersoft Studio JSON data adapter for the V2 Kalibrierkontrollblatt sample.
+
+  Bundled so the report previews out-of-the-box: opening the main JRXML and
+  hitting "Preview" fills it from the sibling sample-data.json (contract
+  inventory-datasheet v1.1) via this adapter, referenced by the report property
+  com.jaspersoft.studio.data.defadapter.
+
+  Authoring/preview aid only — Studio-namespaced, inert in the report-runner
+  (the calServer V2 backend supplies the JSON datasource at runtime; see README).
+-->
+<jsonDataAdapter class="net.sf.jasperreports.data.json.JsonDataAdapterImpl">
+	<name>Kalibrierkontrollblatt JSON Sample (sample-data.json)</name>
+	<dataFile class="net.sf.jasperreports.data.StandardRepositoryDataLocation">
+		<location>sample-data.json</location>
+	</dataFile>
+	<language>json</language>
+	<useConnection>true</useConnection>
+	<selectExpression></selectExpression>
+</jsonDataAdapter>

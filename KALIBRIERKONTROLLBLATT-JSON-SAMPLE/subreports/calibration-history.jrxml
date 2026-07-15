@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 calibration-history subreport (contract inventory-datasheet v1.1): fed the
+  "calibrations" array via subDataSource("calibrations"). Static German column
+  headers (no $V{} variable → no null-in-header risk).
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="calibration-history" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c3c9e2f0-0201-4c31-9e21-000000000202">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="8"/>
+	<field name="calibration_date" class="java.lang.String"><fieldDescription><![CDATA[calibration_date]]></fieldDescription></field>
+	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[next_calibration_date]]></fieldDescription></field>
+	<field name="certificate_number" class="java.lang.String"><fieldDescription><![CDATA[certificate_number]]></fieldDescription></field>
+	<field name="technician" class="java.lang.String"><fieldDescription><![CDATA[technician]]></fieldDescription></field>
+	<columnHeader>
+		<band height="16">
+			<staticText><reportElement x="0" y="0" width="120" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[Kalibrierdatum]]></text></staticText>
+			<staticText><reportElement x="120" y="0" width="120" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[Nächste Fälligkeit]]></text></staticText>
+			<staticText><reportElement x="240" y="0" width="200" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[Zertifikat-Nr.]]></text></staticText>
+			<staticText><reportElement x="440" y="0" width="121" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[Bearbeiter]]></text></staticText>
+			<line><reportElement x="0" y="15" width="561" height="1"/></line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14">
+			<textField><reportElement x="0" y="0" width="120" height="13"/><textFieldExpression><![CDATA[$F{calibration_date}]]></textFieldExpression></textField>
+			<textField><reportElement x="120" y="0" width="120" height="13"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
+			<textField><reportElement x="240" y="0" width="200" height="13"/><textFieldExpression><![CDATA[$F{certificate_number}]]></textFieldExpression></textField>
+			<textField><reportElement x="440" y="0" width="121" height="13"/><textFieldExpression><![CDATA[$F{technician}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+</jasperReport>

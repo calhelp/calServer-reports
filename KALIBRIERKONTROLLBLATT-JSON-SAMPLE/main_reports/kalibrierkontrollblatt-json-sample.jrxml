@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 Kalibrierkontrollblatt (ADR-009, contract "inventory-datasheet" v1.1). Filled
+  from a JSON data source — NO SQL, NO V1 code columns. Rebuilds the V1
+  KALIBRIERKONTROLLBLATT layout against readable api_name fields: device master-data
+  grid (incl. structured active_location + cost_center) plus the full calibration
+  history via subDataSource("calibrations"). All labels are staticText, so there is
+  no report-level $V{} variable that could evaluate to null in the title band.
+  See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kalibrierkontrollblatt-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="c3c9e2f0-0200-4c30-9e20-000000000201">
+	<!-- Studio-only: preview fills from sample-data.json via the bundled adapter.
+	     Ignored by the report-runner, which is handed the JSON datasource by the
+	     calServer V2 backend at runtime (see README). -->
+	<property name="com.jaspersoft.studio.data.defadapter" value="kalibrierkontrollblatt-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Label" fontSize="8" isBold="true"/>
+	<style name="Value" fontSize="9"/>
+	<style name="SectionTitle" fontSize="10" isBold="true"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
+	</parameter>
+	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[device.asset_number]]></fieldDescription></field>
+	<field name="serial_number" class="java.lang.String"><fieldDescription><![CDATA[device.serial_number]]></fieldDescription></field>
+	<field name="description" class="java.lang.String"><fieldDescription><![CDATA[device.description]]></fieldDescription></field>
+	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[device.manufacturer]]></fieldDescription></field>
+	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[device.model]]></fieldDescription></field>
+	<field name="type_code" class="java.lang.String"><fieldDescription><![CDATA[device.type_code]]></fieldDescription></field>
+	<field name="accuracy_class" class="java.lang.String"><fieldDescription><![CDATA[device.accuracy_class]]></fieldDescription></field>
+	<field name="cost_center" class="java.lang.String"><fieldDescription><![CDATA[device.cost_center]]></fieldDescription></field>
+	<field name="calibration_interval" class="java.lang.String"><fieldDescription><![CDATA[device.calibration_interval]]></fieldDescription></field>
+	<field name="last_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[device.last_calibration_date]]></fieldDescription></field>
+	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[device.next_calibration_date]]></fieldDescription></field>
+	<field name="loc_building" class="java.lang.String"><fieldDescription><![CDATA[device.active_location.location_1]]></fieldDescription></field>
+	<field name="loc_room" class="java.lang.String"><fieldDescription><![CDATA[device.active_location.location_2]]></fieldDescription></field>
+	<field name="loc_object" class="java.lang.String"><fieldDescription><![CDATA[device.active_location.location_3]]></fieldDescription></field>
+	<field name="customer_name" class="java.lang.String"><fieldDescription><![CDATA[customer.name]]></fieldDescription></field>
+	<field name="customer_number" class="java.lang.String"><fieldDescription><![CDATA[customer.customer_number]]></fieldDescription></field>
+	<field name="customer_city" class="java.lang.String"><fieldDescription><![CDATA[customer.city]]></fieldDescription></field>
+	<title>
+		<band height="214">
+			<textField>
+				<reportElement x="0" y="0" width="561" height="22"/>
+				<textElement textAlignment="Center"><font size="15" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA["Kalibrierkontrollblatt"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="24" width="561" height="14"/>
+				<textElement textAlignment="Center"><font size="10"/></textElement>
+				<textFieldExpression><![CDATA[($F{asset_number} == null ? "" : $F{asset_number}) + "  ·  " + ($F{description} == null ? "" : $F{description})]]></textFieldExpression>
+			</textField>
+			<line><reportElement x="0" y="44" width="561" height="1"/></line>
+			<!-- Prüfmittel-Stammdaten -->
+			<staticText><reportElement style="SectionTitle" x="0" y="52" width="561" height="14"/><text><![CDATA[Prüfmittel]]></text></staticText>
+			<staticText><reportElement style="Label" x="0" y="70" width="130" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="70" width="150" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="70" width="120" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="70" width="151" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="86" width="130" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="86" width="150" height="13"/><textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="86" width="120" height="13"/><text><![CDATA[Typ / Genauigkeit]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="86" width="151" height="13"/><textFieldExpression><![CDATA[($F{type_code} == null ? "" : $F{type_code}) + "  Kl. " + ($F{accuracy_class} == null ? "" : $F{accuracy_class})]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="102" width="130" height="13"/><text><![CDATA[Kostenstelle]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="102" width="150" height="13"/><textFieldExpression><![CDATA[$F{cost_center}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="102" width="120" height="13"/><text><![CDATA[Kalibrierintervall (Mon.)]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="102" width="151" height="13"/><textFieldExpression><![CDATA[$F{calibration_interval}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="118" width="130" height="13"/><text><![CDATA[Standort (Gebäude/Raum)]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="118" width="150" height="13"/><textFieldExpression><![CDATA[($F{loc_building} == null ? "" : $F{loc_building}) + (($F{loc_room} == null || $F{loc_room}.isEmpty()) ? "" : (" / " + $F{loc_room}))]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="118" width="120" height="13"/><text><![CDATA[Objekt / Ebene]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="118" width="151" height="13"/><textFieldExpression><![CDATA[$F{loc_object}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="134" width="130" height="13"/><text><![CDATA[Letzte Kalibrierung]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="134" width="150" height="13"/><textFieldExpression><![CDATA[$F{last_calibration_date}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="134" width="120" height="13"/><text><![CDATA[Nächste Kalibrierung]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="134" width="151" height="13"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
+			<line><reportElement x="0" y="156" width="561" height="1"/></line>
+			<!-- Kunde -->
+			<staticText><reportElement style="SectionTitle" x="0" y="164" width="561" height="14"/><text><![CDATA[Kunde]]></text></staticText>
+			<staticText><reportElement style="Label" x="0" y="182" width="130" height="13"/><text><![CDATA[Kunden-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="182" width="150" height="13"/><textFieldExpression><![CDATA[$F{customer_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="182" width="120" height="13"/><text><![CDATA[Kunde / Ort]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="182" width="151" height="13"/><textFieldExpression><![CDATA[($F{customer_name} == null ? "" : $F{customer_name}) + (($F{customer_city} == null || $F{customer_city}.isEmpty()) ? "" : (", " + $F{customer_city}))]]></textFieldExpression></textField>
+		</band>
+	</title>
+	<detail>
+		<band height="30">
+			<staticText><reportElement style="SectionTitle" x="0" y="4" width="561" height="14"/><text><![CDATA[Kalibrierhistorie]]></text></staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="20" width="561" height="10" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("calibrations")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/calibration-history.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<line><reportElement x="0" y="0" width="561" height="1"/></line>
+			<staticText><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Kalibrierkontrollblatt · calServer V2]]></text></staticText>
+			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
+			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
+		</band>
+	</pageFooter>
+</jasperReport>
