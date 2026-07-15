@@ -13,7 +13,10 @@
 	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[model]]></fieldDescription></field>
 	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[next_calibration_date]]></fieldDescription></field>
 	<field name="certificate_number" class="java.lang.String"><fieldDescription><![CDATA[certificate_number]]></fieldDescription></field>
-	<variable name="isDe" class="java.lang.Boolean"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression></variable>
+	<!-- initialValueExpression required: the columnHeader band prints before the
+	     first detail record, so without it $V{isDe} would be null there and the
+	     bilingual header labels would render "null". -->
+	<variable name="isDe" class="java.lang.Boolean" calculation="Nothing"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression><initialValueExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></initialValueExpression></variable>
 	<columnHeader>
 		<band height="15">
 			<staticText><reportElement x="0" y="0" width="70" height="14"/><textElement><font isBold="true"/></textElement><text><![CDATA[Inv.-Nr.]]></text></staticText>

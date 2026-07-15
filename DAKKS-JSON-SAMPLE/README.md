@@ -17,7 +17,31 @@ unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
 | `main_reports/dakks-json-sample.jrxml` | Hauptbericht: Labor-Kopf, zweisprachiges Objekt-Stammdatengrid, Kalibrierzeichen-Box (Line-Art), QR aus `device.asset_number`, Abschnittskörper (Verfahren, Messbedingungen), Signatur-/Freigabebereich, Seiten-Footer |
 | `subreports/results.jrxml` | Messergebnis-Tabelle; `results`-Array via `subDataSource("results")` — mit SI-Wert+Präfix+Einheit-Konkatenation und per-Zeile `accred`-„*"-Symbol |
 | `subreports/standards.jrxml` | Verwendete Normale; `standards`-Array via `subDataSource("standards")` — inkl. nächster Kalibrierung + Zertifikat-Nr. |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.1**) — als JSON-Data-Adapter in Jaspersoft Studio verwenden |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.1**) |
+| `main_reports/dakks-json-sample_adapter.xml` | Mitgelieferter Jaspersoft-Studio-**JSON-Data-Adapter** auf `sample-data.json` — macht die Vorschau turnkey (siehe „Vorschau ohne Backend") |
+
+## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
+
+Dieses Bundle ist **datenquellenlos**: Der Bericht enthält **kein** eingebettetes
+SQL und **keine** Beispieldaten im Template selbst. Er rendert nur dann Inhalt,
+wenn ihm eine **JSON-Datenquelle** übergeben wird. Wird er ohne Datenquelle
+ausgeführt — z. B. „Preview" in Jaspersoft Studio ohne konfigurierten
+Data-Adapter, oder Generierung in der Live-Umgebung **ohne** die Report-Variable
+`data_contract` — bleibt die Seite leer bzw. der Lauf bricht auf dem
+Subreport-`subDataSource(...)`-Aufruf ab. Das ist **kein** Template-Fehler,
+sondern die fehlende Datenanbindung. Abhilfe:
+
+- **Vorschau ohne Backend (Jaspersoft Studio):** Das Bundle bringt den Adapter
+  `dakks-json-sample_adapter.xml` mit und referenziert ihn über die
+  Report-Property `com.jaspersoft.studio.data.defadapter`. „Open → Preview"
+  füllt den Schein direkt aus `sample-data.json`. Falls die Studio-Version den
+  Default-Adapter nicht automatisch zieht, den Adapter im Vorschau-Dropdown
+  einmalig auswählen.
+- **Live-Umgebung (calServer V2):** Auf dem Report-Setting die report-scoped
+  Variable `data_contract = calibration-certificate` setzen — dann liefert das
+  Backend (`CalibrationReportDataBuilder`) den JSON-Datensatz an den Runner.
+  Ohne diese Variable läuft der klassische JDBC-Pfad, der hier mangels
+  `<queryString>` keine Daten hat.
 
 ## Datenanbindung
 
@@ -46,8 +70,9 @@ siehe `sample-data.json`.
 
 ## Autoren-Hinweise (Jaspersoft Studio)
 
-1. In Studio einen **JSON-Data-Adapter** anlegen und auf `sample-data.json`
-   zeigen lassen.
+1. Der mitgelieferte **JSON-Data-Adapter** (`dakks-json-sample_adapter.xml`)
+   zeigt bereits auf `sample-data.json` und ist als Default-Adapter hinterlegt —
+   „Preview" genügt. (Alternativ selbst einen JSON-Data-Adapter anlegen.)
 2. Felder über ihren JSON-Pfad (`<fieldDescription>`) binden, nicht über SQL.
 3. Für wiederkehrende Listen (Ergebnisse, Normale) ein Subreport mit
    `subDataSource("<array>")` als Datenquelle verwenden.
