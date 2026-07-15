@@ -10,6 +10,10 @@
   Bilingual labels switch on $P{Sprache}. See main_reports/sample-data.json.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="b1a7c0de-0100-4a10-9c10-000000000010">
+	<!-- Studio-only: preview fills from sample-data.json via the bundled adapter.
+	     Ignored by the report-runner, which is handed the JSON datasource by the
+	     calServer V2 backend at runtime (see README). -->
+	<property name="com.jaspersoft.studio.data.defadapter" value="dakks-json-sample_adapter.xml"/>
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<style name="Label" fontSize="8" isBold="true"/>
 	<style name="Value" fontSize="9"/>
@@ -46,7 +50,11 @@
 	<field name="text_traceability" class="java.lang.String"><fieldDescription><![CDATA[texts.traceability]]></fieldDescription></field>
 	<field name="text_uncertainty" class="java.lang.String"><fieldDescription><![CDATA[texts.uncertainty]]></fieldDescription></field>
 	<field name="text_conformity" class="java.lang.String"><fieldDescription><![CDATA[texts.conformity_legend]]></fieldDescription></field>
-	<variable name="isDe" class="java.lang.Boolean"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression></variable>
+	<!-- Language flag. Needs an initialValueExpression: the title band (and any
+	     other report-level band) is evaluated before the first detail record, so
+	     without an initial value $V{isDe} would be null there and the bilingual
+	     ternaries in the title would render "null". -->
+	<variable name="isDe" class="java.lang.Boolean" calculation="Nothing"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression><initialValueExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></initialValueExpression></variable>
 	<title>
 		<band height="300">
 			<textField>

@@ -216,8 +216,9 @@ jobs:
               allowed_patterns+=('*.xsd' '*.json')
             elif [[ "$sample" == *-JSON-SAMPLE ]]; then
               # V2 (APEX) bundles ship a JSON data-adapter sample (sample-data.json)
-              # next to the JRXML — keep *.json in the ZIP.
-              allowed_patterns+=('*.json')
+              # plus a Jaspersoft Studio data-adapter (*.xml) so the report
+              # previews out-of-the-box — keep both in the ZIP.
+              allowed_patterns+=('*.json' '*.xml')
             fi
 
             rm -rf "${stage_dir}"

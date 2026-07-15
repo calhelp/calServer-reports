@@ -28,7 +28,10 @@
 	<field name="exp_uncert" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert]]></fieldDescription></field>
 	<field name="exp_uncert_p" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert_p]]></fieldDescription></field>
 	<field name="exp_uncert_u" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert_u]]></fieldDescription></field>
-	<variable name="isDe" class="java.lang.Boolean"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression></variable>
+	<!-- initialValueExpression required: the columnHeader band prints before the
+	     first detail record, so without it $V{isDe} would be null there and the
+	     bilingual header labels would render "null". -->
+	<variable name="isDe" class="java.lang.Boolean" calculation="Nothing"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression><initialValueExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></initialValueExpression></variable>
 	<variable name="Nominal" class="java.lang.String"><variableExpression><![CDATA[($F{fixq}==null?"":$F{fixq}) + ($F{fixq_p}==null||$F{fixq_p}.isEmpty()?"":(" "+$F{fixq_p})) + ($F{fixq_u}==null?"":$F{fixq_u})]]></variableExpression></variable>
 	<variable name="Measured" class="java.lang.String"><variableExpression><![CDATA[($F{varq}==null?"":$F{varq}) + ($F{varq_p}==null||$F{varq_p}.isEmpty()?"":(" "+$F{varq_p})) + ($F{varq_u}==null?"":$F{varq_u})]]></variableExpression></variable>
 	<variable name="Lower" class="java.lang.String"><variableExpression><![CDATA[($F{lower_limit}==null?"":$F{lower_limit}) + ($F{lower_limit_p}==null||$F{lower_limit_p}.isEmpty()?"":(" "+$F{lower_limit_p})) + ($F{lower_limit_u}==null?"":$F{lower_limit_u})]]></variableExpression></variable>
