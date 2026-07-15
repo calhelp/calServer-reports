@@ -30,9 +30,16 @@ The existing bundles in this repo are the stable **V1 contract**: embedded SQL e
 
 ### Rules
 - Do **NOT** rewrite existing bundles to query the calServer V2 schema (readable column names). They stay on the V1 contract and receive bug fixes only.
-- Future **V2 bundles** will use **JSON datasources** with readable API field names (`$F{serial_number}` instead of `$F{I4202}`); the data is supplied by the calServer backend, not by SQL inside the template. Structure and packaging rules for V2 bundles will be added here when the first V2 bundle lands.
+- **V2 bundles** use **JSON datasources** with readable API field names (`$F{serial_number}` instead of `$F{I4202}`); the data is supplied by the calServer backend, not by SQL inside the template.
 - Strategy and migration path: https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md
 - JasperReports 6.20.6 (section 0.1) remains binding for all bundles until the version policy is explicitly updated.
+
+### V2 (APEX) packaging rules (MUST — now live)
+- **Naming:** a V2 bundle folder ends with `-JSON-SAMPLE` (e.g. `DAKKS-JSON-SAMPLE`); its ZIP name is the lowercased form (e.g. `dakks-json-sample`). The packaging workflows and the downloads page key off this suffix.
+- **JSON sample allowed:** V2 bundles ship a `main_reports/sample-data.json` (a JSON data-adapter fixture). The `create_zip()` allowlist matches `*-JSON-SAMPLE` and keeps `*.json` — do NOT drop the sample. (Baseline allowlist is `*.jrxml`/`*.md` only; without the `*.json` branch the sample is deleted before zipping.)
+- **Downloads page:** V2 bundles appear in their own category **"APEX · V2 (JSON-Datenquelle)"** (matched on `-json-sample` in `downloads/index.html` `getCategory()`), separate from the V1 (BASE) reports. Add a `get_last_modified` line + `README_MAP`/`TITLE_MAP` entry in `publish-downloads.yml` for each new V2 bundle.
+- **No API upload / no release (for now):** V2 bundles are **downloads-page only**. Do NOT add `/api/report/<uuid>` upload steps or `release-reports.yml` entries for them unless that policy is explicitly changed.
+- Structure (`main_reports/` + `subreports/`) and the 6.20.6 pin apply unchanged.
 
 ---
 

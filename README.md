@@ -206,7 +206,7 @@ Alle aktuellen und früheren ZIP-Archive mit Reportvorlagen stehen als Release-P
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
 - [Alle Releases durchsuchen](https://github.com/calhelp/calServer-reports/releases)
 
-**Hinweis für GitHub Pages:** Die Downloads-Seite funktioniert nur, wenn GitHub Pages auf den Branch `gh-pages` zeigt und der Workflow `publish-downloads` mindestens einmal erfolgreich gelaufen ist.
+**Hinweis für GitHub Pages:** Die Downloads-Seite wird vom Workflow `publish-downloads` gebaut und über die GitHub-Actions-Pages-Quelle (`actions/deploy-pages`) veröffentlicht — die Pages-Quelle muss in den Repo-Einstellungen auf **„GitHub Actions"** stehen (kein `gh-pages`-Branch nötig). Der Workflow muss mindestens einmal erfolgreich gelaufen sein.
 
 **Troubleshooting-Checkliste (optional):**
 - Existiert der Branch `gh-pages`?
@@ -223,7 +223,7 @@ Für Entwickler:innen und zum Testen der jeweils frisch gebauten Version gibt es
 calServer V2 verwendet ein neues Datenbankschema mit **lesbaren Feldnamen** (`serial_number`, `next_calibration_date`) statt der bisherigen Metrologie-Codes (`I4202`, `C2303`). Für die Reportvorlagen bedeutet das:
 
 - **Die bestehenden Bundles in diesem Repository bleiben der stabile V1-Stand** (eingebettetes SQL über JDBC mit den Codespalten). Sie laufen unverändert auf allen V1-Systemen und werden weiter mit Bugfixes gepflegt.
-- **Neue V2-Bundles** erscheinen künftig als Varianten mit **JSON-Datasource** und lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert dann das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
+- **V2-Bundles** (Ordner mit Endung `-JSON-SAMPLE`, z. B. `DAKKS-JSON-SAMPLE`, `INVENTORY-JSON-SAMPLE`) nutzen eine **JSON-Datasource** mit lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL). Auf der [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) erscheinen sie in der eigenen Kategorie **„APEX · V2 (JSON-Datenquelle)"** (APEX = interner Codename für V2), getrennt von den V1-Vorlagen.
 - Bestehende Vorlagen bitte **nicht** auf das V2-Schema-SQL umschreiben — die Strategie und der Migrationspfad sind hier dokumentiert: [Evaluierung: JasperReports-Strategie für calServer V2](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md).
 - Als Übersetzungshilfe zwischen alten Codes und neuen Feldnamen dient weiterhin der [FIELD-NAMES-Report](FIELD-NAMES/) sowie die Mapping-Referenz in der Strategie-Dokumentation.
 
