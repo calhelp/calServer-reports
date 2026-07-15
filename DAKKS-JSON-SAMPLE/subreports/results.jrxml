@@ -1,114 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 results subreport: fed the "results" array of the calibration-certificate
-  contract via ((JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("results").
-  Each field reads a readable api_name relative to a result element.
+  V2 measurement-results subreport (contract calibration-certificate v1.1): fed
+  the "results" array via subDataSource("results"). Reproduces the accredited
+  layout's value/prefix/unit concatenation (e.g. "10.5 mV") and the per-row
+  accreditation "*" symbol driven by the readable `accred` field.
 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="results" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b1a7c0de-0002-4a10-9c02-000000000002">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="results" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b1a7c0de-0102-4a10-9c12-000000000012">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="8"/>
-	<field name="row_num" class="java.lang.Integer">
-		<fieldDescription><![CDATA[row_num]]></fieldDescription>
-	</field>
-	<field name="test_desc" class="java.lang.String">
-		<fieldDescription><![CDATA[test_desc]]></fieldDescription>
-	</field>
-	<field name="fixq" class="java.lang.String">
-		<fieldDescription><![CDATA[fixq]]></fieldDescription>
-	</field>
-	<field name="varq" class="java.lang.String">
-		<fieldDescription><![CDATA[varq]]></fieldDescription>
-	</field>
-	<field name="lower_limit" class="java.lang.String">
-		<fieldDescription><![CDATA[lower_limit]]></fieldDescription>
-	</field>
-	<field name="upper_limit" class="java.lang.String">
-		<fieldDescription><![CDATA[upper_limit]]></fieldDescription>
-	</field>
-	<field name="exp_uncert" class="java.lang.String">
-		<fieldDescription><![CDATA[exp_uncert]]></fieldDescription>
-	</field>
-	<field name="pass_fail" class="java.lang.String">
-		<fieldDescription><![CDATA[pass_fail]]></fieldDescription>
-	</field>
+	<parameter name="Sprache" class="java.lang.String"><defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression></parameter>
+	<field name="row_num" class="java.lang.Integer"><fieldDescription><![CDATA[row_num]]></fieldDescription></field>
+	<field name="test_desc" class="java.lang.String"><fieldDescription><![CDATA[test_desc]]></fieldDescription></field>
+	<field name="accred" class="java.lang.String"><fieldDescription><![CDATA[accred]]></fieldDescription></field>
+	<field name="pass_fail" class="java.lang.String"><fieldDescription><![CDATA[pass_fail]]></fieldDescription></field>
+	<field name="fixq" class="java.lang.String"><fieldDescription><![CDATA[fixq]]></fieldDescription></field>
+	<field name="fixq_p" class="java.lang.String"><fieldDescription><![CDATA[fixq_p]]></fieldDescription></field>
+	<field name="fixq_u" class="java.lang.String"><fieldDescription><![CDATA[fixq_u]]></fieldDescription></field>
+	<field name="varq" class="java.lang.String"><fieldDescription><![CDATA[varq]]></fieldDescription></field>
+	<field name="varq_p" class="java.lang.String"><fieldDescription><![CDATA[varq_p]]></fieldDescription></field>
+	<field name="varq_u" class="java.lang.String"><fieldDescription><![CDATA[varq_u]]></fieldDescription></field>
+	<field name="lower_limit" class="java.lang.String"><fieldDescription><![CDATA[lower_limit]]></fieldDescription></field>
+	<field name="lower_limit_p" class="java.lang.String"><fieldDescription><![CDATA[lower_limit_p]]></fieldDescription></field>
+	<field name="lower_limit_u" class="java.lang.String"><fieldDescription><![CDATA[lower_limit_u]]></fieldDescription></field>
+	<field name="upper_limit" class="java.lang.String"><fieldDescription><![CDATA[upper_limit]]></fieldDescription></field>
+	<field name="upper_limit_p" class="java.lang.String"><fieldDescription><![CDATA[upper_limit_p]]></fieldDescription></field>
+	<field name="upper_limit_u" class="java.lang.String"><fieldDescription><![CDATA[upper_limit_u]]></fieldDescription></field>
+	<field name="exp_uncert" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert]]></fieldDescription></field>
+	<field name="exp_uncert_p" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert_p]]></fieldDescription></field>
+	<field name="exp_uncert_u" class="java.lang.String"><fieldDescription><![CDATA[exp_uncert_u]]></fieldDescription></field>
+	<variable name="isDe" class="java.lang.Boolean"><variableExpression><![CDATA[$P{Sprache} == null || $P{Sprache}.equals("Deutsch")]]></variableExpression></variable>
+	<variable name="Nominal" class="java.lang.String"><variableExpression><![CDATA[($F{fixq}==null?"":$F{fixq}) + ($F{fixq_p}==null||$F{fixq_p}.isEmpty()?"":(" "+$F{fixq_p})) + ($F{fixq_u}==null?"":$F{fixq_u})]]></variableExpression></variable>
+	<variable name="Measured" class="java.lang.String"><variableExpression><![CDATA[($F{varq}==null?"":$F{varq}) + ($F{varq_p}==null||$F{varq_p}.isEmpty()?"":(" "+$F{varq_p})) + ($F{varq_u}==null?"":$F{varq_u})]]></variableExpression></variable>
+	<variable name="Lower" class="java.lang.String"><variableExpression><![CDATA[($F{lower_limit}==null?"":$F{lower_limit}) + ($F{lower_limit_p}==null||$F{lower_limit_p}.isEmpty()?"":(" "+$F{lower_limit_p})) + ($F{lower_limit_u}==null?"":$F{lower_limit_u})]]></variableExpression></variable>
+	<variable name="Upper" class="java.lang.String"><variableExpression><![CDATA[($F{upper_limit}==null?"":$F{upper_limit}) + ($F{upper_limit_p}==null||$F{upper_limit_p}.isEmpty()?"":(" "+$F{upper_limit_p})) + ($F{upper_limit_u}==null?"":$F{upper_limit_u})]]></variableExpression></variable>
+	<variable name="Uncert" class="java.lang.String"><variableExpression><![CDATA[($F{exp_uncert}==null?"":$F{exp_uncert}) + ($F{exp_uncert_p}==null||$F{exp_uncert_p}.isEmpty()?"":(" "+$F{exp_uncert_p})) + ($F{exp_uncert_u}==null?"":$F{exp_uncert_u})]]></variableExpression></variable>
 	<columnHeader>
 		<band height="16">
-			<staticText>
-				<reportElement x="0" y="0" width="30" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[Nr.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="30" y="0" width="150" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[Prüfpunkt]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="180" y="0" width="70" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[Sollwert]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="250" y="0" width="70" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[Istwert]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="320" y="0" width="70" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[untere Grenze]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="390" y="0" width="70" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[obere Grenze]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="460" y="0" width="45" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[U]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="505" y="0" width="30" height="15"/>
-				<textElement><font isBold="true"/></textElement>
-				<text><![CDATA[i.O.]]></text>
-			</staticText>
+			<staticText><reportElement x="0" y="0" width="22" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[Nr.]]></text></staticText>
+			<textField><reportElement x="22" y="0" width="150" height="15"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$V{isDe} ? "Prüfpunkt" : "Test point"]]></textFieldExpression></textField>
+			<textField><reportElement x="172" y="0" width="80" height="15"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$V{isDe} ? "Sollwert" : "Nominal"]]></textFieldExpression></textField>
+			<textField><reportElement x="252" y="0" width="80" height="15"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$V{isDe} ? "Istwert" : "Measured"]]></textFieldExpression></textField>
+			<textField><reportElement x="332" y="0" width="75" height="15"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$V{isDe} ? "untere Grenze" : "Lower limit"]]></textFieldExpression></textField>
+			<textField><reportElement x="407" y="0" width="75" height="15"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$V{isDe} ? "obere Grenze" : "Upper limit"]]></textFieldExpression></textField>
+			<staticText><reportElement x="482" y="0" width="55" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[U (k=2)]]></text></staticText>
+			<staticText><reportElement x="537" y="0" width="24" height="15"/><textElement><font isBold="true"/></textElement><text><![CDATA[i.O.]]></text></staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="14">
-			<textField>
-				<reportElement x="0" y="0" width="30" height="13"/>
-				<textFieldExpression><![CDATA[$F{row_num}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="30" y="0" width="150" height="13"/>
-				<textFieldExpression><![CDATA[$F{test_desc}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="180" y="0" width="70" height="13"/>
-				<textFieldExpression><![CDATA[$F{fixq}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="250" y="0" width="70" height="13"/>
-				<textFieldExpression><![CDATA[$F{varq}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="320" y="0" width="70" height="13"/>
-				<textFieldExpression><![CDATA[$F{lower_limit}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="390" y="0" width="70" height="13"/>
-				<textFieldExpression><![CDATA[$F{upper_limit}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="460" y="0" width="45" height="13"/>
-				<textFieldExpression><![CDATA[$F{exp_uncert}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="505" y="0" width="30" height="13"/>
-				<textFieldExpression><![CDATA[$F{pass_fail}]]></textFieldExpression>
-			</textField>
+			<textField><reportElement x="0" y="0" width="22" height="13"/><textFieldExpression><![CDATA[$F{row_num}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement x="22" y="0" width="150" height="13"/><textFieldExpression><![CDATA[($F{test_desc}==null?"":$F{test_desc}) + (($F{accred}!=null && $F{accred}.equals("1")) ? " *" : "")]]></textFieldExpression></textField>
+			<textField><reportElement x="172" y="0" width="80" height="13"/><textFieldExpression><![CDATA[$V{Nominal}]]></textFieldExpression></textField>
+			<textField><reportElement x="252" y="0" width="80" height="13"/><textFieldExpression><![CDATA[$V{Measured}]]></textFieldExpression></textField>
+			<textField><reportElement x="332" y="0" width="75" height="13"/><textFieldExpression><![CDATA[$V{Lower}]]></textFieldExpression></textField>
+			<textField><reportElement x="407" y="0" width="75" height="13"/><textFieldExpression><![CDATA[$V{Upper}]]></textFieldExpression></textField>
+			<textField><reportElement x="482" y="0" width="55" height="13"/><textFieldExpression><![CDATA[$V{Uncert}]]></textFieldExpression></textField>
+			<textField><reportElement x="537" y="0" width="24" height="13"/><textFieldExpression><![CDATA[$F{pass_fail}]]></textFieldExpression></textField>
 		</band>
 	</detail>
 </jasperReport>

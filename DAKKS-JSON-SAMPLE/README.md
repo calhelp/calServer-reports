@@ -1,6 +1,7 @@
-# DAKKS-JSON-SAMPLE — V2-Pilot (JSON-Datasource)
+# DAKKS-JSON-SAMPLE — layouttreuer DAkkS-Kalibrierschein (V2 / APEX)
 
-Dies ist das **Pilot-Bundle für calServer V2** (Phase 0 der
+Dies ist die **layouttreue V2-Nachbildung des akkreditierten DAkkS-Kalibrierscheins**
+(Phase 0 der
 [JasperReports-V2-Strategie](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md),
 [ADR-009](https://github.com/calhelp/calServer-yii/blob/develop/docs-v2/entwicklung/adr/009-report-data-contract-statt-sql-templates.md)).
 
@@ -13,10 +14,10 @@ unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/dakks-json-sample.jrxml` | Hauptbericht; liest die Felder über `<fieldDescription>`-JSON-Pfade (z. B. `device.serial_number`) |
-| `subreports/results.jrxml` | Messergebnis-Tabelle; erhält das `results`-Array via `subDataSource("results")` |
-| `subreports/standards.jrxml` | Verwendete Normale; erhält das `standards`-Array via `subDataSource("standards")` |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` v1.0) — als JSON-Data-Adapter in Jaspersoft Studio verwenden |
+| `main_reports/dakks-json-sample.jrxml` | Hauptbericht: Labor-Kopf, zweisprachiges Objekt-Stammdatengrid, Kalibrierzeichen-Box (Line-Art), QR aus `device.asset_number`, Abschnittskörper (Verfahren, Messbedingungen), Signatur-/Freigabebereich, Seiten-Footer |
+| `subreports/results.jrxml` | Messergebnis-Tabelle; `results`-Array via `subDataSource("results")` — mit SI-Wert+Präfix+Einheit-Konkatenation und per-Zeile `accred`-„*"-Symbol |
+| `subreports/standards.jrxml` | Verwendete Normale; `standards`-Array via `subDataSource("standards")` — inkl. nächster Kalibrierung + Zertifikat-Nr. |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.1**) — als JSON-Data-Adapter in Jaspersoft Studio verwenden |
 
 ## Datenanbindung
 
@@ -31,12 +32,17 @@ unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
   `sample-data.json`, abrufbar auch über
   `GET /api/v2/calibrations/{ctag}/report-dataset`.
 
-## Contract `calibration-certificate` (v1.0)
+## Contract `calibration-certificate` (v1.1)
 
-Wurzelobjekt mit den Blöcken `meta`, `calibration`, `device`, `customer`,
-`standards[]`, `results[]`. Jeder Entitätsblock trägt zusätzlich ein
-`custom_fields`-Objekt mit den benutzerdefinierten Feldern unter ihrem
-`api_name`. Feldreferenz siehe `sample-data.json`.
+Wurzelobjekt mit den Blöcken `meta`, `laboratory`, `accreditation`,
+`calibration`, `device`, `customer`, `procedure`, `standards[]`, `results[]`,
+`signatures[]`, `texts`. Die Blöcke `laboratory`/`accreditation`/`procedure`/
+`texts` und der Freigeber (`signatures[]`) stammen aus konfigurierten
+Report-Variablen (`master_report_variable`, z. B. `lab_name`, `mark_number_1`,
+`approver_name`, `traceability_note`) — nicht aus Entity-Daten. `results[]`
+enthält je Wert das Triple `<feld>`/`<feld>_p` (SI-Präfix)/`<feld>_u` (Einheit)
+plus `accred`. Jeder Entitätsblock trägt zusätzlich `custom_fields`. Feldreferenz
+siehe `sample-data.json`.
 
 ## Autoren-Hinweise (Jaspersoft Studio)
 
@@ -47,7 +53,6 @@ Wurzelobjekt mit den Blöcken `meta`, `calibration`, `device`, `customer`,
    `subDataSource("<array>")` als Datenquelle verwenden.
 4. JasperReports-Version **6.20.6** bleibt verbindlich (siehe `robots.md`).
 
-> **Status:** Referenz-/Pilotvorlage. Das Layout demonstriert den
-> JSON-Datasource-Mechanismus; die layouttreue Nachbildung des akkreditierten
-> DAkkS-Scheins erfolgt im weiteren Verlauf von Phase 0 gegen den
-> Dual-Run-Sichtvergleich.
+> **Status:** Layouttreue V2-Nachbildung, über den report-runner zu PDF
+> verifiziert. Die abschließende pixelgenaue Abnahme des akkreditierten Scheins
+> erfolgt per Dual-Run-Sichtvergleich V1↔V2 in einer Live-Umgebung.
