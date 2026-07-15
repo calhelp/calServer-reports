@@ -105,6 +105,8 @@ jobs:
           get_last_modified "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
           get_last_modified "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
           get_last_modified "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
+          get_last_modified "ORDER-JSON-SAMPLE" "order-json-sample"
+          get_last_modified "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -179,6 +181,8 @@ jobs:
               "sticker-dakks-12mm-json-sample":     "STICKER-DAKKS-12MM-JSON-SAMPLE/README.md",
               "sticker-dakks-18mm-json-sample":     "STICKER-DAKKS-18MM-JSON-SAMPLE/README.md",
               "sticker-cal-inv-zebra-json-sample":  "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/README.md",
+              "order-json-sample":                  "ORDER-JSON-SAMPLE/README.md",
+              "delivery-json-sample":               "DELIVERY-JSON-SAMPLE/README.md",
           }
 
           SCHEMA_MAP = {
@@ -201,6 +205,8 @@ jobs:
               "sticker-dakks-12mm-json-sample":     "DAkkS-Aufkleber 12 mm (APEX · V2)",
               "sticker-dakks-18mm-json-sample":     "DAkkS-Aufkleber 18 mm (APEX · V2)",
               "sticker-cal-inv-zebra-json-sample":  "Zebra Inventar-/Kalibrier-Sticker (APEX · V2)",
+              "order-json-sample":                  "Auftragsbeleg (APEX · V2)",
+              "delivery-json-sample":               "Lieferschein (APEX · V2)",
           }
 
           INFO_TEMPLATE = """<!doctype html>

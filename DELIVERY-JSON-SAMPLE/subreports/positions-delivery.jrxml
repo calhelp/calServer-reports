@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 delivery positions subreport (contract order-document v1.0): fed the
+  "positions" array via subDataSource("positions"). Delivery-note variant — only
+  position, description and quantity, no prices/tax. No $V{} variables.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="positions-delivery" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0311-4d71-9f61-000000000311">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<field name="pos_number" class="java.lang.Integer"><fieldDescription><![CDATA[pos_number]]></fieldDescription></field>
+	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
+	<field name="quantity" class="java.lang.Double"><fieldDescription><![CDATA[quantity]]></fieldDescription></field>
+	<field name="unit" class="java.lang.String"><fieldDescription><![CDATA[unit]]></fieldDescription></field>
+	<detail>
+		<band height="15">
+			<textField><reportElement x="0" y="0" width="40" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement x="40" y="0" width="431" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.##"><reportElement x="471" y="0" width="60" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField>
+			<textField><reportElement x="533" y="0" width="28" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+</jasperReport>

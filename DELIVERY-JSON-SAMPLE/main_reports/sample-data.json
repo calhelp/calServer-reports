@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "contract": "order-document",
+    "schema_version": "1.0",
+    "generated_at": "2026-07-15T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "document": {
+    "number": "LI-2026-0042",
+    "date": "2026-07-20",
+    "status": "Lieferung",
+    "comment": "Lieferung zu Auftrag AU-2026-0042.",
+    "delivery_condition": "frei Haus",
+    "delivery_costs": 0,
+    "description": null,
+    "custom_fields": {
+      "W4109": "2026-07-20"
+    }
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE"
+  },
+  "delivery": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Wareneingang, Tor 3",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "contact": {
+      "name": "Erika Musterfrau",
+      "email": "erika@muster.example",
+      "phone": "+49 30 1234500"
+    }
+  },
+  "invoice": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE"
+  },
+  "positions": [
+    { "pos_number": 1, "name": "Digitalmultimeter Fluke 87V (INV-9001)", "article_type": "inventory", "quantity": 1, "unit": "Stk", "price": 0.0, "discount": 0.0, "tax": 0.0, "line_net": 0.0 },
+    { "pos_number": 2, "name": "Referenz-Kalibrator (REF-001)", "article_type": "inventory", "quantity": 1, "unit": "Stk", "price": 0.0, "discount": 0.0, "tax": 0.0, "line_net": 0.0 }
+  ],
+  "statistics": {
+    "tax_groups": [],
+    "net_total": 0.0,
+    "order_discount_percent": 0.0,
+    "discount_amount": 0.0,
+    "net_after_discount": 0.0,
+    "vat_total": 0.0,
+    "gross_total": 0.0
+  }
+}

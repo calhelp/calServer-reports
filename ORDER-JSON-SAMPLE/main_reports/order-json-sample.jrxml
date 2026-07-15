@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 order document (Auftrag/Angebot/Rechnung), ADR-009 contract "order-document"
+  v1.0. Filled from a JSON data source — NO SQL, NO V1 code columns. Positions and
+  the per-tax-rate statistics are pre-aggregated server-side (OrderDocumentDataBuilder)
+  because a JSON template cannot group an array; the template only prints them:
+  positions[] via subDataSource("positions"), statistics.tax_groups[] via
+  subDataSource("statistics.tax_groups"), and the scalar totals as root fields.
+  All labels are staticText (no report-level $V{} → no null-in-title risk).
+  See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="order-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="d6dcf500-0300-4d60-9f50-000000000300">
+	<property name="com.jaspersoft.studio.data.defadapter" value="order-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Label" fontSize="8" isBold="true"/>
+	<style name="Value" fontSize="9"/>
+	<style name="Money" fontSize="9"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
+	</parameter>
+	<field name="doc_number" class="java.lang.String"><fieldDescription><![CDATA[document.number]]></fieldDescription></field>
+	<field name="doc_date" class="java.lang.String"><fieldDescription><![CDATA[document.date]]></fieldDescription></field>
+	<field name="doc_status" class="java.lang.String"><fieldDescription><![CDATA[document.status]]></fieldDescription></field>
+	<field name="doc_comment" class="java.lang.String"><fieldDescription><![CDATA[document.comment]]></fieldDescription></field>
+	<field name="doc_description" class="java.lang.String"><fieldDescription><![CDATA[document.description]]></fieldDescription></field>
+	<field name="cust_name" class="java.lang.String"><fieldDescription><![CDATA[customer.name]]></fieldDescription></field>
+	<field name="cust_street" class="java.lang.String"><fieldDescription><![CDATA[customer.street]]></fieldDescription></field>
+	<field name="cust_zip" class="java.lang.String"><fieldDescription><![CDATA[customer.zip]]></fieldDescription></field>
+	<field name="cust_city" class="java.lang.String"><fieldDescription><![CDATA[customer.city]]></fieldDescription></field>
+	<field name="cust_contact" class="java.lang.String"><fieldDescription><![CDATA[customer.contact.name]]></fieldDescription></field>
+	<field name="cust_number" class="java.lang.String"><fieldDescription><![CDATA[customer.customer_number]]></fieldDescription></field>
+	<field name="net_total" class="java.lang.Double"><fieldDescription><![CDATA[statistics.net_total]]></fieldDescription></field>
+	<field name="discount_amount" class="java.lang.Double"><fieldDescription><![CDATA[statistics.discount_amount]]></fieldDescription></field>
+	<field name="net_after_discount" class="java.lang.Double"><fieldDescription><![CDATA[statistics.net_after_discount]]></fieldDescription></field>
+	<field name="vat_total" class="java.lang.Double"><fieldDescription><![CDATA[statistics.vat_total]]></fieldDescription></field>
+	<field name="gross_total" class="java.lang.Double"><fieldDescription><![CDATA[statistics.gross_total]]></fieldDescription></field>
+	<field name="order_discount_percent" class="java.lang.Double"><fieldDescription><![CDATA[statistics.order_discount_percent]]></fieldDescription></field>
+	<title>
+		<band height="200">
+			<!-- Sender line -->
+			<staticText><reportElement x="0" y="0" width="330" height="9"/><textElement><font size="6"/></textElement><text><![CDATA[calServer V2 · Musterfirma · Musterstraße 1 · 12345 Musterstadt]]></text></staticText>
+			<!-- Recipient address block -->
+			<textField><reportElement x="0" y="18" width="300" height="14"/><textElement><font size="10" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{cust_name}]]></textFieldExpression></textField>
+			<textField><reportElement x="0" y="32" width="300" height="12"/><textFieldExpression><![CDATA[$F{cust_street}]]></textFieldExpression></textField>
+			<textField><reportElement x="0" y="44" width="300" height="12"/><textFieldExpression><![CDATA[($F{cust_zip} == null ? "" : $F{cust_zip}) + " " + ($F{cust_city} == null ? "" : $F{cust_city})]]></textFieldExpression></textField>
+			<!-- Meta box (right) -->
+			<staticText><reportElement style="Label" x="380" y="18" width="80" height="12"/><text><![CDATA[Belegnummer]]></text></staticText>
+			<textField><reportElement style="Value" x="460" y="18" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="32" width="80" height="12"/><text><![CDATA[Datum]]></text></staticText>
+			<textField><reportElement style="Value" x="460" y="32" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_date}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="46" width="80" height="12"/><text><![CDATA[Kunden-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="460" y="46" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="60" width="80" height="12"/><text><![CDATA[Kontakt]]></text></staticText>
+			<textField><reportElement style="Value" x="460" y="60" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_contact}]]></textFieldExpression></textField>
+			<!-- Subject -->
+			<textField><reportElement x="0" y="120" width="561" height="18"/><textElement><font size="13" isBold="true"/></textElement><textFieldExpression><![CDATA[($F{doc_status} == null ? "Beleg" : $F{doc_status}) + " " + ($F{doc_number} == null ? "" : $F{doc_number})]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement style="Value" x="0" y="144" width="561" height="14"/><textFieldExpression><![CDATA[$F{doc_comment}]]></textFieldExpression></textField>
+			<!-- Positions table header -->
+			<line><reportElement x="0" y="176" width="561" height="1"/></line>
+			<staticText><reportElement style="Label" x="0" y="180" width="28" height="14"/><text><![CDATA[Pos]]></text></staticText>
+			<staticText><reportElement style="Label" x="28" y="180" width="240" height="14"/><text><![CDATA[Beschreibung]]></text></staticText>
+			<staticText><reportElement style="Label" x="268" y="180" width="60" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Menge]]></text></staticText>
+			<staticText><reportElement style="Label" x="328" y="180" width="70" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Einzelpreis]]></text></staticText>
+			<staticText><reportElement style="Label" x="398" y="180" width="45" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Rabatt]]></text></staticText>
+			<staticText><reportElement style="Label" x="443" y="180" width="78" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Betrag]]></text></staticText>
+			<staticText><reportElement style="Label" x="521" y="180" width="40" height="14"/><textElement textAlignment="Right"/><text><![CDATA[MwSt]]></text></staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="200">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="0" width="561" height="14" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("positions")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/positions.jasper"]]></subreportExpression>
+			</subreport>
+			<line><reportElement positionType="Float" x="330" y="24" width="231" height="1"/></line>
+			<!-- Totals -->
+			<staticText><reportElement style="Label" positionType="Float" x="330" y="28" width="150" height="13"/><text><![CDATA[Zwischensumme netto]]></text></staticText>
+			<textField pattern="#,##0.00 €"><reportElement style="Money" positionType="Float" x="480" y="28" width="81" height="13"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{net_total}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement style="Label" positionType="Float" x="330" y="44" width="150" height="13"><printWhenExpression><![CDATA[$F{discount_amount} != null && $F{discount_amount}.doubleValue() != 0.0]]></printWhenExpression></reportElement><textFieldExpression><![CDATA["Rabatt " + ($F{order_discount_percent} == null ? "" : $F{order_discount_percent}) + " %"]]></textFieldExpression></textField>
+			<textField pattern="#,##0.00 €"><reportElement style="Money" positionType="Float" x="480" y="44" width="81" height="13"><printWhenExpression><![CDATA[$F{discount_amount} != null && $F{discount_amount}.doubleValue() != 0.0]]></printWhenExpression></reportElement><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{discount_amount} == null ? null : (-$F{discount_amount})]]></textFieldExpression></textField>
+			<!-- Tax groups (USt. je Steuersatz) -->
+			<subreport>
+				<reportElement positionType="Float" x="330" y="60" width="231" height="12" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("statistics.tax_groups")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/tax-groups.jasper"]]></subreportExpression>
+			</subreport>
+			<line><reportElement positionType="Float" x="330" y="84" width="231" height="1"/></line>
+			<staticText><reportElement style="Label" positionType="Float" x="330" y="88" width="150" height="14"/><textElement><font size="10" isBold="true"/></textElement><text><![CDATA[Gesamtbetrag]]></text></staticText>
+			<textField pattern="#,##0.00 €"><reportElement style="Money" positionType="Float" x="470" y="88" width="91" height="14"/><textElement textAlignment="Right"><font size="10" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{gross_total}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement positionType="Float" x="0" y="120" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$F{doc_description}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<line><reportElement x="0" y="0" width="561" height="1"/></line>
+			<textField><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[($F{doc_status} == null ? "" : $F{doc_status}) + (($F{doc_number} == null) ? "" : (" · " + $F{doc_number}))]]></textFieldExpression></textField>
+			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
+			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -204,6 +204,24 @@ jobs:
           path: STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/main_reports
           if-no-files-found: error
 
+      - name: Upload ORDER-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ORDER-JSON-SAMPLE
+          path: |
+            ORDER-JSON-SAMPLE/main_reports
+            ORDER-JSON-SAMPLE/subreports
+          if-no-files-found: error
+
+      - name: Upload DELIVERY-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DELIVERY-JSON-SAMPLE
+          path: |
+            DELIVERY-JSON-SAMPLE/main_reports
+            DELIVERY-JSON-SAMPLE/subreports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -329,6 +347,8 @@ jobs:
           create_zip "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
           create_zip "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
           create_zip "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
+          create_zip "ORDER-JSON-SAMPLE" "order-json-sample"
+          create_zip "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
 
 
       - name: Upload report ZIPs as artifact

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 order positions subreport (contract order-document v1.0): fed the "positions"
+  array via subDataSource("positions"). One row per line item; the pre-computed
+  line_net is printed as-is (no running-sum in Jasper). No $V{} variables.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="positions" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0301-4d61-9f51-000000000301">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<field name="pos_number" class="java.lang.Integer"><fieldDescription><![CDATA[pos_number]]></fieldDescription></field>
+	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
+	<field name="quantity" class="java.lang.Double"><fieldDescription><![CDATA[quantity]]></fieldDescription></field>
+	<field name="unit" class="java.lang.String"><fieldDescription><![CDATA[unit]]></fieldDescription></field>
+	<field name="price" class="java.lang.Double"><fieldDescription><![CDATA[price]]></fieldDescription></field>
+	<field name="discount" class="java.lang.Double"><fieldDescription><![CDATA[discount]]></fieldDescription></field>
+	<field name="line_net" class="java.lang.Double"><fieldDescription><![CDATA[line_net]]></fieldDescription></field>
+	<field name="tax" class="java.lang.Double"><fieldDescription><![CDATA[tax]]></fieldDescription></field>
+	<detail>
+		<band height="15">
+			<textField><reportElement x="0" y="0" width="28" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight"><reportElement x="28" y="0" width="240" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.##"><reportElement x="268" y="0" width="32" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField>
+			<textField><reportElement x="306" y="0" width="22" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.00 €"><reportElement x="328" y="0" width="70" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{price}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.##' %'"><reportElement x="398" y="0" width="45" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.00 €"><reportElement x="443" y="0" width="78" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{line_net}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.##' %'"><reportElement x="521" y="0" width="40" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{tax}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+</jasperReport>
