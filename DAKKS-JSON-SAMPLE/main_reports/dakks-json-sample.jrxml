@@ -25,6 +25,14 @@
 		<parameterDescription><![CDATA[Sprachumschalter für zweisprachige Labels (Deutsch = zweisprachig de/en).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Company_footer" class="java.lang.String">
+		<parameterDescription><![CDATA[Fußzeilentext am unteren Rand jeder Seite, z. B. Laborname und Akkreditierungshinweis. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Show_next_calibration" class="java.lang.String">
+		<parameterDescription><![CDATA["true"/"false": Block „Nächste Kalibrierung / Next calibration" auf dem Deckblatt anzeigen (Rekalibrier-Empfehlung nur auf Kundenwunsch, DAkkS).]]></parameterDescription>
+		<defaultValueExpression><![CDATA["true"]]></defaultValueExpression>
+	</parameter>
 	<field name="certificate_number" class="java.lang.String"><fieldDescription><![CDATA[meta.certificate_number]]></fieldDescription></field>
 	<field name="cal_date" class="java.lang.String"><fieldDescription><![CDATA[calibration.calibration_date]]></fieldDescription></field>
 	<field name="next_cal_date" class="java.lang.String"><fieldDescription><![CDATA[calibration.next_calibration_date]]></fieldDescription></field>
@@ -110,8 +118,8 @@
 					<jr:codeExpression><![CDATA[$F{device_asset_number} == null ? "" : $F{device_asset_number}]]></jr:codeExpression>
 				</jr:QRCode>
 			</componentElement>
-			<staticText><reportElement style="Label" x="0" y="220" width="200" height="13"/><text><![CDATA[Nächste Kalibrierung / Next calibration]]></text></staticText>
-			<textField><reportElement style="Value" x="0" y="236" width="255" height="13"/><textFieldExpression><![CDATA[$F{next_cal_date}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="220" width="200" height="13"><printWhenExpression><![CDATA[!"false".equalsIgnoreCase($P{Show_next_calibration})]]></printWhenExpression></reportElement><text><![CDATA[Nächste Kalibrierung / Next calibration]]></text></staticText>
+			<textField><reportElement style="Value" x="0" y="236" width="255" height="13"><printWhenExpression><![CDATA[!"false".equalsIgnoreCase($P{Show_next_calibration})]]></printWhenExpression></reportElement><textFieldExpression><![CDATA[$F{next_cal_date}]]></textFieldExpression></textField>
 		</band>
 	</title>
 	<detail>
@@ -150,6 +158,7 @@
 		<band height="30">
 			<line><reportElement x="0" y="0" width="561" height="1"/></line>
 			<textField><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[($F{lab_name} == null ? "" : $F{lab_name}) + (($F{certificate_number} == null) ? "" : (" · " + $F{certificate_number}))]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="0" y="16" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
 			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA[($V{isDe} ? "Seite " : "Page ") + $V{PAGE_NUMBER} + ($V{isDe} ? " von " : " of ")]]></textFieldExpression></textField>
 			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
 		</band>

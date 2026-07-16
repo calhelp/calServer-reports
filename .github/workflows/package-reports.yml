@@ -163,6 +163,7 @@ jobs:
           path: |
             DAKKS-JSON-SAMPLE/main_reports
             DAKKS-JSON-SAMPLE/subreports
+            DAKKS-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: Upload INVENTORY-JSON-SAMPLE as artifact
@@ -304,6 +305,12 @@ jobs:
               cp "${sample}/README.md" "${stage_dir}/README.md"
             fi
 
+            # Parameter-Manifest an der Bundle-Wurzel mitnehmen (nur V2-JSON-
+            # Bundles pflegen eins; calServer liest daraus den Parameter-Katalog).
+            if [ -f "${sample}/parameters.json" ]; then
+              cp "${sample}/parameters.json" "${stage_dir}/parameters.json"
+            fi
+
             # Nicht erlaubte Dateien entfernen, damit nur die gewünschten Typen
             # (JRXML, Markdown und ggf. Properties/XSD/JSON) enthalten bleiben.
             local allowed_conditions=()
@@ -328,6 +335,7 @@ jobs:
             [ -d main_reports ] && zip_targets+=(main_reports)
             [ -d subreports ] && zip_targets+=(subreports)
             [ -f README.md ] && zip_targets+=(README.md)
+            [ -f parameters.json ] && zip_targets+=(parameters.json)
             if [ "${#zip_targets[@]}" -eq 0 ]; then
               echo "❌ No report content found for ${sample}" >&2
               popd >/dev/null

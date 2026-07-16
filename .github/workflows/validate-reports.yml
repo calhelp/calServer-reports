@@ -1,0 +1,33 @@
+---
+name: Validate Reports
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check JasperReports version comments
+        run: bash scripts/check_jasper_version.sh
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install jsonschema
+        run: pip install jsonschema
+
+      # Parameter-Manifeste (parameters.json) gibt es NUR in V2-JSON-Bundles
+      # (kein eingebettetes SQL). Der Check validiert gegen
+      # schema/report-parameters.schema.json und das jeweilige Haupt-JRXML.
+      - name: Check parameter manifests
+        run: python3 scripts/check_parameters_manifest.py

@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://calhelp.github.io/calServer-reports/schema/report-parameters.schema.json",
+  "title": "calServer Report-Parameter-Manifest",
+  "description": "Maschinenlesbarer Parameter-Katalog eines V2-JSON-Report-Bundles (parameters.json an der Bundle-Wurzel). Gilt NUR fuer Bundles ohne eingebettetes SQL, die der report-runner aus einem JSON-Datensatz fuellt (ADR-009); klassische V1/JDBC-Bundles tragen kein Manifest.",
+  "type": "object",
+  "required": ["version", "parameters"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "description": "Format-Kennung des Manifests. Erweiterungen bleiben abwaertskompatibel innerhalb derselben Version.",
+      "const": 1
+    },
+    "parameters": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/parameter" }
+    }
+  },
+  "definitions": {
+    "localizedText": {
+      "description": "Anzeigetext: einfacher String oder Objekt je Sprache (de, en, ...). Aufloesung im Backend: Anfragesprache, dann de, dann en, dann erste vorhandene.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^[a-z]{2}(-[A-Z]{2})?$" },
+          "additionalProperties": { "type": "string" }
+        }
+      ]
+    },
+    "parameter": {
+      "type": "object",
+      "required": ["name", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "Exakter JRXML-Parametername ($P{...}); muss im Haupt-JRXML deklariert sein. Fuer role=variable mit Grossbuchstaben beginnen (ucfirst-Injektion durch calServer).",
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "label": { "$ref": "#/definitions/localizedText" },
+        "description": { "$ref": "#/definitions/localizedText" },
+        "role": {
+          "description": "variable = Admin-Konfiguration (Berichtsvariable), prompt = Nutzerabfrage beim Generieren, system = wird automatisch versorgt und nie angeboten.",
+          "type": "string",
+          "enum": ["variable", "prompt", "system"],
+          "default": "variable"
+        },
+        "scope": {
+          "description": "Empfohlener Geltungsbereich der Berichtsvariable (nur Vorauswahl im Dialog).",
+          "type": "string",
+          "enum": ["report", "type", "global"],
+          "default": "report"
+        },
+        "input": {
+          "description": "UI-Eingabetyp im Variablen-Dialog.",
+          "type": "string",
+          "enum": ["text", "textarea", "select", "boolean", "number", "date", "color", "image"],
+          "default": "text"
+        },
+        "options": {
+          "description": "Erlaubte Werte, nur bei input=select.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "required": ["value"],
+                "additionalProperties": false,
+                "properties": {
+                  "value": { "type": "string" },
+                  "label": { "$ref": "#/definitions/localizedText" }
+                }
+              }
+            ]
+          }
+        },
+        "default": {
+          "description": "Standardwert als String (befuellt das content-Feld der Berichtsvariable vor).",
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "group": {
+          "description": "Gruppierung in Auswahllisten (z. B. \"Layout\", \"Labor-Identitaet\").",
+          "type": "string"
+        },
+        "order": {
+          "description": "Sortierung innerhalb der Gruppe (aufsteigend).",
+          "type": "integer"
+        },
+        "example": {
+          "description": "Beispielwert als Platzhaltertext im Eingabefeld.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "input": { "const": "select" } }, "required": ["input"] },
+          "then": { "required": ["options"] },
+          "else": { "not": { "required": ["options"] } }
+        }
+      ]
+    }
+  }
+}

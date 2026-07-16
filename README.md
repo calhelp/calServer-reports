@@ -91,11 +91,16 @@ downloads/
 pages/
 └── index.html          # Projekt-Landing-Page für GitHub Pages
 
+schema/
+└── report-parameters.schema.json  # JSON-Schema für parameters.json (V2-JSON-Bundles)
+
 scripts/
-├── check_jasper_version.sh  # Prüft JRXML-Versionen auf 6.20.6
-├── dakks_upload_sample.bat  # Beispielskript für den automatisierten Report-Upload
-├── dcc_upload_sample.bat    # Upload-Beispiel für DCC-Reports
-└── dcc_xml_writer.py        # Hilfsskript zum Erzeugen von DCC-XML
+├── check_jasper_version.sh         # Prüft JRXML-Versionen auf 6.20.6
+├── check_parameters_manifest.py    # CI-Validator für parameters.json-Manifeste
+├── generate_parameters_manifest.py # Erzeugt ein parameters.json-Gerüst aus dem Haupt-JRXML
+├── dakks_upload_sample.bat         # Beispielskript für den automatisierten Report-Upload
+├── dcc_upload_sample.bat           # Upload-Beispiel für DCC-Reports
+└── dcc_xml_writer.py               # Hilfsskript zum Erzeugen von DCC-XML
 ````
 
 **Hinweis:** Die Beispiele sind bewusst generisch gehalten. Sie können direkt als Grundlage für eigene Anpassungen verwendet werden.
@@ -145,8 +150,40 @@ Nutze Versionierung für Reports, um bei Fehlern jederzeit auf eine frühere Var
 Im Ordner `scripts` findest du neben dem Batch-Skript `dakks_upload_sample.bat` weitere Hilfen:
 
 - `check_jasper_version.sh` prüft alle JRXML-Dateien auf die erwartete JasperReports-Version 6.20.6.
+- `check_parameters_manifest.py` validiert `parameters.json`-Manifeste gegen das Schema und das Haupt-JRXML (läuft auch als CI-Check, siehe unten).
+- `generate_parameters_manifest.py` erzeugt ein `parameters.json`-Gerüst aus den `<parameter>`-Deklarationen eines Haupt-JRXML.
 - `dcc_upload_sample.bat` zeigt einen Upload-Workflow für DCC-Reports.
 - `dcc_xml_writer.py` unterstützt bei der Erzeugung von DCC-XML.
+
+### Parameter beschreiben (`parameters.json`, nur V2-JSON-Bundles)
+
+V2-JSON-Bundles (Bundles **ohne eingebettetes SQL**, die der report-runner aus
+einem JSON-Datensatz füllt — erkennbar am Suffix `-JSON-SAMPLE`) können ihre
+konfigurierbaren Parameter in einem **Manifest `parameters.json`** an der
+Bundle-Wurzel beschreiben (gleiche Ebene wie die README). calServer V2 liest
+das Manifest direkt aus dem hochgeladenen ZIP und bietet die Parameter beim
+Anlegen von Berichtsvariablen mit Label, Beschreibung, Typ und Standardwert
+zur Auswahl an. Referenzbeispiel: [`DAKKS-JSON-SAMPLE/parameters.json`](DAKKS-JSON-SAMPLE/parameters.json).
+
+**Wichtig:** Klassische V1/JDBC-Bundles (mit eingebettetem SQL) bekommen
+**kein** Manifest — calServer ignoriert es dort, und der CI-Check bricht mit
+einem Fehler ab.
+
+Workflow für Berichtsentwickler:
+
+1. Parameter wie gewohnt im JRXML deklarieren. Namen konfigurierbarer
+   Parameter **mit Großbuchstaben beginnen** (`Company_footer`, nicht
+   `company_footer`) — calServer injiziert Berichtsvariablen als
+   `$P{ucfirst(variable_name)}`, kleingeschriebene Parameternamen sind von
+   Variablen nicht erreichbar.
+2. Gerüst erzeugen: `python3 scripts/generate_parameters_manifest.py MEIN-BUNDLE -o MEIN-BUNDLE/parameters.json`
+3. Labels und Beschreibungen (deutsch **und** englisch), Rollen
+   (`variable`/`prompt`/`system`), Scope-Empfehlungen und Eingabetypen
+   ergänzen — Format siehe [`schema/report-parameters.schema.json`](schema/report-parameters.schema.json).
+4. Lokal prüfen: `python3 scripts/check_parameters_manifest.py MEIN-BUNDLE`
+   — derselbe Check läuft in jedem Pull Request (Workflow „Validate Reports“).
+
+Der Paket-Build nimmt das Manifest automatisch in das Bundle-ZIP auf.
 
 ### Vorbereitung:
 
