@@ -17,6 +17,10 @@
 	<style name="Value" fontSize="9"/>
 	<style name="SectionTitle" fontSize="10" isBold="true"/>
 	<style name="Small" fontSize="8"/>
+	<parameter name="Company_footer" class="java.lang.String">
+		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<field name="location_1" class="java.lang.String"><fieldDescription><![CDATA[location.location_1]]></fieldDescription></field>
 	<field name="location_2" class="java.lang.String"><fieldDescription><![CDATA[location.location_2]]></fieldDescription></field>
 	<field name="location_3" class="java.lang.String"><fieldDescription><![CDATA[location.location_3]]></fieldDescription></field>
@@ -137,11 +141,12 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="24">
+		<band height="36">
 			<line><reportElement x="0" y="0" width="561" height="1"/></line>
 			<staticText><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Standort- / Leihbericht · calServer V2]]></text></staticText>
 			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
 			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="0" y="18" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
 		</band>
 	</pageFooter>
 </jasperReport>

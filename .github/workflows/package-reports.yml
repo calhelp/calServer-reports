@@ -182,6 +182,7 @@ jobs:
           path: |
             KALIBRIERKONTROLLBLATT-JSON-SAMPLE/main_reports
             KALIBRIERKONTROLLBLATT-JSON-SAMPLE/subreports
+            KALIBRIERKONTROLLBLATT-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: Upload STICKER-DAKKS-12MM-JSON-SAMPLE as artifact
@@ -212,6 +213,7 @@ jobs:
           path: |
             ORDER-JSON-SAMPLE/main_reports
             ORDER-JSON-SAMPLE/subreports
+            ORDER-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: Upload DELIVERY-JSON-SAMPLE as artifact
@@ -221,20 +223,25 @@ jobs:
           path: |
             DELIVERY-JSON-SAMPLE/main_reports
             DELIVERY-JSON-SAMPLE/subreports
+            DELIVERY-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: Upload REPAIR-JSON-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
           name: REPAIR-JSON-SAMPLE
-          path: REPAIR-JSON-SAMPLE/main_reports
+          path: |
+            REPAIR-JSON-SAMPLE/main_reports
+            REPAIR-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: Upload LOCATION-JSON-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
           name: LOCATION-JSON-SAMPLE
-          path: LOCATION-JSON-SAMPLE/main_reports
+          path: |
+            LOCATION-JSON-SAMPLE/main_reports
+            LOCATION-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
       - name: List files before zipping (Debug)
