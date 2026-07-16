@@ -19,6 +19,10 @@
 	<parameter name="Reportpath" class="java.lang.String">
 		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
 	</parameter>
+	<parameter name="Company_footer" class="java.lang.String">
+		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
 	<field name="doc_number" class="java.lang.String"><fieldDescription><![CDATA[document.number]]></fieldDescription></field>
 	<field name="doc_date" class="java.lang.String"><fieldDescription><![CDATA[document.date]]></fieldDescription></field>
 	<field name="doc_status" class="java.lang.String"><fieldDescription><![CDATA[document.status]]></fieldDescription></field>
@@ -93,11 +97,12 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="24">
+		<band height="36">
 			<line><reportElement x="0" y="0" width="561" height="1"/></line>
 			<textField><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[($F{doc_status} == null ? "" : $F{doc_status}) + (($F{doc_number} == null) ? "" : (" · " + $F{doc_number}))]]></textFieldExpression></textField>
 			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
 			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="0" y="18" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
 		</band>
 	</pageFooter>
 </jasperReport>

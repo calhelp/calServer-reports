@@ -42,3 +42,18 @@ Template-Fehler, sondern fehlende Datenanbindung. Abhilfe:
 - Labels als `staticText` halten — `$V{}`-Variablen in `title`/`columnHeader` ohne
   `initialValueExpression` würden vor dem ersten Record `null` drucken.
 - Subreport-Teilmengen über `subDataSource("<array>")`.
+
+## Parameter-Katalog (`parameters.json`)
+
+Dieses Bundle liefert ein **Parameter-Manifest** (`parameters.json` an der
+Bundle-Wurzel), damit calServer V2 die konfigurierbaren Parameter beim Anlegen
+von Berichtsvariablen mit Beschreibung, Typ und Standardwert anbietet (siehe
+[Konzept](https://github.com/calhelp/calServer-yii/blob/develop/docs/konzept-report-parameter-katalog.md)).
+
+| Parameter | Rolle | Wirkung |
+|-----------|-------|---------|
+| `Company_footer` | variable (type) | Optionale Fußzeile am unteren Rand jeder Seite (Kalibrierkontrollblatt). Leerer Default → keine Änderung am aktuellen Layout; nur wenn gesetzt (Berichtsvariable `company_footer`), erscheint die Zeile. |
+
+Gilt nur für V2-JSON-Bundles. Der optionale Fußzeilentext ist `isBlankWhenNull`
+und standardmäßig leer — die pixelgenaue Abnahme des Layouts (report-runner)
+bleibt wie gehabt maßgeblich.

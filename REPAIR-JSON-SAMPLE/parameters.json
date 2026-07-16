@@ -1,0 +1,23 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/report-parameters.schema.json",
+  "version": 1,
+  "parameters": [
+    {
+      "name": "Company_footer",
+      "label": {
+        "de": "Fußzeile",
+        "en": "Footer line"
+      },
+      "description": {
+        "de": "Optionale Fußzeile am unteren Rand jeder Seite des Reparaturberichts, unterhalb von Berichtsname und Seitenzählung — z. B. Firmenname, Anschrift und Kontaktdaten. Leer lassen, wenn keine zusätzliche Fußzeile gedruckt werden soll.",
+        "en": "Optional footer at the bottom of every page of the repair report, below the report name and page count — e.g. company name, address and contact details. Leave empty to omit the extra footer line."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "textarea",
+      "required": false,
+      "group": "Layout",
+      "example": "Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt · info@musterfirma.de"
+    }
+  ]
+}
