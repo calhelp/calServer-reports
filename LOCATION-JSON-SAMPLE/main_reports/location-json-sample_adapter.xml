@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Jaspersoft Studio JSON data adapter for the location/loan V2 sample.
+
+  Bundled so the report previews out-of-the-box: opening
+  location-json-sample.jrxml and hitting "Preview" fills it from the sibling
+  sample-data.json (contract location-report v1.0) via this adapter,
+  referenced by the report property com.jaspersoft.studio.data.defadapter.
+
+  This is an AUTHORING/PREVIEW aid only. It is a Studio-namespaced property and
+  is inert in the report-runner: at runtime the calServer V2 backend supplies
+  the JSON datasource itself (see README → "Datenanbindung"). If your Studio
+  version does not auto-apply it, pick this adapter manually in the preview
+  data-adapter dropdown.
+-->
+<jsonDataAdapter class="net.sf.jasperreports.data.json.JsonDataAdapterImpl">
+	<name>Location JSON Sample (sample-data.json)</name>
+	<dataFile class="net.sf.jasperreports.data.StandardRepositoryDataLocation">
+		<location>sample-data.json</location>
+	</dataFile>
+	<language>json</language>
+	<useConnection>true</useConnection>
+	<selectExpression></selectExpression>
+</jsonDataAdapter>

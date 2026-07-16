@@ -107,6 +107,8 @@ jobs:
           get_last_modified "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
           get_last_modified "ORDER-JSON-SAMPLE" "order-json-sample"
           get_last_modified "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
+          get_last_modified "REPAIR-JSON-SAMPLE" "repair-json-sample"
+          get_last_modified "LOCATION-JSON-SAMPLE" "location-json-sample"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -183,6 +185,8 @@ jobs:
               "sticker-cal-inv-zebra-json-sample":  "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/README.md",
               "order-json-sample":                  "ORDER-JSON-SAMPLE/README.md",
               "delivery-json-sample":               "DELIVERY-JSON-SAMPLE/README.md",
+              "repair-json-sample":                 "REPAIR-JSON-SAMPLE/README.md",
+              "location-json-sample":               "LOCATION-JSON-SAMPLE/README.md",
           }
 
           SCHEMA_MAP = {
@@ -207,6 +211,8 @@ jobs:
               "sticker-cal-inv-zebra-json-sample":  "Zebra Inventar-/Kalibrier-Sticker (APEX · V2)",
               "order-json-sample":                  "Auftragsbeleg (APEX · V2)",
               "delivery-json-sample":               "Lieferschein (APEX · V2)",
+              "repair-json-sample":                 "Reparaturbericht (APEX · V2)",
+              "location-json-sample":               "Standort-/Leihbericht (APEX · V2)",
           }
 
           INFO_TEMPLATE = """<!doctype html>
