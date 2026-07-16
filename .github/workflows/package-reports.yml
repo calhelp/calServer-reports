@@ -222,6 +222,20 @@ jobs:
             DELIVERY-JSON-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload REPAIR-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: REPAIR-JSON-SAMPLE
+          path: REPAIR-JSON-SAMPLE/main_reports
+          if-no-files-found: error
+
+      - name: Upload LOCATION-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LOCATION-JSON-SAMPLE
+          path: LOCATION-JSON-SAMPLE/main_reports
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -349,6 +363,8 @@ jobs:
           create_zip "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
           create_zip "ORDER-JSON-SAMPLE" "order-json-sample"
           create_zip "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
+          create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
+          create_zip "LOCATION-JSON-SAMPLE" "location-json-sample"
 
 
       - name: Upload report ZIPs as artifact

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 repair report (ADR-009, contract "repair-report" v1.0). Filled from a JSON
+  data source — NO SQL. V1 ships no repair JRXML, so this is a greenfield layout:
+  device master-data grid, fault description, repair action, date/time/status and
+  a signature line. All labels are staticText (no report-level $V{} → no
+  null-in-title risk). See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repair-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="e8eef700-0400-4e80-af70-000000000400">
+	<property name="com.jaspersoft.studio.data.defadapter" value="repair-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Label" fontSize="8" isBold="true"/>
+	<style name="Value" fontSize="9"/>
+	<style name="SectionTitle" fontSize="10" isBold="true"/>
+	<field name="description" class="java.lang.String"><fieldDescription><![CDATA[repair.description]]></fieldDescription></field>
+	<field name="notes" class="java.lang.String"><fieldDescription><![CDATA[repair.notes]]></fieldDescription></field>
+	<field name="repair_date" class="java.lang.String"><fieldDescription><![CDATA[repair.repair_date]]></fieldDescription></field>
+	<field name="repair_time" class="java.lang.String"><fieldDescription><![CDATA[repair.repair_time]]></fieldDescription></field>
+	<field name="repair_status" class="java.lang.String"><fieldDescription><![CDATA[repair.status]]></fieldDescription></field>
+	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[device.asset_number]]></fieldDescription></field>
+	<field name="serial_number" class="java.lang.String"><fieldDescription><![CDATA[device.serial_number]]></fieldDescription></field>
+	<field name="device_description" class="java.lang.String"><fieldDescription><![CDATA[device.description]]></fieldDescription></field>
+	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[device.manufacturer]]></fieldDescription></field>
+	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[device.model]]></fieldDescription></field>
+	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[device.next_calibration_date]]></fieldDescription></field>
+	<field name="customer_name" class="java.lang.String"><fieldDescription><![CDATA[customer.name]]></fieldDescription></field>
+	<field name="customer_number" class="java.lang.String"><fieldDescription><![CDATA[customer.customer_number]]></fieldDescription></field>
+	<field name="customer_city" class="java.lang.String"><fieldDescription><![CDATA[customer.city]]></fieldDescription></field>
+	<title>
+		<band height="170">
+			<textField>
+				<reportElement x="0" y="0" width="561" height="22"/>
+				<textElement textAlignment="Center"><font size="15" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA["Reparaturbericht"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="24" width="561" height="14"/>
+				<textElement textAlignment="Center"><font size="10"/></textElement>
+				<textFieldExpression><![CDATA[($F{asset_number} == null ? "" : $F{asset_number}) + "  ·  " + ($F{device_description} == null ? "" : $F{device_description})]]></textFieldExpression>
+			</textField>
+			<line><reportElement x="0" y="44" width="561" height="1"/></line>
+			<staticText><reportElement style="SectionTitle" x="0" y="52" width="561" height="14"/><text><![CDATA[Prüfmittel]]></text></staticText>
+			<staticText><reportElement style="Label" x="0" y="70" width="130" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="70" width="150" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="70" width="120" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="70" width="151" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="86" width="130" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="86" width="150" height="13"/><textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="86" width="120" height="13"/><text><![CDATA[Nächste Kalibrierung]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="86" width="151" height="13"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="0" y="102" width="130" height="13"/><text><![CDATA[Kunde]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="102" width="431" height="13"/><textFieldExpression><![CDATA[($F{customer_name} == null ? "" : $F{customer_name}) + (($F{customer_number} == null || $F{customer_number}.isEmpty()) ? "" : ("  (" + $F{customer_number} + ")")) + (($F{customer_city} == null || $F{customer_city}.isEmpty()) ? "" : (", " + $F{customer_city}))]]></textFieldExpression></textField>
+			<line><reportElement x="0" y="124" width="561" height="1"/></line>
+			<staticText><reportElement style="Label" x="0" y="132" width="130" height="13"/><text><![CDATA[Reparaturdatum]]></text></staticText>
+			<textField><reportElement style="Value" x="130" y="132" width="150" height="13"/><textFieldExpression><![CDATA[($F{repair_date} == null ? "" : $F{repair_date}) + (($F{repair_time} == null || $F{repair_time}.isEmpty()) ? "" : (" " + $F{repair_time}))]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="290" y="132" width="120" height="13"/><text><![CDATA[Status]]></text></staticText>
+			<textField><reportElement style="Value" x="410" y="132" width="151" height="13"/><textFieldExpression><![CDATA[$F{repair_status}]]></textFieldExpression></textField>
+		</band>
+	</title>
+	<detail>
+		<band height="180">
+			<staticText><reportElement style="SectionTitle" x="0" y="0" width="561" height="14"/><text><![CDATA[Fehlerbeschreibung]]></text></staticText>
+			<textField textAdjust="StretchHeight"><reportElement style="Value" x="0" y="18" width="561" height="14"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
+			<staticText><reportElement style="SectionTitle" positionType="Float" x="0" y="48" width="561" height="14"/><text><![CDATA[Reparaturaktion]]></text></staticText>
+			<textField textAdjust="StretchHeight"><reportElement style="Value" positionType="Float" x="0" y="66" width="561" height="14"/><textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression></textField>
+			<line><reportElement positionType="Float" x="0" y="130" width="220" height="1"/></line>
+			<staticText><reportElement positionType="Float" x="0" y="132" width="220" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift Techniker]]></text></staticText>
+			<line><reportElement positionType="Float" x="341" y="130" width="220" height="1"/></line>
+			<staticText><reportElement positionType="Float" x="341" y="132" width="220" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift Freigabe]]></text></staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<line><reportElement x="0" y="0" width="561" height="1"/></line>
+			<staticText><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Reparaturbericht · calServer V2]]></text></staticText>
+			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
+			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
+		</band>
+	</pageFooter>
+</jasperReport>

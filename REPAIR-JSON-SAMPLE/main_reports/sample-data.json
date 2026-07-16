@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "contract": "repair-report",
+    "schema_version": "1.0",
+    "generated_at": "2026-07-16T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "repair": {
+    "description": "Display zeigt keine Anzeige, Gerät startet nicht",
+    "notes": "Displayeinheit getauscht, Firmware aktualisiert, Funktionstest bestanden",
+    "repair_date": "2026-07-10",
+    "repair_time": "09:30:00",
+    "status_code": "A",
+    "status": "erledigt",
+    "custom_fields": { "technician": "Max Mustermann", "total_cost": "245.00" }
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Digitalmultimeter Fluke 87V",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "type_code": "DMM",
+    "next_calibration_date": "2027-06-30",
+    "custom_fields": {}
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "custom_fields": {}
+  }
+}

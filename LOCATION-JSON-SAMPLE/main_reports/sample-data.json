@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "contract": "location-report",
+    "schema_version": "1.0",
+    "generated_at": "2026-07-16T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "location": {
+    "location_1": "Gebäude A",
+    "location_2": "Raum 101",
+    "location_3": "Regal 3",
+    "location_4": "OG2",
+    "location_5": "L-42",
+    "location_date": "2026-07-01",
+    "location_time": "08:00:00",
+    "is_active": 1,
+    "status": "verliehen",
+    "custom_fields": { "rental_end": "2026-09-30" }
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Digitalmultimeter Fluke 87V",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "type_code": "DMM",
+    "next_calibration_date": "2027-06-30",
+    "custom_fields": {}
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "custom_fields": {}
+  },
+  "customer_contact": {
+    "name": "Erika Musterfrau",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "email": "erika@muster.example",
+    "phone": "+49 30 1234500"
+  },
+  "delivery_customer": {
+    "name": "Muster GmbH — Werk 2",
+    "customer_number": "K-1001",
+    "street": "Wareneingang, Tor 3",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "custom_fields": {}
+  },
+  "delivery_contact": {
+    "name": "Hans Beispiel",
+    "email": "hans@muster.example",
+    "phone": "+49 30 1234501"
+  }
+}
