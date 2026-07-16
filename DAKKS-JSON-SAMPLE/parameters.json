@@ -1,0 +1,76 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/report-parameters.schema.json",
+  "version": 1,
+  "parameters": [
+    {
+      "name": "Sprache",
+      "label": {
+        "de": "Sprache des Kalibrierscheins",
+        "en": "Certificate language"
+      },
+      "description": {
+        "de": "Steuert die Beschriftungen des Kalibrierscheins. „Deutsch“ rendert Titel, Seitenzählung und Abschnittsköpfe zweisprachig Deutsch/Englisch (DAkkS-üblich); jeder andere Wert schaltet auf rein englische Beschriftung um.",
+        "en": "Controls the certificate captions. \"Deutsch\" renders title, page numbering and section headers bilingually in German/English (customary for DAkkS certificates); any other value switches to English-only captions."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "select",
+      "options": [
+        { "value": "Deutsch", "label": { "de": "Deutsch (zweisprachig de/en)", "en": "German (bilingual de/en)" } },
+        { "value": "English", "label": { "de": "Englisch", "en": "English" } }
+      ],
+      "default": "Deutsch",
+      "required": false,
+      "group": "Allgemein",
+      "order": 10
+    },
+    {
+      "name": "Company_footer",
+      "label": {
+        "de": "Fußzeile",
+        "en": "Footer line"
+      },
+      "description": {
+        "de": "Freier Text am unteren Rand jeder Seite, unterhalb von Laborname und Kalibrierschein-Nummer — üblicherweise Firmenname mit Akkreditierungshinweis des Kalibrierlaboratoriums. Leer lassen, wenn keine zusätzliche Fußzeile gedruckt werden soll.",
+        "en": "Free text at the bottom of every page, below the laboratory name and certificate number — typically the company name with the calibration laboratory's accreditation notice. Leave empty to omit the extra footer line."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "textarea",
+      "required": false,
+      "group": "Layout",
+      "order": 20,
+      "example": "Musterfirma GmbH · Kalibrierlaboratorium D-K-15208-01-00"
+    },
+    {
+      "name": "Show_next_calibration",
+      "label": {
+        "de": "Nächste Kalibrierung anzeigen",
+        "en": "Show next calibration date"
+      },
+      "description": {
+        "de": "Blendet den Block „Nächste Kalibrierung / Next calibration“ auf dem Deckblatt ein oder aus. Nach DIN EN ISO/IEC 17025 ist das Rekalibrierdatum eine Empfehlung, die nur auf Kundenwunsch auf dem Kalibrierschein erscheint — „false“ erzeugt den Schein ohne diese Empfehlung.",
+        "en": "Shows or hides the \"Nächste Kalibrierung / Next calibration\" block on the cover page. Under DIN EN ISO/IEC 17025 the recalibration date is a recommendation printed on the certificate only at the customer's request — \"false\" produces the certificate without it."
+      },
+      "role": "variable",
+      "scope": "report",
+      "input": "boolean",
+      "default": "true",
+      "required": false,
+      "group": "Inhalt",
+      "order": 30
+    },
+    {
+      "name": "Reportpath",
+      "label": {
+        "de": "Bundle-Wurzelpfad",
+        "en": "Bundle root path"
+      },
+      "description": {
+        "de": "Wurzelpfad zur Auflösung der Subreports (/subreports/*.jasper). Wird von calServer automatisch gesetzt und darf nicht als Berichtsvariable konfiguriert werden.",
+        "en": "Root path for resolving the subreports (/subreports/*.jasper). Supplied automatically by calServer and must not be configured as a report variable."
+      },
+      "role": "system"
+    }
+  ]
+}

@@ -19,6 +19,7 @@ unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
 | `subreports/standards.jrxml` | Verwendete Normale; `standards`-Array via `subDataSource("standards")` — inkl. nächster Kalibrierung + Zertifikat-Nr. |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.1**) |
 | `main_reports/dakks-json-sample_adapter.xml` | Mitgelieferter Jaspersoft-Studio-**JSON-Data-Adapter** auf `sample-data.json` — macht die Vorschau turnkey (siehe „Vorschau ohne Backend") |
+| `parameters.json` | **Parameter-Manifest**: beschreibt die konfigurierbaren Parameter des Hauptberichts (Label de/en, Beschreibung, Rolle, Eingabetyp, Default) für den calServer-Parameter-Katalog (siehe unten) |
 
 ## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
 
@@ -67,6 +68,28 @@ Report-Variablen (`master_report_variable`, z. B. `lab_name`, `mark_number_1`,
 enthält je Wert das Triple `<feld>`/`<feld>_p` (SI-Präfix)/`<feld>_u` (Einheit)
 plus `accred`. Jeder Entitätsblock trägt zusätzlich `custom_fields`. Feldreferenz
 siehe `sample-data.json`.
+
+## Parameter-Katalog (`parameters.json`)
+
+Dieses Bundle ist der **Pilotbericht für das Parameter-Manifest**: Die Datei
+`parameters.json` an der Bundle-Wurzel beschreibt die konfigurierbaren
+Parameter des Haupt-JRXML maschinenlesbar (Format:
+[`schema/report-parameters.schema.json`](../schema/report-parameters.schema.json)).
+calServer V2 liest sie direkt aus dem hochgeladenen ZIP und bietet die
+Parameter im Dialog „Berichtsvariable erstellen" mit Beschreibung, Typ und
+Standardwert zur Auswahl an — statt eines leeren Freitextfelds.
+
+| Parameter | Rolle | Wirkung |
+|-----------|-------|---------|
+| `Sprache` | variable (global) | `Deutsch` = zweisprachige Beschriftung de/en, sonst rein englisch |
+| `Company_footer` | variable (type) | zusätzliche Fußzeile am unteren Seitenrand (leer = keine) |
+| `Show_next_calibration` | variable (report) | `false` blendet den Block „Nächste Kalibrierung" aus (Rekalibrier-Empfehlung nur auf Kundenwunsch, DIN EN ISO/IEC 17025) |
+| `Reportpath` | system | wird von calServer automatisch gesetzt (Subreport-Auflösung) |
+
+Die vorgeschlagenen Variablennamen sind `lcfirst` der Parameternamen
+(`Company_footer` → Berichtsvariable `company_footer`); die Auflösung zur
+Laufzeit läuft über `$P{ucfirst(variable_name)}`. Gilt **nur für
+V2-JSON-Bundles** — klassische JDBC-Bundles tragen kein Manifest.
 
 ## Autoren-Hinweise (Jaspersoft Studio)
 
