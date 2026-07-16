@@ -1,106 +1,92 @@
-# DAKKS-JSON-SAMPLE — layouttreuer DAkkS-Kalibrierschein (V2 / APEX)
+# DAKKS-JSON-SAMPLE — exakter V1-DAkkS-Kalibrierschein mit JSON-Datenquelle
 
-Dies ist die **layouttreue V2-Nachbildung des akkreditierten DAkkS-Kalibrierscheins**
-(Phase 0 der
-[JasperReports-V2-Strategie](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md),
-[ADR-009](https://github.com/calhelp/calServer-yii/blob/develop/docs-v2/entwicklung/adr/009-report-data-contract-statt-sql-templates.md)).
+Dieses Bundle ist die **byte-genaue Kopie des akkreditierten V1-Originals**
+[`DAKKS-SAMPLE`](../DAKKS-SAMPLE/) — gleicher Aufbau, gleiche Bänder, gleiche
+Ausdrücke, **alle 52 V1-Parameter unverändert** — nur die Datenquelle ist
+getauscht: statt eingebettetem SQL über JDBC füllt der report-runner die
+Vorlage aus dem calServer-Report-Data-Contract `calibration-certificate`
+(**v1.2**, JSON).
 
-Im Gegensatz zu den bestehenden V1-Bundles (eingebettetes SQL über JDBC mit
-Codespalten wie `I4201`, `C2303`) wird dieses Bundle aus einem **JSON-Datensatz
-mit lesbaren API-Feldnamen** gefüllt — es enthält **kein SQL** und ist damit
-unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL).
+Die Kopie ist **per Konstruktion exakt**: die drei JRXMLs werden nicht von
+Hand gepflegt, sondern mit
+[`scripts/build_dakks_json_clone.py`](../scripts/build_dakks_json_clone.py)
+mechanisch aus dem V1-Original abgeleitet. Erlaubte Unterschiede sind genau:
+
+1. `<queryString>` entfernt (kein SQL),
+2. jedes `<field>` erhält eine `<fieldDescription>` mit seinem JSON-Pfad
+   (Feldname und -klasse bleiben — alle `$F{…}`-Ausdrücke sind unverändert),
+3. die zwei Subreport-Aufrufe lesen `subDataSource("standards")` bzw.
+   `subDataSource("results")` statt `$P{REPORT_CONNECTION}`,
+4. Report-Name + Studio-Default-Adapter (Vorschau-Komfort),
+5. `Results`: Feld `row_num` als `java.lang.Integer` statt des abstrakten
+   `java.lang.Number` (JsonDataSource-Anforderung; im Layout ungenutzt).
+
+`python3 scripts/build_dakks_json_clone.py --check` weist die Ableitung
+byte-genau nach. **Nie von Hand editieren** — Mapping im Skript ändern und
+mit `--write` neu generieren.
 
 ## Aufbau
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/dakks-json-sample.jrxml` | Hauptbericht: Labor-Kopf, zweisprachiges Objekt-Stammdatengrid, Kalibrierzeichen-Box (Line-Art), QR aus `device.asset_number`, Abschnittskörper (Verfahren, Messbedingungen), Signatur-/Freigabebereich, Seiten-Footer |
-| `subreports/results.jrxml` | Messergebnis-Tabelle; `results`-Array via `subDataSource("results")` — mit SI-Wert+Präfix+Einheit-Konkatenation und per-Zeile `accred`-„*"-Symbol |
-| `subreports/standards.jrxml` | Verwendete Normale; `standards`-Array via `subDataSource("standards")` — inkl. nächster Kalibrierung + Zertifikat-Nr. |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.1**) |
-| `main_reports/dakks-json-sample_adapter.xml` | Mitgelieferter Jaspersoft-Studio-**JSON-Data-Adapter** auf `sample-data.json` — macht die Vorschau turnkey (siehe „Vorschau ohne Backend") |
-| `parameters.json` | **Parameter-Manifest**: beschreibt die konfigurierbaren Parameter des Hauptberichts (Label de/en, Beschreibung, Rolle, Eingabetyp, Default) für den calServer-Parameter-Katalog (siehe unten) |
+| `main_reports/dakks-json-sample.jrxml` | Hauptbericht (1:1 aus `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml`) |
+| `subreports/Standard.jrxml` | Verwendete Normale (1:1 aus V1 `Standard.jrxml`; `subDataSource("standards")`) |
+| `subreports/Results.jrxml` | Messergebnisse mit allen V1-Layoutvarianten (`MeasurementDetails` 1/2/21/22/3/4, `ModernResultsHeader`; `subDataSource("results")`) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.2**) |
+| `main_reports/dakks-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Adapter auf `sample-data.json` (turnkey-Vorschau) |
+| `parameters.json` | **Kompletter Katalog aller 52 V1-Parameter** (Labels, Beschreibung, Defaults, Gruppen) für die calServer-Berichtsvariablen-UI |
 
-## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
+## Parameter
 
-Dieses Bundle ist **datenquellenlos**: Der Bericht enthält **kein** eingebettetes
-SQL und **keine** Beispieldaten im Template selbst. Er rendert nur dann Inhalt,
-wenn ihm eine **JSON-Datenquelle** übergeben wird. Wird er ohne Datenquelle
-ausgeführt — z. B. „Preview" in Jaspersoft Studio ohne konfigurierten
-Data-Adapter, oder Generierung in der Live-Umgebung **ohne** die Report-Variable
-`data_contract` — bleibt die Seite leer bzw. der Lauf bricht auf dem
-Subreport-`subDataSource(...)`-Aufruf ab. Das ist **kein** Template-Fehler,
-sondern die fehlende Datenanbindung. Abhilfe:
+Alle 52 Parameter des V1-Originals sind deklariert und wirken wie in V1 —
+maschinenlesbar beschrieben in [`parameters.json`](../DAKKS-JSON-SAMPLE/parameters.json):
+`Sprache`, `MarkNumber1/2`, `PageNumberPosition`, `MeasurementDetails`,
+`ModernResultsHeader`, alle `ShowGroup1*`-Abschnittsschalter samt Overrides
+und sämtliche Textbausteine (`Cert_description`, `Uncertainty_description`, …).
+Gepflegt werden sie wie in V1 als **Berichtsvariablen**; calServer reicht
+jede Variable unter `Ucfirst(name)` **und** ihrem Rohnamen durch (nötig für
+die kleingeschriebenen V1-Parameter `environmental_conditions`/`sign_names`).
+Automatisch versorgt werden `P_CTAG`, `Sprache` (aus der Datensatz-Locale)
+und `QR_Code_Value` (calServer-Kurz-URL `/inventory/qrcode/{id}`,
+per gleichnamiger Variable übersteuerbar).
 
-- **Vorschau ohne Backend (Jaspersoft Studio):** Das Bundle bringt den Adapter
-  `dakks-json-sample_adapter.xml` mit und referenziert ihn über die
-  Report-Property `com.jaspersoft.studio.data.defadapter`. „Open → Preview"
-  füllt den Schein direkt aus `sample-data.json`. Falls die Studio-Version den
-  Default-Adapter nicht automatisch zieht, den Adapter im Vorschau-Dropdown
-  einmalig auswählen.
-- **Live-Umgebung (calServer V2):** Auf dem Report-Setting die report-scoped
-  Variable `data_contract = calibration-certificate` setzen — dann liefert das
-  Backend (`CalibrationReportDataBuilder`) den JSON-Datensatz an den Runner.
-  Ohne diese Variable läuft der klassische JDBC-Pfad, der hier mangels
-  `<queryString>` keine Daten hat.
+**Datenseitige Variablen** (füllen den JSON-Datensatz, Contract v1.2):
+
+| Variable | Wirkung |
+|----------|---------|
+| `cert_field` | Altspaltenname des Zertifikatsnummern-Felds → `calibration.certificate_display` + Zertifikatsspalte der Normale |
+| `procedure_field` | Altspaltenname des Prozedur-Referenzfelds → füllt den `procedure`-Block aus der Prozedur-Tabelle |
+| `environmental_conditions` | Ressourcen-Name → `environment.working_hours` („Temp\|Feuchte") |
+| `reportVariantCode` | Ressourcen-Name → `report_variant.template` („1"/„0", DIM-Layoutvariante) |
 
 ## Datenanbindung
 
-- **Kein** `<queryString>`, **keine** `REPORT_CONNECTION`.
-- Der Runner füllt den Hauptbericht mit einer `JsonDataSource` aus dem
-  mitgelieferten Datensatz (`dataSourceType=json`, `dataJson`).
-- Subreports holen ihre Teilmenge über
-  `((JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("<array>")` — keine
-  Connection, kein eigenes SQL.
-- Den Datensatz erzeugt das calServer-V2-Backend
-  (`CalibrationReportDataBuilder`); zum Testen/Entwerfen dient
-  `sample-data.json`, abrufbar auch über
-  `GET /api/v2/calibrations/{ctag}/report-dataset`.
+- **Kein** `<queryString>`, **keine** `REPORT_CONNECTION` — der Runner füllt
+  mit einer `JsonDataSource` (`dataSourceType=json`, `dataJson`); die
+  Subreports iterieren `standards[]`/`results[]` per `subDataSource`.
+- calServer erkennt das SQL-lose Bundle beim Generieren **automatisch** und
+  baut den Datensatz (`CalibrationReportDataBuilder`, Contract v1.2) — keine
+  `data_contract`-Variable nötig (Override möglich).
+- **Backend-Mindestversion:** Contract **v1.2**. Gegen ein v1.1-Backend
+  fehlen u. a. `calibration.place` und die Normale-Zellen → „null"-Drucke.
 
-## Contract `calibration-certificate` (v1.1)
+## ⚠️ Leeres/weißes Blatt?
 
-Wurzelobjekt mit den Blöcken `meta`, `laboratory`, `accreditation`,
-`calibration`, `device`, `customer`, `procedure`, `standards[]`, `results[]`,
-`signatures[]`, `texts`. Die Blöcke `laboratory`/`accreditation`/`procedure`/
-`texts` und der Freigeber (`signatures[]`) stammen aus konfigurierten
-Report-Variablen (`master_report_variable`, z. B. `lab_name`, `mark_number_1`,
-`approver_name`, `traceability_note`) — nicht aus Entity-Daten. `results[]`
-enthält je Wert das Triple `<feld>`/`<feld>_p` (SI-Präfix)/`<feld>_u` (Einheit)
-plus `accred`. Jeder Entitätsblock trägt zusätzlich `custom_fields`. Feldreferenz
-siehe `sample-data.json`.
+Das Bundle ist datenquellenlos. Ohne JSON-Datenquelle (Studio-Preview ohne
+Adapter, oder Backend älter als die Auto-Erkennung) bleibt die Seite leer.
+Studio: mitgelieferten Adapter wählen („Open → Preview" nutzt ihn über die
+`defadapter`-Property automatisch). Live: aktuelles calServer V2 genügt.
 
-## Parameter-Katalog (`parameters.json`)
+## Bekannte, dokumentierte Abweichungen zum V1-SQL
 
-Dieses Bundle ist der **Pilotbericht für das Parameter-Manifest**: Die Datei
-`parameters.json` an der Bundle-Wurzel beschreibt die konfigurierbaren
-Parameter des Haupt-JRXML maschinenlesbar (Format:
-[`schema/report-parameters.schema.json`](../schema/report-parameters.schema.json)).
-calServer V2 liest sie direkt aus dem hochgeladenen ZIP und bietet die
-Parameter im Dialog „Berichtsvariable erstellen" mit Beschreibung, Typ und
-Standardwert zur Auswahl an — statt eines leeren Freitextfelds.
+- Zustand Ein-/Ausgang: die V2-Synchronisation typisiert die Altspalte
+  numerisch; der Datensatz liest den Rohwert (`calibration.condition`).
+- `--`-Defaults der Altspalten für Temperatur/Feuchte/Auftragsnummer sind
+  datenseitig nicht reproduzierbar (leer statt „--"; nur bei leeren Daten
+  sichtbar, Ausdrücke sind guarded).
+- Zertifikatsnummern-Fallback ohne `cert_field`-Variable ist die kanonische
+  `certificate_number` (V1-Yii-Default war eine feste Altspalte).
+- Das `SELECT DISTINCT` der Normale-Abfrage (Dedupe) entfällt.
 
-| Parameter | Rolle | Wirkung |
-|-----------|-------|---------|
-| `Sprache` | variable (global) | `Deutsch` = zweisprachige Beschriftung de/en, sonst rein englisch |
-| `Company_footer` | variable (type) | zusätzliche Fußzeile am unteren Seitenrand (leer = keine) |
-| `Show_next_calibration` | variable (report) | `false` blendet den Block „Nächste Kalibrierung" aus (Rekalibrier-Empfehlung nur auf Kundenwunsch, DIN EN ISO/IEC 17025) |
-| `Reportpath` | system | wird von calServer automatisch gesetzt (Subreport-Auflösung) |
-
-Die vorgeschlagenen Variablennamen sind `lcfirst` der Parameternamen
-(`Company_footer` → Berichtsvariable `company_footer`); die Auflösung zur
-Laufzeit läuft über `$P{ucfirst(variable_name)}`. Gilt **nur für
-V2-JSON-Bundles** — klassische JDBC-Bundles tragen kein Manifest.
-
-## Autoren-Hinweise (Jaspersoft Studio)
-
-1. Der mitgelieferte **JSON-Data-Adapter** (`dakks-json-sample_adapter.xml`)
-   zeigt bereits auf `sample-data.json` und ist als Default-Adapter hinterlegt —
-   „Preview" genügt. (Alternativ selbst einen JSON-Data-Adapter anlegen.)
-2. Felder über ihren JSON-Pfad (`<fieldDescription>`) binden, nicht über SQL.
-3. Für wiederkehrende Listen (Ergebnisse, Normale) ein Subreport mit
-   `subDataSource("<array>")` als Datenquelle verwenden.
-4. JasperReports-Version **6.20.6** bleibt verbindlich (siehe `robots.md`).
-
-> **Status:** Layouttreue V2-Nachbildung, über den report-runner zu PDF
-> verifiziert. Die abschließende pixelgenaue Abnahme des akkreditierten Scheins
-> erfolgt per Dual-Run-Sichtvergleich V1↔V2 in einer Live-Umgebung.
+> **Status:** Referenzvorlage der V2-Strategie (ADR-009). JasperReports
+> **6.20.6** bleibt verbindlich (siehe `robots.md`).
