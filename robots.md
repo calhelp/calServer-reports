@@ -31,6 +31,7 @@ The existing bundles in this repo are the stable **V1 contract**: embedded SQL e
 ### Rules
 - Do **NOT** rewrite existing bundles to query the calServer V2 schema (readable column names). They stay on the V1 contract and receive bug fixes only.
 - **V2 bundles** use **JSON datasources** with readable API field names (`$F{serial_number}` instead of `$F{I4202}`); the data is supplied by the calServer backend, not by SQL inside the template.
+- **Exception — exact V1 clones:** a V2 bundle that is a byte-exact clone of a V1 original (e.g. `DAKKS-JSON-SAMPLE`, derived from `DAKKS-SAMPLE` by `scripts/build_dakks_json_clone.py`) KEEPS the V1 field names inside the template; the readable api_name lives in each field's `<fieldDescription>` JSON path. Never hand-edit such a clone — change the mapping in the build script and regenerate (`--write`), verify with `--check`.
 - Strategy and migration path: https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md
 - JasperReports 6.20.6 (section 0.1) remains binding for all bundles until the version policy is explicitly updated.
 

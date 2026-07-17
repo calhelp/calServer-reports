@@ -3,74 +3,1115 @@
   "version": 1,
   "parameters": [
     {
+      "name": "Reportpath",
+      "label": {
+        "de": "Report-Basisverzeichnis",
+        "en": "Report base path"
+      },
+      "description": {
+        "de": "Wird vom report-runner automatisch auf das entpackte Bundle gesetzt (Subreport-Auflösung).",
+        "en": "Set automatically by the report runner to the extracted bundle root (subreport resolution)."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 10
+    },
+    {
+      "name": "PrefixTable",
+      "label": {
+        "de": "Tabellenpräfix",
+        "en": "Table prefix"
+      },
+      "description": {
+        "de": "V1-Altlast für eingebettetes SQL; im JSON-Bundle ohne Funktion, wird automatisch versorgt.",
+        "en": "V1 legacy for embedded SQL; unused in the JSON bundle, supplied automatically."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 20
+    },
+    {
+      "name": "P_CTAG",
+      "label": {
+        "de": "Kalibrier-ID",
+        "en": "Calibration id"
+      },
+      "description": {
+        "de": "Wird von calServer automatisch mit der ID der Kalibrierung befüllt.",
+        "en": "Automatically filled by calServer with the calibration id."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 30
+    },
+    {
+      "name": "QR_Code_Value",
+      "label": {
+        "de": "QR-Code-Inhalt",
+        "en": "QR code content"
+      },
+      "description": {
+        "de": "Automatisch die calServer-Kurz-URL des Geräts (/inventory/qrcode/…); per gleichnamiger Berichtsvariable übersteuerbar.",
+        "en": "Automatically the calServer short URL of the device (/inventory/qrcode/…); can be overridden by a report variable of the same name."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 40
+    },
+    {
+      "name": "P_Image_Path",
+      "label": {
+        "de": "Bildpfad (V1-Altlast)",
+        "en": "Image path (V1 legacy)"
+      },
+      "description": {
+        "de": "Wurde in V1 an den Ergebnis-Subreport durchgereicht, dort aber nicht verwendet; bleibt unbelegt.",
+        "en": "Passed through to the results subreport in V1 but never used there; stays unset."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 50
+    },
+    {
       "name": "Sprache",
       "label": {
         "de": "Sprache des Kalibrierscheins",
         "en": "Certificate language"
       },
       "description": {
-        "de": "Steuert die Beschriftungen des Kalibrierscheins. „Deutsch“ rendert Titel, Seitenzählung und Abschnittsköpfe zweisprachig Deutsch/Englisch (DAkkS-üblich); jeder andere Wert schaltet auf rein englische Beschriftung um.",
-        "en": "Controls the certificate captions. \"Deutsch\" renders title, page numbering and section headers bilingually in German/English (customary for DAkkS certificates); any other value switches to English-only captions."
+        "de": "Automatisch aus der Datensatz-Locale (Deutsch/Englisch); per Berichtsvariable übersteuerbar. „Deutsch“ rendert die DAkkS-übliche zweisprachige Beschriftung.",
+        "en": "Derived automatically from the dataset locale (German/English); can be overridden by a report variable. \"Deutsch\" renders the bilingual captions customary for DAkkS certificates."
       },
-      "role": "variable",
-      "scope": "global",
+      "role": "system",
+      "group": "System",
+      "order": 60,
       "input": "select",
       "options": [
-        { "value": "Deutsch", "label": { "de": "Deutsch (zweisprachig de/en)", "en": "German (bilingual de/en)" } },
-        { "value": "English", "label": { "de": "Englisch", "en": "English" } }
+        {
+          "value": "Deutsch",
+          "label": {
+            "de": "Deutsch (zweisprachig de/en)",
+            "en": "German (bilingual de/en)"
+          }
+        },
+        {
+          "value": "Englisch",
+          "label": {
+            "de": "Englisch",
+            "en": "English"
+          }
+        }
       ],
-      "default": "Deutsch",
-      "required": false,
-      "group": "Allgemein",
-      "order": 10
+      "default": "Deutsch"
     },
     {
-      "name": "Company_footer",
+      "name": "MarkNumber1",
       "label": {
-        "de": "Fußzeile",
-        "en": "Footer line"
+        "de": "Kalibrierzeichen Zeile 1",
+        "en": "Calibration mark line 1"
       },
       "description": {
-        "de": "Freier Text am unteren Rand jeder Seite, unterhalb von Laborname und Kalibrierschein-Nummer — üblicherweise Firmenname mit Akkreditierungshinweis des Kalibrierlaboratoriums. Leer lassen, wenn keine zusätzliche Fußzeile gedruckt werden soll.",
-        "en": "Free text at the bottom of every page, below the laboratory name and certificate number — typically the company name with the calibration laboratory's accreditation notice. Leave empty to omit the extra footer line."
+        "de": "Obere Nummer im Kalibrierzeichen-Kasten (Titelseite und Folgeseiten).",
+        "en": "Upper number in the calibration-mark box (title and following pages)."
       },
       "role": "variable",
-      "scope": "type",
-      "input": "textarea",
-      "required": false,
-      "group": "Layout",
-      "order": 20,
-      "example": "Musterfirma GmbH · Kalibrierlaboratorium D-K-15208-01-00"
+      "group": "Kalibrierzeichen",
+      "order": 70,
+      "default": "123456"
     },
     {
-      "name": "Show_next_calibration",
+      "name": "MarkNumber2",
       "label": {
-        "de": "Nächste Kalibrierung anzeigen",
-        "en": "Show next calibration date"
+        "de": "Kalibrierzeichen Zeile 2",
+        "en": "Calibration mark line 2"
       },
       "description": {
-        "de": "Blendet den Block „Nächste Kalibrierung / Next calibration“ auf dem Deckblatt ein oder aus. Nach DIN EN ISO/IEC 17025 ist das Rekalibrierdatum eine Empfehlung, die nur auf Kundenwunsch auf dem Kalibrierschein erscheint — „false“ erzeugt den Schein ohne diese Empfehlung.",
-        "en": "Shows or hides the \"Nächste Kalibrierung / Next calibration\" block on the cover page. Under DIN EN ISO/IEC 17025 the recalibration date is a recommendation printed on the certificate only at the customer's request — \"false\" produces the certificate without it."
+        "de": "DAkkS-Registriernummer im Kalibrierzeichen-Kasten; \\n erzeugt den Zeilenumbruch.",
+        "en": "DAkkS registration number in the calibration-mark box; \\n produces the line break."
       },
       "role": "variable",
-      "scope": "report",
-      "input": "boolean",
-      "default": "true",
-      "required": false,
-      "group": "Inhalt",
-      "order": 30
+      "group": "Kalibrierzeichen",
+      "order": 80,
+      "default": "D-K-\nYYYYY-ZZ-N",
+      "example": "D-K-15208-01-00"
     },
     {
-      "name": "Reportpath",
+      "name": "ShowMarkOnFollowingPages",
       "label": {
-        "de": "Bundle-Wurzelpfad",
-        "en": "Bundle root path"
+        "de": "Kalibrierzeichen auf Folgeseiten",
+        "en": "Mark on following pages"
       },
       "description": {
-        "de": "Wurzelpfad zur Auflösung der Subreports (/subreports/*.jasper). Wird von calServer automatisch gesetzt und darf nicht als Berichtsvariable konfiguriert werden.",
-        "en": "Root path for resolving the subreports (/subreports/*.jasper). Supplied automatically by calServer and must not be configured as a report variable."
+        "de": "„Y“ wiederholt den Kalibrierzeichen-Kasten im Seitenkopf aller Folgeseiten.",
+        "en": "\"Y\" repeats the calibration-mark box in the page header of every following page."
       },
-      "role": "system"
+      "role": "variable",
+      "group": "Kalibrierzeichen",
+      "order": 90,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ReportVersion",
+      "label": {
+        "de": "Vorlagen-Version",
+        "en": "Template version"
+      },
+      "description": {
+        "de": "Kleiner Versionsvermerk oben links auf der Titelseite.",
+        "en": "Small version note in the top-left corner of the title page."
+      },
+      "role": "variable",
+      "group": "Kalibrierzeichen",
+      "order": 100,
+      "default": "V0.8.2"
+    },
+    {
+      "name": "sign_names",
+      "label": {
+        "de": "Unterschriftsnamen drucken",
+        "en": "Print signer names"
+      },
+      "description": {
+        "de": "Steuert die Namenszeilen im Unterschriftsblock der Titelseite (kleingeschriebener V1-Parametername).",
+        "en": "Controls the name lines in the title-page signature block (lowercase V1 parameter name)."
+      },
+      "role": "variable",
+      "group": "Kalibrierzeichen",
+      "order": 110,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "PageNumberPosition",
+      "label": {
+        "de": "Position der Seitenzahl",
+        "en": "Page number position"
+      },
+      "description": {
+        "de": "HeaderLeft/HeaderCenter/HeaderRight bzw. footerLeft/footerCenter/footerRight.",
+        "en": "HeaderLeft/HeaderCenter/HeaderRight or footerLeft/footerCenter/footerRight."
+      },
+      "role": "variable",
+      "group": "Seitenzählung",
+      "order": 120,
+      "default": "HeaderLeft"
+    },
+    {
+      "name": "PageNumberBilingual",
+      "label": {
+        "de": "Seitenzahl zweisprachig",
+        "en": "Bilingual page numbers"
+      },
+      "description": {
+        "de": "„Y“ ergänzt unter der deutschen Seitenzeile die englische (Page x of y).",
+        "en": "\"Y\" adds the English line (Page x of y) below the German one."
+      },
+      "role": "variable",
+      "group": "Seitenzählung",
+      "order": 130,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "MeasurementDetails",
+      "label": {
+        "de": "Layout der Ergebnistabelle",
+        "en": "Results table layout"
+      },
+      "description": {
+        "de": "Wählt die Spaltenvariante des Ergebnis-Subreports (1, 2, 21, 22, 3, 4 — wie V1 MET/CAL).",
+        "en": "Selects the column variant of the results subreport (1, 2, 21, 22, 3, 4 — as in V1 MET/CAL)."
+      },
+      "role": "variable",
+      "group": "Ergebnistabelle",
+      "order": 140,
+      "default": "1"
+    },
+    {
+      "name": "ModernResultsHeader",
+      "label": {
+        "de": "Moderner Tabellenkopf",
+        "en": "Modern table header"
+      },
+      "description": {
+        "de": "„Y“ schaltet die moderne Kopfvariante der Ergebnistabelle ein.",
+        "en": "\"Y\" enables the modern header variant of the results table."
+      },
+      "role": "variable",
+      "group": "Ergebnistabelle",
+      "order": 150,
+      "input": "select",
+      "options": [
+        {
+          "value": "N",
+          "label": {
+            "de": "klassisch",
+            "en": "classic"
+          }
+        },
+        {
+          "value": "Y",
+          "label": {
+            "de": "modern",
+            "en": "modern"
+          }
+        }
+      ],
+      "default": "N"
+    },
+    {
+      "name": "ExpUncType",
+      "label": {
+        "de": "Zusatz zur Messunsicherheits-Spalte",
+        "en": "Uncertainty column note"
+      },
+      "description": {
+        "de": "Optionaler Hinweistext neben der Überschrift der Ergebnistabelle.",
+        "en": "Optional note printed next to the results-table heading."
+      },
+      "role": "variable",
+      "group": "Ergebnistabelle",
+      "order": 160
+    },
+    {
+      "name": "Results_end_note",
+      "label": {
+        "de": "Schlusszeile der Ergebnistabelle",
+        "en": "Results end note"
+      },
+      "description": {
+        "de": "Text der Abschlusszeile unter der Ergebnistabelle.",
+        "en": "Text of the closing line below the results table."
+      },
+      "role": "variable",
+      "group": "Ergebnistabelle",
+      "order": 170,
+      "default": "---Ende des Ergebnisberichts--"
+    },
+    {
+      "name": "ShowGroup1CalibrationItem",
+      "label": {
+        "de": "Abschnitt „Kalibriergegenstand“",
+        "en": "Section \"calibration item\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Kalibriergegenstand“ aus.",
+        "en": "\"N\" hides the \"calibration item\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 180,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1IncomingDate",
+      "label": {
+        "de": "Abschnitt „Datum der Anlieferung“",
+        "en": "Section \"incoming date\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Datum der Anlieferung“ aus.",
+        "en": "\"N\" hides the \"incoming date\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 190,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1Condition",
+      "label": {
+        "de": "Abschnitt „Zustand bei Eingang/Ausgang“",
+        "en": "Section \"incoming/outgoing condition\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Zustand bei Eingang/Ausgang“ aus.",
+        "en": "\"N\" hides the \"incoming/outgoing condition\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 200,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1Spacer",
+      "label": {
+        "de": "Abschnitt „Zwischenraum“",
+        "en": "Section \"spacer\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Zwischenraum“ aus.",
+        "en": "\"N\" hides the \"spacer\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 210,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1Procedure",
+      "label": {
+        "de": "Abschnitt „Kalibrierverfahren“",
+        "en": "Section \"calibration procedure\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Kalibrierverfahren“ aus.",
+        "en": "\"N\" hides the \"calibration procedure\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 220,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1ProcedureDocument",
+      "label": {
+        "de": "Abschnitt „Verfahrensanweisung“",
+        "en": "Section \"procedural document\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Verfahrensanweisung“ aus.",
+        "en": "\"N\" hides the \"procedural document\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 230,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1MeasurementConditions",
+      "label": {
+        "de": "Abschnitt „Messbedingungen“",
+        "en": "Section \"measurement conditions\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Messbedingungen“ aus.",
+        "en": "\"N\" hides the \"measurement conditions\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 240,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1CalibrationPlace",
+      "label": {
+        "de": "Abschnitt „Ort der Kalibrierung“",
+        "en": "Section \"place of calibration\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Ort der Kalibrierung“ aus.",
+        "en": "\"N\" hides the \"place of calibration\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 250,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1EnvironmentalConditions",
+      "label": {
+        "de": "Abschnitt „Umgebungsbedingungen“",
+        "en": "Section \"environmental conditions\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Umgebungsbedingungen“ aus.",
+        "en": "\"N\" hides the \"environmental conditions\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 260,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1StandardsTraceability",
+      "label": {
+        "de": "Abschnitt „Verwendete Normale / Rückführung“",
+        "en": "Section \"standards / traceability\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Verwendete Normale / Rückführung“ aus.",
+        "en": "\"N\" hides the \"standards / traceability\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 270,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1ResultsIntro",
+      "label": {
+        "de": "Abschnitt „Messergebnisse (Einleitung)“",
+        "en": "Section \"results intro\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Messergebnisse (Einleitung)“ aus.",
+        "en": "\"N\" hides the \"results intro\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 280,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1MeasurementUncertainty",
+      "label": {
+        "de": "Abschnitt „Messunsicherheiten“",
+        "en": "Section \"measurement uncertainty\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Messunsicherheiten“ aus.",
+        "en": "\"N\" hides the \"measurement uncertainty\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 290,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1Conformity",
+      "label": {
+        "de": "Abschnitt „Konformität“",
+        "en": "Section \"conformity\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Konformität“ aus.",
+        "en": "\"N\" hides the \"conformity\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 300,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1AdditionalInformation",
+      "label": {
+        "de": "Abschnitt „Weitere Hinweise“",
+        "en": "Section \"additional information\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Weitere Hinweise“ aus.",
+        "en": "\"N\" hides the \"additional information\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 310,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "ShowGroup1ResultsDetails",
+      "label": {
+        "de": "Abschnitt „Ergebnistabelle“",
+        "en": "Section \"results table\""
+      },
+      "description": {
+        "de": "„N“ blendet den Abschnitt „Ergebnistabelle“ aus.",
+        "en": "\"N\" hides the \"results table\" section."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 320,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "IncomingDate_override",
+      "label": {
+        "de": "Anlieferdatum überschreiben",
+        "en": "Override incoming date"
+      },
+      "description": {
+        "de": "Fester Text statt des Anlieferdatums aus den Gerätedaten.",
+        "en": "Fixed text instead of the incoming date from the device data."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 330
+    },
+    {
+      "name": "Condition_override",
+      "label": {
+        "de": "Zustandstext überschreiben",
+        "en": "Override condition text"
+      },
+      "description": {
+        "de": "Fester Text statt des Zustands aus dem Kalibrierdatensatz.",
+        "en": "Fixed text instead of the condition from the calibration record."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 340
+    },
+    {
+      "name": "CalibrationPlace_override",
+      "label": {
+        "de": "Kalibrierort überschreiben",
+        "en": "Override calibration place"
+      },
+      "description": {
+        "de": "Fester Text statt des Orts aus dem Kalibrierdatensatz.",
+        "en": "Fixed text instead of the place from the calibration record."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 350
+    },
+    {
+      "name": "environmental_conditions",
+      "label": {
+        "de": "Umgebungsbedingungen-Ressource",
+        "en": "Environmental-conditions resource"
+      },
+      "description": {
+        "de": "Name der calServer-Ressource, deren Klimabereich („Temp|Feuchte“) gedruckt wird (kleingeschriebener V1-Parametername; speist auch environment.working_hours im Datensatz).",
+        "en": "Name of the calServer resource whose climate range (\"temp|humidity\") is printed (lowercase V1 parameter name; also feeds environment.working_hours in the dataset)."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 360,
+      "example": "Labor Klima"
+    },
+    {
+      "name": "ReportVariantCode",
+      "label": {
+        "de": "Layoutvarianten-Ressource",
+        "en": "Layout-variant resource"
+      },
+      "description": {
+        "de": "Name der Ressource mit report_template=1 für die DIM-Layoutvariante (als Berichtsvariable „reportVariantCode“ pflegen, speist auch report_variant.template).",
+        "en": "Name of the resource with report_template=1 enabling the DIM layout variant (maintain as report variable \"reportVariantCode\"; also feeds report_variant.template)."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 370
+    },
+    {
+      "name": "Cert_field",
+      "label": {
+        "de": "Zertifikatsnummern-Feld",
+        "en": "Certificate-number field"
+      },
+      "description": {
+        "de": "Altspaltenname des Felds, dessen Wert als Kalibrierschein-Nummer gilt (als Berichtsvariable „cert_field“ pflegen; speist calibration.certificate_display und die Zertifikatsspalte der Normale).",
+        "en": "Legacy column name of the field whose value is the certificate number (maintain as report variable \"cert_field\"; feeds calibration.certificate_display and the standards' certificate column)."
+      },
+      "role": "variable",
+      "group": "Abschnitte",
+      "order": 380,
+      "example": "C2396"
+    },
+    {
+      "name": "Cert_description",
+      "label": {
+        "de": "Normtext Titelseite",
+        "en": "Title-page normative text"
+      },
+      "description": {
+        "de": "Rechtstext rechts auf der Titelseite (Rückführung, DAkkS-Abkommen, Messunsicherheit). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 390,
+      "input": "textarea"
+    },
+    {
+      "name": "Cert_description_1",
+      "label": {
+        "de": "Weiterverbreitungs-Hinweis",
+        "en": "Redistribution notice"
+      },
+      "description": {
+        "de": "Hinweis unter dem Stammdatengrid („…nur vollständig und unverändert weiterverbreitet…“). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 400,
+      "input": "textarea"
+    },
+    {
+      "name": "Asset_description",
+      "label": {
+        "de": "Beschreibung Kalibriergegenstand",
+        "en": "Calibration-item description"
+      },
+      "description": {
+        "de": "Freitext im Abschnitt „Kalibriergegenstand“. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 410,
+      "input": "textarea"
+    },
+    {
+      "name": "Results_description",
+      "label": {
+        "de": "Einleitung Messergebnisse",
+        "en": "Results intro text"
+      },
+      "description": {
+        "de": "Text des Abschnitts „Messergebnisse“; {0} wird durch die Startseite der Tabelle ersetzt. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 420,
+      "input": "textarea"
+    },
+    {
+      "name": "Measurements_description",
+      "label": {
+        "de": "Messunsicherheits-Text 1",
+        "en": "Uncertainty text 1"
+      },
+      "description": {
+        "de": "Erster Textblock im Abschnitt „Messunsicherheiten“. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 430,
+      "input": "textarea"
+    },
+    {
+      "name": "Measurements_description_1",
+      "label": {
+        "de": "Messunsicherheits-Text 2",
+        "en": "Uncertainty text 2"
+      },
+      "description": {
+        "de": "Zweiter Textblock im Abschnitt „Messunsicherheiten“ (GUM-Dokumentation). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 440,
+      "input": "textarea"
+    },
+    {
+      "name": "Uncertainty_description",
+      "label": {
+        "de": "Messunsicherheits-Langtext",
+        "en": "Uncertainty long text"
+      },
+      "description": {
+        "de": "Ausführlicher EA-4/02-/GUM-Block (HTML-Auszeichnung erlaubt). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 450,
+      "input": "textarea"
+    },
+    {
+      "name": "Conformity_description_1",
+      "label": {
+        "de": "Konformität Einleitung",
+        "en": "Conformity intro"
+      },
+      "description": {
+        "de": "Einleitungssatz des Konformitätsabschnitts. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 460,
+      "input": "textarea"
+    },
+    {
+      "name": "Conformity_description_2",
+      "label": {
+        "de": "Konformität Symbolliste",
+        "en": "Conformity symbol list"
+      },
+      "description": {
+        "de": "Symbolzeilen der Konformitätslegende (HTML-Zeilenumbrüche). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 470,
+      "input": "textarea"
+    },
+    {
+      "name": "Conformity_description_3",
+      "label": {
+        "de": "Konformität Symboltexte",
+        "en": "Conformity symbol details"
+      },
+      "description": {
+        "de": "Erläuterungstexte zu den Konformitätssymbolen. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 480,
+      "input": "textarea"
+    },
+    {
+      "name": "Additional_information",
+      "label": {
+        "de": "Weitere Hinweise",
+        "en": "Additional information"
+      },
+      "description": {
+        "de": "Text des Abschnitts „Weitere Hinweise“ (EA-/ILAC-Abkommen). Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 490,
+      "input": "textarea"
+    },
+    {
+      "name": "Calibration_procedure_1",
+      "label": {
+        "de": "Fallback Kalibrierverfahren",
+        "en": "Calibration-procedure fallback"
+      },
+      "description": {
+        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensbeschreibung liefert. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 500,
+      "input": "textarea"
+    },
+    {
+      "name": "Calibration_document",
+      "label": {
+        "de": "Fallback Verfahrensanweisung",
+        "en": "Procedural-document fallback"
+      },
+      "description": {
+        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensanweisung liefert. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 510,
+      "input": "textarea"
+    },
+    {
+      "name": "Calibration_procedure_2",
+      "label": {
+        "de": "Fallback Arbeitsanweisung",
+        "en": "Work-instruction fallback"
+      },
+      "description": {
+        "de": "Fallback-Text für die Arbeitsanweisungs-Kaskade. Leer lassen für den zweisprachigen V1-Standardtext.",
+        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+      },
+      "role": "variable",
+      "group": "Textbausteine",
+      "order": 520,
+      "input": "textarea"
     }
   ]
 }
