@@ -90,9 +90,7 @@
 	</parameter>
 	<parameter name="Conformity_description_2" class="java.lang.String">
 		<parameterDescription><![CDATA[Kurzlegende für Symbolik (? / !? / ! / *).]]></parameterDescription>
-		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
-? "? innerhalb der Spezifikation<br/>!? außerhalb der Spezifikation (keine Aussage möglich)<br/>! außerhalb der Spezifikation<br/>* nicht im Akkreditierungsumfang"
-: "? within the specification<br/>!? out of specification (no statement possible)<br/>! out of specification<br/>* not covered by the accreditation scope"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["?\n\n\n!?\n\n\n!\n\n*"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Conformity_description_3" class="java.lang.String">
                 <parameterDescription><![CDATA[Detailbeschreibungen zu den Symbolen für Konformität und Akkreditierungsumfang.]]></parameterDescription>
@@ -1588,7 +1586,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<reportElement x="16" y="8" width="70" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000001">
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
@@ -1596,7 +1594,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="8" width="100" height="17" uuid="a1b2c3d4-0002-4a01-8e01-000000000003">
@@ -1648,7 +1646,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<reportElement x="16" y="25" width="70" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000001">
 					<printWhenExpression><![CDATA[($P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")) && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Right">
 					<font size="8" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
@@ -1660,7 +1658,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="25" width="100" height="15" uuid="a2b2c3d4-0002-4a01-8e01-000000000003">
@@ -1707,7 +1705,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<reportElement x="0" y="8" width="70" height="17" uuid="a1b2c3d4-0004-4a01-8e01-000000000007">
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft")]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{PAGE_NUMBER} + " von ") : ("Page " + $V{PAGE_NUMBER} + " of ")]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
@@ -1715,7 +1713,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="220" y="8" width="100" height="17" uuid="a1b2c3d4-0005-4a01-8e01-000000000009">
@@ -1749,7 +1747,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<reportElement x="0" y="25" width="70" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000007">
 					<printWhenExpression><![CDATA[$P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft") && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Right">
 					<font size="8" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Page " + $V{PAGE_NUMBER} + " of ") : ("Seite " + $V{PAGE_NUMBER} + " von ")]]></textFieldExpression>
@@ -1761,7 +1759,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textElement textAlignment="Left">
 					<font size="8" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\u00A0" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="220" y="25" width="100" height="15" uuid="a2b2c3d4-0005-4a01-8e01-000000000009">
