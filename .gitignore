@@ -1,2 +1,6 @@
 # Ignore compiled Jasper report files
 *.jasper
+
+# Python bytecode caches (scripts/)
+__pycache__/
+*.pyc
