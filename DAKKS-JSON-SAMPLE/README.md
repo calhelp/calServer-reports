@@ -70,6 +70,45 @@ per gleichnamiger Variable übersteuerbar).
 - **Backend-Mindestversion:** Contract **v1.2**. Gegen ein v1.1-Backend
   fehlen u. a. `calibration.place` und die Normale-Zellen → „null"-Drucke.
 
+## DAkkS-Schein als DCC (PTB 3.3.0) ausgeben
+
+Derselbe Contract, der die PDF-Vorlage füllt, kann **zusätzlich** als offizielles
+**Digital Calibration Certificate** nach PTB-Standard ausgegeben werden
+(https://wiki.dcc.ptb.de/) — der DAkkS-Schein wird so „als DCC wählbar",
+**ohne zweite Datenquelle**.
+
+```bash
+python3 scripts/dcc330_writer.py \
+  --input DAKKS-JSON-SAMPLE/main_reports/sample-data.json \
+  --output build/dakks-dcc-3.3.0.xml --validate
+```
+
+- **Eingang:** exakt der Contract `calibration-certificate` **v1.2** (dieselbe
+  `sample-data.json`, die den Report speist).
+- **Ausgang:** `dcc:digitalCalibrationCertificate` `schemaVersion="3.3.0"`,
+  validiert gegen [`DCC/main_reports/schema/dcc-v3.3.0.xsd`](../DCC/main_reports/schema/dcc-v3.3.0.xsd)
+  (importiert D-SI- und XML-DSig-Schema).
+- **Messwerte in D-SI:** je Ergebniszeile werden Nennwert, Messwert (mit
+  erweiterter Messunsicherheit, k=2 / 95 %) und die Toleranzgrenzen als
+  `si:real` (Wert + `si:unit` in Backslash-Notation, z. B. `\volt`, `\ohm`)
+  ausgegeben. Wert/Präfix/Einheit (`fixq`/`fixq_p`/`fixq_u` …) werden dabei in
+  die SI-Basiseinheit skaliert, sodass Wert und Unsicherheit dieselbe Einheit
+  tragen.
+- **Mapping v1.2 → DCC 3.3.0:** Labor/Kunde/Gerät/Unterzeichner →
+  `administrativeData` (coreData, items, calibrationLaboratory, respPersons,
+  customer); Akkreditierungskennzeichen → `statements`; `results[]` →
+  `measurementResults`.
+- **Beispielausgabe (eingecheckt):**
+  [`main_reports/sample-dcc-3.3.0.xml`](main_reports/sample-dcc-3.3.0.xml).
+- **Guardrail:** [`scripts/check_dcc330.py`](../scripts/check_dcc330.py) prüft die
+  D-SI-Helfer, regeneriert das Sample deterministisch (Parität) und validiert
+  es gegen das XSD (überspringt die XSD-Prüfung offline anstandslos). Läuft im
+  CI-Workflow `validate-reports.yml`.
+
+> Die PDF (Jasper) und das DCC-XML bilden das digitale Zertifikat als Paar;
+> `dcc330_writer.py` ist der PTB-3.3.0-Nachfolger des einfacheren
+> `dcc_xml_writer.py` (calhelp-Format).
+
 ## ⚠️ Leeres/weißes Blatt?
 
 Das Bundle ist datenquellenlos. Ohne JSON-Datenquelle (Studio-Preview ohne

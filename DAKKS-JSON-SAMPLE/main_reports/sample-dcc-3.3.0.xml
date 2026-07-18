@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<dcc:digitalCalibrationCertificate xmlns:dcc="https://ptb.de/dcc" xmlns:si="https://ptb.de/si" schemaVersion="3.3.0">
+  <dcc:administrativeData>
+    <dcc:dccSoftware>
+      <dcc:software>
+        <dcc:name>
+          <dcc:content lang="de">calServer</dcc:content>
+        </dcc:name>
+        <dcc:release>1.0</dcc:release>
+      </dcc:software>
+    </dcc:dccSoftware>
+    <dcc:coreData>
+      <dcc:countryCodeISO3166_1>DE</dcc:countryCodeISO3166_1>
+      <dcc:usedLangCodeISO639_1>de</dcc:usedLangCodeISO639_1>
+      <dcc:mandatoryLangCodeISO639_1>de</dcc:mandatoryLangCodeISO639_1>
+      <dcc:uniqueIdentifier>K-2026-0815</dcc:uniqueIdentifier>
+      <dcc:beginPerformanceDate>2026-06-30</dcc:beginPerformanceDate>
+      <dcc:endPerformanceDate>2026-06-30</dcc:endPerformanceDate>
+      <dcc:performanceLocation>laboratory</dcc:performanceLocation>
+    </dcc:coreData>
+    <dcc:items>
+      <dcc:item>
+        <dcc:name>
+          <dcc:content lang="de">Digitalmultimeter 34401A</dcc:content>
+        </dcc:name>
+        <dcc:manufacturer>
+          <dcc:name>
+            <dcc:content lang="de">Keysight</dcc:content>
+          </dcc:name>
+        </dcc:manufacturer>
+        <dcc:model>34401A</dcc:model>
+        <dcc:identifications>
+          <dcc:identification>
+            <dcc:issuer>manufacturer</dcc:issuer>
+            <dcc:value>1075011</dcc:value>
+            <dcc:name>
+              <dcc:content lang="de">Seriennummer</dcc:content>
+            </dcc:name>
+          </dcc:identification>
+          <dcc:identification>
+            <dcc:issuer>customer</dcc:issuer>
+            <dcc:value>INV-9001</dcc:value>
+            <dcc:name>
+              <dcc:content lang="de">Inventarnummer</dcc:content>
+            </dcc:name>
+          </dcc:identification>
+        </dcc:identifications>
+      </dcc:item>
+    </dcc:items>
+    <dcc:calibrationLaboratory>
+      <dcc:calibrationLaboratoryCode>D-K-15208-01-00</dcc:calibrationLaboratoryCode>
+      <dcc:contact>
+        <dcc:name>
+          <dcc:content lang="de">Kalibrierlabor Musterstadt</dcc:content>
+        </dcc:name>
+        <dcc:eMail>labor@muster.example</dcc:eMail>
+        <dcc:phone>+49 30 1234500</dcc:phone>
+        <dcc:location>
+          <dcc:city>Musterstadt</dcc:city>
+          <dcc:countryCode>DE</dcc:countryCode>
+          <dcc:postCode>12345</dcc:postCode>
+          <dcc:street>Laborweg 5</dcc:street>
+        </dcc:location>
+      </dcc:contact>
+    </dcc:calibrationLaboratory>
+    <dcc:respPersons>
+      <dcc:respPerson>
+        <dcc:person>
+          <dcc:name>
+            <dcc:content lang="de">Erika Musterfrau</dcc:content>
+          </dcc:name>
+        </dcc:person>
+        <dcc:role>technician</dcc:role>
+      </dcc:respPerson>
+      <dcc:respPerson>
+        <dcc:person>
+          <dcc:name>
+            <dcc:content lang="de">Dr. Max Mustermann</dcc:content>
+          </dcc:name>
+        </dcc:person>
+        <dcc:role>approver</dcc:role>
+        <dcc:mainSigner>true</dcc:mainSigner>
+      </dcc:respPerson>
+    </dcc:respPersons>
+    <dcc:customer>
+      <dcc:name>
+        <dcc:content lang="de">Muster GmbH</dcc:content>
+      </dcc:name>
+      <dcc:eMail>qs@muster.example</dcc:eMail>
+      <dcc:location>
+        <dcc:city>Musterstadt</dcc:city>
+        <dcc:countryCode>DE</dcc:countryCode>
+        <dcc:postCode>Musterstadt</dcc:postCode>
+        <dcc:street>Musterstraße 1</dcc:street>
+      </dcc:location>
+    </dcc:customer>
+    <dcc:statements>
+      <dcc:statement>
+        <dcc:declaration>
+          <dcc:content lang="de">Akkreditierte Kalibrierung (DAkkS): DAkkS-K-0815, 123456, D-K-15208-01-00</dcc:content>
+        </dcc:declaration>
+      </dcc:statement>
+    </dcc:statements>
+  </dcc:administrativeData>
+  <dcc:measurementResults>
+    <dcc:measurementResult>
+      <dcc:name>
+        <dcc:content lang="de">VA-DMM-01</dcc:content>
+      </dcc:name>
+      <dcc:results>
+        <dcc:result>
+          <dcc:name>
+            <dcc:content lang="de">DC-Spannung 10 V Bereich</dcc:content>
+          </dcc:name>
+          <dcc:data>
+            <dcc:list>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Nennwert</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10.00000</si:value>
+                  <si:unit>\volt</si:unit>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Messwert</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10.00004</si:value>
+                  <si:unit>\volt</si:unit>
+                  <si:measurementUncertaintyUnivariate>
+                    <si:expandedMU>
+                      <si:valueExpandedMU>0.000035</si:valueExpandedMU>
+                      <si:coverageFactor>2</si:coverageFactor>
+                      <si:coverageProbability>0.95</si:coverageProbability>
+                    </si:expandedMU>
+                  </si:measurementUncertaintyUnivariate>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Untere Grenze</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>9.99990</si:value>
+                  <si:unit>\volt</si:unit>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Obere Grenze</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10.00010</si:value>
+                  <si:unit>\volt</si:unit>
+                </si:real>
+              </dcc:quantity>
+            </dcc:list>
+          </dcc:data>
+        </dcc:result>
+        <dcc:result>
+          <dcc:name>
+            <dcc:content lang="de">Widerstand 10 kOhm</dcc:content>
+          </dcc:name>
+          <dcc:data>
+            <dcc:list>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Nennwert</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10000.0000</si:value>
+                  <si:unit>\ohm</si:unit>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Messwert</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10000.2000</si:value>
+                  <si:unit>\ohm</si:unit>
+                  <si:measurementUncertaintyUnivariate>
+                    <si:expandedMU>
+                      <si:valueExpandedMU>0.12</si:valueExpandedMU>
+                      <si:coverageFactor>2</si:coverageFactor>
+                      <si:coverageProbability>0.95</si:coverageProbability>
+                    </si:expandedMU>
+                  </si:measurementUncertaintyUnivariate>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Untere Grenze</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>9999.0000</si:value>
+                  <si:unit>\ohm</si:unit>
+                </si:real>
+              </dcc:quantity>
+              <dcc:quantity>
+                <dcc:name>
+                  <dcc:content lang="de">Obere Grenze</dcc:content>
+                </dcc:name>
+                <si:real>
+                  <si:value>10001.0000</si:value>
+                  <si:unit>\ohm</si:unit>
+                </si:real>
+              </dcc:quantity>
+            </dcc:list>
+          </dcc:data>
+        </dcc:result>
+      </dcc:results>
+    </dcc:measurementResult>
+  </dcc:measurementResults>
+</dcc:digitalCalibrationCertificate>

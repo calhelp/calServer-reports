@@ -31,3 +31,14 @@ jobs:
       # schema/report-parameters.schema.json und das jeweilige Haupt-JRXML.
       - name: Check parameter manifests
         run: python3 scripts/check_parameters_manifest.py
+
+      # DCC 3.3.0 Export: xmlschema erlaubt echte Validierung gegen dcc-v3.3.0.xsd
+      # (mit remote SI-/dsig-Imports). Der Check überspringt die XSD-Prüfung
+      # anstandslos, falls das Schema offline nicht ladbar ist.
+      - name: Install xmlschema
+        run: pip install xmlschema
+
+      # Regeneriert das DCC-Sample deterministisch (Parität), prüft Struktur
+      # und validiert gegen das offizielle PTB-DCC-3.3.0-Schema.
+      - name: Check DCC 3.3.0 export
+        run: python3 scripts/check_dcc330.py
