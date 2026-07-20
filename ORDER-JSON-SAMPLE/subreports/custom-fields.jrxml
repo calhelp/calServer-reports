@@ -15,7 +15,7 @@
 	<detail>
 		<band height="12">
 			<textField><reportElement x="0" y="0" width="130" height="11"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[($F{label} == null ? "" : $F{label}) + ":"]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight"><reportElement x="132" y="0" width="188" height="11"/><textFieldExpression><![CDATA[$F{value}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="132" y="0" width="188" height="11"/><textFieldExpression><![CDATA[$F{value}]]></textFieldExpression></textField>
 		</band>
 	</detail>
 </jasperReport>
