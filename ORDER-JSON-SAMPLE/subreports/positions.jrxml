@@ -18,9 +18,9 @@
 	<detail>
 		<band height="15">
 			<textField><reportElement x="0" y="0" width="28" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight"><reportElement x="28" y="0" width="240" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="28" y="0" width="240" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
 			<textField pattern="#,##0.##"><reportElement x="268" y="0" width="32" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField>
-			<textField><reportElement x="306" y="0" width="22" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="306" y="0" width="22" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
 			<textField pattern="#,##0.00 €"><reportElement x="328" y="0" width="70" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{price}]]></textFieldExpression></textField>
 			<textField pattern="#,##0.##' %'"><reportElement x="398" y="0" width="45" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression></textField>
 			<textField pattern="#,##0.00 €"><reportElement x="443" y="0" width="78" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{line_net}]]></textFieldExpression></textField>

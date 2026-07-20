@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "order-document",
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "generated_at": "2026-07-15T10:00:00+00:00",
     "locale": "de-DE"
   },
@@ -9,6 +9,8 @@
     "number": "AU-2026-0042",
     "date": "2026-07-15",
     "status": "Auftrag",
+    "type": "order_confirmation",
+    "type_label": "Auftragsbestätigung",
     "comment": "Vielen Dank für Ihren Auftrag.",
     "delivery_condition": "frei Haus",
     "delivery_costs": 12.5,
@@ -23,6 +25,25 @@
       { "key": "W4105", "label": "Bestelldatum", "value": "2026-07-10" },
       { "key": "W4109", "label": "Liefertermin", "value": "2026-07-20" }
     ]
+  },
+  "supplier": {
+    "name": "calServer Musterfirma GmbH",
+    "sender_line": "calServer Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt",
+    "street": "Musterstraße 1",
+    "zip": "12345",
+    "city": "Musterstadt",
+    "country": "DE",
+    "phone": "+49 30 1234567",
+    "email": "info@musterfirma.example",
+    "web": "www.musterfirma.example",
+    "tax_number": "12/345/67890",
+    "vat_id": "DE123456789",
+    "commercial_register": "Amtsgericht Musterstadt HRB 12345",
+    "managing_director": "Max Mustermann",
+    "bank_name": "Musterbank",
+    "iban": "DE02 1203 0000 0000 2020 51",
+    "bic": "BYLADEM1001",
+    "payment_terms": "Zahlbar innerhalb von 14 Tagen ohne Abzug."
   },
   "customer": {
     "name": "Muster GmbH",
@@ -55,6 +76,23 @@
     "zip": "54320",
     "city": "Beispielstadt",
     "country": "DE"
+  },
+  "recipient": {
+    "role": "customer",
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "contact": {
+      "name": "Erika Musterfrau",
+      "street": "Musterstraße 1",
+      "zip": "54321",
+      "city": "Beispielstadt",
+      "email": "erika@muster.example",
+      "phone": "+49 30 1234500"
+    }
   },
   "positions": [
     { "pos_number": 1, "name": "Kalibrierung Gleichspannung", "article_type": "article", "quantity": 2, "unit": "Stk", "price": 100.0, "discount": 0.0, "tax": 19.0, "line_net": 200.0 },
