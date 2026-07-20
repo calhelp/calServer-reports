@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "order-document",
-    "schema_version": "1.0",
+    "schema_version": "1.1",
     "generated_at": "2026-07-15T10:00:00+00:00",
     "locale": "de-DE"
   },
@@ -11,13 +11,18 @@
     "status": "Auftrag",
     "comment": "Vielen Dank für Ihren Auftrag.",
     "delivery_condition": "frei Haus",
-    "delivery_costs": 0,
+    "delivery_costs": 12.5,
     "description": "Es gelten unsere Allgemeinen Geschäftsbedingungen.",
     "custom_fields": {
-      "W4104": "Ihre Bestellung 12345",
+      "W4104": "12345",
       "W4105": "2026-07-10",
       "W4109": "2026-07-20"
-    }
+    },
+    "custom_fields_list": [
+      { "key": "W4104", "label": "Ihre Bestellnummer", "value": "12345" },
+      { "key": "W4105", "label": "Bestelldatum", "value": "2026-07-10" },
+      { "key": "W4109", "label": "Liefertermin", "value": "2026-07-20" }
+    ]
   },
   "customer": {
     "name": "Muster GmbH",
@@ -36,18 +41,18 @@
     }
   },
   "delivery": {
-    "name": "Muster GmbH",
-    "customer_number": "K-1001",
-    "street": "Musterstraße 1",
-    "zip": "54321",
-    "city": "Beispielstadt",
+    "name": "Muster GmbH – Wareneingang",
+    "customer_number": "K-1001-L",
+    "street": "Wareneingang, Tor 3",
+    "zip": "54322",
+    "city": "Beispielstadt-Industriegebiet",
     "country": "DE"
   },
   "invoice": {
-    "name": "Muster GmbH",
-    "customer_number": "K-1001",
-    "street": "Musterstraße 1",
-    "zip": "54321",
+    "name": "Muster GmbH – Buchhaltung",
+    "customer_number": "K-1001-R",
+    "street": "Rechnungsstelle, Postfach 90",
+    "zip": "54320",
     "city": "Beispielstadt",
     "country": "DE"
   },

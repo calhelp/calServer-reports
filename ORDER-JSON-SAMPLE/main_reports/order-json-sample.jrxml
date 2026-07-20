@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 order document (Auftrag/Angebot/Rechnung), ADR-009 contract "order-document"
-  v1.0. Filled from a JSON data source — NO SQL, NO V1 code columns. Positions and
+  V2 order document (Auftrag/Angebot/Rechnung/Lieferung), ADR-009 contract
+  "order-document" v1.1. Renders the ordering customer plus — when they differ —
+  the delivery and invoice address, the delivery condition/costs, and the booking
+  custom fields (W41xx) generically via document.custom_fields_list.
+  Filled from a JSON data source — NO SQL, NO V1 code columns. Positions and
   the per-tax-rate statistics are pre-aggregated server-side (OrderDocumentDataBuilder)
   because a JSON template cannot group an array; the template only prints them:
   positions[] via subDataSource("positions"), statistics.tax_groups[] via
@@ -40,6 +43,18 @@
 	<field name="vat_total" class="java.lang.Double"><fieldDescription><![CDATA[statistics.vat_total]]></fieldDescription></field>
 	<field name="gross_total" class="java.lang.Double"><fieldDescription><![CDATA[statistics.gross_total]]></fieldDescription></field>
 	<field name="order_discount_percent" class="java.lang.Double"><fieldDescription><![CDATA[statistics.order_discount_percent]]></fieldDescription></field>
+	<field name="doc_delivery_condition" class="java.lang.String"><fieldDescription><![CDATA[document.delivery_condition]]></fieldDescription></field>
+	<field name="doc_delivery_costs" class="java.lang.Double"><fieldDescription><![CDATA[document.delivery_costs]]></fieldDescription></field>
+	<field name="del_name" class="java.lang.String"><fieldDescription><![CDATA[delivery.name]]></fieldDescription></field>
+	<field name="del_street" class="java.lang.String"><fieldDescription><![CDATA[delivery.street]]></fieldDescription></field>
+	<field name="del_zip" class="java.lang.String"><fieldDescription><![CDATA[delivery.zip]]></fieldDescription></field>
+	<field name="del_city" class="java.lang.String"><fieldDescription><![CDATA[delivery.city]]></fieldDescription></field>
+	<field name="del_number" class="java.lang.String"><fieldDescription><![CDATA[delivery.customer_number]]></fieldDescription></field>
+	<field name="inv_name" class="java.lang.String"><fieldDescription><![CDATA[invoice.name]]></fieldDescription></field>
+	<field name="inv_street" class="java.lang.String"><fieldDescription><![CDATA[invoice.street]]></fieldDescription></field>
+	<field name="inv_zip" class="java.lang.String"><fieldDescription><![CDATA[invoice.zip]]></fieldDescription></field>
+	<field name="inv_city" class="java.lang.String"><fieldDescription><![CDATA[invoice.city]]></fieldDescription></field>
+	<field name="inv_number" class="java.lang.String"><fieldDescription><![CDATA[invoice.customer_number]]></fieldDescription></field>
 	<title>
 		<band height="200">
 			<!-- Sender line -->
@@ -57,6 +72,26 @@
 			<textField><reportElement style="Value" x="460" y="46" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_number}]]></textFieldExpression></textField>
 			<staticText><reportElement style="Label" x="380" y="60" width="80" height="12"/><text><![CDATA[Kontakt]]></text></staticText>
 			<textField><reportElement style="Value" x="460" y="60" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_contact}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="74" width="80" height="12"><printWhenExpression><![CDATA[$F{doc_delivery_condition} != null && !$F{doc_delivery_condition}.isEmpty()]]></printWhenExpression></reportElement><text><![CDATA[Lieferung]]></text></staticText>
+			<textField><reportElement style="Value" x="460" y="74" width="101" height="12"><printWhenExpression><![CDATA[$F{doc_delivery_condition} != null && !$F{doc_delivery_condition}.isEmpty()]]></printWhenExpression></reportElement><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_delivery_condition}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="88" width="80" height="12"><printWhenExpression><![CDATA[$F{doc_delivery_costs} != null && $F{doc_delivery_costs}.doubleValue() != 0.0]]></printWhenExpression></reportElement><text><![CDATA[Lieferkosten]]></text></staticText>
+			<textField pattern="#,##0.00 €"><reportElement style="Value" x="460" y="88" width="101" height="12"><printWhenExpression><![CDATA[$F{doc_delivery_costs} != null && $F{doc_delivery_costs}.doubleValue() != 0.0]]></printWhenExpression></reportElement><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_delivery_costs}]]></textFieldExpression></textField>
+			<!-- Lieferadresse (nur wenn abweichend vom Auftraggeber) -->
+			<frame>
+				<reportElement x="0" y="64" width="175" height="52"><printWhenExpression><![CDATA[$F{del_number} != null && !$F{del_number}.equals($F{cust_number})]]></printWhenExpression></reportElement>
+				<staticText><reportElement style="Label" x="0" y="0" width="175" height="11"/><text><![CDATA[Lieferadresse]]></text></staticText>
+				<textField><reportElement x="0" y="12" width="175" height="12"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$F{del_name}]]></textFieldExpression></textField>
+				<textField><reportElement x="0" y="24" width="175" height="12"/><textFieldExpression><![CDATA[$F{del_street}]]></textFieldExpression></textField>
+				<textField><reportElement x="0" y="36" width="175" height="12"/><textFieldExpression><![CDATA[($F{del_zip} == null ? "" : $F{del_zip}) + " " + ($F{del_city} == null ? "" : $F{del_city})]]></textFieldExpression></textField>
+			</frame>
+			<!-- Rechnungsadresse (nur wenn abweichend vom Auftraggeber) -->
+			<frame>
+				<reportElement x="185" y="64" width="175" height="52"><printWhenExpression><![CDATA[$F{inv_number} != null && !$F{inv_number}.equals($F{cust_number})]]></printWhenExpression></reportElement>
+				<staticText><reportElement style="Label" x="0" y="0" width="175" height="11"/><text><![CDATA[Rechnungsadresse]]></text></staticText>
+				<textField><reportElement x="0" y="12" width="175" height="12"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$F{inv_name}]]></textFieldExpression></textField>
+				<textField><reportElement x="0" y="24" width="175" height="12"/><textFieldExpression><![CDATA[$F{inv_street}]]></textFieldExpression></textField>
+				<textField><reportElement x="0" y="36" width="175" height="12"/><textFieldExpression><![CDATA[($F{inv_zip} == null ? "" : $F{inv_zip}) + " " + ($F{inv_city} == null ? "" : $F{inv_city})]]></textFieldExpression></textField>
+			</frame>
 			<!-- Subject -->
 			<textField><reportElement x="0" y="120" width="561" height="18"/><textElement><font size="13" isBold="true"/></textElement><textFieldExpression><![CDATA[($F{doc_status} == null ? "Beleg" : $F{doc_status}) + " " + ($F{doc_number} == null ? "" : $F{doc_number})]]></textFieldExpression></textField>
 			<textField textAdjust="StretchHeight"><reportElement style="Value" x="0" y="144" width="561" height="14"/><textFieldExpression><![CDATA[$F{doc_comment}]]></textFieldExpression></textField>
@@ -93,6 +128,12 @@
 			<line><reportElement positionType="Float" x="330" y="84" width="231" height="1"/></line>
 			<staticText><reportElement style="Label" positionType="Float" x="330" y="88" width="150" height="14"/><textElement><font size="10" isBold="true"/></textElement><text><![CDATA[Gesamtbetrag]]></text></staticText>
 			<textField pattern="#,##0.00 €"><reportElement style="Money" positionType="Float" x="470" y="88" width="91" height="14"/><textElement textAlignment="Right"><font size="10" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{gross_total}]]></textFieldExpression></textField>
+			<!-- Weitere Angaben: Zusatzfelder (W41xx) generisch aus custom_fields_list (Contract 1.1) -->
+			<subreport>
+				<reportElement positionType="Float" x="0" y="30" width="320" height="12" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("document.custom_fields_list")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/custom-fields.jasper"]]></subreportExpression>
+			</subreport>
 			<textField textAdjust="StretchHeight"><reportElement positionType="Float" x="0" y="120" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$F{doc_description}]]></textFieldExpression></textField>
 		</band>
 	</detail>
