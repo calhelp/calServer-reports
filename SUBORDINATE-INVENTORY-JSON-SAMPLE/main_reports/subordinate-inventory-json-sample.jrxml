@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2-Bundle (ADR-009/ADR-011): Gerät mit Details und allen untergeordneten
+  Geräten, gefüllt aus dem "inventory-datasheet"-Contract (ab Schema 1.2) via
+  JSON-Datasource - KEIN SQL, KEINE V1-Codespalten. Der Teilbaum kommt als
+  "children"-Array (tiefensortiert, level = 1 für direkte Kinder) und wird per
+  subDataSource an den Subreport gereicht; das übergeordnete Gerät steht im
+  "parent"-Objekt (leer bei einem Root-Gerät).
+  Dataset builder: Laravel InventoryReportDataBuilder; siehe sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subordinate-inventory-json-sample" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30" uuid="a7c4e2d0-0001-4c30-9e11-000000000201">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+	<style name="Label" fontSize="9" isBold="true"/>
+	<style name="Value" fontSize="9"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
+	</parameter>
+	<field name="asset_number" class="java.lang.String">
+		<fieldDescription><![CDATA[device.asset_number]]></fieldDescription>
+	</field>
+	<field name="serial_number" class="java.lang.String">
+		<fieldDescription><![CDATA[device.serial_number]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[device.description]]></fieldDescription>
+	</field>
+	<field name="manufacturer" class="java.lang.String">
+		<fieldDescription><![CDATA[device.manufacturer]]></fieldDescription>
+	</field>
+	<field name="model" class="java.lang.String">
+		<fieldDescription><![CDATA[device.model]]></fieldDescription>
+	</field>
+	<field name="type_code" class="java.lang.String">
+		<fieldDescription><![CDATA[device.type_code]]></fieldDescription>
+	</field>
+	<field name="location" class="java.lang.String">
+		<fieldDescription><![CDATA[device.location]]></fieldDescription>
+	</field>
+	<field name="next_calibration_date" class="java.lang.String">
+		<fieldDescription><![CDATA[device.next_calibration_date]]></fieldDescription>
+	</field>
+	<field name="customer_name" class="java.lang.String">
+		<fieldDescription><![CDATA[customer.name]]></fieldDescription>
+	</field>
+	<field name="customer_city" class="java.lang.String">
+		<fieldDescription><![CDATA[customer.city]]></fieldDescription>
+	</field>
+	<field name="parent_asset_number" class="java.lang.String">
+		<fieldDescription><![CDATA[parent.asset_number]]></fieldDescription>
+	</field>
+	<field name="parent_description" class="java.lang.String">
+		<fieldDescription><![CDATA[parent.description]]></fieldDescription>
+	</field>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="0" width="535" height="24"/>
+				<textElement><font size="16" isBold="true"/></textElement>
+				<text><![CDATA[Gerät mit untergeordneten Geräten]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="28" width="535" height="14"/>
+				<textElement><font size="10"/></textElement>
+				<textFieldExpression><![CDATA[($F{asset_number} == null ? "" : $F{asset_number}) + "  ·  " + ($F{description} == null ? "" : $F{description})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="190">
+			<staticText>
+				<reportElement style="Label" x="0" y="0" width="120" height="14"/>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="0" width="160" height="14"/>
+				<textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="290" y="0" width="120" height="14"/>
+				<text><![CDATA[Serien-Nr.]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="410" y="0" width="125" height="14"/>
+				<textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="16" width="120" height="14"/>
+				<text><![CDATA[Hersteller / Typ]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="16" width="415" height="14"/>
+				<textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + "  " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="32" width="120" height="14"/>
+				<text><![CDATA[Typ-Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="32" width="415" height="14"/>
+				<textFieldExpression><![CDATA[$F{type_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="48" width="120" height="14"/>
+				<text><![CDATA[Standort]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="48" width="415" height="14"/>
+				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="64" width="120" height="14"/>
+				<text><![CDATA[Nächste Kalibrierung]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="64" width="415" height="14"/>
+				<textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="80" width="120" height="14"/>
+				<text><![CDATA[Eigentümer / Kunde]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="80" width="415" height="14"/>
+				<textFieldExpression><![CDATA[($F{customer_name} == null ? "" : $F{customer_name}) + ($F{customer_city} == null ? "" : ", " + $F{customer_city})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="0" y="104" width="120" height="14">
+					<printWhenExpression><![CDATA[$F{parent_asset_number} != null]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Übergeordnetes Gerät]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Value" x="120" y="104" width="415" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{parent_asset_number} != null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{parent_asset_number} + ($F{parent_description} == null ? "" : "  ·  " + $F{parent_description})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" positionType="Float" x="0" y="130" width="535" height="14"/>
+				<textElement><font size="11" isBold="true"/></textElement>
+				<text><![CDATA[Untergeordnete Geräte]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="148" width="535" height="14" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("children")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/children.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
