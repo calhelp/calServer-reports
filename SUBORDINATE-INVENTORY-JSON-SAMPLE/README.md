@@ -32,9 +32,13 @@ Der Contract 1.2 liefert zusätzlich zum Gerät:
   Contract bleibt der Subreport leer.
 
 Aktivierung in calServer: Report-Setting auf dem Inventar-Grid anlegen
-(Kontext „Detail"), Vorlage = dieses Bundle, und die Report-Variable
-`data_contract = inventory-datasheet` zuweisen (Details siehe V2-Doku
-„V2-Berichte mit JSON-Datenquelle").
+(Kontext „Detail") und dieses Bundle als ZIP hochladen — mehr ist nicht
+nötig. calServer erkennt bei hochgeladenen Bundles ein query-loses
+Haupt-JRXML automatisch und sendet den Default-Contract des Grids mit
+(`inventory-datasheet`). Die Report-Variable `data_contract` ist nur noch
+als Override bzw. Escape-Hatch (`jdbc` erzwingt den klassischen
+JDBC-Pfad) oder für per Pfad referenzierte, nicht hochgeladene Vorlagen
+relevant (Details siehe V2-Doku „V2-Berichte mit JSON-Datenquelle").
 
 > **Status:** Referenz-/Beispielvorlage. JasperReports **6.20.6** bleibt
 > verbindlich (siehe `robots.md`).
