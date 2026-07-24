@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "contract": "inventory-datasheet",
+    "schema_version": "1.2",
+    "generated_at": "2026-07-24T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Prüfplatz Elektrik A",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "type_code": "DMM",
+    "accuracy_class": "2026-01-15",
+    "location": "Labor 1 / Schrank A",
+    "active_location": {},
+    "cost_center": "CC-4711",
+    "status": 1,
+    "calibration_interval": 12,
+    "last_calibration_date": "2026-06-30",
+    "next_calibration_date": "2027-06-30",
+    "custom_fields": {
+      "customer_tag": "KND-DMM-7"
+    }
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "12345",
+    "city": "Musterstadt",
+    "custom_fields": {}
+  },
+  "calibrations": [
+    {
+      "calibration_date": "2026-06-30",
+      "next_calibration_date": "2027-06-30",
+      "certificate_number": "DAkkS-K-2026-0042",
+      "technician": "Erika Musterfrau"
+    }
+  ],
+  "parent": {
+    "asset_number": "INV-8000",
+    "serial_number": "SN-8000",
+    "description": "Messsystem Halle 2",
+    "manufacturer": "Keysight",
+    "model": "System-2000"
+  },
+  "children": [
+    {
+      "level": 1,
+      "asset_number": "INV-9001-1",
+      "serial_number": "SN-90011",
+      "description": "Multimeter Fluke 87V",
+      "manufacturer": "Fluke",
+      "model": "87V",
+      "location": "Labor 1 / Schrank A",
+      "next_calibration_date": "2027-06-30"
+    },
+    {
+      "level": 2,
+      "asset_number": "INV-9001-1-1",
+      "serial_number": "SN-901111",
+      "description": "Messleitungssatz",
+      "manufacturer": "Fluke",
+      "model": "TL71",
+      "location": "Labor 1 / Schrank A",
+      "next_calibration_date": "2027-08-15"
+    },
+    {
+      "level": 1,
+      "asset_number": "INV-9001-2",
+      "serial_number": "SN-90012",
+      "description": "Netzteil",
+      "manufacturer": "Rohde & Schwarz",
+      "model": "HMP4040",
+      "location": "Labor 1 / Schrank B",
+      "next_calibration_date": "2027-05-01"
+    }
+  ]
+}

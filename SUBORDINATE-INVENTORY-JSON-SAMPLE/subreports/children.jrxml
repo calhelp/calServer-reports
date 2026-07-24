@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2-Subreport: erhält das "children"-Array des inventory-datasheet-Contracts
+  (ab Schema 1.2) via
+  ((JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("children").
+  Die Zeilen sind tiefensortiert; "level" (1 = direktes Kind) macht die
+  Hierarchie in der Ebene-Spalte sichtbar.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="children" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenNoDataType="NoDataSection" uuid="a7c4e2d0-0002-4c30-9e12-000000000202">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="8"/>
+	<field name="level" class="java.lang.Integer">
+		<fieldDescription><![CDATA[level]]></fieldDescription>
+	</field>
+	<field name="asset_number" class="java.lang.String">
+		<fieldDescription><![CDATA[asset_number]]></fieldDescription>
+	</field>
+	<field name="serial_number" class="java.lang.String">
+		<fieldDescription><![CDATA[serial_number]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="location" class="java.lang.String">
+		<fieldDescription><![CDATA[location]]></fieldDescription>
+	</field>
+	<field name="next_calibration_date" class="java.lang.String">
+		<fieldDescription><![CDATA[next_calibration_date]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="16">
+			<staticText>
+				<reportElement x="0" y="0" width="35" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Ebene]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="0" width="105" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="90" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Serien-Nr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="150" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Beschreibung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="90" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Standort]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="65" height="15"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[Nächste Kal.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14">
+			<textField>
+				<reportElement x="0" y="0" width="35" height="13"/>
+				<textFieldExpression><![CDATA[$F{level}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="35" y="0" width="105" height="13"/>
+				<textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="140" y="0" width="90" height="13"/>
+				<textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="230" y="0" width="150" height="13"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="380" y="0" width="90" height="13"/>
+				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="65" height="13"/>
+				<textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="14">
+			<staticText>
+				<reportElement x="0" y="0" width="535" height="13"/>
+				<text><![CDATA[Keine untergeordneten Geräte vorhanden.]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

@@ -175,6 +175,16 @@ jobs:
             INVENTORY-JSON-SAMPLE/subreports
           if-no-files-found: error
 
+      - name: Upload SUBORDINATE-INVENTORY-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SUBORDINATE-INVENTORY-JSON-SAMPLE
+          path: |
+            SUBORDINATE-INVENTORY-JSON-SAMPLE/main_reports
+            SUBORDINATE-INVENTORY-JSON-SAMPLE/subreports
+            SUBORDINATE-INVENTORY-JSON-SAMPLE/parameters.json
+          if-no-files-found: error
+
       - name: Upload KALIBRIERKONTROLLBLATT-JSON-SAMPLE as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -372,6 +382,7 @@ jobs:
           # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL)
           create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"
           create_zip "INVENTORY-JSON-SAMPLE" "inventory-json-sample"
+          create_zip "SUBORDINATE-INVENTORY-JSON-SAMPLE" "subordinate-inventory-json-sample"
           create_zip "KALIBRIERKONTROLLBLATT-JSON-SAMPLE" "kalibrierkontrollblatt-json-sample"
           create_zip "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
           create_zip "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"

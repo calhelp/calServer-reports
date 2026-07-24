@@ -1,0 +1,20 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/report-parameters.schema.json",
+  "version": 1,
+  "parameters": [
+    {
+      "name": "Reportpath",
+      "label": {
+        "de": "Report-Basisverzeichnis",
+        "en": "Report base path"
+      },
+      "description": {
+        "de": "Wird vom report-runner automatisch auf das entpackte Bundle gesetzt (Subreport-Auflösung).",
+        "en": "Set automatically by the report runner to the extracted bundle root (subreport resolution)."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 10
+    }
+  ]
+}
