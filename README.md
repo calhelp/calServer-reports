@@ -261,6 +261,13 @@ calServer V2 verwendet ein neues Datenbankschema mit **lesbaren Feldnamen** (`se
 
 - **Die bestehenden Bundles in diesem Repository bleiben der stabile V1-Stand** (eingebettetes SQL über JDBC mit den Codespalten). Sie laufen unverändert auf allen V1-Systemen und werden weiter mit Bugfixes gepflegt.
 - **V2-Bundles** (Ordner mit Endung `-JSON-SAMPLE`, z. B. `DAKKS-JSON-SAMPLE`, `INVENTORY-JSON-SAMPLE`) nutzen eine **JSON-Datasource** mit lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL). Auf der [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) erscheinen sie in der eigenen Kategorie **„APEX · V2 (JSON-Datenquelle)"** (APEX = interner Codename für V2), getrennt von den V1-Vorlagen.
+- **Systemberichte:** Ein paar Berichte erzeugt calServer V2 von sich aus, ohne dass jemand sie aus einem Menü wählt. Für jeden davon gibt es auf jeder Installation eine feste, nicht löschbare Zeile in der Berichtsverwaltung — den Platzhalter, der auf sein Bundle wartet. Welches Bundle wohin gehört:
+
+  | Systembericht | Bundle | Wann calServer ihn erzeugt |
+  |---------------|--------|-----------------------------|
+  | Leihschein | [`LOCATION-JSON-SAMPLE`](LOCATION-JSON-SAMPLE/) | Beim Buchen einer Ausleihe, als Anhang der Leihschein-E-Mail |
+
+  Details: [Systemberichte](https://github.com/calhelp/calServer-yii/blob/develop/docs-v2/admin/berichte/systemberichte.md).
 - Bestehende Vorlagen bitte **nicht** auf das V2-Schema-SQL umschreiben — die Strategie und der Migrationspfad sind hier dokumentiert: [Evaluierung: JasperReports-Strategie für calServer V2](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md).
 - Als Übersetzungshilfe zwischen alten Codes und neuen Feldnamen dient weiterhin der [FIELD-NAMES-Report](FIELD-NAMES/) sowie die Mapping-Referenz in der Strategie-Dokumentation.
 

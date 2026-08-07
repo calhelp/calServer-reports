@@ -10,6 +10,23 @@ Sechste Bundle-Familie; das Layout folgt dem V1-Leihschein
 Lieferadresse mit Kontakten, Leihdaten (Leihdatum/-zeit, Rückgabedatum, Status),
 Prüfmittel-Grid und Standortblock (`location_1..5`) mit Signaturzeilen.
 
+## Referenz-Bundle für den Systembericht „Leihschein"
+
+Dieses Bundle ist die empfohlene Vorlage für den **Leihschein**, den calServer
+beim Buchen einer Ausleihe erzeugt und der Leihschein-E-Mail anhängt.
+
+Dafür gibt es auf jeder calServer-V2-Installation eine feste Zeile in
+**Administration > Berichtsverwaltung > Master-Reports**: den Platzhalter
+**Leihschein** (Etikett „Systembericht", Grid `location`, Ordner `locations`).
+Er wird bei der Installation angelegt, ist nicht löschbar und wartet auf sein
+Bundle — hochladen genügt, danach hängt der Leihschein an der Mail. Solange
+nichts hochgeladen ist, geht die Mail ohne Anhang raus.
+
+Details: [Systemberichte](https://github.com/calhelp/calServer-yii/blob/develop/docs-v2/admin/berichte/systemberichte.md).
+
+Als Referenz gedacht, nicht als Vorschrift: Ein eigenes Layout wird auf
+derselben Zeile genauso hochgeladen.
+
 ## Aufbau
 
 | Datei | Zweck |
@@ -53,9 +70,12 @@ sondern die fehlende Datenanbindung. Abhilfe:
   braucht keine Fallback-Logik.
 - Den Datensatz erzeugt das calServer-V2-Backend (`LocationReportDataBuilder`).
 
-Aktivierung in calServer: dem Report-Setting (grid_name `location`, Ordner
-`locations`) eine Report-Variable `data_contract = location-report` zuweisen
-(Details siehe V2-Doku „V2-Berichte mit JSON-Datenquelle").
+Aktivierung in calServer: Bundle auf ein Report-Setting mit grid_name
+`location` und Ordner `locations` hochladen — für den Leihschein ist das der
+Systembericht-Platzhalter (siehe oben). Der Contract wird am Bundle erkannt
+(kein `<queryString>` → `location-report`); eine Report-Variable
+`data_contract` ist nur nötig, wenn davon abgewichen werden soll (Details siehe
+V2-Doku „V2-Berichte mit JSON-Datenquelle").
 
 ## Contract `location-report` (v1.0)
 
