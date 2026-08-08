@@ -2,17 +2,39 @@
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
   V2 order positions subreport, delivery-note variant (contract order-document
-  v1.2): fed the "positions" array via subDataSource("positions"). A Lieferschein
+  v1.5): fed the "positions" array via subDataSource("positions"). A Lieferschein
   carries no prices — only position, description, quantity and unit. Column
   geometry matches the delivery header frame of order-json-sample.jrxml.
   No $V{} variables.
+
+  Gruppierung wie in `positions.jrxml`: fasst der Beleg mehrere Auftraege
+  zusammen, bricht die Gruppe `sourceOrder` die Tabelle je Quellauftrag um. Fuer
+  einen Sammel-Lieferschein ist das noch wichtiger als fuer die Rechnung — wer
+  die Ware annimmt, muss sehen, welche Zeilen zu welchem Auftrag gehoeren.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="positions-delivery" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0304-4d64-9f54-000000000304">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<parameter name="Is_collective" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[true = der Beleg fasst mehrere Auftraege zusammen; nur dann druckt die Gruppenkopfzeile je Quellauftrag. Wird vom Hauptbericht aus collective.is_collective gesetzt.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
 	<field name="pos_number" class="java.lang.Integer"><fieldDescription><![CDATA[pos_number]]></fieldDescription></field>
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
 	<field name="quantity" class="java.lang.Double"><fieldDescription><![CDATA[quantity]]></fieldDescription></field>
 	<field name="unit" class="java.lang.String"><fieldDescription><![CDATA[unit]]></fieldDescription></field>
+	<field name="source_order_number" class="java.lang.String"><fieldDescription><![CDATA[source_order.number]]></fieldDescription></field>
+	<field name="source_order_recipient" class="java.lang.String"><fieldDescription><![CDATA[source_order.delivery_recipient]]></fieldDescription></field>
+	<group name="sourceOrder" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{source_order_number}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression><![CDATA[Boolean.TRUE.equals($P{Is_collective})]]></printWhenExpression>
+				<textField isBlankWhenNull="true"><reportElement x="0" y="4" width="280" height="12"/><textElement><font size="9" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{source_order_number} == null ? "" : ("Auftrag " + $F{source_order_number})]]></textFieldExpression></textField>
+				<textField isBlankWhenNull="true"><reportElement x="280" y="4" width="281" height="12"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{source_order_recipient} == null || $F{source_order_recipient}.trim().isEmpty() ? null : ("Lieferung: " + $F{source_order_recipient})]]></textFieldExpression></textField>
+				<line><reportElement x="0" y="18" width="561" height="1"/></line>
+			</band>
+		</groupHeader>
+	</group>
 	<detail>
 		<band height="15">
 			<textField isBlankWhenNull="true"><reportElement x="0" y="0" width="28" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>

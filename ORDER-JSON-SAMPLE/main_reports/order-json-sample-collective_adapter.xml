@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Jaspersoft Studio JSON data adapter for the COLLECTIVE order-document sample
+  (Sammelrechnung: Positionen aus zwei Auftraegen, collective.is_collective =
+  true). Zum Pruefen der Gruppenkopfzeile je Quellauftrag in der Vorschau —
+  im Studio unter "Data Adapter" auswaehlen statt des Standard-Adapters.
+
+  Authoring/preview aid only — Studio-namespaced, inert in the report-runner
+  (the calServer V2 backend supplies the JSON datasource at runtime; see README).
+-->
+<jsonDataAdapter class="net.sf.jasperreports.data.json.JsonDataAdapterImpl">
+	<name>Order Document JSON Sample — Sammelrechnung (sample-data-collective.json)</name>
+	<dataFile class="net.sf.jasperreports.data.StandardRepositoryDataLocation">
+		<location>sample-data-collective.json</location>
+	</dataFile>
+	<language>json</language>
+	<useConnection>true</useConnection>
+	<selectExpression></selectExpression>
+</jsonDataAdapter>
