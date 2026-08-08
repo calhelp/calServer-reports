@@ -53,7 +53,7 @@
 				<!-- Der Warenempfaenger des Quellauftrags: V1 beschriftet seine
 				     Gruppen genau damit ("Lieferung: …"), und das ist der Fall,
 				     fuer den es die Sammelrechnung gibt — ein Rechnungsempfaenger,
-				     mehrere Warenempfaenger. Fehlt er (Contract < 1.6 oder kein
+				     mehrere Warenempfaenger. Fehlt er (Contract < 1.7 oder kein
 				     abweichender Lieferkunde), bleibt die Zeile leer. -->
 				<textField isBlankWhenNull="true"><reportElement x="280" y="4" width="281" height="12"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{source_order_recipient} == null || $F{source_order_recipient}.trim().isEmpty() ? null : ("Lieferung: " + $F{source_order_recipient})]]></textFieldExpression></textField>
 				<line><reportElement x="0" y="18" width="561" height="1"/></line>

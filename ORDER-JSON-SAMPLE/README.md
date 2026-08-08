@@ -23,12 +23,12 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 | `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt. Dieselbe Gruppierung |
 | `subreports/tax-groups.jrxml` | Steuergruppen; `statistics.tax_groups`-Array via `subDataSource("statistics.tax_groups")` (USt. je Satz — § 14 UStG-Aufschlüsselung) |
 | `subreports/custom-fields.jrxml` | Zusatzfelder (W41xx); `document.custom_fields_list`-Array via `subDataSource("document.custom_fields_list")` — Label/Wert je konfiguriertem Feld, generisch |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.6), gewöhnlicher Auftrag |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.7), gewöhnlicher Auftrag |
 | `main_reports/sample-data-collective.json` | Beispiel-Datensatz **Sammelrechnung**: Positionen aus zwei Aufträgen, `collective.is_collective = true` |
 | `main_reports/order-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 | `main_reports/order-json-sample-collective_adapter.xml` | Data-Adapter für die Vorschau des Sammelfalls (im Studio umschalten) |
 
-## Contract `order-document` (v1.6)
+## Contract `order-document` (v1.7)
 
 Wurzelobjekt mit `meta`, `document` (Nummer/Datum/Status/**Typ**/Kommentar/
 Rechtstext, `delivery_condition`/`delivery_costs`, `custom_fields` als Objekt
@@ -95,7 +95,7 @@ Zeilen aus (durchgängig `isBlankWhenNull` — es wird nie „null" gedruckt).
 > eindeutig sind. Die exakte V1-Rabatt-Steuer-Arithmetik bei mehreren Steuersätzen
 > ist ein Dual-Run-Abstimmungspunkt (siehe Builder-Doku).
 
-### Sammelrechnung: eine Gruppe statt einer zweiten Templatevariante (v1.5/v1.6)
+### Sammelrechnung: eine Gruppe statt einer zweiten Templatevariante (v1.5/v1.7)
 
 Ein Beleg kann Positionen aus **mehreren Aufträgen** tragen — die
 Sammelrechnung. V1 braucht dafür eine eigene JRXML-Datei
@@ -130,8 +130,9 @@ genauso — das Feld ist dann null.
 Zum Ansehen: `sample-data-collective.json` mit dem Adapter
 `order-json-sample-collective_adapter.xml`.
 
-> **v1.4 → v1.5 → v1.6 (additiv, nicht brechend):** v1.5 bringt `collective`,
-> `positions[].source_order` und `positions[].line_id`; v1.6 ergänzt
+> **v1.4 → v1.7 (additiv, nicht brechend):** v1.5 bringt `collective`,
+> `positions[].source_order` und `positions[].line_id`; v1.6 die
+> Belegwährung (`statistics.currency`); v1.7 ergänzt
 > `source_order.delivery_recipient` (der Subreport kommt während der Iteration
 > über `positions` nicht an `collective.source_orders` heran). Bestehende
 > Bindungen bleiben unverändert.
