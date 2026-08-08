@@ -19,14 +19,16 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 | Datei | Zweck |
 |-------|-------|
 | `main_reports/order-json-sample.jrxml` | Hauptbericht: Absenderzeile + Briefkopf (`recipient` je Dokumenttyp, Meta-Box Belegnummer/Datum/Kunde/Kontakt/Lieferbedingung/-kosten), abweichende Liefer-/Rechnungsadresse als Info-Block, typabhängiger Betreff, Positionstabelle + Statistik + Zusatzfelder, Rechnungs-/Lieferschein-Spezifika, Fußzeile mit Firmen-/Steuer-/Bankangaben. Alle Labels als `staticText` |
-| `subreports/positions.jrxml` | Positionen; `positions`-Array via `subDataSource("positions")` (Pos/Beschreibung/Menge/Einzelpreis/Rabatt/Betrag/MwSt) |
-| `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt |
+| `subreports/positions.jrxml` | Positionen; `positions`-Array via `subDataSource("positions")` (Pos/Beschreibung/Menge/Einzelpreis/Rabatt/Betrag/MwSt). Gruppe `sourceOrder` je Quellauftrag — Kopfzeile nur bei einer Sammelrechnung (s.u.) |
+| `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt. Dieselbe Gruppierung |
 | `subreports/tax-groups.jrxml` | Steuergruppen; `statistics.tax_groups`-Array via `subDataSource("statistics.tax_groups")` (USt. je Satz — § 14 UStG-Aufschlüsselung) |
 | `subreports/custom-fields.jrxml` | Zusatzfelder (W41xx); `document.custom_fields_list`-Array via `subDataSource("document.custom_fields_list")` — Label/Wert je konfiguriertem Feld, generisch |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.2) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.6), gewöhnlicher Auftrag |
+| `main_reports/sample-data-collective.json` | Beispiel-Datensatz **Sammelrechnung**: Positionen aus zwei Aufträgen, `collective.is_collective = true` |
 | `main_reports/order-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
+| `main_reports/order-json-sample-collective_adapter.xml` | Data-Adapter für die Vorschau des Sammelfalls (im Studio umschalten) |
 
-## Contract `order-document` (v1.2)
+## Contract `order-document` (v1.6)
 
 Wurzelobjekt mit `meta`, `document` (Nummer/Datum/Status/**Typ**/Kommentar/
 Rechtstext, `delivery_condition`/`delivery_costs`, `custom_fields` als Objekt
@@ -92,6 +94,47 @@ Zeilen aus (durchgängig `isBlankWhenNull` — es wird nie „null" gedruckt).
 > **Auftragsrabatt (W4114):** Die Muster sind rabattfrei, damit die Summen
 > eindeutig sind. Die exakte V1-Rabatt-Steuer-Arithmetik bei mehreren Steuersätzen
 > ist ein Dual-Run-Abstimmungspunkt (siehe Builder-Doku).
+
+### Sammelrechnung: eine Gruppe statt einer zweiten Templatevariante (v1.5/v1.6)
+
+Ein Beleg kann Positionen aus **mehreren Aufträgen** tragen — die
+Sammelrechnung. V1 braucht dafür eine eigene JRXML-Datei
+(`Angebot_V0.8_Billing_Group.jrxml`), weil dort das SQL im Template steht und
+ein Template kein zweites Join-Muster schalten kann. Beim JSON-Datensatz
+entfällt der Grund: der Server liefert die vereinigten Positionen bereits in
+der richtigen Reihenfolge, und die Gruppe `sourceOrder` im Positions-Subreport
+bricht sie um.
+
+Drei Felder tragen das:
+
+| Feld | Bedeutung |
+|---|---|
+| `collective.is_collective` | true, wenn der Beleg mehrere Aufträge zusammenfasst. Geht als Subreport-Parameter `Is_collective` weiter und schaltet **allein** die Gruppenkopfzeile |
+| `positions[].source_order` | `{id, number, delivery_recipient}` — **immer** gesetzt, beim gewöhnlichen Auftrag auf ihn selbst. Deshalb braucht die Gruppe keine Fallunterscheidung |
+| `collective.source_orders[]` | Kopfblock: je Quellauftrag Nummer, Datum, Auftraggeber, Warenempfänger, Positionsanzahl und Netto. Leer, wenn nichts zusammengefasst wird |
+
+Die Kopfzeile druckt „Auftrag &lt;Nummer&gt;" und rechts den **Warenempfänger**
+des Quellauftrags — dieselbe Information, mit der V1 seine Gruppen beschriftet
+(„Lieferung: …"). Das ist der Anwendungsfall der Sammelrechnung: ein
+Rechnungsempfänger, mehrere Warenempfänger.
+
+Die Positionsnummer bleibt die **auftragsbezogene** (`pos_number`) und läuft je
+Gruppe von vorn. Der belegweit eindeutige Zeilenbezeichner `line_id`
+(EN 16931 BT-126) wird nicht gedruckt — er ist für die E-Rechnung da.
+
+**Für einen gewöhnlichen Auftrag ändert sich nichts:** `is_collective` ist
+false, das Band wird übersprungen, das Layout bleibt Zeile für Zeile das
+bisherige. Ein Datensatz älteren Contracts (ohne `collective`) verhält sich
+genauso — das Feld ist dann null.
+
+Zum Ansehen: `sample-data-collective.json` mit dem Adapter
+`order-json-sample-collective_adapter.xml`.
+
+> **v1.4 → v1.5 → v1.6 (additiv, nicht brechend):** v1.5 bringt `collective`,
+> `positions[].source_order` und `positions[].line_id`; v1.6 ergänzt
+> `source_order.delivery_recipient` (der Subreport kommt während der Iteration
+> über `positions` nicht an `collective.source_orders` heran). Bestehende
+> Bindungen bleiben unverändert.
 
 ## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
 

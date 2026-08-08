@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 order document, ADR-009 contract "order-document" v1.2. ONE template for all
+  V2 order document, ADR-009 contract "order-document" v1.5. ONE template for all
   status-dependent document types: the server derives document.type from the
   booking status (offer / order_confirmation / delivery_note / invoice — V1
   status groups) and pre-resolves the letter-head "recipient" for that type
@@ -18,6 +18,13 @@
     (statistics.tax_groups), service-date note, payment terms;
   - offer / order confirmation: full price table + totals, status-specific
     description text (booking_offer/…_report_description).
+
+  Sammelrechnung (v1.5): der Beleg kann Positionen aus mehreren Auftraegen
+  tragen. Das Flag collective.is_collective geht als Parameter Is_collective an
+  den Positions-Subreport; nur dort entscheidet es, ob die Tabelle je
+  Quellauftrag eine Gruppenkopfzeile bekommt. Ein gewoehnlicher Auftrag setzt es
+  auf false und sieht unveraendert aus. V1 braucht dafuer eine zweite
+  Templatevariante (Angebot_V0.8_Billing_Group.jrxml) — hier reicht die Gruppe.
 
   Filled from a JSON data source — NO SQL, NO V1 code columns. Positions and the
   per-tax-rate statistics are pre-aggregated server-side (OrderDocumentDataBuilder);
@@ -46,6 +53,14 @@
 	<field name="doc_type_label" class="java.lang.String"><fieldDescription><![CDATA[document.type_label]]></fieldDescription></field>
 	<field name="doc_comment" class="java.lang.String"><fieldDescription><![CDATA[document.comment]]></fieldDescription></field>
 	<field name="doc_description" class="java.lang.String"><fieldDescription><![CDATA[document.description]]></fieldDescription></field>
+	<!--
+	  Sammelrechnung (Contract v1.5): true, wenn der Beleg Positionen aus MEHREREN
+	  Auftraegen zusammenfasst. Wird an die Positions-Subreports durchgereicht;
+	  nur dort entscheidet es, ob die Gruppenkopfzeile je Quellauftrag druckt.
+	  Bei einem Datensatz aelteren Contracts fehlt das Feld und bleibt null —
+	  der Beleg sieht dann aus wie bisher.
+	-->
+	<field name="collective_is" class="java.lang.Boolean"><fieldDescription><![CDATA[collective.is_collective]]></fieldDescription></field>
 	<field name="rcpt_name" class="java.lang.String"><fieldDescription><![CDATA[recipient.name]]></fieldDescription></field>
 	<field name="rcpt_street" class="java.lang.String"><fieldDescription><![CDATA[recipient.street]]></fieldDescription></field>
 	<field name="rcpt_zip" class="java.lang.String"><fieldDescription><![CDATA[recipient.zip]]></fieldDescription></field>
@@ -149,6 +164,7 @@
 		<band height="230">
 			<subreport>
 				<reportElement positionType="Float" x="0" y="0" width="561" height="14" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="Is_collective"><subreportParameterExpression><![CDATA[$F{collective_is}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("positions")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + ("delivery_note".equals($F{doc_type}) ? "/subreports/positions-delivery.jasper" : "/subreports/positions.jasper")]]></subreportExpression>
 			</subreport>
