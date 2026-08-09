@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 Prüfmittel-Subreport (Contract location-report v1.1): bekommt das
+  "devices"-Array über subDataSource("devices").
+
+  Eine Leihe kann mehr als ein Gerät umfassen: Ein Set (Koffer) wird als ein
+  Objekt verliehen und auf einem Schein quittiert. Vorher band der Hauptbericht
+  eine feste Zeile an device.*, der Entleiher unterschrieb also für einen
+  Koffer, dessen Inhalt auf dem Papier nicht stand.
+
+  Das Wurzelgerät steht immer an erster Stelle; bei einer Einzelbuchung enthält
+  die Liste nur dieses eine. Keine $V{}-Variablen.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devices" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0312-4d72-9f62-000000000312">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Small" fontSize="8"/>
+	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[asset_number]]></fieldDescription></field>
+	<field name="serial_number" class="java.lang.String"><fieldDescription><![CDATA[serial_number]]></fieldDescription></field>
+	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[manufacturer]]></fieldDescription></field>
+	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[model]]></fieldDescription></field>
+	<field name="description" class="java.lang.String"><fieldDescription><![CDATA[description]]></fieldDescription></field>
+	<detail>
+		<band height="15">
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="0" y="0" width="100" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="100" y="0" width="110" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
+			<textField><reportElement style="Small" x="210" y="0" width="150" height="13"/><textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="360" y="0" width="201" height="13"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
+		</band>
+	</detail>
+</jasperReport>
