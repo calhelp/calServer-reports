@@ -262,7 +262,9 @@ def check_bundle(bundle: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write", action="store_true", help="Manifeste (neu) schreiben statt prüfen")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--write", action="store_true", help="Manifeste (neu) schreiben statt prüfen")
+    mode.add_argument("--check", action="store_true", help="Manifeste prüfen (Default-Modus)")
     parser.add_argument("bundles", nargs="*", help="Bundle-Verzeichnisse (Default: alle PRUEFPLAN-*)")
     args = parser.parse_args()
 
