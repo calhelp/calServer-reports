@@ -254,6 +254,16 @@ jobs:
             LOCATION-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
+      - name: Upload PRICE-LIST-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PRICE-LIST-JSON-SAMPLE
+          path: |
+            PRICE-LIST-JSON-SAMPLE/main_reports
+            PRICE-LIST-JSON-SAMPLE/subreports
+            PRICE-LIST-JSON-SAMPLE/parameters.json
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -391,6 +401,7 @@ jobs:
           create_zip "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
           create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
           create_zip "LOCATION-JSON-SAMPLE" "location-json-sample"
+          create_zip "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
 
 
       - name: Upload report ZIPs as artifact
