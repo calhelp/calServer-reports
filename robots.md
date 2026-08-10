@@ -66,6 +66,13 @@ valid Prüfplan bundle end-to-end from this section alone.
   `schema/procedure-package.schema.json` (published to Pages).
 
 ### Content rules for `procedure.json` (MUST)
+> These content rules are shared with calServer's **internal AI** (the
+> Prüfplan draft assistant in the step editor): its system prompt
+> (`laravel/app/Services/Ai/ProcedurePlanService.php::systemPrompt()` in
+> calhelp/calServer-yii) carries the same metrological guardrails. If you
+> change a rule here, update that prompt too — and vice versa. There is
+> deliberately no runtime sharing across the two repos.
+
 - Header: `{"format": "calserver.procedure", "version": 2, "name": "...", "test_steps": [...]}`.
   Version 2 is the current maximum — never write a higher version.
 - `row_number` gapless from 1; `test_step` numbers unique, decimal
