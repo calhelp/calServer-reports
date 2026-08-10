@@ -29,14 +29,19 @@ jobs:
             local zip_name="$2"
             local stage_dir="staging/${zip_name}"
             local rsync_excludes=()
-            local allowed_patterns=('*.jrxml')
+            local allowed_patterns=('*.jrxml' '*.md')
             local include_args=(--include='*/')
 
             if [ "$sample" = "DAKKS-SAMPLE" ]; then
               rsync_excludes+=(--exclude='config/**')
-              allowed_patterns+=('*.properties' '*.md')
+              allowed_patterns+=('*.properties')
             elif [ "$sample" = "DCC" ]; then
-              allowed_patterns+=('*.xsd' '*.md' '*.json')
+              allowed_patterns+=('*.xsd' '*.json')
+            elif [[ "$sample" == *-JSON-SAMPLE ]]; then
+              # V2 (APEX) bundles ship a JSON data-adapter sample (sample-data.json)
+              # plus a Jaspersoft Studio data-adapter (*.xml) so the report
+              # previews out-of-the-box — keep both in the ZIP.
+              allowed_patterns+=('*.json' '*.xml')
             fi
 
             rm -rf "${stage_dir}"
@@ -54,6 +59,17 @@ jobs:
                   "${sample}/${folder}/" "${stage_dir}/${folder}/"
               fi
             done
+
+            # Top-level README.md des Samples mitnehmen, falls vorhanden.
+            if [ -f "${sample}/README.md" ]; then
+              cp "${sample}/README.md" "${stage_dir}/README.md"
+            fi
+
+            # Parameter-Manifest an der Bundle-Wurzel mitnehmen (nur V2-JSON-
+            # Bundles pflegen eins; calServer liest daraus den Parameter-Katalog).
+            if [ -f "${sample}/parameters.json" ]; then
+              cp "${sample}/parameters.json" "${stage_dir}/parameters.json"
+            fi
 
             # Sicherstellen, dass nur explizit erlaubte Dateitypen in den ZIPs landen.
             local allowed_conditions=()
@@ -74,17 +90,17 @@ jobs:
             fi
 
             pushd "${stage_dir}" >/dev/null
-            if [ -d main_reports ] && [ -d subreports ]; then
-              zip -r "../../output/${zip_name}.zip" main_reports subreports
-            elif [ -d main_reports ]; then
-              zip -r "../../output/${zip_name}.zip" main_reports
-            elif [ -d subreports ]; then
-              zip -r "../../output/${zip_name}.zip" subreports
-            else
-              echo "❌ No report folders found for ${sample}" >&2
+            local zip_targets=()
+            [ -d main_reports ] && zip_targets+=(main_reports)
+            [ -d subreports ] && zip_targets+=(subreports)
+            [ -f README.md ] && zip_targets+=(README.md)
+            [ -f parameters.json ] && zip_targets+=(parameters.json)
+            if [ "${#zip_targets[@]}" -eq 0 ]; then
+              echo "❌ No report content found for ${sample}" >&2
               popd >/dev/null
               exit 1
             fi
+            zip -r "../../output/${zip_name}.zip" "${zip_targets[@]}"
             popd >/dev/null
           }
 
@@ -104,6 +120,22 @@ jobs:
           create_zip "TRACE-FORWARD" "trace-forward"
           create_zip "TRACE-BACKWARD" "trace-backward"
           create_zip "STICKERS/Sticker_Vorlage" "sticker-vorlage"
+
+          # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL).
+          # Gleiche Liste wie in package-reports.yml; ein Release ohne sie wäre
+          # nur der halbe Stand.
+          create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"
+          create_zip "INVENTORY-JSON-SAMPLE" "inventory-json-sample"
+          create_zip "SUBORDINATE-INVENTORY-JSON-SAMPLE" "subordinate-inventory-json-sample"
+          create_zip "KALIBRIERKONTROLLBLATT-JSON-SAMPLE" "kalibrierkontrollblatt-json-sample"
+          create_zip "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
+          create_zip "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
+          create_zip "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
+          create_zip "ORDER-JSON-SAMPLE" "order-json-sample"
+          create_zip "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
+          create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
+          create_zip "LOCATION-JSON-SAMPLE" "location-json-sample"
+          create_zip "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
 
       - name: Determine release metadata
         id: release_meta
