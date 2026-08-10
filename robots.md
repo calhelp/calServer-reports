@@ -82,6 +82,14 @@ valid Prüfplan bundle end-to-end from this section alone.
   `range`, `resolution`, `tolerance`, `uncertainty`, `k`, `decision_rule`).
   Steps below inherit them until the next header — put the metrology on the
   header once instead of repeating it per measurement point.
+- **Every `Manual Test` needs an evaluation** via its effective `config` (own
+  or inherited): `NUMERIC,NOMINAL` / `NUMERIC,UUT INDICATED` for measurement
+  points, `TEXT(Y=PASS)` for a yes/no confirmation (visual check, functional
+  check; `TEXT(N=PASS)` inverts — no = pass). A `Manual Test` without any of
+  these is a DEAD step in measurement capture: `stepKind()` classifies it as
+  informational, it can neither be measured nor confirmed. Instructions that
+  need no confirmation (e.g. "attach the calibration label") are
+  `"test_type": "Message"` instead.
 - `test_mode` is HTML (calServer renders it); `test_mode_markdown` optional.
 - Metrological guardrails: state tolerances from the manufacturer's data
   sheet (and say in the README that they must be re-checked against the
