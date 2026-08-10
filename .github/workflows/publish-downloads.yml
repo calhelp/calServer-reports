@@ -110,6 +110,7 @@ jobs:
           get_last_modified "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
           get_last_modified "REPAIR-JSON-SAMPLE" "repair-json-sample"
           get_last_modified "LOCATION-JSON-SAMPLE" "location-json-sample"
+          get_last_modified "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -195,6 +196,7 @@ jobs:
               "delivery-json-sample":               "DELIVERY-JSON-SAMPLE/README.md",
               "repair-json-sample":                 "REPAIR-JSON-SAMPLE/README.md",
               "location-json-sample":               "LOCATION-JSON-SAMPLE/README.md",
+              "price-list-json-sample":             "PRICE-LIST-JSON-SAMPLE/README.md",
           }
 
           SCHEMA_MAP = {
@@ -222,6 +224,7 @@ jobs:
               "delivery-json-sample":               "Lieferschein (APEX · V2)",
               "repair-json-sample":                 "Reparaturbericht (APEX · V2)",
               "location-json-sample":               "Standort-/Leihbericht (APEX · V2)",
+              "price-list-json-sample":             "Preisliste (APEX · V2)",
           }
 
           INFO_TEMPLATE = """<!doctype html>
