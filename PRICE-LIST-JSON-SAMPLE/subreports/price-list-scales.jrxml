@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  Mengenstaffel einer Zeile, Contract "price-list" v1.0 (`scales`).
+
+  Eine Stufe trägt entweder einen festen Stückpreis ODER einen Nachlass in
+  Prozent — nie beides. Deshalb entscheidet der Ausdruck, was gedruckt wird,
+  statt zwei Spalten zu führen, von denen immer eine leer bliebe.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-scales" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0004-4000-8000-000000000004">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
+	<field name="min_quantity" class="java.math.BigDecimal"><fieldDescription><![CDATA[min_quantity]]></fieldDescription></field>
+	<field name="price" class="java.math.BigDecimal"><fieldDescription><![CDATA[price]]></fieldDescription></field>
+	<field name="discount" class="java.math.BigDecimal"><fieldDescription><![CDATA[discount]]></fieldDescription></field>
+	<detail>
+		<band height="11">
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="0" width="416" height="10"/>
+				<textElement><font size="7" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA["ab " + ($F{min_quantity} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{min_quantity})) + ": " + ($F{price} != null ? new java.text.DecimalFormat("#,##0.00").format($F{price}) + " " + $P{Currency} : ($F{discount} != null ? "−" + new java.text.DecimalFormat("#,##0.##").format($F{discount}) + " %" : ""))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
