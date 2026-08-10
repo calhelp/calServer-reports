@@ -17,6 +17,9 @@
 	<style name="Value" fontSize="9"/>
 	<style name="SectionTitle" fontSize="10" isBold="true"/>
 	<style name="Small" fontSize="8"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
+	</parameter>
 	<parameter name="Company_footer" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -116,13 +119,16 @@
 			<staticText><reportElement style="Label" x="210" y="18" width="150" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
 			<staticText><reportElement style="Label" x="360" y="18" width="201" height="13"/><text><![CDATA[Beschreibung]]></text></staticText>
 			<line><reportElement x="0" y="32" width="561" height="1"/></line>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="0" y="36" width="100" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="100" y="36" width="110" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
-			<textField>
-				<reportElement style="Small" x="210" y="36" width="150" height="13"/>
-				<textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="360" y="36" width="201" height="13"/><textFieldExpression><![CDATA[$F{device_description}]]></textFieldExpression></textField>
+			<!-- Eine Zeile je Gerät der Leihe (Contract v1.1, devices[]): ein
+			     Set wird als ein Objekt verliehen und auf einem Schein
+			     quittiert, also gehören seine Teile auf das Papier. Das
+			     Wurzelgerät steht zuerst; bei einer Einzelbuchung bleibt es
+			     bei dieser einen Zeile. -->
+			<subreport>
+				<reportElement positionType="Float" x="0" y="36" width="561" height="14" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("devices")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/devices.jasper"]]></subreportExpression>
+			</subreport>
 			<staticText><reportElement style="SectionTitle" positionType="Float" x="0" y="62" width="561" height="14"/><text><![CDATA[Standort]]></text></staticText>
 			<staticText><reportElement style="Label" positionType="Float" x="0" y="80" width="130" height="13"/><text><![CDATA[Standort 1]]></text></staticText>
 			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="130" y="80" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_1}]]></textFieldExpression></textField>

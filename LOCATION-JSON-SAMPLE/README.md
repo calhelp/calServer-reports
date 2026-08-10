@@ -32,7 +32,8 @@ derselben Zeile genauso hochgeladen.
 | Datei | Zweck |
 |-------|-------|
 | `main_reports/location-json-sample.jrxml` | Hauptbericht: Kopf mit Kunde-/Lieferadresse + Kontakten, Leihdaten-Block, Prüfmittel-Grid, Standortblock (`location_1..5`), Signaturzeilen (Entleiher/Ausgabe), Seiten-Footer |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `location-report` **v1.0**) |
+| `subreports/devices.jrxml` | Prüfmittel-Zeilen, gefüllt aus `devices[]` — eine Zeile je Gerät der Leihe |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `location-report` **v1.1**) |
 | `main_reports/location-json-sample_adapter.xml` | Mitgelieferter Jaspersoft-Studio-**JSON-Data-Adapter** auf `sample-data.json` — macht die Vorschau turnkey (siehe „Vorschau ohne Backend") |
 
 ## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
@@ -65,6 +66,17 @@ sondern die fehlende Datenanbindung. Abhilfe:
   (Wurzelobjekt).
 - Das Rückgabedatum ist ein konfiguriertes Custom Field und wird unter seinem
   `api_name` gebunden: `location.custom_fields.rental_end`.
+- Das **Prüfmittel-Grid** läuft über `subDataSource("devices")` in
+  `subreports/devices.jrxml`. Ein Set (Koffer) wird als **ein** Objekt
+  verliehen und auf **einem** Schein quittiert, also stehen seine Teile mit
+  darauf. Bis v1.0 band der Hauptbericht eine feste Zeile an `device.*` — der
+  Entleiher unterschrieb für einen Koffer, dessen Inhalt das Papier nicht
+  nannte. `device` bleibt daneben bestehen, damit eine gegen v1.0 geschriebene
+  Vorlage weiterläuft.
+- `location_1..5` und `status` liefern **lesbaren Text**, keine uIDs: Ist ein
+  Standortfeld als `[CURRENT_USER]` konfiguriert, hält die Spalte eine
+  Benutzer-uID — der Bericht bekommt den Namen. Genauso wird der Status-uID zum
+  Status-Titel.
 - Die Lieferadresse (`delivery_customer`) fällt **serverseitig** auf den
   Kunden zurück, wenn kein eigener Lieferkunde hinterlegt ist — das Template
   braucht keine Fallback-Logik.
@@ -77,13 +89,14 @@ Systembericht-Platzhalter (siehe oben). Der Contract wird am Bundle erkannt
 `data_contract` ist nur nötig, wenn davon abgewichen werden soll (Details siehe
 V2-Doku „V2-Berichte mit JSON-Datenquelle").
 
-## Contract `location-report` (v1.0)
+## Contract `location-report` (v1.1)
 
 | Block | Felder |
 |-------|--------|
 | `meta` | `contract`, `schema_version`, `generated_at`, `locale` |
 | `location` | `location_1..5`, `location_date`, `location_time`, `is_active`, `status`, `custom_fields{}` (inkl. `rental_end`, wenn konfiguriert) |
 | `device` | `asset_number`, `serial_number`, `description`, `manufacturer`, `model`, `type_code`, `next_calibration_date`, `custom_fields{}` (`{}` wenn kein Gerät verknüpft) |
+| `devices[]` | **v1.1** — alle Geräte der Leihe, Wurzelgerät zuerst; Felder wie `device`. Bei einer Einzelbuchung genau ein Eintrag. |
 | `customer` | `name`, `customer_number`, `street`, `zip`, `city`, `country`, `custom_fields{}` |
 | `customer_contact` | `name`, `street`, `zip`, `city`, `email`, `phone` (`{}` wenn kein Kontakt verknüpft) |
 | `delivery_customer` | wie `customer`; serverseitiger Fallback auf `customer` |

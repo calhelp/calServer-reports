@@ -18,6 +18,18 @@
       "required": false,
       "group": "Layout",
       "example": "Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt · info@musterfirma.de"
+    },
+    {
+      "name": "Reportpath",
+      "label": {
+        "de": "Bundle-Wurzelpfad",
+        "en": "Bundle root path"
+      },
+      "description": {
+        "de": "Wurzelpfad zur Auflösung der Subreports (/subreports/*.jasper). Wird von calServer automatisch gesetzt.",
+        "en": "Root path for resolving the subreports (/subreports/*.jasper). Supplied automatically by calServer."
+      },
+      "role": "system"
     }
   ]
 }
