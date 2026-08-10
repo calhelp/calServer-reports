@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "contract": "price-list",
+    "schema_version": "1.0",
+    "generated_at": "2026-08-10T09:00:00+02:00",
+    "locale": "de-DE"
+  },
+  "list": {
+    "group": { "id": "g-1", "name": "Händler" },
+    "date": "2026-08-10",
+    "currency": "EUR",
+    "derivation": { "mode": "percent", "value": -15 },
+    "surcharges": [
+      {
+        "reference_id": "DAkkS",
+        "mode": "percent",
+        "value": 45,
+        "price_class_id": null,
+        "price_class_label": null
+      },
+      {
+        "reference_id": "Vor-Ort",
+        "mode": "absolute",
+        "value": 120,
+        "price_class_id": "pk-200",
+        "price_class_label": "Temperatur"
+      }
+    ],
+    "calibration": [
+      {
+        "id": "pk-100",
+        "number": "PK100",
+        "name": "Elektrische Messgeräte",
+        "parent_id": null,
+        "depth": 0,
+        "amount": null,
+        "derived": false,
+        "inherited_from": null,
+        "exceptions": [],
+        "scales": []
+      },
+      {
+        "id": "pk-100-01",
+        "number": "PK100.01",
+        "name": "Multimeter handheld",
+        "parent_id": "pk-100",
+        "depth": 1,
+        "amount": 84.15,
+        "derived": true,
+        "inherited_from": null,
+        "exceptions": [
+          {
+            "type_id": "T-1",
+            "type_label": "Keithley DMM6500",
+            "amount": 110.0,
+            "derived": false,
+            "scales": []
+          }
+        ],
+        "scales": []
+      },
+      {
+        "id": "pk-100-02",
+        "number": "PK100.02",
+        "name": "Multimeter Tischgerät",
+        "parent_id": "pk-100",
+        "depth": 1,
+        "amount": 101.15,
+        "derived": true,
+        "inherited_from": null,
+        "exceptions": [],
+        "scales": [{ "min_quantity": 5, "price": null, "discount": 10 }]
+      },
+      {
+        "id": "pk-200",
+        "number": "PK200",
+        "name": "Temperatur",
+        "parent_id": null,
+        "depth": 0,
+        "amount": null,
+        "derived": false,
+        "inherited_from": null,
+        "exceptions": [],
+        "scales": []
+      },
+      {
+        "id": "pk-200-01",
+        "number": "PK200.01",
+        "name": "Temperaturfühler",
+        "parent_id": "pk-200",
+        "depth": 1,
+        "amount": 50.15,
+        "derived": true,
+        "inherited_from": null,
+        "exceptions": [],
+        "scales": []
+      },
+      {
+        "id": "pk-200-02",
+        "number": "PK200.02",
+        "name": "Klimaschrank / Ofen",
+        "parent_id": "pk-200",
+        "depth": 1,
+        "amount": 296.65,
+        "derived": false,
+        "inherited_from": { "id": "pk-200", "name": "Temperatur" },
+        "exceptions": [],
+        "scales": []
+      }
+    ],
+    "other_type_prices": { "count": 0, "truncated": false, "entries": [] },
+    "services": [
+      {
+        "id": "sv-1",
+        "name": "Zusätzlicher Messpunkt",
+        "amount": 25.0,
+        "variants": [],
+        "scales": [
+          { "min_quantity": 5, "price": null, "discount": 10 },
+          { "min_quantity": 10, "price": null, "discount": 20 }
+        ]
+      },
+      {
+        "id": "sv-2",
+        "name": "Express-Bearbeitung",
+        "amount": 60.0,
+        "variants": [],
+        "scales": []
+      }
+    ],
+    "articles": [
+      { "id": "a-1", "name": "Gerät reinigen", "amount": 12.0, "unit": "EA" },
+      { "id": "a-2", "name": "Versandpauschale", "amount": 9.5, "unit": "EA" }
+    ],
+    "counts": {
+      "categories": 6,
+      "categories_priced": 4,
+      "type_exceptions": 1,
+      "other_type_prices": 0,
+      "services": 2,
+      "articles": 2
+    }
+  }
+}

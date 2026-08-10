@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 Preisliste (customer-facing), Contract "price-list" v1.0. Gefüllt aus einem
+  JSON-Datensatz — kein SQL, keine V1-Codespalten.
+
+  DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
+  PDF-Overlay des Berichtswesens; deshalb hält das Titelband oben 128 pt
+  (≈ 45 mm) frei, statt eine Absenderzeile fest einzubauen. Eine hier
+  eingebaute Adresse wäre für jeden zweiten Mandanten falsch — und ließe sich
+  nicht wegkonfigurieren, ohne die Vorlage zu ändern.
+
+  Aufbau: Kopf (Titel, Preisgruppe, Stichtag, Währung, Ableitungsregel) →
+  Kalibrierpreise (Kategoriebaum mit Typausnahmen) → Zusatzleistungen →
+  Standardartikel → Konditions-Fußnoten. Alle Abschnitte verschwinden
+  vollständig, wenn ihr Array leer ist.
+
+  Bewusst NICHT gedruckt: `list.other_type_prices`. Das ist die gekappte Liste
+  der Typpreise ohne Kategorie (Obergrenze 200) — ein Übergangsbestand auf dem
+  Weg zur Kategorisierung, kein Bestandteil einer Kundenliste. Wer sie braucht,
+  nimmt den CSV-Export.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="a1b2c3d4-0000-4000-8000-000000000000">
+	<property name="com.jaspersoft.studio.data.defadapter" value="price-list-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Label" fontSize="8" isBold="true"/>
+	<style name="Value" fontSize="9"/>
+	<style name="Section" fontSize="11" isBold="true"/>
+	<parameter name="Reportpath" class="java.lang.String">
+		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
+	</parameter>
+	<parameter name="Company_footer" class="java.lang.String">
+		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="List_title" class="java.lang.String">
+		<parameterDescription><![CDATA[Überschrift des Dokuments. Leer = "Preisliste".]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Preisliste"]]></defaultValueExpression>
+	</parameter>
+	<field name="group_name" class="java.lang.String"><fieldDescription><![CDATA[list.group.name]]></fieldDescription></field>
+	<field name="date" class="java.lang.String"><fieldDescription><![CDATA[list.date]]></fieldDescription></field>
+	<field name="currency" class="java.lang.String"><fieldDescription><![CDATA[list.currency]]></fieldDescription></field>
+	<field name="derivation_mode" class="java.lang.String"><fieldDescription><![CDATA[list.derivation.mode]]></fieldDescription></field>
+	<field name="derivation_value" class="java.math.BigDecimal"><fieldDescription><![CDATA[list.derivation.value]]></fieldDescription></field>
+	<field name="count_categories" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.categories]]></fieldDescription></field>
+	<field name="count_services" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.services]]></fieldDescription></field>
+	<field name="count_articles" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.articles]]></fieldDescription></field>
+	<!--
+		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
+		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
+		FEST und kein Parameter — ein Parameter könnte die Bandgeometrie zur
+		Laufzeit gar nicht verschieben, er sähe nur so aus. Wer mehr oder
+		weniger Platz braucht, ändert diese Bandhöhe und die y-Werte darunter;
+		das ist ein Layout-Eingriff und gehört in die Vorlage, nicht in eine
+		Berichtsvariable.
+	-->
+	<title>
+		<band height="224">
+			<textField>
+				<reportElement style="Section" x="0" y="168" width="330" height="18"/>
+				<textElement><font size="14" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$P{List_title}]]></textFieldExpression>
+			</textField>
+			<staticText><reportElement style="Label" x="380" y="168" width="90" height="12"/><text><![CDATA[Preisgruppe]]></text></staticText>
+			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="168" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{group_name} == null ? "Listenpreise" : $F{group_name}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="182" width="90" height="12"/><text><![CDATA[Stichtag]]></text></staticText>
+			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="182" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{date}]]></textFieldExpression></textField>
+			<staticText><reportElement style="Label" x="380" y="196" width="90" height="12"/><text><![CDATA[Währung]]></text></staticText>
+			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="196" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="190" width="360" height="20">
+					<printWhenExpression><![CDATA[$F{derivation_mode} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement><font size="7" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA["Diese Gruppe leitet vom Listenpreis ab: " + ($F{derivation_value} != null && $F{derivation_value}.signum() >= 0 ? "+" : "") + ($F{derivation_value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{derivation_value})) + ("absolute".equals($F{derivation_mode}) ? " " + ($F{currency} == null ? "" : $F{currency}) : " %") + "."]]></textFieldExpression>
+			</textField>
+			<line><reportElement x="0" y="218" width="561" height="1"/></line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="0"/>
+	</pageHeader>
+	<detail>
+		<band height="60">
+			<staticText>
+				<reportElement style="Section" x="0" y="0" width="404" height="14">
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Kalibrierpreise]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="410" y="2" width="80" height="11">
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Betrag]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="16" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.calibration")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-categories.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement style="Section" positionType="Float" x="0" y="20" width="404" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Zusatzleistungen]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="36" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.services")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-services.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement style="Section" positionType="Float" x="0" y="40" width="404" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_articles} != null && $F{count_articles}.intValue() > 0]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Standardartikel]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="56" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.articles")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-articles.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="2" width="460" height="18"/>
+				<textElement><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="2" width="91" height="10"/>
+				<textElement textAlignment="Right"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="40">
+			<line><reportElement positionType="Float" x="0" y="4" width="561" height="1"/></line>
+			<staticText><reportElement style="Label" positionType="Float" x="0" y="8" width="200" height="11"/><text><![CDATA[Konditionen]]></text></staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="20" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.surcharges")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-surcharges.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

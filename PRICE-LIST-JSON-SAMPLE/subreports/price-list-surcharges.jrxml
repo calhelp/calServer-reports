@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  Konditions-Fußnoten der Preisliste, Contract "price-list" v1.0
+  (`list.surcharges`).
+
+  Ein Zuschlag gilt entweder pauschal oder nur für eine Preiskategorie; im
+  zweiten Fall steht die Kategorie dahinter in Klammern. Prozent und fester
+  Betrag stehen im selben Feld, weil eine Fußnote gelesen und nicht gerechnet
+  wird — die Zahl steht dort, wo der Satz sie erwartet.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-surcharges" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0006-4000-8000-000000000006">
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
+	<field name="reference_id" class="java.lang.String"><fieldDescription><![CDATA[reference_id]]></fieldDescription></field>
+	<field name="mode" class="java.lang.String"><fieldDescription><![CDATA[mode]]></fieldDescription></field>
+	<field name="value" class="java.math.BigDecimal"><fieldDescription><![CDATA[value]]></fieldDescription></field>
+	<field name="price_class_label" class="java.lang.String"><fieldDescription><![CDATA[price_class_label]]></fieldDescription></field>
+	<detail>
+		<band height="11">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="561" height="10"/>
+				<textElement><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[($F{reference_id} == null ? "" : $F{reference_id}) + " " + ($F{value} != null && $F{value}.signum() >= 0 ? "+" : "") + ($F{value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{value})) + ("absolute".equals($F{mode}) ? " " + $P{Currency} : " %") + ($F{price_class_label} != null ? " (" + $F{price_class_label} + ")" : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
