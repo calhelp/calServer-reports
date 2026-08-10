@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://calhelp.github.io/calServer-reports/schema/procedure-package.schema.json",
+  "title": "calServer Prüfplan-Paket (calserver.procedure-package)",
+  "description": "Manifest eines Prüfplan-Pakets: ein ZIP mit README.md, procedure.json (calserver.procedure) und optionalen Anhängen unter images/ und docs/. Das Manifest listet jeden Paket-Eintrag mit SHA-256-Prüfsumme und ist damit der Manipulationsanker des Formats. Zusätzliche, hier nicht beschriebene Felder sind erlaubt und werden von älteren Lesern ignoriert (Vorwärtskompatibilität); die verbindliche Lese-Semantik gehört calServer V2 (laravel/app/Services/Procedure/ProcedurePackageService.php).",
+  "type": "object",
+  "required": ["format", "format_version", "name", "document", "files"],
+  "properties": {
+    "format": {
+      "const": "calserver.procedure-package"
+    },
+    "format_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version des Paketformats. Leser lehnen Versionen oberhalb der eigenen ab, statt unbekannte Inhalte still zu verlieren. Aktuelle Version: 1."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Anzeigename des Prüfplans. Wird beim Import als Vorlagenname übernommen, sofern kein Name mitgegeben wird."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Optionale Kurzbeschreibung (ein Absatz)."
+    },
+    "document": {
+      "type": "object",
+      "required": ["format", "version"],
+      "description": "Deklarative Angabe zum eingebetteten procedure.json, damit Werkzeuge ohne Öffnen der Datei entscheiden können. Beim Import bleibt der Serializer die letzte Instanz.",
+      "properties": {
+        "format": {
+          "const": "calserver.procedure"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "description": "Revisionslage der exportierten Vorlagenversion im Quellsystem. Beim Import rein deklarativ: importiert wird immer als neue Vorlage 0.1, Freigabestände fremder Systeme werden nie übernommen.",
+      "properties": {
+        "major_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minor_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "released": {
+          "enum": [null, "approval", "release"],
+          "description": "null = Entwurf, approval = genehmigt, release = freigegeben."
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt der Paket-Erstellung (RFC 3339)."
+    },
+    "generator": {
+      "type": "string",
+      "description": "Erzeugendes System, z.B. calserver-v2 oder calserver-reports."
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Jeder ZIP-Eintrag außer manifest.json (und der reservierten, in Version 1 ungeprüften manifest.json.sig) MUSS hier gelistet sein. Ein ungelisteter Eintrag, ein fehlender Eintrag oder eine abweichende Prüfsumme macht das Paket ungültig.",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "size_bytes"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(README\\.md|procedure\\.json|(images|docs)/[A-Za-z0-9][A-Za-z0-9._-]{0,127}\\.[A-Za-z0-9]{1,8})$",
+            "description": "Relativer Pfad im Paket. Flach (Tiefe höchstens 1); die je Ordner erlaubten Endungen (images: png/jpg/jpeg/gif/svg/webp, docs: pdf/md/txt/csv/xlsx/docx) erzwingt der Leser."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
