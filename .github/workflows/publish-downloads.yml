@@ -111,6 +111,8 @@ jobs:
           get_last_modified "REPAIR-JSON-SAMPLE" "repair-json-sample"
           get_last_modified "LOCATION-JSON-SAMPLE" "location-json-sample"
           get_last_modified "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
+          get_last_modified "PRUEFPLAN-FLUKE-23" "pruefplan-fluke-23"
+          get_last_modified "PRUEFPLAN-MESSSCHIEBER-150MM" "pruefplan-messschieber-150mm"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -197,6 +199,8 @@ jobs:
               "repair-json-sample":                 "REPAIR-JSON-SAMPLE/README.md",
               "location-json-sample":               "LOCATION-JSON-SAMPLE/README.md",
               "price-list-json-sample":             "PRICE-LIST-JSON-SAMPLE/README.md",
+              "pruefplan-fluke-23":                 "PRUEFPLAN-FLUKE-23/README.md",
+              "pruefplan-messschieber-150mm":       "PRUEFPLAN-MESSSCHIEBER-150MM/README.md",
           }
 
           SCHEMA_MAP = {
@@ -225,6 +229,8 @@ jobs:
               "repair-json-sample":                 "Reparaturbericht (APEX · V2)",
               "location-json-sample":               "Standort-/Leihbericht (APEX · V2)",
               "price-list-json-sample":             "Preisliste (APEX · V2)",
+              "pruefplan-fluke-23":                 "Prüfplan: Fluke 23 Series II mit Fluke 5520A",
+              "pruefplan-messschieber-150mm":       "Prüfplan: Messschieber 150 mm mit Endmaßsatz",
           }
 
           INFO_TEMPLATE = """<!doctype html>

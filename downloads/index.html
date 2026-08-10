@@ -77,6 +77,11 @@
         const getCategory = (artifactName = "") => {
           const name = artifactName.toLowerCase();
 
+          // Prüfplan-Pakete (calserver.procedure-package) sind keine
+          // Jasper-Reports — eigene Kategorie, Prüfung VOR allen anderen,
+          // damit kein späterer Teilstring-Treffer sie einsammelt.
+          if (name.includes("pruefplan")) return "Prüfpläne";
+
           // V2 (APEX) bundles use a JSON data source (readable api_name fields,
           // no SQL). Grouped separately from the V1 (BASE) reports.
           if (name.includes("-json-sample")) {
@@ -112,6 +117,7 @@
         );
 
         const categoryOrder = [
+          "Prüfpläne",
           "APEX · V2 (JSON-Datenquelle)",
           "Sticker",
           "Trace",

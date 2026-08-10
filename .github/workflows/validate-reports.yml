@@ -32,6 +32,12 @@ jobs:
       - name: Check parameter manifests
         run: python3 scripts/check_parameters_manifest.py
 
+      # Prüfplan-Pakete (calserver.procedure-package, PRUEFPLAN-*): Manifest
+      # gegen schema/procedure-package.schema.json, sha256-Parität in beide
+      # Richtungen, Eintrags-Allowlist, procedure.json-Kopf.
+      - name: Check Prüfplan package manifests
+        run: python3 scripts/build_pruefplan_manifest.py --check
+
       # DCC 3.3.0 Export: xmlschema erlaubt echte Validierung gegen dcc-v3.3.0.xsd
       # (mit remote SI-/dsig-Imports). Der Check überspringt die XSD-Prüfung
       # anstandslos, falls das Schema offline nicht ladbar ist.

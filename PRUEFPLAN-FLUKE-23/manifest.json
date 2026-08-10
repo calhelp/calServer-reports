@@ -1,0 +1,30 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/procedure-package.schema.json",
+  "format": "calserver.procedure-package",
+  "format_version": 1,
+  "name": "Fluke 23 Series II — Kalibrierung mit Fluke 5520A",
+  "document": {
+    "format": "calserver.procedure",
+    "version": 2
+  },
+  "plan": {
+    "major_version": 0,
+    "minor_version": 1,
+    "released": null
+  },
+  "created_at": "2026-08-10T12:00:00+00:00",
+  "generator": "calserver-reports",
+  "locale": "de",
+  "files": [
+    {
+      "path": "procedure.json",
+      "sha256": "40986535451f825bcb4bbbb62e4d8b094f6535ba1a462ea342739452b930f06d",
+      "size_bytes": 37727
+    },
+    {
+      "path": "README.md",
+      "sha256": "bfcd3ac7b8558b5a7c703cb4804c7ae296e35ff592b67ef08e74c761eee667d9",
+      "size_bytes": 2636
+    }
+  ]
+}

@@ -44,6 +44,84 @@ The existing bundles in this repo are the stable **V1 contract**: embedded SQL e
 
 ---
 
+## 0.3) Prüfplan packages (`calserver.procedure-package`) — MUST
+
+This repo also hosts **Prüfplan bundles** (test plans for calServer V2). They are a
+**separate bundle class**: NO JasperReports involved, none of the report rules
+(sections 0.1, 1, 2, 6) apply to them. An AI agent should be able to author a
+valid Prüfplan bundle end-to-end from this section alone.
+
+### Naming and structure (MUST)
+- Folder `PRUEFPLAN-<SLUG>/` (e.g. `PRUEFPLAN-FLUKE-23`); ZIP name is the
+  lowercased form (`pruefplan-fluke-23`). Never use the `-JSON-SAMPLE` suffix —
+  that triggers the report (APEX) packaging rules and the JRXML assertion.
+- Required files at the bundle root: `manifest.json`, `README.md`,
+  `procedure.json`. Optional: `images/` (png/jpg/jpeg/gif/svg/webp) and
+  `docs/` (pdf/md/txt/csv/xlsx/docx), both FLAT (depth 1), file names
+  `[A-Za-z0-9][A-Za-z0-9._-]*`, max 128 chars.
+- NO `main_reports/`, NO `subreports/`, NO `*.jrxml`, NO SQL, no other file
+  types. The format owner is calServer V2
+  (`laravel/app/Services/Procedure/ProcedurePackageService.php` in
+  calhelp/calServer-yii); the machine-readable manifest schema is
+  `schema/procedure-package.schema.json` (published to Pages).
+
+### Content rules for `procedure.json` (MUST)
+> These content rules are shared with calServer's **internal AI** (the
+> Prüfplan draft assistant in the step editor): its system prompt
+> (`laravel/app/Services/Ai/ProcedurePlanService.php::systemPrompt()` in
+> calhelp/calServer-yii) carries the same metrological guardrails. If you
+> change a rule here, update that prompt too — and vice versa. There is
+> deliberately no runtime sharing across the two repos.
+
+- Header: `{"format": "calserver.procedure", "version": 2, "name": "...", "test_steps": [...]}`.
+  Version 2 is the current maximum — never write a higher version.
+- `row_number` gapless from 1; `test_step` numbers unique, decimal
+  sub-numbering (`1`, `1.001`, `1.002`, …) below a group header.
+- A group starts with a step `"test_type": "Header"`; ONLY headers may carry
+  `group_defaults` (allowed keys: `config`, `test_value_p`, `test_value_u`,
+  `range`, `resolution`, `tolerance`, `uncertainty`, `k`, `decision_rule`).
+  Steps below inherit them until the next header — put the metrology on the
+  header once instead of repeating it per measurement point.
+- `test_mode` is HTML (calServer renders it); `test_mode_markdown` optional.
+- Metrological guardrails: state tolerances from the manufacturer's data
+  sheet (and say in the README that they must be re-checked against the
+  edition valid for the device under test); uncertainties as expanded
+  measurement uncertainty (k = 2) of the actual setup, never as a
+  substitute for a real budget; keep TUR ≥ 4:1 where the setup allows it and
+  say so in the header's test_mode where it deliberately does not (see
+  `PRUEFPLAN-MESSSCHIEBER-150MM` — its 3:1 and 2.5:1 groups are intentional
+  and documented); DC voltage groups end with a polarity-reversal point
+  (same magnitude as the largest positive point, negative sign).
+
+### Manifest (MUST)
+- NEVER edit `manifest.json` by hand and NEVER invent sha256 values.
+  Regenerate: `python3 scripts/build_pruefplan_manifest.py --write <BUNDLE>`,
+  then verify: `python3 scripts/build_pruefplan_manifest.py --check`.
+  CI runs `--check` on every push/PR (validate-reports.yml) and fails on any
+  drift: unlisted file, missing file, wrong checksum, disallowed entry.
+- Keep `created_at`/`plan`/`description` stable across `--write` runs (the
+  script preserves them); `plan` is provenance only — calServer always
+  imports a package as a new template at version 0.1.
+
+### Packaging & downloads page (MUST)
+- `package-reports.yml`: add an `upload-artifact` step for the bundle folder
+  and a `create_pruefplan_zip "<BUNDLE>" "<zip-name>"` call (NOT
+  `create_zip()` — that stages `main_reports/` and fails without a JRXML).
+- `publish-downloads.yml`: add a `get_last_modified` line plus `README_MAP`
+  and `TITLE_MAP` entries (`Prüfplan: <DUT> mit <Normal>`); no `SCHEMA_MAP`.
+- Category on the downloads page is automatic: any ZIP name containing
+  `pruefplan` lands in **"Prüfpläne"** (`downloads/index.html`,
+  `getCategory()`).
+- Downloads-page only: NO `/api/report/<uuid>` upload step, NO
+  `release-reports.yml` entry.
+
+### Verify locally
+- `python3 scripts/build_pruefplan_manifest.py --check` is green
+- `cd <BUNDLE> && zip -r /tmp/<zip-name>.zip .` produces a ZIP that calServer
+  V2 imports as-is (Kalibrierungen → Prüfpläne → Importieren)
+
+---
+
 ## 1) Required bundle structure (MUST)
 For every report bundle folder (e.g. DAKKS-SAMPLE, DCC, ORDER-SAMPLE, STICKERS-*):
 - `main_reports/`  → contains the entry-point JRXML(s) users execute
@@ -137,6 +215,11 @@ Some ZIPs are POSTed via `curl` to fixed report IDs using secrets:
 
 ## 7) Practical checklist for adding/modifying a report bundle
 When you introduce or change a bundle:
+
+> **Prüfplan bundles (`PRUEFPLAN-*`) follow section 0.3 instead of this
+> checklist** — no JRXML, no `main_reports/`/`subreports/`, packaging via
+> `create_pruefplan_zip()`, manifest via
+> `scripts/build_pruefplan_manifest.py --write`.
 
 ### Bundle content
 - Create/keep: `<BUNDLE>/main_reports/` and `<BUNDLE>/subreports/`
