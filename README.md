@@ -266,6 +266,8 @@ calServer V2 verwendet ein neues Datenbankschema mit **lesbaren Feldnamen** (`se
   | Systembericht | Bundle | Wann calServer ihn erzeugt |
   |---------------|--------|-----------------------------|
   | Leihschein | [`LOCATION-JSON-SAMPLE`](LOCATION-JSON-SAMPLE/) | Beim Buchen einer Ausleihe, als Anhang der Leihschein-E-Mail |
+  | Preisliste | [`PRICE-LIST-JSON-SAMPLE`](PRICE-LIST-JSON-SAMPLE/) | Auf der Preislisten-Seite, je Preisgruppe und Stichtag |
+  | Auftragsbeleg | [`ORDER-JSON-SAMPLE`](ORDER-JSON-SAMPLE/) | Angebot, Auftragsbestätigung, Lieferschein und Rechnung aus dem Auftrag — und die Quelle der E-Rechnung nach ZUGFeRD/EN 16931 |
 
   Details: [Systemberichte](https://github.com/calhelp/calServer-yii/blob/develop/docs-v2/admin/berichte/systemberichte.md).
 - Bestehende Vorlagen bitte **nicht** auf das V2-Schema-SQL umschreiben — die Strategie und der Migrationspfad sind hier dokumentiert: [Evaluierung: JasperReports-Strategie für calServer V2](https://github.com/calhelp/calServer-yii/blob/develop/docs/evaluierung-jasper-reports-v2.md).
