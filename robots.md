@@ -73,8 +73,17 @@ valid Prüfplan bundle end-to-end from this section alone.
 > change a rule here, update that prompt too — and vice versa. There is
 > deliberately no runtime sharing across the two repos.
 
-- Header: `{"format": "calserver.procedure", "version": 2, "name": "...", "test_steps": [...]}`.
-  Version 2 is the current maximum — never write a higher version.
+- Header: `{"format": "calserver.procedure", "version": 3, "name": "...", "test_steps": [...]}`.
+  Version 3 is the current maximum — never write a higher version.
+- **Step images (document version 3):** any step may carry
+  `"images": ["<basename>", ...]` — each entry MUST be a file in the
+  bundle's `images/` folder (`scripts/build_pruefplan_manifest.py --check`
+  enforces existence). calServer shows these pictures right at the step in
+  measurement capture. Use them for connection diagrams on group headers,
+  measuring guides and test patterns on confirmation steps (e.g. an LCD
+  test pattern with "everything as pictured? yes/no" as a
+  `TEXT(Y=PASS)` step). The step references by name; the bytes travel in
+  `images/` and become plan attachments on import.
 - `row_number` gapless from 1; `test_step` numbers unique, decimal
   sub-numbering (`1`, `1.001`, `1.002`, …) below a group header.
 - A group starts with a step `"test_type": "Header"`; ONLY headers may carry

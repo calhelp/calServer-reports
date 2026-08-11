@@ -17,7 +17,9 @@ Zwei Modi:
       in beide Richtungen (jede Datei gelistet, jeder Listeneintrag
       vorhanden), die Eintrags-Allowlist (kein JRXML, keine Fremdformate,
       Tiefe höchstens 1) und den Kopf von procedure.json
-      (format calserver.procedure, version <= 2). Exit 1 bei Abweichung.
+      (format calserver.procedure, version <= 3) samt Schritt-Bildverweisen
+      (jedes steps[].images-Element muss als images/-Datei existieren).
+      Exit 1 bei Abweichung.
 
 Die verbindliche Lese-Semantik gehört calServer V2
 (laravel/app/Services/Procedure/ProcedurePackageService.php in
@@ -39,7 +41,7 @@ SCHEMA_PATH = REPO_ROOT / "schema" / "procedure-package.schema.json"
 PACKAGE_FORMAT = "calserver.procedure-package"
 PACKAGE_VERSION = 1
 DOCUMENT_FORMAT = "calserver.procedure"
-MAX_DOCUMENT_VERSION = 2
+MAX_DOCUMENT_VERSION = 3
 
 SCHEMA_URL = "https://calhelp.github.io/calServer-reports/schema/procedure-package.schema.json"
 
@@ -112,6 +114,21 @@ def read_document(bundle: Path) -> dict | None:
             f"{bundle.name}/procedure.json: version {version!r} — "
             f"erlaubt sind 1 bis {MAX_DOCUMENT_VERSION}"
         )
+
+    # Schritt-Bildverweise (Dokumentversion 3): jeder Name muss als
+    # images/-Datei im Bundle liegen — sonst verspricht der Schritt ein
+    # Bild, das die Messwertaufnahme nie findet.
+    steps = document.get("test_steps")
+    if isinstance(steps, list):
+        for step in steps:
+            if not isinstance(step, dict):
+                continue
+            for image in step.get("images") or []:
+                if not isinstance(image, str) or not (bundle / "images" / image).is_file():
+                    fail(
+                        f"{bundle.name}/procedure.json: Schritt {step.get('test_step')!r} "
+                        f"referenziert fehlendes Bild {image!r} (images/)"
+                    )
     return document
 
 

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="sans-serif">
+  <rect width="640" height="360" fill="#ffffff"/>
+  <text x="320" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#1f2937">Anschluss Strom (mA / A)</text>
+
+  <rect x="30" y="60" width="240" height="240" rx="10" fill="#eef2f7" stroke="#334155" stroke-width="2"/>
+  <text x="150" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">Fluke 5520A</text>
+  <text x="150" y="110" text-anchor="middle" font-size="12" fill="#64748b">AUX / 20A OUTPUT</text>
+  <circle cx="110" cy="160" r="16" fill="#dc2626" stroke="#7f1d1d" stroke-width="3"/>
+  <text x="110" y="196" text-anchor="middle" font-size="12" fill="#334155">AUX HI / 20A</text>
+  <circle cx="190" cy="160" r="16" fill="#111827" stroke="#000000" stroke-width="3"/>
+  <text x="190" y="196" text-anchor="middle" font-size="12" fill="#334155">LO</text>
+  <text x="150" y="270" text-anchor="middle" font-size="11" fill="#64748b">Ab 3 A den 20A-Ausgang</text>
+  <text x="150" y="286" text-anchor="middle" font-size="11" fill="#64748b">verwenden, Einschaltdauer beachten</text>
+
+  <rect x="370" y="60" width="240" height="240" rx="10" fill="#fefce8" stroke="#334155" stroke-width="2"/>
+  <text x="490" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">Fluke 23 Series II</text>
+  <circle cx="450" cy="160" r="16" fill="#dc2626" stroke="#7f1d1d" stroke-width="3"/>
+  <text x="450" y="196" text-anchor="middle" font-size="12" fill="#334155">A / 10A</text>
+  <circle cx="530" cy="160" r="16" fill="#111827" stroke="#000000" stroke-width="3"/>
+  <text x="530" y="196" text-anchor="middle" font-size="12" fill="#334155">COM</text>
+  <text x="490" y="270" text-anchor="middle" font-size="11" fill="#64748b">Für mA-Bereiche die</text>
+  <text x="490" y="286" text-anchor="middle" font-size="11" fill="#64748b">mA-Buchse verwenden</text>
+
+  <path d="M 126 160 C 240 120, 380 120, 434 160" fill="none" stroke="#dc2626" stroke-width="4"/>
+  <path d="M 206 160 C 300 210, 420 210, 514 160" fill="none" stroke="#111827" stroke-width="4"/>
+  <text x="320" y="118" text-anchor="middle" font-size="12" fill="#dc2626">AUX HI → A (rot)</text>
+  <text x="320" y="232" text-anchor="middle" font-size="12" fill="#111827">LO → COM (schwarz)</text>
+
+  <text x="320" y="336" text-anchor="middle" font-size="12" fill="#475569">Nach der Strommessung Leitungen zurück auf V·Ω stecken — Schutz vor versehentlichem Kurzschluss.</text>
+</svg>

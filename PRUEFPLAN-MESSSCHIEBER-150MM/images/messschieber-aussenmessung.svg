@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" font-family="sans-serif">
+  <rect width="640" height="340" fill="#ffffff"/>
+  <text x="320" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#1f2937">Außenmessung — Endmaß zwischen den Außenmessflächen</text>
+
+  <!-- Schiene -->
+  <rect x="60" y="90" width="520" height="34" fill="#e2e8f0" stroke="#334155" stroke-width="2"/>
+  <g font-size="10" fill="#64748b">
+    <text x="90" y="112">0</text><text x="180" y="112">30</text><text x="270" y="112">60</text><text x="360" y="112">90</text><text x="450" y="112">120</text><text x="535" y="112">150</text>
+  </g>
+
+  <!-- fester Schenkel -->
+  <path d="M 60 90 L 60 250 L 92 250 L 92 124 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+  <!-- Schieber mit beweglichem Schenkel -->
+  <rect x="236" y="82" width="120" height="50" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+  <path d="M 236 124 L 236 250 L 268 250 L 268 124 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+
+  <!-- Endmaß -->
+  <rect x="92" y="170" width="144" height="60" fill="#fcd34d" stroke="#92400e" stroke-width="2"/>
+  <text x="164" y="204" text-anchor="middle" font-size="13" font-weight="bold" fill="#78350f">Endmaß</text>
+
+  <!-- Messflächen-Markierung -->
+  <line x1="92" y1="160" x2="92" y2="240" stroke="#dc2626" stroke-width="3"/>
+  <line x1="236" y1="160" x2="236" y2="240" stroke="#dc2626" stroke-width="3"/>
+  <text x="164" y="258" text-anchor="middle" font-size="11" fill="#dc2626">Messflächen vollflächig anlegen</text>
+
+  <g font-size="12" fill="#475569">
+    <text x="320" y="290" text-anchor="middle">Endmaß mittig und winkelrecht zwischen die Außenmessflächen nehmen, mit gleichmäßiger,</text>
+    <text x="320" y="308" text-anchor="middle">gefühlvoller Messkraft schließen (kein Kippen), Anzeige erst nach Stillstand ablesen.</text>
+  </g>
+</svg>
