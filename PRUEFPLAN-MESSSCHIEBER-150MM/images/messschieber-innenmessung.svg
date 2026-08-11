@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" font-family="sans-serif">
+  <rect width="640" height="340" fill="#ffffff"/>
+  <text x="320" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#1f2937">Innenmessung — Einstellring über den Innenmessschnäbeln</text>
+
+  <!-- Schiene unten -->
+  <rect x="60" y="220" width="520" height="34" fill="#e2e8f0" stroke="#334155" stroke-width="2"/>
+  <!-- Innenmessschnäbel oben -->
+  <path d="M 60 220 L 60 120 L 78 120 L 78 150 L 92 176 L 92 220 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+  <path d="M 262 220 L 262 176 L 276 150 L 276 120 L 294 120 L 294 220 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+
+  <!-- Einstellring -->
+  <circle cx="177" cy="120" r="88" fill="none" stroke="#92400e" stroke-width="16"/>
+  <circle cx="177" cy="120" r="80" fill="none" stroke="#fcd34d" stroke-width="8"/>
+  <text x="177" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#78350f">Einstellring / Endmaß mit Backen</text>
+
+  <!-- Anlage-Markierung -->
+  <line x1="78" y1="112" x2="78" y2="150" stroke="#dc2626" stroke-width="3"/>
+  <line x1="276" y1="112" x2="276" y2="150" stroke="#dc2626" stroke-width="3"/>
+
+  <g font-size="12" fill="#475569">
+    <text x="320" y="290" text-anchor="middle">Schnäbel im größten Durchmesser anlegen (leicht pendeln, Umkehrpunkt der Anzeige suchen),</text>
+    <text x="320" y="308" text-anchor="middle">nicht verkanten. Der größte angezeigte Wert ist der Messwert.</text>
+  </g>
+</svg>

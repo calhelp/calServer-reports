@@ -1,6 +1,6 @@
 {
   "format": "calserver.procedure",
-  "version": 2,
+  "version": 3,
   "name": "Messschieber 150 mm — Kalibrierung mit Endmaßsatz",
   "test_steps": [
     {
@@ -187,7 +187,10 @@
         "uncertainty": 0.007,
         "k": 2,
         "decision_rule": "ILAC-G8 w = U"
-      }
+      },
+      "images": [
+        "messschieber-aussenmessung.svg"
+      ]
     },
     {
       "row_number": 12,
@@ -373,7 +376,10 @@
         "uncertainty": 0.01,
         "k": 2,
         "decision_rule": "ILAC-G8 w = U"
-      }
+      },
+      "images": [
+        "messschieber-innenmessung.svg"
+      ]
     },
     {
       "row_number": 23,
@@ -463,7 +469,10 @@
         "uncertainty": 0.012,
         "k": 2,
         "decision_rule": "ILAC-G8 w = U"
-      }
+      },
+      "images": [
+        "messschieber-tiefenmass.svg"
+      ]
     },
     {
       "row_number": 28,

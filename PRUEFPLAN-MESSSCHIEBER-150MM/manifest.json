@@ -5,7 +5,7 @@
   "name": "Messschieber 150 mm — Kalibrierung mit Endmaßsatz",
   "document": {
     "format": "calserver.procedure",
-    "version": 2
+    "version": 3
   },
   "plan": {
     "major_version": 0,
@@ -18,13 +18,28 @@
   "files": [
     {
       "path": "procedure.json",
-      "sha256": "d2fa1bdd548a5b7545fba19a8a4aba3a1ae7589398a92a075569322b62e6916e",
-      "size_bytes": 18947
+      "sha256": "04d7c303f5eab0065e46e934babf944b7ba8f6e69f904dc5e78feebd67baa69f",
+      "size_bytes": 19147
     },
     {
       "path": "README.md",
       "sha256": "343713f397d202adf6a0c3b7edf121a18e2eb27e12608b3848d8591319a6dd2a",
       "size_bytes": 2259
+    },
+    {
+      "path": "images/messschieber-aussenmessung.svg",
+      "sha256": "016fcc573fd1ae8d2943a91e2b77920f8c80fc475539d7c26b6d0e0d12e31fc8",
+      "size_bytes": 1899
+    },
+    {
+      "path": "images/messschieber-innenmessung.svg",
+      "sha256": "930be701f2f42508c5c7d329eb4f15325ba4a00082b2235282cb178da1781e87",
+      "size_bytes": 1531
+    },
+    {
+      "path": "images/messschieber-tiefenmass.svg",
+      "sha256": "e7149d65b14313566e58a9533cbd68da2242d41b73f23efba7bfd96f96195f99",
+      "size_bytes": 1479
     }
   ]
 }

@@ -5,7 +5,7 @@
   "name": "Fluke 23 Series II — Kalibrierung mit Fluke 5520A",
   "document": {
     "format": "calserver.procedure",
-    "version": 2
+    "version": 3
   },
   "plan": {
     "major_version": 0,
@@ -18,13 +18,28 @@
   "files": [
     {
       "path": "procedure.json",
-      "sha256": "212e72596a00f4f9a5177d53e6c978311f5c085e8b024a9a2b13218ff4f0db9d",
-      "size_bytes": 37801
+      "sha256": "9b18cfa180f1fe0f423d7a21776f6ea7c46987ff87a23c50aa3ff12abea3755d",
+      "size_bytes": 38997
     },
     {
       "path": "README.md",
       "sha256": "bfcd3ac7b8558b5a7c703cb4804c7ae296e35ff592b67ef08e74c761eee667d9",
       "size_bytes": 2636
+    },
+    {
+      "path": "images/fluke-23-anschluss-a.svg",
+      "sha256": "2ec2824b223b077f64a6a3b661b03330df4dd380e894214487326a0a8f0f5ac2",
+      "size_bytes": 2528
+    },
+    {
+      "path": "images/fluke-23-anschluss-v-ohm.svg",
+      "sha256": "9125dd89ca2b4909fd6dd9bf9feeb2ebd9935963a55d93e1e826aff1576aff91",
+      "size_bytes": 2589
+    },
+    {
+      "path": "images/fluke-23-lcd-testbild.svg",
+      "sha256": "36890fbf5f3420126e783db832787347ed05eff04d2cefeb4b027f29940c5b09",
+      "size_bytes": 2923
     }
   ]
 }
