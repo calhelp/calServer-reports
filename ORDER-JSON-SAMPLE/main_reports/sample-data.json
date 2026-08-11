@@ -1,13 +1,17 @@
 {
   "meta": {
     "contract": "order-document",
-    "schema_version": "1.7",
+    "schema_version": "1.8",
     "generated_at": "2026-07-15T10:00:00+00:00",
     "locale": "de-DE"
   },
   "document": {
     "number": "AU-2026-0042",
     "date": "2026-07-15",
+    "invoice_number": "RE-2026-0117",
+    "due_date": "2026-08-14",
+    "delivery_date": "2026-07-10",
+    "buyer_reference": "BST-2026-9911",
     "status": "Auftrag",
     "type": "order_confirmation",
     "type_label": "Auftragsbestätigung",
@@ -55,7 +59,8 @@
     "bank_name": "Musterbank",
     "iban": "DE02 1203 0000 0000 2020 51",
     "bic": "BYLADEM1001",
-    "payment_terms": "Zahlbar innerhalb von 14 Tagen ohne Abzug."
+    "payment_terms": "Zahlbar innerhalb von 14 Tagen ohne Abzug.",
+    "country_code": "DE"
   },
   "customer": {
     "name": "Muster GmbH",
@@ -71,7 +76,8 @@
       "city": "Beispielstadt",
       "email": "erika@muster.example",
       "phone": "+49 30 1234500"
-    }
+    },
+    "country_code": "DE"
   },
   "delivery": {
     "name": "Muster GmbH – Wareneingang",
@@ -79,7 +85,8 @@
     "street": "Wareneingang, Tor 3",
     "zip": "54322",
     "city": "Beispielstadt-Industriegebiet",
-    "country": "DE"
+    "country": "DE",
+    "country_code": "DE"
   },
   "invoice": {
     "name": "Muster GmbH – Buchhaltung",
@@ -87,7 +94,8 @@
     "street": "Rechnungsstelle, Postfach 90",
     "zip": "54320",
     "city": "Beispielstadt",
-    "country": "DE"
+    "country": "DE",
+    "country_code": "DE"
   },
   "recipient": {
     "role": "customer",
@@ -104,7 +112,8 @@
       "city": "Beispielstadt",
       "email": "erika@muster.example",
       "phone": "+49 30 1234500"
-    }
+    },
+    "country_code": "DE"
   },
   "collective": {
     "is_collective": false,
@@ -119,6 +128,7 @@
       "article_type": "article",
       "quantity": 2,
       "unit": "Stk",
+      "unit_code": "H87",
       "price": 100.0,
       "discount": 0.0,
       "tax": 19.0,
@@ -136,6 +146,7 @@
       "article_type": "article",
       "quantity": 1,
       "unit": "Stk",
+      "unit_code": "H87",
       "price": 50.0,
       "discount": 10.0,
       "tax": 7.0,

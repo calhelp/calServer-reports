@@ -23,12 +23,12 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 | `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt. Dieselbe Gruppierung |
 | `subreports/tax-groups.jrxml` | Steuergruppen; `statistics.tax_groups`-Array via `subDataSource("statistics.tax_groups")` (USt. je Satz — § 14 UStG-Aufschlüsselung) |
 | `subreports/custom-fields.jrxml` | Zusatzfelder (W41xx); `document.custom_fields_list`-Array via `subDataSource("document.custom_fields_list")` — Label/Wert je konfiguriertem Feld, generisch |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.7), gewöhnlicher Auftrag |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.8), gewöhnlicher Auftrag |
 | `main_reports/sample-data-collective.json` | Beispiel-Datensatz **Sammelrechnung**: Positionen aus zwei Aufträgen, `collective.is_collective = true` |
 | `main_reports/order-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 | `main_reports/order-json-sample-collective_adapter.xml` | Data-Adapter für die Vorschau des Sammelfalls (im Studio umschalten) |
 
-## Contract `order-document` (v1.7)
+## Contract `order-document` (v1.8)
 
 Wurzelobjekt mit `meta`, `document` (Nummer/Datum/Status/**Typ**/Kommentar/
 Rechtstext, `delivery_condition`/`delivery_costs`, `custom_fields` als Objekt
@@ -85,11 +85,12 @@ Zeilen aus (durchgängig `isBlankWhenNull` — es wird nie „null" gedruckt).
 > offer/order/billing/delivery) sowie die Blöcke `supplier` und `recipient`.
 > Bestehende v1.0/v1.1-Bindungen bleiben unverändert.
 >
-> **Ausblick ZUGFeRD:** Für Rechnungen ist eine optionale hybride
-> ZUGFeRD-/Factur-X-Ausgabe (PDF/A-3 + EN-16931-XML) geplant — Konzept siehe
+> **ZUGFeRD ist da (v1.8):** Für Rechnungen erzeugt calServer optional die
+> hybride ZUGFeRD-/Factur-X-Ausgabe (PDF/A-3b + eingebettetes EN-16931-XML) —
+> aus **diesem** Datensatz, nicht aus einer zweiten Abfrage. Siehe Abschnitt
+> „E-Rechnung" unten und
 > [`docs/konzept-zugferd-rechnung.md`](https://github.com/calhelp/calServer-yii/blob/develop/docs/konzept-zugferd-rechnung.md)
-> im calServer-yii-Repo. Der v1.2-Datensatz (supplier/recipient/tax_groups)
-> liefert dafür bereits die wesentlichen EN-16931-Felder.
+> im calServer-yii-Repo.
 
 > **Auftragsrabatt (W4114):** Die Muster sind rabattfrei, damit die Summen
 > eindeutig sind. Die exakte V1-Rabatt-Steuer-Arithmetik bei mehreren Steuersätzen
@@ -136,6 +137,50 @@ Zum Ansehen: `sample-data-collective.json` mit dem Adapter
 > `source_order.delivery_recipient` (der Subreport kommt während der Iteration
 > über `positions` nicht an `collective.source_orders` heran). Bestehende
 > Bindungen bleiben unverändert.
+
+### E-Rechnung nach ZUGFeRD / EN 16931 (v1.8)
+
+Dieses Bundle ist der **Systembericht „Auftragsbeleg"** — die feste, nicht
+löschbare Zeile, die calServer auf jeder Installation für den Auftragsbeleg
+anlegt. Das ist nicht nur Ordnung in der Berichtsverwaltung: die E-Rechnung
+hängt daran. Ihre Aktivierung und die Feldzuordnungen sitzen als
+Report-Variablen an genau dieser Zeile, und ein rechtsverbindlicher Beleg
+kann nicht an „irgendeinem Auftragsbericht, den jemand mal angelegt hat"
+hängen.
+
+**Einschalten:** Report-Variable `zugferd` an diesem Bericht auf `en16931`
+(Empfehlung), `basic` oder `extended`. Nicht gesetzt heißt aus — dann bleibt
+alles reines PDF. Die Ausgabe greift **nur** bei `document.type = invoice`
+und Format PDF; Angebot, Auftragsbestätigung und Lieferschein bleiben
+unberührt.
+
+**Was v1.8 an Feldern dazulegt** (alle additiv, kein Wert ändert sich):
+
+| Feld | EN 16931 | Herkunft |
+|---|---|---|
+| `document.invoice_number` | BT-1 | Auftragsnummer, oder das W41xx-Feld aus `zugferd_invoice_number_field` |
+| `document.due_date` | BT-9 | Belegdatum + `company_payment_due_days` |
+| `document.delivery_date` | BT-72 | W41xx-Feld aus `zugferd_delivery_date_field` (§ 14 UStG Leistungsdatum) |
+| `document.buyer_reference` | BT-10 | W41xx-Feld aus `zugferd_buyer_reference_field` (B2G: Leitweg-ID) |
+| `supplier.country_code`, `*.country_code` | BT-40 / BT-55 | `country` normalisiert auf ISO 3166-1 alpha-2 |
+| `positions[].unit_code` | BT-130 | `unit` übersetzt nach UN/ECE Rec 20 („Stk" → `H87`, „Std" → `HUR`, sonst `C62`) |
+
+**Fürs Template heißt das: nichts muss sich ändern.** `unit` bleibt der
+Freitext, der gedruckt wird; `country` bleibt der Klartext im Adressblock.
+Die Codes stehen daneben und sind für die Maschine. Wer will, druckt
+Leistungs- und Fälligkeitsdatum jetzt aus dem Datensatz, statt wie bisher
+einen Hinweistext zu setzen.
+
+**Prüfen vor dem Scharfschalten:**
+`GET /api/v2/bookings/{id}/reports/{reportId}/einvoice` liefert das reine
+CII-XML — oder 422 mit der Liste dessen, was noch fehlt (Steuernummer,
+Ländercode, Rechnungsnummer). Derselbe Endpunkt bedient XRechnung-Empfänger,
+die kein Hybrid-PDF nehmen.
+
+**Grenzen, bewusst:** Steuerkategorien nur `S` (Regelsatz) und `Z` (0 %).
+§ 19 UStG (Kleinunternehmer), Reverse Charge und innergemeinschaftliche
+Lieferung brauchen zusätzlich Befreiungsgründe und andere Kategorie-Codes —
+das ist Ausbaustufe. Gutschrift/Storno (BT-3 = 381) ebenso.
 
 ## ⚠️ Warum ein leeres/weißes Blatt erscheinen kann
 
