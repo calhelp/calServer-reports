@@ -147,6 +147,23 @@ jobs:
             cp -R schema "${SITE_DIR}/schema"
           fi
 
+          # Bundle-Bilder der Prüfpläne unter downloads/info/images/ ablegen:
+          # die READMEs betten sie relativ als images/… ein, und derselbe Pfad
+          # muss im entpackten ZIP, auf GitHub und auf der Info-Seite tragen.
+          # Flach (Namen sind je Bundle eindeutig vergeben) — eine Kollision
+          # überschriebe still, deshalb schlägt sie hier fehl.
+          mkdir -p "${DOWNLOADS_DIR}/info/images"
+          for bundle_image in PRUEFPLAN-*/images/*; do
+            if [ -f "${bundle_image}" ]; then
+              target="${DOWNLOADS_DIR}/info/images/$(basename "${bundle_image}")"
+              if [ -e "${target}" ]; then
+                echo "Bildname doppelt über Bundles hinweg: $(basename "${bundle_image}")" >&2
+                exit 1
+              fi
+              cp "${bundle_image}" "${target}"
+            fi
+          done
+
           : > "${METADATA_FILE}"
           shopt -s nullglob
 

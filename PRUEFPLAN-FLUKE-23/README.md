@@ -2,8 +2,8 @@
 
 Vollständiger Prüfablauf für ein **Fluke 23 Series II** Digitalmultimeter
 (3200 Digits) gegen einen **Fluke 5520A** Kalibrator — 76 Schritte in
-14 Gruppen, im kanonischen calServer-Vorlagenformat
-(`calserver.procedure`, Version 2), paketiert als
+14 Messgruppen, im kanonischen calServer-Vorlagenformat
+(`calserver.procedure`, Version 3), paketiert als
 `calserver.procedure-package`.
 
 ## Paketinhalt
@@ -11,8 +11,11 @@ Vollständiger Prüfablauf für ein **Fluke 23 Series II** Digitalmultimeter
 | Datei | Zweck |
 | --- | --- |
 | `manifest.json` | Manifest: jede Datei mit SHA-256-Prüfsumme und Größe |
-| `procedure.json` | Der Prüfplan (76 Schritte, 14 Gruppen) |
+| `procedure.json` | Der Prüfplan (76 Schritte, 14 Messgruppen) |
 | `README.md` | Diese Beschreibung |
+| `images/fluke-23-anschluss-v-ohm.svg` | Anschlussbild V/Ω/Diode (5520A ↔ Prüfling) |
+| `images/fluke-23-anschluss-a.svg` | Anschlussbild mA/A (5520A ↔ Prüfling) |
+| `images/fluke-23-lcd-testbild.svg` | LCD-Testbild für den Segmenttest |
 
 Das Manifest ist der Manipulationsanker des Formats: calServer lehnt beim
 Import jedes Paket ab, dessen Inhalt vom Manifest abweicht — in beide
@@ -28,7 +31,21 @@ Richtungen. Das maschinenlesbare Schema:
 3. Über das Ketten-Symbol der Prozedur zuordnen, dann wie gewohnt
    genehmigen, freigeben, in eine Kalibrierung laden
 
-Alternativ nimmt derselbe Import-Knopf auch das nackte `procedure.json`.
+Alternativ nimmt derselbe Import-Knopf auch das nackte `procedure.json` —
+dann allerdings ohne die Bilder, die nur das Paket mitbringt.
+
+## Schritt-Bilder (Dokumentversion 3)
+
+Die Schritte referenzieren die Bilder aus `images/` per `images`-Feld;
+calServer zeigt sie in der Messwertaufnahme und im Probelauf direkt am
+Schritt. Die Messgruppen-Köpfe tragen ihr Anschlussbild, der
+Abschlussschritt den Segmenttest als Ja/Nein-Frage (`TEXT(Y=PASS)`):
+
+![Anschluss V/Ω/Diode: 5520A NORMAL an V/Ω und COM des Prüflings](images/fluke-23-anschluss-v-ohm.svg)
+
+![Anschluss mA/A: 5520A AUX an mA bzw. A und COM des Prüflings](images/fluke-23-anschluss-a.svg)
+
+![LCD-Testbild: alle Segmente, -1888, Annunciatoren und BAT sichtbar](images/fluke-23-lcd-testbild.svg)
 
 ## Was die Gruppenebene hier trägt
 
