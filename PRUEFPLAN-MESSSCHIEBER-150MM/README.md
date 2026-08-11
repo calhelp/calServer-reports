@@ -2,8 +2,8 @@
 
 Vollständiger Prüfablauf für einen **Messschieber 0–150 mm**
 (Ziffernschrittwert 0,01 mm) gegen einen **Endmaßsatz nach DIN EN ISO 3650
-Klasse 1** — 34 Schritte in 3 Gruppen, im kanonischen
-calServer-Vorlagenformat (`calserver.procedure`, Version 2), paketiert als
+Klasse 1** — 34 Schritte in 3 Messgruppen, im kanonischen
+calServer-Vorlagenformat (`calserver.procedure`, Version 3), paketiert als
 `calserver.procedure-package`.
 
 ## Paketinhalt
@@ -11,8 +11,11 @@ calServer-Vorlagenformat (`calserver.procedure`, Version 2), paketiert als
 | Datei | Zweck |
 | --- | --- |
 | `manifest.json` | Manifest: jede Datei mit SHA-256-Prüfsumme und Größe |
-| `procedure.json` | Der Prüfplan (34 Schritte, 3 Gruppen) |
+| `procedure.json` | Der Prüfplan (34 Schritte, 3 Messgruppen) |
 | `README.md` | Diese Beschreibung |
+| `images/messschieber-aussenmessung.svg` | Messanleitung Außenmessung (Endmaß zwischen den Messflächen) |
+| `images/messschieber-innenmessung.svg` | Messanleitung Innenmessung (Einstellring) |
+| `images/messschieber-tiefenmass.svg` | Messanleitung Tiefenmaß (Stufe aus Endmaßen) |
 
 Das Manifest ist der Manipulationsanker des Formats: calServer lehnt beim
 Import jedes Paket ab, dessen Inhalt vom Manifest abweicht — in beide
@@ -28,7 +31,20 @@ Richtungen. Das maschinenlesbare Schema:
 3. Über das Ketten-Symbol der Prozedur zuordnen, dann wie gewohnt
    genehmigen, freigeben, in eine Kalibrierung laden
 
-Alternativ nimmt derselbe Import-Knopf auch das nackte `procedure.json`.
+Alternativ nimmt derselbe Import-Knopf auch das nackte `procedure.json` —
+dann allerdings ohne die Bilder, die nur das Paket mitbringt.
+
+## Schritt-Bilder (Dokumentversion 3)
+
+Jeder Messgruppen-Kopf referenziert seine Messanleitung aus `images/` per
+`images`-Feld; calServer zeigt sie in der Messwertaufnahme und im
+Probelauf direkt am Schritt — wie messen, nicht nur was:
+
+![Außenmessung: Endmaß zwischen den Messflächen, Schnabel nah am Balken](images/messschieber-aussenmessung.svg)
+
+![Innenmessung: Einstellring mit den Innenmessschneiden antasten](images/messschieber-innenmessung.svg)
+
+![Tiefenmaß: Stufe aus Endmaßen, Tiefenmaßstab auf der Planfläche](images/messschieber-tiefenmass.svg)
 
 ## Der TUR ist hier Absicht
 
