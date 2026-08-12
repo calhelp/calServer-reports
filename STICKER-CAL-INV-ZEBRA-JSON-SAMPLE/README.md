@@ -15,12 +15,52 @@ DB-agnostisch, keine V1-Codespalten.
 
 ## Felder
 
-`device.asset_number` (QR + Text), `device.cost_center`, `device.active_location.location_1/2`,
+`barcode.value` + `barcode.type` (der Code), `device.asset_number` (Text),
+`device.cost_center`, `device.active_location.location_1/2`,
 `device.last_calibration_date`, `device.next_calibration_date`, `customer.name`
 (OE-Bezeichnung/Gruppe). Dataset-Builder: Laravel `InventoryReportDataBuilder`.
 
-> Der QR wird runner-seitig aus dem Feldwert gerendert (`<jr:QRCode>`, ZXing) — kein
-> vorgeneriertes Bild, kein `Barcode`-Model, DB-agnostisch.
+> **Der Code kommt aus `barcode`, nicht aus `device.asset_number`.** Welches Feld
+> codiert wird und in welcher Symbologie, entscheiden die Regeln
+> (*Grundeinstellungen > Barcode & Etikett*); der Datensatz liefert beides fertig
+> aufgelöst. Deshalb passt diese eine Datei auch beim Kunden, der eine Hausnummer
+> aus einem Zusatzfeld codiert — sonst bräuchte er einen Fork.
+>
+> Die Symbologie schaltet über `printWhenExpression` gegen `barcode.type`:
+> `qrcode` (ZXing), `datamatrix`, `code128`, `code39` (barcode4j). Ein Wert, für
+> den keine Komponente da ist, druckt schlicht keinen Code — das Etikett bleibt
+> lesbar.
+>
+> Gerendert wird runner-seitig aus dem Feldwert — kein vorgeneriertes Bild, kein
+> `Barcode`-Model, DB-agnostisch.
+
+## Systembericht-Platzhalter und Stapeldruck (ab calServer V2)
+
+Dieses Bundle gehört auf den Platzhalter **Geräteetikett** in
+**Administration > Berichtsverwaltung** (Grid `inventory`/Ordner `inventories`). Der Platzhalter ist
+ab Werk da, trägt das Kennzeichen *Systembericht* und ist als Etikett markiert —
+das ist, was **„Etikett drucken"** an die Grid-Zeile hängt.
+
+Der Contract wird am Bundle erkannt; eine Report-Variable `data_contract` ist auf
+dem Platzhalter **nicht nötig** (der Grid-Standard ist bereits
+`inventory-datasheet`). Nötig bleibt sie nur, wenn das Bundle auf einer anders
+konfigurierten Zeile liegt.
+
+**Stapeldruck.** Werden im Grid mehrere Zeilen markiert, druckt calServer sie in
+*einem* Lauf in eine PDF. Dafür schickt es statt eines Dokuments
+
+```json
+{ "meta": { "count": 40 }, "stickers": [ <dokument>, <dokument>, … ] }
+```
+
+und lässt den Runner `stickers` durchlaufen. Jedes Element ist ein
+**vollständiges Dokument** in genau der Form, die `sample-data.json` zeigt —
+deshalb funktioniert diese Vorlage in beiden Fällen unverändert. **Es ist keine
+Stapel-Fassung der Vorlage nötig und keine gewünscht**: Wer hier auf ein Array
+umbaut, bricht den Einzeldruck.
+
+Entwurf und Vorschau laufen weiter gegen `sample-data.json`, also gegen einen
+einzelnen Datensatz.
 
 ## ⚠️ Leeres Blatt = fehlende Datenquelle
 

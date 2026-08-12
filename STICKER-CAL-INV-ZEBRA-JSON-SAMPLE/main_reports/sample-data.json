@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "inventory-datasheet",
-    "schema_version": "1.1",
+    "schema_version": "1.3",
     "generated_at": "2026-07-15T10:00:00+00:00",
     "locale": "de-DE"
   },
@@ -27,6 +27,7 @@
     "next_calibration_date": "2027-06-30",
     "custom_fields": { "customer_tag": "KND-DMM-7" }
   },
+  "barcode": { "type": "datamatrix", "field": "asset_number", "value": "INV-9001" },
   "customer": {
     "name": "Muster GmbH",
     "customer_number": "K-1001",
