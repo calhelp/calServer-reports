@@ -17,6 +17,34 @@ Landscape (≈ 18×24,7 mm), gefüllt aus einem **JSON-Datensatz** (Contract
 `accreditation.mark_number_1` (+ `mark_number_2`), `calibration.calibration_date`,
 `calibration.next_calibration_date`. Dataset-Builder: Laravel `CalibrationReportDataBuilder`.
 
+## Systembericht-Platzhalter und Stapeldruck (ab calServer V2)
+
+Dieses Bundle gehört auf den Platzhalter **Kalibrieraufkleber** in
+**Administration > Berichtsverwaltung** (Grid `calibration`/Ordner `calibrations`). Der Platzhalter ist
+ab Werk da, trägt das Kennzeichen *Systembericht* und ist als Etikett markiert —
+das ist, was **„Etikett drucken"** an die Grid-Zeile hängt.
+
+Der Contract wird am Bundle erkannt; eine Report-Variable `data_contract` ist auf
+dem Platzhalter **nicht nötig** (der Grid-Standard ist bereits
+`calibration-certificate`). Nötig bleibt sie nur, wenn das Bundle auf einer anders
+konfigurierten Zeile liegt.
+
+**Stapeldruck.** Werden im Grid mehrere Zeilen markiert, druckt calServer sie in
+*einem* Lauf in eine PDF. Dafür schickt es statt eines Dokuments
+
+```json
+{ "meta": { "count": 40 }, "stickers": [ <dokument>, <dokument>, … ] }
+```
+
+und lässt den Runner `stickers` durchlaufen. Jedes Element ist ein
+**vollständiges Dokument** in genau der Form, die `sample-data.json` zeigt —
+deshalb funktioniert diese Vorlage in beiden Fällen unverändert. **Es ist keine
+Stapel-Fassung der Vorlage nötig und keine gewünscht**: Wer hier auf ein Array
+umbaut, bricht den Einzeldruck.
+
+Entwurf und Vorschau laufen weiter gegen `sample-data.json`, also gegen einen
+einzelnen Datensatz.
+
 ## ⚠️ Leeres Blatt = fehlende Datenquelle
 
 Ohne JSON-Datenquelle rendert das Label leer. Vorschau: mitgelieferter Adapter

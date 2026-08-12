@@ -18,14 +18,47 @@
 	<field name="loc_building" class="java.lang.String"><fieldDescription><![CDATA[device.active_location.location_1]]></fieldDescription></field>
 	<field name="loc_room" class="java.lang.String"><fieldDescription><![CDATA[device.active_location.location_2]]></fieldDescription></field>
 	<field name="org_unit" class="java.lang.String"><fieldDescription><![CDATA[customer.name]]></fieldDescription></field>
+	<!-- Was codiert wird und in welcher Symbologie, entscheiden die Regeln
+	     (Grundeinstellungen > Barcode & Etikett). Der Datensatz liefert sie
+	     fertig aufgeloest, damit dieselbe Vorlage bei jedem Mandanten passt. -->
+	<field name="barcode_value" class="java.lang.String"><fieldDescription><![CDATA[barcode.value]]></fieldDescription></field>
+	<field name="barcode_type" class="java.lang.String"><fieldDescription><![CDATA[barcode.type]]></fieldDescription></field>
+	<variable name="code" class="java.lang.String"><variableExpression><![CDATA[$F{barcode_value} == null ? ($F{asset_number} == null ? "" : $F{asset_number}) : $F{barcode_value}]]></variableExpression></variable>
+	<variable name="symbology" class="java.lang.String"><variableExpression><![CDATA[$F{barcode_type} == null ? "datamatrix" : $F{barcode_type}]]></variableExpression></variable>
 	<detail>
 		<band height="120">
 			<!-- QR of the inventory/asset number -->
 			<componentElement>
-				<reportElement x="6" y="20" width="80" height="80"/>
+				<reportElement x="6" y="20" width="80" height="80">
+					<printWhenExpression><![CDATA[$V{symbology}.equals("qrcode")]]></printWhenExpression>
+				</reportElement>
 				<jr:QRCode>
-					<jr:codeExpression><![CDATA[$F{asset_number} == null ? "" : $F{asset_number}]]></jr:codeExpression>
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
 				</jr:QRCode>
+			</componentElement>
+			<componentElement>
+				<reportElement x="6" y="20" width="80" height="80">
+					<printWhenExpression><![CDATA[$V{symbology}.equals("datamatrix")]]></printWhenExpression>
+				</reportElement>
+				<jr:DataMatrix>
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
+				</jr:DataMatrix>
+			</componentElement>
+			<componentElement>
+				<reportElement x="6" y="34" width="80" height="52">
+					<printWhenExpression><![CDATA[$V{symbology}.equals("code128")]]></printWhenExpression>
+				</reportElement>
+				<jr:Code128>
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<componentElement>
+				<reportElement x="6" y="34" width="80" height="52">
+					<printWhenExpression><![CDATA[$V{symbology}.equals("code39")]]></printWhenExpression>
+				</reportElement>
+				<jr:Code39>
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
+				</jr:Code39>
 			</componentElement>
 			<staticText><reportElement x="6" y="102" width="80" height="10"/><textElement textAlignment="Center"><font size="6"/></textElement><text><![CDATA[Inventar-Nr.]]></text></staticText>
 			<!-- Right info column -->
