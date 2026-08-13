@@ -139,6 +139,94 @@ valid Prüfplan bundle end-to-end from this section alone.
 
 ---
 
+## 0.4) Wiki packages (`calserver.wiki-package`) — MUST
+
+This repo also hosts **Wiki bundles** (knowledge-base templates for calServer
+V2, e.g. the ISO/IEC 17025 quality-management skeleton). Like the Prüfplan
+bundles they are a **separate bundle class**: NO JasperReports involved, none
+of the report rules (sections 0.1, 1, 2, 6) apply. An AI agent should be able
+to author a valid Wiki bundle end-to-end from this section alone.
+
+**Why they live here and not in the product:** calServer imports, this repo
+publishes. A wiki template is editorial content — it changes when a standard
+or our wording changes, not when the product ships. Bundling it into
+calServer would mean a product release for a text fix, and a migration would
+write into a customer's knowledge base unasked. Decision:
+`laravel/docs/adr/2026-09-11-wiki-vorlagen-kommen-ueber-den-import-nicht-ueber-eine-migration.md`
+in calhelp/calServer-yii.
+
+### Naming and structure (MUST)
+- Folder `WIKI-<SLUG>/` (e.g. `WIKI-ISO-17025`); ZIP name is the lowercased
+  form (`wiki-iso-17025`). Never use the `-JSON-SAMPLE` suffix — that triggers
+  the report (APEX) packaging rules and the JRXML assertion.
+- Required files at the bundle root: `manifest.json`, `README.md`,
+  `wiki.json`. Optional: `media/` (images and attachments), FLAT (depth 1),
+  file names `[A-Za-z0-9][A-Za-z0-9._-]*`, max 128 chars.
+- NO `main_reports/`, NO `subreports/`, NO `*.jrxml`, NO SQL. The format owner
+  is calServer V2 (`laravel/app/Services/Wiki/WikiPackageService.php` in
+  calhelp/calServer-yii); the machine-readable manifest schema is
+  `schema/wiki-package.schema.json` (published to Pages).
+
+### Content rules for `wiki.json` (MUST)
+- Header: `{"format": "calserver.wiki", "version": 1, "categories": [...],
+  "articles": [...], "media": []}`. Version 1 is the current maximum — never
+  write a higher version.
+- **Categories are language-bound.** Each entry needs a bundle-internal `key`,
+  a `title`, a `language_code`. The key is the only link a page has to its
+  category; row IDs mean nothing across installations, which is why the
+  importer re-recognises a category by (title, language).
+- **Articles group language variants.** Each article carries a stable
+  `general_page_id` (a UUID) and a `pages[]` list with one entry per language.
+  That UUID is the idempotency anchor: importing the same bundle twice creates
+  nothing the second time. NEVER regenerate the UUIDs of a published bundle —
+  a new UUID makes an updated article a second article on every installation
+  that already imported the old one.
+- Every page needs `language_code`, `title`, `category_key` and content. A page
+  without `category_key` lands under "Ohne Kategorie" in the tree — in a
+  shipped template that is a defect, and `--check` fails on it.
+- Content is `content_html` (preferred for hand-authored bundles) and/or
+  `content_json` (the block document). With HTML only, calServer converts to
+  blocks on import, so the page is editable in the block editor rather than a
+  frozen HTML island. Useful markup: `<h2>`/`<h3>`, `<p>`, `<ul>`/`<ol>`,
+  `<table>`, plus `<ul class='wiki-todo-list'><li data-checked='false'>` for a
+  checklist. Use single quotes for attributes so the JSON stays readable.
+- **Images** live in `media/` and are declared in the top-level `media[]` array
+  (`id`, `file`, `filename`, `mime_type`, `kind`); blocks reference them by
+  `props.mediaId`, never by file name. `--check` enforces that every referenced
+  ID is declared and every declared file exists.
+- Write the template as a **skeleton, not a finished manual**: state the
+  requirement, give a checklist, name the records. Say so in the README — an
+  unchanged skeleton proves nothing to an accreditation body.
+
+### Manifest (MUST)
+- NEVER edit `manifest.json` by hand and NEVER invent sha256 values.
+  Regenerate: `python3 scripts/build_wiki_manifest.py --write <BUNDLE>`,
+  then verify: `python3 scripts/build_wiki_manifest.py --check`.
+  CI runs `--check` on every push/PR (validate-reports.yml) and fails on any
+  drift: unlisted file, missing file, wrong checksum, disallowed entry, or a
+  `content` block that no longer matches `wiki.json`.
+- Keep `name`/`description`/`created_at`/`locale` stable across `--write` runs
+  (the script preserves them); `content` is derived and must not be hand-set.
+
+### Packaging & downloads page (MUST)
+- `package-reports.yml`: add an `upload-artifact` step for the bundle folder
+  and a `create_wiki_zip "<BUNDLE>" "<zip-name>"` call (NOT `create_zip()` —
+  that stages `main_reports/` and fails without a JRXML).
+- `publish-downloads.yml`: add a `get_last_modified` line plus `README_MAP`
+  and `TITLE_MAP` entries (`Wiki: <Thema>`); no `SCHEMA_MAP`.
+- Category on the downloads page is automatic: any ZIP name starting with
+  `wiki-` lands in **"Wiki-Vorlagen"** (`downloads/index.html`,
+  `getCategory()`).
+- Downloads-page only: NO `/api/report/<uuid>` upload step, NO
+  `release-reports.yml` entry.
+
+### Verify locally
+- `python3 scripts/build_wiki_manifest.py --check` is green
+- `cd <BUNDLE> && zip -r /tmp/<zip-name>.zip .` produces a ZIP that calServer
+  V2 imports as-is (Wiki → Importieren, permission `wiki_import`)
+
+---
+
 ## 1) Required bundle structure (MUST)
 For every report bundle folder (e.g. DAKKS-SAMPLE, DCC, ORDER-SAMPLE, STICKERS-*):
 - `main_reports/`  → contains the entry-point JRXML(s) users execute

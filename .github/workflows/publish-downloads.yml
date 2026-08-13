@@ -113,6 +113,7 @@ jobs:
           get_last_modified "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
           get_last_modified "PRUEFPLAN-FLUKE-23" "pruefplan-fluke-23"
           get_last_modified "PRUEFPLAN-MESSSCHIEBER-150MM" "pruefplan-messschieber-150mm"
+          get_last_modified "WIKI-ISO-17025" "wiki-iso-17025"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -153,7 +154,7 @@ jobs:
           # Flach (Namen sind je Bundle eindeutig vergeben) — eine Kollision
           # überschriebe still, deshalb schlägt sie hier fehl.
           mkdir -p "${DOWNLOADS_DIR}/info/images"
-          for bundle_image in PRUEFPLAN-*/images/*; do
+          for bundle_image in PRUEFPLAN-*/images/* WIKI-*/media/*; do
             if [ -f "${bundle_image}" ]; then
               target="${DOWNLOADS_DIR}/info/images/$(basename "${bundle_image}")"
               if [ -e "${target}" ]; then
@@ -218,6 +219,7 @@ jobs:
               "price-list-json-sample":             "PRICE-LIST-JSON-SAMPLE/README.md",
               "pruefplan-fluke-23":                 "PRUEFPLAN-FLUKE-23/README.md",
               "pruefplan-messschieber-150mm":       "PRUEFPLAN-MESSSCHIEBER-150MM/README.md",
+              "wiki-iso-17025":                     "WIKI-ISO-17025/README.md",
           }
 
           SCHEMA_MAP = {
@@ -248,6 +250,7 @@ jobs:
               "price-list-json-sample":             "Preisliste (APEX · V2)",
               "pruefplan-fluke-23":                 "Prüfplan: Fluke 23 Series II mit Fluke 5520A",
               "pruefplan-messschieber-150mm":       "Prüfplan: Messschieber 150 mm mit Endmaßsatz",
+              "wiki-iso-17025":                     "Wiki: QM-Gerüst nach ISO/IEC 17025",
           }
 
           INFO_TEMPLATE = """<!doctype html>

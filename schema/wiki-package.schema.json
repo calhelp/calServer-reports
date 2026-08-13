@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://calhelp.github.io/calServer-reports/schema/wiki-package.schema.json",
+  "title": "calServer Wiki-Paket (calserver.wiki-package)",
+  "description": "Manifest eines Wiki-Pakets: ein ZIP mit wiki.json (calserver.wiki), optionalem README.md und optionalen Bildern/Anhängen unter media/. Das Manifest listet jeden Paket-Eintrag mit SHA-256-Prüfsumme und ist damit der Manipulationsanker des Formats. Zusätzliche, hier nicht beschriebene Felder sind erlaubt und werden von älteren Lesern ignoriert (Vorwärtskompatibilität); die verbindliche Lese-Semantik gehört calServer V2 (laravel/app/Services/Wiki/WikiPackageService.php).",
+  "type": "object",
+  "required": ["format", "format_version", "name", "document", "files"],
+  "properties": {
+    "format": {
+      "const": "calserver.wiki-package"
+    },
+    "format_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version des Paketformats. Leser lehnen Versionen oberhalb der eigenen ab, statt unbekannte Inhalte still zu verlieren. Aktuelle Version: 1."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Anzeigename des Pakets. Rein deklarativ: Kategorien und Artikel tragen ihre Namen in wiki.json."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Optionale Kurzbeschreibung (ein Absatz)."
+    },
+    "document": {
+      "type": "object",
+      "required": ["format", "version"],
+      "description": "Deklarative Angabe zum eingebetteten wiki.json, damit Werkzeuge ohne Öffnen der Datei entscheiden können. Beim Import bleibt der Leser die letzte Instanz.",
+      "properties": {
+        "format": {
+          "const": "calserver.wiki"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "description": "Umfang des Pakets. Rein deklarativ (Anzeige auf der Download-Seite); der Import zählt selbst nach.",
+      "properties": {
+        "categories": { "type": "integer", "minimum": 0 },
+        "articles": { "type": "integer", "minimum": 0 },
+        "pages": { "type": "integer", "minimum": 0 },
+        "media": { "type": "integer", "minimum": 0 },
+        "languages": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$" }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt der Paket-Erstellung (RFC 3339)."
+    },
+    "generator": {
+      "type": "string",
+      "description": "Erzeugendes System, z.B. calserver-v2 oder calserver-reports."
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Jeder ZIP-Eintrag außer manifest.json (und der reservierten, in Version 1 ungeprüften manifest.json.sig) MUSS hier gelistet sein. Ein ungelisteter Eintrag, ein fehlender Eintrag oder eine abweichende Prüfsumme macht das Paket ungültig.",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "size_bytes"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(README\\.md|wiki\\.json|media/[A-Za-z0-9][A-Za-z0-9._-]{0,127})$",
+            "description": "Relativer Pfad im Paket. Flach (Tiefe höchstens 1); media/ nimmt die Bilder und Anhänge der Artikel auf, referenziert über die Medien-ID im Blockdokument."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
