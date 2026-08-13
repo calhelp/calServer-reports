@@ -85,6 +85,14 @@ TRACE-BACKWARD/
 STICKERS/
 └── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
 
+PRUEFPLAN-*/
+└── ...                 # Prüfplan-Pakete für calServer V2 — kein Jasper
+                        # (calserver.procedure-package, robots.md §0.3)
+
+WIKI-*/
+└── ...                 # Wiki-Vorlagen für calServer V2 — kein Jasper
+                        # (calserver.wiki-package, robots.md §0.4)
+
 downloads/
 └── ...                 # GitHub-Pages-Downloads (generiert durch Workflow)
 
@@ -92,7 +100,9 @@ pages/
 └── index.html          # Projekt-Landing-Page für GitHub Pages
 
 schema/
-└── report-parameters.schema.json  # JSON-Schema für parameters.json (V2-JSON-Bundles)
+├── report-parameters.schema.json   # JSON-Schema für parameters.json (V2-JSON-Bundles)
+├── procedure-package.schema.json   # Manifest-Schema der Prüfplan-Pakete
+└── wiki-package.schema.json        # Manifest-Schema der Wiki-Vorlagen
 
 scripts/
 ├── check_jasper_version.sh         # Prüft JRXML-Versionen auf 6.20.6

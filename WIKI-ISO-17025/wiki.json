@@ -1,0 +1,523 @@
+{
+  "format": "calserver.wiki",
+  "version": 1,
+  "categories": [
+    {
+      "key": "iso17025-ueberblick-de",
+      "title": "ISO 17025 – Überblick",
+      "description": "Aufbau der Norm und Hinweise zur Nutzung dieses Wikis.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-allgemein-de",
+      "title": "ISO 17025 – Allgemeine Anforderungen",
+      "description": "Kapitel 4: Unparteilichkeit und Vertraulichkeit.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-struktur-de",
+      "title": "ISO 17025 – Strukturelle Anforderungen",
+      "description": "Kapitel 5: Rechtsform, Organisation, Verantwortlichkeiten.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-ressourcen-de",
+      "title": "ISO 17025 – Ressourcen",
+      "description": "Kapitel 6: Personal, Räume, Ausrüstung, Rückführbarkeit, externe Leistungen.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-prozesse-de",
+      "title": "ISO 17025 – Prozessanforderungen",
+      "description": "Kapitel 7: vom Auftrag bis zum Bericht.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-management-de",
+      "title": "ISO 17025 – Managementsystem",
+      "description": "Kapitel 8: Dokumente, Aufzeichnungen, Risiken, Audits, Bewertung.",
+      "language_code": "de"
+    },
+    {
+      "key": "iso17025-ueberblick-en",
+      "title": "ISO 17025 – Overview",
+      "description": "Structure of the standard and how to use this wiki.",
+      "language_code": "en"
+    },
+    {
+      "key": "iso17025-allgemein-en",
+      "title": "ISO 17025 – General requirements",
+      "description": "Clause 4: impartiality and confidentiality.",
+      "language_code": "en"
+    },
+    {
+      "key": "iso17025-struktur-en",
+      "title": "ISO 17025 – Structural requirements",
+      "description": "Clause 5: legal status, organisation, responsibilities.",
+      "language_code": "en"
+    },
+    {
+      "key": "iso17025-ressourcen-en",
+      "title": "ISO 17025 – Resource requirements",
+      "description": "Clause 6: personnel, facilities, equipment, traceability, external services.",
+      "language_code": "en"
+    },
+    {
+      "key": "iso17025-prozesse-en",
+      "title": "ISO 17025 – Process requirements",
+      "description": "Clause 7: from the order to the report.",
+      "language_code": "en"
+    },
+    {
+      "key": "iso17025-management-en",
+      "title": "ISO 17025 – Management system",
+      "description": "Clause 8: documents, records, risks, audits, review.",
+      "language_code": "en"
+    }
+  ],
+  "articles": [
+    {
+      "general_page_id": "17025000-0001-4000-8000-000000000001",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ueberblick-de",
+          "title": "Die Norm im Überblick",
+          "content_html": "<h2>Die Norm im Überblick</h2><p>Die DIN EN ISO/IEC 17025:2018 legt die Anforderungen an die Kompetenz, Unparteilichkeit und einheitliche Arbeitsweise von Laboratorien fest. Sie gilt für Kalibrier- und Prüflaboratorien gleichermaßen und ist die Grundlage jeder Akkreditierung durch eine nationale Akkreditierungsstelle.</p><h3>Aufbau</h3><ul><li><strong>Kapitel 4 – Allgemeine Anforderungen:</strong> Unparteilichkeit, Vertraulichkeit.</li><li><strong>Kapitel 5 – Strukturelle Anforderungen:</strong> Rechtsform, Organisation, Verantwortlichkeiten, Geltungsbereich.</li><li><strong>Kapitel 6 – Anforderungen an Ressourcen:</strong> Personal, Räumlichkeiten, Ausrüstung, messtechnische Rückführbarkeit, extern bereitgestellte Leistungen.</li><li><strong>Kapitel 7 – Prozessanforderungen:</strong> Auftragsprüfung, Methoden, Probenahme, Prüfgegenstände, Aufzeichnungen, Messunsicherheit, Validität, Berichte, Beschwerden, nichtkonforme Arbeit, Datenlenkung.</li><li><strong>Kapitel 8 – Anforderungen an das Managementsystem:</strong> Dokumentation, Aufzeichnungen, Risiken und Chancen, Verbesserung, Audits, Managementbewertung.</li></ul><h3>Wie dieses Wiki gedacht ist</h3><p>Jeder Artikel beschreibt eine Anforderung in eigenen Worten, listet eine Checkliste für die Umsetzung und benennt die Nachweise, die im Audit verlangt werden. Die Vorlage ist ein Gerüst: Sie ersetzt kein QM-Handbuch, sondern gibt ihm eine Gliederung, die zur Norm passt.</p><ul class='wiki-todo-list'><li data-checked='false'>Verantwortliche Person je Kapitel eintragen</li><li data-checked='false'>Verweise auf die eigenen Verfahrensanweisungen ergänzen</li><li data-checked='false'>Nicht zutreffende Abschnitte begründet streichen statt leer stehen lassen</li></ul><h3>Bezug zu calServer</h3><p>Die Module Prüfmittel, Kalibrierungen, Prüfabläufe, Normen und Standards, Dokumente sowie der Audit-Trail decken einen erheblichen Teil der geforderten Aufzeichnungen ab. Wo ein Artikel ein Modul benennt, ist das ein Hinweis auf die Stelle, an der der Nachweis entsteht, keine Aussage über Konformität.</p>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ueberblick-en",
+          "title": "The standard at a glance",
+          "content_html": "<h2>The standard at a glance</h2><p>ISO/IEC 17025:2017 specifies the requirements for the competence, impartiality and consistent operation of laboratories. It applies to calibration and testing laboratories alike and is the basis of any accreditation by a national accreditation body.</p><h3>Structure</h3><ul><li><strong>Clause 4 – General requirements:</strong> impartiality, confidentiality.</li><li><strong>Clause 5 – Structural requirements:</strong> legal status, organisation, responsibilities, scope.</li><li><strong>Clause 6 – Resource requirements:</strong> personnel, facilities, equipment, metrological traceability, externally provided services.</li><li><strong>Clause 7 – Process requirements:</strong> review of requests, methods, sampling, items, technical records, measurement uncertainty, validity, reporting, complaints, nonconforming work, control of data.</li><li><strong>Clause 8 – Management system requirements:</strong> documentation, records, risks and opportunities, improvement, audits, management review.</li></ul><h3>How this wiki is meant to be used</h3><p>Every article describes one requirement in plain words, lists a checklist for implementation and names the records an auditor will ask for. The template is a skeleton: it does not replace a quality manual, it gives one a structure that matches the standard.</p><ul class='wiki-todo-list'><li data-checked='false'>Assign an owner for each clause</li><li data-checked='false'>Add references to your own procedures</li><li data-checked='false'>Remove sections that do not apply, with a reason, instead of leaving them empty</li></ul><h3>Relation to calServer</h3><p>The modules for equipment, calibrations, procedures, standards, documents and the audit trail cover a substantial part of the required records. Where an article names a module, that is a pointer to where the record is created, not a statement about conformity.</p>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0002-4000-8000-000000000002",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-allgemein-de",
+          "title": "4.1 Unparteilichkeit",
+          "content_html": "<h2>4.1 Unparteilichkeit</h2><p>Labortätigkeiten müssen unparteiisch ausgeführt und so strukturiert und geleitet werden, dass die Unparteilichkeit gewahrt bleibt. Die Leitung verpflichtet sich dazu, und Risiken für die Unparteilichkeit werden fortlaufend ermittelt.</p><h3>Was die Norm verlangt</h3><ul><li>Verpflichtungserklärung der Leitung zur Unparteilichkeit.</li><li>Struktur und Finanzierung dürfen die Unabhängigkeit der Ergebnisse nicht beeinflussen.</li><li>Risiken aus Beziehungen zu Kunden, Eigentümern, Lieferanten und Personal werden fortlaufend identifiziert.</li><li>Erkannte Risiken werden beseitigt oder auf ein vertretbares Maß gemindert; die Wirksamkeit wird nachgewiesen.</li></ul><h3>Typische Risikoquellen</h3><ul><li>Kalibrierung eigener Produkte oder Produkte des Mutterkonzerns.</li><li>Umsatzabhängige Vergütung von Prüfpersonal.</li><li>Beratung und Prüfung für denselben Kunden durch dieselbe Person.</li><li>Persönliche Bindungen zwischen Prüfpersonal und Auftraggeber.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Unterschriebene Unparteilichkeitserklärung der Leitung ablegen</li><li data-checked='false'>Register der Unparteilichkeitsrisiken anlegen und jährlich bewerten</li><li data-checked='false'>Erklärung zu Interessenkonflikten von allen Mitarbeitenden einholen</li><li data-checked='false'>Regel festlegen, wann Personal von einem Auftrag ausgeschlossen wird</li></ul><h3>Nachweise</h3><ul><li>Unterzeichnete Erklärungen von Leitung und Personal.</li><li>Risikoregister mit Bewertung und Maßnahmen.</li><li>Protokolle der Managementbewertung, in denen das Thema behandelt wurde.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-allgemein-en",
+          "title": "4.1 Impartiality",
+          "content_html": "<h2>4.1 Impartiality</h2><p>Laboratory activities shall be undertaken impartially and structured and managed so as to safeguard impartiality. Management commits to it, and risks to impartiality are identified on an ongoing basis.</p><h3>What the standard requires</h3><ul><li>A commitment to impartiality made by laboratory management.</li><li>Structure and funding must not compromise the independence of results.</li><li>Risks arising from relationships with customers, owners, suppliers and personnel are identified on an ongoing basis.</li><li>Identified risks are eliminated or minimised, and the effectiveness is demonstrated.</li></ul><h3>Typical sources of risk</h3><ul><li>Calibrating your own products or those of the parent company.</li><li>Remuneration of technical staff linked to turnover.</li><li>Consultancy and testing for the same customer by the same person.</li><li>Personal ties between technical staff and the client.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>File the signed impartiality statement of management</li><li data-checked='false'>Set up a register of impartiality risks and review it annually</li><li data-checked='false'>Collect conflict-of-interest declarations from all staff</li><li data-checked='false'>Define when a staff member is excluded from an order</li></ul><h3>Records</h3><ul><li>Signed declarations of management and personnel.</li><li>Risk register with assessment and measures.</li><li>Management review minutes covering the topic.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0003-4000-8000-000000000003",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-allgemein-de",
+          "title": "4.2 Vertraulichkeit",
+          "content_html": "<h2>4.2 Vertraulichkeit</h2><p>Das Labor ist für die Verwaltung aller Informationen verantwortlich, die es im Rahmen seiner Tätigkeiten erhält oder erzeugt. Kundeninformationen sind vertraulich zu behandeln, sofern keine gesetzliche Offenlegungspflicht besteht.</p><h3>Was die Norm verlangt</h3><ul><li>Rechtsverbindliche Verpflichtung zur Vertraulichkeit.</li><li>Wenn Offenlegung gesetzlich gefordert ist: der Kunde wird informiert, soweit dies zulässig ist.</li><li>Informationen aus anderen Quellen als dem Kunden werden ebenfalls vertraulich behandelt.</li><li>Alle Personen, die für das Labor tätig sind, sind zur Vertraulichkeit verpflichtet, auch externe.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Vertraulichkeitsvereinbarung in Arbeits- und Werkverträgen verankern</li><li data-checked='false'>Zugriffsrechte im System auf das notwendige Maß beschränken</li><li data-checked='false'>Regel für die Weitergabe von Berichten an Dritte festlegen</li><li data-checked='false'>Aufbewahrung und Vernichtung von Kundenunterlagen regeln</li></ul><h3>Bezug zu calServer</h3><p>Rollen und Operationen steuern, wer welche Daten sieht. Der Audit-Trail hält fest, wer Datensätze geändert hat, und Berichte lassen sich gezielt freigeben statt breit verteilt. Die Zuordnung von Rollen zu Personen gehört in die eigene Verfahrensanweisung, nicht in dieses Wiki.</p><h3>Nachweise</h3><ul><li>Unterschriebene Vertraulichkeitserklärungen, auch von Externen.</li><li>Rollen- und Berechtigungskonzept mit Stand und Freigabe.</li><li>Aufzeichnungen über Offenlegungen gegenüber Behörden.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-allgemein-en",
+          "title": "4.2 Confidentiality",
+          "content_html": "<h2>4.2 Confidentiality</h2><p>The laboratory is responsible for the management of all information obtained or created during its activities. Customer information is treated as confidential unless disclosure is required by law.</p><h3>What the standard requires</h3><ul><li>A legally enforceable commitment to confidentiality.</li><li>Where disclosure is required by law, the customer is informed as far as this is permitted.</li><li>Information about a customer from sources other than the customer is treated as confidential too.</li><li>Everyone acting on behalf of the laboratory is bound to confidentiality, external parties included.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Anchor a confidentiality clause in employment and contractor agreements</li><li data-checked='false'>Restrict system access rights to what the role actually needs</li><li data-checked='false'>Define the rule for passing reports to third parties</li><li data-checked='false'>Define retention and destruction of customer documents</li></ul><h3>Relation to calServer</h3><p>Roles and operations govern who sees which data. The audit trail records who changed a data set, and reports can be released deliberately instead of distributed broadly. Assigning roles to people belongs in your own procedure, not in this wiki.</p><h3>Records</h3><ul><li>Signed confidentiality declarations, including external parties.</li><li>Role and permission concept with revision and approval.</li><li>Records of disclosures to authorities.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0004-4000-8000-000000000004",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-struktur-de",
+          "title": "5 Struktur und Verantwortlichkeiten",
+          "content_html": "<h2>5 Strukturelle Anforderungen</h2><p>Das Labor muss eine rechtlich fassbare Einheit sein, seinen Geltungsbereich festlegen und seine Organisation so beschreiben, dass Verantwortung und Befugnis nachvollziehbar sind.</p><h3>Was die Norm verlangt</h3><ul><li>Rechtsstatus und die für das Labor rechtlich verantwortliche Leitung sind festgelegt.</li><li>Der Geltungsbereich der Labortätigkeiten ist dokumentiert; nur er darf als normkonform bezeichnet werden.</li><li>Organisationsstruktur, Leitungsstruktur und Beziehungen zu übergeordneten Organisationen sind beschrieben.</li><li>Verantwortung, Befugnis und Wechselbeziehungen des gesamten Personals sind festgelegt.</li><li>Verfahren sind in dem Umfang dokumentiert, der die einheitliche Anwendung sicherstellt.</li><li>Es gibt Personal mit Befugnis für Managementsystem, Abweichungen und Ergebnisse; Vertretungen sind geregelt.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Organigramm mit Stellenbezeichnungen und Vertretungen pflegen</li><li data-checked='false'>Geltungsbereich schriftlich abgrenzen, inklusive Standorte und flexibler Bereiche</li><li data-checked='false'>Funktionsbeschreibungen für QM-Beauftragte, Technische Leitung und Freigebende erstellen</li><li data-checked='false'>Vertretungsregelung für jede Schlüsselrolle benennen</li></ul><h3>Nachweise</h3><ul><li>Handelsregisterauszug oder gleichwertiger Nachweis der Rechtsform.</li><li>Aktuelles Organigramm mit Freigabedatum.</li><li>Stellen- und Funktionsbeschreibungen.</li><li>Akkreditierungsurkunde mit Anlage zum Geltungsbereich.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-struktur-en",
+          "title": "5 Structure and responsibilities",
+          "content_html": "<h2>5 Structural requirements</h2><p>The laboratory shall be a legal entity, define the scope of its activities and describe its organisation so that responsibility and authority are traceable.</p><h3>What the standard requires</h3><ul><li>Legal status and the management legally responsible for the laboratory are defined.</li><li>The scope of laboratory activities is documented; only that scope may be claimed as conforming.</li><li>Organisational and management structure and relationships with parent organisations are described.</li><li>Responsibility, authority and interrelation of all personnel are defined.</li><li>Procedures are documented to the extent necessary to ensure consistent application.</li><li>Personnel with authority for the management system, deviations and results are appointed; deputies are arranged.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain an organisation chart with job titles and deputies</li><li data-checked='false'>Define the scope in writing, including sites and flexible scopes</li><li data-checked='false'>Write role descriptions for quality manager, technical manager and approvers</li><li data-checked='false'>Name a deputy for every key role</li></ul><h3>Records</h3><ul><li>Commercial register extract or equivalent proof of legal status.</li><li>Current organisation chart with approval date.</li><li>Job and role descriptions.</li><li>Accreditation certificate with the scope annex.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0005-4000-8000-000000000005",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ressourcen-de",
+          "title": "6.2 Personal",
+          "content_html": "<h2>6.2 Personal</h2><p>Alle Personen, die die Labortätigkeiten beeinflussen können, müssen unparteiisch handeln, kompetent sein und gemäß dem Managementsystem arbeiten. Kompetenz wird festgelegt, nachgewiesen und überwacht.</p><h3>Was die Norm verlangt</h3><ul><li>Kompetenzanforderungen für jede Funktion sind dokumentiert, inklusive Ausbildung, Qualifikation, Schulung, Fachkenntnis und Erfahrung.</li><li>Das Labor stellt sicher, dass Personal die geforderte Kompetenz besitzt, bevor es eigenständig arbeitet.</li><li>Verfahren für Auswahl, Schulung, Beaufsichtigung, Autorisierung und Überwachung der Kompetenz.</li><li>Befugnisse für bestimmte Tätigkeiten sind namentlich erteilt: Methodenentwicklung, Ergebnisbewertung, Berichtsfreigabe, Aussagen zur Konformität.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Qualifikationsmatrix je Person und Verfahren führen</li><li data-checked='false'>Einarbeitungsplan mit Freigabe durch die Technische Leitung</li><li data-checked='false'>Wiederkehrende Kompetenzüberwachung terminieren, etwa über Doppelmessungen</li><li data-checked='false'>Schulungsbedarf jährlich ermitteln und Wirksamkeit bewerten</li></ul><h3>Nachweise</h3><ul><li>Personalakten mit Zeugnissen, Schulungsnachweisen und Autorisierungen.</li><li>Qualifikationsmatrix mit Stand.</li><li>Aufzeichnungen der Kompetenzüberwachung und ihrer Bewertung.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ressourcen-en",
+          "title": "6.2 Personnel",
+          "content_html": "<h2>6.2 Personnel</h2><p>All personnel who can influence laboratory activities shall act impartially, be competent and work in accordance with the management system. Competence is defined, demonstrated and monitored.</p><h3>What the standard requires</h3><ul><li>Competence requirements for every function are documented, covering education, qualification, training, technical knowledge and experience.</li><li>The laboratory ensures personnel have the required competence before they work independently.</li><li>Procedures for selection, training, supervision, authorisation and monitoring of competence.</li><li>Authorisations for specific activities are granted by name: method development, result evaluation, report approval, statements of conformity.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain a competence matrix per person and procedure</li><li data-checked='false'>Run an induction plan approved by the technical manager</li><li data-checked='false'>Schedule recurring competence monitoring, for example duplicate measurements</li><li data-checked='false'>Determine training needs annually and evaluate effectiveness</li></ul><h3>Records</h3><ul><li>Personnel files with certificates, training records and authorisations.</li><li>Competence matrix with revision status.</li><li>Records of competence monitoring and its evaluation.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0006-4000-8000-000000000006",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ressourcen-de",
+          "title": "6.3 Räumlichkeiten und Umgebungsbedingungen",
+          "content_html": "<h2>6.3 Räumlichkeiten und Umgebungsbedingungen</h2><p>Räumlichkeiten und Umgebungsbedingungen müssen für die Labortätigkeiten geeignet sein und dürfen die Gültigkeit der Ergebnisse nicht beeinträchtigen. Anforderungen werden dokumentiert, überwacht und aufgezeichnet.</p><h3>Was die Norm verlangt</h3><ul><li>Anforderungen an Umgebungsbedingungen, die die Ergebnisse beeinflussen, sind dokumentiert.</li><li>Die Bedingungen werden überwacht, gesteuert und aufgezeichnet.</li><li>Bei Überschreitung der Grenzen werden Tätigkeiten unterbrochen.</li><li>Zugang zu den Bereichen und deren Nutzung sind geregelt.</li><li>Maßnahmen gegen Kontamination, Störeinflüsse und gegenseitige Beeinflussung unverträglicher Tätigkeiten.</li></ul><h3>Typische überwachte Größen</h3><ul><li>Temperatur und relative Luftfeuchte, oft 23 °C ± 2 K und 45 % ± 10 % rF.</li><li>Luftdruck, wo er in die Messunsicherheit eingeht.</li><li>Erschütterung, elektromagnetische Störungen, Netzqualität.</li><li>Sauberkeit und Staubbelastung.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Grenzwerte je Arbeitsplatz festlegen und aushängen</li><li data-checked='false'>Kontinuierliche Aufzeichnung der Klimadaten einrichten</li><li data-checked='false'>Eskalation bei Grenzwertverletzung schriftlich regeln</li><li data-checked='false'>Zutrittsregelung für Laborbereiche dokumentieren</li></ul><h3>Bezug zu calServer</h3><p>Die Umgebungsbedingungen einer Kalibrierung gehören zum Kalibriervorgang und erscheinen auf dem Kalibrierschein. Die Klimaüberwachung selbst erfolgt über die Messtechnik des Labors; die Anbindung externer Datenquellen ist eine eigene Entscheidung und in der Systemdokumentation beschrieben.</p><h3>Nachweise</h3><ul><li>Aufzeichnungen der Umgebungsbedingungen über den Aufbewahrungszeitraum.</li><li>Kalibrierscheine der Klimasensoren.</li><li>Aufzeichnungen über Unterbrechungen und deren Bewertung.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ressourcen-en",
+          "title": "6.3 Facilities and environmental conditions",
+          "content_html": "<h2>6.3 Facilities and environmental conditions</h2><p>Facilities and environmental conditions shall be suitable for the laboratory activities and shall not adversely affect the validity of results. Requirements are documented, monitored and recorded.</p><h3>What the standard requires</h3><ul><li>Requirements for environmental conditions that affect results are documented.</li><li>Conditions are monitored, controlled and recorded.</li><li>Activities are stopped when the limits are exceeded.</li><li>Access to and use of the areas is controlled.</li><li>Measures against contamination, interference and mutual influence of incompatible activities.</li></ul><h3>Typically monitored quantities</h3><ul><li>Temperature and relative humidity, often 23 °C ± 2 K and 45 % ± 10 % RH.</li><li>Air pressure where it contributes to measurement uncertainty.</li><li>Vibration, electromagnetic interference, mains quality.</li><li>Cleanliness and dust load.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Define limits per workstation and post them</li><li data-checked='false'>Set up continuous recording of climate data</li><li data-checked='false'>Put the escalation on limit violations in writing</li><li data-checked='false'>Document the access rules for laboratory areas</li></ul><h3>Relation to calServer</h3><p>The environmental conditions of a calibration are part of the calibration record and appear on the certificate. Climate monitoring itself is done by the laboratory instrumentation; connecting external data sources is a separate decision and described in the system documentation.</p><h3>Records</h3><ul><li>Environmental records covering the retention period.</li><li>Calibration certificates of the climate sensors.</li><li>Records of interruptions and their evaluation.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0007-4000-8000-000000000007",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ressourcen-de",
+          "title": "6.4 Ausrüstung",
+          "content_html": "<h2>6.4 Ausrüstung</h2><p>Das Labor muss Zugang zu der Ausrüstung haben, die für die korrekte Durchführung seiner Tätigkeiten erforderlich ist, und deren Eignung nachweisen. Dazu gehören Messgeräte, Software, Normale, Referenzmaterialien und Hilfsmittel.</p><h3>Was die Norm verlangt</h3><ul><li>Verfahren für Handhabung, Transport, Lagerung, Verwendung und geplante Instandhaltung.</li><li>Vor Inbetriebnahme wird geprüft, ob die Ausrüstung die Anforderungen erfüllt.</li><li>Messgeräte, die die Ergebnisse beeinflussen, sind kalibriert, wenn Genauigkeit oder Messunsicherheit dies verlangen.</li><li>Ein Kalibrierprogramm legt Intervalle fest und wird überprüft und angepasst.</li><li>Kennzeichnung des Kalibrierstatus, inklusive Fälligkeit.</li><li>Zwischenprüfungen, wo sie zur Aufrechterhaltung des Vertrauens nötig sind.</li><li>Ausrüstung, die überlastet, fehlbehandelt oder auffällig war, wird außer Betrieb genommen und gekennzeichnet.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Vollständiges Verzeichnis der Ausrüstung mit eindeutiger Kennung führen</li><li data-checked='false'>Kalibrierintervalle festlegen und ihre Angemessenheit regelmäßig bewerten</li><li data-checked='false'>Zwischenprüfungen definieren, wo das Intervall lang oder die Beanspruchung hoch ist</li><li data-checked='false'>Sperrprozess für auffällige Geräte festlegen, inklusive Rückwirkungsbetrachtung</li></ul><h3>Bezug zu calServer</h3><p>Das Modul Prüfmittel führt das Verzeichnis mit Kennung, Standort, Status und Fälligkeit; die Kalibrierhistorie hängt am Gerät. Statuswechsel und Sperren bleiben im Audit-Trail nachvollziehbar. Ob ein Intervall angemessen ist, entscheidet das Labor, nicht das System.</p><h3>Nachweise</h3><ul><li>Geräteverzeichnis mit Identifikation, Hersteller, Seriennummer, Standort.</li><li>Kalibrierscheine und Nachweise der Zwischenprüfungen.</li><li>Instandhaltungs- und Störungsaufzeichnungen.</li><li>Bewertung der Auswirkungen bei festgestellten Abweichungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ressourcen-en",
+          "title": "6.4 Equipment",
+          "content_html": "<h2>6.4 Equipment</h2><p>The laboratory shall have access to the equipment required for the correct performance of its activities and shall demonstrate its suitability. This includes measuring instruments, software, standards, reference materials and auxiliary apparatus.</p><h3>What the standard requires</h3><ul><li>Procedures for handling, transport, storage, use and planned maintenance.</li><li>Equipment is verified to conform to requirements before being placed in service.</li><li>Measuring equipment that affects results is calibrated where accuracy or measurement uncertainty require it.</li><li>A calibration programme defines intervals and is reviewed and adjusted.</li><li>The calibration status is labelled, including the due date.</li><li>Intermediate checks where they are needed to maintain confidence.</li><li>Equipment that has been overloaded, mishandled or gives suspect results is taken out of service and labelled.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain a complete equipment register with unique identification</li><li data-checked='false'>Define calibration intervals and review their adequacy regularly</li><li data-checked='false'>Define intermediate checks where intervals are long or usage is heavy</li><li data-checked='false'>Define the quarantine process for suspect equipment, including the look-back</li></ul><h3>Relation to calServer</h3><p>The equipment module holds the register with identification, location, status and due date; the calibration history hangs off the item. Status changes and blocks remain traceable in the audit trail. Whether an interval is adequate is decided by the laboratory, not by the system.</p><h3>Records</h3><ul><li>Equipment register with identification, manufacturer, serial number, location.</li><li>Calibration certificates and records of intermediate checks.</li><li>Maintenance and malfunction records.</li><li>Impact assessment for any deviation found.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0008-4000-8000-000000000008",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ressourcen-de",
+          "title": "6.5 Messtechnische Rückführbarkeit",
+          "content_html": "<h2>6.5 Messtechnische Rückführbarkeit</h2><p>Messergebnisse müssen über eine ununterbrochene Kette dokumentierter Kalibrierungen auf die entsprechende SI-Einheit oder eine anerkannte Bezugsgröße rückgeführt werden, jede mit ihrem Beitrag zur Messunsicherheit.</p><h3>Was die Norm verlangt</h3><ul><li>Ununterbrochene Kalibrierkette bis zu einer geeigneten Bezugsnormale.</li><li>Kalibrierungen durch kompetente Laboratorien, deren Kompetenz nachgewiesen ist.</li><li>Wo Rückführung auf SI technisch nicht möglich ist: zertifizierte Referenzmaterialien, konsensbasierte Verfahren oder Vergleichsmessungen, mit Begründung.</li><li>Jede Stufe der Kette weist ihre Messunsicherheit aus.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Rückführungspyramide je Messgröße dokumentieren</li><li data-checked='false'>Anforderungen an externe Kalibrierlaboratorien festlegen, etwa Akkreditierung und CMC</li><li data-checked='false'>Eingangsprüfung fremder Kalibrierscheine definieren</li><li data-checked='false'>Begründung für nicht auf SI rückführbare Größen ablegen</li></ul><h3>Bezug zu calServer</h3><p>Normale und Bezugsnormale sind als Prüfmittel geführt und lassen sich der Kalibrierung zuordnen, in der sie verwendet wurden. Damit ist im Nachhinein belegbar, welches Normal ein Ergebnis stützt. Die fachliche Bewertung der Kette bleibt Aufgabe des Labors.</p><h3>Nachweise</h3><ul><li>Kalibrierscheine der Normale mit Angabe der Messunsicherheit.</li><li>Nachweis der Kompetenz der beauftragten Kalibrierlaboratorien.</li><li>Zuordnung Normal zu Kalibriervorgang.</li><li>Zertifikate der eingesetzten Referenzmaterialien.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ressourcen-en",
+          "title": "6.5 Metrological traceability",
+          "content_html": "<h2>6.5 Metrological traceability</h2><p>Measurement results shall be traceable to the relevant SI unit or a recognised reference through a documented unbroken chain of calibrations, each contributing to the measurement uncertainty.</p><h3>What the standard requires</h3><ul><li>An unbroken calibration chain up to a suitable reference standard.</li><li>Calibrations by competent laboratories whose competence is demonstrated.</li><li>Where SI traceability is not technically possible: certified reference materials, consensus procedures or comparisons, with justification.</li><li>Every step of the chain states its measurement uncertainty.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Document the traceability pyramid per measurand</li><li data-checked='false'>Define requirements for external calibration laboratories, e.g. accreditation and CMC</li><li data-checked='false'>Define the incoming check of external calibration certificates</li><li data-checked='false'>File the justification for quantities not traceable to SI</li></ul><h3>Relation to calServer</h3><p>Standards and reference standards are managed as equipment and can be linked to the calibration in which they were used. That makes it verifiable afterwards which standard supports a result. Evaluating the chain technically remains the laboratory's task.</p><h3>Records</h3><ul><li>Calibration certificates of the standards, stating measurement uncertainty.</li><li>Evidence of competence of the contracted calibration laboratories.</li><li>Link between standard and calibration record.</li><li>Certificates of the reference materials used.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0009-4000-8000-000000000009",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-ressourcen-de",
+          "title": "6.6 Extern bereitgestellte Produkte und Dienstleistungen",
+          "content_html": "<h2>6.6 Extern bereitgestellte Produkte und Dienstleistungen</h2><p>Extern bezogene Produkte und Dienstleistungen, die die Labortätigkeiten beeinflussen, müssen geeignet sein. Das gilt für Kalibrierdienste, Vergleichsmessungen, Referenzmaterialien, Instandhaltung und ausgelagerte Prüfungen.</p><h3>Was die Norm verlangt</h3><ul><li>Anforderungen an Produkte und Dienstleistungen sind vor der Beschaffung festgelegt.</li><li>Kriterien für Bewertung, Auswahl, Überwachung der Leistung und erneute Bewertung von Anbietern.</li><li>Maßnahmen bei Nichterfüllung der Anforderungen.</li><li>Der Kunde wird informiert, wenn Labortätigkeiten ausgelagert werden.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Lieferantenliste mit Bewertungsstand führen</li><li data-checked='false'>Beschaffungsanforderungen je Kategorie schriftlich festlegen</li><li data-checked='false'>Wareneingangsprüfung für kritische Materialien definieren</li><li data-checked='false'>Regelung zur Kundeninformation bei Auslagerung dokumentieren</li></ul><h3>Nachweise</h3><ul><li>Lieferantenbewertungen mit Datum und Ergebnis.</li><li>Bestellungen mit den vereinbarten Anforderungen.</li><li>Aufzeichnungen der Wareneingangsprüfung.</li><li>Nachweis der Kundeninformation bei ausgelagerten Tätigkeiten.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-ressourcen-en",
+          "title": "6.6 Externally provided products and services",
+          "content_html": "<h2>6.6 Externally provided products and services</h2><p>Externally provided products and services that affect laboratory activities shall be suitable. This covers calibration services, proficiency testing, reference materials, maintenance and subcontracted testing.</p><h3>What the standard requires</h3><ul><li>Requirements for products and services are defined before procurement.</li><li>Criteria for evaluation, selection, monitoring of performance and re-evaluation of providers.</li><li>Actions when requirements are not met.</li><li>The customer is informed when laboratory activities are subcontracted.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain a supplier list with evaluation status</li><li data-checked='false'>Put procurement requirements per category in writing</li><li data-checked='false'>Define incoming inspection for critical materials</li><li data-checked='false'>Document how customers are informed about subcontracting</li></ul><h3>Records</h3><ul><li>Supplier evaluations with date and outcome.</li><li>Purchase orders stating the agreed requirements.</li><li>Records of incoming inspection.</li><li>Evidence of customer notification for subcontracted work.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0010-4000-8000-000000000010",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.1 Anfragen, Angebote und Verträge",
+          "content_html": "<h2>7.1 Prüfung von Anfragen, Angeboten und Verträgen</h2><p>Vor Annahme eines Auftrags muss geklärt sein, was gefordert ist, ob das Labor es leisten kann und welche Methode zum Einsatz kommt. Abweichungen vom Vertrag werden mit dem Kunden abgestimmt.</p><h3>Was die Norm verlangt</h3><ul><li>Anforderungen sind angemessen festgelegt, dokumentiert und verstanden.</li><li>Das Labor verfügt über Fähigkeit und Ressourcen, die Anforderungen zu erfüllen.</li><li>Bei ausgelagerten Tätigkeiten gilt Abschnitt 6.6; der Kunde wird informiert und stimmt zu.</li><li>Die geeignete Methode wird ausgewählt und dem Kunden mitgeteilt.</li><li>Bei Aussagen zur Konformität sind Entscheidungsregel und Risiko vereinbart, sofern nicht durch die Methode vorgegeben.</li><li>Abweichungen vom Vertrag werden dem Kunden mitgeteilt.</li><li>Bei Änderungen wird die Prüfung wiederholt und das betroffene Personal informiert.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Checkliste für die Auftragsprüfung erstellen</li><li data-checked='false'>Entscheidungsregel für Konformitätsaussagen schriftlich festlegen</li><li data-checked='false'>Machbarkeitsprüfung bei Sonderaufträgen dokumentieren</li><li data-checked='false'>Freigabestufen für Angebote festlegen</li></ul><h3>Bezug zu calServer</h3><p>Aufträge, Kunden und die zugeordneten Prüfmittel bilden die Auftragslage ab; Prüfabläufe halten die vereinbarte Methode fest. Die Auftragsprüfung selbst ist eine fachliche Entscheidung und muss als solche dokumentiert werden.</p><h3>Nachweise</h3><ul><li>Aufzeichnungen der Auftragsprüfung, inklusive erheblicher Änderungen.</li><li>Vereinbarte Entscheidungsregel je Auftrag oder Kunde.</li><li>Aufzeichnungen der Kundenabstimmung bei Abweichungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.1 Requests, tenders and contracts",
+          "content_html": "<h2>7.1 Review of requests, tenders and contracts</h2><p>Before accepting an order it must be clear what is required, whether the laboratory can deliver it and which method will be used. Deviations from the contract are agreed with the customer.</p><h3>What the standard requires</h3><ul><li>Requirements are adequately defined, documented and understood.</li><li>The laboratory has the capability and resources to meet the requirements.</li><li>For subcontracted activities clause 6.6 applies; the customer is informed and approves.</li><li>The appropriate method is selected and communicated to the customer.</li><li>Where statements of conformity are made, the decision rule and risk are agreed unless the method already defines them.</li><li>Deviations from the contract are communicated to the customer.</li><li>On amendment the review is repeated and affected personnel are informed.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Create a checklist for contract review</li><li data-checked='false'>Put the decision rule for conformity statements in writing</li><li data-checked='false'>Document the feasibility check for non-routine orders</li><li data-checked='false'>Define approval levels for tenders</li></ul><h3>Relation to calServer</h3><p>Orders, customers and the assigned equipment represent the workload; procedures capture the agreed method. The contract review itself is a technical decision and has to be documented as one.</p><h3>Records</h3><ul><li>Records of the review, including significant changes.</li><li>The agreed decision rule per order or customer.</li><li>Records of customer communication on deviations.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0011-4000-8000-000000000011",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.2 Auswahl, Verifizierung und Validierung von Methoden",
+          "content_html": "<h2>7.2 Auswahl, Verifizierung und Validierung von Methoden</h2><p>Das Labor muss geeignete Methoden anwenden, ihre Beherrschung vor der Einführung nachweisen und selbst entwickelte oder abgewandelte Methoden validieren.</p><h3>Was die Norm verlangt</h3><ul><li>Aktuelle Fassungen der Methoden stehen dem Personal zur Verfügung.</li><li>Bevorzugt werden Normmethoden; Abweichungen sind zu begründen und zu genehmigen.</li><li>Verifizierung: Das Labor weist vor der Einführung nach, dass es die Normmethode beherrscht.</li><li>Validierung: Bei nicht genormten, selbst entwickelten oder erweiterten Methoden wird die Eignung für den vorgesehenen Zweck belegt.</li><li>Der Umfang der Validierung entspricht dem Bedarf der Anwendung.</li><li>Leistungsmerkmale wie Messbereich, Richtigkeit, Präzision, Nachweisgrenze, Selektivität und Robustheit werden bewertet.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Methodenliste mit Ausgabestand und Freigabe führen</li><li data-checked='false'>Verifizierungsbericht je eingeführter Normmethode ablegen</li><li data-checked='false'>Validierungsplan und -bericht für eigene Methoden erstellen</li><li data-checked='false'>Änderungsverfahren für validierte Methoden festlegen, inklusive erneuter Bewertung</li></ul><h3>Bezug zu calServer</h3><p>Prüfabläufe bilden die Methode als ausführbaren Schrittplan ab und sind versioniert und freigebbar. Der Freigabestand einer Vorlage macht nachvollziehbar, nach welcher Fassung ein Ergebnis entstanden ist. Die Validierung selbst ist ein fachlicher Nachweis und gehört als Dokument dazu.</p><h3>Nachweise</h3><ul><li>Methodenverzeichnis mit Revisionsstand.</li><li>Verifizierungs- und Validierungsberichte mit Freigabe.</li><li>Aufzeichnungen zu Methodenänderungen und deren Bewertung.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.2 Selection, verification and validation of methods",
+          "content_html": "<h2>7.2 Selection, verification and validation of methods</h2><p>The laboratory shall use appropriate methods, demonstrate that it can operate them before introduction, and validate methods it develops or modifies.</p><h3>What the standard requires</h3><ul><li>Current versions of methods are available to personnel.</li><li>Standard methods are preferred; deviations must be justified and authorised.</li><li>Verification: before introducing a standard method the laboratory demonstrates it can perform it properly.</li><li>Validation: for non-standard, laboratory-developed or extended methods, fitness for the intended use is demonstrated.</li><li>The extent of validation matches the needs of the application.</li><li>Performance characteristics such as range, trueness, precision, limit of detection, selectivity and robustness are evaluated.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain a method list with issue status and approval</li><li data-checked='false'>File a verification report for every standard method introduced</li><li data-checked='false'>Produce a validation plan and report for in-house methods</li><li data-checked='false'>Define the change process for validated methods, including re-evaluation</li></ul><h3>Relation to calServer</h3><p>Procedures model the method as an executable step plan and are versioned and releasable. The release status of a template makes it traceable which version produced a result. The validation itself is technical evidence and belongs alongside it as a document.</p><h3>Records</h3><ul><li>Method register with revision status.</li><li>Verification and validation reports with approval.</li><li>Records of method changes and their evaluation.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0012-4000-8000-000000000012",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.3 Probenahme",
+          "content_html": "<h2>7.3 Probenahme</h2><p>Führt das Labor Probenahmen durch, muss es dafür einen Plan und ein Verfahren haben. Beides ist am Ort der Probenahme verfügbar und berücksichtigt die zu kontrollierenden Faktoren.</p><h3>Was die Norm verlangt</h3><ul><li>Probenahmeplan und -verfahren sind dokumentiert und verfügbar.</li><li>Das Verfahren beschreibt Auswahl, Entnahme und Aufbereitung.</li><li>Faktoren, die zu kontrollieren sind, um die Gültigkeit der Ergebnisse zu sichern, sind benannt.</li><li>Aufzeichnungen umfassen Verfahren, Datum und Uhrzeit, Identifikation, Probenehmer, Umgebungsbedingungen und, wo nötig, eine Lageskizze.</li><li>Abweichungen vom Probenahmeverfahren werden aufgezeichnet.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Prüfen, ob Probenahme zum Geltungsbereich gehört; wenn nein, hier vermerken</li><li data-checked='false'>Probenahmeverfahren je Matrix oder Produktgruppe erstellen</li><li data-checked='false'>Formblatt für Probenahmeaufzeichnungen bereitstellen</li><li data-checked='false'>Schulung und Autorisierung der Probenehmer regeln</li></ul><h3>Nachweise</h3><ul><li>Probenahmepläne und -verfahren mit Freigabe.</li><li>Probenahmeprotokolle mit allen geforderten Angaben.</li><li>Aufzeichnungen über Abweichungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.3 Sampling",
+          "content_html": "<h2>7.3 Sampling</h2><p>Where the laboratory carries out sampling, it shall have a sampling plan and method. Both are available at the sampling site and address the factors to be controlled.</p><h3>What the standard requires</h3><ul><li>Sampling plan and method are documented and available.</li><li>The method describes selection, withdrawal and preparation.</li><li>Factors to be controlled to ensure the validity of results are identified.</li><li>Records include the method, date and time, identification, sampler, environmental conditions and, where needed, a diagram of the location.</li><li>Deviations from the sampling method are recorded.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Check whether sampling is within scope; if not, note that here</li><li data-checked='false'>Write a sampling method per matrix or product group</li><li data-checked='false'>Provide a form for sampling records</li><li data-checked='false'>Define training and authorisation of samplers</li></ul><h3>Records</h3><ul><li>Sampling plans and methods with approval.</li><li>Sampling records with all required entries.</li><li>Records of deviations.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0013-4000-8000-000000000013",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.4 Handhabung von Prüf- und Kalibriergegenständen",
+          "content_html": "<h2>7.4 Handhabung von Prüf- und Kalibriergegenständen</h2><p>Vom Eingang bis zur Rückgabe muss der Gegenstand eindeutig identifizierbar sein und so behandelt werden, dass er sich nicht unbemerkt verändert.</p><h3>Was die Norm verlangt</h3><ul><li>Verfahren für Transport, Empfang, Handhabung, Schutz, Lagerung, Aufbewahrung und Entsorgung oder Rückgabe.</li><li>Eindeutige Identifikation, die während der gesamten Verweildauer erhalten bleibt.</li><li>Abweichungen vom festgelegten Zustand werden vor Beginn mit dem Kunden geklärt und aufgezeichnet.</li><li>Bestehen Zweifel an der Eignung, holt das Labor eine Weisung ein und weist im Bericht auf die Einschränkung hin.</li><li>Erfordert der Gegenstand bestimmte Umgebungsbedingungen, werden diese überwacht und aufgezeichnet.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Eingangsprozess mit Zustandsdokumentation festlegen</li><li data-checked='false'>Kennzeichnungssystem definieren, das Verwechslung ausschließt</li><li data-checked='false'>Lagerbedingungen je Gerätegruppe festlegen</li><li data-checked='false'>Vorgehen bei erkennbaren Schäden vor Bearbeitungsbeginn regeln</li></ul><h3>Bezug zu calServer</h3><p>Prüfmittel tragen eine eindeutige Kennung mit Barcode oder QR-Code; Status und Standort sind am Datensatz geführt, Zustandsvermerke lassen sich am Vorgang hinterlegen. Die physische Kennzeichnung am Gerät bleibt eine organisatorische Maßnahme.</p><h3>Nachweise</h3><ul><li>Eingangsaufzeichnungen mit Zustandsbeschreibung.</li><li>Aufzeichnungen der Kundenabstimmung bei Auffälligkeiten.</li><li>Lager- und Umgebungsaufzeichnungen, wo gefordert.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.4 Handling of test and calibration items",
+          "content_html": "<h2>7.4 Handling of test and calibration items</h2><p>From receipt to return the item must be unambiguously identifiable and handled so that it cannot change unnoticed.</p><h3>What the standard requires</h3><ul><li>Procedures for transportation, receipt, handling, protection, storage, retention and disposal or return.</li><li>Unambiguous identification retained for the whole time the item is in the laboratory.</li><li>Deviations from the specified condition are resolved with the customer before work starts and recorded.</li><li>Where suitability is in doubt, the laboratory seeks instruction and states the limitation in the report.</li><li>Where the item requires specific environmental conditions, these are monitored and recorded.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Define the receipt process including condition documentation</li><li data-checked='false'>Define an identification system that rules out mix-ups</li><li data-checked='false'>Define storage conditions per equipment group</li><li data-checked='false'>Define how visible damage is handled before work starts</li></ul><h3>Relation to calServer</h3><p>Items carry a unique identifier with barcode or QR code; status and location are held on the record, and condition notes can be attached to the job. Physical labelling on the device remains an organisational measure.</p><h3>Records</h3><ul><li>Receipt records with a description of the condition.</li><li>Records of customer communication on anomalies.</li><li>Storage and environmental records where required.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0014-4000-8000-000000000014",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.5 Technische Aufzeichnungen",
+          "content_html": "<h2>7.5 Technische Aufzeichnungen</h2><p>Für jede Labortätigkeit müssen Aufzeichnungen entstehen, die eine Wiederholung unter möglichst gleichen Bedingungen erlauben. Sie enthalten die Ergebnisse, die Einflussfaktoren und die verantwortlichen Personen.</p><h3>Was die Norm verlangt</h3><ul><li>Aufzeichnungen enthalten Ergebnisse, Berichte, Messunsicherheiten und alle Informationen, die zur Wiederholung nötig sind.</li><li>Datum und die verantwortliche Person je Tätigkeit sind erkennbar.</li><li>Ursprüngliche Beobachtungen, abgeleitete Daten und die Prüfkette sind nachvollziehbar.</li><li>Änderungen sind rückverfolgbar: der überschriebene Wert bleibt sichtbar, mit Grund, Person und Zeitpunkt.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Festlegen, welche Rohdaten je Verfahren aufzubewahren sind</li><li data-checked='false'>Regel für Korrekturen in Papier- und Systemaufzeichnungen dokumentieren</li><li data-checked='false'>Vier-Augen-Prinzip für kritische Ergebnisse festlegen</li><li data-checked='false'>Aufbewahrungsfristen je Aufzeichnungsart benennen</li></ul><h3>Bezug zu calServer</h3><p>Messwerte, Prüfschritte und Bewertungen hängen am Kalibriervorgang; der Audit-Trail hält Änderungen mit altem und neuem Wert, Benutzer und Zeitpunkt fest. Damit ist die von der Norm geforderte Rückverfolgbarkeit von Änderungen technisch abgedeckt, sofern der Prozess sie auch verlangt.</p><h3>Nachweise</h3><ul><li>Vollständige Kalibrier- und Prüfvorgänge mit Rohdaten.</li><li>Audit-Trail-Auszüge zu geänderten Werten.</li><li>Nachweis der Ergebnisprüfung durch eine zweite Person, wo festgelegt.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.5 Technical records",
+          "content_html": "<h2>7.5 Technical records</h2><p>Every laboratory activity shall produce records that allow the activity to be repeated under conditions as close as possible to the original. They contain the results, the influencing factors and the responsible persons.</p><h3>What the standard requires</h3><ul><li>Records contain results, reports, measurement uncertainties and all information needed to repeat the activity.</li><li>The date and the person responsible for each activity are identifiable.</li><li>Original observations, derived data and the audit trail are traceable.</li><li>Amendments are traceable: the previous value stays visible, together with reason, person and time.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Define which raw data must be retained per procedure</li><li data-checked='false'>Document the rule for corrections in paper and system records</li><li data-checked='false'>Define four-eyes review for critical results</li><li data-checked='false'>State retention periods per record type</li></ul><h3>Relation to calServer</h3><p>Measured values, test steps and evaluations belong to the calibration record; the audit trail keeps changes with old and new value, user and timestamp. The traceability of amendments required by the standard is therefore technically covered, provided the process asks for it as well.</p><h3>Records</h3><ul><li>Complete calibration and test records including raw data.</li><li>Audit trail extracts for amended values.</li><li>Evidence of second-person review where defined.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0015-4000-8000-000000000015",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.6 Bewertung der Messunsicherheit",
+          "content_html": "<h2>7.6 Bewertung der Messunsicherheit</h2><p>Das Labor muss die Beiträge zur Messunsicherheit ermitteln. Kalibrierlaboratorien bewerten die Messunsicherheit für alle Kalibrierungen; Prüflaboratorien bewerten sie ebenfalls, mit dem Umfang, den die Methode zulässt.</p><h3>Was die Norm verlangt</h3><ul><li>Alle wesentlichen Beiträge werden identifiziert, auch die aus der Probenahme.</li><li>Kalibrierlaboratorien bewerten die Messunsicherheit für jede Kalibrierung, einschließlich eigener Kalibrierungen.</li><li>Prüflaboratorien bewerten die Messunsicherheit; ist das wegen der Methode nicht streng möglich, erfolgt eine Schätzung auf Basis des Methodenverständnisses und früherer Erfahrung.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Unsicherheitsbudget je Messgröße erstellen und begründen</li><li data-checked='false'>Beiträge aus Normal, Auflösung, Wiederholbarkeit, Drift und Umgebung erfassen</li><li data-checked='false'>Erweiterungsfaktor und Vertrauensniveau einheitlich festlegen</li><li data-checked='false'>Budgets bei Methoden- oder Normaländerung erneut prüfen</li></ul><h3>Bezug zu calServer</h3><p>Ergebnisdatensätze führen die Messunsicherheit je Messpunkt mit; das Verhältnis von Toleranz zu Unsicherheit lässt sich am Prüfschritt auswerten. Das Budget selbst, also die Herleitung, bleibt ein Dokument des Labors.</p><h3>Nachweise</h3><ul><li>Unsicherheitsbudgets mit Datum und Freigabe.</li><li>Ergebnisaufzeichnungen mit ausgewiesener Messunsicherheit.</li><li>Nachweis der Überprüfung der Budgets bei Änderungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.6 Evaluation of measurement uncertainty",
+          "content_html": "<h2>7.6 Evaluation of measurement uncertainty</h2><p>The laboratory shall identify the contributions to measurement uncertainty. Calibration laboratories evaluate it for all calibrations; testing laboratories evaluate it too, to the extent the method allows.</p><h3>What the standard requires</h3><ul><li>All significant contributions are identified, including those from sampling.</li><li>Calibration laboratories evaluate measurement uncertainty for every calibration, including their own equipment.</li><li>Testing laboratories evaluate measurement uncertainty; where the method makes a rigorous evaluation impossible, an estimate is made based on understanding of the method and prior experience.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Produce and justify an uncertainty budget per measurand</li><li data-checked='false'>Capture contributions from the standard, resolution, repeatability, drift and environment</li><li data-checked='false'>Define coverage factor and confidence level consistently</li><li data-checked='false'>Re-check budgets when the method or the standard changes</li></ul><h3>Relation to calServer</h3><p>Result records carry the measurement uncertainty per measurement point; the ratio of tolerance to uncertainty can be evaluated at the test step. The budget itself, that is the derivation, remains a laboratory document.</p><h3>Records</h3><ul><li>Uncertainty budgets with date and approval.</li><li>Result records stating the measurement uncertainty.</li><li>Evidence that budgets were reviewed after changes.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0016-4000-8000-000000000016",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.7 Sicherstellung der Validität der Ergebnisse",
+          "content_html": "<h2>7.7 Sicherstellung der Validität der Ergebnisse</h2><p>Das Labor muss überwachen, ob seine Ergebnisse gültig bleiben. Dazu dienen interne Maßnahmen und der Vergleich mit anderen Laboratorien; die Daten werden ausgewertet, nicht nur gesammelt.</p><h3>Interne Überwachung</h3><ul><li>Verwendung von Referenzmaterialien oder Qualitätsregelkarten.</li><li>Zwischenprüfungen an Messgeräten.</li><li>Funktionsprüfungen und Wiederholmessungen.</li><li>Erneute Prüfung aufbewahrter Gegenstände.</li><li>Korrelation von Merkmalen eines Gegenstands.</li><li>Erneute Bewertung durch eine zweite Person.</li></ul><h3>Externe Überwachung</h3><ul><li>Teilnahme an Eignungsprüfungen, sofern verfügbar.</li><li>Teilnahme an Vergleichsmessungen außerhalb formaler Eignungsprüfungen.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Jahresplan für Ringversuche und Vergleichsmessungen aufstellen</li><li data-checked='false'>Regelkarten je kritischer Messgröße einführen</li><li data-checked='false'>Auswertekriterien und Eingreifgrenzen festlegen</li><li data-checked='false'>Vorgehen bei auffälligen Trends schriftlich regeln</li></ul><h3>Nachweise</h3><ul><li>Ringversuchsergebnisse mit Bewertung und, wo nötig, Maßnahmen.</li><li>Regelkarten mit Trendauswertung.</li><li>Aufzeichnungen der Zwischenprüfungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.7 Ensuring the validity of results",
+          "content_html": "<h2>7.7 Ensuring the validity of results</h2><p>The laboratory shall monitor whether its results remain valid. Internal measures and comparison with other laboratories serve that purpose; the data is analysed, not merely collected.</p><h3>Internal monitoring</h3><ul><li>Use of reference materials or quality control charts.</li><li>Intermediate checks on measuring equipment.</li><li>Functional checks and replicate measurements.</li><li>Retesting of retained items.</li><li>Correlation of results for different characteristics of an item.</li><li>Review of reported results by a second person.</li></ul><h3>External monitoring</h3><ul><li>Participation in proficiency testing where available.</li><li>Participation in interlaboratory comparisons other than proficiency testing.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Draw up an annual plan for proficiency tests and comparisons</li><li data-checked='false'>Introduce control charts for critical measurands</li><li data-checked='false'>Define evaluation criteria and action limits</li><li data-checked='false'>Put the response to adverse trends in writing</li></ul><h3>Records</h3><ul><li>Proficiency test results with evaluation and, where needed, actions.</li><li>Control charts with trend analysis.</li><li>Records of intermediate checks.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0017-4000-8000-000000000017",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.8 Berichterstattung über Ergebnisse",
+          "content_html": "<h2>7.8 Berichterstattung über Ergebnisse</h2><p>Ergebnisse werden richtig, klar, eindeutig und objektiv berichtet. Der Bericht enthält alles, was zur Interpretation nötig ist, und benennt, wofür das Labor nicht einsteht.</p><h3>Pflichtangaben eines Berichts</h3><ul><li>Titel und Name sowie Anschrift des Labors und des Kunden.</li><li>Ort der Durchführung, wenn er nicht die Laboranschrift ist.</li><li>Eindeutige Kennzeichnung, auf jeder Seite als zum Bericht gehörig erkennbar, mit klarem Ende.</li><li>Identifikation des Gegenstands sowie Datum von Erhalt und Durchführung.</li><li>Angewendete Methode, Ergebnisse mit Einheiten, Ergänzungen und Abweichungen.</li><li>Name und Funktion der freigebenden Person sowie Ausgabedatum.</li><li>Hinweis, dass sich Ergebnisse ausschließlich auf die geprüften Gegenstände beziehen.</li></ul><h3>Zusätzlich beim Kalibrierschein</h3><ul><li>Messunsicherheit in derselben Einheit oder relativ zum Messwert.</li><li>Bedingungen, unter denen kalibriert wurde, soweit sie das Ergebnis beeinflussen.</li><li>Nachweis der messtechnischen Rückführbarkeit.</li><li>Ergebnisse vor und nach einer Justage oder Instandsetzung, falls vorhanden.</li><li>Aussage zur Konformität nur mit Angabe der Entscheidungsregel.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Berichtsvorlagen gegen die Pflichtangaben abgleichen</li><li data-checked='false'>Freigabeschritt mit namentlicher Verantwortung festlegen</li><li data-checked='false'>Verfahren für Berichtsänderungen und Ersatzberichte dokumentieren</li><li data-checked='false'>Regel für Meinungen und Interpretationen festlegen, inklusive Kennzeichnung</li></ul><h3>Bezug zu calServer</h3><p>Kalibrierscheine entstehen aus Berichtsvorlagen, die die Pflichtangaben tragen; die Freigabe ist ein eigener Schritt und im Verlauf sichtbar. Eine geänderte Fassung ersetzt die vorherige nicht stillschweigend, sondern bleibt als eigene Ausgabe erkennbar.</p><h3>Nachweise</h3><ul><li>Ausgestellte Berichte und Kalibrierscheine in der ausgelieferten Fassung.</li><li>Aufzeichnungen zur Freigabe mit Person und Datum.</li><li>Berichtsänderungen mit Begründung und Bezug zum Original.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.8 Reporting of results",
+          "content_html": "<h2>7.8 Reporting of results</h2><p>Results shall be reported accurately, clearly, unambiguously and objectively. The report contains everything needed for interpretation and states what the laboratory does not vouch for.</p><h3>Mandatory content of a report</h3><ul><li>A title and the name and address of the laboratory and the customer.</li><li>The location of performance where it is not the laboratory address.</li><li>Unique identification, every page identifiable as part of the report, with a clear end.</li><li>Identification of the item plus dates of receipt and performance.</li><li>The method used, results with units, additions and deviations.</li><li>Name and function of the person authorising the report, and date of issue.</li><li>A statement that the results relate only to the items tested or calibrated.</li></ul><h3>Additional content of a calibration certificate</h3><ul><li>Measurement uncertainty in the same unit or relative to the measured value.</li><li>The conditions under which the calibration was performed, where they influence the result.</li><li>Evidence of metrological traceability.</li><li>Results before and after any adjustment or repair, if available.</li><li>A statement of conformity only together with the decision rule applied.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Check report templates against the mandatory content</li><li data-checked='false'>Define the approval step with named responsibility</li><li data-checked='false'>Document the procedure for amended and replacement reports</li><li data-checked='false'>Define the rule for opinions and interpretations, including how they are marked</li></ul><h3>Relation to calServer</h3><p>Calibration certificates are produced from report templates carrying the mandatory content; approval is a distinct step and visible in the history. An amended version does not silently replace the previous one but stays identifiable as its own issue.</p><h3>Records</h3><ul><li>Issued reports and certificates in the delivered version.</li><li>Approval records with person and date.</li><li>Amendments with reason and reference to the original.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0018-4000-8000-000000000018",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.9 Beschwerden",
+          "content_html": "<h2>7.9 Beschwerden</h2><p>Das Labor braucht einen dokumentierten Prozess für den Umgang mit Beschwerden. Beschreibung des Prozesses und Bearbeitungsstand sind interessierten Parteien auf Anfrage zugänglich.</p><h3>Was die Norm verlangt</h3><ul><li>Dokumentierter Prozess für Entgegennahme, Bewertung und Entscheidung.</li><li>Bestätigung des Eingangs und Rückmeldung über Ergebnis und Fortschritt.</li><li>Personen, die die Entscheidung treffen, waren an der beanstandeten Tätigkeit nicht beteiligt.</li><li>Formale Mitteilung des Ergebnisses an den Beschwerdeführer, wenn möglich durch eine unabhängige Person.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Eingangskanäle für Beschwerden benennen und veröffentlichen</li><li data-checked='false'>Fristen für Bestätigung und Rückmeldung festlegen</li><li data-checked='false'>Unabhängigkeit der Entscheidung sicherstellen und dokumentieren</li><li data-checked='false'>Verbindung zu Korrekturmaßnahmen herstellen</li></ul><h3>Bezug zu calServer</h3><p>Tickets bilden Eingang, Zuständigkeit, Verlauf und Abschluss einer Beschwerde ab; jeder Bearbeitungsschritt ist mit Person und Zeitpunkt hinterlegt. Die Unabhängigkeit der Entscheidung ist eine organisatorische Festlegung, keine Systemeinstellung.</p><h3>Nachweise</h3><ul><li>Beschwerdeakte mit Eingang, Bewertung, Entscheidung und Mitteilung.</li><li>Nachweis der Unabhängigkeit der entscheidenden Person.</li><li>Verknüpfte Korrekturmaßnahmen und deren Wirksamkeitsprüfung.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.9 Complaints",
+          "content_html": "<h2>7.9 Complaints</h2><p>The laboratory needs a documented process for handling complaints. A description of the process and the status of a complaint are available to interested parties on request.</p><h3>What the standard requires</h3><ul><li>A documented process for receiving, evaluating and deciding on complaints.</li><li>Acknowledgement of receipt and feedback on outcome and progress.</li><li>The people deciding were not involved in the activity being complained about.</li><li>Formal notice of the outcome to the complainant, given where possible by an independent person.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Name and publish the channels for complaints</li><li data-checked='false'>Define deadlines for acknowledgement and feedback</li><li data-checked='false'>Ensure and document the independence of the decision</li><li data-checked='false'>Link complaints to corrective action</li></ul><h3>Relation to calServer</h3><p>Tickets capture receipt, ownership, history and closure of a complaint; every step carries person and timestamp. The independence of the decision is an organisational arrangement, not a system setting.</p><h3>Records</h3><ul><li>Complaint file with receipt, evaluation, decision and notification.</li><li>Evidence of the deciding person's independence.</li><li>Linked corrective actions and their effectiveness review.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0019-4000-8000-000000000019",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.10 Nichtkonforme Arbeit",
+          "content_html": "<h2>7.10 Nichtkonforme Arbeit</h2><p>Entspricht eine Tätigkeit oder ein Ergebnis nicht den eigenen Verfahren oder den vereinbarten Anforderungen, greift ein festgelegtes Verfahren. Es klärt Verantwortung, Bewertung, Sofortmaßnahmen und die Frage, ob bereits ausgelieferte Ergebnisse betroffen sind.</p><h3>Was die Norm verlangt</h3><ul><li>Verantwortlichkeiten und Befugnisse für den Umgang mit nichtkonformer Arbeit sind festgelegt.</li><li>Maßnahmen richten sich nach den Risiken, die das Labor bewertet hat.</li><li>Bewertung der Bedeutung, inklusive Auswirkung auf frühere Ergebnisse.</li><li>Entscheidung über die Annehmbarkeit der nichtkonformen Arbeit.</li><li>Falls nötig: Benachrichtigung des Kunden und Rückruf von Ergebnissen.</li><li>Festlegung, wer die Wiederaufnahme der Arbeit genehmigt.</li><li>Aufzeichnung der nichtkonformen Arbeit und der Maßnahmen.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Meldeweg für Abweichungen bekannt machen</li><li data-checked='false'>Bewertungsraster für die Bedeutung festlegen</li><li data-checked='false'>Rückwirkungsbetrachtung als Pflichtschritt verankern</li><li data-checked='false'>Freigabe zur Wiederaufnahme namentlich regeln</li></ul><h3>Nachweise</h3><ul><li>Abweichungsmeldungen mit Bewertung und Entscheidung.</li><li>Nachweis der Kundenbenachrichtigung, wo erforderlich.</li><li>Genehmigung der Wiederaufnahme der Arbeit.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.10 Nonconforming work",
+          "content_html": "<h2>7.10 Nonconforming work</h2><p>When an activity or a result does not conform to the laboratory's own procedures or the agreed requirements, a defined procedure applies. It settles responsibility, evaluation, immediate action and whether results already issued are affected.</p><h3>What the standard requires</h3><ul><li>Responsibilities and authorities for managing nonconforming work are defined.</li><li>Actions are based on the risk levels the laboratory has established.</li><li>Evaluation of the significance, including the effect on previous results.</li><li>A decision on the acceptability of the nonconforming work.</li><li>Where necessary: notification of the customer and recall of results.</li><li>Definition of who authorises the resumption of work.</li><li>Records of the nonconforming work and of the actions taken.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Make the reporting route for deviations known</li><li data-checked='false'>Define a grid for assessing significance</li><li data-checked='false'>Make the look-back a mandatory step</li><li data-checked='false'>Assign authorisation to resume work by name</li></ul><h3>Records</h3><ul><li>Deviation reports with evaluation and decision.</li><li>Evidence of customer notification where required.</li><li>Authorisation to resume work.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0020-4000-8000-000000000020",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-prozesse-de",
+          "title": "7.11 Lenkung von Daten und Informationsmanagement",
+          "content_html": "<h2>7.11 Lenkung von Daten und Informationsmanagement</h2><p>Das Labor braucht Zugang zu den Daten, die es für seine Tätigkeiten benötigt. Informationsmanagementsysteme werden vor Inbetriebnahme auf Eignung geprüft und danach vor unbefugtem Zugriff, Verlust und Verfälschung geschützt.</p><h3>Was die Norm verlangt</h3><ul><li>Systeme zur Erfassung, Verarbeitung, Aufzeichnung, Berichterstattung, Speicherung und Wiedergewinnung von Daten werden vor Einführung validiert.</li><li>Das gilt auch für Änderungen, einschließlich Konfiguration und handelsüblicher Software im vorgesehenen Anwendungsbereich.</li><li>Schutz vor unbefugtem Zugriff, gegen Manipulation und Verlust.</li><li>Betrieb unter Bedingungen, die Integrität von Daten und Informationen sichern; das schließt Sicherungen ein.</li><li>Berechnungen und Datenübertragungen werden systematisch überprüft.</li><li>Bei extern verwalteten Systemen gelten die Anforderungen unverändert.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Validierungsnachweis für das Laborinformationssystem ablegen</li><li data-checked='false'>Änderungs- und Freigabeverfahren für Systemänderungen festlegen</li><li data-checked='false'>Datensicherung mit Wiederherstellungstest planen und protokollieren</li><li data-checked='false'>Berechtigungskonzept regelmäßig überprüfen</li><li data-checked='false'>Prüfung automatisierter Berechnungen dokumentieren</li></ul><h3>Bezug zu calServer</h3><p>Rollen und Operationen regeln den Zugriff, der Audit-Trail hält Änderungen fest, und Sicherungen sowie deren Zeitplan gehören zur Systemadministration. Der Nachweis, dass Berechnungen richtig arbeiten, entsteht durch die Prüfung des Labors, nicht durch die Anwesenheit der Funktion.</p><h3>Nachweise</h3><ul><li>Validierungs- und Änderungsdokumentation des Systems.</li><li>Sicherungsprotokolle und Ergebnisse von Wiederherstellungstests.</li><li>Berechtigungskonzept mit Prüfvermerk.</li><li>Aufzeichnungen der Berechnungsprüfung.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-prozesse-en",
+          "title": "7.11 Control of data and information management",
+          "content_html": "<h2>7.11 Control of data and information management</h2><p>The laboratory needs access to the data required for its activities. Information management systems are validated for functionality before use and afterwards protected against unauthorised access, loss and corruption.</p><h3>What the standard requires</h3><ul><li>Systems for collecting, processing, recording, reporting, storing and retrieving data are validated before introduction.</li><li>This also applies to changes, including configuration and commercial off-the-shelf software within its intended range of application.</li><li>Protection against unauthorised access, tampering and loss.</li><li>Operation under conditions that safeguard the integrity of data and information, backups included.</li><li>Calculations and data transfers are checked systematically.</li><li>Where systems are managed externally, the requirements apply unchanged.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>File the validation evidence for the laboratory information system</li><li data-checked='false'>Define the change and approval process for system changes</li><li data-checked='false'>Plan and log backups including a restore test</li><li data-checked='false'>Review the permission concept regularly</li><li data-checked='false'>Document the checks of automated calculations</li></ul><h3>Relation to calServer</h3><p>Roles and operations govern access, the audit trail records changes, and backups and their schedule are part of system administration. Evidence that calculations work correctly comes from the laboratory's checks, not from the presence of the feature.</p><h3>Records</h3><ul><li>Validation and change documentation of the system.</li><li>Backup logs and results of restore tests.</li><li>Permission concept with review note.</li><li>Records of calculation checks.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0021-4000-8000-000000000021",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.2 / 8.3 Dokumentation und Lenkung von Dokumenten",
+          "content_html": "<h2>8.2 und 8.3 Managementsystem-Dokumentation und Dokumentenlenkung</h2><p>Die Leitung legt Politik und Ziele für die Erfüllung der Norm fest und macht sie im Labor bekannt. Alle Dokumente, die für die Labortätigkeiten gelten, werden gelenkt: Freigabe, Verteilung, Änderung, Ungültigkeit.</p><h3>Was die Norm verlangt</h3><ul><li>Dokumentierte Politik und Ziele, von der Leitung getragen und im Labor bekannt.</li><li>Verpflichtung auf gute fachliche Praxis und ständige Verbesserung.</li><li>Dokumente werden vor Ausgabe auf Angemessenheit geprüft und freigegeben.</li><li>Regelmäßige Überprüfung und, wo nötig, Aktualisierung.</li><li>Änderungen und der aktuelle Revisionsstand sind erkennbar.</li><li>Relevante Fassungen sind am Einsatzort verfügbar; die Verteilung ist gelenkt.</li><li>Unbeabsichtigte Verwendung veralteter Dokumente ist ausgeschlossen; aufbewahrte veraltete Dokumente sind gekennzeichnet.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Dokumentenlenkungsliste mit Stand und Freigabe führen</li><li data-checked='false'>Freigabe- und Änderungsprozess mit Rollen festlegen</li><li data-checked='false'>Turnus für die Überprüfung von Dokumenten definieren</li><li data-checked='false'>Kennzeichnung veralteter Fassungen regeln</li></ul><h3>Bezug zu calServer</h3><p>Das Dokumentenmodul führt Dateien mit Version und Zuordnung; Wiki-Artikel wie dieser tragen eine Revisionshistorie und lassen sich als Ganzes exportieren, was die Sicherung des Standes vereinfacht. Die Freigaberegel selbst legt das Labor fest.</p><h3>Nachweise</h3><ul><li>Dokumentenlenkungsliste mit Revisionsständen.</li><li>Freigabevermerke mit Person und Datum.</li><li>Nachweis der Verteilung und des Einzugs veralteter Fassungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.2 / 8.3 Documentation and control of documents",
+          "content_html": "<h2>8.2 and 8.3 Management system documentation and control of documents</h2><p>Management establishes policy and objectives for fulfilling the standard and communicates them within the laboratory. All documents that apply to laboratory activities are controlled: approval, distribution, change, obsolescence.</p><h3>What the standard requires</h3><ul><li>Documented policy and objectives, supported by management and communicated within the laboratory.</li><li>A commitment to good professional practice and continual improvement.</li><li>Documents are reviewed for adequacy and approved before issue.</li><li>Periodic review and, where necessary, update.</li><li>Changes and the current revision status are identifiable.</li><li>Relevant versions are available at the point of use; distribution is controlled.</li><li>Unintended use of obsolete documents is prevented; retained obsolete documents are marked.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Maintain a document control list with status and approval</li><li data-checked='false'>Define the approval and change process with roles</li><li data-checked='false'>Define the review cycle for documents</li><li data-checked='false'>Define how obsolete versions are marked</li></ul><h3>Relation to calServer</h3><p>The document module manages files with version and assignment; wiki articles like this one carry a revision history and can be exported as a whole, which makes preserving a state straightforward. The approval rule itself is set by the laboratory.</p><h3>Records</h3><ul><li>Document control list with revision status.</li><li>Approval notes with person and date.</li><li>Evidence of distribution and withdrawal of obsolete versions.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0022-4000-8000-000000000022",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.4 Lenkung von Aufzeichnungen",
+          "content_html": "<h2>8.4 Lenkung von Aufzeichnungen</h2><p>Aufzeichnungen belegen die Erfüllung der Anforderungen. Sie müssen lesbar bleiben, auffindbar sein und über eine festgelegte Frist geschützt aufbewahrt werden.</p><h3>Was die Norm verlangt</h3><ul><li>Aufzeichnungen sind lesbar, kennzeichnungsfähig und wiederauffindbar.</li><li>Verfahren für Identifizierung, Aufbewahrung, Schutz, Sicherung, Archivierung, Wiederauffindbarkeit, Aufbewahrungsfrist und Entsorgung.</li><li>Zugriff auf Aufzeichnungen ist geregelt.</li><li>Die Aufbewahrungsfrist berücksichtigt vertragliche und rechtliche Verpflichtungen.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Aufbewahrungsmatrix je Aufzeichnungsart erstellen</li><li data-checked='false'>Archivierungs- und Löschverfahren festlegen</li><li data-checked='false'>Lesbarkeit langfristiger elektronischer Aufzeichnungen sicherstellen</li><li data-checked='false'>Zugriffsrechte auf Archivbestände prüfen</li></ul><h3>Nachweise</h3><ul><li>Aufbewahrungsmatrix mit Fristen und Begründung.</li><li>Sicherungs- und Archivierungsprotokolle.</li><li>Nachweise über durchgeführte Löschungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.4 Control of records",
+          "content_html": "<h2>8.4 Control of records</h2><p>Records demonstrate the fulfilment of requirements. They must stay legible, be retrievable and be retained under protection for a defined period.</p><h3>What the standard requires</h3><ul><li>Records are legible, identifiable and retrievable.</li><li>Procedures for identification, storage, protection, backup, archiving, retrieval, retention time and disposal.</li><li>Access to records is controlled.</li><li>The retention period takes contractual and legal obligations into account.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Create a retention matrix per record type</li><li data-checked='false'>Define archiving and deletion procedures</li><li data-checked='false'>Ensure long-term legibility of electronic records</li><li data-checked='false'>Review access rights to archived data</li></ul><h3>Records</h3><ul><li>Retention matrix with periods and rationale.</li><li>Backup and archiving logs.</li><li>Evidence of deletions carried out.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0023-4000-8000-000000000023",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.5 Maßnahmen zum Umgang mit Risiken und Chancen",
+          "content_html": "<h2>8.5 Maßnahmen zum Umgang mit Risiken und Chancen</h2><p>Das Labor betrachtet Risiken und Chancen, die mit seinen Tätigkeiten verbunden sind, und plant Maßnahmen. Ziel ist, dass das Managementsystem die beabsichtigten Ergebnisse erreicht und unerwünschte Auswirkungen vermindert werden.</p><h3>Was die Norm verlangt</h3><ul><li>Risiken und Chancen werden ermittelt.</li><li>Maßnahmen zu deren Behandlung werden geplant.</li><li>Die Maßnahmen werden in das Managementsystem eingebunden und umgesetzt.</li><li>Die Wirksamkeit der Maßnahmen wird bewertet.</li><li>Der Umfang der Maßnahmen entspricht der möglichen Auswirkung auf die Gültigkeit der Ergebnisse.</li></ul><h3>Typische Risikofelder</h3><ul><li>Unparteilichkeit und Interessenkonflikte.</li><li>Kompetenz und Verfügbarkeit von Personal.</li><li>Ausfall kritischer Ausrüstung und Normale.</li><li>Abhängigkeit von einzelnen Lieferanten.</li><li>Datenverlust und Systemausfall.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Risikoregister mit Bewertungsmaßstab anlegen</li><li data-checked='false'>Maßnahmen mit Verantwortlichen und Terminen hinterlegen</li><li data-checked='false'>Wirksamkeitsprüfung terminieren</li><li data-checked='false'>Risiken in der Managementbewertung behandeln</li></ul><h3>Nachweise</h3><ul><li>Risikoregister mit Bewertung, Maßnahmen und Stand.</li><li>Nachweise der Wirksamkeitsprüfung.</li><li>Protokolle, in denen Risiken behandelt wurden.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.5 Actions to address risks and opportunities",
+          "content_html": "<h2>8.5 Actions to address risks and opportunities</h2><p>The laboratory considers the risks and opportunities associated with its activities and plans actions. The aim is that the management system achieves its intended results and that undesired effects are reduced.</p><h3>What the standard requires</h3><ul><li>Risks and opportunities are identified.</li><li>Actions to address them are planned.</li><li>The actions are integrated into the management system and implemented.</li><li>The effectiveness of the actions is evaluated.</li><li>Actions are proportional to the potential impact on the validity of results.</li></ul><h3>Typical risk areas</h3><ul><li>Impartiality and conflicts of interest.</li><li>Competence and availability of personnel.</li><li>Failure of critical equipment and standards.</li><li>Dependence on single suppliers.</li><li>Data loss and system outage.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Set up a risk register with an assessment scale</li><li data-checked='false'>Record actions with owners and due dates</li><li data-checked='false'>Schedule the effectiveness review</li><li data-checked='false'>Cover risks in the management review</li></ul><h3>Records</h3><ul><li>Risk register with assessment, actions and status.</li><li>Evidence of effectiveness reviews.</li><li>Minutes in which risks were addressed.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0024-4000-8000-000000000024",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.6 / 8.7 Verbesserung und Korrekturmaßnahmen",
+          "content_html": "<h2>8.6 und 8.7 Verbesserung und Korrekturmaßnahmen</h2><p>Das Labor sucht Verbesserungsmöglichkeiten und holt Rückmeldungen seiner Kunden ein. Tritt eine Abweichung auf, wird sie behandelt, ihre Ursache untersucht und die Wirksamkeit der Maßnahme bewertet.</p><h3>Verbesserung</h3><ul><li>Verbesserungsmöglichkeiten werden ermittelt und ausgewählt.</li><li>Rückmeldungen von Kunden, positive wie negative, werden eingeholt, analysiert und genutzt.</li></ul><h3>Korrekturmaßnahmen</h3><ul><li>Auf die Abweichung wird reagiert: Steuerung, Korrektur, Umgang mit den Folgen.</li><li>Die Notwendigkeit einer Ursachenbeseitigung wird bewertet, damit die Abweichung nicht wiederkehrt.</li><li>Erforderliche Maßnahmen werden umgesetzt und auf Wirksamkeit geprüft.</li><li>Risiken und Chancen werden bei Bedarf aktualisiert, das Managementsystem bei Bedarf geändert.</li><li>Korrekturmaßnahmen sind der Bedeutung der Abweichung angemessen.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Verfahren zur Ursachenanalyse festlegen, etwa 5-Why oder Ishikawa</li><li data-checked='false'>Maßnahmenliste mit Verantwortlichen und Terminen führen</li><li data-checked='false'>Wirksamkeitsprüfung verbindlich terminieren</li><li data-checked='false'>Kundenzufriedenheit regelmäßig erheben und auswerten</li></ul><h3>Nachweise</h3><ul><li>Abweichungs- und Maßnahmenakten mit Ursachenanalyse.</li><li>Nachweise der Wirksamkeitsprüfung.</li><li>Auswertungen von Kundenrückmeldungen.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.6 / 8.7 Improvement and corrective action",
+          "content_html": "<h2>8.6 and 8.7 Improvement and corrective action</h2><p>The laboratory looks for opportunities for improvement and seeks feedback from its customers. When a nonconformity occurs it is dealt with, its cause is investigated and the effectiveness of the action is evaluated.</p><h3>Improvement</h3><ul><li>Opportunities for improvement are identified and selected.</li><li>Customer feedback, positive and negative, is sought, analysed and used.</li></ul><h3>Corrective action</h3><ul><li>The nonconformity is reacted to: control, correction, dealing with the consequences.</li><li>The need to eliminate the cause is evaluated so the nonconformity does not recur.</li><li>Necessary actions are implemented and reviewed for effectiveness.</li><li>Risks and opportunities are updated where needed, the management system changed where needed.</li><li>Corrective actions are appropriate to the effects of the nonconformity.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Define the root cause method, for example 5 whys or Ishikawa</li><li data-checked='false'>Maintain an action list with owners and due dates</li><li data-checked='false'>Schedule the effectiveness review as a mandatory step</li><li data-checked='false'>Collect and analyse customer satisfaction regularly</li></ul><h3>Records</h3><ul><li>Nonconformity and action files with root cause analysis.</li><li>Evidence of effectiveness reviews.</li><li>Analyses of customer feedback.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0025-4000-8000-000000000025",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.8 Interne Audits",
+          "content_html": "<h2>8.8 Interne Audits</h2><p>Interne Audits stellen fest, ob das Managementsystem den eigenen Festlegungen und der Norm entspricht und ob es wirksam umgesetzt ist. Sie folgen einem Programm, das die Bedeutung der Prozesse und frühere Ergebnisse berücksichtigt.</p><h3>Was die Norm verlangt</h3><ul><li>Auditprogramm mit Häufigkeit, Methoden, Verantwortlichkeiten, Anforderungen und Berichterstattung.</li><li>Auditkriterien und Umfang je Audit sind festgelegt.</li><li>Die Ergebnisse werden der zuständigen Leitung berichtet.</li><li>Angemessene Korrekturen und Korrekturmaßnahmen erfolgen ohne unangemessene Verzögerung.</li><li>Aufzeichnungen des Programms und der Ergebnisse werden aufbewahrt.</li><li>Auditoren sind unabhängig von der auditierten Tätigkeit, soweit möglich.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Jahresauditplan aufstellen, der alle Normkapitel abdeckt</li><li data-checked='false'>Qualifikation der internen Auditoren nachweisen</li><li data-checked='false'>Auditchecklisten je Bereich vorbereiten</li><li data-checked='false'>Nachverfolgung offener Auditfeststellungen sicherstellen</li></ul><h3>Nachweise</h3><ul><li>Auditprogramm mit Abdeckungsnachweis.</li><li>Auditberichte mit Feststellungen und Bewertung.</li><li>Maßnahmenverfolgung bis zum Abschluss.</li><li>Qualifikationsnachweise der Auditoren.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.8 Internal audits",
+          "content_html": "<h2>8.8 Internal audits</h2><p>Internal audits establish whether the management system conforms to the laboratory's own requirements and to the standard, and whether it is effectively implemented. They follow a programme that takes the importance of processes and previous results into account.</p><h3>What the standard requires</h3><ul><li>An audit programme covering frequency, methods, responsibilities, requirements and reporting.</li><li>Audit criteria and scope are defined for each audit.</li><li>Results are reported to the relevant management.</li><li>Appropriate corrections and corrective actions are taken without undue delay.</li><li>Records of the programme and of the results are retained.</li><li>Auditors are independent of the activity audited wherever possible.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Draw up an annual audit plan covering all clauses</li><li data-checked='false'>Demonstrate the qualification of internal auditors</li><li data-checked='false'>Prepare audit checklists per area</li><li data-checked='false'>Ensure follow-up of open audit findings</li></ul><h3>Records</h3><ul><li>Audit programme with evidence of coverage.</li><li>Audit reports with findings and evaluation.</li><li>Action tracking through to closure.</li><li>Qualification records of the auditors.</li></ul>"
+        }
+      ]
+    },
+    {
+      "general_page_id": "17025000-0026-4000-8000-000000000026",
+      "pages": [
+        {
+          "language_code": "de",
+          "category_key": "iso17025-management-de",
+          "title": "8.9 Managementbewertung",
+          "content_html": "<h2>8.9 Managementbewertung</h2><p>Die Leitung bewertet das Managementsystem in geplanten Abständen, um dessen fortdauernde Eignung, Angemessenheit und Wirksamkeit zu beurteilen, einschließlich der Politik und der Ziele.</p><h3>Eingaben in die Bewertung</h3><ul><li>Änderungen interner und externer Themen, die das Labor betreffen.</li><li>Zielerreichung.</li><li>Eignung von Politik und Verfahren.</li><li>Status von Maßnahmen aus vorherigen Bewertungen.</li><li>Ergebnisse interner Audits.</li><li>Korrekturmaßnahmen.</li><li>Bewertungen durch externe Stellen.</li><li>Änderungen von Umfang und Art der Tätigkeiten.</li><li>Kundenrückmeldungen und Beschwerden.</li><li>Wirksamkeit von Verbesserungen.</li><li>Angemessenheit der Ressourcen.</li><li>Ergebnisse der Risikoermittlung.</li><li>Ergebnisse der Maßnahmen zur Sicherstellung der Validität.</li><li>Weitere relevante Faktoren wie Schulung und Vergleichsmessungen.</li></ul><h3>Ergebnisse der Bewertung</h3><ul><li>Entscheidungen zur Wirksamkeit des Managementsystems und seiner Prozesse.</li><li>Verbesserungen der Erfüllung der Normanforderungen.</li><li>Bereitstellung erforderlicher Ressourcen.</li><li>Erforderliche Änderungen.</li></ul><h3>Umsetzung im Labor</h3><ul class='wiki-todo-list'><li data-checked='false'>Feste Tagesordnung entlang der geforderten Eingaben verwenden</li><li data-checked='false'>Bewertung mindestens jährlich terminieren</li><li data-checked='false'>Beschlüsse mit Verantwortlichen und Terminen festhalten</li><li data-checked='false'>Umsetzung der Beschlüsse bis zur nächsten Bewertung verfolgen</li></ul><h3>Nachweise</h3><ul><li>Protokolle der Managementbewertung mit allen Eingaben.</li><li>Beschlussliste mit Verantwortlichen und Terminen.</li><li>Nachweis der Umsetzung der Beschlüsse.</li></ul>"
+        },
+        {
+          "language_code": "en",
+          "category_key": "iso17025-management-en",
+          "title": "8.9 Management reviews",
+          "content_html": "<h2>8.9 Management reviews</h2><p>Management reviews the management system at planned intervals to assess its continuing suitability, adequacy and effectiveness, including the policy and objectives.</p><h3>Inputs to the review</h3><ul><li>Changes in internal and external issues relevant to the laboratory.</li><li>Fulfilment of objectives.</li><li>Suitability of policies and procedures.</li><li>Status of actions from previous reviews.</li><li>Outcome of internal audits.</li><li>Corrective actions.</li><li>Assessments by external bodies.</li><li>Changes in the volume and type of work.</li><li>Customer feedback and complaints.</li><li>Effectiveness of improvements.</li><li>Adequacy of resources.</li><li>Results of risk identification.</li><li>Outcomes of the activities ensuring the validity of results.</li><li>Other relevant factors such as training and interlaboratory comparisons.</li></ul><h3>Outputs of the review</h3><ul><li>Decisions on the effectiveness of the management system and its processes.</li><li>Improvement of the fulfilment of the requirements of the standard.</li><li>Provision of required resources.</li><li>Any need for change.</li></ul><h3>Implementation</h3><ul class='wiki-todo-list'><li data-checked='false'>Use a fixed agenda following the required inputs</li><li data-checked='false'>Schedule the review at least annually</li><li data-checked='false'>Record decisions with owners and due dates</li><li data-checked='false'>Track implementation of decisions until the next review</li></ul><h3>Records</h3><ul><li>Management review minutes covering all inputs.</li><li>Decision list with owners and due dates.</li><li>Evidence that decisions were implemented.</li></ul>"
+        }
+      ]
+    }
+  ],
+  "media": []
+}

@@ -38,6 +38,14 @@ jobs:
       - name: Check Prüfplan package manifests
         run: python3 scripts/build_pruefplan_manifest.py --check
 
+      # Wiki-Pakete (calserver.wiki-package, WIKI-*): Manifest gegen
+      # schema/wiki-package.schema.json, sha256-Parität in beide Richtungen,
+      # Eintrags-Allowlist, wiki.json-Kopf sowie inhaltliche Vollständigkeit
+      # (jede Seite mit Kategorie, keine Sprache doppelt je Artikel, jedes
+      # referenzierte Bild vorhanden).
+      - name: Check Wiki package manifests
+        run: python3 scripts/build_wiki_manifest.py --check
+
       # DCC 3.3.0 Export: xmlschema erlaubt echte Validierung gegen dcc-v3.3.0.xsd
       # (mit remote SI-/dsig-Imports). Der Check überspringt die XSD-Prüfung
       # anstandslos, falls das Schema offline nicht ladbar ist.
