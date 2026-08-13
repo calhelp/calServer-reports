@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Preisliste (customer-facing), Contract "price-list" v1.0. Gefüllt aus einem
+  V2 Preisliste (customer-facing), Contract "price-list" v1.1. Gefüllt aus einem
   JSON-Datensatz — kein SQL, keine V1-Codespalten.
 
   DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
@@ -14,6 +14,13 @@
   Kalibrierpreise (Kategoriebaum mit Typausnahmen) → Zusatzleistungen →
   Standardartikel → Konditions-Fußnoten. Alle Abschnitte verschwinden
   vollständig, wenn ihr Array leer ist.
+
+  ZWEISPRACHIG (Contract 1.1): Welche der beiden Sprachen gedruckt wird,
+  entscheidet der Datensatz-Builder — `name` trägt bereits die angeforderte,
+  `name_secondary` ist nur in der Fassung "beide" gefüllt. Die Vorlage druckt,
+  was sie bekommt; eine Vorlage, die selbst zwischen drei Fassungen
+  unterscheidet, wäre drei Vorlagen in einer. Der Kopf nennt die Fassung, damit
+  man einem ausgedruckten Blatt ansieht, welche Liste man in der Hand hält.
 
   Bewusst NICHT gedruckt: `list.other_type_prices`. Das ist die gekappte Liste
   der Typpreise ohne Kategorie (Obergrenze 200) — ein Übergangsbestand auf dem
@@ -45,6 +52,9 @@
 	<field name="count_categories" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.categories]]></fieldDescription></field>
 	<field name="count_services" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.services]]></fieldDescription></field>
 	<field name="count_articles" class="java.lang.Integer"><fieldDescription><![CDATA[list.counts.articles]]></fieldDescription></field>
+	<field name="language_mode" class="java.lang.String"><fieldDescription><![CDATA[list.language.mode]]></fieldDescription></field>
+	<field name="language_primary_label" class="java.lang.String"><fieldDescription><![CDATA[list.language.primary_label]]></fieldDescription></field>
+	<field name="language_secondary_label" class="java.lang.String"><fieldDescription><![CDATA[list.language.secondary_label]]></fieldDescription></field>
 	<!--
 		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
 		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
@@ -73,6 +83,19 @@
 				</reportElement>
 				<textElement><font size="7" isItalic="true"/></textElement>
 				<textFieldExpression><![CDATA["Diese Gruppe leitet vom Listenpreis ab: " + ($F{derivation_value} != null && $F{derivation_value}.signum() >= 0 ? "+" : "") + ($F{derivation_value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{derivation_value})) + ("absolute".equals($F{derivation_mode}) ? " " + ($F{currency} == null ? "" : $F{currency}) : " %") + "."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="380" y="210" width="90" height="10">
+					<printWhenExpression><![CDATA[$F{language_mode} != null && !"primary".equals($F{language_mode})]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Sprache]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Value" x="470" y="210" width="91" height="10">
+					<printWhenExpression><![CDATA[$F{language_mode} != null && !"primary".equals($F{language_mode})]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"><font size="8"/></textElement>
+				<textFieldExpression><![CDATA["both".equals($F{language_mode}) ? ($F{language_primary_label} == null ? "" : $F{language_primary_label}) + " / " + ($F{language_secondary_label} == null ? "" : $F{language_secondary_label}) : ($F{language_secondary_label} == null ? "" : $F{language_secondary_label})]]></textFieldExpression>
 			</textField>
 			<line><reportElement x="0" y="218" width="561" height="1"/></line>
 		</band>

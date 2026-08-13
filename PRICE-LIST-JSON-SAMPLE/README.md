@@ -3,8 +3,8 @@
 Die **Preisliste**, wie ein Labor sie seinem Kunden übergibt: Kategoriebaum mit
 den geltenden Kalibrierpreisen (Typausnahmen eingerückt), Zusatzleistungen mit
 Mengenstaffel, Standardartikel und die Konditions-Fußnoten. Gefüllt aus einem
-**JSON-Datensatz** (Contract `price-list` v1.0) statt aus SQL — DB-agnostisch,
-keine V1-Codespalten.
+**JSON-Datensatz** (Contract `price-list` v1.1) statt aus SQL — DB-agnostisch,
+keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist.
 
 ## Der Briefkopf steht nicht in dieser Vorlage
 
@@ -33,17 +33,51 @@ ist ein Layout-Eingriff und gehört in die Vorlage.
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.0) |
 | `main_reports/price-list-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
-## Contract `price-list` (v1.0)
+## Zweisprachig, ohne Fallunterscheidung in der Vorlage
+
+Eine Preisliste geht an einen deutschen und an einen ausländischen Kunden.
+calServer führt dafür je Preiskategorie und je Katalogartikel einen **zweiten
+Namen**; welche Sprache das ist, entscheidet eine Einstellung des Mandanten.
+
+**Die Vorlage entscheidet nichts davon.** Der Datensatz-Builder löst die
+angeforderte Fassung auf, bevor er den Datensatz herausgibt:
+
+| Fassung (`list.language.mode`) | `name` | `name_secondary` |
+|---|---|---|
+| `primary` | der gepflegte Name | `null` |
+| `secondary` | der Name in der Zweitsprache (fehlt er: der gepflegte) | `null` |
+| `both` | der gepflegte Name | der Name in der Zweitsprache, sonst `null` |
+
+Damit folgt **jede** Vorlage der Sprachwahl, die nur `name` liest — auch eine
+selbst gebaute aus der Zeit vor 1.1. Die mitgelieferten Subreports drucken
+zusätzlich `name_secondary` als eingerückte zweite Zeile; ist das Feld leer,
+fällt die Zeile weg (`isRemoveLineWhenBlank`) und das Layout ist Punkt für
+Punkt dasselbe wie zuvor. Der Kopf nennt die Fassung („Sprache: Deutsch /
+English"), sobald sie nicht die erste ist — sonst sieht man einem Blatt auf dem
+Schreibtisch nicht an, welche Liste man in der Hand hält.
+
+Eine Fallunterscheidung in JRXML wäre der teuerste Ort dafür: drei Fassungen in
+einer Vorlage sind drei Vorlagen in einer, und jede Änderung müsste sie alle
+treffen.
+
+## Contract `price-list` (v1.1)
 
 Dataset-Builder: Laravel `PriceListReportDataBuilder`; derselbe Aufbau, den die
 Preislisten-Seite liest (`PriceListService`). Datensatz zum Vorlagenbau:
 `GET /api/v2/price-list/reports/dataset`.
 
 Der Umschlag trägt `meta` (Contract, Schema-Version, Erzeugungszeit, Locale) und
-`list` mit `group`, `date`, `currency`, `derivation`, `surcharges[]`,
-`calibration[]` (je Kategorie `number`, `name`, `depth`, `amount`, `derived`,
-`inherited_from`, `exceptions[]`, `scales[]`), `services[]`, `articles[]` und
-`counts`.
+`list` mit `group`, `date`, `currency`, `language`, `derivation`, `surcharges[]`,
+`calibration[]` (je Kategorie `number`, `name`, `name_secondary`, `depth`,
+`amount`, `derived`, `inherited_from`, `exceptions[]`, `scales[]`), `services[]`,
+`articles[]` und `counts`.
+
+`list.language` trägt `mode` (`primary` / `secondary` / `both`), `primary`,
+`primary_label`, `secondary` und `secondary_label`. `secondary` ist `null`,
+wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
+
+**Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
+`list.language` und `name_secondary` an jeder benannten Zeile.
 
 Zwei Feinheiten, die man beim Lesen des Datensatzes leicht übersieht:
 
@@ -52,6 +86,8 @@ Zwei Feinheiten, die man beim Lesen des Datensatzes leicht übersieht:
 - **`derived` heißt abgeleitet, nicht geschätzt.** Der Betrag entsteht aus der
   Kondition der Preisgruppe auf dem Listenpreis; er ist so verbindlich wie ein
   eingetragener.
+- **Gerätetypen tragen keinen Zweitnamen.** „Fluke 87V" heißt in jeder Sprache
+  so; die Typausnahmen bleiben deshalb einsprachig, auch in der Fassung `both`.
 
 ### Bewusst nicht gedruckt
 
@@ -90,5 +126,15 @@ Alle sieben JRXML übersetzen mit JasperReports 6.20.6, und der Hauptbericht
 füllt gegen `sample-data.json` durch (eine Seite). Geprüft wurde dabei auch,
 dass die zweistufige Auflösung `subDataSource("exceptions")` innerhalb des
 Kategorie-Subreports wirklich greift — die Typausnahme erscheint eingerückt
-unter ihrer Kategorie. Die pixelgenaue Abnahme des Layouts (report-runner)
-bleibt wie gehabt maßgeblich.
+unter ihrer Kategorie.
+
+Für 1.1 kam ein zweiter Lauf dazu: derselbe Datensatz einmal mit und einmal
+ohne Zweitnamen. **Ohne** sind Inhalt und Position jedes Textelements
+identisch mit der Ausgabe der 1.0-Vorlage — die zweite Zeile kostet eine
+einsprachige Liste also keinen Millimeter. Der mitgelieferte
+`sample-data.json` steht bewusst auf `mode: both` und lässt zwei Zeilen
+unübersetzt (`Klimaschrank / Ofen`, `Express-Bearbeitung`), damit beide Fälle
+in der Vorschau sichtbar sind.
+
+Die pixelgenaue Abnahme des Layouts (report-runner) bleibt wie gehabt
+maßgeblich.
