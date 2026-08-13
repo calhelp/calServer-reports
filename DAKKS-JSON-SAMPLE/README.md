@@ -109,6 +109,30 @@ python3 scripts/dcc330_writer.py \
 > `dcc330_writer.py` ist der PTB-3.3.0-Nachfolger des einfacheren
 > `dcc_xml_writer.py` (calhelp-Format).
 
+## Konformitätsspalte: welche Werte die Vorlage liest
+
+Die Spalte „Konformität" hängt an **einem** Feld: `results[].pass_fail`.
+`Results.jrxml` vergleicht den Wert (case-insensitiv, getrimmt) gegen genau
+vier Schreibweisen — MET/TEAMs `Points.cPointPassFailStatus`:
+
+| `pass_fail` | Druck | Bedeutung laut Legende |
+|-------------|-------|------------------------|
+| `Pass` | `i.T.` | in Toleranz |
+| `Fail` | `!` | außerhalb der Spezifikation |
+| `Pass Indeterminate` | `?` | innerhalb, aber mit Messunsicherheit keine Konformitätsaussage möglich |
+| `Fail Indeterminate` | `!?` | außerhalb, aber keine negative Konformitätsaussage möglich |
+
+Alles andere — auch leer, auch `P`/`F`, auch `Conditional` — druckt eine leere
+Zelle. In der Variante `MeasurementDetails=1` kommt ein zweites Gatter dazu:
+gedruckt wird nur, wenn `fsc` „EVAL" oder „PICE" enthält.
+
+Die Felder `conformity`, `test_status` und `guardband_meth` des Contracts sind
+**nicht** gebunden: das Bundle ist die byte-genaue Kopie des V1-Originals, und
+das kannte sie nicht. calServer normalisiert deshalb backendseitig nach
+`pass_fail` (`CalibrationReportDataBuilder`), bevor der Datensatz hier ankommt —
+eine Zeile, deren Entscheidung nur in `test_status` steht (MET/TRACK, alte
+V1-Laufzeit), erscheint dadurch mit Konformität statt mit leerer Spalte.
+
 ## ⚠️ Leeres/weißes Blatt?
 
 Das Bundle ist datenquellenlos. Ohne JSON-Datenquelle (Studio-Preview ohne
