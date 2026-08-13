@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  Zusatzleistungen der Preisliste, Contract "price-list" v1.0 (`list.services`).
+  Zusatzleistungen der Preisliste, Contract "price-list" v1.1 (`list.services`).
 
   Die Mengenstaffel steht nicht als eigene Tabelle, sondern als Zusatz hinter
   dem Betrag ("ab 5: −10 %") — auf einer Kundenliste ist sie eine Kondition,
   keine zweite Preiszeile. Gerendert aus `scales` über einen eingebetteten
   Subreport, damit beliebig viele Stufen mitlaufen.
+
+  ZWEISPRACHIG (Contract 1.1): `name` trägt die angeforderte Sprache,
+  `name_secondary` ist nur in der Fassung "beide" gefüllt und fällt sonst als
+  Zeile weg. Aufgelöst wird das im Datensatz-Builder, nicht hier.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-services" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0003-4000-8000-000000000003">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<parameter name="Reportpath" class="java.lang.String"/>
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
+	<field name="name_secondary" class="java.lang.String"><fieldDescription><![CDATA[name_secondary]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
 	<detail>
-		<band height="15">
+		<band height="25">
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="404" height="12"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
@@ -31,8 +36,13 @@
 				</reportElement>
 				<textFieldExpression><![CDATA[$P{Currency}]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="12" y="12" width="392" height="10" isRemoveLineWhenBlank="true"/>
+				<textElement><font size="8" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{name_secondary}]]></textFieldExpression>
+			</textField>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="12" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="0" y="22" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$P{Currency}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("scales")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-scales.jasper"]]></subreportExpression>

@@ -1,15 +1,28 @@
 {
   "meta": {
     "contract": "price-list",
-    "schema_version": "1.0",
+    "schema_version": "1.1",
     "generated_at": "2026-08-10T09:00:00+02:00",
     "locale": "de-DE"
   },
   "list": {
-    "group": { "id": "g-1", "name": "Händler" },
+    "group": {
+      "id": "g-1",
+      "name": "Händler"
+    },
     "date": "2026-08-10",
     "currency": "EUR",
-    "derivation": { "mode": "percent", "value": -15 },
+    "language": {
+      "mode": "both",
+      "primary": "de",
+      "primary_label": "Deutsch",
+      "secondary": "en",
+      "secondary_label": "English"
+    },
+    "derivation": {
+      "mode": "percent",
+      "value": -15
+    },
     "surcharges": [
       {
         "reference_id": "DAkkS",
@@ -31,6 +44,7 @@
         "id": "pk-100",
         "number": "PK100",
         "name": "Elektrische Messgeräte",
+        "name_secondary": "Electrical instruments",
         "parent_id": null,
         "depth": 0,
         "amount": null,
@@ -43,6 +57,7 @@
         "id": "pk-100-01",
         "number": "PK100.01",
         "name": "Multimeter handheld",
+        "name_secondary": "Handheld multimeter",
         "parent_id": "pk-100",
         "depth": 1,
         "amount": 84.15,
@@ -63,18 +78,26 @@
         "id": "pk-100-02",
         "number": "PK100.02",
         "name": "Multimeter Tischgerät",
+        "name_secondary": "Benchtop multimeter",
         "parent_id": "pk-100",
         "depth": 1,
         "amount": 101.15,
         "derived": true,
         "inherited_from": null,
         "exceptions": [],
-        "scales": [{ "min_quantity": 5, "price": null, "discount": 10 }]
+        "scales": [
+          {
+            "min_quantity": 5,
+            "price": null,
+            "discount": 10
+          }
+        ]
       },
       {
         "id": "pk-200",
         "number": "PK200",
         "name": "Temperatur",
+        "name_secondary": "Temperature",
         "parent_id": null,
         "depth": 0,
         "amount": null,
@@ -87,6 +110,7 @@
         "id": "pk-200-01",
         "number": "PK200.01",
         "name": "Temperaturfühler",
+        "name_secondary": "Temperature sensor",
         "parent_id": "pk-200",
         "depth": 1,
         "amount": 50.15,
@@ -99,38 +123,69 @@
         "id": "pk-200-02",
         "number": "PK200.02",
         "name": "Klimaschrank / Ofen",
+        "name_secondary": null,
         "parent_id": "pk-200",
         "depth": 1,
         "amount": 296.65,
         "derived": false,
-        "inherited_from": { "id": "pk-200", "name": "Temperatur" },
+        "inherited_from": {
+          "id": "pk-200",
+          "name": "Temperatur",
+          "name_secondary": "Temperature"
+        },
         "exceptions": [],
         "scales": []
       }
     ],
-    "other_type_prices": { "count": 0, "truncated": false, "entries": [] },
+    "other_type_prices": {
+      "count": 0,
+      "truncated": false,
+      "entries": []
+    },
     "services": [
       {
         "id": "sv-1",
         "name": "Zusätzlicher Messpunkt",
+        "name_secondary": "Additional measuring point",
         "amount": 25.0,
         "variants": [],
         "scales": [
-          { "min_quantity": 5, "price": null, "discount": 10 },
-          { "min_quantity": 10, "price": null, "discount": 20 }
+          {
+            "min_quantity": 5,
+            "price": null,
+            "discount": 10
+          },
+          {
+            "min_quantity": 10,
+            "price": null,
+            "discount": 20
+          }
         ]
       },
       {
         "id": "sv-2",
         "name": "Express-Bearbeitung",
+        "name_secondary": null,
         "amount": 60.0,
         "variants": [],
         "scales": []
       }
     ],
     "articles": [
-      { "id": "a-1", "name": "Gerät reinigen", "amount": 12.0, "unit": "EA" },
-      { "id": "a-2", "name": "Versandpauschale", "amount": 9.5, "unit": "EA" }
+      {
+        "id": "a-1",
+        "name": "Gerät reinigen",
+        "name_secondary": "Device cleaning",
+        "amount": 12.0,
+        "unit": "EA"
+      },
+      {
+        "id": "a-2",
+        "name": "Versandpauschale",
+        "name_secondary": "Shipping flat rate",
+        "amount": 9.5,
+        "unit": "EA"
+      }
     ],
     "counts": {
       "categories": 6,

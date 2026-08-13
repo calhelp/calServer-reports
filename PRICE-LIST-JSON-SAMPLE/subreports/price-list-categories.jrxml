@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  Kategoriebaum der Preisliste, Contract "price-list" v1.0. Eine Zeile je
+  Kategoriebaum der Preisliste, Contract "price-list" v1.1. Eine Zeile je
   Preiskategorie aus `list.calibration`; die Baumtiefe steckt als Zahl in
   `depth` und wird als Einrückung gerechnet (der Datensatz ist bereits in
   Baumreihenfolge sortiert — hier wird nicht umsortiert).
@@ -11,6 +11,13 @@
 
   Typausnahmen hängen als Array `exceptions` an der Kategorie und laufen über
   einen eingebetteten Subreport — die einzige zweistufige Stelle des Bündels.
+
+  ZWEISPRACHIG (Contract 1.1): `name` trägt bereits die angeforderte Sprache —
+  der Datensatz-Builder löst das auf, nicht diese Vorlage. `name_secondary` ist
+  nur in der Fassung "beide" gefüllt und erscheint dann als zweite Zeile unter
+  der Bezeichnung; sonst fällt die Zeile weg (isRemoveLineWhenBlank) und die
+  Vorlage druckt wie zuvor. Deshalb steht hier keine Fallunterscheidung: JRXML
+  ist der teuerste Ort dafür.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-categories" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0001-4000-8000-000000000001">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
@@ -18,12 +25,13 @@
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
 	<field name="number" class="java.lang.String"><fieldDescription><![CDATA[number]]></fieldDescription></field>
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
+	<field name="name_secondary" class="java.lang.String"><fieldDescription><![CDATA[name_secondary]]></fieldDescription></field>
 	<field name="depth" class="java.lang.Integer"><fieldDescription><![CDATA[depth]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
 	<field name="derived" class="java.lang.Boolean"><fieldDescription><![CDATA[derived]]></fieldDescription></field>
 	<field name="inherited_from_name" class="java.lang.String"><fieldDescription><![CDATA[inherited_from.name]]></fieldDescription></field>
 	<detail>
-		<band height="15">
+		<band height="25">
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="70" height="12">
 					<printWhenExpression><![CDATA[$F{depth} != null && $F{depth}.intValue() == 0]]></printWhenExpression>
@@ -67,8 +75,13 @@
 				<textElement textAlignment="Right"><font size="6"/></textElement>
 				<textFieldExpression><![CDATA[($F{derived} != null && $F{derived}.booleanValue() ? "abgel." : "") + ($F{inherited_from_name} != null ? " geerbt" : "")]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="86" y="12" width="318" height="10" isRemoveLineWhenBlank="true"/>
+				<textElement><font size="8" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{name_secondary}]]></textFieldExpression>
+			</textField>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="12" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="0" y="22" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$P{Currency}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("exceptions")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-exceptions.jasper"]]></subreportExpression>
