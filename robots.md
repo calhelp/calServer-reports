@@ -142,7 +142,7 @@ valid Prüfplan bundle end-to-end from this section alone.
 ## 0.4) Wiki packages (`calserver.wiki-package`) — MUST
 
 This repo also hosts **Wiki bundles** (knowledge-base templates for calServer
-V2, e.g. the ISO/IEC 17025 quality-management skeleton). Like the Prüfplan
+V2, e.g. the ISO/IEC 17025 quality-management manual starter). Like the Prüfplan
 bundles they are a **separate bundle class**: NO JasperReports involved, none
 of the report rules (sections 0.1, 1, 2, 6) apply. An AI agent should be able
 to author a valid Wiki bundle end-to-end from this section alone.
@@ -190,13 +190,22 @@ in calhelp/calServer-yii.
   frozen HTML island. Useful markup: `<h2>`/`<h3>`, `<p>`, `<ul>`/`<ol>`,
   `<table>`, plus `<ul class='wiki-todo-list'><li data-checked='false'>` for a
   checklist. Use single quotes for attributes so the JSON stays readable.
+  One conversion limit worth knowing: a `<table>` with `colspan`/`rowspan`
+  stays an `html` block (the block editor has no merged cells). Content is
+  preserved, editing is markup-level — so use merged cells only where the
+  table really needs them (a summing row, say).
 - **Images** live in `media/` and are declared in the top-level `media[]` array
   (`id`, `file`, `filename`, `mime_type`, `kind`); blocks reference them by
   `props.mediaId`, never by file name. `--check` enforces that every referenced
   ID is declared and every declared file exists.
-- Write the template as a **skeleton, not a finished manual**: state the
-  requirement, give a checklist, name the records. Say so in the README — an
-  unchanged skeleton proves nothing to an accreditation body.
+- Write the template as a **starter, not a finished manual**. Two shapes work:
+  the requirement plus checklist and records, or the manual text itself with
+  every lab-specific detail as a bracketed placeholder (`[Laborname]`,
+  `[Turnus]`) and a "adapt before release" callout at the top of each page.
+  Never invent lab-specific facts (scope rows, uncertainty figures, intervals)
+  as if they were real; mark example rows as examples. Say so in the README —
+  an unchanged template proves nothing to an accreditation body, and leftover
+  placeholders stand out in an audit.
 
 ### Manifest (MUST)
 - NEVER edit `manifest.json` by hand and NEVER invent sha256 values.
