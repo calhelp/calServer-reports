@@ -1,22 +1,27 @@
-# Wiki: QM-Gerüst nach ISO/IEC 17025
+# Wiki: QM-Handbuch nach ISO/IEC 17025 (Startvorlage)
 
-Gerüst für die Managementdokumentation eines Kalibrier- oder Prüflabors,
-gegliedert nach den Kapiteln 4 bis 8 der DIN EN ISO/IEC 17025:2018 — **26
-Artikel in je zwei Sprachen** (Deutsch und Englisch), verteilt auf sechs
-Kategorien je Sprache, im Format `calserver.wiki` (Version 1), paketiert als
+Startvorlage für das Qualitätsmanagementhandbuch eines Kalibrierlabors,
+gegliedert nach DIN EN ISO/IEC 17025:2018-03 — **14 Kapitel (QMH-00 bis
+QMH-13) in je zwei Sprachen** (Deutsch und Englisch), je Sprache eine
+Kategorie, im Format `calserver.wiki` (Version 1), paketiert als
 `calserver.wiki-package`.
 
-Jeder Artikel nennt die Anforderung in eigenen Worten, eine
-Umsetzungs-Checkliste als Aufgabenliste und die Nachweise, die im Audit
-verlangt werden. Wo es passt, benennt er das calServer-Modul, in dem der
-Nachweis entsteht.
+Anders als eine Kapitelübersicht der Norm ist das hier der **Handbuchtext
+selbst**: durchformulierte Abschnitte, in denen alles Laborspezifische als
+Platzhalter in eckigen Klammern steht (`[Laborname]`, `[DAkkS-Registriernummer]`,
+`[Turnus]`). Jede Seite beginnt mit einem Hinweisblock „Vorlage – vor der
+Freigabe anpassen", der auflistet, was zu ersetzen und was zu entscheiden ist.
+Tabellen bringen die Struktur mit (Dokumentenkopf, Akkreditierungsumfang,
+Rollenmatrix, Rückführungsplan, Unsicherheitsbudget, Aufbewahrungsfristen);
+ihre Zeilen sind als Beispiel gekennzeichnet und werden vor der Freigabe
+überschrieben.
 
 ## Paketinhalt
 
 | Datei | Zweck |
 | --- | --- |
 | `manifest.json` | Manifest: jede Datei mit SHA-256-Prüfsumme und Größe |
-| `wiki.json` | Das Wiki (12 Kategorien, 26 Artikel, 52 Seiten) |
+| `wiki.json` | Das Wiki (2 Kategorien, 14 Artikel, 28 Seiten) |
 | `README.md` | Diese Beschreibung |
 
 Das Manifest ist der Manipulationsanker des Formats: calServer lehnt beim
@@ -29,18 +34,36 @@ Vorlage Bilder mitbringt.
 
 ## Aufbau
 
-| Kategorie | Normkapitel | Artikel |
-| --- | --- | --- |
-| ISO 17025 – Überblick | – | Die Norm im Überblick |
-| ISO 17025 – Allgemeine Anforderungen | 4 | Unparteilichkeit, Vertraulichkeit |
-| ISO 17025 – Strukturelle Anforderungen | 5 | Struktur und Verantwortlichkeiten |
-| ISO 17025 – Ressourcen | 6 | Personal, Räumlichkeiten, Ausrüstung, Rückführbarkeit, externe Leistungen |
-| ISO 17025 – Prozessanforderungen | 7 | Auftragsprüfung, Methoden, Probenahme, Prüfgegenstände, technische Aufzeichnungen, Messunsicherheit, Validität, Berichte, Beschwerden, nichtkonforme Arbeit, Datenlenkung |
-| ISO 17025 – Managementsystem | 8 | Dokumentenlenkung, Aufzeichnungen, Risiken, Verbesserung, interne Audits, Managementbewertung |
+Alle Kapitel liegen in einer Kategorie je Sprache — „Laborhandbuch DIN EN
+ISO/IEC 17025:2018 (Vorlage)" bzw. „Laboratory Manual DIN EN ISO/IEC 17025:2018
+(Template)". Die Nummerierung QMH-00 bis QMH-13 gibt die Reihenfolge vor.
 
-Dieselben sechs Kategorien gibt es auf Englisch; die Sprachvarianten eines
-Artikels hängen an derselben `general_page_id` und erscheinen in calServer als
+| Kapitel | Inhalt | Normkapitel |
+| --- | --- | --- |
+| QMH-00 | Deckblatt, Platzhalter, Kapitelübersicht und Dokumentenlenkung | 8.3, 8.4 |
+| QMH-01 | Anwendungsbereich und Akkreditierungsumfang | 1, 5 |
+| QMH-02 | Unparteilichkeit und Vertraulichkeit | 4.1, 4.2 |
+| QMH-03 | Organisation und Verantwortlichkeiten | 5 |
+| QMH-04 | Personal und Qualifikation | 6.2 |
+| QMH-05 | Räumlichkeiten und Umgebungsbedingungen | 6.3 |
+| QMH-06 | Ausrüstung und Normale | 6.4 |
+| QMH-07 | Metrologische Rückführbarkeit und externe Leistungen | 6.5, 6.6 |
+| QMH-08 | Auftragsabwicklung und Kalibrierverfahren | 7.1, 7.2, 7.4 |
+| QMH-09 | Ermittlung der Messunsicherheit | 7.6 (GUM, EA-4/02) |
+| QMH-10 | Sicherstellung der Validität der Ergebnisse | 7.7 |
+| QMH-11 | Kalibrierscheine und Konformitätsaussagen | 7.8 (ILAC-G8) |
+| QMH-12 | Beschwerden, nichtkonforme Arbeit und Korrekturmaßnahmen | 7.9, 7.10, 8.7 |
+| QMH-13 | Risiken und Chancen, interne Audits, Managementbewertung | 8.5, 8.8, 8.9 |
+
+Die englische Fassung trägt dieselben Nummern (`QMH-00 Cover Page,
+Placeholders and Document Control` und so weiter). Die Sprachvarianten eines
+Kapitels hängen an derselben `general_page_id` und erscheinen in calServer als
 Übersetzungen desselben Artikels.
+
+Wo ein Kapitel einen Nachweis beschreibt, der in calServer entsteht (Normale
+und Rückführbarkeit, Prüfmittelüberwachung, Kalibrierscheine, Beschwerden),
+benennt es das Modul — als Hinweis auf die Stelle, nicht als Aussage über
+Konformität.
 
 ## Import in calServer V2
 
@@ -61,19 +84,29 @@ Vorlage übernehmen will, importiert mit `--mode=overwrite`; der Paketinhalt
 wird dann als **neue Revision** angelegt, die bisherige Fassung bleibt in der
 Historie.
 
-## Wichtig: ein Gerüst, kein QM-Handbuch
+Die Seiten liegen als HTML im Paket und werden beim Import in Blöcke
+umgewandelt — sie sind also im Blockeditor bearbeitbar, nicht als HTML-Insel
+eingefroren. Einzige Ausnahme sind Tabellen mit verbundenen Zellen (das
+Unsicherheitsbudget in QMH-09): die bleiben ein HTML-Block, weil der
+Blockeditor keine `colspan` kennt.
 
-Die Texte sind ein Ausgangspunkt. Sie müssen an das eigene Labor angepasst
-werden:
+## Wichtig: eine Startvorlage, kein fertiges Handbuch
 
-- Verantwortliche Person je Kapitel eintragen
+Der Text ist ein Ausgangspunkt und muss vor der Freigabe an das eigene Labor
+angepasst werden:
+
+- Platzhaltertabelle in QMH-00 ausfüllen und die Platzhalter in allen Kapiteln
+  ersetzen
+- Beispielzeilen in den Tabellen (Akkreditierungsumfang, Normale,
+  Unsicherheitsbudget) durch die eigenen Angaben ersetzen
+- Kapitel streichen, die nicht zutreffen (etwa Probenahme oder
+  Vor-Ort-Kalibrierung), statt sie leer stehen zu lassen
 - Verweise auf die eigenen Verfahrensanweisungen ergänzen
-- Nicht zutreffende Abschnitte begründet streichen statt leer stehen lassen
+- Freigabezeile besetzen: erstellt / geprüft / freigegeben mit Datum
 
-Ein unverändert übernommenes Gerüst belegt gegenüber einer
-Akkreditierungsstelle nichts. Wo ein Artikel ein calServer-Modul benennt, ist
-das ein Hinweis auf die Stelle, an der der Nachweis entsteht, keine Aussage
-über Konformität.
+Ein unverändert übernommenes Handbuch belegt gegenüber einer
+Akkreditierungsstelle nichts — im Gegenteil, stehengebliebene Platzhalter
+fallen im Audit sofort auf.
 
 ## Mitwirken
 
@@ -85,3 +118,7 @@ Korrekturen und Ergänzungen gern per Pull Request. Nach jeder Änderung an
 python3 scripts/build_wiki_manifest.py --write WIKI-ISO-17025
 python3 scripts/build_wiki_manifest.py --check
 ```
+
+Die `general_page_id` eines Kapitels bleibt dabei unangetastet: eine neue UUID
+machte aus einem überarbeiteten Kapitel auf jeder Installation, die die Vorlage
+schon importiert hat, ein zweites.

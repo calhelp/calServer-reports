@@ -250,7 +250,7 @@ jobs:
               "price-list-json-sample":             "Preisliste (APEX · V2)",
               "pruefplan-fluke-23":                 "Prüfplan: Fluke 23 Series II mit Fluke 5520A",
               "pruefplan-messschieber-150mm":       "Prüfplan: Messschieber 150 mm mit Endmaßsatz",
-              "wiki-iso-17025":                     "Wiki: QM-Gerüst nach ISO/IEC 17025",
+              "wiki-iso-17025":                     "Wiki: QM-Handbuch nach ISO/IEC 17025 (Startvorlage)",
           }
 
           INFO_TEMPLATE = """<!doctype html>

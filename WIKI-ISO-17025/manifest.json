@@ -2,35 +2,35 @@
   "$schema": "https://calhelp.github.io/calServer-reports/schema/wiki-package.schema.json",
   "format": "calserver.wiki-package",
   "format_version": 1,
-  "name": "Wiki: QM-Gerüst nach ISO/IEC 17025",
+  "name": "Wiki: QM-Handbuch nach ISO/IEC 17025 (Startvorlage)",
   "document": {
     "format": "calserver.wiki",
     "version": 1
   },
   "content": {
-    "categories": 12,
-    "articles": 26,
-    "pages": 52,
+    "categories": 2,
+    "articles": 14,
+    "pages": 28,
     "media": 0,
     "languages": [
       "de",
       "en"
     ]
   },
-  "created_at": "2026-08-13T12:00:00+00:00",
+  "created_at": "2026-08-14T12:00:00+00:00",
   "generator": "calserver-reports",
   "locale": "de",
   "files": [
     {
       "path": "wiki.json",
-      "sha256": "5735273ab1e26b8f0f85db59fae0a52e980eced7ba9244415fdec09d4a58c46c",
-      "size_bytes": 99376
+      "sha256": "be4fb2dde12258402fa4cd8d907949488244be834bde03859e92ae44298ccd9b",
+      "size_bytes": 95704
     },
     {
       "path": "README.md",
-      "sha256": "dd25f9ba77052267688d1ab4a3a8f3691ed2734ceceb5bf605581e6dcb2c471f",
-      "size_bytes": 3789
+      "sha256": "c9b33f73881fd6e2da065847097faf44721ddf503edb29c550d147f8ba6f267d",
+      "size_bytes": 5748
     }
   ],
-  "description": "26 Artikel entlang der Kapitel 4 bis 8 der DIN EN ISO/IEC 17025:2018, je in Deutsch und Englisch, in sechs Kategorien je Sprache. Anforderung, Umsetzungs-Checkliste und Nachweise je Artikel."
+  "description": "Startvorlage für das QM-Handbuch eines Kalibrierlabors: 14 Kapitel (QMH-00 bis QMH-13) nach DIN EN ISO/IEC 17025:2018-03, je in Deutsch und Englisch. Durchformulierter Handbuchtext mit Platzhaltern in eckigen Klammern, Hinweisblock je Kapitel und Tabellen zum Ausfüllen (Akkreditierungsumfang, Rollen, Rückführung, Unsicherheitsbudget)."
 }
