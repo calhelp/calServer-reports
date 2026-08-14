@@ -128,7 +128,7 @@ für optionale Parameter.
 | --- | --- | --- | --- |
 | `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
 | `MeasurementDetails` | ➖ | `1` | Wählt eines der vier Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2` formatierte Eingaben, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere oder nicht-numerische Eingaben werden als `1` behandelt. |
-| `ModernResultsHeader` | ➖ | `N` | Schaltet im `Results`-Unterbericht den modernen Tabellen­kopf ein (`Y`) oder behält den klassischen Kopf bei (`N`). |
+| `ModernResultsHeader` | ➖ | `Y` | Tabellenkopf-Stil im `Results`-Unterbericht. Standard ist der moderne Kopf ohne umlaufende Rahmen (gilt auch für leere oder unbekannte Werte); nur ein explizites `N` schaltet auf den klassischen Kopf mit Rahmen zurück. Beide Stile sind je `MeasurementDetails`-Variante an den Datenspalten ausgerichtet. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
 | `environmental_conditions` | ➖ | `""` | Optionaler Freitext für Umgebungs­temperatur und relative Luft­feuchte im Format `Text_Temperatur \| Text_Feuchte`. Ersetzt die Werte aus `C2311`/`C2312`, wenn angegeben. Ist ein Ressourcen­name übergeben, werden Temperatur und Feuchte aus `resource.environment_resources` derselben Zeile übernommen. |
 
@@ -223,6 +223,10 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   * `SymbolStatus` leitet aus `pass_fail` die Konformitäts­symbolik
     (`iO`, `?`, `!?`, `!`) ab, sofern kein individueller Kommentar (`remark`)
     hinterlegt ist.
+  * Der Tabellenkopf existiert je `MeasurementDetails`-Variante in einer
+    modernen (Standard, ohne umlaufende Rahmen) und einer klassischen
+    Ausführung (`ModernResultsHeader=N`); beide sind an den Datenspalten
+    der jeweiligen Variante ausgerichtet.
 * **Frame-Auswahl über `MeasurementDetails`** – siehe Parameter­tabelle, Abschnitt 4.4.
 
 ### 5.3 Integration & Pflege

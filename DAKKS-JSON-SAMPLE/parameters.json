@@ -283,8 +283,8 @@
         "en": "Modern table header"
       },
       "description": {
-        "de": "„Y“ schaltet die moderne Kopfvariante der Ergebnistabelle ein.",
-        "en": "\"Y\" enables the modern header variant of the results table."
+        "de": "Standard ist der moderne Tabellenkopf ohne umlaufende Rahmen; nur ein explizites „N“ schaltet auf den klassischen Kopf zurück.",
+        "en": "The modern header without surrounding rules is the default; only an explicit \"N\" switches back to the classic header."
       },
       "role": "variable",
       "group": "Ergebnistabelle",
@@ -292,21 +292,21 @@
       "input": "select",
       "options": [
         {
-          "value": "N",
-          "label": {
-            "de": "klassisch",
-            "en": "classic"
-          }
-        },
-        {
           "value": "Y",
           "label": {
             "de": "modern",
             "en": "modern"
           }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "klassisch",
+            "en": "classic"
+          }
         }
       ],
-      "default": "N"
+      "default": "Y"
     },
     {
       "name": "ExpUncType",

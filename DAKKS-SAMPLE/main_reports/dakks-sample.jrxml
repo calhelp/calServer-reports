@@ -33,8 +33,8 @@
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ModernResultsHeader" class="java.lang.String">
-		<parameterDescription><![CDATA[Schaltet den modernen Tabellenkopf im Results-Unterbericht ein (Y/N).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+		<parameterDescription><![CDATA[Tabellenkopf-Stil im Results-Unterbericht: Standard ist der moderne Kopf ohne umlaufende Rahmen; nur ein explizites "N" schaltet auf den klassischen Kopf mit Rahmen zurück.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ReportVariantCode" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Ressourcenname für Layoutvarianten. Wenn die gefundene Ressource report_template = 1 hat, wird Variante 1 aktiviert, sonst Variante 0 (Standard).]]></parameterDescription>
