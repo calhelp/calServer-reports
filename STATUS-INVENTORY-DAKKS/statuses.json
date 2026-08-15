@@ -1,0 +1,90 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "inventory"
+  ],
+  "statuses": [
+    {
+      "key": "inventory-in-betrieb",
+      "type": "inventory",
+      "title": "In Betrieb",
+      "short_title": "BET",
+      "description": "Gerät ist einsatzbereit und kalibriert.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check",
+      "sort_order": 10,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "inventory-eingelagert",
+      "type": "inventory",
+      "title": "Eingelagert",
+      "short_title": "LAG",
+      "description": "Reserve; einsatzbereit, aber nicht in Verwendung.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-box",
+      "sort_order": 20,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "inventory-in-kalibrierung",
+      "type": "inventory",
+      "title": "In Kalibrierung",
+      "short_title": "KAL",
+      "description": "Gerät ist zur Kalibrierung außer Haus oder im Labor gebunden.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-sync",
+      "sort_order": 30,
+      "active": false,
+      "hide": false
+    },
+    {
+      "key": "inventory-in-reparatur",
+      "type": "inventory",
+      "title": "In Reparatur",
+      "short_title": "REP",
+      "description": "Gerät ist in Instandsetzung.",
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-wrench",
+      "sort_order": 40,
+      "active": false,
+      "hide": false
+    },
+    {
+      "key": "inventory-gesperrt",
+      "type": "inventory",
+      "title": "Gesperrt",
+      "short_title": "SPR",
+      "description": "Nicht verwenden: Kalibrierung nicht bestanden, Schaden oder Verdacht darauf.",
+      "color": "#991B1B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-ban",
+      "sort_order": 50,
+      "active": false,
+      "hide": false
+    },
+    {
+      "key": "inventory-ausgesondert",
+      "type": "inventory",
+      "title": "Ausgesondert",
+      "short_title": "AUS",
+      "description": "Endgültig aus dem Bestand genommen; Historie bleibt erhalten.",
+      "color": "#3F3F46",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-trash",
+      "sort_order": 60,
+      "active": false,
+      "hide": true
+    }
+  ],
+  "transitions": [],
+  "processing_times": []
+}

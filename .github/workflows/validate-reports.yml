@@ -46,6 +46,14 @@ jobs:
       - name: Check Wiki package manifests
         run: python3 scripts/build_wiki_manifest.py --check
 
+      # Konfigurationspakete (calserver.category-package /
+      # calserver.status-package, CATEGORY-*/STATUS-*): Manifest gegen das
+      # jeweilige Schema, sha256-Parität in beide Richtungen,
+      # Eintrags-Allowlist sowie inhaltliche Prüfungen (Schlüssel eindeutig,
+      # parent_key aufloesbar, Folgeaktionen zeigen auf Status des Pakets).
+      - name: Check config package manifests
+        run: python3 scripts/build_config_manifest.py --check
+
       # DCC 3.3.0 Export: xmlschema erlaubt echte Validierung gegen dcc-v3.3.0.xsd
       # (mit remote SI-/dsig-Imports). Der Check überspringt die XSD-Prüfung
       # anstandslos, falls das Schema offline nicht ladbar ist.

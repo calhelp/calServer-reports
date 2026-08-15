@@ -85,6 +85,16 @@ TRACE-BACKWARD/
 STICKERS/
 └── ...                 # Aufkleber- und Etikettenvorlagen (versch. Formate)
 
+CATEGORY-INVENTORY-DAKKS/
+├── categories.json     # Inventar-Kategoriebaum (Messgröße → Normalstufe)
+├── manifest.json       # sha256 je Datei
+└── README.md
+
+STATUS-CALIBRATION-DAKKS/, STATUS-INVENTORY-DAKKS/
+├── statuses.json       # Statusmodell samt Feldfunktionen je Status
+├── manifest.json
+└── README.md
+
 PRUEFPLAN-*/
 └── ...                 # Prüfplan-Pakete für calServer V2 — kein Jasper
                         # (calserver.procedure-package, robots.md §0.3)
@@ -102,11 +112,14 @@ pages/
 schema/
 ├── report-parameters.schema.json   # JSON-Schema für parameters.json (V2-JSON-Bundles)
 ├── procedure-package.schema.json   # Manifest-Schema der Prüfplan-Pakete
+├── category-package.schema.json    # Manifest-Schema der Kategorie-Pakete
+├── status-package.schema.json      # Manifest-Schema der Status-Pakete
 └── wiki-package.schema.json        # Manifest-Schema der Wiki-Vorlagen
 
 scripts/
 ├── check_jasper_version.sh         # Prüft JRXML-Versionen auf 6.20.6
 ├── check_parameters_manifest.py    # CI-Validator für parameters.json-Manifeste
+├── build_config_manifest.py        # Manifest-Werkzeug der Kategorie-/Status-Pakete (--write/--check)
 ├── generate_parameters_manifest.py # Erzeugt ein parameters.json-Gerüst aus dem Haupt-JRXML
 ├── dakks_upload_sample.bat         # Beispielskript für den automatisierten Report-Upload
 ├── dcc_upload_sample.bat           # Upload-Beispiel für DCC-Reports
@@ -247,7 +260,7 @@ Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API d
 
 ## 📦 Download der aktuellen Vorlagenpakete
 
-Die [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) ist die Vorlagenseite für calServer: Berichte sind ein Teil davon, daneben stehen dort Sticker und Etiketten, Prüfpläne und Wiki-Vorlagen. Sortiert wird thematisch. calServer V2 ist der Standard und wird nicht eigens gekennzeichnet; die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie **„calServer V1 (Legacy)"** am Ende der Seite.
+Die [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) ist die Vorlagenseite für calServer: Berichte sind ein Teil davon, daneben stehen dort Sticker und Etiketten, Prüfpläne, Kategoriebäume, Statusmodelle und Wiki-Vorlagen. Sortiert wird thematisch. calServer V2 ist der Standard und wird nicht eigens gekennzeichnet; die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie **„calServer V1 (Legacy)"** am Ende der Seite.
 
 Alle aktuellen und früheren ZIP-Archive stehen zusätzlich als Release-Pakete zur Verfügung:
 

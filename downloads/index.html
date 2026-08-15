@@ -13,7 +13,7 @@
           <p class="page__eyebrow">Immer der aktuelle Build</p>
           <h1>Vorlagen für calServer</h1>
           <p class="page__subhead">
-            Fertige Vorlagenpakete für <a href="https://calserver.com">calServer</a>: Berichte, Sticker und Etiketten, Prüfpläne und Wiki-Vorlagen. Jedes Paket wird im passenden Bereich von calServer importiert und dort weiter angepasst; die Info-Seiten nennen die verfügbaren Parameter. Standard ist calServer V2. Die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie „calServer V1 (Legacy)“.
+            Fertige Vorlagenpakete für <a href="https://calserver.com">calServer</a>: Berichte, Sticker und Etiketten, Prüfpläne, Kategoriebäume, Statusmodelle und Wiki-Vorlagen. Jedes Paket wird im passenden Bereich von calServer importiert und dort weiter angepasst; die Info-Seiten nennen die verfügbaren Parameter. Standard ist calServer V2. Die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie „calServer V1 (Legacy)“.
           </p>
         </div>
         <div class="page__meta" id="page-meta"></div>
@@ -85,6 +85,14 @@
           note: "Prüfplan-Pakete, keine Berichte. Import unter Kalibrierungen → Prüfpläne.",
         },
         {
+          name: "Kategorien",
+          note: "Kategoriebäume samt Feldfunktionen je Kategorie. Import unter Administration → Kategorien.",
+        },
+        {
+          name: "Status",
+          note: "Statusmodelle je Modul: Statusliste, Feldfunktionen, Folgeaktionen. Import unter Administration → Statusverwaltung.",
+        },
+        {
           name: "Wiki-Vorlagen",
           note: "Wiki-Pakete, keine Berichte. Import unter Wiki → Importieren.",
         },
@@ -101,11 +109,15 @@
       const getCategory = (artifactName = "") => {
         const name = artifactName.toLowerCase();
 
-        // Prüfplan- und Wiki-Pakete sind eigene Bundle-Klassen ohne Jasper —
-        // Prüfung VOR allen Report-Regeln, damit kein späterer Teilstring-
-        // Treffer sie einsammelt.
+        // Prüfplan-, Wiki- und Konfigurationspakete sind eigene Bundle-Klassen
+        // ohne Jasper — Prüfung VOR allen Report-Regeln, damit kein späterer
+        // Teilstring-Treffer sie einsammelt. „status-" trifft sonst nichts,
+        // „category-" dagegen sehr wohl (die Sticker-Regel greift auf
+        // „cal-inv"), deshalb stehen beide hier oben.
         if (name.includes("pruefplan")) return "Prüfpläne";
         if (name.startsWith("wiki-")) return "Wiki-Vorlagen";
+        if (name.startsWith("category-")) return "Kategorien";
+        if (name.startsWith("status-")) return "Status";
 
         // Alles Übrige ist ein Report-Bundle. V2 (JSON-Datenquelle, Suffix
         // -json-sample) ist der Standard und wird thematisch einsortiert,

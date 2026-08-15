@@ -1,0 +1,823 @@
+{
+  "format": "calserver.categories",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "inventory"
+  ],
+  "categories": [
+    {
+      "key": "elektrisch",
+      "type": "inventory",
+      "name": "Elektrische Messgrößen",
+      "short_name": "ELEK",
+      "parent_key": null,
+      "sort_num": 10,
+      "color": "#1D4ED8",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Gleich- und Wechselspannung, Strom, Widerstand, Kapazität, Induktivität."
+    },
+    {
+      "key": "elektrisch-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "ELEK-BEZ",
+      "parent_key": "elektrisch",
+      "sort_num": 10,
+      "color": "#1D4ED8",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Elektrische Messgrößen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "elektrisch-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "ELEK-GEB",
+      "parent_key": "elektrisch",
+      "sort_num": 20,
+      "color": "#1D4ED8",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Elektrische Messgrößen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "elektrisch-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "ELEK-PRF",
+      "parent_key": "elektrisch",
+      "sort_num": 30,
+      "color": "#1D4ED8",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Elektrische Messgrößen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "laenge",
+      "type": "inventory",
+      "name": "Länge und Winkel",
+      "short_name": "LAEN",
+      "parent_key": null,
+      "sort_num": 20,
+      "color": "#0F766E",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Dimensionelle Messtechnik: Endmaße, Messschieber, Messuhren, Winkelnormale."
+    },
+    {
+      "key": "laenge-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "LAEN-BEZ",
+      "parent_key": "laenge",
+      "sort_num": 10,
+      "color": "#0F766E",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Länge und Winkel)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "laenge-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "LAEN-GEB",
+      "parent_key": "laenge",
+      "sort_num": 20,
+      "color": "#0F766E",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Länge und Winkel)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "laenge-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "LAEN-PRF",
+      "parent_key": "laenge",
+      "sort_num": 30,
+      "color": "#0F766E",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Länge und Winkel)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "temperatur",
+      "type": "inventory",
+      "name": "Temperatur und Feuchte",
+      "short_name": "TEMP",
+      "parent_key": null,
+      "sort_num": 30,
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Thermometer, Fühler, Kalibrierbäder, Klimasensoren."
+    },
+    {
+      "key": "temperatur-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "TEMP-BEZ",
+      "parent_key": "temperatur",
+      "sort_num": 10,
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Temperatur und Feuchte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "temperatur-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "TEMP-GEB",
+      "parent_key": "temperatur",
+      "sort_num": 20,
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Temperatur und Feuchte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "temperatur-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "TEMP-PRF",
+      "parent_key": "temperatur",
+      "sort_num": 30,
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Temperatur und Feuchte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "druck",
+      "type": "inventory",
+      "name": "Druck und Vakuum",
+      "short_name": "DRCK",
+      "parent_key": null,
+      "sort_num": 40,
+      "color": "#6D28D9",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Manometer, Druckwaagen, Drucksensoren, Vakuummesstechnik."
+    },
+    {
+      "key": "druck-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "DRCK-BEZ",
+      "parent_key": "druck",
+      "sort_num": 10,
+      "color": "#6D28D9",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Druck und Vakuum)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "druck-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "DRCK-GEB",
+      "parent_key": "druck",
+      "sort_num": 20,
+      "color": "#6D28D9",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Druck und Vakuum)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "druck-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "DRCK-PRF",
+      "parent_key": "druck",
+      "sort_num": 30,
+      "color": "#6D28D9",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Druck und Vakuum)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "masse",
+      "type": "inventory",
+      "name": "Masse und Waagen",
+      "short_name": "MASS",
+      "parent_key": null,
+      "sort_num": 50,
+      "color": "#BE123C",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Gewichtstücke, Waagen, Wägezellen."
+    },
+    {
+      "key": "masse-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "MASS-BEZ",
+      "parent_key": "masse",
+      "sort_num": 10,
+      "color": "#BE123C",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Masse und Waagen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "masse-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "MASS-GEB",
+      "parent_key": "masse",
+      "sort_num": 20,
+      "color": "#BE123C",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Masse und Waagen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "masse-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "MASS-PRF",
+      "parent_key": "masse",
+      "sort_num": 30,
+      "color": "#BE123C",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Masse und Waagen)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "kraft",
+      "type": "inventory",
+      "name": "Kraft, Drehmoment und Härte",
+      "short_name": "KRAF",
+      "parent_key": null,
+      "sort_num": 60,
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Kraftaufnehmer, Drehmomentschlüssel und -prüfgeräte, Härteprüfmittel."
+    },
+    {
+      "key": "kraft-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "KRAF-BEZ",
+      "parent_key": "kraft",
+      "sort_num": 10,
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Kraft, Drehmoment und Härte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "kraft-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "KRAF-GEB",
+      "parent_key": "kraft",
+      "sort_num": 20,
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Kraft, Drehmoment und Härte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "kraft-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "KRAF-PRF",
+      "parent_key": "kraft",
+      "sort_num": 30,
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Kraft, Drehmoment und Härte)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "volumen",
+      "type": "inventory",
+      "name": "Volumen und Durchfluss",
+      "short_name": "VOLU",
+      "parent_key": null,
+      "sort_num": 70,
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Kolbenhubpipetten, Volumenmessgeräte, Durchflussnormale."
+    },
+    {
+      "key": "volumen-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "VOLU-BEZ",
+      "parent_key": "volumen",
+      "sort_num": 10,
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Volumen und Durchfluss)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "volumen-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "VOLU-GEB",
+      "parent_key": "volumen",
+      "sort_num": 20,
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Volumen und Durchfluss)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "volumen-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "VOLU-PRF",
+      "parent_key": "volumen",
+      "sort_num": 30,
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Volumen und Durchfluss)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "zeit",
+      "type": "inventory",
+      "name": "Zeit und Frequenz",
+      "short_name": "ZEIT",
+      "parent_key": null,
+      "sort_num": 80,
+      "color": "#4338CA",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Frequenznormale, Zeitzähler, Stoppuhren."
+    },
+    {
+      "key": "zeit-bezugsnormale",
+      "type": "inventory",
+      "name": "Bezugsnormale",
+      "short_name": "ZEIT-BEZ",
+      "parent_key": "zeit",
+      "sort_num": 10,
+      "color": "#4338CA",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Höchste Rückführungsstufe des Labors, extern kalibriert. (Zeit und Frequenz)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "manufacturer",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        }
+      ]
+    },
+    {
+      "key": "zeit-gebrauchsnormale",
+      "type": "inventory",
+      "name": "Gebrauchsnormale",
+      "short_name": "ZEIT-GEB",
+      "parent_key": "zeit",
+      "sort_num": 20,
+      "color": "#4338CA",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Für die tägliche Arbeit, gegen die Bezugsnormale kalibriert. (Zeit und Frequenz)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_interval",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "zeit-pruefmittel",
+      "type": "inventory",
+      "name": "Prüfmittel",
+      "short_name": "ZEIT-PRF",
+      "parent_key": "zeit",
+      "sort_num": 30,
+      "color": "#4338CA",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Messmittel ohne Normalcharakter: Adapter, Vorrichtungen, Hilfsgeräte der Messgröße. (Zeit und Frequenz)",
+      "field_rules": [
+        {
+          "field": "serial_number",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "hilfsmittel",
+      "type": "inventory",
+      "name": "Hilfs- und Betriebsmittel",
+      "short_name": "HILF",
+      "parent_key": null,
+      "sort_num": 90,
+      "color": "#475569",
+      "text_color": "#FFFFFF",
+      "rentable": false,
+      "description": "Ausstattung ohne eigene Messfunktion; nicht kalibrierpflichtig, aber inventarisiert."
+    },
+    {
+      "key": "hilfsmittel-adapter",
+      "type": "inventory",
+      "name": "Adapter und Leitungen",
+      "short_name": "HILF-ADP",
+      "parent_key": "hilfsmittel",
+      "sort_num": 10,
+      "color": "#475569",
+      "text_color": "#FFFFFF",
+      "rentable": false
+    },
+    {
+      "key": "hilfsmittel-klima",
+      "type": "inventory",
+      "name": "Klimaüberwachung",
+      "short_name": "HILF-KLI",
+      "parent_key": "hilfsmittel",
+      "sort_num": 20,
+      "color": "#475569",
+      "text_color": "#FFFFFF",
+      "rentable": false
+    },
+    {
+      "key": "hilfsmittel-vorrichtungen",
+      "type": "inventory",
+      "name": "Prüfvorrichtungen",
+      "short_name": "HILF-VOR",
+      "parent_key": "hilfsmittel",
+      "sort_num": 30,
+      "color": "#475569",
+      "text_color": "#FFFFFF",
+      "rentable": false
+    }
+  ]
+}
