@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "title": "calServer Status-Paket (calserver.status-package)",
+  "description": "Manifest eines Status-Pakets: ein ZIP mit statuses.json (calserver.statuses) und optionalem README.md. Das Manifest listet jeden Paket-Eintrag mit SHA-256-Prüfsumme und ist damit der Manipulationsanker des Formats. Ein Paket trägt das Statusmodell eines Moduls (Statusliste, Feldfunktionen je Status, Folgeaktionen, Zeitvariablen), nicht den Status einzelner Datensätze. Zusätzliche, hier nicht beschriebene Felder sind erlaubt und werden von älteren Lesern ignoriert (Vorwärtskompatibilität); die verbindliche Lese-Semantik gehört calServer V2 (laravel/app/Services/Status/StatusPackageService.php).",
+  "type": "object",
+  "required": [
+    "format",
+    "format_version",
+    "name",
+    "document",
+    "files"
+  ],
+  "properties": {
+    "format": {
+      "const": "calserver.status-package"
+    },
+    "format_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version des Paketformats. Leser lehnen Versionen oberhalb der eigenen ab, statt unbekannte Inhalte still zu verlieren. Aktuelle Version: 1."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Anzeigename des Pakets. Rein deklarativ: die Status tragen ihre Titel in statuses.json."
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optionale Kurzbeschreibung (ein Absatz)."
+    },
+    "document": {
+      "type": "object",
+      "required": [
+        "format",
+        "version"
+      ],
+      "description": "Deklarative Angabe zum eingebetteten statuses.json, damit Werkzeuge ohne Öffnen der Datei entscheiden können. Beim Import bleibt der Leser die letzte Instanz.",
+      "properties": {
+        "format": {
+          "const": "calserver.statuses"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "description": "Abgeleitete Kennzahlen für die Anzeige (Anzahl Status, Feldfunktionen, Folgeaktionen, enthaltene Typen). Nicht verbindlich — maßgeblich ist statuses.json.",
+      "properties": {
+        "statuses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "field_rules": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "transitions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "processing_times": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Zeitpunkt der Paketerstellung (ISO 8601). Provenienz, keine Semantik beim Import."
+    },
+    "generator": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Erzeuger des Pakets, z. B. calserver-reports oder calserver-v2."
+    },
+    "locale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Sprache der Statusbezeichnungen im Paket (z. B. de). Status sind einsprachig; wer eine andere Sprache braucht, pflegt ein eigenes Paket."
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Jeder Eintrag des Archivs mit Prüfsumme. Fehlt eine gelistete Datei, taucht eine ungelistete auf oder weicht eine Prüfsumme ab, wird das Paket abgelehnt.",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256",
+          "size_bytes"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(statuses\\.json|README\\.md)$",
+            "description": "Pfad relativ zur Paketwurzel. Erlaubt sind nur statuses.json und README.md — ein Statuspaket trägt keine Binärdateien."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

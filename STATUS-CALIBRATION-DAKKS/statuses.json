@@ -1,0 +1,153 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "calibration"
+  ],
+  "statuses": [
+    {
+      "key": "calibration-geplant",
+      "type": "calibration",
+      "title": "Geplant",
+      "short_title": "GEP",
+      "description": "Auftrag angenommen, Messung steht aus.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-calendar",
+      "sort_order": 10,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "calibration-in-arbeit",
+      "type": "calibration",
+      "title": "In Arbeit",
+      "short_title": "ARB",
+      "description": "Messung läuft.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-cog",
+      "sort_order": 20,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "calibration-messung-abgeschlossen",
+      "type": "calibration",
+      "title": "Messung abgeschlossen",
+      "short_title": "MES",
+      "description": "Messwerte erfasst, technische Prüfung steht aus.",
+      "color": "#7C3AED",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check-square",
+      "sort_order": 30,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "calibration_date",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "technician",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "calibration-freigabe",
+      "type": "calibration",
+      "title": "Freigabe ausstehend",
+      "short_title": "FRG",
+      "description": "Technische Prüfung durch eine zweite Person nach ISO/IEC 17025 Abschnitt 7.8.",
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-eye",
+      "sort_order": 40,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "calibration-abgeschlossen",
+      "type": "calibration",
+      "title": "Abgeschlossen",
+      "short_title": "ABG",
+      "description": "Kalibrierschein erstellt und freigegeben.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check",
+      "sort_order": 50,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "cal_result",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "calibration_date",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        },
+        {
+          "field": "certificate_number",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 30
+        },
+        {
+          "field": "next_calibration_date",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 40
+        }
+      ]
+    },
+    {
+      "key": "calibration-storniert",
+      "type": "calibration",
+      "title": "Storniert",
+      "short_title": "STO",
+      "description": "Auftrag zurückgezogen; kein Kalibrierschein.",
+      "color": "#991B1B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-times",
+      "sort_order": 60,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "notes",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    }
+  ],
+  "transitions": [],
+  "processing_times": [
+    {
+      "variable_name": "Durchlaufzeit Kalibrierung",
+      "table_name": "calibration",
+      "start_key": "calibration-geplant",
+      "stop_key": "calibration-abgeschlossen",
+      "format": "d:h:m"
+    }
+  ]
+}

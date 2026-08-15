@@ -240,6 +240,97 @@ in calhelp/calServer-yii.
 
 ---
 
+## 0.5) Konfigurationspakete (`calserver.category-package` / `calserver.status-package`) — MUST
+
+This repo also hosts **configuration packages** for calServer V2: category
+trees and status models. Like the Prüfplan and Wiki bundles they are a
+**separate bundle class**: NO JasperReports involved, none of the report rules
+(sections 0.1, 1, 2, 6) apply. An AI agent should be able to author a valid
+configuration bundle end-to-end from this section alone.
+
+**Why they live here and not in the product:** a category tree and a status
+model are editorial content of a laboratory, not product code. They change when
+a lab's scope or process changes, not when calServer ships a release. calServer
+imports; this repo maintains the content.
+
+### Naming and structure (MUST)
+
+- Folder `CATEGORY-<SLUG>/` or `STATUS-<SLUG>/` (e.g. `CATEGORY-INVENTORY-DAKKS`,
+  `STATUS-CALIBRATION-DAKKS`); ZIP name is the lowercased form. Never use the
+  `-JSON-SAMPLE` suffix — that triggers the report (APEX) packaging rules and
+  the JRXML assertion.
+- Required files at the bundle root, and **nothing else**: `manifest.json`,
+  `README.md`, plus `categories.json` (CATEGORY-*) or `statuses.json`
+  (STATUS-*). NO subfolders, NO images, NO `main_reports/`, NO `*.jrxml`.
+- The format owner is calServer V2
+  (`laravel/app/Services/Category/CategoryPackageService.php` and
+  `laravel/app/Services/Status/StatusPackageService.php` in
+  calhelp/calServer-yii); the machine-readable manifest schemas are
+  `schema/category-package.schema.json` and `schema/status-package.schema.json`
+  (published to Pages).
+
+### Content rules (MUST)
+
+- **Keys are package-internal, uIDs are never written.** A category is
+  recognised on import by (type, parent, name), a status by (type, title).
+  `parent_key`, `from_key`/`to_key` and `start_key`/`stop_key` reference the
+  `key` of another entry **in the same document**; parents MUST appear before
+  their children.
+- **Categories:** `type` is one of `inventory`, `calibration`, `repair`,
+  `booking` (never `types` — that is an assignment discriminator, not a
+  catalogue). Assignments (`category_item`) are NOT part of a package: which
+  device sits in which category is the installation's stock, not a template.
+- **Statuses:** `type` is one of `inventory`, `calibration`, `booking`,
+  `repair`, `location`, `notepad`, `support_tickets`. `active: false` or
+  `hide: true` takes a record out of circulation (the loan module reads that) —
+  use it deliberately, and say so in the README.
+- **Field rules carry the readable field name**, never a V1 metrology code:
+  `{"field": "cal_result", "edit_mandatory": true}`. The importer maps it to
+  whatever column reference the target installation uses. A field the target
+  does not have is **skipped with a warning**, so a rule on a customer-specific
+  field does not break the package — but it also does nothing. Only reference
+  factory fields (`database/data/default_field_definitions.json` in
+  calhelp/calServer-yii) unless the README explains the prerequisite.
+- Statuses that carry no field rules are allowed and useful; a package whose
+  every status is decoration should say in its README why.
+
+### Manifest (MUST)
+
+- NEVER edit `manifest.json` by hand and NEVER invent sha256 values.
+  Regenerate: `python3 scripts/build_config_manifest.py --write <BUNDLE>`,
+  then verify: `python3 scripts/build_config_manifest.py --check`.
+  CI runs `--check` on every push/PR (validate-reports.yml) and fails on any
+  drift: unlisted file, missing file, wrong checksum, disallowed entry,
+  duplicate key, unresolvable `parent_key`, transition pointing at a status the
+  package does not carry.
+- Keep `created_at`, `name`, `description` and `locale` stable across `--write`
+  runs (the script preserves them).
+
+### Packaging & downloads page (MUST)
+
+- `package-reports.yml`: add an `upload-artifact` step for the bundle folder
+  and a `create_config_zip "<BUNDLE>" "<zip-name>" "<document>"` call (NOT
+  `create_zip()` — that stages `main_reports/` and fails without a JRXML).
+- `publish-downloads.yml`: add a `get_last_modified` line plus `README_MAP`
+  and `TITLE_MAP` entries (`Kategorien: <Thema>` / `Status: <Thema>`); no
+  `SCHEMA_MAP`.
+- Category on the downloads page is automatic: a ZIP name starting with
+  `category-` lands in **"Kategorien"**, one starting with `status-` in
+  **"Status"** (`downloads/index.html`, `getCategory()`). Both rules sit above
+  the report rules on purpose — `status-…` would otherwise fall through to the
+  legacy bucket.
+- Downloads-page only: NO `/api/report/<uuid>` upload step, NO
+  `release-reports.yml` entry.
+
+### Verify locally
+
+- `python3 scripts/build_config_manifest.py --check` is green
+- `cd <BUNDLE> && zip -r /tmp/<zip-name>.zip .` produces a ZIP that calServer
+  V2 imports as-is (Administration → Kategorien bzw. Statusverwaltung →
+  Paket; permissions `category_import` / `status_import`)
+
+---
+
 ## 1) Required bundle structure (MUST)
 For every report bundle folder (e.g. DAKKS-SAMPLE, DCC, ORDER-SAMPLE, STICKERS-*):
 - `main_reports/`  → contains the entry-point JRXML(s) users execute

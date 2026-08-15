@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "format": "calserver.status-package",
+  "format_version": 1,
+  "name": "Status: Kalibrierung für akkreditierte Labore",
+  "document": {
+    "format": "calserver.statuses",
+    "version": 1
+  },
+  "content": {
+    "statuses": 6,
+    "field_rules": 7,
+    "types": [
+      "calibration"
+    ],
+    "transitions": 0,
+    "processing_times": 1
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "statuses.json",
+      "sha256": "ba828e9b81fa2e6635805c97c8c0b0b5d00cfa6a472ae66c38026ea0f73b9788",
+      "size_bytes": 3989
+    },
+    {
+      "path": "README.md",
+      "sha256": "56e45a642ca0f590d5351f4b5694d9fd79be64580bfff48f57c203f0e36f7e33",
+      "size_bytes": 3341
+    }
+  ],
+  "description": "Statusmodell des Kalibrierbereichs mit Prüfentscheid, Kalibrierdatum und Scheinnummer als Pflichtfelder im Status „Abgeschlossen“.",
+  "created_at": "2026-08-15T12:00:00+00:00",
+  "locale": "de"
+}

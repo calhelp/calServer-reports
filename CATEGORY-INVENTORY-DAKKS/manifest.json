@@ -1,0 +1,33 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/category-package.schema.json",
+  "format": "calserver.category-package",
+  "format_version": 1,
+  "name": "Kategorien: Inventar für Kalibrierlabore (DAkkS)",
+  "document": {
+    "format": "calserver.categories",
+    "version": 1
+  },
+  "content": {
+    "categories": 36,
+    "field_rules": 48,
+    "types": [
+      "inventory"
+    ]
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "categories.json",
+      "sha256": "a134568ac0a180ec8de083df75d11d3fe9ab7c1582dc9c4c4ef6a84ff027f426",
+      "size_bytes": 23256
+    },
+    {
+      "path": "README.md",
+      "sha256": "d61503add9a3dfb98f2ab5fc7e49b93a6c095dc5da620487f926f3f72fbea4ea",
+      "size_bytes": 3418
+    }
+  ],
+  "description": "Inventar-Kategoriebaum nach Messgrößen mit den Normalstufen Bezugsnormale, Gebrauchsnormale und Prüfmittel darunter; Pflichtfelder je Normalstufe.",
+  "created_at": "2026-08-15T12:00:00+00:00",
+  "locale": "de"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "format": "calserver.status-package",
+  "format_version": 1,
+  "name": "Status: Geräte-Lebenszyklus für Kalibrierlabore",
+  "document": {
+    "format": "calserver.statuses",
+    "version": 1
+  },
+  "content": {
+    "statuses": 6,
+    "field_rules": 0,
+    "types": [
+      "inventory"
+    ],
+    "transitions": 0,
+    "processing_times": 0
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "statuses.json",
+      "sha256": "be458e28ff40023e9b4602daaac40fb97d9d7400100dab2026583c13bd69fca6",
+      "size_bytes": 2390
+    },
+    {
+      "path": "README.md",
+      "sha256": "4f0c56915cf767025e5f782923be80c38ed81673102062ea21f8eee3d1461400",
+      "size_bytes": 3043
+    }
+  ],
+  "description": "Gerätestatus von „In Betrieb“ bis „Ausgesondert“ mit Begründungspflicht bei Sperrung und Aussonderung.",
+  "created_at": "2026-08-15T12:00:00+00:00",
+  "locale": "de"
+}
