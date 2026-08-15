@@ -38,7 +38,11 @@ The existing bundles in this repo are the stable **V1 contract**: embedded SQL e
 ### V2 (APEX) packaging rules (MUST — now live)
 - **Naming:** a V2 bundle folder ends with `-JSON-SAMPLE` (e.g. `DAKKS-JSON-SAMPLE`); its ZIP name is the lowercased form (e.g. `dakks-json-sample`). The packaging workflows and the downloads page key off this suffix.
 - **JSON sample allowed:** V2 bundles ship a `main_reports/sample-data.json` (a JSON data-adapter fixture). The `create_zip()` allowlist matches `*-JSON-SAMPLE` and keeps `*.json` — do NOT drop the sample. (Baseline allowlist is `*.jrxml`/`*.md` only; without the `*.json` branch the sample is deleted before zipping.)
-- **Downloads page:** V2 bundles appear in their own category **"APEX · V2 (JSON-Datenquelle)"** (matched on `-json-sample` in `downloads/index.html` `getCategory()`), separate from the V1 (BASE) reports. Add a `get_last_modified` line + `README_MAP`/`TITLE_MAP` entry in `publish-downloads.yml` for each new V2 bundle.
+- **Downloads page:** the page (`downloads/index.html`) is the calServer **template page** — reports are one bundle class on it, next to stickers, Prüfpläne and Wiki templates. **V2 is the default and is never marked as V2.** Rules:
+  - V2 bundles are sorted **by topic** into `Kalibrier- & Zertifikatsberichte`, `Geräte & Inventar`, `Aufträge & Belege` or `Sticker & Etiketten` (keyword rules in `getCategory()`, evaluated after the `-json-sample` check; the sticker rule runs first so `sticker-dakks-*-json-sample` does not fall into the DAkkS rule). A V2 bundle matching no rule lands in `Weitere` — extend `getCategory()` **and** `CATEGORIES` in `downloads/index.html` instead of leaving it there.
+  - V1 (BASE) bundles are legacy and all collect in the single category **"calServer V1 (Legacy)"**, sorted last. That category is the fallback for everything without the `-json-sample` suffix, so V1 bundles need no entry anywhere. No new V1 bundles — see the rules above.
+  - `TITLE_MAP` (info pages): V2 titles carry **no** version suffix; V1 titles carry `(calServer V1)` so the legacy twin of a V2 bundle stays distinguishable.
+  - For each new V2 bundle: add a `get_last_modified` line + `README_MAP`/`TITLE_MAP` entry in `publish-downloads.yml`.
 - **No API upload / no release (for now):** V2 bundles are **downloads-page only**. Do NOT add `/api/report/<uuid>` upload steps or `release-reports.yml` entries for them unless that policy is explicitly changed.
 - Structure (`main_reports/` + `subreports/`) and the 6.20.6 pin apply unchanged.
 

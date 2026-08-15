@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Downloads</title>
+    <title>calServer Vorlagen</title>
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
     <main class="page">
       <header class="page__header">
         <div>
-          <p class="page__eyebrow">Always latest build artifacts</p>
-          <h1>Downloads</h1>
+          <p class="page__eyebrow">Immer der aktuelle Build</p>
+          <h1>Vorlagen für calServer</h1>
           <p class="page__subhead">
-            Auf dieser Seite stehen die aktuellen Reportpakete für <a href="https://calserver.com">calServer</a> zum Download bereit. Die Pakete können direkt im Berichtsmanagement eingespielt und konfiguriert werden. Die Artefaktbeschreibungen enthalten Hinweise zu den verfügbaren Parametern für eine individuelle Anpassung.
+            Fertige Vorlagenpakete für <a href="https://calserver.com">calServer</a>: Berichte, Sticker und Etiketten, Prüfpläne und Wiki-Vorlagen. Jedes Paket wird im passenden Bereich von calServer importiert und dort weiter angepasst; die Info-Seiten nennen die verfügbaren Parameter. Standard ist calServer V2. Die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie „calServer V1 (Legacy)“.
           </p>
         </div>
         <div class="page__meta" id="page-meta"></div>
@@ -28,7 +28,7 @@
         </label>
         <label class="search">
           <span>Suche</span>
-          <input id="search" type="search" placeholder="Artefakte filtern…" />
+          <input id="search" type="search" placeholder="Vorlagen filtern…" />
         </label>
       </section>
 
@@ -56,6 +56,82 @@
         return `${(bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0)} ${sizes[i]}`;
       };
 
+      // Kategorien der Vorlagenseite, in Anzeigereihenfolge. calServer V2 ist
+      // der Standard und wird deshalb nicht mehr als Version ausgewiesen — die
+      // V2-Pakete stehen thematisch sortiert. V1 ist Legacy und sammelt sich
+      // am Ende in genau einer Kategorie.
+      const LEGACY_CATEGORY = "calServer V1 (Legacy)";
+      const FALLBACK_CATEGORY = "Weitere";
+
+      const CATEGORIES = [
+        {
+          name: "Kalibrier- & Zertifikatsberichte",
+          note: "Kalibrierscheine und Kontrollblätter. Import in der Berichtsverwaltung.",
+        },
+        {
+          name: "Geräte & Inventar",
+          note: "Datenblätter und Inventarlisten, auch mit untergeordneten Geräten.",
+        },
+        {
+          name: "Aufträge & Belege",
+          note: "Auftragsbeleg, Lieferschein, Reparaturbericht, Preisliste und Leihschein.",
+        },
+        {
+          name: "Sticker & Etiketten",
+          note: "Etikettenvorlagen für Zebra-Drucker und DAkkS-Aufkleber.",
+        },
+        {
+          name: "Prüfpläne",
+          note: "Prüfplan-Pakete, keine Berichte. Import unter Kalibrierungen → Prüfpläne.",
+        },
+        {
+          name: "Wiki-Vorlagen",
+          note: "Wiki-Pakete, keine Berichte. Import unter Wiki → Importieren.",
+        },
+        {
+          name: FALLBACK_CATEGORY,
+          note: "Pakete ohne feste thematische Zuordnung.",
+        },
+        {
+          name: LEGACY_CATEGORY,
+          note: "Vorlagen für calServer V1 mit eingebettetem SQL. Sie erhalten nur noch Bugfixes; neue Vorlagen entstehen für V2.",
+        },
+      ];
+
+      const getCategory = (artifactName = "") => {
+        const name = artifactName.toLowerCase();
+
+        // Prüfplan- und Wiki-Pakete sind eigene Bundle-Klassen ohne Jasper —
+        // Prüfung VOR allen Report-Regeln, damit kein späterer Teilstring-
+        // Treffer sie einsammelt.
+        if (name.includes("pruefplan")) return "Prüfpläne";
+        if (name.startsWith("wiki-")) return "Wiki-Vorlagen";
+
+        // Alles Übrige ist ein Report-Bundle. V2 (JSON-Datenquelle, Suffix
+        // -json-sample) ist der Standard und wird thematisch einsortiert,
+        // V1 (eingebettetes SQL über JDBC) landet gesammelt im Legacy-Block.
+        if (!name.includes("-json-sample")) return LEGACY_CATEGORY;
+
+        // Sticker zuerst: sticker-dakks-*-json-sample trägt sonst die
+        // dakks-Regel davon.
+        if (name.includes("sticker")) return "Sticker & Etiketten";
+        if (name.includes("dakks") || name.includes("kalibrierkontrollblatt")) {
+          return "Kalibrier- & Zertifikatsberichte";
+        }
+        if (name.includes("inventory")) return "Geräte & Inventar";
+        if (
+          name.includes("order") ||
+          name.includes("delivery") ||
+          name.includes("repair") ||
+          name.includes("price-list") ||
+          name.includes("location")
+        ) {
+          return "Aufträge & Belege";
+        }
+
+        return FALLBACK_CATEGORY;
+      };
+
       const renderDownloads = (payload, downloadsRoot) => {
         const sectionsRoot = document.getElementById("downloads-sections");
         const meta = document.getElementById("page-meta");
@@ -74,40 +150,6 @@
           <div><strong>Build:</strong> ${buildDate}</div>
         `;
 
-        const getCategory = (artifactName = "") => {
-          const name = artifactName.toLowerCase();
-
-          // Prüfplan-Pakete (calserver.procedure-package) sind keine
-          // Jasper-Reports — eigene Kategorie, Prüfung VOR allen anderen,
-          // damit kein späterer Teilstring-Treffer sie einsammelt.
-          if (name.includes("pruefplan")) return "Prüfpläne";
-
-          // Wiki-Pakete (calserver.wiki-package) ebenso: eigene Bundle-Klasse
-          // ohne Jasper, eigene Kategorie, Prüfung vor den Report-Regeln.
-          if (name.startsWith("wiki-")) return "Wiki-Vorlagen";
-
-          // V2 (APEX) bundles use a JSON data source (readable api_name fields,
-          // no SQL). Grouped separately from the V1 (BASE) reports.
-          if (name.includes("-json-sample")) {
-            return "APEX · V2 (JSON-Datenquelle)";
-          }
-          if (name.includes("sticker")) return "Sticker";
-          if (name.includes("trace-forward") || name.includes("trace-backward")) {
-            return "Trace";
-          }
-          if (
-            name.includes("dakks-sample") ||
-            name.includes("dcc-sample") ||
-            name.includes("kalibrierkontrollblatt")
-          ) {
-            return "Kalibrier-/Zertifikatsberichte";
-          }
-          if (name.includes("delivery-standalone")) return "Lieferung";
-          if (name.includes("field-names")) return "Feldnamen";
-
-          return "Weitere";
-        };
-
         const groupedArtifacts = (payload.artifacts || []).reduce(
           (groups, artifact) => {
             const category = getCategory(artifact.name);
@@ -119,18 +161,6 @@
           },
           {}
         );
-
-        const categoryOrder = [
-          "Prüfpläne",
-          "Wiki-Vorlagen",
-          "APEX · V2 (JSON-Datenquelle)",
-          "Sticker",
-          "Trace",
-          "Kalibrier-/Zertifikatsberichte",
-          "Lieferung",
-          "Feldnamen",
-          "Weitere",
-        ];
 
         const renderRow = (artifact, category) => {
           const date = artifact.lastModified
@@ -152,7 +182,7 @@
               data-category="${category.toLowerCase()}"
               data-description="${description.toLowerCase()}"
             >
-              <td data-label="Artefakt">
+              <td data-label="Vorlage">
                 <div class="artifact-name">${artifact.name}</div>
               </td>
               <td data-label="Beschreibung">
@@ -175,50 +205,58 @@
           `;
         };
 
-        const sections = categoryOrder
-          .filter((category) => groupedArtifacts[category]?.length)
-          .map((category) => {
-            const artifacts = groupedArtifacts[category];
-            const rows = artifacts
-              .map((artifact) => renderRow(artifact, category))
-              .join("");
+        const visibleCategories = CATEGORIES.filter(
+          (category) => groupedArtifacts[category.name]?.length
+        );
 
-            return `
-              <section class="card">
-                <div class="downloads-category__header">
-                  <h2>${category} (${artifacts.length})</h2>
-                </div>
-                <table class="downloads">
-                  <thead>
-                    <tr>
-                      <th>Artefakt</th>
-                      <th>Beschreibung</th>
-                      <th>Dateiname</th>
-                      <th>Größe</th>
-                      <th>Letzte Änderung</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${rows}
-                  </tbody>
-                </table>
-              </section>
-            `;
-          });
+        const sections = visibleCategories.map((category) => {
+          const artifacts = groupedArtifacts[category.name];
+          const rows = artifacts
+            .map((artifact) => renderRow(artifact, category.name))
+            .join("");
+
+          return `
+            <section class="card">
+              <div class="downloads-category__header">
+                <h2>${category.name} (${artifacts.length})</h2>
+                ${
+                  category.note
+                    ? `<p class="downloads-category__note">${category.note}</p>`
+                    : ""
+                }
+              </div>
+              <table class="downloads">
+                <thead>
+                  <tr>
+                    <th>Vorlage</th>
+                    <th>Beschreibung</th>
+                    <th>Dateiname</th>
+                    <th>Größe</th>
+                    <th>Letzte Änderung</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows}
+                </tbody>
+              </table>
+            </section>
+          `;
+        });
 
         sectionsRoot.innerHTML =
           sections.join("") ||
-          `<section class="card"><table class="downloads"><tbody><tr><td colspan="6">Keine Artefakte gefunden.</td></tr></tbody></table></section>`;
+          `<section class="card"><table class="downloads"><tbody><tr><td colspan="6">Keine Vorlagen gefunden.</td></tr></tbody></table></section>`;
 
         const categoryFilter = document.getElementById("category-filter");
         categoryFilter.innerHTML = `
           <option value="">Alle</option>
-          ${categoryOrder
-            .filter((category) => groupedArtifacts[category]?.length)
+          ${visibleCategories
             .map(
               (category) =>
-                `<option value="${category.toLowerCase()}">${category}</option>`
+                `<option value="${category.name.toLowerCase()}">${
+                  category.name
+                }</option>`
             )
             .join("")}
         `;

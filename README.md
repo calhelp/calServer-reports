@@ -245,9 +245,11 @@ Das Skript erstellt automatisch ein ZIP-Archiv und lädt es via `curl` zur API d
 
 ---
 
-## 📦 Download der aktuellen Reportpakete
+## 📦 Download der aktuellen Vorlagenpakete
 
-Alle aktuellen und früheren ZIP-Archive mit Reportvorlagen stehen als Release-Pakete zur Verfügung:
+Die [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) ist die Vorlagenseite für calServer: Berichte sind ein Teil davon, daneben stehen dort Sticker und Etiketten, Prüfpläne und Wiki-Vorlagen. Sortiert wird thematisch. calServer V2 ist der Standard und wird nicht eigens gekennzeichnet; die V1-Vorlagen mit eingebettetem SQL stehen gesammelt in der Kategorie **„calServer V1 (Legacy)"** am Ende der Seite.
+
+Alle aktuellen und früheren ZIP-Archive stehen zusätzlich als Release-Pakete zur Verfügung:
 
 - [Latest Downloads (immer aktuelle Artefakte)](https://calhelp.github.io/calServer-reports/downloads/)
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
@@ -270,7 +272,7 @@ Für Entwickler:innen und zum Testen der jeweils frisch gebauten Version gibt es
 calServer V2 verwendet ein neues Datenbankschema mit **lesbaren Feldnamen** (`serial_number`, `next_calibration_date`) statt der bisherigen Metrologie-Codes (`I4202`, `C2303`). Für die Reportvorlagen bedeutet das:
 
 - **Die bestehenden Bundles in diesem Repository bleiben der stabile V1-Stand** (eingebettetes SQL über JDBC mit den Codespalten). Sie laufen unverändert auf allen V1-Systemen und werden weiter mit Bugfixes gepflegt.
-- **V2-Bundles** (Ordner mit Endung `-JSON-SAMPLE`, z. B. `DAKKS-JSON-SAMPLE`, `INVENTORY-JSON-SAMPLE`) nutzen eine **JSON-Datasource** mit lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL). Auf der [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) erscheinen sie in der eigenen Kategorie **„APEX · V2 (JSON-Datenquelle)"** (APEX = interner Codename für V2), getrennt von den V1-Vorlagen.
+- **V2-Bundles** (Ordner mit Endung `-JSON-SAMPLE`, z. B. `DAKKS-JSON-SAMPLE`, `INVENTORY-JSON-SAMPLE`) nutzen eine **JSON-Datasource** mit lesbaren API-Feldnamen (`$F{serial_number}` statt `$F{I4202}`). Die Daten liefert das calServer-Backend als berichtsförmiges JSON-Paket — die Vorlagen enthalten kein eigenes SQL mehr und funktionieren dadurch unabhängig vom Datenbank-Backend (MySQL, PostgreSQL, MSSQL). Auf der [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) sind sie der Standardfall und deshalb nicht als V2 gekennzeichnet: Sie stehen thematisch einsortiert (Kalibrier- & Zertifikatsberichte, Geräte & Inventar, Aufträge & Belege, Sticker & Etiketten). Die V1-Vorlagen sammeln sich am Seitenende in der Kategorie **„calServer V1 (Legacy)"**.
 - **Systemberichte:** Ein paar Berichte erzeugt calServer V2 von sich aus, ohne dass jemand sie aus einem Menü wählt. Für jeden davon gibt es auf jeder Installation eine feste, nicht löschbare Zeile in der Berichtsverwaltung — den Platzhalter, der auf sein Bundle wartet. Welches Bundle wohin gehört:
 
   | Systembericht | Bundle | Wann calServer ihn erzeugt |
