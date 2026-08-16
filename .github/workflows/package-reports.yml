@@ -288,6 +288,20 @@ jobs:
           path: STATUS-INVENTORY-DAKKS
           if-no-files-found: error
 
+      - name: Upload STATUS-REPAIR-DAKKS as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STATUS-REPAIR-DAKKS
+          path: STATUS-REPAIR-DAKKS
+          if-no-files-found: error
+
+      - name: Upload STATUS-BOOKING-DAKKS as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STATUS-BOOKING-DAKKS
+          path: STATUS-BOOKING-DAKKS
+          if-no-files-found: error
+
       # Prüfplan-Pakete (calserver.procedure-package, robots.md §0.3):
       # eigene Bundle-Klasse ohne JRXML — der ganze Ordner ist das Paket.
       - name: Upload PRUEFPLAN-FLUKE-23 as artifact
@@ -544,6 +558,8 @@ jobs:
           create_config_zip "CATEGORY-INVENTORY-DAKKS" "category-inventory-dakks" "categories.json"
           create_config_zip "STATUS-CALIBRATION-DAKKS" "status-calibration-dakks" "statuses.json"
           create_config_zip "STATUS-INVENTORY-DAKKS" "status-inventory-dakks" "statuses.json"
+          create_config_zip "STATUS-REPAIR-DAKKS" "status-repair-dakks" "statuses.json"
+          create_config_zip "STATUS-BOOKING-DAKKS" "status-booking-dakks" "statuses.json"
 
           # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL)
           create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"
@@ -591,6 +607,8 @@ jobs:
           unzip -l zip_output/category-inventory-dakks.zip
           unzip -l zip_output/status-calibration-dakks.zip
           unzip -l zip_output/status-inventory-dakks.zip
+          unzip -l zip_output/status-repair-dakks.zip
+          unzip -l zip_output/status-booking-dakks.zip
 
       - name: Send DAKKS-SAMPLE ZIP to API
         env:

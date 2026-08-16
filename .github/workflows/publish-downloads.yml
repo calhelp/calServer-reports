@@ -114,6 +114,8 @@ jobs:
           get_last_modified "CATEGORY-INVENTORY-DAKKS" "category-inventory-dakks"
           get_last_modified "STATUS-CALIBRATION-DAKKS" "status-calibration-dakks"
           get_last_modified "STATUS-INVENTORY-DAKKS" "status-inventory-dakks"
+          get_last_modified "STATUS-REPAIR-DAKKS" "status-repair-dakks"
+          get_last_modified "STATUS-BOOKING-DAKKS" "status-booking-dakks"
           get_last_modified "PRUEFPLAN-FLUKE-23" "pruefplan-fluke-23"
           get_last_modified "PRUEFPLAN-MESSSCHIEBER-150MM" "pruefplan-messschieber-150mm"
           get_last_modified "WIKI-ISO-17025" "wiki-iso-17025"
@@ -226,6 +228,8 @@ jobs:
               "category-inventory-dakks":           "CATEGORY-INVENTORY-DAKKS/README.md",
               "status-calibration-dakks":           "STATUS-CALIBRATION-DAKKS/README.md",
               "status-inventory-dakks":             "STATUS-INVENTORY-DAKKS/README.md",
+              "status-repair-dakks":                "STATUS-REPAIR-DAKKS/README.md",
+              "status-booking-dakks":               "STATUS-BOOKING-DAKKS/README.md",
           }
 
           SCHEMA_MAP = {
@@ -264,6 +268,8 @@ jobs:
               "category-inventory-dakks":           "Kategorien: Inventar für Kalibrierlabore (DAkkS)",
               "status-calibration-dakks":           "Status: Kalibrierung für akkreditierte Labore",
               "status-inventory-dakks":             "Status: Geräte-Lebenszyklus für Kalibrierlabore",
+              "status-repair-dakks":                "Status: Reparatur für Kalibrierlabore",
+              "status-booking-dakks":               "Status: Aufträge für Kalibrierlabore",
           }
 
           INFO_TEMPLATE = """<!doctype html>

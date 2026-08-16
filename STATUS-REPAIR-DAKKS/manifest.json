@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "format": "calserver.status-package",
+  "format_version": 1,
+  "name": "Status: Reparatur für Kalibrierlabore",
+  "document": {
+    "format": "calserver.statuses",
+    "version": 1
+  },
+  "content": {
+    "statuses": 6,
+    "field_rules": 6,
+    "types": [
+      "repair"
+    ],
+    "transitions": 0,
+    "processing_times": 1
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "statuses.json",
+      "sha256": "343862f7c7b299ec822ec19e6cd308aef8e9fcbaaffe6f25642467a7fe2a314c",
+      "size_bytes": 3746
+    },
+    {
+      "path": "README.md",
+      "sha256": "34b7549911f844b71359dbedf38ff4df840ebc63a684103bb7ef39028d8b8f87",
+      "size_bytes": 3618
+    }
+  ],
+  "description": "Statusmodell des Reparaturbereichs von der Annahme bis zur Rückgabe; Fehlerbeschreibung beim Eingang und Reparaturaktion beim Abschluss sind Pflichtfelder.",
+  "created_at": "2026-08-15T23:30:00+00:00",
+  "locale": "de"
+}

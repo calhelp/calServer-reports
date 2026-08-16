@@ -256,9 +256,13 @@ imports; this repo maintains the content.
 ### Naming and structure (MUST)
 
 - Folder `CATEGORY-<SLUG>/` or `STATUS-<SLUG>/` (e.g. `CATEGORY-INVENTORY-DAKKS`,
-  `STATUS-CALIBRATION-DAKKS`); ZIP name is the lowercased form. Never use the
-  `-JSON-SAMPLE` suffix — that triggers the report (APEX) packaging rules and
-  the JRXML assertion.
+  `STATUS-CALIBRATION-DAKKS`, `STATUS-REPAIR-DAKKS`); ZIP name is the lowercased
+  form. Never use the `-JSON-SAMPLE` suffix — that triggers the report (APEX)
+  packaging rules and the JRXML assertion.
+- **One package per module.** A status package carries one `type`; a lab that
+  only wants the calibration statuses must not have to take the order module
+  with it. The four shipped sets (`calibration`, `inventory`, `repair`,
+  `booking`) are the pattern for any further one.
 - Required files at the bundle root, and **nothing else**: `manifest.json`,
   `README.md`, plus `categories.json` (CATEGORY-*) or `statuses.json`
   (STATUS-*). NO subfolders, NO images, NO `main_reports/`, NO `*.jrxml`.

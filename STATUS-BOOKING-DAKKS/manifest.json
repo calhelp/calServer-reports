@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "format": "calserver.status-package",
+  "format_version": 1,
+  "name": "Status: Aufträge für Kalibrierlabore",
+  "document": {
+    "format": "calserver.statuses",
+    "version": 1
+  },
+  "content": {
+    "statuses": 6,
+    "field_rules": 2,
+    "types": [
+      "booking"
+    ],
+    "transitions": 0,
+    "processing_times": 1
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "statuses.json",
+      "sha256": "bb75d9b8d5169ed5e8e5c908d5b79844928aa8925caf5f4089ceec0361ca8810",
+      "size_bytes": 2972
+    },
+    {
+      "path": "README.md",
+      "sha256": "c5ba2efb814a92908d0a0afe0a463e5e468e61ab6fcd3d869127a500dc8e9a58",
+      "size_bytes": 2843
+    }
+  ],
+  "description": "Statusmodell des Auftragsbereichs vom Angebot bis zum Abschluss; Kunde ab der Auftragsbestätigung und Stornogrund als Pflichtfelder.",
+  "created_at": "2026-08-15T23:30:00+00:00",
+  "locale": "de"
+}

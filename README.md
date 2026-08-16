@@ -90,7 +90,8 @@ CATEGORY-INVENTORY-DAKKS/
 ├── manifest.json       # sha256 je Datei
 └── README.md
 
-STATUS-CALIBRATION-DAKKS/, STATUS-INVENTORY-DAKKS/
+STATUS-CALIBRATION-DAKKS/, STATUS-INVENTORY-DAKKS/,
+STATUS-REPAIR-DAKKS/, STATUS-BOOKING-DAKKS/
 ├── statuses.json       # Statusmodell samt Feldfunktionen je Status
 ├── manifest.json
 └── README.md
