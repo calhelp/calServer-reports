@@ -1,0 +1,148 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "repair"
+  ],
+  "statuses": [
+    {
+      "key": "repair-eingegangen",
+      "type": "repair",
+      "title": "Eingegangen",
+      "short_title": "EIN",
+      "description": "Gerät ist im Haus, Fehlerbild aufgenommen.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-inbox",
+      "sort_order": 10,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "description",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "inventory_id",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "repair-in-diagnose",
+      "type": "repair",
+      "title": "In Diagnose",
+      "short_title": "DIA",
+      "description": "Fehlersuche läuft; Aufwand noch offen.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-search",
+      "sort_order": 20,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "repair-kostenvoranschlag",
+      "type": "repair",
+      "title": "Kostenvoranschlag offen",
+      "short_title": "KVA",
+      "description": "Aufwand ermittelt, Freigabe des Kunden steht aus.",
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-clock",
+      "sort_order": 30,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "notes",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "repair-in-reparatur",
+      "type": "repair",
+      "title": "In Reparatur",
+      "short_title": "REP",
+      "description": "Instandsetzung läuft.",
+      "color": "#7C3AED",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-wrench",
+      "sort_order": 40,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "repair-abgeschlossen",
+      "type": "repair",
+      "title": "Abgeschlossen",
+      "short_title": "ABG",
+      "description": "Instandsetzung fertig; Gerät geht zurück in die Kalibrierung.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check",
+      "sort_order": 50,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "notes",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "repair_date",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "repair-nicht-repariert",
+      "type": "repair",
+      "title": "Nicht repariert",
+      "short_title": "NRP",
+      "description": "Nicht reparabel, unwirtschaftlich oder vom Kunden abgelehnt.",
+      "color": "#991B1B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-times",
+      "sort_order": 60,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "notes",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    }
+  ],
+  "transitions": [],
+  "processing_times": [
+    {
+      "variable_name": "Durchlaufzeit Reparatur",
+      "table_name": "repair",
+      "start_key": "repair-eingegangen",
+      "stop_key": "repair-abgeschlossen",
+      "format": "d:h:m"
+    }
+  ]
+}

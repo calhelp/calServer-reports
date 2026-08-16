@@ -1,0 +1,116 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "booking"
+  ],
+  "statuses": [
+    {
+      "key": "booking-angebot",
+      "type": "booking",
+      "title": "Angebot",
+      "short_title": "ANG",
+      "description": "Preis genannt, Auftrag noch nicht erteilt.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-file-edit",
+      "sort_order": 10,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "booking-bestaetigt",
+      "type": "booking",
+      "title": "Auftrag bestätigt",
+      "short_title": "BES",
+      "description": "Kunde hat beauftragt; Geräte werden erwartet oder sind da.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check-square",
+      "sort_order": 20,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "customer_id",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "booking-in-bearbeitung",
+      "type": "booking",
+      "title": "In Bearbeitung",
+      "short_title": "ARB",
+      "description": "Kalibrierungen und Prüfungen laufen.",
+      "color": "#7C3AED",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-cog",
+      "sort_order": 30,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "booking-versandbereit",
+      "type": "booking",
+      "title": "Versandbereit",
+      "short_title": "VER",
+      "description": "Alle Positionen fertig, Scheine erstellt; Rückversand steht an.",
+      "color": "#B45309",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-box",
+      "sort_order": 40,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "booking-abgeschlossen",
+      "type": "booking",
+      "title": "Abgeschlossen",
+      "short_title": "ABG",
+      "description": "Geräte zurück beim Kunden, Auftrag abgerechnet.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check",
+      "sort_order": 50,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "booking-storniert",
+      "type": "booking",
+      "title": "Storniert",
+      "short_title": "STO",
+      "description": "Auftrag zurückgezogen oder abgelehnt.",
+      "color": "#991B1B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-times",
+      "sort_order": 60,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "comment",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    }
+  ],
+  "transitions": [],
+  "processing_times": [
+    {
+      "variable_name": "Durchlaufzeit Auftrag",
+      "table_name": "booking",
+      "start_key": "booking-bestaetigt",
+      "stop_key": "booking-abgeschlossen",
+      "format": "d:h:m"
+    }
+  ]
+}
