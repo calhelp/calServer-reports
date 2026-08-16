@@ -166,12 +166,20 @@ von Berichtsvariablen mit Beschreibung, Typ und Standardwert anbietet (siehe
 Sind die `company_*`-Variablen nicht gepflegt, bleibt die Rücksendeangabe leer —
 kein Fehler, der Umschlag trägt sie dann selbst.
 
-### Sendungsnummer und Bemerkung aus anderen Feldern
+### Sendungsnummer und Bemerkung
 
-Beide Angaben sind mandantenkonfigurierte Standortfelder. Das Backend adressiert
-sie über ihren **physischen Spaltenschlüssel**, nicht über den `api_name` — so
-bleibt die Vorlage gültig, auch wenn die Installation das Feld umbenannt hat.
-Werksvorgabe sind `L2837` (Sendungsverfolgungsnummer) und `L2826` (Bemerkung).
-Liegen die Daten woanders, zeigen die Berichtsvariablen
-`shipping_tracking_field` bzw. `shipping_note_field` (`report_type = location`)
-auf den anderen Schlüssel. Am Template ändert das nichts.
+Beide Angaben sind mandantenkonfigurierte Standortfelder — wie sie heißen,
+entscheidet die Installation. Deshalb rät das Backend nicht, sondern lässt sich
+das Feld nennen:
+
+| Berichtsvariable (`report_type = location`) | Zeigt auf das Feld mit |
+|---------------------------------------------|------------------------|
+| `shipping_tracking_field` | der Sendungsverfolgungsnummer |
+| `shipping_note_field` | der Bemerkung zur Sendung |
+
+Inhalt ist der `api_name` des Feldes aus der Feldverwaltung; der physische
+Spaltenschlüssel geht genauso, die Registry übersetzt ihn. Heißt das Feld
+bereits `tracking_number` bzw. `shipping_note`, findet der Bericht es ohne
+Variable. Ist nichts konfiguriert, bleiben `shipping.tracking_number` und
+`shipping.note` leer, und Sendungsnummer wie Hinweis verschwinden spurlos vom
+Blatt. Am Template ändert das nichts — es sieht nur `shipping.*`.
