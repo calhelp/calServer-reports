@@ -1,8 +1,9 @@
 {
   "meta": {
     "contract": "location-report",
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "generated_at": "2026-07-16T10:00:00+00:00",
+    "generated_date": "2026-07-16",
     "locale": "de-DE"
   },
   "location": {
@@ -13,11 +14,17 @@
     "location_5": "L-42",
     "location_date": "2026-07-01",
     "location_time": "08:00:00",
+    "rental_end": "2026-09-30",
     "is_active": 1,
     "status": "verliehen",
     "custom_fields": {
       "rental_end": "2026-09-30"
     }
+  },
+  "shipping": {
+    "tracking_number": "00340434161094022838",
+    "note": "Bitte den Koffer vollständig und im Originaltransportbehälter zurücksenden.",
+    "item_count": 4
   },
   "device": {
     "asset_number": "INV-9001",

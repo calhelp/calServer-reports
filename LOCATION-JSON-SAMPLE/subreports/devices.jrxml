@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Prüfmittel-Subreport (Contract location-report v1.1): bekommt das
+  V2 Prüfmittel-Subreport (Contract location-report v1.2): bekommt das
   "devices"-Array über subDataSource("devices").
 
   Eine Leihe kann mehr als ein Gerät umfassen: Ein Set (Koffer) wird als ein
@@ -9,23 +9,59 @@
   eine feste Zeile an device.*, der Entleiher unterschrieb also für einen
   Koffer, dessen Inhalt auf dem Papier nicht stand.
 
+  Seit v1.2 ist die Liste eine ABHAKLISTE: jede Zeile beginnt mit einem
+  Ankreuzfeld und trägt eine Positionsnummer, damit Packerei und Empfänger die
+  Sendung Stück für Stück gegen das Papier prüfen können. Die Spaltenköpfe
+  liegen deshalb hier im columnHeader und nicht im Hauptbericht — ein Koffer mit
+  17 Teilen läuft über den Seitenumbruch, und auf Seite 2 stünde sonst eine
+  Ankreuzliste ohne Kopf.
+
   Das Wurzelgerät steht immer an erster Stelle; bei einer Einzelbuchung enthält
-  die Liste nur dieses eine. Keine $V{}-Variablen.
+  die Liste nur dieses eine.
 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devices" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0312-4d72-9f62-000000000312">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devices" pageWidth="549" pageHeight="842" columnWidth="549" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0312-4d72-9f62-000000000312">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
+	<style name="Label" fontSize="8" isBold="true"/>
 	<style name="Small" fontSize="8"/>
 	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[asset_number]]></fieldDescription></field>
 	<field name="serial_number" class="java.lang.String"><fieldDescription><![CDATA[serial_number]]></fieldDescription></field>
 	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[manufacturer]]></fieldDescription></field>
 	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[model]]></fieldDescription></field>
 	<field name="description" class="java.lang.String"><fieldDescription><![CDATA[description]]></fieldDescription></field>
+	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[next_calibration_date]]></fieldDescription></field>
+	<columnHeader>
+		<band height="16">
+			<staticText><reportElement style="Label" x="12" y="0" width="22" height="13"/><text><![CDATA[Pos]]></text></staticText>
+			<staticText><reportElement style="Label" x="34" y="0" width="88" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
+			<staticText><reportElement style="Label" x="122" y="0" width="94" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
+			<staticText><reportElement style="Label" x="216" y="0" width="128" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
+			<staticText><reportElement style="Label" x="344" y="0" width="140" height="13"/><text><![CDATA[Beschreibung]]></text></staticText>
+			<staticText><reportElement style="Label" x="484" y="0" width="65" height="13"/><textElement textAlignment="Right"/><text><![CDATA[Nächste Kal.]]></text></staticText>
+			<line><reportElement x="0" y="14" width="549" height="1"/></line>
+		</band>
+	</columnHeader>
+	<!--
+	  splitType="Prevent": Eine Zeile darf den Seitenumbruch nicht in der Mitte
+	  erwischen. Ohne das rutscht bei einer mehrzeiligen Beschreibung deren
+	  zweite Zeile allein auf die Folgeseite — dort steht sie ohne Ankreuzfeld,
+	  ohne Positionsnummer und ohne Inventarnummer, also als Position, die
+	  niemand abhaken kann.
+	-->
 	<detail>
-		<band height="15">
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="0" y="0" width="100" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="100" y="0" width="110" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
-			<textField><reportElement style="Small" x="210" y="0" width="150" height="13"/><textFieldExpression><![CDATA[($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="360" y="0" width="201" height="13"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
+		<band height="16" splitType="Prevent">
+			<!-- Ankreuzfeld zum Abhaken der Position beim Packen bzw. Auspacken. -->
+			<rectangle>
+				<reportElement x="0" y="1" width="9" height="9"/>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</rectangle>
+			<textField><reportElement style="Small" x="12" y="0" width="22" height="13"/><textFieldExpression><![CDATA[String.valueOf($V{REPORT_COUNT})]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="34" y="0" width="88" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="122" y="0" width="94" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
+			<textField><reportElement style="Small" x="216" y="0" width="128" height="13"/><textFieldExpression><![CDATA[(($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})).trim()]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="344" y="0" width="140" height="13"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="484" y="0" width="65" height="13"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
+			<!-- Zeilentrenner: eine Abhakliste braucht die Führung fürs Auge. -->
+			<line><reportElement positionType="Float" x="0" y="14" width="549" height="1"/><graphicElement><pen lineWidth="0.25" lineColor="#BBBBBB"/></graphicElement></line>
 		</band>
 	</detail>
 </jasperReport>
