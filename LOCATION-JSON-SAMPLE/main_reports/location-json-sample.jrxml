@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 location/loan report (ADR-009, contract "location-report" v1.0). Filled from
-  a JSON data source — NO SQL. Layout follows the V1 Location.jrxml loan sheet:
-  customer / delivery-customer address blocks with contacts, loan-data block
-  (Leihdatum/-zeit, Rückgabedatum aus location.custom_fields.rental_end, Status),
-  device grid and a location block (location_1..5). The delivery block always
-  carries printable values — the server falls back to the owning customer, so no
-  branching is needed here. All labels are staticText (no report-level $V{} → no
-  null-in-title risk). See main_reports/sample-data.json.
+  V2 location/loan report (ADR-009, contract "location-report" v1.2). Filled from
+  a JSON data source — NO SQL.
+
+  Seit v1.2 ist der Leihschein zugleich das VERSANDDOKUMENT der Sendung: Er ist
+  als Fensterbrief nach DIN 5008 Form B gesetzt, die Lieferadresse steht im
+  Fenster, und die Prüfmittelliste trägt je Zeile ein Ankreuzfeld, damit
+  Packerei und Empfänger die Sendung abhaken können. Unterschriftszeilen gibt es
+  nicht mehr — das Blatt reist mit der Sendung, es wird nicht am Tresen
+  quittiert.
+
+  Geometrie des Anschriftfelds (DIN 676 Form B, DIN-lang-Fensterumschlag nach
+  DIN 680: Fenster 20 mm von links, 15 mm von unten):
+
+    Anschriftfeld   20 mm von links, 45 mm von oben, 85 × 45 mm
+    Zusatz-/Vermerkzone  obere 17,7 mm  (hier: die Rücksendeangabe)
+    Anschriftzone        untere 27,3 mm (hier: die Lieferanschrift)
+    Betreffzeile    98,4 mm von oben
+
+  Umgerechnet (1 mm = 2,8346 pt, Seitenränder links 17 pt / oben 12 pt) liegt das
+  Feld im Titelband bei x=40, y=116, 241 × 128 pt. Es steckt in EINEM Frame:
+  Wer auf Form A umstellen muss (Anschriftfeld ab 27 mm, kurzer Briefkopf),
+  ändert genau eine Zahl — y=116 wird zu y=64.
+
+  Der Absender kommt NICHT aus dem Datensatz, sondern aus den
+  company_*-Berichtsvariablen (dieselben, die der Auftragsbeleg nutzt); ohne
+  gepflegte Variablen bleibt die Rücksendeangabe leer und der Umschlag trägt sie
+  selbst. Alle Beschriftungen sind staticText (kein report-level $V{} → kein
+  null-im-Titel-Risiko). Siehe main_reports/sample-data.json.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="location-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="e8eef700-0500-4e80-af70-000000000500">
 	<property name="com.jaspersoft.studio.data.defadapter" value="location-json-sample_adapter.xml"/>
@@ -17,12 +37,42 @@
 	<style name="Value" fontSize="9"/>
 	<style name="SectionTitle" fontSize="10" isBold="true"/>
 	<style name="Small" fontSize="8"/>
+	<style name="Address" fontSize="10"/>
+	<style name="SenderLine" fontSize="6"/>
 	<parameter name="Reportpath" class="java.lang.String">
 		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
 	</parameter>
 	<parameter name="Company_footer" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_sender_line" class="java.lang.String">
+		<parameterDescription><![CDATA[Rücksendeangabe über der Anschrift (die kleine einzeilige Absenderzeile im Fenster). Leer = aus Name/Straße/PLZ/Ort zusammengesetzt.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_name" class="java.lang.String">
+		<parameterDescription><![CDATA[Absender: Firmenname. Fällt in die Rücksendeangabe ein, wenn Company_sender_line leer ist.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_street" class="java.lang.String">
+		<parameterDescription><![CDATA[Absender: Straße und Hausnummer.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_zip" class="java.lang.String">
+		<parameterDescription><![CDATA[Absender: Postleitzahl.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_city" class="java.lang.String">
+		<parameterDescription><![CDATA[Absender: Ort.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Company_country" class="java.lang.String">
+		<parameterDescription><![CDATA[Absender: Land. Steuert zugleich, ob die Empfängeranschrift eine Landzeile bekommt — gedruckt wird sie nur bei abweichendem Land.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Show_fold_marks" class="java.lang.String">
+		<parameterDescription><![CDATA[Falz- und Lochmarken am linken Rand drucken (105 mm, 148,5 mm, 210 mm). "0" = aus, z. B. bei vorgedrucktem Briefpapier, das sie schon trägt.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<field name="location_1" class="java.lang.String"><fieldDescription><![CDATA[location.location_1]]></fieldDescription></field>
 	<field name="location_2" class="java.lang.String"><fieldDescription><![CDATA[location.location_2]]></fieldDescription></field>
@@ -32,13 +82,15 @@
 	<field name="location_date" class="java.lang.String"><fieldDescription><![CDATA[location.location_date]]></fieldDescription></field>
 	<field name="location_time" class="java.lang.String"><fieldDescription><![CDATA[location.location_time]]></fieldDescription></field>
 	<field name="location_status" class="java.lang.String"><fieldDescription><![CDATA[location.status]]></fieldDescription></field>
-	<field name="rental_end" class="java.lang.String"><fieldDescription><![CDATA[location.custom_fields.rental_end]]></fieldDescription></field>
-	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[device.asset_number]]></fieldDescription></field>
-	<field name="serial_number" class="java.lang.String"><fieldDescription><![CDATA[device.serial_number]]></fieldDescription></field>
-	<field name="device_description" class="java.lang.String"><fieldDescription><![CDATA[device.description]]></fieldDescription></field>
-	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[device.manufacturer]]></fieldDescription></field>
-	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[device.model]]></fieldDescription></field>
-	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[device.next_calibration_date]]></fieldDescription></field>
+	<!--
+	  Rückgabedatum: seit Contract v1.2 ein eigenes Feld. Bis v1.1 stand es unter
+	  location.custom_fields.rental_end — dort ist es seit ADR-013 leer, weil die
+	  Leihende eine echte Spalte wurde und custom_fields nur JSON-Felder trägt.
+	-->
+	<field name="rental_end" class="java.lang.String"><fieldDescription><![CDATA[location.rental_end]]></fieldDescription></field>
+	<field name="tracking_number" class="java.lang.String"><fieldDescription><![CDATA[shipping.tracking_number]]></fieldDescription></field>
+	<field name="shipping_note" class="java.lang.String"><fieldDescription><![CDATA[shipping.note]]></fieldDescription></field>
+	<field name="item_count" class="java.lang.Integer"><fieldDescription><![CDATA[shipping.item_count]]></fieldDescription></field>
 	<field name="customer_name" class="java.lang.String"><fieldDescription><![CDATA[customer.name]]></fieldDescription></field>
 	<field name="customer_number" class="java.lang.String"><fieldDescription><![CDATA[customer.customer_number]]></fieldDescription></field>
 	<field name="customer_street" class="java.lang.String"><fieldDescription><![CDATA[customer.street]]></fieldDescription></field>
@@ -51,108 +103,231 @@
 	<field name="delivery_street" class="java.lang.String"><fieldDescription><![CDATA[delivery_customer.street]]></fieldDescription></field>
 	<field name="delivery_zip" class="java.lang.String"><fieldDescription><![CDATA[delivery_customer.zip]]></fieldDescription></field>
 	<field name="delivery_city" class="java.lang.String"><fieldDescription><![CDATA[delivery_customer.city]]></fieldDescription></field>
+	<field name="delivery_country" class="java.lang.String"><fieldDescription><![CDATA[delivery_customer.country]]></fieldDescription></field>
 	<field name="delivery_contact_name" class="java.lang.String"><fieldDescription><![CDATA[delivery_contact.name]]></fieldDescription></field>
 	<field name="delivery_contact_email" class="java.lang.String"><fieldDescription><![CDATA[delivery_contact.email]]></fieldDescription></field>
 	<field name="delivery_contact_phone" class="java.lang.String"><fieldDescription><![CDATA[delivery_contact.phone]]></fieldDescription></field>
+	<!--
+	  Falz- und Lochmarken. Sie gehören auf JEDE Seite (gefalzt wird der ganze
+	  Stapel), deshalb ins Hintergrundband. Die Marken sitzen am linken Rand bei
+	  105 mm / 148,5 mm / 210 mm ab Seitenoberkante; die Lochmarke ist länger.
+	-->
+	<background>
+		<band height="818">
+			<line>
+				<reportElement x="0" y="286" width="8" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="409" width="14" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="583" width="8" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+		</band>
+	</background>
 	<title>
-		<band height="240">
+		<band height="364">
+			<!--
+			  Anschriftfeld (DIN 676 Form B). Der Frame IST das Feld: 85 × 45 mm
+			  an 20/45 mm. Innen liegt die Rücksendeangabe in der Zusatz- und
+			  Vermerkzone (12 mm ab Feldoberkante) und die Anschrift am Beginn
+			  der Anschriftzone (17,7 mm = 50 pt ab Feldoberkante).
+			-->
+			<frame>
+				<reportElement x="40" y="116" width="241" height="128"/>
+				<textField isBlankWhenNull="true">
+					<reportElement style="SenderLine" x="0" y="34" width="241" height="10"/>
+					<textFieldExpression><![CDATA[($P{Company_sender_line} != null && !$P{Company_sender_line}.trim().isEmpty())
+	? $P{Company_sender_line}
+	: (
+		($P{Company_name} == null ? "" : $P{Company_name})
+		+ (($P{Company_street} == null || $P{Company_street}.trim().isEmpty()) ? "" : " · " + $P{Company_street})
+		+ ((($P{Company_zip} == null || $P{Company_zip}.trim().isEmpty()) && ($P{Company_city} == null || $P{Company_city}.trim().isEmpty()))
+			? ""
+			: " · " + ($P{Company_zip} == null ? "" : $P{Company_zip}) + " " + ($P{Company_city} == null ? "" : $P{Company_city}))
+	).trim()]]></textFieldExpression>
+				</textField>
+				<!--
+				  Die Anschrift ist EIN Textfeld mit \n-Zeilen, kein Stapel
+				  Einzelfelder: Fehlt der Ansprechpartner, rückt die Straße auf,
+				  statt eine Lücke im Fenster zu lassen. Keine Leerzeile vor dem
+				  Ort — die kannte DIN 5008 bis 1996, seit der Fassung 2020 ist
+				  die Anschrift durchgehend. Die Landzeile druckt nur bei
+				  abweichendem Land (Company_country); "DE" unter einer deutschen
+				  Inlandsanschrift wäre schlicht falsch.
+				-->
+				<textField isBlankWhenNull="true">
+					<reportElement style="Address" x="0" y="50" width="241" height="78"/>
+					<textElement><paragraph lineSpacing="Fixed" lineSpacingSize="12.5"/></textElement>
+					<textFieldExpression><![CDATA[(($F{delivery_name} == null || $F{delivery_name}.trim().isEmpty()) ? "" : $F{delivery_name} + "\n")
++ (($F{delivery_contact_name} == null || $F{delivery_contact_name}.trim().isEmpty()) ? "" : $F{delivery_contact_name} + "\n")
++ (($F{delivery_street} == null || $F{delivery_street}.trim().isEmpty()) ? "" : $F{delivery_street} + "\n")
++ (($F{delivery_zip} == null ? "" : $F{delivery_zip}) + " " + ($F{delivery_city} == null ? "" : $F{delivery_city})).trim()
++ (($F{delivery_country} == null || $F{delivery_country}.trim().isEmpty()
+		|| ($P{Company_country} != null && $F{delivery_country}.trim().equalsIgnoreCase($P{Company_country}.trim())))
+	? ""
+	: "\n" + $F{delivery_country})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<!--
+			  Informationsblock rechts (DIN 5008: ab 125 mm, also außerhalb des
+			  Fensters, das bei 105 mm endet). Er trägt, was der Empfänger beim
+			  Auspacken braucht: wen er anruft, bis wann er zurückschicken muss
+			  und unter welcher Nummer die Sendung läuft.
+			-->
+			<frame>
+				<reportElement x="337" y="116" width="224" height="91"/>
+				<staticText><reportElement style="Label" x="0" y="0" width="104" height="12"/><text><![CDATA[Kunden-Nr.]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="0" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{customer_number}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="13" width="104" height="12"/><text><![CDATA[Ansprechpartner]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="13" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[($F{delivery_contact_name} != null && !$F{delivery_contact_name}.trim().isEmpty()) ? $F{delivery_contact_name} : $F{contact_name}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="26" width="104" height="12"/><text><![CDATA[Telefon]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="26" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[($F{delivery_contact_phone} != null && !$F{delivery_contact_phone}.trim().isEmpty()) ? $F{delivery_contact_phone} : $F{contact_phone}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="39" width="104" height="12"/><text><![CDATA[Versanddatum]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="39" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[($F{location_date} == null ? "" : $F{location_date}) + (($F{location_time} == null || $F{location_time}.isEmpty()) ? "" : " " + $F{location_time})]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="52" width="104" height="12"/><text><![CDATA[Rückgabe bis]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="52" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{rental_end}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="65" width="104" height="12"/><text><![CDATA[Verleih-Status]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="65" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{location_status}]]></textFieldExpression></textField>
+				<staticText>
+					<reportElement style="Label" x="0" y="78" width="104" height="12">
+						<printWhenExpression><![CDATA[$F{tracking_number} != null && !$F{tracking_number}.trim().isEmpty()]]></printWhenExpression>
+					</reportElement>
+					<text><![CDATA[Sendungsnummer]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Small" x="104" y="78" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{tracking_number}]]></textFieldExpression></textField>
+			</frame>
+			<!-- Betreffzeile (DIN 5008: 98,4 mm ab Seitenoberkante) -->
+			<staticText>
+				<reportElement x="12" y="267" width="549" height="18"/>
+				<textElement><font size="13" isBold="true"/></textElement>
+				<text><![CDATA[Leihschein / Versandschein]]></text>
+			</staticText>
+			<staticText><reportElement style="SectionTitle" x="12" y="296" width="270" height="14"/><text><![CDATA[Entleiher]]></text></staticText>
 			<textField>
-				<reportElement x="0" y="0" width="561" height="22"/>
-				<textElement textAlignment="Center"><font size="15" isBold="true"/></textElement>
-				<textFieldExpression><![CDATA["Standort- / Leihbericht"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="24" width="561" height="14"/>
-				<textElement textAlignment="Center"><font size="10"/></textElement>
-				<textFieldExpression><![CDATA[($F{asset_number} == null ? "" : $F{asset_number}) + "  ·  " + ($F{device_description} == null ? "" : $F{device_description})]]></textFieldExpression>
-			</textField>
-			<line><reportElement x="0" y="44" width="561" height="1"/></line>
-			<staticText><reportElement style="SectionTitle" x="0" y="52" width="270" height="14"/><text><![CDATA[Kunde]]></text></staticText>
-			<textField>
-				<reportElement style="Value" x="0" y="70" width="270" height="13"/>
+				<reportElement style="Value" x="12" y="312" width="270" height="13"/>
 				<textFieldExpression><![CDATA[($F{customer_name} == null ? "" : $F{customer_name}) + (($F{customer_number} == null || $F{customer_number}.isEmpty()) ? "" : ("  (" + $F{customer_number} + ")"))]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="0" y="84" width="270" height="13"/><textFieldExpression><![CDATA[$F{customer_street}]]></textFieldExpression></textField>
-			<textField>
-				<reportElement style="Value" x="0" y="98" width="270" height="13"/>
-				<textFieldExpression><![CDATA[($F{customer_zip} == null ? "" : $F{customer_zip}) + " " + ($F{customer_city} == null ? "" : $F{customer_city})]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Small" x="12" y="325" width="270" height="12"/>
+				<textFieldExpression><![CDATA[(($F{customer_street} == null ? "" : $F{customer_street} + ", ")
+	+ ($F{customer_zip} == null ? "" : $F{customer_zip}) + " " + ($F{customer_city} == null ? "" : $F{customer_city})).trim()]]></textFieldExpression>
 			</textField>
-			<staticText><reportElement style="Label" x="0" y="116" width="60" height="12"/><text><![CDATA[Kontakt]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="60" y="116" width="210" height="12"/><textFieldExpression><![CDATA[$F{contact_name}]]></textFieldExpression></textField>
-			<textField>
-				<reportElement style="Small" x="60" y="129" width="210" height="12"/>
-				<textFieldExpression><![CDATA[($F{contact_email} == null ? "" : $F{contact_email}) + (($F{contact_phone} == null || $F{contact_phone}.isEmpty()) ? "" : ("  ·  " + $F{contact_phone}))]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Small" x="12" y="337" width="270" height="12"/>
+				<textFieldExpression><![CDATA[(($F{contact_name} == null ? "" : $F{contact_name})
+	+ (($F{contact_email} == null || $F{contact_email}.isEmpty()) ? "" : "  ·  " + $F{contact_email})
+	+ (($F{contact_phone} == null || $F{contact_phone}.isEmpty()) ? "" : "  ·  " + $F{contact_phone})).trim()]]></textFieldExpression>
 			</textField>
-			<staticText><reportElement style="SectionTitle" x="291" y="52" width="270" height="14"/><text><![CDATA[Lieferadresse]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="291" y="70" width="270" height="13"/><textFieldExpression><![CDATA[$F{delivery_name}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="291" y="84" width="270" height="13"/><textFieldExpression><![CDATA[$F{delivery_street}]]></textFieldExpression></textField>
-			<textField>
-				<reportElement style="Value" x="291" y="98" width="270" height="13"/>
-				<textFieldExpression><![CDATA[($F{delivery_zip} == null ? "" : $F{delivery_zip}) + " " + ($F{delivery_city} == null ? "" : $F{delivery_city})]]></textFieldExpression>
+			<!--
+			  Die Lieferadresse steht schon im Fenster — hier wiederholt sie
+			  niemand. Was das Anschriftfeld nicht trägt, weil dort nur die
+			  Postanschrift hingehört, steht daneben: die E-Mail des
+			  Lieferkontakts, damit die Rückfrage zur Sendung nicht am Papier
+			  scheitert (Telefon und Name führt der Informationsblock oben).
+			-->
+			<staticText>
+				<reportElement style="SectionTitle" x="291" y="296" width="270" height="14">
+					<printWhenExpression><![CDATA[$F{delivery_contact_email} != null && !$F{delivery_contact_email}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Rückfragen zur Sendung]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Value" x="291" y="312" width="270" height="13"/>
+				<textFieldExpression><![CDATA[$F{delivery_contact_email}]]></textFieldExpression>
 			</textField>
-			<staticText><reportElement style="Label" x="291" y="116" width="60" height="12"/><text><![CDATA[Kontakt]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="351" y="116" width="210" height="12"/><textFieldExpression><![CDATA[$F{delivery_contact_name}]]></textFieldExpression></textField>
-			<textField>
-				<reportElement style="Small" x="351" y="129" width="210" height="12"/>
-				<textFieldExpression><![CDATA[($F{delivery_contact_email} == null ? "" : $F{delivery_contact_email}) + (($F{delivery_contact_phone} == null || $F{delivery_contact_phone}.isEmpty()) ? "" : ("  ·  " + $F{delivery_contact_phone}))]]></textFieldExpression>
-			</textField>
-			<line><reportElement x="0" y="150" width="561" height="1"/></line>
-			<staticText><reportElement style="SectionTitle" x="0" y="158" width="561" height="14"/><text><![CDATA[Leihdaten]]></text></staticText>
-			<staticText><reportElement style="Label" x="0" y="176" width="130" height="13"/><text><![CDATA[Leihdatum / -zeit]]></text></staticText>
-			<textField>
-				<reportElement style="Value" x="130" y="176" width="150" height="13"/>
-				<textFieldExpression><![CDATA[($F{location_date} == null ? "" : $F{location_date}) + (($F{location_time} == null || $F{location_time}.isEmpty()) ? "" : (" " + $F{location_time}))]]></textFieldExpression>
-			</textField>
-			<staticText><reportElement style="Label" x="290" y="176" width="120" height="13"/><text><![CDATA[Rückgabedatum]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="176" width="151" height="13"/><textFieldExpression><![CDATA[$F{rental_end}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="0" y="192" width="130" height="13"/><text><![CDATA[Verleih-Status]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="192" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_status}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="290" y="192" width="120" height="13"/><text><![CDATA[Nächste Kalibrierung]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="192" width="151" height="13"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
 		</band>
 	</title>
 	<detail>
-		<band height="230">
-			<staticText><reportElement style="SectionTitle" x="0" y="0" width="561" height="14"/><text><![CDATA[Prüfmittel]]></text></staticText>
-			<staticText><reportElement style="Label" x="0" y="18" width="100" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
-			<staticText><reportElement style="Label" x="100" y="18" width="110" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
-			<staticText><reportElement style="Label" x="210" y="18" width="150" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
-			<staticText><reportElement style="Label" x="360" y="18" width="201" height="13"/><text><![CDATA[Beschreibung]]></text></staticText>
-			<line><reportElement x="0" y="32" width="561" height="1"/></line>
-			<!-- Eine Zeile je Gerät der Leihe (Contract v1.1, devices[]): ein
-			     Set wird als ein Objekt verliehen und auf einem Schein
-			     quittiert, also gehören seine Teile auf das Papier. Das
-			     Wurzelgerät steht zuerst; bei einer Einzelbuchung bleibt es
-			     bei dieser einen Zeile. -->
+		<band height="210">
+			<!--
+			  Versandhinweis (Bemerkung der Buchung). Kollabiert vollständig, wenn
+			  keiner gepflegt ist — alles darunter schwimmt (positionType Float).
+			-->
+			<frame>
+				<reportElement x="12" y="0" width="549" height="30" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{shipping_note} != null && !$F{shipping_note}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<staticText><reportElement style="Label" x="0" y="0" width="549" height="12"/><text><![CDATA[Hinweis zur Sendung]]></text></staticText>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Value" x="0" y="13" width="549" height="13"/><textFieldExpression><![CDATA[$F{shipping_note}]]></textFieldExpression></textField>
+			</frame>
+			<staticText><reportElement style="SectionTitle" positionType="Float" x="12" y="36" width="300" height="14"/><text><![CDATA[Sendungsinhalt]]></text></staticText>
+			<textField>
+				<reportElement style="Small" positionType="Float" x="300" y="37" width="261" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[($F{item_count} == null ? "" : ($F{item_count} + ($F{item_count}.intValue() == 1 ? " Position" : " Positionen")))]]></textFieldExpression>
+			</textField>
+			<!--
+			  Eine Zeile je Gerät der Leihe (Contract v1.1, devices[]): ein Set
+			  wird als ein Objekt verliehen und auf einem Schein quittiert, also
+			  gehören seine Teile auf das Papier. Das Wurzelgerät steht zuerst;
+			  bei einer Einzelbuchung bleibt es bei dieser einen Zeile.
+
+			  Die Spaltenköpfe liegen im Subreport (columnHeader), nicht hier: Ein
+			  Koffer mit 17 Teilen läuft über den Seitenumbruch, und eine
+			  Ankreuzliste ohne Kopf auf Seite 2 ist nicht abhakbar.
+			-->
 			<subreport>
-				<reportElement positionType="Float" x="0" y="36" width="561" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="12" y="54" width="549" height="14" isRemoveLineWhenBlank="true"/>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("devices")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/devices.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText><reportElement style="SectionTitle" positionType="Float" x="0" y="62" width="561" height="14"/><text><![CDATA[Standort]]></text></staticText>
-			<staticText><reportElement style="Label" positionType="Float" x="0" y="80" width="130" height="13"/><text><![CDATA[Standort 1]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="130" y="80" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_1}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" positionType="Float" x="290" y="80" width="120" height="13"/><text><![CDATA[Standort 4]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="410" y="80" width="151" height="13"/><textFieldExpression><![CDATA[$F{location_4}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" positionType="Float" x="0" y="96" width="130" height="13"/><text><![CDATA[Standort 2]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="130" y="96" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_2}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" positionType="Float" x="290" y="96" width="120" height="13"/><text><![CDATA[Standort 5]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="410" y="96" width="151" height="13"/><textFieldExpression><![CDATA[$F{location_5}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" positionType="Float" x="0" y="112" width="130" height="13"/><text><![CDATA[Standort 3]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" positionType="Float" x="130" y="112" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_3}]]></textFieldExpression></textField>
-			<line><reportElement positionType="Float" x="0" y="180" width="220" height="1"/></line>
-			<staticText><reportElement positionType="Float" x="0" y="182" width="220" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift Entleiher]]></text></staticText>
-			<line><reportElement positionType="Float" x="341" y="180" width="220" height="1"/></line>
-			<staticText><reportElement positionType="Float" x="341" y="182" width="220" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift Ausgabe]]></text></staticText>
+			<!--
+			  Prüfvermerk statt Unterschrift: Das Blatt reist mit der Sendung und
+			  wird nicht am Tresen quittiert — abgehakt wird es trotzdem, beim
+			  Packen wie beim Auspacken.
+			-->
+			<line><reportElement positionType="Float" x="12" y="80" width="549" height="1"/></line>
+			<rectangle>
+				<reportElement positionType="Float" x="12" y="88" width="9" height="9"/>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</rectangle>
+			<staticText><reportElement style="Small" positionType="Float" x="26" y="87" width="280" height="12"/><text><![CDATA[Sendung vollständig und unbeschädigt erhalten]]></text></staticText>
+			<staticText><reportElement style="Label" positionType="Float" x="341" y="87" width="40" height="12"/><text><![CDATA[Datum]]></text></staticText>
+			<line><reportElement positionType="Float" x="381" y="98" width="180" height="1"/></line>
+			<!--
+			  Standortangaben der Leihe. Rein interne Felder — der Block
+			  verschwindet, wenn keines gepflegt ist, statt einen Kasten aus
+			  Beschriftungen ohne Werte auf ein Kundendokument zu setzen.
+			-->
+			<frame>
+				<reportElement positionType="Float" x="12" y="112" width="549" height="66" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{location_1} != null && !$F{location_1}.trim().isEmpty())
+	|| ($F{location_2} != null && !$F{location_2}.trim().isEmpty())
+	|| ($F{location_3} != null && !$F{location_3}.trim().isEmpty())
+	|| ($F{location_4} != null && !$F{location_4}.trim().isEmpty())
+	|| ($F{location_5} != null && !$F{location_5}.trim().isEmpty())]]></printWhenExpression>
+				</reportElement>
+				<staticText><reportElement style="SectionTitle" x="0" y="0" width="549" height="14"/><text><![CDATA[Standort]]></text></staticText>
+				<staticText><reportElement style="Label" x="0" y="18" width="130" height="13"/><text><![CDATA[Standort 1]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="18" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_1}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="290" y="18" width="120" height="13"/><text><![CDATA[Standort 4]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="18" width="139" height="13"/><textFieldExpression><![CDATA[$F{location_4}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="34" width="130" height="13"/><text><![CDATA[Standort 2]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="34" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_2}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="290" y="34" width="120" height="13"/><text><![CDATA[Standort 5]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="34" width="139" height="13"/><textFieldExpression><![CDATA[$F{location_5}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="50" width="130" height="13"/><text><![CDATA[Standort 3]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="50" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_3}]]></textFieldExpression></textField>
+			</frame>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="36">
-			<line><reportElement x="0" y="0" width="561" height="1"/></line>
-			<staticText><reportElement x="0" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Standort- / Leihbericht · calServer V2]]></text></staticText>
+			<line><reportElement x="12" y="0" width="549" height="1"/></line>
+			<staticText><reportElement x="12" y="4" width="400" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Leihschein / Versandschein · calServer V2]]></text></staticText>
 			<textField><reportElement x="420" y="4" width="110" height="12"/><textElement textAlignment="Right"><font size="7"/></textElement><textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER} + " von "]]></textFieldExpression></textField>
-			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement x="0" y="18" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
+			<textField evaluationTime="Report"><reportElement x="530" y="4" width="31" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="12" y="18" width="549" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
 		</band>
 	</pageFooter>
 </jasperReport>
