@@ -349,6 +349,13 @@ jobs:
           path: WIKI-ISO-17025
           if-no-files-found: error
 
+      - name: Upload WIKI-ISO-17025-CALSERVER as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WIKI-ISO-17025-CALSERVER
+          path: WIKI-ISO-17025-CALSERVER
+          if-no-files-found: error
+
       - name: List files before zipping (Debug)
         run: |
           echo "📂 Inhalt von DAKKS-SAMPLE:"
@@ -550,6 +557,7 @@ jobs:
           }
 
           create_wiki_zip "WIKI-ISO-17025" "wiki-iso-17025"
+          create_wiki_zip "WIKI-ISO-17025-CALSERVER" "wiki-iso-17025-calserver"
 
           # Konfigurationspakete (calserver.category-package /
           # calserver.status-package): manifest.json + Dokument + README.md,
@@ -629,6 +637,7 @@ jobs:
           unzip -l zip_output/pruefplan-fluke-23.zip
           unzip -l zip_output/pruefplan-messschieber-150mm.zip
           unzip -l zip_output/wiki-iso-17025.zip
+          unzip -l zip_output/wiki-iso-17025-calserver.zip
           unzip -l zip_output/category-inventory-dakks.zip
           unzip -l zip_output/status-calibration-dakks.zip
           unzip -l zip_output/status-inventory-dakks.zip

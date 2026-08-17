@@ -1,0 +1,36 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/wiki-package.schema.json",
+  "format": "calserver.wiki-package",
+  "format_version": 1,
+  "name": "Wiki: QM-Handbuch nach ISO/IEC 17025 mit calServer-Umsetzung (Startvorlage)",
+  "document": {
+    "format": "calserver.wiki",
+    "version": 1
+  },
+  "content": {
+    "categories": 2,
+    "articles": 15,
+    "pages": 30,
+    "media": 0,
+    "languages": [
+      "de",
+      "en"
+    ]
+  },
+  "created_at": "2026-08-17T12:00:00+00:00",
+  "generator": "calserver-reports",
+  "locale": "de",
+  "files": [
+    {
+      "path": "wiki.json",
+      "sha256": "6e93357fe1a1099a0627b6b04d3bf549702e3df9713a6bec121857380aeb63f3",
+      "size_bytes": 215424
+    },
+    {
+      "path": "README.md",
+      "sha256": "9d10c788d84f135191d5a7f2f4cf6c605647da3cda091994e60d838a7aa8806e",
+      "size_bytes": 9689
+    }
+  ],
+  "description": "Zweite Variante der 17025-Handbuchvorlage: derselbe Handbuchtext, aber jedes Kapitel endet mit drei Abschnitten zur Umsetzung in calServer V2 (wo die Anforderung landet, welcher Nachweis dort entsteht, was calServer nicht leistet). 15 Kapitel QMH-00 bis QMH-14 in Deutsch und Englisch, das letzte eine Abdeckungsmatrix ueber alle Normabschnitte mit Lueckenliste zum Abhaken."
+}

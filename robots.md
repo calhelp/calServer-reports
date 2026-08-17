@@ -210,6 +210,17 @@ in calhelp/calServer-yii.
   as if they were real; mark example rows as examples. Say so in the README —
   an unchanged template proves nothing to an accreditation body, and leftover
   placeholders stand out in an audit.
+- A topic MAY ship **two variants**: a tool-neutral one and one that carries the
+  calServer implementation (`WIKI-ISO-17025` and `WIKI-ISO-17025-CALSERVER`).
+  Rules for the second kind: it is a **separate bundle** with its own categories
+  and its own `general_page_id`s — never an extra language or an extra category
+  inside the neutral one, and never a `--mode=overwrite` upgrade path from it.
+  Every product claim MUST be traceable to `docs-v2` in calhelp/calServer-yii;
+  where a doc page describes a function that V2 does not have, the bundle says
+  it is missing rather than repeating the claim. State what the product does
+  **not** cover as plainly as what it does — a gap named in a manual is a known
+  point in an audit, a hidden one is a finding. Say in the README which variant
+  a lab should pick and that importing both is not intended.
 
 ### Manifest (MUST)
 - NEVER edit `manifest.json` by hand and NEVER invent sha256 values.
