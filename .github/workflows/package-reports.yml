@@ -264,6 +264,16 @@ jobs:
             PRICE-LIST-JSON-SAMPLE/parameters.json
           if-no-files-found: error
 
+      - name: Upload FREE-DELIVERY-JSON-SAMPLE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FREE-DELIVERY-JSON-SAMPLE
+          path: |
+            FREE-DELIVERY-JSON-SAMPLE/main_reports
+            FREE-DELIVERY-JSON-SAMPLE/subreports
+            FREE-DELIVERY-JSON-SAMPLE/parameters.json
+          if-no-files-found: error
+
       # Konfigurationspakete (calserver.category-package /
       # calserver.status-package / calserver.ticket-config-package,
       # robots.md §0.5): eigene Bundle-Klasse ohne JRXML, der ganze Ordner ist
@@ -607,6 +617,7 @@ jobs:
           create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
           create_zip "LOCATION-JSON-SAMPLE" "location-json-sample"
           create_zip "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
+          create_zip "FREE-DELIVERY-JSON-SAMPLE" "free-delivery-json-sample"
 
 
       - name: Upload report ZIPs as artifact

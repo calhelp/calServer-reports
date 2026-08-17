@@ -1,0 +1,182 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/report-parameters.schema.json",
+  "version": 1,
+  "parameters": [
+    {
+      "name": "Document_title",
+      "label": {
+        "de": "Dokumenttitel",
+        "en": "Document title"
+      },
+      "description": {
+        "de": "Überschrift des Papiers und Text in der Fußzeile. Voreinstellung „Versandschein\"; wer das Dokument im Haus anders nennt (etwa „Lieferschein\" oder „Warenbegleitschein\"), setzt es hier einmal für alle Drucke.",
+        "en": "Heading of the document and the text in its footer. Defaults to \"Versandschein\"; set it once here if your organisation calls the paper something else."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "text",
+      "required": false,
+      "group": "Dokument",
+      "order": 1,
+      "default": "Versandschein",
+      "example": "Lieferschein"
+    },
+    {
+      "name": "Company_sender_line",
+      "label": {
+        "de": "Rücksendeangabe",
+        "en": "Return address line"
+      },
+      "description": {
+        "de": "Die kleine einzeilige Absenderangabe über der Empfängeranschrift im Briefumschlagfenster. Leer lassen, um sie aus Firmenname, Straße, PLZ und Ort zusammensetzen zu lassen. Dieselbe Variable nutzen Leihschein und Auftragsbeleg.",
+        "en": "The small one-line sender note printed above the recipient address in the envelope window. Leave empty to have it composed from company name, street, postcode and city. The loan receipt and the order document use the same variable."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 2,
+      "example": "Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt"
+    },
+    {
+      "name": "Company_name",
+      "label": {
+        "de": "Absender: Firmenname",
+        "en": "Sender: company name"
+      },
+      "description": {
+        "de": "Firmenname des Absenders. Wird für die Rücksendeangabe verwendet, wenn keine eigene Rücksendeangabe gepflegt ist.",
+        "en": "Sender company name. Used for the return address line when no explicit one is configured."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 3,
+      "example": "Musterfirma GmbH"
+    },
+    {
+      "name": "Company_street",
+      "label": {
+        "de": "Absender: Straße",
+        "en": "Sender: street"
+      },
+      "description": {
+        "de": "Straße und Hausnummer des Absenders, für die Rücksendeangabe.",
+        "en": "Sender street and number, used for the return address line."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 4,
+      "example": "Musterstraße 1"
+    },
+    {
+      "name": "Company_zip",
+      "label": {
+        "de": "Absender: PLZ",
+        "en": "Sender: postcode"
+      },
+      "description": {
+        "de": "Postleitzahl des Absenders, für die Rücksendeangabe.",
+        "en": "Sender postcode, used for the return address line."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 5,
+      "example": "12345"
+    },
+    {
+      "name": "Company_city",
+      "label": {
+        "de": "Absender: Ort",
+        "en": "Sender: city"
+      },
+      "description": {
+        "de": "Ort des Absenders, für die Rücksendeangabe.",
+        "en": "Sender city, used for the return address line."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 6,
+      "example": "Musterstadt"
+    },
+    {
+      "name": "Company_country",
+      "label": {
+        "de": "Absender: Land",
+        "en": "Sender: country"
+      },
+      "description": {
+        "de": "Land des Absenders. Steuert zugleich die Landzeile der Empfängeranschrift: Sie wird nur gedruckt, wenn das Land der Lieferadresse davon abweicht — eine Inlandsanschrift bekommt also keine überflüssige Landzeile ins Fenster.",
+        "en": "Sender country. It also controls the recipient's country line: that line is printed only when the delivery country differs, so a domestic address gets no redundant country line in the window."
+      },
+      "role": "variable",
+      "scope": "global",
+      "input": "text",
+      "required": false,
+      "group": "Absender",
+      "order": 7,
+      "example": "DE"
+    },
+    {
+      "name": "Show_fold_marks",
+      "label": {
+        "de": "Falz- und Lochmarken",
+        "en": "Fold and punch marks"
+      },
+      "description": {
+        "de": "Druckt die Falzmarken bei 105 mm und 210 mm sowie die Lochmarke bei 148,5 mm an den linken Blattrand. Auf \"0\" setzen, wenn auf vorgedrucktem Briefpapier gedruckt wird, das die Marken bereits trägt.",
+        "en": "Prints the fold marks at 105 mm and 210 mm plus the punch mark at 148.5 mm on the left edge of the sheet. Set to \"0\" when printing on pre-printed stationery that already carries them."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "text",
+      "required": false,
+      "group": "Layout",
+      "order": 8,
+      "default": "1",
+      "example": "1"
+    },
+    {
+      "name": "Company_footer",
+      "label": {
+        "de": "Fußzeile",
+        "en": "Footer line"
+      },
+      "description": {
+        "de": "Optionale Fußzeile am unteren Rand jeder Seite, unterhalb von Dokumenttitel und Seitenzählung — z. B. Firmenname, Anschrift und Kontaktdaten. Leer lassen, wenn keine zusätzliche Fußzeile gedruckt werden soll.",
+        "en": "Optional footer at the bottom of every page, below the document title and page count — e.g. company name, address and contact details. Leave empty to omit the extra footer line."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "textarea",
+      "required": false,
+      "group": "Layout",
+      "order": 9,
+      "example": "Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt · info@musterfirma.de"
+    },
+    {
+      "name": "Reportpath",
+      "label": {
+        "de": "Bundle-Wurzelpfad",
+        "en": "Bundle root path"
+      },
+      "description": {
+        "de": "Wurzelpfad zur Auflösung der Subreports (/subreports/*.jasper). Wird von calServer automatisch gesetzt.",
+        "en": "Root path for resolving the subreports (/subreports/*.jasper). Supplied automatically by calServer."
+      },
+      "role": "system"
+    }
+  ]
+}
