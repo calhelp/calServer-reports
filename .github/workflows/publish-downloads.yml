@@ -117,6 +117,7 @@ jobs:
           get_last_modified "STATUS-INVENTORY-DAKKS" "status-inventory-dakks"
           get_last_modified "STATUS-REPAIR-DAKKS" "status-repair-dakks"
           get_last_modified "STATUS-BOOKING-DAKKS" "status-booking-dakks"
+          get_last_modified "STATUS-LOCATION-DAKKS" "status-location-dakks"
           get_last_modified "STATUS-TICKETS-DAKKS" "status-tickets-dakks"
           get_last_modified "TICKET-CONFIG-DAKKS" "ticket-config-dakks"
           get_last_modified "TICKET-CONFIG-DAKKS-3D" "ticket-config-dakks-3d"
@@ -237,6 +238,7 @@ jobs:
               "status-inventory-dakks":             "STATUS-INVENTORY-DAKKS/README.md",
               "status-repair-dakks":                "STATUS-REPAIR-DAKKS/README.md",
               "status-booking-dakks":               "STATUS-BOOKING-DAKKS/README.md",
+              "status-location-dakks":              "STATUS-LOCATION-DAKKS/README.md",
               "status-tickets-dakks":               "STATUS-TICKETS-DAKKS/README.md",
               "ticket-config-dakks":                "TICKET-CONFIG-DAKKS/README.md",
               "ticket-config-dakks-3d":             "TICKET-CONFIG-DAKKS-3D/README.md",
@@ -282,6 +284,7 @@ jobs:
               "status-inventory-dakks":             "Status: Geräte-Lebenszyklus für Kalibrierlabore",
               "status-repair-dakks":                "Status: Reparatur für Kalibrierlabore",
               "status-booking-dakks":               "Status: Aufträge für Kalibrierlabore",
+              "status-location-dakks":              "Status: Standorte und Leihe für Kalibrierlabore",
               "status-tickets-dakks":               "Status: Risiken, Chancen und Maßnahmen im Ticketsystem",
               "ticket-config-dakks":                "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (zwei Methoden)",
               "ticket-config-dakks-3d":             "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (drei Methoden)",

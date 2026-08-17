@@ -273,8 +273,13 @@ ships a release. calServer imports; this repo maintains the content.
   the JRXML assertion.
 - **One package per module.** A status package carries one `type`; a lab that
   only wants the calibration statuses must not have to take the order module
-  with it. The four shipped sets (`calibration`, `inventory`, `repair`,
-  `booking`) are the pattern for any further one.
+  with it. The shipped sets (`calibration`, `inventory`, `repair`, `booking`,
+  `location`, `support_tickets`) are the pattern for any further one.
+- **Titles that the product already ships are kept verbatim.** Import matches a
+  status by (type, title), so a package that renames a shipped status creates a
+  twin next to it instead of extending it. `STATUS-LOCATION-DAKKS` is the
+  example: it carries calServer's own `Standort`, `Busy` and `Reservation` and
+  only adds what is missing. Renaming is the installation's call, after import.
 - Required files at the bundle root, and **nothing else**: `manifest.json`,
   `README.md`, plus `categories.json` (CATEGORY-*), `statuses.json` (STATUS-*)
   or `ticket-config.json` (TICKET-CONFIG-*). NO subfolders, NO images, NO

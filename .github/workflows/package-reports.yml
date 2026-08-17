@@ -313,6 +313,13 @@ jobs:
           path: STATUS-BOOKING-DAKKS
           if-no-files-found: error
 
+      - name: Upload STATUS-LOCATION-DAKKS as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STATUS-LOCATION-DAKKS
+          path: STATUS-LOCATION-DAKKS
+          if-no-files-found: error
+
       - name: Upload STATUS-TICKETS-DAKKS as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -600,6 +607,7 @@ jobs:
           create_config_zip "STATUS-INVENTORY-DAKKS" "status-inventory-dakks" "statuses.json"
           create_config_zip "STATUS-REPAIR-DAKKS" "status-repair-dakks" "statuses.json"
           create_config_zip "STATUS-BOOKING-DAKKS" "status-booking-dakks" "statuses.json"
+          create_config_zip "STATUS-LOCATION-DAKKS" "status-location-dakks" "statuses.json"
           create_config_zip "STATUS-TICKETS-DAKKS" "status-tickets-dakks" "statuses.json"
           create_config_zip "TICKET-CONFIG-DAKKS" "ticket-config-dakks" "ticket-config.json"
           create_config_zip "TICKET-CONFIG-DAKKS-3D" "ticket-config-dakks-3d" "ticket-config.json"
