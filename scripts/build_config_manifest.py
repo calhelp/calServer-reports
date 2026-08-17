@@ -35,7 +35,9 @@ Zwei Modi:
         ganzzahligem Gewicht, Formel arithmetisch und mit mindestens einer
         Ebene, dritte Ebene und Formel stimmen überein, Matrixbänder eindeutig
         und lückenlos über den erreichbaren Wertebereich, jede Matrixzeile
-        verweist auf eine Priorität desselben Pakets.
+        verweist auf eine Priorität desselben Pakets, Fristen sind ganze Tage
+        ab 1 und werden mit steigendem Risiko kürzer, keine Vorwarnung ohne
+        Frist.
 
       Exit 1 bei Abweichung.
 
@@ -81,6 +83,8 @@ KINDS = {
         "schema": "ticket-config-package.schema.json",
         "collection": "types",
         "types": (),
+        # Version 2 traegt die Fristen an der Matrix (due_days, warn_days).
+        "max_document_version": 2,
     },
     "status": {
         "prefix": "STATUS-",
@@ -102,6 +106,11 @@ KINDS = {
 }
 
 PACKAGE_VERSION = 1
+
+# Hoechste lesbare Dokumentversion, wenn eine Klasse nichts anderes sagt
+# (`max_document_version` im Eintrag oben). Global waere sie falsch: dass das
+# Ticketmanagement-Dokument eine zweite Version hat, sagt nichts darueber, ob
+# ein Kategoriedokument eine haette.
 MAX_DOCUMENT_VERSION = 1
 MANIFEST_NAME = "manifest.json"
 README_NAME = "README.md"
@@ -545,6 +554,8 @@ def check_ticket_matrix(
 
     covered: set[int] = set()
     seen: set[str] = set()
+    # (untere Bandgrenze, Frist) je Zeile — fuer die Monotonie-Pruefung unten.
+    deadlines: list[tuple[int, int | None]] = []
 
     for index, row in enumerate(matrix, start=1):
         if not isinstance(row, dict):
@@ -582,6 +593,21 @@ def check_ticket_matrix(
 
         covered.update(range(low_value, high_value + 1))
 
+        due_days = check_ticket_days(row, band, "due_days", bundle, problems)
+        warn_days = check_ticket_days(row, band, "warn_days", bundle, problems)
+        deadlines.append((low_value, due_days))
+
+        if warn_days is not None and due_days is None:
+            problems.append(
+                f"{bundle.name}: Band {band!r} hat eine Vorwarnzeit, aber keine Frist — "
+                "ohne Frist gibt es nichts, wovor gewarnt werden koennte"
+            )
+        elif warn_days is not None and due_days is not None and warn_days > due_days:
+            problems.append(
+                f"{bundle.name}: Band {band!r} warnt {warn_days} Tage vor einer Frist von "
+                f"{due_days} Tagen — die Vorwarnung laege vor der Bewertung"
+            )
+
         priority = row.get("priority")
         if priority is None:
             continue
@@ -596,6 +622,28 @@ def check_ticket_matrix(
                 "die das Paket nicht mitbringt"
             )
 
+    # Je hoeher das Risiko, desto kuerzer die Frist. Eine fehlende Frist zaehlt
+    # als „unendlich" und ist deshalb nur ganz unten zulaessig (das niedrigste
+    # Band der DAkkS-Vorlagen kommt bewusst ohne aus: Eintrag genuegt). Eine
+    # Vorlage, die dem kritischen Band drei Monate und dem normalen eine Woche
+    # gibt, ist ein Zahlendreher, den beim Lesen niemand bemerkt — die Matrix
+    # sortiert nach Farbe, nicht nach Tagen.
+    previous_band: int | None = None
+    previous_days: int | None = None
+    for low_value, due_days in sorted(deadlines):
+        if previous_band is not None and previous_days is not None:
+            if due_days is None:
+                problems.append(
+                    f"{bundle.name}: Band ab {low_value} hat gar keine Frist, das niedrigere "
+                    f"Band ab {previous_band} aber {previous_days} Tage"
+                )
+            elif due_days > previous_days:
+                problems.append(
+                    f"{bundle.name}: Band ab {low_value} hat mit {due_days} Tagen eine laengere "
+                    f"Frist als das niedrigere Band ab {previous_band} ({previous_days} Tage)"
+                )
+        previous_band, previous_days = low_value, due_days
+
     if reachable <= 0:
         return
 
@@ -605,6 +653,35 @@ def check_ticket_matrix(
             f"{bundle.name}: die Matrix deckt den erreichbaren Wertebereich 1 bis {reachable} "
             f"nicht ab — es fehlen {len(missing)} Werte, erster: {missing[0]}"
         )
+
+
+def check_ticket_days(
+    row: dict,
+    band: str,
+    field: str,
+    bundle: Path,
+    problems: list[str],
+) -> int | None:
+    """Frist oder Vorwarnzeit einer Matrixzeile, in Kalendertagen.
+
+    Fehlt der Wert, heisst das „keine" — das ist gueltig und der Normalfall
+    eines Pakets der Dokumentversion 1. Steht dort aber etwas, muss es eine
+    ganze Zahl ab 1 sein: 0 als „keine Frist" zu lesen hiesse, einen
+    Zahlendreher stillschweigend zu verwerfen.
+    """
+    value = row.get(field)
+    if value is None:
+        return None
+
+    if isinstance(value, bool) or not isinstance(value, int):
+        problems.append(f"{bundle.name}: Band {band!r} hat unter {field} keine Anzahl Tage: {value!r}")
+        return None
+
+    if not 1 <= value <= 3650:
+        problems.append(f"{bundle.name}: Band {band!r}: {field} muss zwischen 1 und 3650 Tagen liegen, ist {value}")
+        return None
+
+    return value
 
 
 def check_field_rules(rules: object, label: str, problems: list[str]) -> None:
@@ -658,11 +735,12 @@ def check_bundle(bundle: Path) -> list[str]:
             f"erwartet {spec['document_format']!r}"
         )
 
+    max_version = spec.get("max_document_version", MAX_DOCUMENT_VERSION)
     document_version = document.get("version")
-    if not isinstance(document_version, int) or document_version > MAX_DOCUMENT_VERSION:
+    if not isinstance(document_version, int) or document_version > max_version:
         problems.append(
             f"{bundle.name}: Dokumentversion {document_version!r} ist unlesbar "
-            f"(hoechstens {MAX_DOCUMENT_VERSION})"
+            f"(hoechstens {max_version})"
         )
 
     # Dateien: Manifest gegen Platte, in beide Richtungen.

@@ -5,7 +5,7 @@
   "name": "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (drei Methoden)",
   "document": {
     "format": "calserver.ticket-config",
-    "version": 1
+    "version": 2
   },
   "content": {
     "types": 8,
@@ -20,13 +20,13 @@
   "files": [
     {
       "path": "ticket-config.json",
-      "sha256": "44eb76fde44163019eeaccca12c9c2f1014a6ca7169ea894a0d5513c5e047a36",
-      "size_bytes": 10726
+      "sha256": "9c2b07ae7337e4aec70045f785ce19e2724fa7b8c58e3b0ccd8d40cb08228628",
+      "size_bytes": 10858
     },
     {
       "path": "README.md",
-      "sha256": "b587752d33bf125b3e54f91f4c36b5e3c0feb20df82efbbac2db4c64fdae5165",
-      "size_bytes": 4031
+      "sha256": "b2ba806d86e3c47997b0e86f189339b89c51a67bcba80a47774c05c49ac59bd1",
+      "size_bytes": 4337
     }
   ],
   "description": "Dieselbe Einrichtung wie die Zwei-Methoden-Fassung, bewertet aber mit Auswirkung × Wahrscheinlichkeit × Erkennbarkeit und einer Matrix über 1 bis 125.",

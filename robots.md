@@ -317,6 +317,18 @@ ships a release. calServer imports; this repo maintains the content.
     25 without colour and without priority.
   - The formula and `risk3` must agree: `[Risk_3]` in the formula requires a
     non-empty `risk3` and vice versa.
+  - **Deadlines (document version 2).** A `matrix` row may carry `due_days`
+    (deadline in calendar days from the assessment) and `warn_days` (advance
+    warning). Both are whole days from 1 to 3650 — `0` is not "no deadline",
+    it is a typo, and the script says so. Omitting them is the valid way to
+    say "none", and a version 1 document stays readable. Two rules the script
+    enforces because the matrix sorts by colour, not by days: a deadline must
+    never grow as the band rises (a missing one counts as infinite and is
+    therefore only allowed at the bottom), and `warn_days` needs a `due_days`
+    to warn about and must not exceed it.
+  - Escalation recipients and end statuses are NOT package content. They depend
+    on the groups and statuses of the target installation and are set once in
+    Ticket administration.
   - Ticket **statuses** do NOT belong in this document. They live in the shared
     status catalogue and ship as a `STATUS-*` package next to it
     (`STATUS-TICKETS-DAKKS`); the two READMEs point at each other.
@@ -333,7 +345,7 @@ ships a release. calServer imports; this repo maintains the content.
   CI runs `--check` on every push/PR (validate-reports.yml) and fails on any
   drift: unlisted file, missing file, wrong checksum, disallowed entry,
   duplicate key, unresolvable `parent_key`, transition pointing at a status the
-  package does not carry.
+  package does not carry, deadline that grows with the risk band.
 - Keep `created_at`, `name`, `description` and `locale` stable across `--write`
   runs (the script preserves them).
 

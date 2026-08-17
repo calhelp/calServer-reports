@@ -1,6 +1,6 @@
 {
   "format": "calserver.ticket-config",
-  "version": 1,
+  "version": 2,
   "generator": "calserver-reports",
   "risk": {
     "formula": "[Risk_1] * [Risk_2]",
@@ -267,19 +267,25 @@
       "risk": "5-9",
       "color": "FFFF00",
       "priority": "Normal",
-      "sort_order": 2
+      "sort_order": 2,
+      "due_days": 90,
+      "warn_days": 14
     },
     {
       "risk": "10-14",
       "color": "FFC000",
       "priority": "Hoch",
-      "sort_order": 3
+      "sort_order": 3,
+      "due_days": 30,
+      "warn_days": 7
     },
     {
       "risk": "15-25",
       "color": "FF0000",
       "priority": "Kritisch",
-      "sort_order": 4
+      "sort_order": 4,
+      "due_days": 7,
+      "warn_days": 2
     }
   ]
 }

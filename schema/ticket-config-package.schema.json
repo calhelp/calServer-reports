@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://calhelp.github.io/calServer-reports/schema/ticket-config-package.schema.json",
   "title": "calServer Ticketmanagement-Paket (calserver.ticket-config-package)",
-  "description": "Manifest eines Ticketmanagement-Pakets: ein ZIP mit ticket-config.json (calserver.ticket-config) und optionalem README.md. Das Manifest listet jeden Paket-Eintrag mit SHA-256-Prüfsumme und ist damit der Manipulationsanker des Formats. Ein Paket trägt die Einrichtung des Ticketmoduls (Vorgangsarten, Kategorien, Prioritäten, die Skalen der bis zu drei Bewertungsebenen, die Risiko-Matrix, die Formel und die Namen der Ebenen), nicht die Tickets und nicht die Ticket-Status — die liegen im gemeinsamen Statuskatalog und haben mit calserver.status-package ihr eigenes Format. Zusätzliche, hier nicht beschriebene Felder sind erlaubt und werden von älteren Lesern ignoriert (Vorwärtskompatibilität); die verbindliche Lese-Semantik gehört calServer V2 (laravel/app/Services/Ticket/TicketConfigPackageService.php).",
+  "description": "Manifest eines Ticketmanagement-Pakets: ein ZIP mit ticket-config.json (calserver.ticket-config) und optionalem README.md. Das Manifest listet jeden Paket-Eintrag mit SHA-256-Prüfsumme und ist damit der Manipulationsanker des Formats. Ein Paket trägt die Einrichtung des Ticketmoduls (Vorgangsarten, Kategorien, Prioritäten, die Skalen der bis zu drei Bewertungsebenen, die Risiko-Matrix samt Fristen, die Formel und die Namen der Ebenen), nicht die Tickets und nicht die Ticket-Status — die liegen im gemeinsamen Statuskatalog und haben mit calserver.status-package ihr eigenes Format. Zusätzliche, hier nicht beschriebene Felder sind erlaubt und werden von älteren Lesern ignoriert (Vorwärtskompatibilität); die verbindliche Lese-Semantik gehört calServer V2 (laravel/app/Services/Ticket/TicketConfigPackageService.php).",
   "type": "object",
   "required": [
     "format",
@@ -18,7 +18,7 @@
     "format_version": {
       "type": "integer",
       "minimum": 1,
-      "description": "Version des Paketformats. Leser lehnen Versionen oberhalb der eigenen ab, statt unbekannte Inhalte still zu verlieren. Aktuelle Version: 1."
+      "description": "Version des Paketformats (des ZIP-Containers). Leser lehnen Versionen oberhalb der eigenen ab, statt unbekannte Inhalte still zu verlieren. Aktuelle Version: 1. Nicht zu verwechseln mit document.version, der Version des eingebetteten Dokuments."
     },
     "name": {
       "type": "string",
@@ -45,7 +45,8 @@
         },
         "version": {
           "type": "integer",
-          "minimum": 1
+          "minimum": 1,
+          "description": "Version des ticket-config.json. Aktuelle Version: 2 (fuehrte due_days und warn_days an der Matrixzeile ein). Version 1 bleibt lesbar, sie bringt eben keine Fristen mit."
         }
       }
     },

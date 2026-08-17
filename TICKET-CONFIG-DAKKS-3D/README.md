@@ -28,15 +28,19 @@ Deshalb steigt das Gewicht, je später etwas auffällt.
 Dieselben vier Stufen und dieselben Prioritäten wie in der
 Zwei-Methoden-Fassung, nur über 1 bis 125 geschnitten:
 
-| Band | Farbe | Priorität |
-|------|-------|-----------|
-| 1–9 | grün | Niedrig |
-| 10–29 | gelb | Normal |
-| 30–59 | orange | Hoch |
-| 60–125 | rot | Kritisch |
+| Band | Farbe | Priorität | Frist | Vorwarnung |
+|------|-------|-----------|-------|------------|
+| 1–9 | grün | Niedrig | keine | — |
+| 10–29 | gelb | Normal | 90 Tage | 14 Tage |
+| 30–59 | orange | Hoch | 30 Tage | 7 Tage |
+| 60–125 | rot | Kritisch | 7 Tage | 2 Tage |
 
-Die Entscheidungsregeln je Band (wer entscheidet, welche Frist, welcher
-Nachweis) stehen im README der Zwei-Methoden-Fassung und gelten unverändert.
+Die Fristen sind dieselben wie in der Zwei-Methoden-Fassung: Sie folgen der
+Einstufung, nicht der Rechenart. Ein kritischer Vorgang ist kritisch, ob er über
+zwei oder drei Methoden dorthin kommt.
+
+Die Entscheidungsregeln je Band (wer entscheidet, welcher Nachweis) stehen im
+README der Zwei-Methoden-Fassung und gelten unverändert.
 
 ## Welche Fassung passt
 
@@ -81,8 +85,8 @@ Die dritte Skala, die Formel und die Bänder stehen im Skript
 
 ## Grenzen
 
-Dieselben wie bei der Zwei-Methoden-Fassung (Fristen setzt calServer nicht
-durch, Ticket-Status tragen keine Pflichtfeldregeln, einsprachig deutsch), und
-eine dazu: **drei Ebenen sind unvollständig schnell.** Solange eine von der
+Dieselben wie bei der Zwei-Methoden-Fassung (Zuständigkeiten bleiben
+Verfahrensanweisung, Ticket-Status tragen keine Pflichtfeldregeln, einsprachig
+deutsch), und eine dazu: **drei Ebenen sind unvollständig schnell.** Solange eine von der
 Formel genutzte Ebene am Ticket nicht ausgewählt ist, hat das Ticket keinen
 Risikowert — mit drei Ebenen passiert das öfter als mit zwei.
