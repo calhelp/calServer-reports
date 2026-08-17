@@ -122,6 +122,7 @@ jobs:
           get_last_modified "PRUEFPLAN-FLUKE-23" "pruefplan-fluke-23"
           get_last_modified "PRUEFPLAN-MESSSCHIEBER-150MM" "pruefplan-messschieber-150mm"
           get_last_modified "WIKI-ISO-17025" "wiki-iso-17025"
+          get_last_modified "WIKI-ISO-17025-CALSERVER" "wiki-iso-17025-calserver"
 
           echo "Last-modified dates:"
           cat artifacts/last-modified.tsv
@@ -228,6 +229,7 @@ jobs:
               "pruefplan-fluke-23":                 "PRUEFPLAN-FLUKE-23/README.md",
               "pruefplan-messschieber-150mm":       "PRUEFPLAN-MESSSCHIEBER-150MM/README.md",
               "wiki-iso-17025":                     "WIKI-ISO-17025/README.md",
+              "wiki-iso-17025-calserver":           "WIKI-ISO-17025-CALSERVER/README.md",
               "category-inventory-dakks":           "CATEGORY-INVENTORY-DAKKS/README.md",
               "status-calibration-dakks":           "STATUS-CALIBRATION-DAKKS/README.md",
               "status-inventory-dakks":             "STATUS-INVENTORY-DAKKS/README.md",
@@ -271,6 +273,7 @@ jobs:
               "pruefplan-fluke-23":                 "Prüfplan: Fluke 23 Series II mit Fluke 5520A",
               "pruefplan-messschieber-150mm":       "Prüfplan: Messschieber 150 mm mit Endmaßsatz",
               "wiki-iso-17025":                     "Wiki: QM-Handbuch nach ISO/IEC 17025 (Startvorlage)",
+              "wiki-iso-17025-calserver":           "Wiki: QM-Handbuch nach ISO/IEC 17025 mit calServer-Umsetzung",
               "category-inventory-dakks":           "Kategorien: Inventar für Kalibrierlabore (DAkkS)",
               "status-calibration-dakks":           "Status: Kalibrierung für akkreditierte Labore",
               "status-inventory-dakks":             "Status: Geräte-Lebenszyklus für Kalibrierlabore",
