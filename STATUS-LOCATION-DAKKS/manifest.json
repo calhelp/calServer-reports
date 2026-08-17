@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/status-package.schema.json",
+  "format": "calserver.status-package",
+  "format_version": 1,
+  "name": "Status: Standorte und Leihe für Kalibrierlabore",
+  "document": {
+    "format": "calserver.statuses",
+    "version": 1
+  },
+  "content": {
+    "statuses": 5,
+    "field_rules": 7,
+    "types": [
+      "location"
+    ],
+    "transitions": 0,
+    "processing_times": 0
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "statuses.json",
+      "sha256": "e64f0732ee41a9061757e7ebec60075dc1071463c6e5890e546516fb86d8075f",
+      "size_bytes": 3586
+    },
+    {
+      "path": "README.md",
+      "sha256": "da19190ff8e36cb298e02394d43bdec2756462ca6c3d1c3ccb569324c9a00264",
+      "size_bytes": 6554
+    }
+  ],
+  "description": "Wo ein Gerät steht und bei wem es ist: Standort, Reservierung, Leihe und ihr Ende, mit dem Rückgabedatum als Pflichtfeld.",
+  "created_at": "2026-08-17T12:00:00+00:00",
+  "locale": "de"
+}

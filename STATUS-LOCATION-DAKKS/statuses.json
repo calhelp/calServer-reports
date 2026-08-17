@@ -1,0 +1,136 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": [
+    "location"
+  ],
+  "statuses": [
+    {
+      "key": "location-standort",
+      "type": "location",
+      "title": "Standort",
+      "short_title": "ST",
+      "description": "Gerät steht an diesem Ort; keine Leihe, kein Rückgabetermin.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-map-marker",
+      "sort_order": 10,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "location_2",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "customer_id",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "location-reservation",
+      "type": "location",
+      "title": "Reservation",
+      "short_title": "RE",
+      "description": "Zeitraum ist für einen Entleiher vorgemerkt; das Gerät ist noch im Haus.",
+      "color": "#7C3AED",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-calendar",
+      "sort_order": 20,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "rental_end",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "location-busy",
+      "type": "location",
+      "title": "Busy",
+      "short_title": "BE",
+      "description": "Gerät ist heraus (im Verleih); der Leihschein gehört zu dieser Zeile.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-send",
+      "sort_order": 30,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "rental_end",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        },
+        {
+          "field": "customer_contact_id",
+          "edit_visible": true,
+          "edit_mandatory": false,
+          "view_visible": true,
+          "display_order": 20
+        }
+      ]
+    },
+    {
+      "key": "location-zurueckgegeben",
+      "type": "location",
+      "title": "Zurückgegeben",
+      "short_title": "ZU",
+      "description": "Gerät ist zurück im Haus und geprüft; der Eintrag ist Historie.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check",
+      "sort_order": 40,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "rental_end",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    },
+    {
+      "key": "location-nicht-zurueckgegeben",
+      "type": "location",
+      "title": "Nicht zurückgegeben",
+      "short_title": "NZ",
+      "description": "Rückgabetermin verstrichen, Verbleib ungeklärt; das Gerät gilt bis zur Klärung nicht als einsatzbereit.",
+      "color": "#991B1B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-exclamation-triangle",
+      "sort_order": 50,
+      "active": true,
+      "hide": false,
+      "field_rules": [
+        {
+          "field": "rental_end",
+          "edit_visible": true,
+          "edit_mandatory": true,
+          "view_visible": true,
+          "display_order": 10
+        }
+      ]
+    }
+  ],
+  "transitions": [],
+  "processing_times": []
+}
