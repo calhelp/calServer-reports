@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "contract": "free-delivery-note",
+    "schema_version": "1.0",
+    "generated_at": "2026-08-17T09:30:00+00:00",
+    "generated_date": "2026-08-17",
+    "locale": "de-DE"
+  },
+  "document": {
+    "number": "VS-2026-0007",
+    "date": "2026-08-17",
+    "subject": "Rücksendung nach Kalibrierung",
+    "customer_number": "K-1001",
+    "item_count": 4
+  },
+  "sender": {
+    "contact_name": "Anna Weber",
+    "email": "anna.weber@labor.example",
+    "phone": "+49 30 1234500"
+  },
+  "customer": {
+    "name": "Muster GmbH",
+    "customer_number": "K-1001",
+    "street": "Musterstraße 1",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "custom_fields": {}
+  },
+  "customer_contact": {
+    "name": "Erika Musterfrau",
+    "street": "Wareneingang, Tor 3",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "email": "erika@muster.example",
+    "phone": "+49 30 1234501"
+  },
+  "delivery": {
+    "name": "Muster GmbH",
+    "contact_name": "Erika Musterfrau",
+    "street": "Wareneingang, Tor 3",
+    "zip": "54321",
+    "city": "Beispielstadt",
+    "country": "DE",
+    "email": "erika@muster.example",
+    "phone": "+49 30 1234501"
+  },
+  "devices": [
+    {
+      "asset_number": "INV-9001",
+      "serial_number": "SN-12345",
+      "description": "Digitalmultimeter Fluke 87V",
+      "manufacturer": "Fluke",
+      "model": "87V",
+      "type_code": "DMM",
+      "next_calibration_date": "2027-06-30",
+      "custom_fields": {}
+    },
+    {
+      "asset_number": "INV-9002",
+      "serial_number": "SN-22450",
+      "description": "Kalibrator Fluke 5522A",
+      "manufacturer": "Fluke",
+      "model": "5522A",
+      "type_code": "CALSTD",
+      "next_calibration_date": "2027-06-30",
+      "custom_fields": {}
+    },
+    {
+      "asset_number": "INV-9003",
+      "serial_number": "SN-33110",
+      "description": "Isolationsmessgerät",
+      "manufacturer": "Fluke",
+      "model": "1507",
+      "type_code": "ISO",
+      "next_calibration_date": "2027-03-31",
+      "custom_fields": {}
+    },
+    {
+      "asset_number": "INV-9004",
+      "serial_number": "SN-44870",
+      "description": "Klemmzange",
+      "manufacturer": "Keysight",
+      "model": "U1194A",
+      "type_code": "CLM",
+      "next_calibration_date": "2027-06-30",
+      "custom_fields": {}
+    }
+  ],
+  "shipping": {
+    "tracking_number": "00340434161094022838",
+    "note": "Vier Geräte in einem Karton, Kalibrierscheine liegen bei.",
+    "item_count": 4
+  }
+}

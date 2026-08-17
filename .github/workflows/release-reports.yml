@@ -136,6 +136,7 @@ jobs:
           create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
           create_zip "LOCATION-JSON-SAMPLE" "location-json-sample"
           create_zip "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
+          create_zip "FREE-DELIVERY-JSON-SAMPLE" "free-delivery-json-sample"
 
       - name: Determine release metadata
         id: release_meta

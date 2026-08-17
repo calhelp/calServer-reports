@@ -111,6 +111,7 @@ jobs:
           get_last_modified "REPAIR-JSON-SAMPLE" "repair-json-sample"
           get_last_modified "LOCATION-JSON-SAMPLE" "location-json-sample"
           get_last_modified "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
+          get_last_modified "FREE-DELIVERY-JSON-SAMPLE" "free-delivery-json-sample"
           get_last_modified "CATEGORY-INVENTORY-DAKKS" "category-inventory-dakks"
           get_last_modified "STATUS-CALIBRATION-DAKKS" "status-calibration-dakks"
           get_last_modified "STATUS-INVENTORY-DAKKS" "status-inventory-dakks"
@@ -225,6 +226,7 @@ jobs:
               "repair-json-sample":                 "REPAIR-JSON-SAMPLE/README.md",
               "location-json-sample":               "LOCATION-JSON-SAMPLE/README.md",
               "price-list-json-sample":             "PRICE-LIST-JSON-SAMPLE/README.md",
+              "free-delivery-json-sample":          "FREE-DELIVERY-JSON-SAMPLE/README.md",
               "pruefplan-fluke-23":                 "PRUEFPLAN-FLUKE-23/README.md",
               "pruefplan-messschieber-150mm":       "PRUEFPLAN-MESSSCHIEBER-150MM/README.md",
               "wiki-iso-17025":                     "WIKI-ISO-17025/README.md",
@@ -268,6 +270,7 @@ jobs:
               "repair-json-sample":                 "Reparaturbericht",
               "location-json-sample":               "Standort-/Leihbericht",
               "price-list-json-sample":             "Preisliste",
+              "free-delivery-json-sample":          "Versandschein (ohne Auftrag)",
               "pruefplan-fluke-23":                 "Prüfplan: Fluke 23 Series II mit Fluke 5520A",
               "pruefplan-messschieber-150mm":       "Prüfplan: Messschieber 150 mm mit Endmaßsatz",
               "wiki-iso-17025":                     "Wiki: QM-Handbuch nach ISO/IEC 17025 (Startvorlage)",
