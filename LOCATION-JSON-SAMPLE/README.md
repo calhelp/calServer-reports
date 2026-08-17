@@ -52,7 +52,7 @@ setzt sie nicht auf `x=0`, sonst läuft die Lochmarke bei 148,5 mm hindurch.
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/location-json-sample.jrxml` | Hauptbericht: Anschriftfeld mit Rücksendeangabe, Informationsblock rechts (Kunden-Nr., Ansprechpartner, Telefon, Versanddatum, Rückgabe, Status, Sendungsnummer), Betreffzeile, Entleiher-Block, Versandhinweis, Prüfvermerk, Standortblock (`location_1..5`), Falzmarken, Seiten-Footer |
+| `main_reports/location-json-sample.jrxml` | Hauptbericht: Anschriftfeld mit Rücksendeangabe, Informationsblock rechts (Kunden-Nr., Ansprechpartner, Telefon, Versanddatum, Rückgabe, Status, Sendungsnummer), Betreffzeile, Entleiher-Block, Versandhinweis, Prüfvermerk, Falzmarken, Seiten-Footer |
 | `subreports/devices.jrxml` | Sendungsinhalt als Abhakliste — je Gerät eine Zeile mit Ankreuzfeld, Positionsnummer und nächster Kalibrierung; Spaltenköpfe wiederholen sich auf Folgeseiten |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `location-report` **v1.2**) |
 | `main_reports/location-json-sample_adapter.xml` | Mitgelieferter Jaspersoft-Studio-**JSON-Data-Adapter** auf `sample-data.json` — macht die Vorschau turnkey (siehe „Vorschau ohne Backend") |
@@ -71,6 +71,11 @@ setzt sie nicht auf `x=0`, sonst läuft die Lochmarke bei 148,5 mm hindurch.
 - **Sendungsdaten.** Sendungsverfolgungsnummer im Informationsblock,
   Versandhinweis (Bemerkung der Buchung) über der Tabelle. Beide fehlen
   spurlos, wenn sie leer sind.
+- **Kein Standortblock.** `location_1..5` sind auf einer Leihe interne
+  Platzierungsfelder, und eines davon ist auf vielen Anlagen als
+  `[CURRENT_USER]` konfiguriert — unter „Standort" stand dann der Name des
+  Buchenden. Der Contract liefert die Felder weiter, das Referenz-Layout
+  druckt sie nicht.
 
 ## Datenanbindung
 
@@ -87,14 +92,18 @@ setzt sie nicht auf `x=0`, sonst läuft die Lochmarke bei 148,5 mm hindurch.
   `subreports/devices.jrxml`. Ein Set (Koffer) wird als **ein** Objekt
   verliehen und auf **einem** Schein quittiert, also stehen seine Teile mit
   darauf. `device` bleibt daneben bestehen, damit eine gegen v1.0 geschriebene
-  Vorlage weiterläuft.
+  Vorlage weiterläuft. Welche Geräte zum Koffer gehören, beantwortet
+  serverseitig ein einziger Resolver über die Elternkette — bis August 2026
+  hing das an einem Pfad-Cache, und auf Anlagen mit importierten Beständen kam
+  der Koffer als eine Position auf dem Papier an.
 - **Sendungsnummer und Bemerkung** liest das Backend, nicht das Template: Der
   Block `shipping` kommt gefüllt an, unabhängig davon, unter welchem `api_name`
   die Installation die beiden Felder führt (Details unten).
 - `location_1..5` und `status` liefern **lesbaren Text**, keine uIDs: Ist ein
   Standortfeld als `[CURRENT_USER]` konfiguriert, hält die Spalte eine
-  Benutzer-uID — der Bericht bekommt den Namen. Genauso wird der Status-uID zum
-  Status-Titel.
+  Benutzer-uID — der Datensatz trägt den Namen. Genauso wird der Status-uID zum
+  Status-Titel. (Das Referenz-Layout druckt `location_1..5` nicht, siehe oben —
+  ein eigenes Layout bekommt sie aufbereitet.)
 - Die Lieferadresse (`delivery_customer`) fällt **serverseitig** auf den
   Kunden zurück, wenn kein eigener Lieferkunde hinterlegt ist — das Template
   braucht keine Fallback-Logik.

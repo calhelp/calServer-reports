@@ -24,6 +24,13 @@
   Wer auf Form A umstellen muss (Anschriftfeld ab 27 mm, kurzer Briefkopf),
   ändert genau eine Zahl — y=116 wird zu y=64.
 
+  Was NICHT drauf steht: die Standortfelder location_1..5. Auf einer Leihe sind
+  das interne Platzierungsangaben, und eines davon ist auf vielen Anlagen als
+  [CURRENT_USER] konfiguriert — auf dem Papier stand dann der Name des
+  Buchenden unter der Überschrift „Standort". Für den Empfänger einer Sendung
+  ist beides ohne Wert. Der Contract liefert die Felder weiter; wer sie braucht,
+  bindet sie im eigenen Layout.
+
   Der Absender kommt NICHT aus dem Datensatz, sondern aus den
   company_*-Berichtsvariablen (dieselben, die der Auftragsbeleg nutzt); ohne
   gepflegte Variablen bleibt die Rücksendeangabe leer und der Umschlag trägt sie
@@ -74,11 +81,6 @@
 		<parameterDescription><![CDATA[Falz- und Lochmarken am linken Rand drucken (105 mm, 148,5 mm, 210 mm). "0" = aus, z. B. bei vorgedrucktem Briefpapier, das sie schon trägt.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
-	<field name="location_1" class="java.lang.String"><fieldDescription><![CDATA[location.location_1]]></fieldDescription></field>
-	<field name="location_2" class="java.lang.String"><fieldDescription><![CDATA[location.location_2]]></fieldDescription></field>
-	<field name="location_3" class="java.lang.String"><fieldDescription><![CDATA[location.location_3]]></fieldDescription></field>
-	<field name="location_4" class="java.lang.String"><fieldDescription><![CDATA[location.location_4]]></fieldDescription></field>
-	<field name="location_5" class="java.lang.String"><fieldDescription><![CDATA[location.location_5]]></fieldDescription></field>
 	<field name="location_date" class="java.lang.String"><fieldDescription><![CDATA[location.location_date]]></fieldDescription></field>
 	<field name="location_time" class="java.lang.String"><fieldDescription><![CDATA[location.location_time]]></fieldDescription></field>
 	<field name="location_status" class="java.lang.String"><fieldDescription><![CDATA[location.status]]></fieldDescription></field>
@@ -248,7 +250,7 @@
 		</band>
 	</title>
 	<detail>
-		<band height="210">
+		<band height="112">
 			<!--
 			  Versandhinweis (Bemerkung der Buchung). Kollabiert vollständig, wenn
 			  keiner gepflegt ist — alles darunter schwimmt (positionType Float).
@@ -294,31 +296,6 @@
 			<staticText><reportElement style="Small" positionType="Float" x="26" y="87" width="280" height="12"/><text><![CDATA[Sendung vollständig und unbeschädigt erhalten]]></text></staticText>
 			<staticText><reportElement style="Label" positionType="Float" x="341" y="87" width="40" height="12"/><text><![CDATA[Datum]]></text></staticText>
 			<line><reportElement positionType="Float" x="381" y="98" width="180" height="1"/></line>
-			<!--
-			  Standortangaben der Leihe. Rein interne Felder — der Block
-			  verschwindet, wenn keines gepflegt ist, statt einen Kasten aus
-			  Beschriftungen ohne Werte auf ein Kundendokument zu setzen.
-			-->
-			<frame>
-				<reportElement positionType="Float" x="12" y="112" width="549" height="66" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[($F{location_1} != null && !$F{location_1}.trim().isEmpty())
-	|| ($F{location_2} != null && !$F{location_2}.trim().isEmpty())
-	|| ($F{location_3} != null && !$F{location_3}.trim().isEmpty())
-	|| ($F{location_4} != null && !$F{location_4}.trim().isEmpty())
-	|| ($F{location_5} != null && !$F{location_5}.trim().isEmpty())]]></printWhenExpression>
-				</reportElement>
-				<staticText><reportElement style="SectionTitle" x="0" y="0" width="549" height="14"/><text><![CDATA[Standort]]></text></staticText>
-				<staticText><reportElement style="Label" x="0" y="18" width="130" height="13"/><text><![CDATA[Standort 1]]></text></staticText>
-				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="18" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_1}]]></textFieldExpression></textField>
-				<staticText><reportElement style="Label" x="290" y="18" width="120" height="13"/><text><![CDATA[Standort 4]]></text></staticText>
-				<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="18" width="139" height="13"/><textFieldExpression><![CDATA[$F{location_4}]]></textFieldExpression></textField>
-				<staticText><reportElement style="Label" x="0" y="34" width="130" height="13"/><text><![CDATA[Standort 2]]></text></staticText>
-				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="34" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_2}]]></textFieldExpression></textField>
-				<staticText><reportElement style="Label" x="290" y="34" width="120" height="13"/><text><![CDATA[Standort 5]]></text></staticText>
-				<textField isBlankWhenNull="true"><reportElement style="Value" x="410" y="34" width="139" height="13"/><textFieldExpression><![CDATA[$F{location_5}]]></textFieldExpression></textField>
-				<staticText><reportElement style="Label" x="0" y="50" width="130" height="13"/><text><![CDATA[Standort 3]]></text></staticText>
-				<textField isBlankWhenNull="true"><reportElement style="Value" x="130" y="50" width="150" height="13"/><textFieldExpression><![CDATA[$F{location_3}]]></textFieldExpression></textField>
-			</frame>
 		</band>
 	</detail>
 	<pageFooter>
