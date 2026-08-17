@@ -1,0 +1,101 @@
+{
+  "format": "calserver.statuses",
+  "version": 1,
+  "generator": "calserver-reports",
+  "types": ["support_tickets"],
+  "statuses": [
+    {
+      "key": "support_tickets-neu",
+      "type": "support_tickets",
+      "title": "Neu",
+      "short_title": "NEU",
+      "description": "Erfasst, noch nicht bewertet.",
+      "color": "#64748B",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-inbox",
+      "sort_order": 10,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-bewertet",
+      "type": "support_tickets",
+      "title": "Bewertet",
+      "short_title": "BEW",
+      "description": "Auswirkung und Wahrscheinlichkeit sind eingetragen, der Risikowert steht.",
+      "color": "#0369A1",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-chart-bar",
+      "sort_order": 20,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-massnahme-geplant",
+      "type": "support_tickets",
+      "title": "Maßnahme geplant",
+      "short_title": "PLA",
+      "description": "Maßnahme, Verantwortliche und Termin sind festgelegt.",
+      "color": "#7C3AED",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-calendar",
+      "sort_order": 30,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-in-umsetzung",
+      "type": "support_tickets",
+      "title": "In Umsetzung",
+      "short_title": "UMS",
+      "description": "Die Maßnahme läuft.",
+      "color": "#0891B2",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-cog",
+      "sort_order": 40,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-wirksamkeit-pruefen",
+      "type": "support_tickets",
+      "title": "Wirksamkeit prüfen",
+      "short_title": "WIR",
+      "description": "Maßnahme umgesetzt, die Wirksamkeit ist noch zu belegen (ISO/IEC 17025, 8.7.1 f).",
+      "color": "#CA8A04",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-verified",
+      "sort_order": 50,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-abgeschlossen",
+      "type": "support_tickets",
+      "title": "Abgeschlossen",
+      "short_title": "ABG",
+      "description": "Wirksamkeit belegt, Restrisiko akzeptiert, Vorgang dokumentiert.",
+      "color": "#15803D",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-check-circle",
+      "sort_order": 60,
+      "active": true,
+      "hide": false
+    },
+    {
+      "key": "support_tickets-kein-handlungsbedarf",
+      "type": "support_tickets",
+      "title": "Kein Handlungsbedarf",
+      "short_title": "KHB",
+      "description": "Bewertet und bewusst nicht behandelt: Risiko im grünen Band akzeptiert oder Chance verworfen. Die Begründung steht im Vorgang (8.5.1 c).",
+      "color": "#78716C",
+      "text_color": "#FFFFFF",
+      "icon": "pi pi-ban",
+      "sort_order": 70,
+      "active": true,
+      "hide": false
+    }
+  ],
+  "transitions": [],
+  "processing_times": []
+}

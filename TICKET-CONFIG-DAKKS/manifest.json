@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/ticket-config-package.schema.json",
+  "format": "calserver.ticket-config-package",
+  "format_version": 1,
+  "name": "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (zwei Methoden)",
+  "document": {
+    "format": "calserver.ticket-config",
+    "version": 1
+  },
+  "content": {
+    "types": 8,
+    "categories": 20,
+    "priorities": 4,
+    "risk_levels": 10,
+    "matrix": 4,
+    "dimensions": 2,
+    "formula": "[Risk_1] * [Risk_2]"
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "ticket-config.json",
+      "sha256": "d5dd63ff6a2dd8e62193fd59b710f86d91e6ac7433245a3306f42f3f25b31fdf",
+      "size_bytes": 9547
+    },
+    {
+      "path": "README.md",
+      "sha256": "46e7f7a1357f0af4f337d39266560093a7fa129473228195d5783deaeb73b4f8",
+      "size_bytes": 7197
+    }
+  ],
+  "description": "Vollständige Einrichtung des Ticketmoduls für ein akkreditiertes Labor: 8 Vorgangsarten, 20 Themenfelder entlang der Normabschnitte, 4 Prioritäten und die Risikobewertung Auswirkung × Wahrscheinlichkeit mit Matrix über 1 bis 25.",
+  "created_at": "2026-08-17T12:00:00+00:00",
+  "locale": "de"
+}

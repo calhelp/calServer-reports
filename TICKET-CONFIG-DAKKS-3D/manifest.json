@@ -1,0 +1,35 @@
+{
+  "$schema": "https://calhelp.github.io/calServer-reports/schema/ticket-config-package.schema.json",
+  "format": "calserver.ticket-config-package",
+  "format_version": 1,
+  "name": "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (drei Methoden)",
+  "document": {
+    "format": "calserver.ticket-config",
+    "version": 1
+  },
+  "content": {
+    "types": 8,
+    "categories": 20,
+    "priorities": 4,
+    "risk_levels": 15,
+    "matrix": 4,
+    "dimensions": 3,
+    "formula": "[Risk_1] * [Risk_2] * [Risk_3]"
+  },
+  "generator": "calserver-reports",
+  "files": [
+    {
+      "path": "ticket-config.json",
+      "sha256": "44eb76fde44163019eeaccca12c9c2f1014a6ca7169ea894a0d5513c5e047a36",
+      "size_bytes": 10726
+    },
+    {
+      "path": "README.md",
+      "sha256": "b587752d33bf125b3e54f91f4c36b5e3c0feb20df82efbbac2db4c64fdae5165",
+      "size_bytes": 4031
+    }
+  ],
+  "description": "Dieselbe Einrichtung wie die Zwei-Methoden-Fassung, bewertet aber mit Auswirkung × Wahrscheinlichkeit × Erkennbarkeit und einer Matrix über 1 bis 125.",
+  "created_at": "2026-08-17T12:00:00+00:00",
+  "locale": "de"
+}

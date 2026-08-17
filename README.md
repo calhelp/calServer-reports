@@ -91,9 +91,15 @@ CATEGORY-INVENTORY-DAKKS/
 └── README.md
 
 STATUS-CALIBRATION-DAKKS/, STATUS-INVENTORY-DAKKS/,
-STATUS-REPAIR-DAKKS/, STATUS-BOOKING-DAKKS/
+STATUS-REPAIR-DAKKS/, STATUS-BOOKING-DAKKS/, STATUS-TICKETS-DAKKS/
 ├── statuses.json       # Statusmodell samt Feldfunktionen je Status
 ├── manifest.json
+└── README.md
+
+TICKET-CONFIG-DAKKS/, TICKET-CONFIG-DAKKS-3D/
+├── ticket-config.json  # Ticketmanagement nach ISO/IEC 17025: Vorgangsarten,
+│                       # Themenfelder, Prioritäten, Risikoskalen, Matrix, Formel
+├── manifest.json       # (3D wird aus 2D abgeleitet, siehe scripts/)
 └── README.md
 
 PRUEFPLAN-*/
@@ -115,12 +121,14 @@ schema/
 ├── procedure-package.schema.json   # Manifest-Schema der Prüfplan-Pakete
 ├── category-package.schema.json    # Manifest-Schema der Kategorie-Pakete
 ├── status-package.schema.json      # Manifest-Schema der Status-Pakete
+├── ticket-config-package.schema.json # Manifest-Schema der Ticketmanagement-Pakete
 └── wiki-package.schema.json        # Manifest-Schema der Wiki-Vorlagen
 
 scripts/
 ├── check_jasper_version.sh         # Prüft JRXML-Versionen auf 6.20.6
 ├── check_parameters_manifest.py    # CI-Validator für parameters.json-Manifeste
-├── build_config_manifest.py        # Manifest-Werkzeug der Kategorie-/Status-Pakete (--write/--check)
+├── build_config_manifest.py        # Manifest-Werkzeug der Kategorie-/Status-/Ticketmanagement-Pakete (--write/--check)
+├── build_ticket_config_3d.py       # Leitet TICKET-CONFIG-DAKKS-3D aus der 2D-Fassung ab (--write/--check)
 ├── generate_parameters_manifest.py # Erzeugt ein parameters.json-Gerüst aus dem Haupt-JRXML
 ├── dakks_upload_sample.bat         # Beispielskript für den automatisierten Report-Upload
 ├── dcc_upload_sample.bat           # Upload-Beispiel für DCC-Reports

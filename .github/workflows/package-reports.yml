@@ -265,8 +265,9 @@ jobs:
           if-no-files-found: error
 
       # Konfigurationspakete (calserver.category-package /
-      # calserver.status-package, robots.md §0.5): eigene Bundle-Klasse ohne
-      # JRXML, der ganze Ordner ist das Paket.
+      # calserver.status-package / calserver.ticket-config-package,
+      # robots.md §0.5): eigene Bundle-Klasse ohne JRXML, der ganze Ordner ist
+      # das Paket.
       - name: Upload CATEGORY-INVENTORY-DAKKS as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -300,6 +301,27 @@ jobs:
         with:
           name: STATUS-BOOKING-DAKKS
           path: STATUS-BOOKING-DAKKS
+          if-no-files-found: error
+
+      - name: Upload STATUS-TICKETS-DAKKS as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STATUS-TICKETS-DAKKS
+          path: STATUS-TICKETS-DAKKS
+          if-no-files-found: error
+
+      - name: Upload TICKET-CONFIG-DAKKS as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TICKET-CONFIG-DAKKS
+          path: TICKET-CONFIG-DAKKS
+          if-no-files-found: error
+
+      - name: Upload TICKET-CONFIG-DAKKS-3D as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TICKET-CONFIG-DAKKS-3D
+          path: TICKET-CONFIG-DAKKS-3D
           if-no-files-found: error
 
       # Prüfplan-Pakete (calserver.procedure-package, robots.md §0.3):
@@ -560,6 +582,9 @@ jobs:
           create_config_zip "STATUS-INVENTORY-DAKKS" "status-inventory-dakks" "statuses.json"
           create_config_zip "STATUS-REPAIR-DAKKS" "status-repair-dakks" "statuses.json"
           create_config_zip "STATUS-BOOKING-DAKKS" "status-booking-dakks" "statuses.json"
+          create_config_zip "STATUS-TICKETS-DAKKS" "status-tickets-dakks" "statuses.json"
+          create_config_zip "TICKET-CONFIG-DAKKS" "ticket-config-dakks" "ticket-config.json"
+          create_config_zip "TICKET-CONFIG-DAKKS-3D" "ticket-config-dakks-3d" "ticket-config.json"
 
           # V2 (APEX) — JSON-Datasource-Bundles (readable api_name fields, no SQL)
           create_zip "DAKKS-JSON-SAMPLE" "dakks-json-sample"

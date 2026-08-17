@@ -93,6 +93,10 @@
           note: "Statusmodelle je Modul: Statusliste, Feldfunktionen, Folgeaktionen. Import unter Administration → Statusverwaltung.",
         },
         {
+          name: "Ticketmanagement",
+          note: "Vorgangsarten, Themenfelder, Prioritäten und die Risikobewertung samt Matrix und Formel. Import unter Administration → Ticket-Verwaltung.",
+        },
+        {
           name: "Wiki-Vorlagen",
           note: "Wiki-Pakete, keine Berichte. Import unter Wiki → Importieren.",
         },
@@ -118,6 +122,7 @@
         if (name.startsWith("wiki-")) return "Wiki-Vorlagen";
         if (name.startsWith("category-")) return "Kategorien";
         if (name.startsWith("status-")) return "Status";
+        if (name.startsWith("ticket-config-")) return "Ticketmanagement";
 
         // Alles Übrige ist ein Report-Bundle. V2 (JSON-Datenquelle, Suffix
         // -json-sample) ist der Standard und wird thematisch einsortiert,

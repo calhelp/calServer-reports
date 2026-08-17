@@ -1,0 +1,321 @@
+{
+  "format": "calserver.ticket-config",
+  "version": 1,
+  "generator": "calserver-reports",
+  "risk": {
+    "formula": "[Risk_1] * [Risk_2] * [Risk_3]",
+    "language_code": "de",
+    "dimension_labels": {
+      "risk1": "Auswirkung",
+      "risk2": "Wahrscheinlichkeit",
+      "risk3": "Erkennbarkeit"
+    }
+  },
+  "types": [
+    {
+      "key": "risiko",
+      "title": "Risiko",
+      "description": "Ereignis, das die Gültigkeit der Ergebnisse oder die Unparteilichkeit gefährden kann (ISO/IEC 17025, 8.5.1)."
+    },
+    {
+      "key": "chance",
+      "title": "Chance",
+      "description": "Möglichkeit, die Leistung des Labors zu verbessern: neues Verfahren, kleinere Messunsicherheit, kürzere Durchlaufzeit (8.5.1, 8.6)."
+    },
+    {
+      "key": "abweichung",
+      "title": "Abweichung",
+      "description": "Nichtkonforme Arbeit: eine Tätigkeit oder ein Ergebnis, das die eigenen Verfahren oder die Kundenanforderung nicht erfüllt (7.10)."
+    },
+    {
+      "key": "beschwerde",
+      "title": "Beschwerde",
+      "description": "Äußerung einer Kundin oder eines Kunden zur Laborleistung, die eine Antwort verlangt (7.9)."
+    },
+    {
+      "key": "korrekturmassnahme",
+      "title": "Korrekturmaßnahme",
+      "description": "Maßnahme gegen die Ursache einer Abweichung, damit sie nicht wiederkehrt (8.7). Keine Sofortmaßnahme — die steht in der Abweichung."
+    },
+    {
+      "key": "verbesserung",
+      "title": "Verbesserung",
+      "description": "Umgesetzter Verbesserungsvorschlag aus Personal, Kundenrückmeldung oder Datenauswertung (8.6)."
+    },
+    {
+      "key": "auditfeststellung",
+      "title": "Auditfeststellung",
+      "description": "Feststellung aus internem Audit oder Begutachtung, mit oder ohne Abweichung (8.8)."
+    },
+    {
+      "key": "aenderung",
+      "title": "Änderung",
+      "description": "Geplante Änderung an Verfahren, Ausrüstung, Personal oder Managementsystem, deren Risiken vorher zu bewerten sind (8.5.2, 8.2.4)."
+    }
+  ],
+  "categories": [
+    {
+      "key": "unparteilichkeit",
+      "title": "Unparteilichkeit und Vertraulichkeit (4)",
+      "description": "Interessenkonflikte, Druck auf Ergebnisse, Umgang mit Kundeninformationen."
+    },
+    {
+      "key": "organisation",
+      "title": "Organisation und Zuständigkeiten (5)",
+      "description": "Rechtsform, Leitung, Vertretungsregelungen, Zuständigkeiten im Akkreditierungsbereich."
+    },
+    {
+      "key": "personal",
+      "title": "Personal und Kompetenz (6.2)",
+      "description": "Qualifikation, Einarbeitung, Kompetenznachweise, Vertretung, Schlüsselpersonen."
+    },
+    {
+      "key": "raeume",
+      "title": "Räume und Umgebungsbedingungen (6.3)",
+      "description": "Temperatur, Feuchte, Erschütterung, Netzqualität, Zutritt, Überwachung der Bedingungen."
+    },
+    {
+      "key": "ausruestung",
+      "title": "Ausrüstung und Normale (6.4)",
+      "description": "Verfügbarkeit, Zustand, Zwischenprüfungen, Defekte, Normale außerhalb der Toleranz."
+    },
+    {
+      "key": "rueckfuehrung",
+      "title": "Messtechnische Rückführung (6.5)",
+      "description": "Rückführungskette, Kalibrierintervalle, Anerkennung fremder Kalibrierscheine."
+    },
+    {
+      "key": "externe-dienstleistungen",
+      "title": "Externe Produkte und Dienstleistungen (6.6)",
+      "description": "Unterauftragnehmer, Lieferanten, Kalibrierdienstleister, Softwarelieferanten."
+    },
+    {
+      "key": "auftraege",
+      "title": "Anfragen, Angebote, Aufträge (7.1)",
+      "description": "Machbarkeit, Prüfung der Anforderungen, Abweichungen vom Auftrag, Kundenkommunikation."
+    },
+    {
+      "key": "verfahren",
+      "title": "Verfahren und Validierung (7.2)",
+      "description": "Auswahl, Verifizierung und Validierung von Verfahren, Abweichungen vom Normverfahren."
+    },
+    {
+      "key": "probenahme",
+      "title": "Probenahme und Prüfgegenstände (7.3, 7.4)",
+      "description": "Transport, Annahme, Kennzeichnung, Lagerung und Rückgabe der Kundengeräte."
+    },
+    {
+      "key": "messunsicherheit",
+      "title": "Messunsicherheit und Konformitätsaussagen (7.6, 7.8.6)",
+      "description": "Unsicherheitsbudgets, Entscheidungsregel, Aussagen zur Konformität im Kalibrierschein."
+    },
+    {
+      "key": "validitaet",
+      "title": "Sicherstellung der Validität (7.7)",
+      "description": "Kontrollkarten, Zwischenprüfungen, Ringversuche und Eignungsprüfungen, Wiederholmessungen."
+    },
+    {
+      "key": "berichte",
+      "title": "Berichte und Kalibrierscheine (7.8)",
+      "description": "Inhalt, Freigabe, Änderungen und Rückruf ausgegebener Kalibrierscheine."
+    },
+    {
+      "key": "beschwerden",
+      "title": "Beschwerdeverfahren (7.9)",
+      "description": "Annahme, Bearbeitung und unparteiische Entscheidung über Beschwerden."
+    },
+    {
+      "key": "nichtkonforme-arbeit",
+      "title": "Nichtkonforme Arbeit (7.10)",
+      "description": "Erkennen, Bewerten, Stoppen und Wiederaufnehmen von Arbeit, Rückruf von Ergebnissen."
+    },
+    {
+      "key": "daten-it",
+      "title": "Daten, IT und Informationssicherheit (7.11)",
+      "description": "Datenintegrität, Zugriffsrechte, Sicherungen, Validierung von Software und Berechnungen."
+    },
+    {
+      "key": "managementsystem",
+      "title": "Managementsystem und Dokumentation (8.2 bis 8.4)",
+      "description": "Lenkung von Dokumenten und Aufzeichnungen, Aufbewahrungsfristen, Freigaben."
+    },
+    {
+      "key": "interne-audits",
+      "title": "Interne Audits (8.8)",
+      "description": "Auditprogramm, Durchführung, Nachverfolgung der Feststellungen."
+    },
+    {
+      "key": "managementbewertung",
+      "title": "Managementbewertung (8.9)",
+      "description": "Eingaben und Ergebnisse der Bewertung durch die Leitung, offene Punkte daraus."
+    },
+    {
+      "key": "akkreditierung",
+      "title": "Akkreditierung und Begutachtung",
+      "description": "Fristen, Umfangserweiterungen, Auflagen und Feststellungen der Akkreditierungsstelle."
+    }
+  ],
+  "priorities": [
+    {
+      "key": "niedrig",
+      "title": "Niedrig",
+      "background_color": "#198754",
+      "color": "#FFFFFF"
+    },
+    {
+      "key": "normal",
+      "title": "Normal",
+      "background_color": "#0D6EFD",
+      "color": "#FFFFFF"
+    },
+    {
+      "key": "hoch",
+      "title": "Hoch",
+      "background_color": "#FD7E14",
+      "color": "#FFFFFF"
+    },
+    {
+      "key": "kritisch",
+      "title": "Kritisch",
+      "background_color": "#DC3545",
+      "color": "#FFFFFF"
+    }
+  ],
+  "risk1": [
+    {
+      "key": "unbedeutend",
+      "title": "Unbedeutend",
+      "weight": 1,
+      "color": "00B050",
+      "description": "Intern bemerkt und behoben. Kein ausgegebenes Ergebnis betroffen, keine Kundenwirkung. Bei einer Chance: spürbar nur im eigenen Ablauf."
+    },
+    {
+      "key": "gering",
+      "title": "Gering",
+      "weight": 2,
+      "color": "92D050",
+      "description": "Nacharbeit im Labor, Termin hält. Ergebnisse bleiben gültig. Bei einer Chance: kleine Zeit- oder Kostenersparnis."
+    },
+    {
+      "key": "spuerbar",
+      "title": "Spürbar",
+      "weight": 3,
+      "color": "FFFF00",
+      "description": "Kunde merkt es: Termin reißt, Umfang wird eingeschränkt, Messung ist zu wiederholen. Konformitätsaussagen bleiben richtig. Bei einer Chance: messbar kleinere Unsicherheit oder kürzere Durchlaufzeit."
+    },
+    {
+      "key": "kritisch",
+      "title": "Kritisch",
+      "weight": 4,
+      "color": "FFC000",
+      "description": "Falsche Konformitätsaussage möglich, Kalibrierscheine sind zurückzurufen, Abweichung in der Begutachtung zu erwarten. Bei einer Chance: neues Verfahren oder Erweiterung des Akkreditierungsumfangs."
+    },
+    {
+      "key": "existenzbedrohend",
+      "title": "Existenzbedrohend",
+      "weight": 5,
+      "color": "FF0000",
+      "description": "Systematisch falsche Ergebnisse beim Kunden, Aussetzung oder Entzug der Akkreditierung, Haftung. Bei einer Chance: neues Geschäftsfeld."
+    }
+  ],
+  "risk2": [
+    {
+      "key": "sehr-unwahrscheinlich",
+      "title": "Sehr unwahrscheinlich",
+      "weight": 1,
+      "color": "00B050",
+      "description": "Im Labor noch nie vorgekommen und durch bestehende Vorkehrungen abgedeckt."
+    },
+    {
+      "key": "unwahrscheinlich",
+      "title": "Unwahrscheinlich",
+      "weight": 2,
+      "color": "92D050",
+      "description": "Einzelfall über mehrere Jahre, im Haus oder bei vergleichbaren Laboren bekannt."
+    },
+    {
+      "key": "moeglich",
+      "title": "Möglich",
+      "weight": 3,
+      "color": "FFFF00",
+      "description": "Etwa einmal im Jahr zu erwarten."
+    },
+    {
+      "key": "wahrscheinlich",
+      "title": "Wahrscheinlich",
+      "weight": 4,
+      "color": "FFC000",
+      "description": "Mehrmals im Jahr zu erwarten."
+    },
+    {
+      "key": "fast-sicher",
+      "title": "Fast sicher",
+      "weight": 5,
+      "color": "FF0000",
+      "description": "Monatlich oder häufiger, oder der Zustand liegt bereits vor."
+    }
+  ],
+  "risk3": [
+    {
+      "key": "sofort-erkennbar",
+      "title": "Sofort erkennbar",
+      "weight": 1,
+      "color": "00B050",
+      "description": "Fällt bei der Arbeit selbst auf: Plausibilitätsgrenze, Zwischenprüfung, Warnung im System."
+    },
+    {
+      "key": "leicht-erkennbar",
+      "title": "Leicht erkennbar",
+      "weight": 2,
+      "color": "92D050",
+      "description": "Fällt bei der fachlichen Freigabe des Kalibrierscheins auf (Vier-Augen-Prinzip)."
+    },
+    {
+      "key": "erkennbar",
+      "title": "Erkennbar",
+      "weight": 3,
+      "color": "FFFF00",
+      "description": "Fällt über Kontrollkarte, Wiederholmessung oder internes Audit auf, also Wochen bis Monate später."
+    },
+    {
+      "key": "schwer-erkennbar",
+      "title": "Schwer erkennbar",
+      "weight": 4,
+      "color": "FFC000",
+      "description": "Fällt erst beim Ringversuch, bei der Rekalibrierung des Normals oder in der Begutachtung auf."
+    },
+    {
+      "key": "kaum-erkennbar",
+      "title": "Kaum erkennbar",
+      "weight": 5,
+      "color": "FF0000",
+      "description": "Fällt nur durch eine Kundenreklamation auf oder bleibt unentdeckt."
+    }
+  ],
+  "matrix": [
+    {
+      "risk": "1-9",
+      "color": "00B050",
+      "priority": "Niedrig",
+      "sort_order": 1
+    },
+    {
+      "risk": "10-29",
+      "color": "FFFF00",
+      "priority": "Normal",
+      "sort_order": 2
+    },
+    {
+      "risk": "30-59",
+      "color": "FFC000",
+      "priority": "Hoch",
+      "sort_order": 3
+    },
+    {
+      "risk": "60-125",
+      "color": "FF0000",
+      "priority": "Kritisch",
+      "sort_order": 4
+    }
+  ]
+}
