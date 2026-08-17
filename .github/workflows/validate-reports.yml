@@ -47,12 +47,19 @@ jobs:
         run: python3 scripts/build_wiki_manifest.py --check
 
       # Konfigurationspakete (calserver.category-package /
-      # calserver.status-package, CATEGORY-*/STATUS-*): Manifest gegen das
+      # calserver.status-package / calserver.ticket-config-package,
+      # CATEGORY-*/STATUS-*/TICKET-CONFIG-*): Manifest gegen das
       # jeweilige Schema, sha256-Parität in beide Richtungen,
       # Eintrags-Allowlist sowie inhaltliche Prüfungen (Schlüssel eindeutig,
-      # parent_key aufloesbar, Folgeaktionen zeigen auf Status des Pakets).
+      # parent_key aufloesbar, Folgeaktionen zeigen auf Status des Pakets,
+      # Risiko-Matrix deckt den erreichbaren Wertebereich ab).
       - name: Check config package manifests
         run: python3 scripts/build_config_manifest.py --check
+
+      # TICKET-CONFIG-DAKKS-3D wird aus der Zwei-Methoden-Fassung abgeleitet,
+      # nicht von Hand gepflegt — sonst laufen die Kataloge auseinander.
+      - name: Check derived three-method ticket configuration
+        run: python3 scripts/build_ticket_config_3d.py --check
 
       # DCC 3.3.0 Export: xmlschema erlaubt echte Validierung gegen dcc-v3.3.0.xsd
       # (mit remote SI-/dsig-Imports). Der Check überspringt die XSD-Prüfung

@@ -240,38 +240,41 @@ in calhelp/calServer-yii.
 
 ---
 
-## 0.5) Konfigurationspakete (`calserver.category-package` / `calserver.status-package`) — MUST
+## 0.5) Konfigurationspakete (`calserver.category-package` / `calserver.status-package` / `calserver.ticket-config-package`) — MUST
 
 This repo also hosts **configuration packages** for calServer V2: category
-trees and status models. Like the Prüfplan and Wiki bundles they are a
-**separate bundle class**: NO JasperReports involved, none of the report rules
-(sections 0.1, 1, 2, 6) apply. An AI agent should be able to author a valid
-configuration bundle end-to-end from this section alone.
+trees, status models and the ticket-management setup. Like the Prüfplan and
+Wiki bundles they are a **separate bundle class**: NO JasperReports involved,
+none of the report rules (sections 0.1, 1, 2, 6) apply. An AI agent should be
+able to author a valid configuration bundle end-to-end from this section alone.
 
-**Why they live here and not in the product:** a category tree and a status
-model are editorial content of a laboratory, not product code. They change when
-a lab's scope or process changes, not when calServer ships a release. calServer
-imports; this repo maintains the content.
+**Why they live here and not in the product:** a category tree, a status model
+and a lab's risk scales are editorial content of a laboratory, not product
+code. They change when a lab's scope or process changes, not when calServer
+ships a release. calServer imports; this repo maintains the content.
 
 ### Naming and structure (MUST)
 
-- Folder `CATEGORY-<SLUG>/` or `STATUS-<SLUG>/` (e.g. `CATEGORY-INVENTORY-DAKKS`,
-  `STATUS-CALIBRATION-DAKKS`, `STATUS-REPAIR-DAKKS`); ZIP name is the lowercased
-  form. Never use the `-JSON-SAMPLE` suffix — that triggers the report (APEX)
-  packaging rules and the JRXML assertion.
+- Folder `CATEGORY-<SLUG>/`, `STATUS-<SLUG>/` or `TICKET-CONFIG-<SLUG>/` (e.g.
+  `CATEGORY-INVENTORY-DAKKS`, `STATUS-CALIBRATION-DAKKS`, `STATUS-REPAIR-DAKKS`,
+  `TICKET-CONFIG-DAKKS`); ZIP name is the lowercased form. Never use the
+  `-JSON-SAMPLE` suffix — that triggers the report (APEX) packaging rules and
+  the JRXML assertion.
 - **One package per module.** A status package carries one `type`; a lab that
   only wants the calibration statuses must not have to take the order module
   with it. The four shipped sets (`calibration`, `inventory`, `repair`,
   `booking`) are the pattern for any further one.
 - Required files at the bundle root, and **nothing else**: `manifest.json`,
-  `README.md`, plus `categories.json` (CATEGORY-*) or `statuses.json`
-  (STATUS-*). NO subfolders, NO images, NO `main_reports/`, NO `*.jrxml`.
+  `README.md`, plus `categories.json` (CATEGORY-*), `statuses.json` (STATUS-*)
+  or `ticket-config.json` (TICKET-CONFIG-*). NO subfolders, NO images, NO
+  `main_reports/`, NO `*.jrxml`.
 - The format owner is calServer V2
-  (`laravel/app/Services/Category/CategoryPackageService.php` and
-  `laravel/app/Services/Status/StatusPackageService.php` in
+  (`laravel/app/Services/Category/CategoryPackageService.php`,
+  `laravel/app/Services/Status/StatusPackageService.php` and
+  `laravel/app/Services/Ticket/TicketConfigPackageService.php` in
   calhelp/calServer-yii); the machine-readable manifest schemas are
-  `schema/category-package.schema.json` and `schema/status-package.schema.json`
-  (published to Pages).
+  `schema/category-package.schema.json`, `schema/status-package.schema.json`
+  and `schema/ticket-config-package.schema.json` (published to Pages).
 
 ### Content rules (MUST)
 
@@ -296,7 +299,31 @@ imports; this repo maintains the content.
   factory fields (`database/data/default_field_definitions.json` in
   calhelp/calServer-yii) unless the README explains the prerequisite.
 - Statuses that carry no field rules are allowed and useful; a package whose
-  every status is decoration should say in its README why.
+  every status is decoration should say in its README why. Ticket statuses
+  (`support_tickets`) carry NONE — that module has no field registry, and a
+  field rule on it is reported as a warning on import.
+- **Ticket configuration:** one document carries the whole setup — `types`,
+  `categories`, `priorities`, the scales `risk1`/`risk2`/`risk3`, the `matrix`
+  and `risk` (formula plus `dimension_labels`). Rules that the manifest script
+  enforces, because they are the failure modes that survive an import
+  unnoticed:
+  - Every level needs an integer `weight` >= 1. A level without weight counts
+    as 0 and drags every ticket carrying it down to risk value 0.
+  - `matrix` bands reference a priority by **title**, and that priority MUST be
+    in the same document. A band is `5` or `10-29`, at most 10 characters
+    (the column is `varchar(10)`), and bands MUST cover the whole reachable
+    range 1 … (product of the highest weights of the dimensions the formula
+    uses). Two-method bands under a three-method formula leave everything above
+    25 without colour and without priority.
+  - The formula and `risk3` must agree: `[Risk_3]` in the formula requires a
+    non-empty `risk3` and vice versa.
+  - Ticket **statuses** do NOT belong in this document. They live in the shared
+    status catalogue and ship as a `STATUS-*` package next to it
+    (`STATUS-TICKETS-DAKKS`); the two READMEs point at each other.
+  - `TICKET-CONFIG-DAKKS-3D` is **derived** from `TICKET-CONFIG-DAKKS` by
+    `scripts/build_ticket_config_3d.py`. Never hand-edit it — change the
+    two-method package or the delta in the script and regenerate (`--write`),
+    verify with `--check`. CI runs that check.
 
 ### Manifest (MUST)
 
@@ -316,12 +343,13 @@ imports; this repo maintains the content.
   and a `create_config_zip "<BUNDLE>" "<zip-name>" "<document>"` call (NOT
   `create_zip()` — that stages `main_reports/` and fails without a JRXML).
 - `publish-downloads.yml`: add a `get_last_modified` line plus `README_MAP`
-  and `TITLE_MAP` entries (`Kategorien: <Thema>` / `Status: <Thema>`); no
-  `SCHEMA_MAP`.
+  and `TITLE_MAP` entries (`Kategorien: <Thema>` / `Status: <Thema>` /
+  `Ticketmanagement: <Thema>`); no `SCHEMA_MAP`.
 - Category on the downloads page is automatic: a ZIP name starting with
   `category-` lands in **"Kategorien"**, one starting with `status-` in
-  **"Status"** (`downloads/index.html`, `getCategory()`). Both rules sit above
-  the report rules on purpose — `status-…` would otherwise fall through to the
+  **"Status"**, one starting with `ticket-config-` in **"Ticketmanagement"**
+  (`downloads/index.html`, `getCategory()`). All three rules sit above the
+  report rules on purpose — `status-…` would otherwise fall through to the
   legacy bucket.
 - Downloads-page only: NO `/api/report/<uuid>` upload step, NO
   `release-reports.yml` entry.
@@ -329,9 +357,12 @@ imports; this repo maintains the content.
 ### Verify locally
 
 - `python3 scripts/build_config_manifest.py --check` is green
+- for TICKET-CONFIG-*: `python3 scripts/build_ticket_config_3d.py --check` is
+  green as well
 - `cd <BUNDLE> && zip -r /tmp/<zip-name>.zip .` produces a ZIP that calServer
-  V2 imports as-is (Administration → Kategorien bzw. Statusverwaltung →
-  Paket; permissions `category_import` / `status_import`)
+  V2 imports as-is (Administration → Kategorien, Statusverwaltung bzw.
+  Ticket-Verwaltung → Paket; permissions `category_import` / `status_import` /
+  `support_config_import`)
 
 ---
 
