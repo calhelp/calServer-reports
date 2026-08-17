@@ -80,13 +80,14 @@ RISK3 = [
     },
 ]
 
-# Bänder über das Produkt dreier Skalen (1…125). Dieselben vier Stufen und
-# dieselben Prioritäten wie in der Zwei-Methoden-Fassung, nur anders geschnitten.
+# Bänder über das Produkt dreier Skalen (1…125). Dieselben vier Stufen, dieselben
+# Prioritäten und dieselben Fristen wie in der Zwei-Methoden-Fassung, nur anders
+# geschnitten: Die Frist folgt der Einstufung, nicht der Rechenart.
 MATRIX = [
     {"risk": "1-9", "color": "00B050", "priority": "Niedrig", "sort_order": 1},
-    {"risk": "10-29", "color": "FFFF00", "priority": "Normal", "sort_order": 2},
-    {"risk": "30-59", "color": "FFC000", "priority": "Hoch", "sort_order": 3},
-    {"risk": "60-125", "color": "FF0000", "priority": "Kritisch", "sort_order": 4},
+    {"risk": "10-29", "color": "FFFF00", "priority": "Normal", "sort_order": 2, "due_days": 90, "warn_days": 14},
+    {"risk": "30-59", "color": "FFC000", "priority": "Hoch", "sort_order": 3, "due_days": 30, "warn_days": 7},
+    {"risk": "60-125", "color": "FF0000", "priority": "Kritisch", "sort_order": 4, "due_days": 7, "warn_days": 2},
 ]
 
 

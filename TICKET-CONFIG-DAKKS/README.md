@@ -53,16 +53,28 @@ Verfahrensanweisung.
 
 ## Die Regeln zum Ergebnis
 
-calServer setzt aus dem Risikowert Farbe und Priorität. Was daraus folgt, ist
-Sache des Labors — hier der Vorschlag, der zu den vier Bändern passt und sich in
-der Begutachtung erklären lässt:
+calServer setzt aus dem Risikowert Farbe, Priorität und **Frist**. Die Frist ist
+seit Dokumentversion 2 Teil des Pakets (`due_days` je Band) und wird vom Produkt
+gerechnet, nicht nur vorgeschlagen: Ein bewertetes Ticket bekommt ein
+Fälligkeitsdatum, und wer die Frist reißt, hört davon. Was inhaltlich zu tun ist
+und wer entscheidet, bleibt Sache des Labors — hier der Vorschlag, der zu den
+vier Bändern passt und sich in der Begutachtung erklären lässt:
 
-| Band | Priorität | Entscheidung | Frist | Nachweis |
-|------|-----------|--------------|-------|----------|
-| 1–4 | Niedrig | Akzeptieren. Status „Kein Handlungsbedarf" mit Begründung, oder Sammelposten für die Managementbewertung | keine | Eintrag genügt |
-| 5–9 | Normal | Maßnahme durch die fachlich zuständige Person | 3 Monate | Maßnahme dokumentiert, Wirksamkeit beim Abschluss beurteilt |
-| 10–14 | Hoch | Maßnahme mit benannter Verantwortlicher, Freigabe durch die Qualitätsmanagement-Beauftragte | 1 Monat | Wirksamkeit gesondert belegt (Kontrollmessung, Audit, Kennzahl) |
-| 15–25 | Kritisch | Sofortmaßnahme prüfen: Arbeit anhalten, Ergebnisse zurückrufen, Kunden informieren (7.10). Entscheidung durch die Laborleitung | sofort, Maßnahme innerhalb 1 Woche geplant | Wirksamkeit belegt, Vorgang in der Managementbewertung berichtet |
+| Band | Priorität | Entscheidung | Frist (`due_days`) | Vorwarnung (`warn_days`) | Nachweis |
+|------|-----------|--------------|--------------------|--------------------------|----------|
+| 1–4 | Niedrig | Akzeptieren. Status „Kein Handlungsbedarf" mit Begründung, oder Sammelposten für die Managementbewertung | keine | — | Eintrag genügt |
+| 5–9 | Normal | Maßnahme durch die fachlich zuständige Person | 3 Monate (90 Tage) | 14 Tage | Maßnahme dokumentiert, Wirksamkeit beim Abschluss beurteilt |
+| 10–14 | Hoch | Maßnahme mit benannter Verantwortlicher, Freigabe durch die Qualitätsmanagement-Beauftragte | 1 Monat (30 Tage) | 7 Tage | Wirksamkeit gesondert belegt (Kontrollmessung, Audit, Kennzahl) |
+| 15–25 | Kritisch | Sofortmaßnahme prüfen: Arbeit anhalten, Ergebnisse zurückrufen, Kunden informieren (7.10). Entscheidung durch die Laborleitung | 1 Woche (7 Tage) | 2 Tage | Wirksamkeit belegt, Vorgang in der Managementbewertung berichtet |
+
+Kalendertage, gerechnet ab dem Tag der **Bewertung**, nicht ab dem Anlegen: Ein
+Vorgang, der drei Wochen unbewertet lag, bekommt sonst eine Frist, die bei der
+ersten Bewertung schon halb verbraucht ist. Das niedrigste Band bleibt bewusst
+ohne Frist — ein akzeptiertes Risiko hat keinen Termin, es hat eine Begründung.
+
+Verschärft sich die Bewertung, verkürzt sich die Frist; entschärft sie sich,
+bleibt die kürzere stehen. Wer eine Frist von Hand setzt, behält sie auch über
+eine Neubewertung hinweg.
 
 Zwei Punkte, die in der Begutachtung regelmäßig gefragt werden und die diese
 Vorlage deshalb bewusst so schneidet:
@@ -125,10 +137,14 @@ python3 scripts/build_config_manifest.py --write TICKET-CONFIG-DAKKS-3D
 
 ## Grenzen
 
-- **Die Fristen der Tabelle oben setzt calServer nicht durch.** Das Produkt
-  rechnet den Risikowert, färbt das Ticket und setzt die Priorität. Termine und
-  Zuständigkeiten sind Verfahrensanweisung; wer sie technisch erzwingen will,
-  arbeitet mit Fälligkeitsdatum und Benachrichtigungen im Ticket.
+- **Die Fristen setzt calServer durch, die Zuständigkeiten nicht.** Aus der
+  Bewertung folgt ein Fälligkeitsdatum, aus dessen Überschreitung eine Meldung
+  an Bearbeiter und Eskalationsgruppe. Wer entscheidet, wer freigibt und was
+  eine Sofortmaßnahme ist, steht weiter in der Verfahrensanweisung.
+- **Empfänger und Endstatus sind Einstellungen, kein Paketinhalt.** Welche
+  Gruppe eine Überschreitung erfährt und welche Ticket-Status „fertig" heißen,
+  hängt an den Gruppen und Status dieser Installation und wird deshalb einmalig
+  in der Ticket-Verwaltung eingestellt, nicht importiert.
 - **Keine Feldfunktionen.** Ticket-Status tragen in calServer keine
   Pflichtfeldregeln (anders als Kalibrier- oder Reparaturstatus). Dass ein
   Ticket vor dem Abschluss eine Wirksamkeitsbeurteilung trägt, ist damit

@@ -5,7 +5,7 @@
   "name": "Ticketmanagement: Risiken und Chancen nach ISO/IEC 17025 (zwei Methoden)",
   "document": {
     "format": "calserver.ticket-config",
-    "version": 1
+    "version": 2
   },
   "content": {
     "types": 8,
@@ -20,13 +20,13 @@
   "files": [
     {
       "path": "ticket-config.json",
-      "sha256": "d5dd63ff6a2dd8e62193fd59b710f86d91e6ac7433245a3306f42f3f25b31fdf",
-      "size_bytes": 9547
+      "sha256": "2f1b943a07a491c83e65c684432f07d8c11d7fb1b3265195bf096c5a9849accf",
+      "size_bytes": 9679
     },
     {
       "path": "README.md",
-      "sha256": "46e7f7a1357f0af4f337d39266560093a7fa129473228195d5783deaeb73b4f8",
-      "size_bytes": 7197
+      "sha256": "db12d6c1651dbb7f817896c39ce0a2d800ae9a0c5c1dab96c86c9f299740a543",
+      "size_bytes": 8380
     }
   ],
   "description": "Vollständige Einrichtung des Ticketmoduls für ein akkreditiertes Labor: 8 Vorgangsarten, 20 Themenfelder entlang der Normabschnitte, 4 Prioritäten und die Risikobewertung Auswirkung × Wahrscheinlichkeit mit Matrix über 1 bis 25.",
