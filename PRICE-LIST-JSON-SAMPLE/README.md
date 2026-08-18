@@ -3,8 +3,9 @@
 Die **Preisliste**, wie ein Labor sie seinem Kunden übergibt: Kategoriebaum mit
 den geltenden Kalibrierpreisen (Typausnahmen eingerückt), Zusatzleistungen mit
 Mengenstaffel, Standardartikel und die Konditions-Fußnoten. Gefüllt aus einem
-**JSON-Datensatz** (Contract `price-list` v1.1) statt aus SQL — DB-agnostisch,
-keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist.
+**JSON-Datensatz** (Contract `price-list` v1.2) statt aus SQL — DB-agnostisch,
+keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist, und
+**mehrspaltig**, wenn Kalibrierarten gepflegt sind.
 
 ## Der Briefkopf steht nicht in dieser Vorlage
 
@@ -24,13 +25,13 @@ ist ein Layout-Eingriff und gehört in die Vorlage.
 | Datei | Zweck |
 |-------|-------|
 | `main_reports/price-list-json-sample.jrxml` | Hauptbericht: Briefkopf-Freiraum, Kopf (Titel, Preisgruppe, Stichtag, Währung, Ableitungsregel), Abschnittsüberschriften, Fußzeile |
-| `subreports/price-list-categories.jrxml` | Kategoriebaum aus `list.calibration`; Obergruppen fett, Untergruppen eingerückt |
+| `subreports/price-list-categories.jrxml` | Kategoriebaum aus `list.calibration`; Obergruppen fett, Untergruppen eingerückt, Grundpreis plus bis zu drei Kalibrierart-Spalten |
 | `subreports/price-list-exceptions.jrxml` | Typausnahmen einer Kategorie (`exceptions`) — die einzige zweistufige Stelle des Bündels |
 | `subreports/price-list-services.jrxml` | Zusatzleistungen aus `list.services` |
 | `subreports/price-list-scales.jrxml` | Mengenstaffel einer Zeile (`scales`), als Kondition unter dem Betrag |
 | `subreports/price-list-articles.jrxml` | Standardartikel aus `list.articles` |
 | `subreports/price-list-surcharges.jrxml` | Konditions-Fußnoten aus `list.surcharges` |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.0) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.2) |
 | `main_reports/price-list-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
 ## Zweisprachig, ohne Fallunterscheidung in der Vorlage
@@ -60,7 +61,57 @@ Eine Fallunterscheidung in JRXML wäre der teuerste Ort dafür: drei Fassungen i
 einer Vorlage sind drei Vorlagen in einer, und jede Änderung müsste sie alle
 treffen.
 
-## Contract `price-list` (v1.1)
+## Kalibrierarten sind Spalten, nicht Zeilen
+
+Die Kalibrierart (ISO, DAkkS, …) ist in calServer normalerweise ein **Zuschlag**
+— „DAkkS +30 %" — und steht dann als Fußnote unter „Konditionen". Das reicht,
+solange der Zuschlag gleichmäßig ist.
+
+Wer ihn nicht gleichmäßig hat, pflegt je Kalibrierart eine eigene Preiszeile
+(Kategorie PK100.01: ISO 89,00, DAkkS 189,00). Die Preisfindung nimmt diese
+Zeile immer vor dem Zuschlag; die Liste zeigte sie bis 1.2 gar nicht, und das
+Kundendokument nannte damit einen anderen Betrag als die Rechnung.
+
+Seit 1.2 druckt der Abschnitt Kalibrierpreise deshalb bis zu **drei zusätzliche
+Betragsspalten**, eine je gepflegter Kalibrierart:
+
+| Datensatz | Rolle |
+|---|---|
+| `list.complexities[]` | alle gepflegten Kalibrierarten mit `value` und `label`, in Reihenfolge des Feldmanagements |
+| `list.complexity_1_label` … `_3_label` | die drei druckbaren Überschriften; **leer = Spalte gibt es nicht** und die Vorlage blendet sie weg |
+| `amount_1` … `amount_3` an jeder Kategorie- und Ausnahmezeile | die Beträge, positionsgleich zu den Überschriften |
+| `amounts` an denselben Zeilen | dieselben Beträge nach Kalibrierart benannt, mit `derived` und `inherited_from` |
+| `list.complexities_truncated` | mehr als drei gepflegt: die Vorlage schreibt es unter die Konditionen |
+
+**Warum beides, Position und Name.** Ein JRXML-Feldpfad steht zur Entwurfszeit
+fest; der Schlüssel „DAkkS" entsteht erst beim Kunden. Die mitgelieferte Vorlage
+liest deshalb die Positionen. Eine selbst gebaute Vorlage für **eine**
+Installation kennt ihre Kalibrierarten und liest bequemer `amounts.DAkkS.amount`.
+
+**Ohne gepflegte Zeilen ändert sich nichts.** `complexities` ist dann leer, alle
+Überschriften sind leer, keine Spalte wird gedruckt — die Liste sieht aus wie vor
+1.2, und die Fußnote macht wie gehabt ihre Arbeit.
+
+**Eine leere Spalte zeigt nichts, nicht „0,00".** „Für diese Kalibrierart ist
+nichts gepflegt" und „kostet nichts" sind verschiedene Aussagen; auf einem
+Dokument, das man aus der Hand gibt, ist die Verwechslung teuer.
+
+**Die Kappung bei drei ist Geometrie, keine Meinung.** JRXML kann Spalten nicht
+zur Laufzeit einfügen, und mehr als vier Betragsspalten lassen auf A4 hoch
+keinen Platz für Nummer und Bezeichnung. Wer mehr braucht, nimmt den CSV-Export
+oder baut eine Querformat-Vorlage über `amounts`. Gekappt wird sichtbar: die
+Vorlage schreibt es unter die Konditionen, statt so zu tun, als sei das alles.
+
+## Die Währung steht im Kopf
+
+Seit 1.2 nennt die Spaltenüberschrift die Währung („Betrag (EUR)"), und die
+Zeilen des Abschnitts Kalibrierpreise drucken sie nicht mehr einzeln. Vier
+Betragsspalten und daneben viermal „EUR" passen nicht auf die Seite, und echte
+Laborlisten nennen die Währung ohnehin einmal oben. Die Abschnitte
+Zusatzleistungen und Standardartikel haben nur einen Betrag und behalten ihre
+Währungsangabe an der Zeile.
+
+## Contract `price-list` (v1.2)
 
 Dataset-Builder: Laravel `PriceListReportDataBuilder`; derselbe Aufbau, den die
 Preislisten-Seite liest (`PriceListService`). Datensatz zum Vorlagenbau:
@@ -78,6 +129,18 @@ wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
 
 **Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
 `list.language` und `name_secondary` an jeder benannten Zeile.
+
+**Neu in 1.2** (additiv, 1.1-Vorlagen laufen unverändert weiter):
+`list.complexities[]`, `list.complexity_1_label` … `_3_label`,
+`list.complexities_truncated` sowie `amounts` und `amount_1` … `amount_3` an
+jeder Kategorie-, Ausnahme- und Typzeile. Eine 1.1-Vorlage liest weiter nur
+`amount` und druckt den Grundpreis wie bisher.
+
+Eine Änderung ist **nicht** rein additiv und gehört auf den Zettel: `amount`
+einer **Typzeile** (`exceptions[]`, `other_type_prices.entries[]`) kann jetzt
+`null` sein. Ein Gerätetyp, für den nur eine DAkkS-Zeile gepflegt ist, hat
+keinen Grundpreis; bis 1.1 fiel er komplett aus der Liste, jetzt steht er drin
+und die Betragsspalte bleibt leer.
 
 Zwei Feinheiten, die man beim Lesen des Datensatzes leicht übersieht:
 
@@ -135,6 +198,15 @@ einsprachige Liste also keinen Millimeter. Der mitgelieferte
 `sample-data.json` steht bewusst auf `mode: both` und lässt zwei Zeilen
 unübersetzt (`Klimaschrank / Ofen`, `Express-Bearbeitung`), damit beide Fälle
 in der Vorschau sichtbar sind.
+
+Für 1.2 kam ein dritter Lauf dazu, jeweils Kompilat **und** Füllung gegen
+JasperReports 6.20.6: derselbe Datensatz mit zwei Kalibrierart-Spalten, mit
+drei plus gesetztem `complexities_truncated`, und ganz ohne. **Ohne** stehen
+Inhalt und Position jedes Textelements des Abschnitts A wieder dort, wo eine
+einspaltige Liste sie hat; die Spalten kosten also nichts, solange niemand sie
+pflegt. Mit Spalten wurde geprüft, dass die Überschriften vollständig stehen
+(„DAkkS-Kalibrierung" passt nur zweizeilig in 64 pt) und dass die Beträge im
+selben Raster fluchten wie die Kategorie darüber.
 
 Die pixelgenaue Abnahme des Layouts (report-runner) bleibt wie gehabt
 maßgeblich.

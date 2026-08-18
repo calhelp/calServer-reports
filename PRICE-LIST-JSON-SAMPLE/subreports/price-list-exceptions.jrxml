@@ -1,42 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  Typausnahmen einer Preiskategorie, Contract "price-list" v1.0. Läuft über
+  Typausnahmen einer Preiskategorie, Contract "price-list" v1.2. Läuft über
   `exceptions` der jeweiligen Kategoriezeile (zweite Stufe, aufgerufen aus
   price-list-categories).
 
   Eine Ausnahme ist ein echter Preis, den der Kunde zahlt — sie gehört auf das
   Papier, eingerückt unter ihre Kategorie, damit erkennbar bleibt, wovon sie
   die Ausnahme ist.
+
+  KALIBRIERARTEN (Contract 1.2): dieselben bis zu drei Spalten wie in der
+  Kategoriezeile darüber (`amount_1` … `amount_3`), im selben Raster — sonst
+  stünde die Ausnahme unter der falschen Überschrift. Seit 1.2 kann `amount`
+  einer Ausnahme LEER sein: ein Gerätetyp, für den nur eine DAkkS-Zeile
+  gepflegt ist, hat keinen Grundpreis und ist trotzdem eine Ausnahme.
+
+  Die Währung steht im Spaltenkopf des Hauptberichts, nicht mehr an der Zeile.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-exceptions" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0002-4000-8000-000000000002">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
 	<field name="type_label" class="java.lang.String"><fieldDescription><![CDATA[type_label]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
+	<field name="amount_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_1]]></fieldDescription></field>
+	<field name="amount_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_2]]></fieldDescription></field>
+	<field name="amount_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_3]]></fieldDescription></field>
 	<detail>
 		<band height="12">
 			<staticText>
-				<reportElement x="98" y="0" width="8" height="11"/>
+				<reportElement x="86" y="0" width="8" height="11"/>
 				<textElement><font size="8"/></textElement>
 				<text><![CDATA[↳]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="0" width="296" height="11"/>
+				<reportElement x="96" y="0" width="150" height="11"/>
 				<textElement><font size="8"/></textElement>
 				<textFieldExpression><![CDATA[$F{type_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
-				<reportElement x="410" y="0" width="80" height="11"/>
+				<reportElement x="256" y="0" width="64" height="11"/>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="494" y="0" width="30" height="11">
-					<printWhenExpression><![CDATA[$F{amount} != null]]></printWhenExpression>
-				</reportElement>
-				<textElement><font size="8"/></textElement>
-				<textFieldExpression><![CDATA[$P{Currency}]]></textFieldExpression>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="324" y="0" width="64" height="11"/>
+				<textElement textAlignment="Right"><font size="8"/></textElement>
+				<textFieldExpression><![CDATA[$F{amount_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="392" y="0" width="64" height="11"/>
+				<textElement textAlignment="Right"><font size="8"/></textElement>
+				<textFieldExpression><![CDATA[$F{amount_2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="460" y="0" width="64" height="11"/>
+				<textElement textAlignment="Right"><font size="8"/></textElement>
+				<textFieldExpression><![CDATA[$F{amount_3}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
