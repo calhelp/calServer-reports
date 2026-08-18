@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Preisliste (customer-facing), Contract "price-list" v1.1. Gefüllt aus einem
+  V2 Preisliste (customer-facing), Contract "price-list" v1.2. Gefüllt aus einem
   JSON-Datensatz — kein SQL, keine V1-Codespalten.
 
   DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
@@ -21,6 +21,29 @@
   was sie bekommt; eine Vorlage, die selbst zwischen drei Fassungen
   unterscheidet, wäre drei Vorlagen in einer. Der Kopf nennt die Fassung, damit
   man einem ausgedruckten Blatt ansieht, welche Liste man in der Hand hält.
+
+  KALIBRIERARTEN ALS SPALTEN (Contract 1.2): Neben dem Grundpreis druckt der
+  Abschnitt Kalibrierpreise bis zu DREI weitere Betragsspalten — je eine
+  gepflegte Kalibrierart (ISO, DAkkS, …). Wie sie heißen, steht in
+  `list.complexity_1_label` … `_3_label`; leer heißt „diese Spalte gibt es
+  nicht" und blendet sie weg. Die Beträge stehen positionsgleich als
+  `amount_1` … `amount_3` an jeder Kategorie- und Ausnahmezeile.
+
+  Warum Position statt Name: `list.calibration[].amounts` ist nach der
+  Kalibrierart benannt („DAkkS"), und dieser Schlüssel entsteht erst beim
+  Kunden — ein JRXML-Feldpfad steht zur Entwurfszeit fest. Der
+  Datensatz-Builder legt deshalb beides bei.
+
+  Führt eine Installation mehr als drei Kalibrierarten, druckt die Vorlage die
+  ersten drei und sagt es unter den Konditionen (`complexities_truncated`).
+  Vollständig ist der CSV-Export. Und wer die Kalibrierart wie üblich über
+  einen Zuschlag abbildet, hat gar keine Spalten: die Liste sieht aus wie vor
+  1.2, der Zuschlag steht als Fußnote unter „Konditionen".
+
+  DIE WÄHRUNG STEHT IM KOPF, NICHT AN JEDER ZEILE. Vier Betragsspalten und
+  daneben viermal „EUR" passen auf A4 hoch nicht — und echte Laborlisten
+  nennen die Währung ohnehin einmal oben. Die Spaltenüberschrift trägt sie
+  zusätzlich in Klammern.
 
   Bewusst NICHT gedruckt: `list.other_type_prices`. Das ist die gekappte Liste
   der Typpreise ohne Kategorie (Obergrenze 200) — ein Übergangsbestand auf dem
@@ -55,6 +78,10 @@
 	<field name="language_mode" class="java.lang.String"><fieldDescription><![CDATA[list.language.mode]]></fieldDescription></field>
 	<field name="language_primary_label" class="java.lang.String"><fieldDescription><![CDATA[list.language.primary_label]]></fieldDescription></field>
 	<field name="language_secondary_label" class="java.lang.String"><fieldDescription><![CDATA[list.language.secondary_label]]></fieldDescription></field>
+	<field name="complexity_1_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_1_label]]></fieldDescription></field>
+	<field name="complexity_2_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_2_label]]></fieldDescription></field>
+	<field name="complexity_3_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_3_label]]></fieldDescription></field>
+	<field name="complexities_truncated" class="java.lang.Boolean"><fieldDescription><![CDATA[list.complexities_truncated]]></fieldDescription></field>
 	<!--
 		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
 		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
@@ -104,48 +131,74 @@
 		<band height="0"/>
 	</pageHeader>
 	<detail>
-		<band height="60">
+		<band height="68">
 			<staticText>
-				<reportElement style="Section" x="0" y="0" width="404" height="14">
+				<reportElement style="Section" x="0" y="8" width="250" height="14">
 					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
 				<text><![CDATA[Kalibrierpreise]]></text>
 			</staticText>
-			<staticText>
-				<reportElement style="Label" x="410" y="2" width="80" height="11">
+			<!--
+				Vier Betragsspalten in einem Raster von 68 pt: Grundpreis, dann
+				bis zu drei Kalibrierarten. Eine Spalte ohne Namen wird nicht
+				gedruckt — dann steht rechts vom Grundpreis nichts, wie vor 1.2.
+			-->
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" x="256" y="0" width="64" height="22">
 					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Betrag]]></text>
-			</staticText>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA["Betrag" + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" x="324" y="0" width="64" height="22">
+					<printWhenExpression><![CDATA[$F{complexity_1_label} != null && !$F{complexity_1_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_1_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" x="392" y="0" width="64" height="22">
+					<printWhenExpression><![CDATA[$F{complexity_2_label} != null && !$F{complexity_2_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_2_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" x="460" y="0" width="64" height="22">
+					<printWhenExpression><![CDATA[$F{complexity_3_label} != null && !$F{complexity_3_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_3_label}]]></textFieldExpression>
+			</textField>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="16" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="0" y="24" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.calibration")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-categories.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement style="Section" positionType="Float" x="0" y="20" width="404" height="14" isRemoveLineWhenBlank="true">
+				<reportElement style="Section" positionType="Float" x="0" y="28" width="404" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
 				<text><![CDATA[Zusatzleistungen]]></text>
 			</staticText>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="36" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="0" y="44" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.services")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-services.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement style="Section" positionType="Float" x="0" y="40" width="404" height="14" isRemoveLineWhenBlank="true">
+				<reportElement style="Section" positionType="Float" x="0" y="48" width="404" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{count_articles} != null && $F{count_articles}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
 				<text><![CDATA[Standardartikel]]></text>
 			</staticText>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="56" width="561" height="1" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="0" y="64" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.articles")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-articles.jasper"]]></subreportExpression>
@@ -167,7 +220,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="40">
+		<band height="54">
 			<line><reportElement positionType="Float" x="0" y="4" width="561" height="1"/></line>
 			<staticText><reportElement style="Label" positionType="Float" x="0" y="8" width="200" height="11"/><text><![CDATA[Konditionen]]></text></staticText>
 			<subreport>
@@ -176,6 +229,18 @@
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.surcharges")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-surcharges.jasper"]]></subreportExpression>
 			</subreport>
+			<!--
+				Gekappt wird sichtbar, nicht still: eine Liste, die drei von
+				fünf Kalibrierarten zeigt und darüber schweigt, liest sich wie
+				eine vollständige.
+			-->
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="34" width="561" height="10" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{complexities_truncated} != null && $F{complexities_truncated}.booleanValue()]]></printWhenExpression>
+				</reportElement>
+				<textElement><font size="7" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA["Weitere Kalibrierarten sind gepflegt, aber auf diesem Dokument nicht abgebildet. Die vollständige Aufstellung liefert der CSV-Export."]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

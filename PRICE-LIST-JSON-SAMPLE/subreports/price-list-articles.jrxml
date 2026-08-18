@@ -18,16 +18,16 @@
 	<detail>
 		<band height="23">
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="404" height="12"/>
+				<reportElement x="0" y="0" width="250" height="12"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
-				<reportElement x="410" y="0" width="80" height="12"/>
+				<reportElement x="256" y="0" width="64" height="12"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="494" y="0" width="67" height="12">
+				<reportElement x="324" y="0" width="67" height="12">
 					<printWhenExpression><![CDATA[$F{amount} != null]]></printWhenExpression>
 				</reportElement>
 				<textFieldExpression><![CDATA[$P{Currency} + ($F{unit} != null ? " / " + $F{unit} : "")]]></textFieldExpression>

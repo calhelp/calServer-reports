@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "price-list",
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "generated_at": "2026-08-10T09:00:00+02:00",
     "locale": "de-DE"
   },
@@ -23,6 +23,20 @@
       "mode": "percent",
       "value": -15
     },
+    "complexities": [
+      {
+        "value": "ISO",
+        "label": "ISO-Kalibrierung"
+      },
+      {
+        "value": "DAkkS",
+        "label": "DAkkS-Kalibrierung"
+      }
+    ],
+    "complexities_truncated": false,
+    "complexity_1_label": "ISO-Kalibrierung",
+    "complexity_2_label": "DAkkS-Kalibrierung",
+    "complexity_3_label": "",
     "surcharges": [
       {
         "reference_id": "DAkkS",
@@ -51,7 +65,11 @@
         "derived": false,
         "inherited_from": null,
         "exceptions": [],
-        "scales": []
+        "scales": [],
+        "amounts": {},
+        "amount_1": null,
+        "amount_2": null,
+        "amount_3": null
       },
       {
         "id": "pk-100-01",
@@ -69,10 +87,35 @@
             "type_label": "Keithley DMM6500",
             "amount": 110.0,
             "derived": false,
-            "scales": []
+            "scales": [],
+            "amounts": {
+              "DAkkS": {
+                "amount": 209.0,
+                "derived": false,
+                "inherited_from": null
+              }
+            },
+            "amount_1": null,
+            "amount_2": 209.0,
+            "amount_3": null
           }
         ],
-        "scales": []
+        "scales": [],
+        "amounts": {
+          "ISO": {
+            "amount": 75.74,
+            "derived": false,
+            "inherited_from": null
+          },
+          "DAkkS": {
+            "amount": 176.72,
+            "derived": false,
+            "inherited_from": null
+          }
+        },
+        "amount_1": 75.74,
+        "amount_2": 176.72,
+        "amount_3": null
       },
       {
         "id": "pk-100-02",
@@ -91,7 +134,17 @@
             "price": null,
             "discount": 10
           }
-        ]
+        ],
+        "amounts": {
+          "DAkkS": {
+            "amount": 212.42,
+            "derived": false,
+            "inherited_from": null
+          }
+        },
+        "amount_1": null,
+        "amount_2": 212.42,
+        "amount_3": null
       },
       {
         "id": "pk-200",
@@ -104,7 +157,11 @@
         "derived": false,
         "inherited_from": null,
         "exceptions": [],
-        "scales": []
+        "scales": [],
+        "amounts": {},
+        "amount_1": null,
+        "amount_2": null,
+        "amount_3": null
       },
       {
         "id": "pk-200-01",
@@ -117,7 +174,17 @@
         "derived": true,
         "inherited_from": null,
         "exceptions": [],
-        "scales": []
+        "scales": [],
+        "amounts": {
+          "DAkkS": {
+            "amount": 105.31,
+            "derived": false,
+            "inherited_from": null
+          }
+        },
+        "amount_1": null,
+        "amount_2": 105.31,
+        "amount_3": null
       },
       {
         "id": "pk-200-02",
@@ -134,7 +201,17 @@
           "name_secondary": "Temperature"
         },
         "exceptions": [],
-        "scales": []
+        "scales": [],
+        "amounts": {
+          "DAkkS": {
+            "amount": 622.97,
+            "derived": false,
+            "inherited_from": null
+          }
+        },
+        "amount_1": null,
+        "amount_2": 622.97,
+        "amount_3": null
       }
     ],
     "other_type_prices": {

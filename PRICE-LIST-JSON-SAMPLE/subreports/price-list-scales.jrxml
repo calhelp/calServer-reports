@@ -16,7 +16,7 @@
 	<detail>
 		<band height="11">
 			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="0" width="416" height="10"/>
+				<reportElement x="96" y="0" width="428" height="10"/>
 				<textElement><font size="7" isItalic="true"/></textElement>
 				<textFieldExpression><![CDATA["ab " + ($F{min_quantity} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{min_quantity})) + ": " + ($F{price} != null ? new java.text.DecimalFormat("#,##0.00").format($F{price}) + " " + $P{Currency} : ($F{discount} != null ? "−" + new java.text.DecimalFormat("#,##0.##").format($F{discount}) + " %" : ""))]]></textFieldExpression>
 			</textField>
