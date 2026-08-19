@@ -22,6 +22,12 @@
   unterscheidet, wäre drei Vorlagen in einer. Der Kopf nennt die Fassung, damit
   man einem ausgedruckten Blatt ansieht, welche Liste man in der Hand hält.
 
+  Die Grundpreisspalte heisst, was `list.base_column_label` sagt: ohne
+  Kalibrierart-Spalten "Betrag", mit ihnen "Standard": dann ist sie eine von
+  ihnen, die ohne besonderen Aufwand. Den Namen entscheidet der
+  Datensatz-Builder, damit Bildschirm, CSV und Papier dieselbe Spalte gleich
+  benennen.
+
   KALIBRIERARTEN ALS SPALTEN (Contract 1.2): Neben dem Grundpreis druckt der
   Abschnitt Kalibrierpreise bis zu DREI weitere Betragsspalten — je eine
   gepflegte Kalibrierart (ISO, DAkkS, …). Wie sie heißen, steht in
@@ -82,6 +88,7 @@
 	<field name="complexity_2_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_2_label]]></fieldDescription></field>
 	<field name="complexity_3_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_3_label]]></fieldDescription></field>
 	<field name="complexities_truncated" class="java.lang.Boolean"><fieldDescription><![CDATA[list.complexities_truncated]]></fieldDescription></field>
+	<field name="base_column_label" class="java.lang.String"><fieldDescription><![CDATA[list.base_column_label]]></fieldDescription></field>
 	<!--
 		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
 		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
@@ -148,7 +155,7 @@
 					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA["Betrag" + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{base_column_label} == null || $F{base_column_label}.isEmpty() ? "Betrag" : $F{base_column_label}) + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" x="324" y="0" width="64" height="22">

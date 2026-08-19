@@ -34,6 +34,7 @@
       }
     ],
     "complexities_truncated": false,
+    "base_column_label": "Standard",
     "complexity_1_label": "ISO-Kalibrierung",
     "complexity_2_label": "DAkkS-Kalibrierung",
     "complexity_3_label": "",
