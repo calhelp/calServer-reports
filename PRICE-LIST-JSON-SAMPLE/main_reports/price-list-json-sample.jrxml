@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Preisliste (customer-facing), Contract "price-list" v1.2. Gefüllt aus einem
+  V2 Preisliste (customer-facing), Contract "price-list" v1.3. Gefüllt aus einem
   JSON-Datensatz — kein SQL, keine V1-Codespalten.
 
   DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
@@ -28,8 +28,9 @@
   Datensatz-Builder, damit Bildschirm, CSV und Papier dieselbe Spalte gleich
   benennen.
 
-  KALIBRIERARTEN ALS SPALTEN (Contract 1.2): Neben dem Grundpreis druckt der
-  Abschnitt Kalibrierpreise bis zu DREI weitere Betragsspalten — je eine
+  KALIBRIERARTEN ALS SPALTEN (Contract 1.2, seit 1.3 auch Abschnitt B): Neben
+  dem Grundpreis drucken die Abschnitte Kalibrierpreise und Zusatzleistungen
+  bis zu DREI weitere Betragsspalten — je eine
   gepflegte Kalibrierart (ISO, DAkkS, …). Wie sie heißen, steht in
   `list.complexity_1_label` … `_3_label`; leer heißt „diese Spalte gibt es
   nicht" und blendet sie weg. Die Beträge stehen positionsgleich als
@@ -186,11 +187,42 @@
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-categories.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement style="Section" positionType="Float" x="0" y="28" width="404" height="14" isRemoveLineWhenBlank="true">
+				<reportElement style="Section" positionType="Float" x="0" y="28" width="250" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
 				<text><![CDATA[Zusatzleistungen]]></text>
 			</staticText>
+			<!-- Derselbe Spaltenkopf wie in Abschnitt A, an denselben Stellen:
+			     die Betraege sollen ueber beide Abschnitte fluchten, sonst
+			     liest man eine DAkkS-Zahl unter einer ISO-Ueberschrift. -->
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" positionType="Float" x="256" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[($F{base_column_label} == null || $F{base_column_label}.isEmpty() ? "Betrag" : $F{base_column_label}) + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" positionType="Float" x="324" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_1_label} != null && !$F{complexity_1_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_1_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" positionType="Float" x="392" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_2_label} != null && !$F{complexity_2_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_2_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
+				<reportElement style="Label" positionType="Float" x="460" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_3_label} != null && !$F{complexity_3_label}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
+				<textFieldExpression><![CDATA[$F{complexity_3_label}]]></textFieldExpression>
+			</textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="44" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
