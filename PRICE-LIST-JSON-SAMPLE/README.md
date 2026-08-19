@@ -3,7 +3,7 @@
 Die **Preisliste**, wie ein Labor sie seinem Kunden übergibt: Kategoriebaum mit
 den geltenden Kalibrierpreisen (Typausnahmen eingerückt), Zusatzleistungen mit
 Mengenstaffel, Standardartikel und die Konditions-Fußnoten. Gefüllt aus einem
-**JSON-Datensatz** (Contract `price-list` v1.3) statt aus SQL — DB-agnostisch,
+**JSON-Datensatz** (Contract `price-list` v1.4) statt aus SQL — DB-agnostisch,
 keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist, und
 **mehrspaltig**, wenn Kalibrierarten gepflegt sind.
 
@@ -31,7 +31,7 @@ ist ein Layout-Eingriff und gehört in die Vorlage.
 | `subreports/price-list-scales.jrxml` | Mengenstaffel einer Zeile (`scales`), als Kondition unter dem Betrag |
 | `subreports/price-list-articles.jrxml` | Standardartikel aus `list.articles` |
 | `subreports/price-list-surcharges.jrxml` | Konditions-Fußnoten aus `list.surcharges` |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.3) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.4) |
 | `main_reports/price-list-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
 ## Zweisprachig, ohne Fallunterscheidung in der Vorlage
@@ -112,7 +112,7 @@ Laborlisten nennen die Währung ohnehin einmal oben. Die Abschnitte
 Zusatzleistungen und Standardartikel haben nur einen Betrag und behalten ihre
 Währungsangabe an der Zeile.
 
-## Contract `price-list` (v1.3)
+## Contract `price-list` (v1.4)
 
 Dataset-Builder: Laravel `PriceListReportDataBuilder`; derselbe Aufbau, den die
 Preislisten-Seite liest (`PriceListService`). Datensatz zum Vorlagenbau:
@@ -130,6 +130,28 @@ wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
 
 **Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
 `list.language` und `name_secondary` an jeder benannten Zeile.
+
+**Neu in 1.4** (additiv): das Betragsraster ist **rechtsbündig**. Vier feste
+Felder je Zeile (`slot_1` … `slot_4`, Kopf `list.slot_1_label` …
+`slot_4_label`), gefüllt wird von rechts: `list.amount_block_slot` sagt, in
+welchem Feld der Grundpreis steht, die Kalibrierarten folgen dahinter. Bei zwei
+gepflegten Kalibrierarten beginnt der Block also in Feld 2 und das Raster endet
+am rechten Rand statt mitten auf dem Blatt.
+
+Warum über die Zuweisung und nicht über die Geometrie: JRXML kann Felder zur
+Laufzeit nicht verschieben. Vorher standen die Felder links und der ungenutzte
+Rest blieb weiß — genau die Fläche, die im Kundendokument nach einem
+Druckfehler aussieht.
+
+`amount`, `amounts`, `amount_1` … `amount_3` und `complexity_N_label` bleiben
+unverändert stehen: eine 1.3-Vorlage druckt weiter wie bisher.
+
+Dazu der Vorlagenparameter **`Leader_style`** (`dots` / `none`, Vorgabe `dots`):
+eine gepunktete Führungslinie überbrückt die Lücke zwischen Kategoriebezeichnung
+und Betragsblock. Sie wird nur einmal je Zeile gezeichnet, in der Länge, die
+`amount_block_slot` vorgibt — bei einem Block ganz rechts über drei Felder, bei
+einem Block in Feld 2 über eines, und bei Feld 1 gar nicht (dort wäre sie ein
+Stummel).
 
 **Neu in 1.3** (additiv): dieselben Kalibrierart-Spalten in **Abschnitt B**
 (`services[]` und ihre `variants[]` tragen `amounts` sowie `amount_1` …
@@ -195,6 +217,7 @@ verbindlich.
 |-----------|-------|---------|
 | `List_title` | variable (type) | Überschrift des Dokuments; Vorgabe „Preisliste". |
 | `Company_footer` | variable (type) | Optionale Fußzeile auf jeder Seite. Leer lassen, wenn der Briefkopf schon eine mitbringt. |
+| `Leader_style` | variable (type) | Führungslinie zwischen Bezeichnung und Betragsblock: `dots` (Vorgabe) oder `none`. |
 | `Reportpath` | system | Bundle-Wurzel für die Subreport-Auflösung, von calServer gesetzt. |
 
 ## Geprüft
@@ -212,6 +235,15 @@ einsprachige Liste also keinen Millimeter. Der mitgelieferte
 `sample-data.json` steht bewusst auf `mode: both` und lässt zwei Zeilen
 unübersetzt (`Klimaschrank / Ofen`, `Express-Bearbeitung`), damit beide Fälle
 in der Vorschau sichtbar sind.
+
+Für 1.4 kamen zwei Gegenproben dazu, wieder Kompilat **und** Füllung. Mit zwei
+gepflegten Kalibrierarten steht der Spaltenkopf bei x = 341 / 409 / 477 statt
+wie vorher bei 273 / 341 / 409 — also 136 pt weiter rechts, am Blattrand statt
+in der Blattmitte. **Ohne** Kalibrierart landet der Grundpreis in Feld 4
+(`Betrag (EUR)` bei x = 477), nicht in Feld 1. Und die Führungslinie wird genau
+einmal je Zeile gezeichnet, in der zum Block passenden Länge (`w=68` bei Block
+in Feld 2, `w=204` bei Block in Feld 4); mit `Leader_style="none"` bleiben nur
+die beiden durchgehenden Trennlinien der Seite übrig.
 
 Für 1.2 kam ein dritter Lauf dazu, jeweils Kompilat **und** Füllung gegen
 JasperReports 6.20.6: derselbe Datensatz mit zwei Kalibrierart-Spalten, mit

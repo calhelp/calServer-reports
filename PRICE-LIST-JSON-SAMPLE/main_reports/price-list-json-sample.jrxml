@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Preisliste (customer-facing), Contract "price-list" v1.3. Gefüllt aus einem
+  V2 Preisliste (customer-facing), Contract "price-list" v1.4. Gefüllt aus einem
   JSON-Datensatz — kein SQL, keine V1-Codespalten.
 
   DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
@@ -70,6 +70,10 @@
 		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Leader_style" class="java.lang.String">
+		<parameterDescription><![CDATA[Fuehrungslinie zwischen Bezeichnung und Betrag: "dots" (gepunktet, Vorgabe) oder "none".]]></parameterDescription>
+		<defaultValueExpression><![CDATA["dots"]]></defaultValueExpression>
+	</parameter>
 	<parameter name="List_title" class="java.lang.String">
 		<parameterDescription><![CDATA[Überschrift des Dokuments. Leer = "Preisliste".]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Preisliste"]]></defaultValueExpression>
@@ -90,6 +94,11 @@
 	<field name="complexity_3_label" class="java.lang.String"><fieldDescription><![CDATA[list.complexity_3_label]]></fieldDescription></field>
 	<field name="complexities_truncated" class="java.lang.Boolean"><fieldDescription><![CDATA[list.complexities_truncated]]></fieldDescription></field>
 	<field name="base_column_label" class="java.lang.String"><fieldDescription><![CDATA[list.base_column_label]]></fieldDescription></field>
+	<field name="slot_1_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_1_label]]></fieldDescription></field>
+	<field name="slot_2_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_2_label]]></fieldDescription></field>
+	<field name="slot_3_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_3_label]]></fieldDescription></field>
+	<field name="slot_4_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_4_label]]></fieldDescription></field>
+	<field name="amount_block_slot" class="java.lang.Integer"><fieldDescription><![CDATA[list.amount_block_slot]]></fieldDescription></field>
 	<!--
 		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
 		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
@@ -147,42 +156,47 @@
 				<text><![CDATA[Kalibrierpreise]]></text>
 			</staticText>
 			<!--
-				Vier Betragsspalten in einem Raster von 68 pt: Grundpreis, dann
-				bis zu drei Kalibrierarten. Eine Spalte ohne Namen wird nicht
-				gedruckt — dann steht rechts vom Grundpreis nichts, wie vor 1.2.
+				Vier Betragsfelder in einem Raster von 68 pt, von RECHTS belegt.
+				Welches Feld welche Spalte traegt, entscheidet der
+				Datensatz-Builder ueber `slot_N_label`: JRXML kann Spalten nicht
+				zur Laufzeit verschieben, also wandert die Zuweisung statt der
+				Geometrie. Ein leeres Feld liegt damit links neben der
+				Bezeichnung, wo es als Abstand liest, statt rechts als Luecke.
 			-->
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" x="256" y="0" width="64" height="22">
-					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0 && $F{slot_1_label} != null && !$F{slot_1_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[($F{base_column_label} == null || $F{base_column_label}.isEmpty() ? "Betrag" : $F{base_column_label}) + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_1_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" x="324" y="0" width="64" height="22">
-					<printWhenExpression><![CDATA[$F{complexity_1_label} != null && !$F{complexity_1_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0 && $F{slot_2_label} != null && !$F{slot_2_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_1_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_2_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" x="392" y="0" width="64" height="22">
-					<printWhenExpression><![CDATA[$F{complexity_2_label} != null && !$F{complexity_2_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0 && $F{slot_3_label} != null && !$F{slot_3_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_2_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_3_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" x="460" y="0" width="64" height="22">
-					<printWhenExpression><![CDATA[$F{complexity_3_label} != null && !$F{complexity_3_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0 && $F{slot_4_label} != null && !$F{slot_4_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_3_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_4_label}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="24" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Leader_style"><subreportParameterExpression><![CDATA[$P{Leader_style}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Block_slot"><subreportParameterExpression><![CDATA[$F{amount_block_slot} == null ? Integer.valueOf(4) : $F{amount_block_slot}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.calibration")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-categories.jasper"]]></subreportExpression>
 			</subreport>
@@ -197,36 +211,38 @@
 			     liest man eine DAkkS-Zahl unter einer ISO-Ueberschrift. -->
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" positionType="Float" x="256" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{slot_1_label} != null && !$F{slot_1_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[($F{base_column_label} == null || $F{base_column_label}.isEmpty() ? "Betrag" : $F{base_column_label}) + ($F{currency} == null || $F{currency}.isEmpty() ? "" : " (" + $F{currency} + ")")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_1_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" positionType="Float" x="324" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_1_label} != null && !$F{complexity_1_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{slot_2_label} != null && !$F{slot_2_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_1_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_2_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" positionType="Float" x="392" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_2_label} != null && !$F{complexity_2_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{slot_3_label} != null && !$F{slot_3_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_2_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_3_label}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement style="Label" positionType="Float" x="460" y="26" width="64" height="18" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{complexity_3_label} != null && !$F{complexity_3_label}.isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0 && $F{slot_4_label} != null && !$F{slot_4_label}.isEmpty()]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA[$F{complexity_3_label}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_4_label}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="44" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Reportpath"><subreportParameterExpression><![CDATA[$P{Reportpath}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Leader_style"><subreportParameterExpression><![CDATA[$P{Leader_style}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Block_slot"><subreportParameterExpression><![CDATA[$F{amount_block_slot} == null ? Integer.valueOf(4) : $F{amount_block_slot}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.services")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-services.jasper"]]></subreportExpression>
 			</subreport>

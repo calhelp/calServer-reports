@@ -22,9 +22,10 @@
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
 	<field name="type_label" class="java.lang.String"><fieldDescription><![CDATA[type_label]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
-	<field name="amount_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_1]]></fieldDescription></field>
-	<field name="amount_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_2]]></fieldDescription></field>
-	<field name="amount_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_3]]></fieldDescription></field>
+	<field name="slot_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_1]]></fieldDescription></field>
+	<field name="slot_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_2]]></fieldDescription></field>
+	<field name="slot_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_3]]></fieldDescription></field>
+	<field name="slot_4" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_4]]></fieldDescription></field>
 	<detail>
 		<band height="12">
 			<staticText>
@@ -40,22 +41,22 @@
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="256" y="0" width="64" height="11"/>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
-				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="324" y="0" width="64" height="11"/>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
-				<textFieldExpression><![CDATA[$F{amount_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_2}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="392" y="0" width="64" height="11"/>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
-				<textFieldExpression><![CDATA[$F{amount_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_3}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="460" y="0" width="64" height="11"/>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
-				<textFieldExpression><![CDATA[$F{amount_3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_4}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
