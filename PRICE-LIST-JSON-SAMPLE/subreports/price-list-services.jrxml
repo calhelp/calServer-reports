@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  Zusatzleistungen der Preisliste, Contract "price-list" v1.1 (`list.services`).
+  Zusatzleistungen der Preisliste, Contract "price-list" v1.3 (`list.services`).
 
   Die Mengenstaffel steht nicht als eigene Tabelle, sondern als Zusatz hinter
   dem Betrag ("ab 5: −10 %") — auf einer Kundenliste ist sie eine Kondition,
   keine zweite Preiszeile. Gerendert aus `scales` über einen eingebetteten
   Subreport, damit beliebig viele Stufen mitlaufen.
+
+  KALIBRIERARTEN (Contract 1.3): Rechts vom Grundpreis stehen dieselben bis zu
+  drei Spalten wie in Abschnitt A, im selben Raster — ein zusaetzlicher
+  Pruefpunkt kostet in DAkkS mehr als in ISO. Die Waehrung steht dafuer im
+  Spaltenkopf des Hauptberichts statt an jeder Zeile.
+
+  NICHT gedruckt: `variants`, die typ- und kategoriebezogenen Zeilen einer
+  Leistung. Das war vor 1.3 auch schon so; sie brauchen eine eigene
+  Achsenspalte und damit eine eigene Tabelle, und die gehoert in einen eigenen
+  Schnitt statt beilaeufig hier hinein.
 
   ZWEISPRACHIG (Contract 1.1): `name` trägt die angeforderte Sprache,
   `name_secondary` ist nur in der Fassung "beide" gefüllt und fällt sonst als
@@ -19,6 +29,9 @@
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
 	<field name="name_secondary" class="java.lang.String"><fieldDescription><![CDATA[name_secondary]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
+	<field name="amount_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_1]]></fieldDescription></field>
+	<field name="amount_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_2]]></fieldDescription></field>
+	<field name="amount_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_3]]></fieldDescription></field>
 	<detail>
 		<band height="25">
 			<textField isBlankWhenNull="true">
@@ -30,11 +43,20 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="324" y="0" width="30" height="12">
-					<printWhenExpression><![CDATA[$F{amount} != null]]></printWhenExpression>
-				</reportElement>
-				<textFieldExpression><![CDATA[$P{Currency}]]></textFieldExpression>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="324" y="0" width="64" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="392" y="0" width="64" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount_2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" pattern="#,##0.00">
+				<reportElement x="460" y="0" width="64" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount_3}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement positionType="Float" x="12" y="12" width="392" height="10" isRemoveLineWhenBlank="true"/>

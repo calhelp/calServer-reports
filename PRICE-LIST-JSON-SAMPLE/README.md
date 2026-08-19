@@ -3,7 +3,7 @@
 Die **Preisliste**, wie ein Labor sie seinem Kunden übergibt: Kategoriebaum mit
 den geltenden Kalibrierpreisen (Typausnahmen eingerückt), Zusatzleistungen mit
 Mengenstaffel, Standardartikel und die Konditions-Fußnoten. Gefüllt aus einem
-**JSON-Datensatz** (Contract `price-list` v1.2) statt aus SQL — DB-agnostisch,
+**JSON-Datensatz** (Contract `price-list` v1.3) statt aus SQL — DB-agnostisch,
 keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist, und
 **mehrspaltig**, wenn Kalibrierarten gepflegt sind.
 
@@ -27,11 +27,11 @@ ist ein Layout-Eingriff und gehört in die Vorlage.
 | `main_reports/price-list-json-sample.jrxml` | Hauptbericht: Briefkopf-Freiraum, Kopf (Titel, Preisgruppe, Stichtag, Währung, Ableitungsregel), Abschnittsüberschriften, Fußzeile |
 | `subreports/price-list-categories.jrxml` | Kategoriebaum aus `list.calibration`; Obergruppen fett, Untergruppen eingerückt, Grundpreis plus bis zu drei Kalibrierart-Spalten |
 | `subreports/price-list-exceptions.jrxml` | Typausnahmen einer Kategorie (`exceptions`) — die einzige zweistufige Stelle des Bündels |
-| `subreports/price-list-services.jrxml` | Zusatzleistungen aus `list.services` |
+| `subreports/price-list-services.jrxml` | Zusatzleistungen aus `list.services`, Grundpreis plus bis zu drei Kalibrierart-Spalten |
 | `subreports/price-list-scales.jrxml` | Mengenstaffel einer Zeile (`scales`), als Kondition unter dem Betrag |
 | `subreports/price-list-articles.jrxml` | Standardartikel aus `list.articles` |
 | `subreports/price-list-surcharges.jrxml` | Konditions-Fußnoten aus `list.surcharges` |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.2) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.3) |
 | `main_reports/price-list-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
 ## Zweisprachig, ohne Fallunterscheidung in der Vorlage
@@ -72,14 +72,15 @@ Wer ihn nicht gleichmäßig hat, pflegt je Kalibrierart eine eigene Preiszeile
 Zeile immer vor dem Zuschlag; die Liste zeigte sie bis 1.2 gar nicht, und das
 Kundendokument nannte damit einen anderen Betrag als die Rechnung.
 
-Seit 1.2 druckt der Abschnitt Kalibrierpreise deshalb bis zu **drei zusätzliche
-Betragsspalten**, eine je gepflegter Kalibrierart:
+Seit 1.2 drucken die Abschnitte Kalibrierpreise und (seit 1.3) Zusatzleistungen
+deshalb bis zu **drei zusätzliche Betragsspalten**, eine je gepflegter
+Kalibrierart:
 
 | Datensatz | Rolle |
 |---|---|
 | `list.complexities[]` | alle gepflegten Kalibrierarten mit `value` und `label`, in Reihenfolge des Feldmanagements |
 | `list.complexity_1_label` … `_3_label` | die drei druckbaren Überschriften; **leer = Spalte gibt es nicht** und die Vorlage blendet sie weg |
-| `amount_1` … `amount_3` an jeder Kategorie- und Ausnahmezeile | die Beträge, positionsgleich zu den Überschriften |
+| `amount_1` … `amount_3` an jeder Kategorie-, Ausnahme- und Leistungszeile | die Beträge, positionsgleich zu den Überschriften |
 | `amounts` an denselben Zeilen | dieselben Beträge nach Kalibrierart benannt, mit `derived` und `inherited_from` |
 | `list.complexities_truncated` | mehr als drei gepflegt: die Vorlage schreibt es unter die Konditionen |
 
@@ -111,7 +112,7 @@ Laborlisten nennen die Währung ohnehin einmal oben. Die Abschnitte
 Zusatzleistungen und Standardartikel haben nur einen Betrag und behalten ihre
 Währungsangabe an der Zeile.
 
-## Contract `price-list` (v1.2)
+## Contract `price-list` (v1.3)
 
 Dataset-Builder: Laravel `PriceListReportDataBuilder`; derselbe Aufbau, den die
 Preislisten-Seite liest (`PriceListService`). Datensatz zum Vorlagenbau:
@@ -129,6 +130,14 @@ wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
 
 **Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
 `list.language` und `name_secondary` an jeder benannten Zeile.
+
+**Neu in 1.3** (additiv): dieselben Kalibrierart-Spalten in **Abschnitt B**
+(`services[]` und ihre `variants[]` tragen `amounts` sowie `amount_1` …
+`amount_3`), dazu `list.base_column_label`. Auch hier eine neue Nullbarkeit:
+`amount` einer **Variante** kann fehlen, wenn für die Achsenkombination
+(Gerätetyp × Preiskategorie) nur eine Kalibrierart-Zeile gepflegt ist. Eine
+Variante ist seit 1.3 **eine** Zeile mit Spalten statt einer Zeile je
+Preiszeile — ISO und DAkkS desselben Gerätetyps standen vorher untereinander.
 
 **Neu in 1.2** (additiv, 1.1-Vorlagen laufen unverändert weiter):
 `list.complexities[]`, `list.complexity_1_label` … `_3_label`,
@@ -153,6 +162,11 @@ Zwei Feinheiten, die man beim Lesen des Datensatzes leicht übersieht:
   so; die Typausnahmen bleiben deshalb einsprachig, auch in der Fassung `both`.
 
 ### Bewusst nicht gedruckt
+
+`list.services[].variants` — die typ- und kategoriebezogenen Zeilen einer
+Leistung. Sie brauchen eine eigene Achsenspalte und damit eine eigene Tabelle;
+das war schon vor 1.3 so und ist ein eigener Schnitt, kein Nebenprodukt der
+Spalten.
 
 `list.other_type_prices` — die bei 200 gekappte Liste der Typpreise **ohne**
 Kategorie. Das ist ein Übergangsbestand auf dem Weg zur Kategorisierung, kein
@@ -207,6 +221,11 @@ einspaltige Liste sie hat; die Spalten kosten also nichts, solange niemand sie
 pflegt. Mit Spalten wurde geprüft, dass die Überschriften vollständig stehen
 („DAkkS-Kalibrierung" passt nur zweizeilig in 64 pt) und dass die Beträge im
 selben Raster fluchten wie die Kategorie darüber.
+
+Für 1.3 kam der Abschnitt B dazu: derselbe Spaltenkopf an denselben x-Werten
+wie in Abschnitt A, damit die Beträge über beide Abschnitte fluchten — sonst
+liest man eine DAkkS-Zahl unter einer ISO-Überschrift. Geprüft mit zwei
+Spalten; die Währung steht auch hier jetzt im Kopf statt an jeder Zeile.
 
 Die pixelgenaue Abnahme des Layouts (report-runner) bleibt wie gehabt
 maßgeblich.
