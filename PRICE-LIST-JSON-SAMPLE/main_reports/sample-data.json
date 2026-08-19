@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "price-list",
-    "schema_version": "1.3",
+    "schema_version": "1.4",
     "generated_at": "2026-08-10T09:00:00+02:00",
     "locale": "de-DE"
   },
@@ -35,6 +35,11 @@
     ],
     "complexities_truncated": false,
     "base_column_label": "Standard",
+    "amount_block_slot": 2,
+    "slot_1_label": "",
+    "slot_2_label": "Standard (EUR)",
+    "slot_3_label": "ISO-Kalibrierung",
+    "slot_4_label": "DAkkS-Kalibrierung",
     "complexity_1_label": "ISO-Kalibrierung",
     "complexity_2_label": "DAkkS-Kalibrierung",
     "complexity_3_label": "",
@@ -70,7 +75,11 @@
         "amounts": {},
         "amount_1": null,
         "amount_2": null,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": null,
+        "slot_3": null,
+        "slot_4": null
       },
       {
         "id": "pk-100-01",
@@ -98,7 +107,11 @@
             },
             "amount_1": null,
             "amount_2": 209.0,
-            "amount_3": null
+            "amount_3": null,
+            "slot_1": null,
+            "slot_2": 110.0,
+            "slot_3": null,
+            "slot_4": 209.0
           }
         ],
         "scales": [],
@@ -116,7 +129,11 @@
         },
         "amount_1": 75.74,
         "amount_2": 176.72,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 84.15,
+        "slot_3": 75.74,
+        "slot_4": 176.72
       },
       {
         "id": "pk-100-02",
@@ -145,7 +162,11 @@
         },
         "amount_1": null,
         "amount_2": 212.42,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 101.15,
+        "slot_3": null,
+        "slot_4": 212.42
       },
       {
         "id": "pk-200",
@@ -162,7 +183,11 @@
         "amounts": {},
         "amount_1": null,
         "amount_2": null,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": null,
+        "slot_3": null,
+        "slot_4": null
       },
       {
         "id": "pk-200-01",
@@ -185,7 +210,11 @@
         },
         "amount_1": null,
         "amount_2": 105.31,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 50.15,
+        "slot_3": null,
+        "slot_4": 105.31
       },
       {
         "id": "pk-200-02",
@@ -212,7 +241,11 @@
         },
         "amount_1": null,
         "amount_2": 622.97,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 296.65,
+        "slot_3": null,
+        "slot_4": 622.97
       }
     ],
     "other_type_prices": {
@@ -248,7 +281,11 @@
         },
         "amount_1": null,
         "amount_2": 42.5,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 25.0,
+        "slot_3": null,
+        "slot_4": 42.5
       },
       {
         "id": "sv-2",
@@ -266,7 +303,11 @@
         },
         "amount_1": null,
         "amount_2": 102.0,
-        "amount_3": null
+        "amount_3": null,
+        "slot_1": null,
+        "slot_2": 60.0,
+        "slot_3": null,
+        "slot_4": 102.0
       }
     ],
     "articles": [

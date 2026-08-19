@@ -37,6 +37,40 @@
       "example": "Musterlabor GmbH · Musterstraße 1 · 12345 Musterstadt · info@musterlabor.de"
     },
     {
+      "name": "Leader_style",
+      "label": {
+        "de": "Führungslinie",
+        "en": "Leader line"
+      },
+      "description": {
+        "de": "Gepunktete Linie zwischen Kategoriebezeichnung und Betragsblock. Sie überbrückt die Lücke, die entsteht, wenn weniger Kalibrierarten gepflegt sind als das Raster Spalten hat — ohne sie wandert das Auge über weißen Grund. „dots\" zeichnet sie, „none\" lässt sie weg.",
+        "en": "Dotted line between the category label and the amount block. It bridges the gap that appears when fewer calibration types are maintained than the grid has columns. \"dots\" draws it, \"none\" leaves it out."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "select",
+      "options": [
+        {
+          "value": "dots",
+          "label": {
+            "de": "Gepunktet",
+            "en": "Dotted"
+          }
+        },
+        {
+          "value": "none",
+          "label": {
+            "de": "Ohne",
+            "en": "None"
+          }
+        }
+      ],
+      "required": false,
+      "default": "dots",
+      "group": "Layout",
+      "example": "dots"
+    },
+    {
       "name": "Reportpath",
       "label": {
         "de": "Bundle-Wurzelpfad",

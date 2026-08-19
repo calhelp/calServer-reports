@@ -34,6 +34,8 @@
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<parameter name="Reportpath" class="java.lang.String"/>
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
+	<parameter name="Leader_style" class="java.lang.String"><defaultValueExpression><![CDATA["dots"]]></defaultValueExpression></parameter>
+	<parameter name="Block_slot" class="java.lang.Integer"><defaultValueExpression><![CDATA[Integer.valueOf(4)]]></defaultValueExpression></parameter>
 	<field name="number" class="java.lang.String"><fieldDescription><![CDATA[number]]></fieldDescription></field>
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
 	<field name="name_secondary" class="java.lang.String"><fieldDescription><![CDATA[name_secondary]]></fieldDescription></field>
@@ -41,9 +43,10 @@
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
 	<field name="derived" class="java.lang.Boolean"><fieldDescription><![CDATA[derived]]></fieldDescription></field>
 	<field name="inherited_from_name" class="java.lang.String"><fieldDescription><![CDATA[inherited_from.name]]></fieldDescription></field>
-	<field name="amount_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_1]]></fieldDescription></field>
-	<field name="amount_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_2]]></fieldDescription></field>
-	<field name="amount_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount_3]]></fieldDescription></field>
+	<field name="slot_1" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_1]]></fieldDescription></field>
+	<field name="slot_2" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_2]]></fieldDescription></field>
+	<field name="slot_3" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_3]]></fieldDescription></field>
+	<field name="slot_4" class="java.math.BigDecimal"><fieldDescription><![CDATA[slot_4]]></fieldDescription></field>
 	<detail>
 		<band height="25">
 			<textField isBlankWhenNull="true">
@@ -73,25 +76,52 @@
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
+			<!--
+				Fuehrungslinie: sie traegt das Auge ueber die Luecke zwischen
+				Bezeichnung und Betrag. Vier Fassungen, weil das erste belegte
+				Feld je nach Zahl der Kalibrierarten woanders beginnt und JRXML
+				die Breite eines Elements nicht zur Laufzeit rechnen kann —
+				gedruckt wird genau die, auf die `Block_slot` zeigt. Zeilen ohne
+				Betrag bekommen keine: eine Linie ins Leere ist keine Fuehrung.
+				Abschaltbar ueber den Parameter Leader_style.
+			-->
+			<line>
+				<reportElement x="252" y="8" width="68" height="1" forecolor="#B8B8B8">
+					<printWhenExpression><![CDATA["none".equals($P{Leader_style}) == false && $P{Block_slot} != null && $P{Block_slot}.intValue() == 2 && $F{slot_2} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5" lineStyle="Dotted" lineColor="#B8B8B8"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="252" y="8" width="136" height="1" forecolor="#B8B8B8">
+					<printWhenExpression><![CDATA["none".equals($P{Leader_style}) == false && $P{Block_slot} != null && $P{Block_slot}.intValue() == 3 && $F{slot_3} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5" lineStyle="Dotted" lineColor="#B8B8B8"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="252" y="8" width="204" height="1" forecolor="#B8B8B8">
+					<printWhenExpression><![CDATA["none".equals($P{Leader_style}) == false && $P{Block_slot} != null && $P{Block_slot}.intValue() == 4 && $F{slot_4} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5" lineStyle="Dotted" lineColor="#B8B8B8"/></graphicElement>
+			</line>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="256" y="0" width="64" height="12"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="324" y="0" width="64" height="12"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{amount_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_2}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="392" y="0" width="64" height="12"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{amount_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_3}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true" pattern="#,##0.00">
 				<reportElement x="460" y="0" width="64" height="12"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{amount_3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{slot_4}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="528" y="0" width="33" height="12"/>
