@@ -18,7 +18,7 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/order-json-sample.jrxml` | Hauptbericht: Absenderzeile + Briefkopf (`recipient` je Dokumenttyp, Meta-Box Belegnummer/Datum/Kunde/Kontakt/Lieferbedingung/-kosten), abweichende Liefer-/Rechnungsadresse als Info-Block, typabhängiger Betreff, Positionstabelle + Statistik + Zusatzfelder, Rechnungs-/Lieferschein-Spezifika, Fußzeile mit Firmen-/Steuer-/Bankangaben. Alle Labels als `staticText` |
+| `main_reports/order-json-sample.jrxml` | Hauptbericht: **Fensterbrief nach DIN 5008 Form B** — Anschriftfeld mit Rücksendeangabe (`recipient` je Dokumenttyp), Informationsblock rechts (Belegnummer/Datum/Kunden-Nr./Kontakt/Lieferbedingung/-kosten), Betreffzeile bei 98,4 mm, Falz- und Lochmarken; darunter abweichende Liefer-/Rechnungsadresse als Info-Block, Positionstabelle + Statistik + Zusatzfelder, Rechnungs-/Lieferschein-Spezifika, Fußzeile mit Firmen-/Steuer-/Bankangaben. Alle Labels als `staticText` |
 | `subreports/positions.jrxml` | Positionen; `positions`-Array via `subDataSource("positions")` (Pos/Beschreibung/Menge/Einzelpreis/Rabatt/Betrag/MwSt). Gruppe `sourceOrder` je Quellauftrag — Kopfzeile nur bei einer Sammelrechnung (s.u.) |
 | `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt. Dieselbe Gruppierung |
 | `subreports/tax-groups.jrxml` | Steuergruppen; `statistics.tax_groups`-Array via `subDataSource("statistics.tax_groups")` (USt. je Satz — § 14 UStG-Aufschlüsselung) |
@@ -27,6 +27,36 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 | `main_reports/sample-data-collective.json` | Beispiel-Datensatz **Sammelrechnung**: Positionen aus zwei Aufträgen, `collective.is_collective = true` |
 | `main_reports/order-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 | `main_reports/order-json-sample-collective_adapter.xml` | Data-Adapter für die Vorschau des Sammelfalls (im Studio umschalten) |
+
+## DIN-Form: ein Fensterbrief, in **jeder** Variante
+
+Der Beleg ist ein **Fensterbrief nach DIN 5008 Form B** — dieselbe Geometrie
+wie beim Leihschein (`LOCATION-JSON-SAMPLE`) und beim Versandschein
+(`FREE-DELIVERY-JSON-SAMPLE`):
+
+| Element | Position | Im Template |
+|---|---|---|
+| Anschriftfeld | 20 mm von links, 45 mm von oben, 85 × 45 mm | Rahmen `x=40 y=116 241×128` im Titelband |
+| Rücksendeangabe | Zusatz-/Vermerkzone, 12 mm ab Feldoberkante | `y=34` im Anschriftfeld-Rahmen |
+| Anschrift | Beginn der Anschriftzone, 17,7 mm ab Feldoberkante | `y=50`, ein Textfeld mit `\n`-Zeilen |
+| Informationsblock | ab 125 mm, auf Höhe des Anschriftfelds | Rahmen `x=337 y=116` |
+| Betreffzeile | 98,4 mm ab Seitenoberkante | `y=267` |
+| Falz-/Lochmarken | 105 / 148,5 / 210 mm am linken Rand | Hintergrundband, abschaltbar über `Show_fold_marks` |
+
+Damit zeigt ein DIN-lang-Fensterumschlag nach DIN 680 genau die Anschrift des
+Empfängers — und zwar bei **allen** Belegtypen: Angebot, Auftragsbestätigung,
+Lieferschein, Rechnung und dem neutralen Beleg teilen sich diesen Kopf, nur die
+Blöcke darunter unterscheiden sich. Wer auf **Form A** umstellt (Anschriftfeld
+ab 27 mm), ändert eine Zahl: `y=116` wird `y=64`.
+
+Die Anschrift ist **ein** Textfeld mit `\n`-Zeilen, kein Stapel Einzelfelder:
+Fehlt der Ansprechpartner oder die Straße, rückt der Rest auf, statt eine Lücke
+im Fenster zu lassen. Die Landzeile druckt nur, wenn `recipient.country` vom
+Absenderland (`supplier.country`, aus `company_country`) abweicht — „DE" unter
+einer deutschen Inlandsanschrift wäre schlicht falsch.
+
+Der Textblock beginnt bei `x=12` (10,2 mm) statt am Rand, damit die Falzmarken
+nicht in die Positionsspalte laufen; die Tabelle ist entsprechend 549 pt breit.
 
 ## Contract `order-document` (v1.8)
 
@@ -205,6 +235,7 @@ von Berichtsvariablen mit Beschreibung, Typ und Standardwert anbietet (siehe
 | Parameter | Rolle | Wirkung |
 |-----------|-------|---------|
 | `Company_footer` | variable (type) | Optionale Fußzeile am unteren Rand jeder Seite (Auftragsbeleg). Leerer Default → keine Änderung am aktuellen Layout; nur wenn gesetzt (Berichtsvariable `company_footer`), erscheint die Zeile. |
+| `Show_fold_marks` | variable (type) | Falz- und Lochmarken am linken Blattrand (105 / 148,5 / 210 mm). Default `1`; auf `0` setzen, wenn vorgedrucktes Briefpapier sie schon trägt (Berichtsvariable `show_fold_marks`). |
 
 Gilt nur für V2-JSON-Bundles. Der optionale Fußzeilentext ist `isBlankWhenNull`
 und standardmäßig leer — die pixelgenaue Abnahme des Layouts (report-runner)

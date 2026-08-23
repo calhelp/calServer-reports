@@ -20,6 +20,24 @@
       "example": "Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt · info@musterfirma.de"
     },
     {
+      "name": "Show_fold_marks",
+      "label": {
+        "de": "Falz- und Lochmarken",
+        "en": "Fold and punch marks"
+      },
+      "description": {
+        "de": "Druckt die Falzmarken bei 105 mm und 210 mm sowie die Lochmarke bei 148,5 mm an den linken Blattrand. Auf \"0\" setzen, wenn auf vorgedrucktem Briefpapier gedruckt wird, das die Marken bereits trägt.",
+        "en": "Prints the fold marks at 105 mm and 210 mm plus the punch mark at 148.5 mm on the left edge of the sheet. Set to \"0\" when printing on pre-printed stationery that already carries them."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "text",
+      "required": false,
+      "group": "Layout",
+      "default": "1",
+      "example": "1"
+    },
+    {
       "name": "Reportpath",
       "label": {
         "de": "Bundle-Wurzelpfad",

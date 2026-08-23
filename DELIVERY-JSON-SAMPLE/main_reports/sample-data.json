@@ -17,13 +17,26 @@
       "W4109": "2026-07-20"
     }
   },
+  "supplier": {
+    "name": "calServer Musterfirma GmbH",
+    "sender_line": "calServer Musterfirma GmbH · Musterstraße 1 · 12345 Musterstadt",
+    "street": "Musterstraße 1",
+    "zip": "12345",
+    "city": "Musterstadt",
+    "country": "DE"
+  },
   "customer": {
     "name": "Muster GmbH",
     "customer_number": "K-1001",
     "street": "Musterstraße 1",
     "zip": "54321",
     "city": "Beispielstadt",
-    "country": "DE"
+    "country": "DE",
+    "contact": {
+      "name": "Hans Muster",
+      "email": "einkauf@muster.example",
+      "phone": "+49 30 1234501"
+    }
   },
   "delivery": {
     "name": "Muster GmbH",
