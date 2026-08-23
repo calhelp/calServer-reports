@@ -112,7 +112,7 @@ Laborlisten nennen die Währung ohnehin einmal oben. Die Abschnitte
 Zusatzleistungen und Standardartikel haben nur einen Betrag und behalten ihre
 Währungsangabe an der Zeile.
 
-## Contract `price-list` (v1.4)
+## Contract `price-list` (v1.5)
 
 Dataset-Builder: Laravel `PriceListReportDataBuilder`; derselbe Aufbau, den die
 Preislisten-Seite liest (`PriceListService`). Datensatz zum Vorlagenbau:
@@ -130,6 +130,22 @@ wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
 
 **Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
 `list.language` und `name_secondary` an jeder benannten Zeile.
+
+**Neu in 1.5** (additiv): `list.counts.services_unnamed` zählt die Zeilen der
+Leistungsachse, die **nicht** in `list.services` stehen, weil ihr
+Standardartikel fehlt oder keinen Namen trägt.
+
+Die Bezeichnung einer Zusatzleistung ist der Name des Standardartikels, auf den
+die Preiszeile zeigt. Ist der gelöscht, blieb bis 1.4 ein Betrag ohne
+Gegenstand: Abschnitt B druckte eine leere Zeile mit einer Zahl daneben, und auf
+einem Blatt, das man aus der Hand gibt, liest sich das wie ein Druckfehler.
+Solche Zeilen liefert der Datensatz nicht mehr aus — verkaufen ließen sie sich
+ohnehin nicht, es gibt keinen Artikel für die Auftragsposition.
+
+Weggelassen wird sichtbar, wie bei `complexities_truncated`: die Zahl steht im
+Datensatz, und die Preislisten-Seite weist darauf hin, damit die Zeile
+reparierbar bleibt statt spurlos zu fehlen. Auf dem Kundendokument hat sie
+nichts zu suchen, die mitgelieferte Vorlage druckt sie deshalb nicht.
 
 **Neu in 1.4** (additiv): das Betragsraster ist **rechtsbündig**. Vier feste
 Felder je Zeile (`slot_1` … `slot_4`, Kopf `list.slot_1_label` …

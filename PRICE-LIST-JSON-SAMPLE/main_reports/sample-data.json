@@ -1,7 +1,7 @@
 {
   "meta": {
     "contract": "price-list",
-    "schema_version": "1.4",
+    "schema_version": "1.5",
     "generated_at": "2026-08-10T09:00:00+02:00",
     "locale": "de-DE"
   },
@@ -332,6 +332,7 @@
       "type_exceptions": 1,
       "other_type_prices": 0,
       "services": 2,
+      "services_unnamed": 0,
       "articles": 2
     }
   }

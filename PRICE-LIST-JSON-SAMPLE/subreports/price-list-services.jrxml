@@ -18,6 +18,13 @@
   Achsenspalte und damit eine eigene Tabelle, und die gehoert in einen eigenen
   Schnitt statt beilaeufig hier hinein.
 
+  KEINE ZEILE OHNE BEZEICHNUNG (Contract 1.5): `name` ist hier immer gefüllt.
+  Die Bezeichnung ist der Name des Standardartikels, auf den die Preiszeile
+  zeigt; fehlt der Artikel, liefert der Datensatz-Builder die Zeile gar nicht
+  erst aus und zählt sie in `list.counts.services_unnamed`. Bis 1.4 stand sie
+  hier als leere Zeile mit einem Betrag daneben. Die Vorlage braucht dafür
+  keinen Fall: was nicht im Datensatz steht, druckt sie nicht.
+
   ZWEISPRACHIG (Contract 1.1): `name` trägt die angeforderte Sprache,
   `name_secondary` ist nur in der Fassung "beide" gefüllt und fällt sonst als
   Zeile weg. Aufgelöst wird das im Datensatz-Builder, nicht hier.
