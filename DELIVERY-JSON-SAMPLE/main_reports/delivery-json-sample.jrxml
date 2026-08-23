@@ -7,18 +7,31 @@
   source — NO SQL. Positions via subDataSource("positions"). The delivery address
   block is resolved server-side (delivery role → falls back to the ordering
   customer). All labels are staticText. See main_reports/sample-data.json.
+
+  Geometrie wie beim Auftragsbeleg (ORDER-JSON-SAMPLE): Fensterbrief nach
+  DIN 5008 Form B, Anschriftfeld 20 mm von links, 45 mm von oben, 85 x 45 mm
+  (im Titelband x=40, y=116, 241 x 128 pt), Informationsblock ab 125 mm,
+  Betreffzeile bei 98,4 mm, Falz- und Lochmarken im Hintergrundband
+  (abschaltbar ueber Show_fold_marks). Der Absender kommt aus dem
+  supplier-Block des Datensatzes, also aus den company_*-Berichtsvariablen.
 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="delivery-json-sample" pageWidth="595" pageHeight="842" columnWidth="561" leftMargin="17" rightMargin="17" topMargin="12" bottomMargin="12" uuid="d7ddf600-0310-4d70-9f60-000000000310">
 	<property name="com.jaspersoft.studio.data.defadapter" value="delivery-json-sample_adapter.xml"/>
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<style name="Label" fontSize="8" isBold="true"/>
 	<style name="Value" fontSize="9"/>
+	<style name="Address" fontSize="10"/>
+	<style name="SenderLine" fontSize="6"/>
 	<parameter name="Reportpath" class="java.lang.String">
 		<parameterDescription><![CDATA[Bundle-Wurzel für die Auflösung der Subreports (/subreports/*.jasper).]]></parameterDescription>
 	</parameter>
 	<parameter name="Company_footer" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionale Fußzeile am unteren Rand jeder Seite, z. B. Firmenname und Kontaktdaten. Leer = keine zusätzliche Fußzeile.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Show_fold_marks" class="java.lang.String">
+		<parameterDescription><![CDATA[Falz- und Lochmarken am linken Rand drucken (105 mm, 148,5 mm, 210 mm). "0" = aus, z. B. bei vorgedrucktem Briefpapier, das sie schon trägt.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<field name="doc_number" class="java.lang.String"><fieldDescription><![CDATA[document.number]]></fieldDescription></field>
 	<field name="doc_date" class="java.lang.String"><fieldDescription><![CDATA[document.date]]></fieldDescription></field>
@@ -30,32 +43,99 @@
 	<field name="del_city" class="java.lang.String"><fieldDescription><![CDATA[delivery.city]]></fieldDescription></field>
 	<field name="del_contact" class="java.lang.String"><fieldDescription><![CDATA[delivery.contact.name]]></fieldDescription></field>
 	<field name="cust_number" class="java.lang.String"><fieldDescription><![CDATA[customer.customer_number]]></fieldDescription></field>
+	<field name="del_country" class="java.lang.String"><fieldDescription><![CDATA[delivery.country]]></fieldDescription></field>
+	<field name="cust_contact" class="java.lang.String"><fieldDescription><![CDATA[customer.contact.name]]></fieldDescription></field>
+	<field name="sup_sender_line" class="java.lang.String"><fieldDescription><![CDATA[supplier.sender_line]]></fieldDescription></field>
+	<field name="sup_name" class="java.lang.String"><fieldDescription><![CDATA[supplier.name]]></fieldDescription></field>
+	<field name="sup_street" class="java.lang.String"><fieldDescription><![CDATA[supplier.street]]></fieldDescription></field>
+	<field name="sup_zip" class="java.lang.String"><fieldDescription><![CDATA[supplier.zip]]></fieldDescription></field>
+	<field name="sup_city" class="java.lang.String"><fieldDescription><![CDATA[supplier.city]]></fieldDescription></field>
+	<field name="sup_country" class="java.lang.String"><fieldDescription><![CDATA[supplier.country]]></fieldDescription></field>
+	<!--
+	  Falz- und Lochmarken bei 105 mm / 148,5 mm / 210 mm ab Seitenoberkante.
+	  Sie gehören auf jede Seite, deshalb ins Hintergrundband.
+	-->
+	<background>
+		<band height="818">
+			<line>
+				<reportElement x="0" y="286" width="8" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="409" width="14" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="583" width="8" height="1">
+					<printWhenExpression><![CDATA[!"0".equals($P{Show_fold_marks})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement><pen lineWidth="0.5"/></graphicElement>
+			</line>
+		</band>
+	</background>
 	<title>
-		<band height="184">
-			<staticText><reportElement x="0" y="0" width="330" height="9"/><textElement><font size="6"/></textElement><text><![CDATA[calServer V2 · Musterfirma · Musterstraße 1 · 12345 Musterstadt]]></text></staticText>
-			<textField><reportElement x="0" y="18" width="300" height="14"/><textElement><font size="10" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{del_name}]]></textFieldExpression></textField>
-			<textField><reportElement x="0" y="32" width="300" height="12"/><textFieldExpression><![CDATA[$F{del_street}]]></textFieldExpression></textField>
-			<textField><reportElement x="0" y="44" width="300" height="12"/><textFieldExpression><![CDATA[($F{del_zip} == null ? "" : $F{del_zip}) + " " + ($F{del_city} == null ? "" : $F{del_city})]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="18" width="80" height="12"/><text><![CDATA[Liefernummer]]></text></staticText>
-			<textField><reportElement style="Value" x="460" y="18" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_number}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="32" width="80" height="12"/><text><![CDATA[Datum]]></text></staticText>
-			<textField><reportElement style="Value" x="460" y="32" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_date}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="46" width="80" height="12"/><text><![CDATA[Kunden-Nr.]]></text></staticText>
-			<textField><reportElement style="Value" x="460" y="46" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_number}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="60" width="80" height="12"/><text><![CDATA[Kontakt]]></text></staticText>
-			<textField><reportElement style="Value" x="460" y="60" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{del_contact}]]></textFieldExpression></textField>
-			<textField><reportElement x="0" y="120" width="561" height="18"/><textElement><font size="13" isBold="true"/></textElement><textFieldExpression><![CDATA["Lieferschein " + ($F{doc_number} == null ? "" : $F{doc_number})]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight"><reportElement style="Value" x="0" y="144" width="561" height="14"/><textFieldExpression><![CDATA[$F{doc_comment}]]></textFieldExpression></textField>
-			<line><reportElement x="0" y="164" width="561" height="1"/></line>
-			<staticText><reportElement style="Label" x="0" y="168" width="40" height="14"/><text><![CDATA[Pos]]></text></staticText>
-			<staticText><reportElement style="Label" x="40" y="168" width="431" height="14"/><text><![CDATA[Beschreibung]]></text></staticText>
-			<staticText><reportElement style="Label" x="471" y="168" width="90" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Menge]]></text></staticText>
+		<band height="332">
+			<!-- Anschriftfeld (DIN 676 Form B): der Frame IST das Feld, 85 x 45 mm an 20/45 mm. -->
+			<frame>
+				<reportElement x="40" y="116" width="241" height="128"/>
+				<textField isBlankWhenNull="true">
+					<reportElement style="SenderLine" x="0" y="34" width="241" height="10"/>
+					<textFieldExpression><![CDATA[($F{sup_sender_line} != null && !$F{sup_sender_line}.trim().isEmpty())
+	? $F{sup_sender_line}
+	: (
+		($F{sup_name} == null ? "" : $F{sup_name})
+		+ (($F{sup_street} == null || $F{sup_street}.trim().isEmpty()) ? "" : " · " + $F{sup_street})
+		+ ((($F{sup_zip} == null || $F{sup_zip}.trim().isEmpty()) && ($F{sup_city} == null || $F{sup_city}.trim().isEmpty()))
+			? ""
+			: " · " + ($F{sup_zip} == null ? "" : $F{sup_zip}) + " " + ($F{sup_city} == null ? "" : $F{sup_city}))
+	).trim()]]></textFieldExpression>
+				</textField>
+				<!--
+				  Ein Textfeld mit \n-Zeilen: Fehlt der Ansprechpartner oder die
+				  Straße, rückt der Rest auf. Landzeile nur bei abweichendem Land.
+				-->
+				<textField isBlankWhenNull="true">
+					<reportElement style="Address" x="0" y="50" width="241" height="78"/>
+					<textElement><paragraph lineSpacing="Fixed" lineSpacingSize="12.5"/></textElement>
+					<textFieldExpression><![CDATA[(($F{del_name} == null || $F{del_name}.trim().isEmpty()) ? "" : $F{del_name} + "\n")
++ (($F{del_contact} == null || $F{del_contact}.trim().isEmpty()) ? "" : $F{del_contact} + "\n")
++ (($F{del_street} == null || $F{del_street}.trim().isEmpty()) ? "" : $F{del_street} + "\n")
++ (($F{del_zip} == null ? "" : $F{del_zip}) + " " + ($F{del_city} == null ? "" : $F{del_city})).trim()
++ (($F{del_country} == null || $F{del_country}.trim().isEmpty()
+		|| ($F{sup_country} != null && $F{del_country}.trim().equalsIgnoreCase($F{sup_country}.trim())))
+	? ""
+	: "\n" + $F{del_country})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<!-- Informationsblock rechts (DIN 5008: ab 125 mm), auf Höhe des Anschriftfelds -->
+			<frame>
+				<reportElement x="337" y="116" width="224" height="65"/>
+				<staticText><reportElement style="Label" x="0" y="0" width="104" height="12"/><text><![CDATA[Liefernummer]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="104" y="0" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_number}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="13" width="104" height="12"/><text><![CDATA[Datum]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="104" y="13" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{doc_date}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="26" width="104" height="12"/><text><![CDATA[Kunden-Nr.]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="104" y="26" width="120" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_number}]]></textFieldExpression></textField>
+				<staticText><reportElement style="Label" x="0" y="39" width="104" height="12"><printWhenExpression><![CDATA[$F{cust_contact} != null && !$F{cust_contact}.trim().isEmpty() && ($F{del_contact} == null || !$F{del_contact}.trim().equals($F{cust_contact}.trim()))]]></printWhenExpression></reportElement><text><![CDATA[Kontakt]]></text></staticText>
+				<textField isBlankWhenNull="true"><reportElement style="Value" x="104" y="39" width="120" height="12"><printWhenExpression><![CDATA[$F{cust_contact} != null && !$F{cust_contact}.trim().isEmpty() && ($F{del_contact} == null || !$F{del_contact}.trim().equals($F{cust_contact}.trim()))]]></printWhenExpression></reportElement><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{cust_contact}]]></textFieldExpression></textField>
+			</frame>
+			<!-- Betreffzeile (DIN 5008: 98,4 mm ab Seitenoberkante) -->
+			<textField><reportElement x="12" y="267" width="549" height="18"/><textElement><font size="13" isBold="true"/></textElement><textFieldExpression><![CDATA["Lieferschein " + ($F{doc_number} == null ? "" : $F{doc_number})]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Value" x="12" y="288" width="549" height="13" isRemoveLineWhenBlank="true"/><textFieldExpression><![CDATA[$F{doc_comment}]]></textFieldExpression></textField>
+			<line><reportElement positionType="Float" x="12" y="310" width="549" height="1"/></line>
+			<staticText><reportElement style="Label" positionType="Float" x="12" y="314" width="40" height="14"/><text><![CDATA[Pos]]></text></staticText>
+			<staticText><reportElement style="Label" positionType="Float" x="52" y="314" width="419" height="14"/><text><![CDATA[Beschreibung]]></text></staticText>
+			<staticText><reportElement style="Label" positionType="Float" x="471" y="314" width="90" height="14"/><textElement textAlignment="Right"/><text><![CDATA[Menge]]></text></staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="30">
 			<subreport>
-				<reportElement positionType="Float" x="0" y="0" width="561" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="12" y="0" width="549" height="14" isRemoveLineWhenBlank="true"/>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("positions")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/positions-delivery.jasper"]]></subreportExpression>
 			</subreport>
@@ -63,10 +143,10 @@
 	</detail>
 	<pageFooter>
 		<band height="58">
-			<staticText><reportElement positionType="Float" x="0" y="16" width="561" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Ware vollständig und unbeschädigt erhalten:]]></text></staticText>
-			<line><reportElement positionType="Float" x="0" y="30" width="240" height="1"/></line>
-			<staticText><reportElement positionType="Float" x="0" y="32" width="240" height="10"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement positionType="Float" x="0" y="46" width="561" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
+			<staticText><reportElement positionType="Float" x="12" y="16" width="549" height="12"/><textElement><font size="7"/></textElement><text><![CDATA[Ware vollständig und unbeschädigt erhalten:]]></text></staticText>
+			<line><reportElement positionType="Float" x="12" y="30" width="240" height="1"/></line>
+			<staticText><reportElement positionType="Float" x="12" y="32" width="240" height="10"/><textElement><font size="7"/></textElement><text><![CDATA[Datum, Unterschrift]]></text></staticText>
+			<textField isBlankWhenNull="true"><reportElement positionType="Float" x="12" y="46" width="549" height="12"/><textElement><font size="7"/></textElement><textFieldExpression><![CDATA[$P{Company_footer}]]></textFieldExpression></textField>
 		</band>
 	</pageFooter>
 </jasperReport>

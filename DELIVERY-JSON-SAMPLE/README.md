@@ -9,7 +9,7 @@ v1.0) statt aus SQL — DB-agnostisch, keine V1-Codespalten.
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/delivery-json-sample.jrxml` | Hauptbericht: Briefkopf mit **Lieferadresse** (Meta-Box Liefernummer/Datum/Kunde/Kontakt), Positionstabelle (Pos/Beschreibung/Menge), Empfangs-Unterschriftszeile |
+| `main_reports/delivery-json-sample.jrxml` | Hauptbericht: **Fensterbrief nach DIN 5008 Form B** — Anschriftfeld mit der **Lieferadresse** und Rücksendeangabe, Informationsblock rechts (Liefernummer/Datum/Kunden-Nr./Kontakt), Betreffzeile bei 98,4 mm, Falz- und Lochmarken, Positionstabelle (Pos/Beschreibung/Menge), Empfangs-Unterschriftszeile |
 | `subreports/positions-delivery.jrxml` | Positionen; `positions`-Array via `subDataSource("positions")` — nur Pos/Beschreibung/Menge |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `order-document` v1.0, `document.status = "Lieferung"`) |
 | `main_reports/delivery-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
@@ -20,6 +20,20 @@ Gleicher Contract wie `ORDER-JSON-SAMPLE`; der Lieferschein liest nur `document`
 die serverseitig aufgelöste `delivery`-Adressrolle (Fallback → Bestell-Kunde) und
 `positions[]` (ohne Preis-/Steuerfelder). Dataset-Builder: Laravel
 `OrderDocumentDataBuilder`.
+
+## DIN-Form
+
+Gleiche Geometrie wie der vollständige Auftragsbeleg (`ORDER-JSON-SAMPLE`):
+Fensterbrief nach DIN 5008 Form B, Anschriftfeld 20 mm von links und 45 mm von
+oben (85 × 45 mm), Informationsblock ab 125 mm, Betreffzeile bei 98,4 mm,
+Falz- und Lochmarken bei 105 / 148,5 / 210 mm — abschaltbar über die
+Berichtsvariable `show_fold_marks` (Parameter `Show_fold_marks`, Default `1`).
+
+Im Anschriftfeld steht die **Lieferadresse** samt Ansprechpartner; die
+Landzeile druckt nur bei einem Land abweichend vom Absenderland. Die
+Rücksendeangabe kommt aus `supplier.sender_line` bzw. der Absenderanschrift,
+also aus den `company_*`-Berichtsvariablen — dieselben, die Auftragsbeleg,
+Leihschein und Versandschein nutzen.
 
 ## ⚠️ Leeres Blatt = fehlende Datenquelle
 
