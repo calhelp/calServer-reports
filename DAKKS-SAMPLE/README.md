@@ -127,16 +127,31 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
-| `MeasurementDetails` | ➖ | `1` | Wählt eines der vier Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2` formatierte Eingaben, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere oder nicht-numerische Eingaben werden als `1` behandelt. |
+| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere oder nicht-numerische Eingaben werden als `1` behandelt. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
 | `ModernResultsHeader` | ➖ | `Y` | Tabellenkopf-Stil im `Results`-Unterbericht. Standard ist der moderne Kopf ohne umlaufende Rahmen (gilt auch für leere oder unbekannte Werte); nur ein explizites `N` schaltet auf den klassischen Kopf mit Rahmen zurück. Beide Stile sind je `MeasurementDetails`-Variante an den Datenspalten ausgerichtet. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
-| `environmental_conditions` | ➖ | `""` | Optionaler Freitext für Umgebungs­temperatur und relative Luft­feuchte im Format `Text_Temperatur \| Text_Feuchte`. Ersetzt die Werte aus `C2311`/`C2312`, wenn angegeben. Ist ein Ressourcen­name übergeben, werden Temperatur und Feuchte aus `resource.environment_resources` derselben Zeile übernommen. |
+| `environmental_conditions` | ➖ | `""` | Name der Ressource, deren Klimabereich gedruckt wird. Der Bericht joint `resource.name = $P{environmental_conditions}` und liest deren Feld „Umgebungs­bedingungen“ (`environment_resources`) – ein Text mit `\|` als Trenner, links die Temperatur, rechts die Feuchte, jeweils mit Einheit, z. B. `21,0 ... 23,0 °C\|40 ... 60 %`. **Jede Hälfte fällt für sich zurück:** bleibt sie leer, druckt der Schein den an der Kalibrierung erfassten Wert (`C2311` + ` °C` bzw. `C2312` + ` %`). So steht der Klimabereich des Labors einmal an der Ressource statt in jedem Bericht erneut. |
 
 ### 4.5 Normative Textbausteine {#params-textblocks}
 
 Alle Textbaustein-Parameter sind optional. Sie sind im JRXML mit DAkkS-konformen
 Standard­formulierungen (de/en gemäß `Sprache`) vorbelegt; durch Übergabe eines
 eigenen Werts wird der Standard überschrieben.
+
+**Die Prozedur schlägt den Parameter.** Die drei `Calibration_*`-Bausteine sind
+reine Fallbacks: Liefert die zur Kalibrierung gehörende Prozedur einen Text,
+gewinnt sie. Gepflegt gehören diese Angaben deshalb an die Prozedur – sie gelten
+dort je Prüfmittel, der Parameter dagegen je Bericht. Welches Kalibrierfeld den
+Prozedurnamen trägt, entscheidet der Join `procedures.procedure_name = c.C2320`
+(V2: die Berichtsvariable `procedure_field`); ohne treffende Prozedur bleiben
+alle vier Prozedur-Abschnitte bei ihren Fallbacks.
+
+| Abschnitt | Feld der Prozedur | Fallback |
+| --- | --- | --- |
+| Kalibrier­verfahren | `procedure_description` | `Calibration_procedure_1` → „Kalibrierverfahren nicht angegeben“ |
+| Verfahrens­anweisung | `calibration_method` | `Calibration_document` → „Verfahrensanweisung nicht angegeben“ |
+| Messbedingungen | `measurement_conditions` | „im permanenten Labor“ |
+| Geltungs­bereich | `scope` | `calibration_item` → `standards` → `Calibration_procedure_2` → „--“ |
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
@@ -151,9 +166,9 @@ eigenen Werts wird der Standard überschrieben.
 | `Conformity_description_2` | ➖ | sprachabhängig | Mehrzeilige Kurzlegende zu den Konformitäts­symbolen (`?`, `!?`, `!`, `*`). |
 | `Conformity_description_3` | ➖ | sprachabhängig | Abschluss­hinweis zur Konformitäts­aussage. |
 | `Additional_information` | ➖ | sprachabhängig | Zusatzhinweise, u. a. zur internationalen DAkkS-Anerkennung. |
-| `Calibration_procedure_1` | ➖ | sprachabhängig | Erster Textbaustein zum angewendeten Kalibrier­verfahren. |
-| `Calibration_procedure_2` | ➖ | sprachabhängig | Zweiter Textbaustein zum Kalibrier­verfahren (z. B. Verweis auf Norm). |
-| `Calibration_document` | ➖ | sprachabhängig | Verweis auf Verfahrens­anweisung bzw. QMS-Dokument. |
+| `Calibration_procedure_1` | ➖ | sprachabhängig | Fallback für das angewendete Kalibrier­verfahren. Der bessere Ort ist das Feld „Beschreibung“ der Prozedur. |
+| `Calibration_procedure_2` | ➖ | sprachabhängig | Fallback für den Geltungs­bereich, wenn weder Prozedur-Scope noch Kalibrier­gegenstand noch Normale gefüllt sind. Der bessere Ort ist das Feld „Geltungsbereich“ der Prozedur. |
+| `Calibration_document` | ➖ | sprachabhängig | Fallback für die Verfahrens­anweisung bzw. das QMS-Dokument. Der bessere Ort ist das Feld „Kalibriermethode“ der Prozedur. |
 
 ### 4.6 Abschnittsumschalter (`ShowGroup1*`) {#params-showgroup}
 
@@ -167,11 +182,11 @@ und können auf `Y` (anzeigen) oder `N` (ausblenden) gesetzt werden. Die Werte
 | `ShowGroup1IncomingDate` | ➖ | `Y` | Abschnitt „Datum der Anlieferung / Incoming Date“. |
 | `ShowGroup1Condition` | ➖ | `Y` | Abschnitt „Zustand bei Eingang/Ausgang“. |
 | `ShowGroup1Spacer` | ➖ | `Y` | Optionaler Abstand vor dem Verfahren. |
-| `ShowGroup1Procedure` | ➖ | `Y` | Abschnitt „Kalibrierverfahren“. |
-| `ShowGroup1ProcedureDocument` | ➖ | `Y` | Abschnitt „Verfahrens­anweisung / QMS-Dokument“. |
-| `ShowGroup1MeasurementConditions` | ➖ | `Y` | Abschnitt „Messbedingungen“. |
+| `ShowGroup1Procedure` | ➖ | `Y` | Abschnitt „Kalibrierverfahren“ (Text aus der Prozedur, siehe 4.5). |
+| `ShowGroup1ProcedureDocument` | ➖ | `Y` | Abschnitt „Verfahrens­anweisung / QMS-Dokument“ (Kalibriermethode der Prozedur, siehe 4.5). |
+| `ShowGroup1MeasurementConditions` | ➖ | `Y` | Abschnitt „Messbedingungen“ (Feld „Messbedingungen“ der Prozedur, siehe 4.5). |
 | `ShowGroup1CalibrationPlace` | ➖ | `Y` | Abschnitt „Ort der Kalibrierung“. |
-| `ShowGroup1EnvironmentalConditions` | ➖ | `Y` | Abschnitt „Umgebungsbedingungen“. |
+| `ShowGroup1EnvironmentalConditions` | ➖ | `Y` | Abschnitt „Umgebungsbedingungen“ (Ressource aus `environmental_conditions`, siehe 4.4). |
 | `ShowGroup1StandardsTraceability` | ➖ | `Y` | Abschnitt „Verwendete Normale / Rückführung“. |
 | `ShowGroup1ResultsIntro` | ➖ | `Y` | Einleitung zu den Mess­ergebnissen. |
 | `ShowGroup1MeasurementUncertainty` | ➖ | `Y` | Abschnitt „MESSUNSICHERHEITEN / UNCERTAINTY OF MEASUREMENTS“. |
@@ -213,8 +228,27 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   und Status­symbol ausgegeben.
 * **SQL-Grundlage:** Liest direkt aus `$P!{PrefixTable}results` und reduziert
   alle Felder per `COALESCE(...)` auf Strings. Filter: `WHERE ctag = $P{P_CTAG}`.
+* **Woher Sollwert und Messwert kommen:** Beide stehen je nach Erfassungsweg in
+  einem von zwei Spaltenpaaren — `fixq`/`varq` (Sollwert des Prüfschritts und
+  Ablesung) oder `sys_actual`/`uut_ind` (Wert des Normals und Anzeige des
+  Prüflings). MET/CAL liefert beide Paare; die calServer-Messwertaufnahme füllt
+  `sys_actual`/`uut_ind` nur für numerische Schritte mit gesetztem `tol_ref`.
+  Jede Layout-Variante band früher genau ein Paar und druckte eine leere Spalte,
+  wenn der Wert im anderen stand — sichtbar als Ergebnistabelle ohne Zahlen bei
+  ungesetztem `MeasurementDetails`. Heute greifen die Variablen `FixqValue` /
+  `SysActualValue` / `VarqValue` / `UutIndValue` auf die Schwesterspalte zurück,
+  wenn die eigene leer ist; Präfix und Einheit folgen der Spalte, aus der der
+  Wert stammt. **Sind beide Paare gefüllt, druckt jede Variante unverändert das
+  Paar, das sie schon immer gedruckt hat.**
+* **Messbedingungen (`test_desc`):** Die erste Spalte trägt die Bezeichnung des
+  Prüfschritts aus der Prozedur. Wer sie sprechend haben will („Kanal 1,
+  Anzeigeabweichung bei 15 °C“), pflegt sie in der Prozedur — der Bericht
+  formatiert sie nur.
 * **Besonderheiten:**
   * `NominalValue` und `MeasuredValue` kombinieren Wert, Prüfschritt und Einheit.
+  * Variante `1` druckt den Sollwert in der Spalte `Sollwert / True Value`, die
+    ihr Tabellenkopf seit jeher ausweist; bis dahin war die Spalte in beiden
+    Kopfstilen ohne Datenzelle und damit immer leer.
   * `ToleranceRange` entscheidet automatisch zwischen ±-Anzeige und
     Min/Max-Spalten.
   * `RoundedTolErr` rundet auf eine Nachkommastelle und hängt `%` an.

@@ -268,8 +268,8 @@
         "en": "Results table layout"
       },
       "description": {
-        "de": "Wählt die Spaltenvariante des Ergebnis-Subreports (1, 2, 21, 22, 3, 4 — wie V1 MET/CAL).",
-        "en": "Selects the column variant of the results subreport (1, 2, 21, 22, 3, 4 — as in V1 MET/CAL)."
+        "de": "Wählt die Spaltenvariante des Ergebnis-Subreports (1, 2, 21, 22, 3, 4 — wie V1 MET/CAL). Tipp: Die Spalte „Messbedingungen“ ist `test_desc` — die Bezeichnung des Prüfschritts aus der Prozedur. Wer sie sprechend haben will („Kanal 1, Anzeigeabweichung bei 15 °C“), pflegt sie in der Prozedur, nicht im Bericht. Sollwert und Messwert füllen sich aus dem Spaltenpaar, das die Zeile trägt: `fixq`/`varq` oder `sys_actual`/`uut_ind`; ist das eigene Paar leer, greift die Variante auf das andere zurück. Die Wahl der Variante entscheidet damit über das Layout, nicht mehr darüber, ob überhaupt Zahlen erscheinen.",
+        "en": "Selects the column variant of the results subreport (1, 2, 21, 22, 3, 4 — as in V1 MET/CAL). Tip: the \"measuring condition\" column is `test_desc`, the test step's label from the procedure. Maintain it there, not in the report. Nominal and measured value come from whichever column pair the row carries — `fixq`/`varq` or `sys_actual`/`uut_ind`; if its own pair is empty the variant falls back to the other one. The variant therefore decides the layout, no longer whether any numbers show up at all."
       },
       "role": "variable",
       "group": "Ergebnistabelle",
@@ -472,8 +472,8 @@
         "en": "Section \"calibration procedure\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Kalibrierverfahren“ aus.",
-        "en": "\"N\" hides the \"calibration procedure\" section."
+        "de": "Abschnitt „Kalibrierverfahren“. Tipp: Gedruckt wird die Beschreibung der Prozedur; `Calibration_procedure_1` ist nur der Fallback, wenn die Prozedur nichts liefert.",
+        "en": "Section \"calibration procedure\". Tip: what gets printed is the procedure's description; `Calibration_procedure_1` is only the fallback for when the procedure has nothing."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -504,8 +504,8 @@
         "en": "Section \"procedural document\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Verfahrensanweisung“ aus.",
-        "en": "\"N\" hides the \"procedural document\" section."
+        "de": "Abschnitt „Verfahrensanweisung / QMS-Dokument“. Tipp: Gedruckt wird die Kalibriermethode der Prozedur; `Calibration_document` ist nur der Fallback.",
+        "en": "Section \"procedure document / QMS document\". Tip: what gets printed is the procedure's calibration method; `Calibration_document` is only the fallback."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -536,8 +536,8 @@
         "en": "Section \"measurement conditions\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Messbedingungen“ aus.",
-        "en": "\"N\" hides the \"measurement conditions\" section."
+        "de": "„N“ blendet den Abschnitt „Messbedingungen“ aus. Tipp: Der Text kommt aus dem Feld „Messbedingungen“ der Prozedur. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen trägt (V1: `C2320`). Ohne Prozedur druckt der Schein „im permanenten Labor“.",
+        "en": "\"N\" hides the \"measurement conditions\" section. Tip: the text comes from the procedure's \"measurement conditions\" field. For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: `C2320`). Without a procedure the certificate prints \"in the permanent laboratory\"."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -600,8 +600,8 @@
         "en": "Section \"environmental conditions\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Umgebungsbedingungen“ aus.",
-        "en": "\"N\" hides the \"environmental conditions\" section."
+        "de": "„N“ blendet den Abschnitt „Umgebungsbedingungen“ aus. Tipp: Temperatur und Feuchte kommen aus der Ressource, die `environmental_conditions` benennt. Ist dort nichts hinterlegt, fällt der Schein je Zeile auf die an der Kalibrierung erfassten Werte zurück (`C2311` °C, `C2312` %).",
+        "en": "\"N\" hides the \"environmental conditions\" section. Tip: temperature and humidity come from the resource named by `environmental_conditions`. With nothing stored there, each line falls back to the values recorded on the calibration itself (`C2311` °C, `C2312` %)."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -866,8 +866,8 @@
         "en": "Environmental-conditions resource"
       },
       "description": {
-        "de": "Name der calServer-Ressource, deren Klimabereich („Temp|Feuchte“) gedruckt wird (kleingeschriebener V1-Parametername; speist auch environment.working_hours im Datensatz).",
-        "en": "Name of the calServer resource whose climate range (\"temp|humidity\") is printed (lowercase V1 parameter name; also feeds environment.working_hours in the dataset)."
+        "de": "Name der calServer-Ressource, deren Klimabereich („Temp|Feuchte“) gedruckt wird (kleingeschriebener V1-Parametername; speist auch environment.working_hours im Datensatz). Tipp: Gelesen wird das Feld „Umgebungsbedingungen“ der Ressource, ein Text mit `|` als Trenner — links die Temperatur, rechts die Feuchte, jeweils mit Einheit, z. B. `21,0 ... 23,0 °C|40 ... 60 %`. Jede Hälfte fällt für sich auf den an der Kalibrierung erfassten Wert zurück, wenn sie leer bleibt. So steht der Klimabereich des Labors einmal an der Ressource und nicht in jedem Bericht erneut.",
+        "en": "Name of the calServer resource whose climate range (\"temp|humidity\") is printed (lowercase V1 parameter name; also feeds environment.working_hours in the dataset). Tip: what is read is the resource's \"environmental conditions\" field, a text using `|` as the separator — temperature on the left, humidity on the right, each with its unit, e.g. `21.0 ... 23.0 °C|40 ... 60 %`. Each half falls back on its own to the value recorded on the calibration when left empty. That way the lab's climate range lives on the resource once instead of in every report."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -1075,8 +1075,8 @@
         "en": "Calibration-procedure fallback"
       },
       "description": {
-        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensbeschreibung liefert. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensbeschreibung liefert. Leer lassen für den zweisprachigen V1-Standardtext. Tipp: Der bessere Ort ist das Feld „Beschreibung“ der Prozedur — es gilt je Prüfmittel, dieser Parameter je Bericht.",
+        "en": "Fallback text when the dataset carries no procedure description. Leave empty to keep the bilingual V1 default. Tip: the better place is the procedure's \"description\" field — it applies per instrument, this parameter per report."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1090,8 +1090,8 @@
         "en": "Procedural-document fallback"
       },
       "description": {
-        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensanweisung liefert. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Fallback für die Verfahrensanweisung, wenn der Datensatz keine liefert. Tipp: Der bessere Ort ist das Feld „Kalibriermethode“ der Prozedur.",
+        "en": "Fallback for the procedure document when the dataset carries none. Tip: the better place is the procedure's \"calibration method\" field."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1105,8 +1105,8 @@
         "en": "Work-instruction fallback"
       },
       "description": {
-        "de": "Fallback-Text für die Arbeitsanweisungs-Kaskade. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Fallback für den Geltungsbereich, wenn weder Prozedur-Scope, Kalibriergegenstand noch Normale gefüllt sind. Tipp: Der bessere Ort ist das Feld „Geltungsbereich“ der Prozedur.",
+        "en": "Fallback for the scope when neither the procedure scope, the calibration item nor the standards are filled. Tip: the better place is the procedure's \"scope\" field."
       },
       "role": "variable",
       "group": "Textbausteine",

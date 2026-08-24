@@ -107,15 +107,72 @@
     || !$P{ModernResultsHeader}.toString().trim().equalsIgnoreCase("N")
 )]]></variableExpression>
 	</variable>
+	<!--
+	    Sollwert und Messwert stehen je nach Erfassungsweg in einem von zwei
+	    Spaltenpaaren: `fixq`/`varq` (Sollwert des Prüfschritts und Ablesung)
+	    oder `sys_actual`/`uut_ind` (Wert des Normals und Anzeige des
+	    Prüflings). MET/CAL liefert beide Paare; die V2-Messwertaufnahme füllt
+	    `sys_actual`/`uut_ind` nur für numerische Schritte mit gesetztem
+	    `tol_ref` und lässt sie sonst leer.
+
+	    Jede Layout-Variante band bisher genau ein Paar. Stand der Wert im
+	    anderen, blieb die Spalte leer, obwohl die Zeile ihn trug — genau der
+	    Fall, in dem der Schein ohne gesetzten Parameter `MeasurementDetails`
+	    eine leere Ergebnistabelle druckte. Die folgenden Variablen greifen auf
+	    die Schwesterspalte zurück, wenn die eigene leer ist; Präfix und
+	    Einheit folgen dabei der Spalte, aus der der Wert stammt. Sind beide
+	    Paare gefüllt — der MET/CAL-Fall —, druckt jede Variante unverändert
+	    das Paar, das sie schon immer gedruckt hat.
+	-->
+	<variable name="FixqValue" class="java.lang.String">
+		<variableExpression><![CDATA[($F{fixq} != null && !$F{fixq}.trim().isEmpty())
+      ? $F{fixq}
+      : ($F{sys_actual} == null ? "" : $F{sys_actual})]]></variableExpression>
+	</variable>
+	<variable name="FixqPrefix" class="java.lang.String">
+		<variableExpression><![CDATA[($F{fixq} != null && !$F{fixq}.trim().isEmpty())
+      ? ($F{fixq_p} == null ? "" : $F{fixq_p})
+      : ($F{sys_actual_p} == null ? "" : $F{sys_actual_p})]]></variableExpression>
+	</variable>
+	<variable name="FixqUnit" class="java.lang.String">
+		<variableExpression><![CDATA[($F{fixq} != null && !$F{fixq}.trim().isEmpty())
+      ? ($F{fixq_u} == null ? "" : $F{fixq_u})
+      : ($F{sys_actual_u} == null ? "" : $F{sys_actual_u})]]></variableExpression>
+	</variable>
+	<variable name="SysActualValue" class="java.lang.String">
+		<variableExpression><![CDATA[($F{sys_actual} != null && !$F{sys_actual}.trim().isEmpty())
+      ? $F{sys_actual}
+      : ($F{fixq} == null ? "" : $F{fixq})]]></variableExpression>
+	</variable>
+	<variable name="SysActualPrefix" class="java.lang.String">
+		<variableExpression><![CDATA[($F{sys_actual} != null && !$F{sys_actual}.trim().isEmpty())
+      ? ($F{sys_actual_p} == null ? "" : $F{sys_actual_p})
+      : ($F{fixq_p} == null ? "" : $F{fixq_p})]]></variableExpression>
+	</variable>
+	<variable name="SysActualUnit" class="java.lang.String">
+		<variableExpression><![CDATA[($F{sys_actual} != null && !$F{sys_actual}.trim().isEmpty())
+      ? ($F{sys_actual_u} == null ? "" : $F{sys_actual_u})
+      : ($F{fixq_u} == null ? "" : $F{fixq_u})]]></variableExpression>
+	</variable>
+	<variable name="VarqValue" class="java.lang.String">
+		<variableExpression><![CDATA[($F{varq} != null && !$F{varq}.trim().isEmpty())
+      ? $F{varq}
+      : ($F{uut_ind} == null ? "" : $F{uut_ind})]]></variableExpression>
+	</variable>
+	<variable name="UutIndValue" class="java.lang.String">
+		<variableExpression><![CDATA[($F{uut_ind} != null && !$F{uut_ind}.trim().isEmpty())
+      ? $F{uut_ind}
+      : ($F{varq} == null ? "" : $F{varq})]]></variableExpression>
+	</variable>
 	<variable name="NominalValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{fixq}==null || $F{fixq}.trim().isEmpty()
+		<variableExpression><![CDATA[$V{FixqValue}==null || $V{FixqValue}.trim().isEmpty()
       ? ""
-      : $F{fixq}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
+      : $V{FixqValue}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
 	</variable>
 	<variable name="MeasuredValue" class="java.lang.String">
-		<variableExpression><![CDATA[$F{varq}==null || $F{varq}.trim().isEmpty()
+		<variableExpression><![CDATA[$V{VarqValue}==null || $V{VarqValue}.trim().isEmpty()
       ? ""
-      : $F{varq}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
+      : $V{VarqValue}.trim().replaceAll("(?i)ohm","Ω")]]></variableExpression>
 	</variable>
 	<variable name="PosLimit" class="java.lang.String">
 		<variableExpression><![CDATA[($F{upper_limit} == null || $F{upper_limit}.trim().isEmpty()
@@ -163,10 +220,10 @@
  ? ""
  : (
      (
-       $F{fixq} != null
-       && !$F{fixq}.trim().isEmpty()
-       && $F{fixq}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?([eE][+-]?\\d+)?")
-       && Math.abs(Double.parseDouble($F{fixq}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", "."))) < 1e-9
+       $V{FixqValue} != null
+       && !$V{FixqValue}.trim().isEmpty()
+       && $V{FixqValue}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?([eE][+-]?\\d+)?")
+       && Math.abs(Double.parseDouble($V{FixqValue}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", "."))) < 1e-9
      )
      ? "--"
      : (
@@ -2423,6 +2480,17 @@
               : ""]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
+					<reportElement x="70" y="0" width="54" height="14" uuid="3a0f6c21-7d54-4b8e-9a2f-6c1b0e4d8f37"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(
+              $V{FixqValue} == null || $V{FixqValue}.trim().isEmpty()
+            ? ""
+            : $V{FixqValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+            )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="124" y="0" width="54" height="14" uuid="8fac207f-71ce-479d-aedf-4db886a10327"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font fontName="DejaVu Sans" size="8"/>
@@ -2439,9 +2507,9 @@
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
                                         <textFieldExpression><![CDATA[(
-              $F{varq} == null || $F{varq}.trim().isEmpty()
+              $V{VarqValue} == null || $V{VarqValue}.trim().isEmpty()
             ? ""
-            : $F{varq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+            : $V{VarqValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2515,21 +2583,21 @@
 					</textElement>
                                         <textFieldExpression><![CDATA[(
               (
-                $F{fixq} == null || $F{fixq}.trim().isEmpty()
+                $V{FixqValue} == null || $V{FixqValue}.trim().isEmpty()
                   ? ""
-                  : $F{fixq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
+                  : $V{FixqValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
-            + ($F{fixq_p} == null || $F{fixq_p}.trim().isEmpty() ? "" : " " + $F{fixq_p}.trim())
+            + ($V{FixqPrefix} == null || $V{FixqPrefix}.trim().isEmpty() ? "" : " " + $V{FixqPrefix}.trim())
             + (
                 (
-                  $F{fixq} != null
-                    && !$F{fixq}.trim().isEmpty()
-                    && $F{fixq}.trim().matches(".*\\p{L}.*")
+                  $V{FixqValue} != null
+                    && !$V{FixqValue}.trim().isEmpty()
+                    && $V{FixqValue}.trim().matches(".*\\p{L}.*")
                 )
-                || $F{fixq_u} == null
-                || $F{fixq_u}.trim().isEmpty()
+                || $V{FixqUnit} == null
+                || $V{FixqUnit}.trim().isEmpty()
                   ? ""
-                  : " " + $F{fixq_u}.trim()
+                  : " " + $V{FixqUnit}.trim()
               )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
@@ -2564,9 +2632,9 @@
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
                                         <textFieldExpression><![CDATA[(
-              $F{varq} == null || $F{varq}.trim().isEmpty()
+              $V{VarqValue} == null || $V{VarqValue}.trim().isEmpty()
             ? ""
-            : $F{varq}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+            : $V{VarqValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -2666,21 +2734,21 @@
 					</textElement>
                                         <textFieldExpression><![CDATA[(
               (
-                $F{sys_actual} == null || $F{sys_actual}.trim().isEmpty()
+                $V{SysActualValue} == null || $V{SysActualValue}.trim().isEmpty()
                   ? ""
-                  : $F{sys_actual}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
+                  : $V{SysActualValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
-            + ($F{sys_actual_p} == null || $F{sys_actual_p}.trim().isEmpty() ? "" : " " + $F{sys_actual_p}.trim())
+            + ($V{SysActualPrefix} == null || $V{SysActualPrefix}.trim().isEmpty() ? "" : " " + $V{SysActualPrefix}.trim())
             + (
                 (
-                  $F{sys_actual} != null
-                    && !$F{sys_actual}.trim().isEmpty()
-                    && $F{sys_actual}.trim().matches(".*\\p{L}.*")
+                  $V{SysActualValue} != null
+                    && !$V{SysActualValue}.trim().isEmpty()
+                    && $V{SysActualValue}.trim().matches(".*\\p{L}.*")
                 )
-                || $F{sys_actual_u} == null
-                || $F{sys_actual_u}.trim().isEmpty()
+                || $V{SysActualUnit} == null
+                || $V{SysActualUnit}.trim().isEmpty()
                   ? ""
-                  : " " + $F{sys_actual_u}.trim()
+                  : " " + $V{SysActualUnit}.trim()
               )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
@@ -2715,9 +2783,9 @@
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[(
-              $F{uut_ind} == null || $F{uut_ind}.trim().isEmpty()
+              $V{UutIndValue} == null || $V{UutIndValue}.trim().isEmpty()
                 ? ""
-                : $F{uut_ind}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+                : $V{UutIndValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
                                 </textField>
                                 <textField isBlankWhenNull="true">
@@ -2817,21 +2885,21 @@
 					</textElement>
                                         <textFieldExpression><![CDATA[(
               (
-                $F{sys_actual} == null || $F{sys_actual}.trim().isEmpty()
+                $V{SysActualValue} == null || $V{SysActualValue}.trim().isEmpty()
                   ? ""
-                  : $F{sys_actual}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
+                  : $V{SysActualValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
               )
-            + ($F{sys_actual_p} == null || $F{sys_actual_p}.trim().isEmpty() ? "" : " " + $F{sys_actual_p}.trim())
+            + ($V{SysActualPrefix} == null || $V{SysActualPrefix}.trim().isEmpty() ? "" : " " + $V{SysActualPrefix}.trim())
             + (
                 (
-                  $F{sys_actual} != null
-                    && !$F{sys_actual}.trim().isEmpty()
-                    && $F{sys_actual}.trim().matches(".*\\p{L}.*")
+                  $V{SysActualValue} != null
+                    && !$V{SysActualValue}.trim().isEmpty()
+                    && $V{SysActualValue}.trim().matches(".*\\p{L}.*")
                 )
-                || $F{sys_actual_u} == null
-                || $F{sys_actual_u}.trim().isEmpty()
+                || $V{SysActualUnit} == null
+                || $V{SysActualUnit}.trim().isEmpty()
                   ? ""
-                  : " " + $F{sys_actual_u}.trim()
+                  : " " + $V{SysActualUnit}.trim()
               )
             ).trim().replaceAll("(?i)ohm","Ω")]]></textFieldExpression>
 				</textField>
@@ -2841,9 +2909,9 @@
                                                 <font fontName="DejaVu Sans" size="8"/>
                                         </textElement>
                                         <textFieldExpression><![CDATA[(
-              $F{uut_ind} == null || $F{uut_ind}.trim().isEmpty()
+              $V{UutIndValue} == null || $V{UutIndValue}.trim().isEmpty()
                 ? ""
-                : $F{uut_ind}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
+                : $V{UutIndValue}.trim().replaceAll("(?<=\\d),(?=\\d)", ".").replaceAll("(?i)ohm","Ω")
             )]]></textFieldExpression>
                                 </textField>
 				<textField>
