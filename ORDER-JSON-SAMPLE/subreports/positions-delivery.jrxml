@@ -12,7 +12,7 @@
   einen Sammel-Lieferschein ist das noch wichtiger als fuer die Rechnung — wer
   die Ware annimmt, muss sehen, welche Zeilen zu welchem Auftrag gehoeren.
 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="positions-delivery" pageWidth="549" pageHeight="842" columnWidth="549" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0304-4d64-9f54-000000000304">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="positions-delivery" pageWidth="496" pageHeight="842" columnWidth="496" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0304-4d64-9f54-000000000304">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<parameter name="Is_collective" class="java.lang.Boolean">
 		<parameterDescription><![CDATA[true = der Beleg fasst mehrere Auftraege zusammen; nur dann druckt die Gruppenkopfzeile je Quellauftrag. Wird vom Hauptbericht aus collective.is_collective gesetzt.]]></parameterDescription>
@@ -29,18 +29,21 @@
 		<groupHeader>
 			<band height="20">
 				<printWhenExpression><![CDATA[Boolean.TRUE.equals($P{Is_collective})]]></printWhenExpression>
-				<textField isBlankWhenNull="true"><reportElement x="0" y="4" width="274" height="12"/><textElement><font size="9" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{source_order_number} == null ? "" : ("Auftrag " + $F{source_order_number})]]></textFieldExpression></textField>
-				<textField isBlankWhenNull="true"><reportElement x="274" y="4" width="275" height="12"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{source_order_recipient} == null || $F{source_order_recipient}.trim().isEmpty() ? null : ("Lieferung: " + $F{source_order_recipient})]]></textFieldExpression></textField>
-				<line><reportElement x="0" y="18" width="549" height="1"/></line>
+				<textField isBlankWhenNull="true"><reportElement x="0" y="4" width="250" height="12"/><textElement><font size="9" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{source_order_number} == null ? "" : ("Auftrag " + $F{source_order_number})]]></textFieldExpression></textField>
+				<textField isBlankWhenNull="true"><reportElement x="250" y="4" width="246" height="12"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{source_order_recipient} == null || $F{source_order_recipient}.trim().isEmpty() ? null : ("Lieferung: " + $F{source_order_recipient})]]></textFieldExpression></textField>
+				<line><reportElement x="0" y="18" width="496" height="1"/></line>
 			</band>
 		</groupHeader>
 	</group>
+	<!-- splitType="Prevent": eine Position wird nicht ueber den Seitenumbruch
+	     zerrissen — auf Briefpapier faellt der abgerissene Beschreibungsrest
+	     direkt unter der Kopflinie der Folgeseite sofort auf. -->
 	<detail>
-		<band height="15">
-			<textField isBlankWhenNull="true"><reportElement x="0" y="0" width="28" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="28" y="0" width="360" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
-			<textField pattern="#,##0.##" isBlankWhenNull="true"><reportElement x="388" y="0" width="80" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement x="478" y="0" width="71" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
+		<band height="15" splitType="Prevent">
+			<textField isBlankWhenNull="true"><reportElement x="0" y="0" width="26" height="14"/><textFieldExpression><![CDATA[$F{pos_number}]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="26" y="0" width="304" height="14"/><textFieldExpression><![CDATA[$F{name}]]></textFieldExpression></textField>
+			<textField pattern="#,##0.##" isBlankWhenNull="true"><reportElement x="330" y="0" width="70" height="14"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement x="410" y="0" width="86" height="14"/><textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression></textField>
 		</band>
 	</detail>
 </jasperReport>

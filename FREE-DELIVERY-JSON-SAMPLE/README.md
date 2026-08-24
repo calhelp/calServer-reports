@@ -58,9 +58,32 @@ Anschriftzone        untere 27,3 mm (Lieferanschrift)
 Betreffzeile         98,4 mm von oben
 ```
 
-Umgerechnet (1 mm = 2,8346 pt, Seitenränder links 17 pt / oben 12 pt) liegt das
-Anschriftfeld im Titelband bei `x=40, y=116, 241 × 128 pt` — **ein** Frame. Für
-DIN 676 Form A (kurzer Briefkopf) wird `y=116` zu `y=64`, sonst nichts.
+Umgerechnet (1 mm = 2,8346 pt, Seitenränder links 20 pt / oben 76 pt) liegt das
+Anschriftfeld im Titelband bei `x=37, y=52, 241 × 128 pt` — **ein** Frame; der
+Informationsblock steht bei `x=297, y=66`, die Betreffzeile bei `y=203`. Für
+DIN 676 Form A (kurzer Briefkopf) wird `y=52` zu `y=0`, sonst nichts.
+
+### Freizone für vorgedrucktes Briefpapier
+
+calServer legt die Bogenvorlage unter den Beleg (Berichtseinstellung
+`use_template` = `pdf` oder `html`; Seite 1 der Vorlage auf Belegseite 1,
+Seite 2 auf jede Folgeseite). Damit nichts in Kopf, Fuß oder Seitenrand des
+Bogens läuft, hält der Beleg feste Grenzen ein:
+
+| Zone | Grenze | Woher |
+|---|---|---|
+| Satzspiegel links | 20 mm (57 pt) | `leftMargin=20` + Inhalt ab `x=37` |
+| Satzspiegel rechts | 195 mm (553 pt) | `rightMargin=42`, `columnWidth=533` |
+| Oberkante Folgeseiten | 26,8 mm (76 pt) | `topMargin=76` |
+| Oberkante Seite 1 | 45 mm (128 pt), Anschriftfeld | Titelband |
+| Unterkante Inhalt | 249 mm (706 pt) | `bottomMargin=136` |
+
+Die 20 mm links sind der Rand, den vorgedrucktes Briefpapier üblicherweise für
+seine Kopf- und Fußlinien benutzt — Tabelle und Trennlinien stehen damit bündig
+unter dem Bogen statt daneben. Trägt der Bogen die Falz- und Lochmarken schon
+selbst, schaltet `show_fold_marks = 0` die eigenen ab. Ein Bogen mit höherem
+Kopf oder Fuß braucht andere Ränder: das sind die vier Zahlen im
+`<jasperReport>`-Element, sonst nichts.
 
 ## ⚠️ Leeres Blatt = fehlende Datenquelle
 
