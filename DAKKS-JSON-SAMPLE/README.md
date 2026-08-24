@@ -109,6 +109,54 @@ python3 scripts/dcc330_writer.py \
 > `dcc330_writer.py` ist der PTB-3.3.0-Nachfolger des einfacheren
 > `dcc_xml_writer.py` (calhelp-Format).
 
+## Ergebnistabelle: welche Felder wo landen
+
+Die Messwertspalten hängen an zwei gleichwertigen Spaltenpaaren des Contracts,
+und die Layout-Variante entscheidet nur noch, welches sie **zuerst** liest:
+
+| Spalte des Scheins | primär | Rückfall |
+|--------------------|--------|----------|
+| Sollwert (Varianten `1`, `2`, `3`, `4`) | `results[].fixq` (+`_p`/`_u`) | `sys_actual` |
+| Sollwert (Varianten `21`, `22`) | `results[].sys_actual` (+`_p`/`_u`) | `fixq` |
+| Messwert (Varianten `1`, `2`, `3`, `4`) | `results[].varq` | `uut_ind` |
+| Messwert (Varianten `21`, `22`) | `results[].uut_ind` | `varq` |
+| Messbedingungen | `results[].test_desc` | – |
+| % rel. Abweichung | `results[].rel_err` | – |
+
+`sys_actual`/`uut_ind` füllt die calServer-Messwertaufnahme nur für numerische
+Prüfschritte mit gesetztem `tol_ref`; MET/CAL-Importe liefern beide Paare. Ohne
+den Rückfall blieb die Ergebnistabelle deshalb bei ungesetztem
+`MeasurementDetails` leer, obwohl die Zeilen die Werte trugen. **Sind beide
+Paare gefüllt, druckt jede Variante unverändert das Paar, das sie schon immer
+gedruckt hat.**
+
+`test_desc` ist die Bezeichnung des Prüfschritts aus der Prozedur — sprechende
+Messbedingungen entstehen dort, nicht im Bericht.
+
+## Prozedur und Umgebungsbedingungen: gepflegt wird an der Quelle
+
+Vier Abschnitte des Scheins kommen aus der **Prozedur**, nicht aus Parametern.
+Damit der Datensatz sie überhaupt trägt, muss die Berichtsvariable
+`procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt
+(V1-Original: `C2320`). Ohne sie bleibt der `procedure`-Block leer und der
+Schein fällt auf seine Textbausteine zurück:
+
+| Abschnitt | Feld der Prozedur | Fallback-Parameter |
+|-----------|-------------------|--------------------|
+| Kalibrierverfahren | `procedure.description` | `Calibration_procedure_1` |
+| Verfahrensanweisung | `procedure.calibration_method` | `Calibration_document` |
+| Messbedingungen | `procedure.measurement_conditions` | „im permanenten Labor" |
+| Geltungsbereich | `procedure.scope` | `calibration_item` → `standards` → `Calibration_procedure_2` |
+
+**Umgebungsbedingungen** kommen aus einer **Ressource**: `environmental_conditions`
+benennt sie, gelesen wird ihr Feld „Umgebungsbedingungen"
+(`resource.environment_resources`) → `environment.working_hours`. Das Format ist
+ein Text mit `|` als Trenner — links die Temperatur, rechts die Feuchte, jeweils
+mit Einheit, z. B. `21,0 ... 23,0 °C|40 ... 60 %`. Jede Hälfte fällt für sich auf
+den an der Kalibrierung erfassten Wert zurück (`calibration.custom_fields.C2311`
+bzw. `C2312`), wenn sie leer bleibt. So steht der Klimabereich des Labors einmal
+an der Ressource statt in jedem Bericht erneut.
+
 ## Konformitätsspalte: welche Werte die Vorlage liest
 
 Die Spalte „Konformität" hängt an **einem** Feld: `results[].pass_fail`.
