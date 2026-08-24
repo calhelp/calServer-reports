@@ -20,7 +20,7 @@
   Die Reihenfolge ist die, in der der Anwender die Geräte eingesammelt hat —
   der Server sortiert sie nicht um.
 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devices" pageWidth="549" pageHeight="842" columnWidth="549" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0312-4d72-9f62-000000000312">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devices" pageWidth="496" pageHeight="842" columnWidth="496" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ddf600-0312-4d72-9f62-000000000312">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<style name="Label" fontSize="8" isBold="true"/>
 	<style name="Small" fontSize="8"/>
@@ -32,13 +32,13 @@
 	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[next_calibration_date]]></fieldDescription></field>
 	<columnHeader>
 		<band height="16">
-			<staticText><reportElement style="Label" x="12" y="0" width="22" height="13"/><text><![CDATA[Pos]]></text></staticText>
-			<staticText><reportElement style="Label" x="34" y="0" width="88" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
-			<staticText><reportElement style="Label" x="122" y="0" width="94" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
-			<staticText><reportElement style="Label" x="216" y="0" width="128" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
-			<staticText><reportElement style="Label" x="344" y="0" width="140" height="13"/><text><![CDATA[Beschreibung]]></text></staticText>
-			<staticText><reportElement style="Label" x="484" y="0" width="65" height="13"/><textElement textAlignment="Right"/><text><![CDATA[Nächste Kal.]]></text></staticText>
-			<line><reportElement x="0" y="14" width="549" height="1"/></line>
+			<staticText><reportElement style="Label" x="11" y="0" width="20" height="13"/><text><![CDATA[Pos]]></text></staticText>
+			<staticText><reportElement style="Label" x="31" y="0" width="79" height="13"/><text><![CDATA[Inventar-Nr.]]></text></staticText>
+			<staticText><reportElement style="Label" x="110" y="0" width="85" height="13"/><text><![CDATA[Serien-Nr.]]></text></staticText>
+			<staticText><reportElement style="Label" x="195" y="0" width="116" height="13"/><text><![CDATA[Hersteller / Typ]]></text></staticText>
+			<staticText><reportElement style="Label" x="311" y="0" width="126" height="13"/><text><![CDATA[Beschreibung]]></text></staticText>
+			<staticText><reportElement style="Label" x="437" y="0" width="59" height="13"/><textElement textAlignment="Right"/><text><![CDATA[Nächste Kal.]]></text></staticText>
+			<line><reportElement x="0" y="14" width="496" height="1"/></line>
 		</band>
 	</columnHeader>
 	<!--
@@ -52,17 +52,17 @@
 		<band height="16" splitType="Prevent">
 			<!-- Ankreuzfeld zum Abhaken der Position beim Packen bzw. Auspacken. -->
 			<rectangle>
-				<reportElement x="0" y="1" width="9" height="9"/>
+				<reportElement x="0" y="1" width="8" height="9"/>
 				<graphicElement><pen lineWidth="0.5"/></graphicElement>
 			</rectangle>
-			<textField><reportElement style="Small" x="12" y="0" width="22" height="13"/><textFieldExpression><![CDATA[String.valueOf($V{REPORT_COUNT})]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="34" y="0" width="88" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="122" y="0" width="94" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
-			<textField><reportElement style="Small" x="216" y="0" width="128" height="13"/><textFieldExpression><![CDATA[(($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})).trim()]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="344" y="0" width="140" height="13"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
-			<textField isBlankWhenNull="true"><reportElement style="Small" x="484" y="0" width="65" height="13"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
+			<textField><reportElement style="Small" x="11" y="0" width="20" height="13"/><textFieldExpression><![CDATA[String.valueOf($V{REPORT_COUNT})]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="31" y="0" width="79" height="13"/><textFieldExpression><![CDATA[$F{asset_number}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="110" y="0" width="85" height="13"/><textFieldExpression><![CDATA[$F{serial_number}]]></textFieldExpression></textField>
+			<textField><reportElement style="Small" x="195" y="0" width="116" height="13"/><textFieldExpression><![CDATA[(($F{manufacturer} == null ? "" : $F{manufacturer}) + " " + ($F{model} == null ? "" : $F{model})).trim()]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement style="Small" x="311" y="0" width="126" height="13"/><textFieldExpression><![CDATA[$F{description}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Small" x="437" y="0" width="59" height="13"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{next_calibration_date}]]></textFieldExpression></textField>
 			<!-- Zeilentrenner: eine Abhakliste braucht die Führung fürs Auge. -->
-			<line><reportElement positionType="Float" x="0" y="14" width="549" height="1"/><graphicElement><pen lineWidth="0.25" lineColor="#BBBBBB"/></graphicElement></line>
+			<line><reportElement positionType="Float" x="0" y="14" width="496" height="1"/><graphicElement><pen lineWidth="0.25" lineColor="#BBBBBB"/></graphicElement></line>
 		</band>
 	</detail>
 </jasperReport>

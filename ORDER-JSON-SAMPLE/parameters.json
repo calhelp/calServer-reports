@@ -38,6 +38,24 @@
       "example": "1"
     },
     {
+      "name": "Show_supplier_footer",
+      "label": {
+        "de": "Absenderangaben in der Fußzeile",
+        "en": "Supplier details in the footer"
+      },
+      "description": {
+        "de": "Druckt Anschrift, USt-IdNr./Steuernummer, Handelsregister und Bankverbindung des Ausstellers in die Fußzeile (§ 14 UStG). Auf \"0\" setzen, wenn auf vorgedrucktem Briefpapier gedruckt wird, das diese Angaben bereits im Fußblock trägt — sonst stehen sie zweimal auf dem Beleg.",
+        "en": "Prints the issuer's address, VAT/tax number, commercial register and bank details in the footer (§ 14 UStG). Set to \"0\" when printing on pre-printed stationery that already carries them in its footer block, otherwise they appear twice on the document."
+      },
+      "role": "variable",
+      "scope": "type",
+      "input": "text",
+      "required": false,
+      "group": "Layout",
+      "default": "1",
+      "example": "1"
+    },
+    {
       "name": "Reportpath",
       "label": {
         "de": "Bundle-Wurzelpfad",

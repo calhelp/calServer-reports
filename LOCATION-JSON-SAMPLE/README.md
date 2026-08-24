@@ -31,22 +31,47 @@ derselben Zeile genauso hochgeladen.
 
 | Element | Lage (ab Blattkante) | Im Titelband (pt) |
 |---------|----------------------|-------------------|
-| Anschriftfeld (Frame) | 20 mm links, 45 mm oben, 85 × 45 mm | `x=40 y=116 w=241 h=128` |
+| Anschriftfeld (Frame) | 20 mm links, 45 mm oben, 85 × 45 mm | `x=37 y=52 w=241 h=128` |
 | Rücksendeangabe | Zusatz-/Vermerkzone, 12 mm ab Feldoberkante | Frame-intern `y=34` |
 | Lieferanschrift | Anschriftzone, 17,7 mm ab Feldoberkante | Frame-intern `y=50` |
-| Betreffzeile | 98,4 mm oben | `y=267` |
+| Betreffzeile | 98,4 mm oben | `y=203` |
 | Falz-/Lochmarken | linker Rand bei 105 / 148,5 / 210 mm | Hintergrundband |
 
 Das passt in einen DIN-lang-Fensterumschlag nach DIN 680 (Fenster 20 mm von
 links, 15 mm von unten) bei Falzung auf 105 mm und 210 mm.
 
-**Form A statt Form B?** Wer einen kurzen Briefkopf hat und das Anschriftfeld
-schon ab 27 mm setzen will, ändert **eine** Zahl: `y="116"` am Frame
-`Anschriftfeld` wird zu `y="64"`. Deshalb steckt der ganze Block in einem Frame.
+Alle Bandkoordinaten liegen hinter `topMargin=76`: Bandzeile `y` steht auf dem
+Blatt bei `76 + y` Punkt.
 
-**Der linke 12-pt-Streifen ist frei.** Dort liegen die Falz- und Lochmarken; der
-Textkörper beginnt bei `x=12` (rund 10 mm ab Blattkante). Wer Elemente ergänzt,
+**Form A statt Form B?** Wer einen kurzen Briefkopf hat und das Anschriftfeld
+schon ab 27 mm setzen will, ändert **eine** Zahl: `y="52"` am Frame
+`Anschriftfeld` wird zu `y="0"`. Deshalb steckt der ganze Block in einem Frame.
+
+**Der linke 37-pt-Streifen ist frei.** Dort liegen die Falz- und Lochmarken; der
+Textkörper beginnt bei `x=37` (20 mm ab Blattkante). Wer Elemente ergänzt,
 setzt sie nicht auf `x=0`, sonst läuft die Lochmarke bei 148,5 mm hindurch.
+
+### Freizone für vorgedrucktes Briefpapier
+
+calServer legt die Bogenvorlage unter den Beleg (Berichtseinstellung
+`use_template` = `pdf` oder `html`; Seite 1 der Vorlage auf Belegseite 1,
+Seite 2 auf jede Folgeseite). Damit nichts in Kopf, Fuß oder Seitenrand des
+Bogens läuft, hält der Beleg feste Grenzen ein:
+
+| Zone | Grenze | Woher |
+|---|---|---|
+| Satzspiegel links | 20 mm (57 pt) | `leftMargin=20` + Inhalt ab `x=37` |
+| Satzspiegel rechts | 195 mm (553 pt) | `rightMargin=42`, `columnWidth=533` |
+| Oberkante Folgeseiten | 26,8 mm (76 pt) | `topMargin=76` |
+| Oberkante Seite 1 | 45 mm (128 pt), Anschriftfeld | Titelband |
+| Unterkante Inhalt | 249 mm (706 pt) | `bottomMargin=136` |
+
+Die 20 mm links sind der Rand, den vorgedrucktes Briefpapier üblicherweise für
+seine Kopf- und Fußlinien benutzt — Tabelle und Trennlinien stehen damit bündig
+unter dem Bogen statt daneben. Trägt der Bogen die Falz- und Lochmarken schon
+selbst, schaltet `show_fold_marks = 0` die eigenen ab. Ein Bogen mit höherem
+Kopf oder Fuß braucht andere Ränder: das sind die vier Zahlen im
+`<jasperReport>`-Element, sonst nichts.
 
 ## Aufbau
 

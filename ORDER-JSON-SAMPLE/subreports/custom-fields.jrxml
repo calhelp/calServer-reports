@@ -8,14 +8,14 @@
   meaning, so a re-configured field renders with its own label without a template
   change. Empty when no custom fields are populated.
 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="custom-fields" pageWidth="320" pageHeight="842" columnWidth="320" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0303-4d63-9f53-000000000303">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="custom-fields" pageWidth="255" pageHeight="842" columnWidth="255" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6dcf500-0303-4d63-9f53-000000000303">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="8"/>
 	<field name="label" class="java.lang.String"><fieldDescription><![CDATA[label]]></fieldDescription></field>
 	<field name="value" class="java.lang.String"><fieldDescription><![CDATA[value]]></fieldDescription></field>
 	<detail>
 		<band height="12">
-			<textField><reportElement x="0" y="0" width="130" height="11"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[($F{label} == null ? "" : $F{label}) + ":"]]></textFieldExpression></textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="132" y="0" width="188" height="11"/><textFieldExpression><![CDATA[$F{value}]]></textFieldExpression></textField>
+			<textField><reportElement x="0" y="0" width="110" height="11"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[($F{label} == null ? "" : $F{label}) + ":"]]></textFieldExpression></textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true"><reportElement x="112" y="0" width="143" height="11"/><textFieldExpression><![CDATA[$F{value}]]></textFieldExpression></textField>
 		</band>
 	</detail>
 </jasperReport>

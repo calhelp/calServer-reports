@@ -18,7 +18,7 @@ andere den Auftraggeber. Das Template verzweigt nur noch auf `document.type`.
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/order-json-sample.jrxml` | Hauptbericht: **Fensterbrief nach DIN 5008 Form B** — Anschriftfeld mit Rücksendeangabe (`recipient` je Dokumenttyp), Informationsblock rechts (Belegnummer/Datum/Kunden-Nr./Kontakt/Lieferbedingung/-kosten), Betreffzeile bei 98,4 mm, Falz- und Lochmarken; darunter abweichende Liefer-/Rechnungsadresse als Info-Block, Positionstabelle + Statistik + Zusatzfelder, Rechnungs-/Lieferschein-Spezifika, Fußzeile mit Firmen-/Steuer-/Bankangaben. Alle Labels als `staticText` |
+| `main_reports/order-json-sample.jrxml` | Hauptbericht: **Fensterbrief nach DIN 5008 Form B, briefpapierfest** — Anschriftfeld mit Rücksendeangabe (`recipient` je Dokumenttyp), Informationsblock rechts (Belegnummer/Datum/Kunden-Nr./Kontakt/Lieferbedingung/-kosten), Betreffzeile bei 98,4 mm, Falz- und Lochmarken; darunter abweichende Liefer-/Rechnungsadresse als Info-Block, Positionstabelle + Statistik + Zusatzfelder, Rechnungs-/Lieferschein-Spezifika, Fußzeile mit Firmen-/Steuer-/Bankangaben. Alle Labels als `staticText` |
 | `subreports/positions.jrxml` | Positionen; `positions`-Array via `subDataSource("positions")` (Pos/Beschreibung/Menge/Einzelpreis/Rabatt/Betrag/MwSt). Gruppe `sourceOrder` je Quellauftrag — Kopfzeile nur bei einer Sammelrechnung (s.u.) |
 | `subreports/positions-delivery.jrxml` | Positionen **ohne Preise** für Lieferscheine (Pos/Beschreibung/Menge/Einheit); wird bei `document.type = delivery_note` automatisch gewählt. Dieselbe Gruppierung |
 | `subreports/tax-groups.jrxml` | Steuergruppen; `statistics.tax_groups`-Array via `subDataSource("statistics.tax_groups")` (USt. je Satz — § 14 UStG-Aufschlüsselung) |
@@ -34,20 +34,23 @@ Der Beleg ist ein **Fensterbrief nach DIN 5008 Form B** — dieselbe Geometrie
 wie beim Leihschein (`LOCATION-JSON-SAMPLE`) und beim Versandschein
 (`FREE-DELIVERY-JSON-SAMPLE`):
 
-| Element | Position | Im Template |
+| Element | Position auf dem Blatt | Im Template |
 |---|---|---|
-| Anschriftfeld | 20 mm von links, 45 mm von oben, 85 × 45 mm | Rahmen `x=40 y=116 241×128` im Titelband |
+| Anschriftfeld | 20 mm von links, 45 mm von oben, 85 × 45 mm | Rahmen `x=37 y=52 241×128` im Titelband |
 | Rücksendeangabe | Zusatz-/Vermerkzone, 12 mm ab Feldoberkante | `y=34` im Anschriftfeld-Rahmen |
 | Anschrift | Beginn der Anschriftzone, 17,7 mm ab Feldoberkante | `y=50`, ein Textfeld mit `\n`-Zeilen |
-| Informationsblock | ab 125 mm, auf Höhe des Anschriftfelds | Rahmen `x=337 y=116` |
-| Betreffzeile | 98,4 mm ab Seitenoberkante | `y=267` |
+| Informationsblock | ab 125 mm, 50 mm von oben | Rahmen `x=297 y=66 236 pt` |
+| Betreffzeile | 98,4 mm ab Seitenoberkante | `y=203` |
 | Falz-/Lochmarken | 105 / 148,5 / 210 mm am linken Rand | Hintergrundband, abschaltbar über `Show_fold_marks` |
+
+Alle Bandkoordinaten liegen hinter `topMargin=76`: Bandzeile `y` steht auf dem
+Blatt bei `76 + y` Punkt.
 
 Damit zeigt ein DIN-lang-Fensterumschlag nach DIN 680 genau die Anschrift des
 Empfängers — und zwar bei **allen** Belegtypen: Angebot, Auftragsbestätigung,
 Lieferschein, Rechnung und dem neutralen Beleg teilen sich diesen Kopf, nur die
 Blöcke darunter unterscheiden sich. Wer auf **Form A** umstellt (Anschriftfeld
-ab 27 mm), ändert eine Zahl: `y=116` wird `y=64`.
+ab 27 mm), ändert eine Zahl: `y=52` wird `y=0`.
 
 Die Anschrift ist **ein** Textfeld mit `\n`-Zeilen, kein Stapel Einzelfelder:
 Fehlt der Ansprechpartner oder die Straße, rückt der Rest auf, statt eine Lücke
@@ -55,8 +58,47 @@ im Fenster zu lassen. Die Landzeile druckt nur, wenn `recipient.country` vom
 Absenderland (`supplier.country`, aus `company_country`) abweicht — „DE" unter
 einer deutschen Inlandsanschrift wäre schlicht falsch.
 
-Der Textblock beginnt bei `x=12` (10,2 mm) statt am Rand, damit die Falzmarken
-nicht in die Positionsspalte laufen; die Tabelle ist entsprechend 549 pt breit.
+Der Textblock beginnt bei `x=37` (20 mm ab Blattkante), damit die Falzmarken
+nicht in die Positionsspalte laufen; die Tabelle ist entsprechend 496 pt breit.
+
+## Der Beleg passt auf Briefpapier
+
+Der Auftragsbeleg ist das Papier, das am häufigsten das Haus verlässt — und in
+aller Regel auf **vorgedrucktem Briefpapier**. calServer legt die Bogenvorlage
+unter den Bericht (Berichtseinstellung `use_template` = `pdf` oder `html`,
+Seite 1 der Vorlage auf Belegseite 1, Seite 2 auf jede Folgeseite). Der Beleg
+hält deshalb eine feste **Freizone** ein und läuft nirgends in Kopf, Fuß oder
+Seitenränder des Bogens:
+
+| Zone | Grenze | Woher |
+|---|---|---|
+| Satzspiegel links | 20 mm (57 pt) | `leftMargin=20` + Inhalt ab `x=37` |
+| Satzspiegel rechts | 195 mm (553 pt) | `rightMargin=42`, `columnWidth=533` |
+| Oberkante Folgeseiten | 26,8 mm (76 pt) | `topMargin=76` |
+| Oberkante Seite 1 | 45 mm (128 pt), Anschriftfeld | Titelband |
+| Unterkante Inhalt | 249 mm (706 pt) | `bottomMargin=136` |
+
+Die 20 mm links sind kein DIN-Wert (DIN 5008 nennt 24,1 mm), sondern der Rand,
+den vorgedrucktes Briefpapier üblicherweise für seine Kopf- und Fußlinien
+benutzt — Tabelle und Trennlinien des Belegs stehen damit **bündig** unter dem
+Bogen statt daneben. Die 48 mm unten sind der Platz, den ein Fußblock mit
+Firmen-, Register-, Bank- und Akkreditierungsangaben braucht.
+
+Zwei Dinge druckt der Bogen meist schon selbst; dafür gibt es je einen
+Schalter, damit sie nicht doppelt erscheinen:
+
+- `Show_supplier_footer = 0` — lässt Anschrift, USt-IdNr./Steuernummer,
+  Handelsregister und Bankverbindung in der Fußzeile weg.
+- `Show_fold_marks = 0` — lässt Falz- und Lochmarken weg.
+
+Beide stehen per Default auf `1`: ohne Briefpapier muss der Beleg die
+Pflichtangaben nach § 14 UStG selbst tragen, und ein stillschweigend
+weggelassener Absender wäre der teurere Fehler. Wer Briefpapier benutzt, setzt
+die beiden Berichtsvariablen `show_supplier_footer` und `show_fold_marks`
+einmal auf `0`.
+
+Ein Bogen mit **höherem** Kopf oder Fuß als oben angegeben braucht andere
+Ränder — das sind die vier Zahlen im `<jasperReport>`-Element, sonst nichts.
 
 ## Contract `order-document` (v1.8)
 
@@ -236,6 +278,7 @@ von Berichtsvariablen mit Beschreibung, Typ und Standardwert anbietet (siehe
 |-----------|-------|---------|
 | `Company_footer` | variable (type) | Optionale Fußzeile am unteren Rand jeder Seite (Auftragsbeleg). Leerer Default → keine Änderung am aktuellen Layout; nur wenn gesetzt (Berichtsvariable `company_footer`), erscheint die Zeile. |
 | `Show_fold_marks` | variable (type) | Falz- und Lochmarken am linken Blattrand (105 / 148,5 / 210 mm). Default `1`; auf `0` setzen, wenn vorgedrucktes Briefpapier sie schon trägt (Berichtsvariable `show_fold_marks`). |
+| `Show_supplier_footer` | variable (type) | Absender-, Steuer- und Bankangaben in der Fußzeile (§ 14 UStG). Default `1`; auf `0` setzen, wenn der Fußblock des Briefpapiers sie schon trägt (Berichtsvariable `show_supplier_footer`). |
 
 Gilt nur für V2-JSON-Bundles. Der optionale Fußzeilentext ist `isBlankWhenNull`
 und standardmäßig leer — die pixelgenaue Abnahme des Layouts (report-runner)
