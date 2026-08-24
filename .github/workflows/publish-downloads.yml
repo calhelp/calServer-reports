@@ -105,6 +105,7 @@ jobs:
           get_last_modified "KALIBRIERKONTROLLBLATT-JSON-SAMPLE" "kalibrierkontrollblatt-json-sample"
           get_last_modified "STICKER-DAKKS-12MM-JSON-SAMPLE" "sticker-dakks-12mm-json-sample"
           get_last_modified "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
+          get_last_modified "STICKER-DAKKS-40X30MM-QR-JSON-SAMPLE" "sticker-dakks-40x30mm-qr-json-sample"
           get_last_modified "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
           get_last_modified "ORDER-JSON-SAMPLE" "order-json-sample"
           get_last_modified "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
@@ -222,6 +223,7 @@ jobs:
               "kalibrierkontrollblatt-json-sample": "KALIBRIERKONTROLLBLATT-JSON-SAMPLE/README.md",
               "sticker-dakks-12mm-json-sample":     "STICKER-DAKKS-12MM-JSON-SAMPLE/README.md",
               "sticker-dakks-18mm-json-sample":     "STICKER-DAKKS-18MM-JSON-SAMPLE/README.md",
+              "sticker-dakks-40x30mm-qr-json-sample": "STICKER-DAKKS-40X30MM-QR-JSON-SAMPLE/README.md",
               "sticker-cal-inv-zebra-json-sample":  "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE/README.md",
               "order-json-sample":                  "ORDER-JSON-SAMPLE/README.md",
               "delivery-json-sample":               "DELIVERY-JSON-SAMPLE/README.md",
@@ -268,6 +270,7 @@ jobs:
               "kalibrierkontrollblatt-json-sample": "Kalibrierkontrollblatt",
               "sticker-dakks-12mm-json-sample":     "DAkkS-Aufkleber 12 mm",
               "sticker-dakks-18mm-json-sample":     "DAkkS-Aufkleber 18 mm",
+              "sticker-dakks-40x30mm-qr-json-sample": "DAkkS-Aufkleber 40×30 mm mit QR",
               "sticker-cal-inv-zebra-json-sample":  "Zebra Inventar-/Kalibrier-Sticker",
               "order-json-sample":                  "Auftragsbeleg",
               "delivery-json-sample":               "Lieferschein",
