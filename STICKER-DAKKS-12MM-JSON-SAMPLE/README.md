@@ -8,13 +8,32 @@ V2-Nachbildung des **DAkkS-Kalibrieraufklebers 12 mm** (Phase C). Micro-Label
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/dakks-aufkleber-12mm-json-sample.jrxml` | Micro-Label: Rahmen (Line-Art), „DAkkS", Akkreditierungs-Markennummer, Kalibrierdatum. Kein QR, keine Variablen |
+| `main_reports/dakks-aufkleber-12mm-json-sample.jrxml` | Micro-Label: Rahmen mit drei Feldern — Kalibrierzeichen (zwei Zeilen), Kalibriermonat. Kein QR, keine Variablen |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` v1.1, minimal) |
 | `main_reports/dakks-aufkleber-12mm-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
+## Gestaltung
+
+Gleiche Anatomie wie das 18-mm-Etikett, ein Feld kürzer: geschlossener Rahmen,
+darin die Registrierdaten der Kalibrierung (*Kalibrierzeichen*) und der
+Kalibriermonat — das Minimum, das die DAkkS-Kalibriermarke verlangt. Das Datum
+der nächsten Kalibrierung ist bei der DAkkS optional und passt auf 12 mm nicht
+mehr; wer es braucht, nimmt das 18-mm-Bundle.
+
+**Die Gewährleistungsmarke selbst zeichnet die Vorlage bewusst nicht.** Sie ist
+ein geschütztes Bild, das ein akkreditiertes Labor von der DAkkS erhält und
+selbst auf das Etikett setzt.
+
+Das Kalibrierdatum wird als **Jahr-Monat** gedruckt (`2026-06`), so wie es die
+DAkkS-Marke vorsieht. **Ohne Akkreditierung** trägt die obere Zone die
+**Schein-Nr.** (`calibration.certificate_display`) statt eines leeren Kastens.
+Leere Werte drucken leer, nie `null`.
+
 ## Felder
 
-`accreditation.mark_number_1` (+ `mark_number_2`), `calibration.calibration_date`.
+`accreditation.mark_number_1` (+ `mark_number_2`) — dieselben zwei Werte, die der
+Kalibrierschein in seinem Kalibrierzeichen-Block druckt. Dazu
+`calibration.calibration_date` und `calibration.certificate_display`.
 Dataset-Builder: Laravel `CalibrationReportDataBuilder`.
 
 ## Systembericht-Platzhalter und Stapeldruck (ab calServer V2)

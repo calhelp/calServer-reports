@@ -1,21 +1,45 @@
 # STICKER-DAKKS-18MM-JSON-SAMPLE — DAkkS-Aufkleber 18 mm (V2 / APEX)
 
 V2-Nachbildung des **DAkkS-Kalibrieraufklebers 18 mm** (Phase C). Label 51×70 pt
-Landscape (≈ 18×24,7 mm), gefüllt aus einem **JSON-Datensatz** (Contract
+Hochformat (≈ 18×24,7 mm), gefüllt aus einem **JSON-Datensatz** (Contract
 `calibration-certificate` v1.1) statt aus SQL — DB-agnostisch, keine V1-Codespalten.
 
 ## Aufbau
 
 | Datei | Zweck |
 |-------|-------|
-| `main_reports/dakks-aufkleber-18mm-json-sample.jrxml` | Label: Rahmen (Line-Art), „DAkkS", Akkreditierungs-Markennummer, Kalibrier- + nächstes Datum. Kein QR, keine Variablen |
+| `main_reports/dakks-aufkleber-18mm-json-sample.jrxml` | Label: Rahmen mit drei Feldern — Kalibrierzeichen, Kalibriermonat, nächster Monat. Kein QR, keine Variablen |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` v1.1, minimal) |
 | `main_reports/dakks-aufkleber-18mm-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
+## Gestaltung
+
+Der Aufkleber folgt der **DAkkS-Kalibriermarke**: ein geschlossener Rahmen, darin
+gestapelte Felder — oben die Registrierdaten der Kalibrierung
+(*Kalibrierzeichen*), darunter der Kalibriermonat, unten der nächste Termin.
+
+**Die Gewährleistungsmarke selbst zeichnet die Vorlage bewusst nicht.** Sie ist
+ein geschütztes Bild, das ein akkreditiertes Labor von der DAkkS erhält und
+selbst auf das Etikett setzt; eine Vorlage darf sie nicht nachbilden. Alles
+andere auf dem Etikett sind Kundendaten.
+
+Datumsfelder werden als **Jahr-Monat** gedruckt (`2026-06`), so wie es die
+DAkkS-Marke vorsieht — nicht als Tagesdatum. Der Rahmen ist Pflicht: die Marke
+darf laut Markenordnung nur innerhalb des Kalibrieretiketts verwendet werden.
+
+**Ohne Akkreditierung** stünde das obere Feld leer. Dann trägt dieselbe Zone die
+**Schein-Nr.** (`calibration.certificate_display`) — beschriftet als das, was sie
+ist, nie als Marke getarnt. Leere Werte drucken leer, nie `null`.
+
 ## Felder
 
-`accreditation.mark_number_1` (+ `mark_number_2`), `calibration.calibration_date`,
-`calibration.next_calibration_date`. Dataset-Builder: Laravel `CalibrationReportDataBuilder`.
+`accreditation.mark_number_1` (+ `mark_number_2`) — dieselben zwei Werte, die der
+Kalibrierschein in seinem Kalibrierzeichen-Block druckt: `mark_number_1` die
+erste Kennziffer (z. B. Auftragsnummer), `mark_number_2` das mehrzeilige
+DAkkS-Kalibrierzeichen (`D-K-\nYYYYY-ZZ-N`). Dazu
+`calibration.calibration_date`, `calibration.next_calibration_date` und
+`calibration.certificate_display`. Dataset-Builder: Laravel
+`CalibrationReportDataBuilder`.
 
 ## Systembericht-Platzhalter und Stapeldruck (ab calServer V2)
 

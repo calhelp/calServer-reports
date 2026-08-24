@@ -7,11 +7,12 @@
     "certificate_number": "DAkkS-K-2026-0042"
   },
   "accreditation": {
-    "mark_number_1": "D-K-12345-01-00",
-    "mark_number_2": "Deutsche Akkreditierungsstelle",
-    "calibration_mark": "DAkkS-K-12345"
+    "mark_number_1": "123456",
+    "mark_number_2": "D-K-\n15208-01-00",
+    "calibration_mark": "DAkkS-K-0815"
   },
   "calibration": {
+    "certificate_display": "K-2026-0042",
     "calibration_date": "2026-06-30",
     "next_calibration_date": "2027-06-30"
   },
