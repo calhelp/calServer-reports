@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 DAkkS calibration label 40x30 mm with QR deep link (ADR-009, contract
+  "calibration-certificate" v1.6). Filled from a JSON data source — NO SQL.
+
+  Same anatomy as the 12/18 mm DAkkS labels — a closed frame with the
+  registration data of the calibration ("Kalibrierzeichen") on top, the month of
+  calibration below it, the next month at the bottom — plus the QR the DAkkS
+  calibration label allows as an optional element. The DAkkS warranty mark
+  (Gewährleistungsmarke) itself is deliberately NOT drawn: it is a protected
+  image an accredited laboratory receives from the DAkkS and places itself.
+
+  WHY THIS SIZE. The QR carries `qr.url`, the public deep link onto the device
+  page of the QR code role (`/v2/qr/{uuid}`) — around 74 characters, so QR
+  version 5 with 37 modules. Printed on the house 203 dpi label printer at three
+  dots per module, the symbol needs ~17 mm; the 50x50 pt square below is 17,6 mm.
+  That is why this bundle exists instead of squeezing a QR onto 18 mm, where
+  nothing would be left for the DAkkS fields.
+
+  Without a deep link (QR links switched off) the same square carries the
+  tenant's configured barcode value instead of an empty white box — a plain
+  inventory QR, which is what the readable number underneath names either way.
+
+  113x85 pt = 39,9x30 mm. See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dakks-aufkleber-40x30mm-qr-json-sample" pageWidth="113" pageHeight="85" orientation="Portrait" columnWidth="113" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" whenNoDataType="AllSectionsNoDetail" uuid="c4cae300-0212-4c42-9e32-000000000212">
+	<property name="com.jaspersoft.studio.data.defadapter" value="dakks-aufkleber-40x30mm-qr-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="5"/>
+	<field name="mark_number_1" class="java.lang.String"><fieldDescription><![CDATA[accreditation.mark_number_1]]></fieldDescription></field>
+	<field name="mark_number_2" class="java.lang.String"><fieldDescription><![CDATA[accreditation.mark_number_2]]></fieldDescription></field>
+	<field name="cal_date" class="java.lang.String"><fieldDescription><![CDATA[calibration.calibration_date]]></fieldDescription></field>
+	<field name="next_cal_date" class="java.lang.String"><fieldDescription><![CDATA[calibration.next_calibration_date]]></fieldDescription></field>
+	<field name="certificate" class="java.lang.String"><fieldDescription><![CDATA[calibration.certificate_display]]></fieldDescription></field>
+	<!-- Der Deep-Link auf die Geräteseite der QR-Code-Rolle. Steht je Datensatz
+	     im Dokument, damit ein Stapel von vierzig Aufklebern vierzig Geräte
+	     trifft und nicht vierzigmal dasselbe. null, solange die QR-Links
+	     abgeschaltet sind. -->
+	<field name="qr_url" class="java.lang.String"><fieldDescription><![CDATA[qr.url]]></fieldDescription></field>
+	<!-- Was der Mandant codiert, entscheiden die Regeln (Grundeinstellungen >
+	     Barcode & Etikett); der Datensatz liefert es fertig aufgelöst. -->
+	<field name="barcode_value" class="java.lang.String"><fieldDescription><![CDATA[barcode.value]]></fieldDescription></field>
+	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[device.asset_number]]></fieldDescription></field>
+	<variable name="hasMark" class="java.lang.Boolean"><variableExpression><![CDATA[Boolean.valueOf(
+    ($F{mark_number_1} != null && !$F{mark_number_1}.trim().isEmpty())
+    || ($F{mark_number_2} != null && !$F{mark_number_2}.trim().isEmpty()))]]></variableExpression></variable>
+	<variable name="readable" class="java.lang.String"><variableExpression><![CDATA[($F{barcode_value} != null && !$F{barcode_value}.trim().isEmpty())
+    ? $F{barcode_value}.trim()
+    : ($F{asset_number} == null ? "" : $F{asset_number}.trim())]]></variableExpression></variable>
+	<variable name="code" class="java.lang.String"><variableExpression><![CDATA[($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())
+    ? $F{qr_url}.trim()
+    : $V{readable}]]></variableExpression></variable>
+	<variable name="isDeepLink" class="java.lang.Boolean"><variableExpression><![CDATA[Boolean.valueOf($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())]]></variableExpression></variable>
+	<detail>
+		<band height="85" splitType="Prevent">
+			<!-- Rahmen des Kalibrieretiketts. Die DAkkS-Marke darf nur innerhalb
+			     dieses Rahmens verwendet werden; der QR ist ein zugelassenes
+			     optionales Element desselben Etiketts. -->
+			<rectangle>
+				<reportElement x="2" y="2" width="109" height="81" uuid="c4cae300-0212-4c42-9e32-000000000401"/>
+				<graphicElement><pen lineWidth="1.0" lineStyle="Solid"/></graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="2" width="1" height="81" uuid="c4cae300-0212-4c42-9e32-000000000402"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="33" width="53" height="1" uuid="c4cae300-0212-4c42-9e32-000000000403"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="57" width="53" height="1" uuid="c4cae300-0212-4c42-9e32-000000000404"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<!-- Registrierdaten der Kalibrierung (Kalibrierzeichen). -->
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="5" y="5" width="47" height="9" uuid="c4cae300-0212-4c42-9e32-000000000405">
+					<printWhenExpression><![CDATA[$V{hasMark}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="6"/></textElement>
+				<textFieldExpression><![CDATA[($F{mark_number_1} == null || $F{mark_number_1}.trim().isEmpty())
+    ? ""
+    : $F{mark_number_1}.trim().split("\\s+")[0]]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="5" y="14" width="47" height="17" uuid="c4cae300-0212-4c42-9e32-000000000406">
+					<printWhenExpression><![CDATA[$V{hasMark}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{mark_number_2} == null
+    ? ""
+    : $F{mark_number_2}.replace("/n", "\n").replace("\\n", "\n").trim()]]></textFieldExpression>
+			</textField>
+			<!-- Ohne Akkreditierung trägt dieselbe Zone die Schein-Nr. -->
+			<staticText>
+				<reportElement x="5" y="6" width="47" height="8" uuid="c4cae300-0212-4c42-9e32-000000000407">
+					<printWhenExpression><![CDATA[!$V{hasMark}.booleanValue()
+    && $F{certificate} != null && !$F{certificate}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Schein-Nr.]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="5" y="14" width="47" height="16" uuid="c4cae300-0212-4c42-9e32-000000000408">
+					<printWhenExpression><![CDATA[!$V{hasMark}.booleanValue()
+    && $F{certificate} != null && !$F{certificate}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{certificate} == null ? "" : $F{certificate}.trim()]]></textFieldExpression>
+			</textField>
+			<!-- Kalibriermonat — das Datumsfeld, das die DAkkS-Marke verlangt. -->
+			<staticText>
+				<reportElement x="5" y="35" width="47" height="7" uuid="c4cae300-0212-4c42-9e32-000000000409"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Kalibriert]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="5" y="42" width="47" height="14" uuid="c4cae300-0212-4c42-9e32-00000000040a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[($F{cal_date} == null || $F{cal_date}.trim().length() < 7)
+    ? ""
+    : $F{cal_date}.trim().substring(0, 7)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="59" width="47" height="7" uuid="c4cae300-0212-4c42-9e32-00000000040b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Nächste]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="5" y="66" width="47" height="14" uuid="c4cae300-0212-4c42-9e32-00000000040c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+				<textFieldExpression><![CDATA[($F{next_cal_date} == null || $F{next_cal_date}.trim().length() < 7)
+    ? ""
+    : $F{next_cal_date}.trim().substring(0, 7)]]></textFieldExpression>
+			</textField>
+			<!-- 50x50 pt = 17,6 mm. Bei QR-Version 5 (37 Module + Ruhezone) sind
+			     das ~0,39 mm je Modul, also gut drei Punkte auf 203 dpi. Wer das
+			     Feld verkleinert, macht den Aufkleber unscannbar. -->
+			<componentElement>
+				<reportElement x="58" y="6" width="50" height="50" uuid="c4cae300-0212-4c42-9e32-00000000040d">
+					<printWhenExpression><![CDATA[$V{code} != null && !$V{code}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<!-- Fehlerkorrektur M (15%), nicht die Jasper-Vorgabe L (7%). Ein
+				     Kalibrieraufkleber lebt am Gerät: Kratzer, Öl, eine
+				     angehobene Ecke. L verzeiht davon fast nichts. M kostet
+				     vier Module (Version 5 statt 4) und die sind eingeplant.
+				     Für rauhe Umgebungen genügt hier ein "Q". -->
+				<jr:QRCode errorCorrectionLevel="M">
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement x="56" y="58" width="54" height="8" uuid="c4cae300-0212-4c42-9e32-00000000040e">
+					<printWhenExpression><![CDATA[$V{isDeepLink}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Gerät scannen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="58" width="54" height="8" uuid="c4cae300-0212-4c42-9e32-00000000040f">
+					<printWhenExpression><![CDATA[!$V{isDeepLink}.booleanValue()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="56" y="66" width="54" height="13" uuid="c4cae300-0212-4c42-9e32-000000000410"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$V{readable}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
