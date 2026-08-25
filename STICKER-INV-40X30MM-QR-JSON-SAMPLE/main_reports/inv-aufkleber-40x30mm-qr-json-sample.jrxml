@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  V2 device label 40x30 mm with QR deep link (ADR-009, contract
+  "inventory-datasheet" v1.4). Filled from a JSON data source — NO SQL.
+
+  WHAT MAKES THIS DIFFERENT from STICKER-CAL-INV-ZEBRA-JSON-SAMPLE: that label
+  encodes `barcode.value` — the asset NUMBER, which a scanner reads back as
+  text. This one encodes `qr.url` — the ADDRESS of the public device page of
+  the QR code role (`/v2/qr/{uuid}`). Scanning it with a phone opens master
+  data, calibration status and documents without a login. Same device, two
+  different jobs; a warehouse scanner wants the number, a technician standing
+  at the machine wants the page.
+
+  WHY THIS SIZE. The deep link is around 74 characters, so QR version 5 with 37
+  modules at error correction M. Printed on the house 203 dpi label printer at
+  three dots per module the symbol needs ~17 mm; the 50x50 pt square below is
+  17,6 mm. Same footprint as STICKER-DAKKS-40X30MM-QR-JSON-SAMPLE so one roll
+  of label stock serves the device label and the calibration sticker.
+
+  Without a deep link (QR links switched off) the same square falls back to the
+  tenant's configured barcode value — then this label behaves like the Zebra
+  one, just bigger. The caption says which of the two it is.
+
+  113x85 pt = 39,9x30 mm. See main_reports/sample-data.json.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inv-aufkleber-40x30mm-qr-json-sample" pageWidth="113" pageHeight="85" orientation="Portrait" columnWidth="113" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" whenNoDataType="AllSectionsNoDetail" uuid="c5cbf400-0221-4c51-9e41-000000000221">
+	<property name="com.jaspersoft.studio.data.defadapter" value="inv-aufkleber-40x30mm-qr-json-sample_adapter.xml"/>
+	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="5"/>
+	<field name="asset_number" class="java.lang.String"><fieldDescription><![CDATA[device.asset_number]]></fieldDescription></field>
+	<field name="description" class="java.lang.String"><fieldDescription><![CDATA[device.description]]></fieldDescription></field>
+	<field name="manufacturer" class="java.lang.String"><fieldDescription><![CDATA[device.manufacturer]]></fieldDescription></field>
+	<field name="model" class="java.lang.String"><fieldDescription><![CDATA[device.model]]></fieldDescription></field>
+	<field name="next_calibration_date" class="java.lang.String"><fieldDescription><![CDATA[device.next_calibration_date]]></fieldDescription></field>
+	<!-- Der Deep-Link auf die Geraeteseite der QR-Code-Rolle. Steht je Datensatz
+	     im Dokument, damit ein Stapel von vierzig Etiketten vierzig Geraete
+	     trifft. null, solange die QR-Links abgeschaltet sind. -->
+	<field name="qr_url" class="java.lang.String"><fieldDescription><![CDATA[qr.url]]></fieldDescription></field>
+	<!-- Was der Mandant codiert, entscheiden die Regeln (Grundeinstellungen >
+	     Barcode & Etikett); der Datensatz liefert es fertig aufgeloest. -->
+	<field name="barcode_value" class="java.lang.String"><fieldDescription><![CDATA[barcode.value]]></fieldDescription></field>
+	<!-- Ohne Beschreibung bliebe die mittlere Zone ein leerer Kasten. Hersteller
+	     und Modell sagen dasselbe in kuerzer und stehen fast immer. -->
+	<variable name="whatItIs" class="java.lang.String"><variableExpression><![CDATA[($F{description} != null && !$F{description}.trim().isEmpty())
+    ? $F{description}.trim()
+    : (($F{manufacturer} == null ? "" : $F{manufacturer}.trim())
+       + (($F{manufacturer} != null && !$F{manufacturer}.trim().isEmpty()
+           && $F{model} != null && !$F{model}.trim().isEmpty()) ? " " : "")
+       + ($F{model} == null ? "" : $F{model}.trim()))]]></variableExpression></variable>
+	<variable name="readable" class="java.lang.String"><variableExpression><![CDATA[($F{barcode_value} != null && !$F{barcode_value}.trim().isEmpty())
+    ? $F{barcode_value}.trim()
+    : ($F{asset_number} == null ? "" : $F{asset_number}.trim())]]></variableExpression></variable>
+	<variable name="code" class="java.lang.String"><variableExpression><![CDATA[($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())
+    ? $F{qr_url}.trim()
+    : $V{readable}]]></variableExpression></variable>
+	<variable name="isDeepLink" class="java.lang.Boolean"><variableExpression><![CDATA[Boolean.valueOf($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())]]></variableExpression></variable>
+	<detail>
+		<band height="85" splitType="Prevent">
+			<rectangle>
+				<reportElement x="2" y="2" width="109" height="81" uuid="c5cbf400-0221-4c51-9e41-000000000501"/>
+				<graphicElement><pen lineWidth="1.0" lineStyle="Solid"/></graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="2" width="1" height="81" uuid="c5cbf400-0221-4c51-9e41-000000000502"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="28" width="53" height="1" uuid="c5cbf400-0221-4c51-9e41-000000000503"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="52" width="53" height="1" uuid="c5cbf400-0221-4c51-9e41-000000000504"/>
+				<graphicElement><pen lineWidth="0.75"/></graphicElement>
+			</line>
+			<!-- Identitaet des Geraets. -->
+			<staticText>
+				<reportElement x="5" y="4" width="47" height="6" uuid="c5cbf400-0221-4c51-9e41-000000000505"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="4" y="11" width="49" height="15" uuid="c5cbf400-0221-4c51-9e41-000000000506"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{asset_number} == null ? "" : $F{asset_number}.trim()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="4" y="30" width="49" height="20" uuid="c5cbf400-0221-4c51-9e41-000000000507"/>
+				<!-- 4,5 pt statt 5: deutsche Geraetebezeichnungen sind Komposita, und
+				     ein Wort, das breiter als die Spalte ist, bricht mitten im Wort
+				     statt an der Luecke. Bei 4,5 pt passt "Buegelmessschraube" in
+				     eine Zeile; ScaleFont faengt ab, was darueber hinausgeht. -->
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="4.5"/></textElement>
+				<textFieldExpression><![CDATA[$V{whatItIs}]]></textFieldExpression>
+			</textField>
+			<!-- Das eine Datum, das man am Geraet im Vorbeigehen prueft. -->
+			<staticText>
+				<reportElement x="4" y="54" width="49" height="7" uuid="c5cbf400-0221-4c51-9e41-000000000508">
+					<printWhenExpression><![CDATA[$F{next_calibration_date} != null && !$F{next_calibration_date}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Nächste Kal.]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="4" y="63" width="49" height="12" uuid="c5cbf400-0221-4c51-9e41-000000000509"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{next_calibration_date} == null ? "" : $F{next_calibration_date}.trim()]]></textFieldExpression>
+			</textField>
+			<!-- 50x50 pt = 17,6 mm. Bei QR-Version 5 (37 Module + Ruhezone) sind
+			     das ~0,39 mm je Modul, also gut drei Punkte auf 203 dpi. Wer das
+			     Feld verkleinert, macht das Etikett unscannbar. -->
+			<componentElement>
+				<reportElement x="58" y="6" width="50" height="50" uuid="c5cbf400-0221-4c51-9e41-00000000050a">
+					<printWhenExpression><![CDATA[$V{code} != null && !$V{code}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<!-- Fehlerkorrektur M (15%), nicht die Jasper-Vorgabe L (7%). Ein
+				     Geraeteetikett lebt am Geraet: Kratzer, Oel, eine angehobene
+				     Ecke. L verzeiht davon fast nichts. -->
+				<jr:QRCode errorCorrectionLevel="M">
+					<jr:codeExpression><![CDATA[$V{code}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement x="56" y="58" width="54" height="8" uuid="c5cbf400-0221-4c51-9e41-00000000050b">
+					<printWhenExpression><![CDATA[$V{isDeepLink}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Gerät scannen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="58" width="54" height="8" uuid="c5cbf400-0221-4c51-9e41-00000000050c">
+					<printWhenExpression><![CDATA[!$V{isDeepLink}.booleanValue()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<text><![CDATA[Inventar-Nr.]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="56" y="66" width="54" height="13" uuid="c5cbf400-0221-4c51-9e41-00000000050d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$V{readable}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

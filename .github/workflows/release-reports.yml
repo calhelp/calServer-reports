@@ -132,6 +132,7 @@ jobs:
           create_zip "STICKER-DAKKS-18MM-JSON-SAMPLE" "sticker-dakks-18mm-json-sample"
           create_zip "STICKER-DAKKS-40X30MM-QR-JSON-SAMPLE" "sticker-dakks-40x30mm-qr-json-sample"
           create_zip "STICKER-CAL-INV-ZEBRA-JSON-SAMPLE" "sticker-cal-inv-zebra-json-sample"
+          create_zip "STICKER-INV-40X30MM-QR-JSON-SAMPLE" "sticker-inv-40x30mm-qr-json-sample"
           create_zip "ORDER-JSON-SAMPLE" "order-json-sample"
           create_zip "DELIVERY-JSON-SAMPLE" "delivery-json-sample"
           create_zip "REPAIR-JSON-SAMPLE" "repair-json-sample"
