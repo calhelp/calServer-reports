@@ -23,11 +23,17 @@ Dasselbe Gerät, zwei verschiedene Aufgaben: Der Lagerscanner will die Nummer,
 der Techniker vor der Maschine will die Seite. Deshalb zwei Bundles und kein
 Schalter.
 
+**Im QR steht der Link — sonst nichts.** Kein Rückfall auf eine Nummer: Sonst
+wäre dasselbe Symbol mal eine Adresse und mal eine Nummer, je nach Einstellung,
+und genau diese Zweideutigkeit ist der Grund, warum dieses Bundle neben dem
+Zebra-Etikett steht statt es zu ersetzen.
+
 **Voraussetzung:** QR-Links müssen eingeschaltet sein (QR-Code-Rolle mit
 `qrlink_enable` und ein öffentlicher Benutzer). Sind sie aus, liefert der
-Datensatz `qr.url = null` — dann codiert derselbe QR den konfigurierten
-Barcode-Wert und die Beschriftung wechselt von *Gerät scannen* auf
-*Inventar-Nr.* Das Etikett verhält sich dann wie das Zebra-Etikett, nur grösser.
+Datensatz `qr.url = null` — dann wird **kein QR gedruckt**; die rechte Hälfte
+trägt stattdessen die lesbare Nummer gross, beschriftet als *Inventar-Nr.* Wer
+dauerhaft ohne QR-Links arbeitet, nimmt besser das Zebra-Bundle: Das codiert die
+Nummer und ist für seinen Zweck gebaut.
 
 ## Warum 40×30 mm
 

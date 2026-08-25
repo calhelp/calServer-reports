@@ -35,12 +35,16 @@ Der QR codiert `qr.url` — den öffentlichen Deep-Link auf die Geräteseite der
 **QR-Code-Rolle** (`/v2/qr/{uuid}`). Scannen führt ohne Anmeldung auf
 Stammdaten, Kalibrierstatus und Dokumente des Geräts.
 
+**Im QR steht der Link — sonst nichts.** Kein Rückfall auf eine Nummer: Sonst
+wäre dasselbe Symbol mal eine Adresse und mal eine Nummer, je nach Einstellung,
+und wer den Aufkleber in der Hand hält, sähe dem QR nicht an, welches von beidem
+er gerade ist.
+
 **Voraussetzung:** QR-Links müssen eingeschaltet sein (QR-Code-Rolle mit
 `qrlink_enable` und ein öffentlicher Benutzer). Sind sie aus, liefert der
-Datensatz `qr.url = null` — dann codiert derselbe QR den konfigurierten
-Barcode-Wert (`barcode.value`, sonst `device.asset_number`), und die
-Beschriftung wechselt von *Gerät scannen* auf *Inventar-Nr.* Ein leeres weisses
-Quadrat wäre die schlechtere Vorgabe.
+Datensatz `qr.url = null` — dann wird **kein QR gedruckt**; die rechte Hälfte
+trägt stattdessen die lesbare Nummer gross, beschriftet als *Inventar-Nr.* Ein
+grosser Nummernblock ist ein brauchbares Etikett, ein weisses Feld ist keines.
 
 Der Link steht **je Datensatz im Dokument**. Der alte V1-Jasper-Parameter
 `QR_Code_Value` gilt je Druckauftrag — im Stapeldruck zeigten damit alle vierzig

@@ -18,9 +18,11 @@
   That is why this bundle exists instead of squeezing a QR onto 18 mm, where
   nothing would be left for the DAkkS fields.
 
-  Without a deep link (QR links switched off) the same square carries the
-  tenant's configured barcode value instead of an empty white box — a plain
-  inventory QR, which is what the readable number underneath names either way.
+  The QR carries the deep link and NOTHING ELSE. No fallback to a number: the
+  same symbol must not be an address on one installation and a number on the
+  next, because nobody holding the sticker can tell which one they are looking
+  at. Without a link (QR links switched off) no QR is printed at all; the right
+  half then carries the readable number large instead of an empty white box.
 
   113x85 pt = 39,9x30 mm. See main_reports/sample-data.json.
 -->
@@ -47,9 +49,15 @@
 	<variable name="readable" class="java.lang.String"><variableExpression><![CDATA[($F{barcode_value} != null && !$F{barcode_value}.trim().isEmpty())
     ? $F{barcode_value}.trim()
     : ($F{asset_number} == null ? "" : $F{asset_number}.trim())]]></variableExpression></variable>
-	<variable name="code" class="java.lang.String"><variableExpression><![CDATA[($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())
-    ? $F{qr_url}.trim()
-    : $V{readable}]]></variableExpression></variable>
+	<!-- Im QR steht der Link zur QR-Ansicht — sonst nichts. Frueher fiel er
+	     ohne Deep-Link auf den Barcodewert zurueck; das machte aus demselben
+	     Symbol mal eine Adresse und mal eine Nummer, je nach Einstellung, und
+	     wer den Aufkleber in der Hand hielt, sah dem QR nicht an, welches von
+	     beidem er gerade ist. Ohne Link wird kein QR gedruckt; die lesbare
+	     Nummer darunter bleibt und traegt die Identitaet. -->
+	<variable name="code" class="java.lang.String"><variableExpression><![CDATA[($F{qr_url} == null || $F{qr_url}.trim().isEmpty())
+    ? ""
+    : $F{qr_url}.trim()]]></variableExpression></variable>
 	<variable name="isDeepLink" class="java.lang.Boolean"><variableExpression><![CDATA[Boolean.valueOf($F{qr_url} != null && !$F{qr_url}.trim().isEmpty())]]></variableExpression></variable>
 	<detail>
 		<band height="85" splitType="Prevent">
@@ -156,15 +164,28 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
 				<text><![CDATA[Gerät scannen]]></text>
 			</staticText>
+			<!-- Ohne Deep-Link wird kein QR gedruckt. Statt einer leeren
+			     Etikettenhaelfte uebernimmt die lesbare Nummer die Flaeche —
+			     ein grosser Nummernblock ist ein brauchbares Etikett, ein
+			     weisses Feld ist keines. -->
 			<staticText>
-				<reportElement x="56" y="58" width="54" height="8" uuid="c4cae300-0212-4c42-9e32-00000000040f">
+				<reportElement x="56" y="24" width="54" height="10" uuid="c4cae300-0212-4c42-9e32-00000000060a">
 					<printWhenExpression><![CDATA[!$V{isDeepLink}.booleanValue()]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="5"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement>
 				<text><![CDATA[Inventar-Nr.]]></text>
 			</staticText>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement x="56" y="66" width="54" height="13" uuid="c4cae300-0212-4c42-9e32-000000000410"/>
+				<reportElement x="56" y="36" width="54" height="26" uuid="c4cae300-0212-4c42-9e32-00000000060b">
+					<printWhenExpression><![CDATA[!$V{isDeepLink}.booleanValue()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="14" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$V{readable}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="56" y="66" width="54" height="13" uuid="c4cae300-0212-4c42-9e32-000000000410">
+					<printWhenExpression><![CDATA[$V{isDeepLink}]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
 				<textFieldExpression><![CDATA[$V{readable}]]></textFieldExpression>
 			</textField>
