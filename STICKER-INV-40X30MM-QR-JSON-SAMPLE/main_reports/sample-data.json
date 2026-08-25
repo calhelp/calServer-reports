@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "contract": "inventory-datasheet",
+    "schema_version": "1.4",
+    "generated_at": "2026-07-15T10:00:00+00:00",
+    "locale": "de-DE"
+  },
+  "device": {
+    "asset_number": "INV-9001",
+    "serial_number": "SN-12345",
+    "description": "Digitalmultimeter Fluke 87V",
+    "manufacturer": "Fluke",
+    "model": "87V",
+    "last_calibration_date": "2026-06-30",
+    "next_calibration_date": "2027-06-30"
+  },
+  "barcode": { "type": "datamatrix", "field": "asset_number", "value": "INV-9001" },
+  "qr": {
+    "enabled": true,
+    "target": "inventory",
+    "url": "https://calserver.example.com/v2/qr/8f14e45f-ceea-467a-9f6a-1c0b3b6c2f11"
+  }
+}
