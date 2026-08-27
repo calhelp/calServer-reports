@@ -293,6 +293,16 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     nicht. Wer die Kennzeichnung des Akkreditierungsumfangs auf dem Schein
     braucht, nimmt `22` (dieselben Werte, mit Spezifikations-, Toleranz- und
     Konformitätsspalte).
+  * **Zeilenumbruch statt Textverlust:** Jede Zelle des Detailbands wächst mit
+    ihrem Inhalt (`textAdjust="StretchHeight"`), alle Zellen einer Zeile werden
+    gleich hoch (`stretchType="ContainerHeight"`) und der Text sitzt oben. Ein
+    langer Wert läuft damit in die nächste Zeile, statt am Spaltenrand
+    abgeschnitten zu werden — betroffen waren vor allem `test_desc`
+    („Messbedingungen“, 70 px in Variante `1`), Werte mit Vorsatz und
+    ausgeschriebener Einheit (`1234.5678 Milli Ampere`) und die gedeckelte
+    Toleranzausnutzung `>500` in der 16 px schmalen Spalte `% Tol`. Kurze
+    Zeilen bleiben exakt 14 px hoch, die Seitenaufteilung bestehender Scheine
+    ändert sich dadurch nicht.
   * Der Tabellenkopf existiert je `MeasurementDetails`-Variante in einer
     modernen (Standard, ohne umlaufende Rahmen) und einer klassischen
     Ausführung (`ModernResultsHeader=N`); beide sind an den Datenspalten

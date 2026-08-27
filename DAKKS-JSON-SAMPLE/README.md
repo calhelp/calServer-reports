@@ -142,6 +142,12 @@ gedruckt hat.**
 `test_desc` ist die Bezeichnung des Prüfschritts aus der Prozedur — sprechende
 Messbedingungen entstehen dort, nicht im Bericht.
 
+Zu lange Inhalte brechen um, statt verloren zu gehen: die Zellen des
+Detailbands wachsen mit ihrem Text, alle Zellen einer Zeile bleiben gleich hoch
+und der Text sitzt oben. Das betraf vor allem `test_desc` (70 px breit in
+Variante `1`), Werte mit ausgeschriebener Einheit (`10 kΩ`) und dreistellige
+`% Tol`. Kurze Zeilen behalten ihre bisherige Höhe von 14 px.
+
 ## Prozedur und Umgebungsbedingungen: gepflegt wird an der Quelle
 
 Vier Abschnitte des Scheins kommen aus der **Prozedur**, nicht aus Parametern.
