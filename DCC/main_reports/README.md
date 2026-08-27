@@ -26,6 +26,9 @@ parallel deployed werden.
 5. Die Varianten `2`, `22`, `3` und `4` drucken Wert, SI-Vorsatz und Einheit als
    eine Angabe (`9.9 mg`). Variante `1` ist die Basisdarstellung und druckt die
    Rohwerte ohne Vorsatz und Einheit.
+6. Das `*` hinter der Konformitätsaussage markiert Messpunkte **außerhalb** des
+   Akkreditierungsumfangs (`accred` = `0`/`nein`/`false`). `1`/`ja` und ein
+   leeres Feld drucken kein Zeichen.
 
 ## XML + PDF im Paar
 1. Exportiere/baue den PDF-Report wie gewohnt (z. B. via Workflow oder calServer-UI).

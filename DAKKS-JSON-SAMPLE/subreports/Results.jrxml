@@ -545,8 +545,35 @@
          || ($F{uut_ind} != null && !$F{uut_ind}.trim().isEmpty())
         )]]></variableExpression>
 	</variable>
+	<!--
+	    Das "*" der Legende bedeutet "Messergebnisse nicht im
+	    Akkreditierungsumfang des Kalibrierlaboratoriums" — es markiert also die
+	    AUSNAHME, nicht die Regel. Bis hierher setzte die Vorlage es bei
+	    `accred = 1`, also genau umgekehrt: auf einem Schein, dessen Zeilen alle
+	    akkreditiert waren, trug jede Zeile die Fussnote "nicht im
+	    Akkreditierungsumfang".
+
+	    Drei Zustaende, nicht zwei:
+
+	      1 / y / yes / ja / true   -> im Umfang            -> kein Zeichen
+	      0 / n / no / nein / false -> nicht im Umfang      -> "*"
+	      leer / nicht gesetzt      -> keine Aussage        -> kein Zeichen
+
+	    Der dritte Fall ist der Grund, warum die Abfrage `accred` nicht mehr auf
+	    0 zurueckfaellt (`COALESCE(accred, '')`): sonst waere "nie gepflegt"
+	    dasselbe wie "ausserhalb des Umfangs", und jede in calServer erfasste
+	    Zeile — die Messwertaufnahme schreibt das Feld nicht — bekaeme die
+	    Fussnote. Ein Schein behauptet nichts, was niemand erfasst hat.
+	-->
 	<variable name="AccredMark" class="java.lang.String">
-		<variableExpression><![CDATA[($F{accred}!=null && $F{accred}.toString().trim().equals("1")) ? "*" : ""]]></variableExpression>
+		<variableExpression><![CDATA[$F{accred} == null
+      ? ""
+      : (
+          $F{accred}.toString().trim().toLowerCase()
+            .matches("0|n|no|nein|false|f")
+          ? "*"
+          : ""
+        )]]></variableExpression>
 	</variable>
 	<columnHeader>
 		<band height="54">
@@ -2827,9 +2854,12 @@
 					<textElement verticalAlignment="Top">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[!$F{test_desc}.trim().isEmpty()
+					<textFieldExpression><![CDATA[(
+              !$F{test_desc}.trim().isEmpty()
               ? $F{test_desc}.trim().replaceAll("(?i)ohm","Ω")
-              : ""]]></textFieldExpression>
+              : ""
+            )
+            + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="ContainerHeight" x="156" y="0" width="96" height="14" uuid="9efcb26d-ce2d-4aeb-a0d4-23ede7e30e17"/>

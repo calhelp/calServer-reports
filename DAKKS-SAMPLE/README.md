@@ -285,14 +285,28 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     die Varianten `3`/`4` ziehen den fertigen Text aus `exp_uncert_iso_e` bzw.
     `exp_uncert_iso_p` vor, sofern er gefüllt ist.
   * Die Konformitätsspalte übersetzt `pass_fail` in die Symbolik der Legende
-    (`i.T.`, `?`, `!?`, `!`) und hängt bei `accred = 1` das `*` der Legende an.
-    Sie erwartet MET/TEAMs Schreibweise (`Pass`, `Fail`, `Pass Indeterminate`,
-    `Fail Indeterminate`); alles andere — auch ein bereits übersetztes Symbol —
-    druckt eine leere Zelle.
-  * Variante `21` hat keine Konformitätsspalte und druckt damit auch das `*`
-    nicht. Wer die Kennzeichnung des Akkreditierungsumfangs auf dem Schein
-    braucht, nimmt `22` (dieselben Werte, mit Spezifikations-, Toleranz- und
-    Konformitätsspalte).
+    (`i.T.`, `?`, `!?`, `!`). Sie erwartet MET/TEAMs Schreibweise (`Pass`,
+    `Fail`, `Pass Indeterminate`, `Fail Indeterminate`); alles andere — auch
+    ein bereits übersetztes Symbol — druckt eine leere Zelle.
+  * **Akkreditierungsumfang (`accred`):** Das `*` der Legende bedeutet
+    „Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums"
+    und markiert damit die Ausnahme, nicht die Regel. Drei Zustände:
+
+    | `accred` | Bedeutung | Druck |
+    | --- | --- | --- |
+    | `1`, `y`, `yes`, `ja`, `true` | im Akkreditierungsumfang | kein Zeichen |
+    | `0`, `n`, `no`, `nein`, `false` | **nicht** im Umfang, kennzeichnungspflichtig | `*` |
+    | leer / nicht gesetzt | keine Aussage erfasst | kein Zeichen |
+
+    Der dritte Zustand ist der Grund, warum die Abfrage `accred` nicht mehr auf
+    `0` zurückfallen lässt (`COALESCE(accred, '')`): sonst wäre „nie gepflegt"
+    dasselbe wie „außerhalb des Umfangs" und jede in calServer erfasste Zeile
+    trüge die Fußnote — die Messwertaufnahme schreibt das Feld nicht. Der
+    Schein behauptet nichts, was niemand erfasst hat.
+  * Das Zeichen steht in den Varianten `1`, `2`, `22`, `3` und `4` hinter der
+    Konformitätsaussage. Variante `21` hat keine Konformitätsspalte und hängt
+    es deshalb an die Messbedingung — die Kennzeichnungspflicht gilt in jeder
+    Variante.
   * **Zeilenumbruch statt Textverlust:** Jede Zelle des Detailbands wächst mit
     ihrem Inhalt (`textAdjust="StretchHeight"`), alle Zellen einer Zeile werden
     gleich hoch (`stretchType="ContainerHeight"`) und der Text sitzt oben. Ein
