@@ -186,7 +186,14 @@ vier Schreibweisen — MET/TEAMs `Points.cPointPassFailStatus`:
 | `Fail Indeterminate` | `!?` | außerhalb, aber keine negative Konformitätsaussage möglich |
 
 Alles andere — auch leer, auch `P`/`F`, auch `Conditional` — druckt eine leere
-Zelle. In der Variante `MeasurementDetails=1` kommt ein zweites Gatter dazu:
+Zelle.
+
+Das `*` daneben ist eine eigene Aussage und hängt an `results[].accred`: es
+bedeutet „Messergebnisse nicht im Akkreditierungsumfang" und markiert damit die
+Ausnahme. `1`/`ja`/`true` = im Umfang (kein Zeichen), `0`/`nein`/`false` =
+nicht im Umfang (`*`), leer = keine Aussage erfasst (kein Zeichen). Der
+Contract liefert das Feld deshalb leer statt als `0`, wenn die Zeile es nicht
+trägt — sonst würde jede in calServer erfasste Zeile die Fußnote bekommen. In der Variante `MeasurementDetails=1` kommt ein zweites Gatter dazu:
 gedruckt wird nur, wenn `fsc` „EVAL" oder „PICE" enthält.
 
 Die Felder `conformity`, `test_status` und `guardband_meth` des Contracts sind
