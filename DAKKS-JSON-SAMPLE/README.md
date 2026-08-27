@@ -118,10 +118,19 @@ und die Layout-Variante entscheidet nur noch, welches sie **zuerst** liest:
 |--------------------|--------|----------|
 | Sollwert (Varianten `1`, `2`, `3`, `4`) | `results[].fixq` (+`_p`/`_u`) | `sys_actual` |
 | Sollwert (Varianten `21`, `22`) | `results[].sys_actual` (+`_p`/`_u`) | `fixq` |
-| Messwert (Varianten `1`, `2`, `3`, `4`) | `results[].varq` | `uut_ind` |
-| Messwert (Varianten `21`, `22`) | `results[].uut_ind` | `varq` |
+| Messwert (Varianten `1`, `2`, `3`, `4`) | `results[].varq` (+`_p`/`_u`) | `uut_ind` |
+| Messwert (Varianten `21`, `22`) | `results[].uut_ind` (+`_p`/`_u`) | `varq` |
+| untere/obere Spezifikation (`1`, `2`, `22`) | `results[].lower_limit` / `upper_limit` (+`_p`/`_u`) | – |
+| erweiterte Messunsicherheit (`1`, `2`, `21`, `22`) | `results[].exp_uncert` (+`_p`/`_u`) | – |
+| erweiterte Messunsicherheit (`3`) | `results[].exp_uncert_iso_e`, sonst `exp_uncert` | – |
+| erweiterte Messunsicherheit (`4`) | `results[].exp_uncert_iso_p`, sonst `exp_uncert` | – |
 | Messbedingungen | `results[].test_desc` | – |
 | % rel. Abweichung | `results[].rel_err` | – |
+| % Tol (`1`, `2`, `22`, `3`, `4`) | `results[].tol_err` | – |
+
+Die `_p`/`_u`-Geschwister sind keine Zierde: die Varianten `2`, `21`, `22`, `3`
+und `4` drucken Wert, SI-Vorsatz und Einheit als eine Angabe (`9.9 mg`).
+Variante `1` ist die Basisdarstellung und druckt bewusst nur den Rohwert.
 
 `sys_actual`/`uut_ind` füllt die calServer-Messwertaufnahme nur für numerische
 Prüfschritte mit gesetztem `tol_ref`; MET/CAL-Importe liefern beide Paare. Ohne

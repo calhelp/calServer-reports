@@ -127,7 +127,7 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
-| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere oder nicht-numerische Eingaben werden als `1` behandelt. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
+| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere, nicht-numerische **und unbekannte** Eingaben werden als `1` behandelt — eine `5` druckte bis dahin eine komplett leere Ergebnistabelle, ohne Kopf und ohne Hinweis. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
 | `ModernResultsHeader` | ➖ | `Y` | Tabellenkopf-Stil im `Results`-Unterbericht. Standard ist der moderne Kopf ohne umlaufende Rahmen (gilt auch für leere oder unbekannte Werte); nur ein explizites `N` schaltet auf den klassischen Kopf mit Rahmen zurück. Beide Stile sind je `MeasurementDetails`-Variante an den Datenspalten ausgerichtet. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
 | `environmental_conditions` | ➖ | `""` | Name der Ressource, deren Klimabereich gedruckt wird. Der Bericht joint `resource.name = $P{environmental_conditions}` und liest deren Feld „Umgebungs­bedingungen“ (`environment_resources`) – ein Text mit `\|` als Trenner, links die Temperatur, rechts die Feuchte, jeweils mit Einheit, z. B. `21,0 ... 23,0 °C\|40 ... 60 %`. **Jede Hälfte fällt für sich zurück:** bleibt sie leer, druckt der Schein den an der Kalibrierung erfassten Wert (`C2311` + ` °C` bzw. `C2312` + ` %`). So steht der Klimabereich des Labors einmal an der Ressource statt in jedem Bericht erneut. |
@@ -244,26 +244,63 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   Prüfschritts aus der Prozedur. Wer sie sprechend haben will („Kanal 1,
   Anzeigeabweichung bei 15 °C“), pflegt sie in der Prozedur — der Bericht
   formatiert sie nur.
+* **Einheiten in den Wertespalten:** Die Varianten `2`, `21`, `22`, `3` und `4`
+  setzen jede Wertespalte nach derselben Regel zusammen — Wert, SI-Vorsatz,
+  Einheit, Vorsatz und Einheit zusammengeschrieben (`9.9 mg`, nicht `9.9 m g`).
+  Trägt der Wert die Einheit schon im Text (`10 V`, `i.O.`), kommt nichts dazu;
+  geprüft wird der Rest hinter der Zahl, damit das `E` einer
+  Exponentialschreibweise nicht für eine Einheit gehalten wird. Variante `1` ist
+  die Basisdarstellung und druckt bewusst die Rohwerte ohne Vorsatz und Einheit;
+  ihre Spalten sind 54 px breit und nehmen keine Einheit mehr auf. Wer Einheiten
+  im Ausdruck braucht, nimmt `2` oder `22` — dieselben Spalten, formatiert.
+* **Die Varianten auf einen Blick:**
+
+  | Variante | Spalten (links nach rechts) | Sollwert / Messwert aus | Einheiten in den Wertespalten |
+  | --- | --- | --- | --- |
+  | `1` | Messbedingungen · Sollwert · untere Spez. · Messwert · obere Spez. · % rel. Abw. · erw. MU · % Tol · Konformität | `fixq` / `varq` | nein (Basisdarstellung, Rohwerte) |
+  | `2` | wie `1`, breitere Spalten | `fixq` / `varq` | ja |
+  | `22` | wie `2` | `sys_actual` / `uut_ind` | ja |
+  | `21` | Messbedingungen · Sollwert · Messwert · % rel. Abw. · erw. MU | `sys_actual` / `uut_ind` | ja |
+  | `3` | Messbedingungen · Sollwert · Messwert · % rel. Abw. · erw. MU · % Tol · Konformität | `fixq` / `varq` | ja |
+  | `4` | wie `3`, Unsicherheit aus `exp_uncert_iso_p` statt `exp_uncert_iso_e` | `fixq` / `varq` | ja |
+
+  Jede Spalte jeder Variante hat eine Datenzelle, und jede Datenzelle steht
+  exakt unter ihrem Spaltenkopf — in beiden Kopfstilen. `21` und `22` drucken
+  bewusst das andere Spaltenpaar; welches von beiden der Sollwert ist, hängt am
+  Toleranzbezug der Prozedur, deshalb gibt es die Varianten überhaupt.
+
 * **Besonderheiten:**
-  * `NominalValue` und `MeasuredValue` kombinieren Wert, Prüfschritt und Einheit.
   * Variante `1` druckt den Sollwert in der Spalte `Sollwert / True Value`, die
     ihr Tabellenkopf seit jeher ausweist; bis dahin war die Spalte in beiden
     Kopfstilen ohne Datenzelle und damit immer leer.
   * `ToleranceRange` entscheidet automatisch zwischen ±-Anzeige und
     Min/Max-Spalten.
-  * `RoundedTolErr` rundet auf eine Nachkommastelle und hängt `%` an.
+  * `RoundedRelError` rundet die relative Abweichung auf eine Nachkommastelle;
+    `RoundedTolErr` rundet die Toleranzausnutzung auf ganze Prozent und deckelt
+    sie bei `>500`. Das Prozentzeichen steht im Spaltenkopf, nicht in der Zelle.
   * `FormattedUncertainty` formatiert wissenschaftliche Schreib­weisen
     (`×10ⁿ`), sofern keine HTML-Markups vorliegen.
-  * `SymbolStatus` leitet aus `pass_fail` die Konformitäts­symbolik
-    (`iO`, `?`, `!?`, `!`) ab, sofern kein individueller Kommentar (`remark`)
-    hinterlegt ist.
+  * `ExpUncertaintyDisplay` setzt die erweiterte Messunsicherheit aus
+    `exp_uncert`, `exp_uncert_p` und `exp_uncert_u` zusammen (`°C` wird zu `K`);
+    die Varianten `3`/`4` ziehen den fertigen Text aus `exp_uncert_iso_e` bzw.
+    `exp_uncert_iso_p` vor, sofern er gefüllt ist.
+  * Die Konformitätsspalte übersetzt `pass_fail` in die Symbolik der Legende
+    (`i.T.`, `?`, `!?`, `!`) und hängt bei `accred = 1` das `*` der Legende an.
+    Sie erwartet MET/TEAMs Schreibweise (`Pass`, `Fail`, `Pass Indeterminate`,
+    `Fail Indeterminate`); alles andere — auch ein bereits übersetztes Symbol —
+    druckt eine leere Zelle.
+  * Variante `21` hat keine Konformitätsspalte und druckt damit auch das `*`
+    nicht. Wer die Kennzeichnung des Akkreditierungsumfangs auf dem Schein
+    braucht, nimmt `22` (dieselben Werte, mit Spezifikations-, Toleranz- und
+    Konformitätsspalte).
   * **Zeilenumbruch statt Textverlust:** Jede Zelle des Detailbands wächst mit
     ihrem Inhalt (`textAdjust="StretchHeight"`), alle Zellen einer Zeile werden
     gleich hoch (`stretchType="ContainerHeight"`) und der Text sitzt oben. Ein
     langer Wert läuft damit in die nächste Zeile, statt am Spaltenrand
     abgeschnitten zu werden — betroffen waren vor allem `test_desc`
-    („Messbedingungen“, 70 px in Variante `1`), Werte mit ausgeschriebener
-    Einheit (`10 kΩ`, `1234.5678 Milli Ampere`) und dreistellige `% Tol`. Kurze
+    („Messbedingungen“, 70 px in Variante `1`), Werte mit Vorsatz und
+    ausgeschriebener Einheit (`1234.5678 Milli Ampere`) und die gedeckelte
+    Toleranzausnutzung `>500` in der 16 px schmalen Spalte `% Tol`. Kurze
     Zeilen bleiben exakt 14 px hoch, die Seitenaufteilung bestehender Scheine
     ändert sich dadurch nicht.
   * Der Tabellenkopf existiert je `MeasurementDetails`-Variante in einer

@@ -20,6 +20,12 @@ parallel deployed werden.
    im Subfolder `subreports` deines DCC-Pfades.
 4. `MeasurementDetails` ist im DCC standardmäßig auf **22** gesetzt (DCC-Layout
    für die Messergebnisse). Andere Layouts (1/2/3/4) sind weiterhin verfügbar.
+   Die Kurzform `21` des DAkkS-Scheins gibt es hier nicht; sie fällt — wie jeder
+   andere unbekannte Wert — auf Variante `1` zurück, statt eine leere
+   Ergebnistabelle zu drucken.
+5. Die Varianten `2`, `22`, `3` und `4` drucken Wert, SI-Vorsatz und Einheit als
+   eine Angabe (`9.9 mg`). Variante `1` ist die Basisdarstellung und druckt die
+   Rohwerte ohne Vorsatz und Einheit.
 
 ## XML + PDF im Paar
 1. Exportiere/baue den PDF-Report wie gewohnt (z. B. via Workflow oder calServer-UI).
