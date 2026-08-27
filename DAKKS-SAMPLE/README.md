@@ -257,6 +257,15 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   * `SymbolStatus` leitet aus `pass_fail` die Konformitäts­symbolik
     (`iO`, `?`, `!?`, `!`) ab, sofern kein individueller Kommentar (`remark`)
     hinterlegt ist.
+  * **Zeilenumbruch statt Textverlust:** Jede Zelle des Detailbands wächst mit
+    ihrem Inhalt (`textAdjust="StretchHeight"`), alle Zellen einer Zeile werden
+    gleich hoch (`stretchType="ContainerHeight"`) und der Text sitzt oben. Ein
+    langer Wert läuft damit in die nächste Zeile, statt am Spaltenrand
+    abgeschnitten zu werden — betroffen waren vor allem `test_desc`
+    („Messbedingungen“, 70 px in Variante `1`), Werte mit ausgeschriebener
+    Einheit (`10 kΩ`, `1234.5678 Milli Ampere`) und dreistellige `% Tol`. Kurze
+    Zeilen bleiben exakt 14 px hoch, die Seitenaufteilung bestehender Scheine
+    ändert sich dadurch nicht.
   * Der Tabellenkopf existiert je `MeasurementDetails`-Variante in einer
     modernen (Standard, ohne umlaufende Rahmen) und einer klassischen
     Ausführung (`ModernResultsHeader=N`); beide sind an den Datenspalten
