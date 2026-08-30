@@ -344,8 +344,8 @@
         "en": "Section \"calibration item\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Kalibriergegenstand“ aus.",
-        "en": "\"N\" hides the \"calibration item\" section."
+        "de": "„N“ blendet den Abschnitt „Kalibriergegenstand“ aus. Tipp: Gedruckt wird das Feld „Kalibriergegenstand“ der Prozedur; `Asset_description` ist nur der Fallback. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt (V1: C2320).",
+        "en": "\"N\" hides the \"calibration item\" section. Tip: what prints is the procedure's \"calibration item\" field; `Asset_description` is only the fallback. For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: C2320)."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -472,8 +472,8 @@
         "en": "Section \"calibration procedure\""
       },
       "description": {
-        "de": "Abschnitt „Kalibrierverfahren“. Tipp: Gedruckt wird die Beschreibung der Prozedur; `Calibration_procedure_1` ist nur der Fallback, wenn die Prozedur nichts liefert.",
-        "en": "Section \"calibration procedure\". Tip: what gets printed is the procedure's description; `Calibration_procedure_1` is only the fallback for when the procedure has nothing."
+        "de": "Abschnitt „Kalibrierverfahren“. Tipp: Gedruckt wird die **Kalibriermethode** der Prozedur. Der Fallback heisst hier `Calibration_document` — im V1-Original sind die beiden Fallback-Parameter dieses und des nächsten Abschnitts über Kreuz benannt. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt (V1: C2320).",
+        "en": "\"Calibration procedure\" section. Tip: what prints is the procedure's **calibration method**. Its fallback is `Calibration_document` — in the V1 original the fallback parameters of this and the next section are crossed. For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: C2320)."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -504,8 +504,8 @@
         "en": "Section \"procedural document\""
       },
       "description": {
-        "de": "Abschnitt „Verfahrensanweisung / QMS-Dokument“. Tipp: Gedruckt wird die Kalibriermethode der Prozedur; `Calibration_document` ist nur der Fallback.",
-        "en": "Section \"procedure document / QMS document\". Tip: what gets printed is the procedure's calibration method; `Calibration_document` is only the fallback."
+        "de": "Abschnitt „Verfahrensanweisung / QMS-Dokument“. Tipp: Gedruckt wird die **Beschreibung** der Prozedur. Der Fallback heisst hier `Calibration_procedure_1` — siehe die Kreuzbenennung beim vorigen Abschnitt. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt (V1: C2320).",
+        "en": "\"Procedural document / QMS document\" section. Tip: what prints is the procedure's **description**. Its fallback is `Calibration_procedure_1` — see the crossed naming noted on the previous section. For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: C2320)."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -536,8 +536,8 @@
         "en": "Section \"measurement conditions\""
       },
       "description": {
-        "de": "„N“ blendet den Abschnitt „Messbedingungen“ aus. Tipp: Der Text kommt aus dem Feld „Messbedingungen“ der Prozedur. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen trägt (V1: `C2320`). Ohne Prozedur druckt der Schein „im permanenten Labor“.",
-        "en": "\"N\" hides the \"measurement conditions\" section. Tip: the text comes from the procedure's \"measurement conditions\" field. For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: `C2320`). Without a procedure the certificate prints \"in the permanent laboratory\"."
+        "de": "„N“ blendet den Abschnitt „Messbedingungen“ aus. Tipp: Der Text kommt aus dem Feld „Messbedingungen“ der Prozedur; ohne ihn druckt der Schein „im permanenten Labor“. Damit der Bericht die Prozedur überhaupt findet, muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt (V1: C2320).",
+        "en": "\"N\" hides the \"measurement conditions\" section. Tip: the text comes from the procedure's \"measurement conditions\" field; without it the certificate prints \"in the permanent laboratory\". For the report to find the procedure at all, the `procedure_field` report variable must point at the calibration field holding the procedure name (V1: C2320)."
       },
       "role": "variable",
       "group": "Abschnitte",
@@ -860,6 +860,21 @@
       "order": 350
     },
     {
+      "name": "procedure_field",
+      "label": {
+        "de": "Prozedurfeld der Kalibrierung",
+        "en": "Calibration field holding the procedure"
+      },
+      "description": {
+        "de": "Der Schalter, der die Prüfprozedur zur Quelle der Scheintexte macht. Einzutragen ist der api_name des KALIBRIERFELDS, in dem der Name der Prozedur steht (V1-Original: C2320) — nicht der Name einer Prozedur. calServer sucht damit die Zeile in „Prozeduren\" und füllt aus ihr Kalibriergegenstand, Kalibrierverfahren, Verfahrensanweisung und Messbedingungen. Bleibt der Parameter leer, bleibt der procedure-Block des Datensatzes leer, und der Schein druckt für diese vier Abschnitte die Fallback-Textbausteine (Asset_description, Calibration_document, Calibration_procedure_1, „im permanenten Labor\") — je Bericht derselbe Text, egal welches Gerät. Trägt das Feld einen Namen, den es unter „Prozeduren\" nicht gibt, greifen dieselben Fallbacks. Die vier Prozedurfelder werden mit Auszeichnung gepflegt (fett, kursiv, Indizes, Listen); mehr überträgt der Bericht nicht.",
+        "en": "The switch that makes the calibration procedure the source of the certificate texts. Enter the api_name of the CALIBRATION FIELD that holds the procedure's name (V1 original: C2320) — not the name of a procedure. calServer uses it to find the row in \"Procedures\" and fills calibration item, calibration method, procedural document and measurement conditions from it. Left empty, the dataset's procedure block stays empty and the certificate prints the fallback text blocks for those four sections (Asset_description, Calibration_document, Calibration_procedure_1, \"in the permanent laboratory\") — the same text for every instrument. A name the \"Procedures\" list does not know falls back the same way. The four procedure fields are edited with markup (bold, italic, sub/superscript, lists); the report carries nothing beyond that."
+      },
+      "role": "data",
+      "group": "Abschnitte",
+      "order": 355,
+      "example": "C2320"
+    },
+    {
       "name": "environmental_conditions",
       "label": {
         "de": "Umgebungsbedingungen-Ressource",
@@ -940,8 +955,8 @@
         "en": "Calibration-item description"
       },
       "description": {
-        "de": "Freitext im Abschnitt „Kalibriergegenstand“. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Fallback für den Abschnitt „Kalibriergegenstand“, wenn der Datensatz keinen liefert. Der bessere Ort ist das Feld „Kalibriergegenstand“ der Prüfprozedur — dafür muss die Berichtsvariable `procedure_field` auf das Kalibrierfeld zeigen, das die Prozedur benennt. Ohne sie gilt dieser Text für jedes Gerät gleich.",
+        "en": "Fallback for the \"calibration item\" section when the dataset carries none. The better place is the procedure's \"calibration item\" field — which requires the `procedure_field` report variable to point at the calibration field naming the procedure. Without it this text applies to every instrument alike."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1075,8 +1090,8 @@
         "en": "Calibration-procedure fallback"
       },
       "description": {
-        "de": "Fallback-Text, wenn der Datensatz keine Verfahrensbeschreibung liefert. Leer lassen für den zweisprachigen V1-Standardtext. Tipp: Der bessere Ort ist das Feld „Beschreibung“ der Prozedur — es gilt je Prüfmittel, dieser Parameter je Bericht.",
-        "en": "Fallback text when the dataset carries no procedure description. Leave empty to keep the bilingual V1 default. Tip: the better place is the procedure's \"description\" field — it applies per instrument, this parameter per report."
+        "de": "Fallback für den Abschnitt „Verfahrensanweisung“, wenn der Datensatz keine Beschreibung liefert. Leer lassen für den zweisprachigen V1-Standardtext. Der bessere Ort ist das Feld „Beschreibung“ der Prüfprozedur — dafür muss die Berichtsvariable `procedure_field` gesetzt sein; sie gilt je Prüfmittel, dieser Parameter je Bericht.",
+        "en": "Fallback for the \"procedural document\" section when the dataset carries no description. Leave empty to keep the bilingual V1 default. The better place is the procedure's \"description\" field — which requires the `procedure_field` report variable; it applies per instrument, this parameter per report."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1090,8 +1105,8 @@
         "en": "Procedural-document fallback"
       },
       "description": {
-        "de": "Fallback für die Verfahrensanweisung, wenn der Datensatz keine liefert. Tipp: Der bessere Ort ist das Feld „Kalibriermethode“ der Prozedur.",
-        "en": "Fallback for the procedure document when the dataset carries none. Tip: the better place is the procedure's \"calibration method\" field."
+        "de": "Fallback für den Abschnitt „Kalibrierverfahren“, wenn der Datensatz keines liefert. Der bessere Ort ist das Feld „Kalibriermethode“ der Prüfprozedur — dafür muss die Berichtsvariable `procedure_field` gesetzt sein. Hinweis zur Benennung: Abschnittsüberschrift und Fallback-Text sind im akkreditierten V1-Original über Kreuz benannt; gedruckt wird hier die Kalibriermethode.",
+        "en": "Fallback for the \"calibration procedure\" section when the dataset carries none. The better place is the procedure's \"calibration method\" field — which requires the `procedure_field` report variable. Naming note: section heading and fallback text are crossed in the accredited V1 original; what prints here is the calibration method."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1105,8 +1120,8 @@
         "en": "Work-instruction fallback"
       },
       "description": {
-        "de": "Fallback für den Geltungsbereich, wenn weder Prozedur-Scope, Kalibriergegenstand noch Normale gefüllt sind. Tipp: Der bessere Ort ist das Feld „Geltungsbereich“ der Prozedur.",
-        "en": "Fallback for the scope when neither the procedure scope, the calibration item nor the standards are filled. Tip: the better place is the procedure's \"scope\" field."
+        "de": "Ohne Wirkung in diesem Layout: Der Wert speist nur die Variable `procedure_scope_var`, und die ist an kein Textfeld gebunden — einen Abschnitt „Geltungsbereich“ druckt der Schein nicht. Der Parameter bleibt deklariert, weil das Bundle die byte-genaue Kopie des akkreditierten V1-Originals ist.",
+        "en": "Without effect in this layout: the value only feeds the `procedure_scope_var` variable, which is bound to no text field — the certificate prints no \"scope\" section. The parameter stays declared because this bundle is the byte-exact copy of the accredited V1 original."
       },
       "role": "variable",
       "group": "Textbausteine",
