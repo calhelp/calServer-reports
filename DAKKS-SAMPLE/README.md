@@ -363,6 +363,36 @@ LEFT JOIN $P!{PrefixTable}customers cu ON cu.KTAG = i.KTAG
 WHERE  c.CTAG = $P{P_CTAG};
 ```
 
+### Prozedurtexte tragen Auszeichnung — und zwar eine begrenzte
+
+Die vier Prozedurfelder (`p.calibration_item`, `p.calibration_method`,
+`p.procedure_description`, `p.measurement_conditions`) landen in Textfeldern
+mit `markup="html"`. JasperReports schickt sie damit durch seinen
+Markup-Prozessor (`JEditorPaneHtmlMarkupProcessor`), und der ist **kein
+Browser**: Er parst mit Swings `HTMLEditorKit` und übernimmt aus dem Ergebnis
+ausschliesslich Zeichenlauf-Attribute.
+
+| Übernommen | Verworfen |
+|------------|-----------|
+| `b`/`strong`, `i`/`em`, `u`, `s`/`strike`/`del` | Tabellen, Bilder, alles Eingebettete |
+| `sub`, `sup` | `text-align`, Einzüge, `class`, alle CSS-Layoutregeln |
+| `br`, `p` (Zeilen- und Absatzumbruch) | `div` und Unbekanntes (Inhalt bleibt, Hülle fällt) |
+| `ul`, `ol`, `li` (Aufzählungszeichen, Nummerierung) | — |
+| `font`/`span` mit Farbe, Grösse, Schriftfamilie; `a href` | — |
+
+Die letzte Zeile ist der Sonderfall: Der Prozessor kann sie, calServer
+**schreibt sie trotzdem nicht** in die Spalten. Eine Schriftfamilie aus dem
+Markup ersetzt die Berichtsschrift (DejaVu Sans) durch eine, die im PDF nicht
+eingebettet ist — Umlaute fallen dann auf ein Ersatzglyph zurück; Überschriften
+bringen über Swings Standard-Stylesheet ihre eigene Grösse mit. Der
+Prozedur-Editor in calServer bietet deshalb nur die erste Hälfte der linken
+Spalte an, und `App\Support\ReportHtml` setzt sie beim Speichern durch.
+
+**Für eine eigene Befüllung dieser Spalten heisst das zweierlei:** Klartext muss
+escaped sein — ein „<" verschluckt sonst still den Rest der Zeile („U < 10 V"
+druckt als „U") —, und ein Zeilenumbruch muss als `<br/>` kommen, weil `\n` in
+HTML ein Leerzeichen ist.
+
 ### Typische Anpassungen
 
 * **Weitere Sprachen** – zusätzliche Locale-Logik über `Sprache` ergänzen; die

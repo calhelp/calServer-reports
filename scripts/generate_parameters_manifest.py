@@ -49,7 +49,7 @@ CLASS_TO_INPUT = {
     "Boolean": "boolean",
 }
 
-VALID_ROLES = {"variable", "prompt", "system"}
+VALID_ROLES = {"variable", "data", "prompt", "system"}
 VALID_SCOPES = {"report", "type", "global"}
 VALID_INPUTS = {"text", "textarea", "select", "boolean", "number", "date", "color", "image"}
 

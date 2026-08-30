@@ -153,15 +153,67 @@ Variante `1`), Werte mit ausgeschriebener Einheit (`10 kΩ`) und dreistellige
 Vier Abschnitte des Scheins kommen aus der **Prozedur**, nicht aus Parametern.
 Damit der Datensatz sie überhaupt trägt, muss die Berichtsvariable
 `procedure_field` auf das Kalibrierfeld zeigen, das den Prozedurnamen führt
-(V1-Original: `C2320`). Ohne sie bleibt der `procedure`-Block leer und der
-Schein fällt auf seine Textbausteine zurück:
+(V1-Original: `C2320`) — einzutragen ist der **Feldname**, nicht der Name einer
+Prozedur. Sie steht mit dieser Erklärung als `role: data` im
+[`parameters.json`](../DAKKS-JSON-SAMPLE/parameters.json), calServer bietet sie
+beim Hochladen des Pakets also von sich aus an.
 
-| Abschnitt | Feld der Prozedur | Fallback-Parameter |
-|-----------|-------------------|--------------------|
-| Kalibrierverfahren | `procedure.description` | `Calibration_procedure_1` |
-| Verfahrensanweisung | `procedure.calibration_method` | `Calibration_document` |
-| Messbedingungen | `procedure.measurement_conditions` | „im permanenten Labor" |
-| Geltungsbereich | `procedure.scope` | `calibration_item` → `standards` → `Calibration_procedure_2` |
+Ohne sie bleibt der `procedure`-Block leer und der Schein fällt auf seine
+Textbausteine zurück — je Bericht derselbe Text, für jedes Gerät, ohne dass
+irgendwo ein Fehler erscheint:
+
+| Abschnitt (Bandbeschriftung) | Feld der Prozedur | Fallback |
+|------------------------------|-------------------|----------|
+| KALIBRIERGEGENSTAND | `procedure.calibration_item` | Parameter `Asset_description` |
+| KALIBRIERVERFAHREN | `procedure.calibration_method` | `Calibration_document`, sonst „Verfahrensanweisung nicht angegeben" |
+| VERFAHRENSANWEISUNG | `procedure.description` | `Calibration_procedure_1`, sonst „Kalibrierverfahren nicht angegeben" |
+| MESSBEDINGUNGEN | `procedure.measurement_conditions` | „im permanenten Labor" |
+
+Die Feldzuordnung ist stimmig — die **Fallback-Parameter** sind es nicht: Unter
+der Überschrift KALIBRIERVERFAHREN springt `Calibration_document` ein und
+schreibt „Verfahrensanweisung nicht angegeben", unter VERFAHRENSANWEISUNG
+`Calibration_procedure_1` mit „Kalibrierverfahren nicht angegeben". Wer die
+Parameternamen als Wegweiser nimmt, füllt also den falschen. Das kommt
+unverändert aus dem akkreditierten V1-Original und wird hier **nicht**
+stillschweigend gerichtet: Die JSON-Kopie ist mechanisch abgeleitet und
+byte-genau nachweisbar. Was sich gefahrlos richten lässt, sind die
+Beschreibungen im Parameter-Katalog — und die sagen es jetzt.
+
+`procedure.standards` und `procedure.scope` sind als Variablen deklariert
+(`procedure_standards_var`, `procedure_scope_var`), aber **an kein Textfeld
+gebunden** — der Schein druckt sie nicht. Eine frühere Fassung dieser Tabelle
+führte „Geltungsbereich" als eigenen Abschnitt; den gibt es im Layout nicht.
+
+### Diese vier Felder tragen Auszeichnung — und zwar eine begrenzte
+
+Alle vier Textfelder stehen im Layout auf `markup="html"`. JasperReports
+schickt ihren Inhalt damit durch seinen Markup-Prozessor
+(`JEditorPaneHtmlMarkupProcessor`), und der ist **kein Browser**: Er parst mit
+Swings `HTMLEditorKit` und übernimmt aus dem Ergebnis ausschliesslich
+Zeichenlauf-Attribute.
+
+| Übernommen | Verworfen |
+|------------|-----------|
+| `b`/`strong`, `i`/`em`, `u`, `s`/`strike`/`del` | Tabellen, Bilder, alles Eingebettete |
+| `sub`, `sup` | `text-align`, Einzüge, `class`, alle CSS-Layoutregeln |
+| `br`, `p` (Zeilen- und Absatzumbruch) | `div` und Unbekanntes (Inhalt bleibt, Hülle fällt) |
+| `ul`, `ol`, `li` (Aufzählungszeichen, Nummerierung inkl. `type`/`start`) | — |
+| `font`/`span` mit Farbe, Grösse, Schriftfamilie; `a href` | — |
+
+Die letzte Zeile ist der Sonderfall: Der Prozessor kann sie, calServer
+**liefert sie trotzdem nicht**. Eine Schriftfamilie aus dem Markup ersetzt die
+Berichtsschrift (DejaVu Sans) durch eine, die im PDF nicht eingebettet ist —
+Umlaute und Sonderzeichen fallen dann auf ein Ersatzglyph zurück. Überschriften
+bringen über Swings Standard-Stylesheet ihre eigene Schriftgrösse mit, und
+Farbe ist auf einem akkreditierten Schein keine Angabe, die aus einem Freitext
+kommen sollte. Was calServer schreibt, ist deshalb genau die erste Hälfte der
+linken Spalte (`App\Support\ReportHtml` setzt sie durch, der Prozedur-Editor
+bietet auch nur sie an).
+
+**Für eigene Datenquellen heisst das zweierlei:** Klartext in diesen Feldern
+muss escaped sein — ein „<" verschluckt sonst still den Rest der Zeile („U <
+10 V" druckt als „U") —, und ein Zeilenumbruch muss als `<br/>` kommen, weil
+`\n` in HTML ein Leerzeichen ist.
 
 **Umgebungsbedingungen** kommen aus einer **Ressource**: `environmental_conditions`
 benennt sie, gelesen wird ihr Feld „Umgebungsbedingungen"

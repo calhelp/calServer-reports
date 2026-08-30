@@ -32,7 +32,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_PATH = REPO_ROOT / "schema" / "report-parameters.schema.json"
 
-VALID_ROLES = {"variable", "prompt", "system"}
+VALID_ROLES = {"variable", "data", "prompt", "system"}
 VALID_SCOPES = {"report", "type", "global"}
 VALID_INPUTS = {"text", "textarea", "select", "boolean", "number", "date", "color", "image"}
 
@@ -141,12 +141,26 @@ def check_manifest(manifest_path: Path) -> None:
             errors.append(f"{manifest_path}: Parameter „{name}“ ist doppelt deklariert")
         seen.add(name)
 
-        if name not in declared:
+        role = entry.get("role", "variable")
+
+        # role=data beschreibt eine Berichtsvariable, die den DATENSATZ steuert
+        # (z. B. `procedure_field`: welches Kalibrierfeld die Prozedur benennt).
+        # Sie taucht im Layout nicht auf und kann dort auch nicht deklariert
+        # sein — die Prüfung „im JRXML deklariert" gilt für sie nicht.
+        if role != "data" and name not in declared:
             errors.append(
                 f"{manifest_path}: Parameter „{name}“ ist im Haupt-JRXML ({jrxml.name}) nicht deklariert"
             )
 
-        role = entry.get("role", "variable")
+        if role == "data" and name in declared:
+            errors.append(
+                f"{manifest_path}: Parameter „{name}“ ist als role=data deklariert, steht aber im "
+                f"Haupt-JRXML ({jrxml.name}) — dann ist es ein Layout-Parameter (role=variable)"
+            )
+
+        # Der ucfirst-Hinweis gilt nur für Layout-Parameter: Eine
+        # `role=data`-Variable wird von calServer unter ihrem Rohnamen gelesen,
+        # kleingeschrieben ist dort die Regel, nicht der Fehler.
         if role == "variable" and name[0].islower():
             warnings.append(
                 f"{manifest_path}: Parameter „{name}“ (role=variable) beginnt kleingeschrieben — "
