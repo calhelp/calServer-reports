@@ -31,6 +31,18 @@ DB-agnostisch, keine V1-Codespalten.
 > den keine Komponente da ist, druckt schlicht keinen Code — das Etikett bleibt
 > lesbar.
 >
+> **Ohne Wert wird kein Barcode gedruckt** (Variable `hasCode` am
+> `printWhenExpression` jeder Komponente). Das ist kein Schönheitsthema:
+> barcode4j verweigert eine leere Nachricht mit
+> `NullPointerException: Parameter msg must not be empty`, und ein Füllfehler
+> bricht in JasperReports den ganzen Lauf ab. Ein einziges Gerät ohne
+> Barcode-Wert nahm damit den kompletten Stapel mit. Der Datensatz lässt den
+> leeren Wert ausdrücklich zu (`barcode.value` ist `null`, wenn das
+> konfigurierte Feld am Gerät leer ist), also muss die Vorlage ihn aushalten.
+> Die Nummer steht rechts weiterhin lesbar. ZXing (`qrcode`) stört sich an einem
+> leeren Wert übrigens nicht, deshalb fiel das nur bei DataMatrix (Vorgabe),
+> Code128 und Code39 auf.
+>
 > Gerendert wird runner-seitig aus dem Feldwert — kein vorgeneriertes Bild, kein
 > `Barcode`-Model, DB-agnostisch.
 
@@ -62,9 +74,20 @@ umbaut, bricht den Einzeldruck.
 Entwurf und Vorschau laufen weiter gegen `sample-data.json`, also gegen einen
 einzelnen Datensatz.
 
+Ein Datensatz der Auswahl, dem der Barcode-Wert fehlt, druckt sein Etikett ohne
+Barcode; die anderen bleiben davon unberührt. Wer die Vorlage anpasst, hält das
+bitte durch (die CI prüft es, `scripts/check_barcode_guards.py`).
+
+Stapeldruck setzt ein **V2-Bundle** voraus. Ein klassisches SQL-Etikett füllt
+sich aus der eigenen Abfrage und liest den `stickers`-Datensatz gar nicht;
+calServer weist den Stapel für solche Berichte deshalb mit einer Meldung ab,
+statt einen Stapel leerer Etiketten zu drucken. Einzeln druckt es weiter.
+
 ## ⚠️ Leeres Blatt = fehlende Datenquelle
 
 Ohne JSON-Datenquelle rendert der Sticker leer. Vorschau: mitgelieferter Adapter
 (Default über `com.jaspersoft.studio.data.defadapter`) → „Open → Preview". Live
 (calServer V2): Report-Setting-Variable `data_contract = inventory-datasheet`.
-JasperReports **6.20.6** verbindlich. Keine `$V{}`-Variablen (nur `staticText`/`$F{}`).
+JasperReports **6.20.6** verbindlich. Die Vorlage nutzt drei Berichtsvariablen
+(`code`, `symbology`, `hasCode`), die aus `$F{}` abgeleitet sind; Parameter
+(`$P{}`) braucht sie keine.

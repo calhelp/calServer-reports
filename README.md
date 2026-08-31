@@ -127,6 +127,7 @@ schema/
 
 scripts/
 ├── check_jasper_version.sh         # Prüft JRXML-Versionen auf 6.20.6
+├── check_barcode_guards.py         # CI-Validator: kein Barcode ohne Leer-Wächter
 ├── check_parameters_manifest.py    # CI-Validator für parameters.json-Manifeste
 ├── build_config_manifest.py        # Manifest-Werkzeug der Kategorie-/Status-/Ticketmanagement-Pakete (--write/--check)
 ├── build_ticket_config_3d.py       # Leitet TICKET-CONFIG-DAKKS-3D aus der 2D-Fassung ab (--write/--check)
@@ -183,6 +184,7 @@ Nutze Versionierung für Reports, um bei Fehlern jederzeit auf eine frühere Var
 Im Ordner `scripts` findest du neben dem Batch-Skript `dakks_upload_sample.bat` weitere Hilfen:
 
 - `check_jasper_version.sh` prüft alle JRXML-Dateien auf die erwartete JasperReports-Version 6.20.6.
+- `check_barcode_guards.py` prüft, dass jedes barcode4j-Symbol (DataMatrix, Code128, Code39, EAN) nur gedruckt wird, wenn sein Wert nicht leer ist. barcode4j wirft sonst `NullPointerException: Parameter msg must not be empty`, und das bricht den ganzen Lauf ab statt nur die eine Seite (beim Stapeldruck also alle Etiketten). Läuft auch als CI-Check.
 - `check_parameters_manifest.py` validiert `parameters.json`-Manifeste gegen das Schema und das Haupt-JRXML (läuft auch als CI-Check, siehe unten).
 - `generate_parameters_manifest.py` erzeugt ein `parameters.json`-Gerüst aus den `<parameter>`-Deklarationen eines Haupt-JRXML.
 - `dcc_upload_sample.bat` zeigt einen Upload-Workflow für DCC-Reports.
