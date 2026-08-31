@@ -23,6 +23,14 @@ jobs:
         with:
           python-version: '3.12'
 
+      # barcode4j (DataMatrix, Code128, Code39, EAN) verweigert eine leere
+      # Nachricht und bricht damit den ganzen Fuellvorgang ab, nicht nur die
+      # Seite. Beim Stapeldruck nimmt ein Geraet ohne Barcode-Wert also den
+      # kompletten Etikettenstapel mit. Jedes Barcode-Element braucht deshalb
+      # ein printWhenExpression, das den leeren Wert auslaesst.
+      - name: Check barcode empty-value guards
+        run: python3 scripts/check_barcode_guards.py
+
       - name: Install jsonschema
         run: pip install jsonschema
 
