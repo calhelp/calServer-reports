@@ -147,7 +147,7 @@
 		<defaultValueExpression><![CDATA["D-K-\nYYYYY-ZZ-N"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="PageNumberPosition" class="java.lang.String">
-		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus. Hinweis: Header-Positionen (HeaderLeft/HeaderCenter/HeaderRight) erscheinen erst ab Seite 2, da die Titelseite (Seite 1) keinen Seitenkopf besitzt; dort wird nur die Gesamtseitenzahl (Anzahl Seiten des Kalibrierscheines) ausgewiesen. Footer-Positionen werden auch auf Seite 1 (Fußzeile) gedruckt.]]></parameterDescription>
+		<parameterDescription><![CDATA[Position der Seitenzahl "Seite x von y" (sprachabhängig über Sprache). Erlaubte Werte: HeaderLeft, HeaderCenter, HeaderRight, FooterLeft, FooterCenter, FooterRight, None. Default HeaderLeft entspricht der bisherigen Position oben links. None blendet die Seitenzahl vollständig aus. Hinweis: Header-Positionen (HeaderLeft/HeaderCenter/HeaderRight) erscheinen erst ab Seite 2, da die Titelseite (Seite 1) keinen Seitenkopf besitzt; dort wird nur die Gesamtseitenzahl (Anzahl Seiten des Kalibrierscheins) ausgewiesen. Footer-Positionen werden auch auf Seite 1 (Fußzeile) gedruckt.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["HeaderLeft"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="PageNumberBilingual" class="java.lang.String">
@@ -350,7 +350,7 @@
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Auftragsnummer" : "Order No."]]></variableExpression>
 	</variable>
 	<variable name="page_number" class="java.lang.String" resetType="None">
-		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Anzahl Seiten des Kalibrierscheines" : "Number of Pages of the certificate"]]></variableExpression>
+		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Anzahl Seiten des Kalibrierscheins" : "Number of Pages of the certificate"]]></variableExpression>
 	</variable>
 	<variable name="date_of_cal" class="java.lang.String" resetType="None">
 		<variableExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? "Datum der Kalibrierung" : "Date of calibration"]]></variableExpression>
@@ -1271,114 +1271,114 @@
 				<reportElement x="16" y="346" width="535" height="1" uuid="92109169-f0d7-470b-9d8a-3261a3feae25"/>
 			</line>
 			<staticText>
-				<reportElement x="16" y="356" width="180" height="14" uuid="61dea76f-0ff0-400d-92a0-1cf4757c98e3"/>
+				<reportElement x="16" y="356" width="184" height="14" uuid="61dea76f-0ff0-400d-92a0-1cf4757c98e3"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Gegenstand]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="370" width="180" height="12" uuid="0cf137b6-d4fa-474b-a79a-40dc0515c13b"/>
+				<reportElement x="16" y="370" width="184" height="12" uuid="0cf137b6-d4fa-474b-a79a-40dc0515c13b"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Object]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="384" width="180" height="15" uuid="23e282f1-d17f-471f-92ca-155f77fa59d6"/>
+				<reportElement x="16" y="384" width="184" height="15" uuid="23e282f1-d17f-471f-92ca-155f77fa59d6"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Hersteller]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="399" width="180" height="12" uuid="c117244a-95ea-43d3-9948-006d9c24fcf0"/>
+				<reportElement x="16" y="399" width="184" height="12" uuid="c117244a-95ea-43d3-9948-006d9c24fcf0"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Manufacturer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="413" width="180" height="15" uuid="8ce406bb-0f0f-46a1-9de9-41aae27399ab"/>
+				<reportElement x="16" y="413" width="184" height="15" uuid="8ce406bb-0f0f-46a1-9de9-41aae27399ab"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Typ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="428" width="180" height="12" uuid="98bdbc9b-cb05-421d-a7bc-53080629d33f"/>
+				<reportElement x="16" y="428" width="184" height="12" uuid="98bdbc9b-cb05-421d-a7bc-53080629d33f"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="442" width="180" height="15" uuid="55fae71d-3219-40f3-a914-4354b43ceb0a"/>
+				<reportElement x="16" y="442" width="184" height="15" uuid="55fae71d-3219-40f3-a914-4354b43ceb0a"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Fabrikat/Serien-Nr.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="458" width="180" height="12" uuid="accf0bf8-be4e-452e-88b6-1efbcaecea92"/>
+				<reportElement x="16" y="458" width="184" height="12" uuid="accf0bf8-be4e-452e-88b6-1efbcaecea92"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Serial number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="488" width="180" height="15" uuid="22375095-7b07-41c0-b6d6-ab452950a47d"/>
+				<reportElement x="16" y="488" width="184" height="15" uuid="22375095-7b07-41c0-b6d6-ab452950a47d"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Auftraggeber]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="503" width="180" height="12" uuid="a2d74465-091d-4624-acfd-ae0c0545b763"/>
+				<reportElement x="16" y="503" width="184" height="12" uuid="a2d74465-091d-4624-acfd-ae0c0545b763"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Customer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="560" width="180" height="15" uuid="fb3d07f8-327d-4e49-b6c1-9525d68d1e63"/>
+				<reportElement x="16" y="560" width="184" height="15" uuid="fb3d07f8-327d-4e49-b6c1-9525d68d1e63"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Auftragsnummer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="575" width="180" height="12" uuid="46f86074-7bc8-429a-a680-64537530b8ad"/>
+				<reportElement x="16" y="575" width="184" height="12" uuid="46f86074-7bc8-429a-a680-64537530b8ad"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Order No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="589" width="180" height="15" uuid="e971c469-dae4-447b-b504-ecb185213c31"/>
+				<reportElement x="16" y="589" width="184" height="15" uuid="e971c469-dae4-447b-b504-ecb185213c31"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Anzahl Seiten des Kalibrierscheines]]></text>
+				<text><![CDATA[Anzahl Seiten des Kalibrierscheins]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="604" width="180" height="12" uuid="6f975af5-9e1f-4245-b060-60e3c13e5b37"/>
+				<reportElement x="16" y="604" width="184" height="12" uuid="6f975af5-9e1f-4245-b060-60e3c13e5b37"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Number of Pages of the certificate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="531" width="180" height="15" uuid="faa42052-fafb-4729-be4b-87f3e55577dc"/>
+				<reportElement x="16" y="531" width="184" height="15" uuid="faa42052-fafb-4729-be4b-87f3e55577dc"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="9" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Datum der Kalibrierung]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="16" y="546" width="180" height="12" uuid="07a5b646-6b1a-4f37-a88c-6ab84af9adc7"/>
+				<reportElement x="16" y="546" width="184" height="12" uuid="07a5b646-6b1a-4f37-a88c-6ab84af9adc7"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="DejaVu Sans" size="7.5" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Date of calibration]]></text>
 			</staticText>
