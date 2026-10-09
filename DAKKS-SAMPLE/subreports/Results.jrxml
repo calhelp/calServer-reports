@@ -520,31 +520,28 @@
         )]]></variableExpression>
 	</variable>
 	<!--
-	    Das "*" der Legende bedeutet "Messergebnisse nicht im
-	    Akkreditierungsumfang des Kalibrierlaboratoriums" — es markiert also die
-	    AUSNAHME, nicht die Regel. Bis hierher setzte die Vorlage es bei
-	    `accred = 1`, also genau umgekehrt: auf einem Schein, dessen Zeilen alle
-	    akkreditiert waren, trug jede Zeile die Fussnote "nicht im
-	    Akkreditierungsumfang".
+	    Das "*" haengt am MET/CAL-Flag ACCRED (Results-Tabelle, Spalte
+	    `accred`). ACCRED ist in der Prozedur standardmaessig "No" (0) und wird
+	    vom Prozedurschreiber gezielt pro Test (TSET) oder fuer die ganze
+	    Prozedur (VSET) auf "Yes" (1) gesetzt; die Werte 2..32767 sind weitere
+	    Kennzeichnungsarten. Das Zeichen folgt dem Flag:
 
-	    Drei Zustaende, nicht zwei:
+	      1 / y / yes / ja / true, 2..32767 -> Flag gesetzt       -> "*"
+	      0 / n / no / nein / false        -> Flag nicht gesetzt -> kein Zeichen
+	      leer / nicht erfasst             -> keine Aussage      -> kein Zeichen
 
-	      1 / y / yes / ja / true   -> im Umfang            -> kein Zeichen
-	      0 / n / no / nein / false -> nicht im Umfang      -> "*"
-	      leer / nicht gesetzt      -> keine Aussage        -> kein Zeichen
-
-	    Der dritte Fall ist der Grund, warum die Abfrage `accred` nicht mehr auf
-	    0 zurueckfaellt (`COALESCE(accred, '')`): sonst waere "nie gepflegt"
-	    dasselbe wie "ausserhalb des Umfangs", und jede in calServer erfasste
-	    Zeile — die Messwertaufnahme schreibt das Feld nicht — bekaeme die
-	    Fussnote. Ein Schein behauptet nichts, was niemand erfasst hat.
+	    Ein Schein, dessen Prozedur ACCRED nie setzt (MET/CAL schreibt dann 0),
+	    traegt also kein Zeichen; die Fussnote erscheint nur in den Zeilen, die
+	    der Prozedurschreiber ausdruecklich gekennzeichnet hat. Was das Zeichen
+	    bedeutet, sagt die Legende des Hauptberichts
+	    (Parameter Conformity_description_3).
 	-->
 	<variable name="AccredMark" class="java.lang.String">
 		<variableExpression><![CDATA[$F{accred} == null
       ? ""
       : (
           $F{accred}.toString().trim().toLowerCase()
-            .matches("0|n|no|nein|false|f")
+            .matches("[1-9][0-9]*|y|yes|ja|true|t")
           ? "*"
           : ""
         )]]></variableExpression>
