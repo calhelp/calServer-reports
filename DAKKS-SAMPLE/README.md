@@ -288,21 +288,23 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     (`i.T.`, `?`, `!?`, `!`). Sie erwartet MET/TEAMs Schreibweise (`Pass`,
     `Fail`, `Pass Indeterminate`, `Fail Indeterminate`); alles andere — auch
     ein bereits übersetztes Symbol — druckt eine leere Zelle.
-  * **Akkreditierungsumfang (`accred`):** Das `*` der Legende bedeutet
-    „Messergebnisse nicht im Akkreditierungsumfang des Kalibrierlaboratoriums"
-    und markiert damit die Ausnahme, nicht die Regel. Drei Zustände:
+  * **Kennzeichnung (`accred`):** Das `*` hängt am MET/CAL-Flag `ACCRED`
+    (Results-Tabelle, Spalte `accred`). `ACCRED` ist in der Prozedur
+    standardmäßig `No` (`0`) und wird vom Prozedurschreiber gezielt pro Test
+    (`TSET`) oder für die ganze Prozedur (`VSET`) auf `Yes` (`1`) gesetzt;
+    die Werte `2`…`32767` sind weitere Kennzeichnungsarten. Das Zeichen folgt
+    dem Flag:
 
     | `accred` | Bedeutung | Druck |
     | --- | --- | --- |
-    | `1`, `y`, `yes`, `ja`, `true` | im Akkreditierungsumfang | kein Zeichen |
-    | `0`, `n`, `no`, `nein`, `false` | **nicht** im Umfang, kennzeichnungspflichtig | `*` |
-    | leer / nicht gesetzt | keine Aussage erfasst | kein Zeichen |
+    | `1`, `y`, `yes`, `ja`, `true`, `2`…`32767` | Flag gesetzt, Zeile gekennzeichnet | `*` |
+    | `0`, `n`, `no`, `nein`, `false` | Flag nicht gesetzt (MET/CAL-Standard) | kein Zeichen |
+    | leer / nicht erfasst | keine Aussage erfasst | kein Zeichen |
 
-    Der dritte Zustand ist der Grund, warum die Abfrage `accred` nicht mehr auf
-    `0` zurückfallen lässt (`COALESCE(accred, '')`): sonst wäre „nie gepflegt"
-    dasselbe wie „außerhalb des Umfangs" und jede in calServer erfasste Zeile
-    trüge die Fußnote — die Messwertaufnahme schreibt das Feld nicht. Der
-    Schein behauptet nichts, was niemand erfasst hat.
+    Ein Schein, dessen Prozedur `ACCRED` nie setzt, trägt also kein Zeichen;
+    die Fußnote erscheint nur in den Zeilen, die der Prozedurschreiber
+    ausdrücklich gekennzeichnet hat. Was das Zeichen bedeutet, sagt die
+    Legende (`Conformity_description_3`).
   * Das Zeichen steht in den Varianten `1`, `2`, `22`, `3` und `4` hinter der
     Konformitätsaussage. Variante `21` hat keine Konformitätsspalte und hängt
     es deshalb an die Messbedingung — die Kennzeichnungspflicht gilt in jeder
