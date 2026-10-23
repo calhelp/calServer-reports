@@ -35,6 +35,7 @@
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
 	<parameter name="Leader_style" class="java.lang.String"><defaultValueExpression><![CDATA["dots"]]></defaultValueExpression></parameter>
 	<parameter name="Block_slot" class="java.lang.Integer"><defaultValueExpression><![CDATA[Integer.valueOf(4)]]></defaultValueExpression></parameter>
+	<parameter name="Caption_from" class="java.lang.String"><defaultValueExpression><![CDATA["ab"]]></defaultValueExpression></parameter>
 	<field name="name" class="java.lang.String"><fieldDescription><![CDATA[name]]></fieldDescription></field>
 	<field name="name_secondary" class="java.lang.String"><fieldDescription><![CDATA[name_secondary]]></fieldDescription></field>
 	<field name="amount" class="java.math.BigDecimal"><fieldDescription><![CDATA[amount]]></fieldDescription></field>
@@ -103,6 +104,7 @@
 			<subreport>
 				<reportElement positionType="Float" x="0" y="22" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$P{Currency}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Caption_from"><subreportParameterExpression><![CDATA[$P{Caption_from}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("scales")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-scales.jasper"]]></subreportExpression>
 			</subreport>

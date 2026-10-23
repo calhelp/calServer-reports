@@ -3,7 +3,7 @@
 Die **Preisliste**, wie ein Labor sie seinem Kunden übergibt: Kategoriebaum mit
 den geltenden Kalibrierpreisen (Typausnahmen eingerückt), Zusatzleistungen mit
 Mengenstaffel, Standardartikel und die Konditions-Fußnoten. Gefüllt aus einem
-**JSON-Datensatz** (Contract `price-list` v1.4) statt aus SQL — DB-agnostisch,
+**JSON-Datensatz** (Contract `price-list` v1.6) statt aus SQL — DB-agnostisch,
 keine V1-Codespalten. **Zweisprachig**, wenn der Datensatz es ist, und
 **mehrspaltig**, wenn Kalibrierarten gepflegt sind.
 
@@ -31,7 +31,7 @@ ist ein Layout-Eingriff und gehört in die Vorlage.
 | `subreports/price-list-scales.jrxml` | Mengenstaffel einer Zeile (`scales`), als Kondition unter dem Betrag |
 | `subreports/price-list-articles.jrxml` | Standardartikel aus `list.articles` |
 | `subreports/price-list-surcharges.jrxml` | Konditions-Fußnoten aus `list.surcharges` |
-| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.4) |
+| `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `price-list` v1.6) |
 | `main_reports/price-list-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Data-Adapter für die Vorschau |
 
 ## Zweisprachig, ohne Fallunterscheidung in der Vorlage
@@ -48,6 +48,9 @@ angeforderte Fassung auf, bevor er den Datensatz herausgibt:
 | `primary` | der gepflegte Name | `null` |
 | `secondary` | der Name in der Zweitsprache (fehlt er: der gepflegte) | `null` |
 | `both` | der gepflegte Name | der Name in der Zweitsprache, sonst `null` |
+
+Seit 1.6 gilt dasselbe für die Beschriftungen (`list.captions`, siehe
+unten): eine englische Liste trägt auch englische Überschriften.
 
 Damit folgt **jede** Vorlage der Sprachwahl, die nur `name` liest — auch eine
 selbst gebaute aus der Zeit vor 1.1. Die mitgelieferten Subreports drucken
@@ -130,6 +133,33 @@ wenn der Mandant nur eine Sprache führt — dann ist `mode` immer `primary`.
 
 **Neu in 1.1** (additiv, 1.0-Vorlagen laufen unverändert weiter):
 `list.language` und `name_secondary` an jeder benannten Zeile.
+
+**Neu in 1.6** (additiv): `list.captions` — die festen Beschriftungen des
+Dokuments als Paare `x` / `x_secondary`, aufgelöst wie die Namen: Titel
+(`title`), Kopf (`group`, `list_prices`, `date`, `currency`, `language`),
+Abschnitte (`section_calibration`, `section_services`, `section_articles`),
+`conditions`, `page`, `derivation`, die Randnotizen `derived` / `inherited`,
+`scale_from` („ab") und `truncated`. Dazu folgt die Überschrift der
+Grundpreisspalte (`slot_N_label`) der Sprachwahl; in der Fassung `both` ist
+sie zweizeilig („Betrag (EUR)" Zeilenumbruch „Amount (EUR)").
+
+Bis 1.5 übersetzte die Sprachwahl nur die Positionen. Eine englische Liste
+stand damit unter „Kalibrierpreise", „Stichtag" und „Betrag (EUR)" — für den
+Kunden, für den man sie druckt, ein halb übersetztes Dokument. Die
+Beschriftungen kommen aus einem kleinen Wörterbuch im Datensatz-Builder
+(Deutsch, Englisch, Französisch); eine Zweitsprache, die dort fehlt, druckt
+die Erstsprache und in der Fassung `both` keine doppelte Zeile.
+
+Die Vorlage druckt in der Fassung `both` den Zweittext kursiv hinter einem
+Schrägstrich (Kopf, Abschnitte, Konditionen, Seitenzahl) oder in der Zeile
+darunter (Titel, Ableitungsregel, Betragsspalte, Randnotizen). Ein selbst
+gesetzter `List_title` bleibt, wie er ist — übersetzen kann ihn die Vorlage
+nicht. Fehlt `list.captions` (Datensatz vor 1.6), druckt sie ihre deutschen
+Texte wie bisher.
+
+Nicht übersetzt werden gepflegte Texte: der Name der Preisgruppe, die
+Bezeichnungen der Kalibrierarten (Spaltenköpfe ISO, DAkkS, …), die Kürzel der
+Zuschläge und die Einheiten der Standardartikel.
 
 **Neu in 1.5** (additiv): `list.counts.services_unnamed` zählt die Zeilen der
 Leistungsachse, die **nicht** in `list.services` stehen, weil ihr
@@ -274,6 +304,15 @@ Für 1.3 kam der Abschnitt B dazu: derselbe Spaltenkopf an denselben x-Werten
 wie in Abschnitt A, damit die Beträge über beide Abschnitte fluchten — sonst
 liest man eine DAkkS-Zahl unter einer ISO-Überschrift. Geprüft mit zwei
 Spalten; die Währung steht auch hier jetzt im Kopf statt an jeder Zeile.
+
+Für 1.6 übersetzen alle sieben JRXML mit JasperReports 6.21.5 (die Fassung
+des report-runner; 6.20.6 lag im Container nicht vor), und der Hauptbericht
+füllt in drei Läufen durch, je eine Seite: Fassung `both` (Kopf, Abschnitte
+und Konditionen mit kursivem Zweittext, Titel und Ableitungsregel zweizeilig),
+Fassung `secondary` (alle Beschriftungen englisch) und ein Datensatz **ohne**
+`list.captions` — der druckt die deutschen Texte wie die 1.5-Vorlage. Dazu
+eine einspaltige Liste in `both`: „Betrag (EUR)" / „Amount (EUR)" steht
+zweizeilig im Spaltenkopf beider Abschnitte.
 
 Die pixelgenaue Abnahme des Layouts (report-runner) bleibt wie gehabt
 maßgeblich.
