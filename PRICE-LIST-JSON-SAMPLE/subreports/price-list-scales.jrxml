@@ -10,6 +10,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="price-list-scales" pageWidth="561" pageHeight="842" columnWidth="561" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a1b2c3d4-0004-4000-8000-000000000004">
 	<style name="UnicodeDefault" isDefault="true" fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false" fontSize="9"/>
 	<parameter name="Currency" class="java.lang.String"><defaultValueExpression><![CDATA[""]]></defaultValueExpression></parameter>
+	<parameter name="Caption_from" class="java.lang.String"><defaultValueExpression><![CDATA["ab"]]></defaultValueExpression></parameter>
 	<field name="min_quantity" class="java.math.BigDecimal"><fieldDescription><![CDATA[min_quantity]]></fieldDescription></field>
 	<field name="price" class="java.math.BigDecimal"><fieldDescription><![CDATA[price]]></fieldDescription></field>
 	<field name="discount" class="java.math.BigDecimal"><fieldDescription><![CDATA[discount]]></fieldDescription></field>
@@ -18,7 +19,7 @@
 			<textField isBlankWhenNull="true">
 				<reportElement x="96" y="0" width="428" height="10"/>
 				<textElement><font size="7" isItalic="true"/></textElement>
-				<textFieldExpression><![CDATA["ab " + ($F{min_quantity} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{min_quantity})) + ": " + ($F{price} != null ? new java.text.DecimalFormat("#,##0.00").format($F{price}) + " " + $P{Currency} : ($F{discount} != null ? "−" + new java.text.DecimalFormat("#,##0.##").format($F{discount}) + " %" : ""))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{Caption_from} + " " + ($F{min_quantity} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{min_quantity})) + ": " + ($F{price} != null ? new java.text.DecimalFormat("#,##0.00").format($F{price}) + " " + $P{Currency} : ($F{discount} != null ? "−" + new java.text.DecimalFormat("#,##0.##").format($F{discount}) + " %" : ""))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

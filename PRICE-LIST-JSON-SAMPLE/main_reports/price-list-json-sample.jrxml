@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
 <!--
-  V2 Preisliste (customer-facing), Contract "price-list" v1.4. Gefüllt aus einem
+  V2 Preisliste (customer-facing), Contract "price-list" v1.6. Gefüllt aus einem
   JSON-Datensatz — kein SQL, keine V1-Codespalten.
 
   DER BRIEFKOPF STEHT NICHT IN DIESER VORLAGE. Er kommt je Mandant über das
@@ -21,6 +21,13 @@
   was sie bekommt; eine Vorlage, die selbst zwischen drei Fassungen
   unterscheidet, wäre drei Vorlagen in einer. Der Kopf nennt die Fassung, damit
   man einem ausgedruckten Blatt ansieht, welche Liste man in der Hand hält.
+
+  BESCHRIFTUNGEN (Contract 1.6): Titel, Kopf, Abschnitte, Spaltenkopf und
+  Fußnoten folgen derselben Regel. `list.captions.x` trägt die angeforderte
+  Sprache, `x_secondary` nur in der Fassung "beide" — dann steht sie kursiv
+  hinter einem Schrägstrich (Kopf, Abschnitte) oder in der Zeile darunter
+  (Titel, Ableitung, Betragsspalte). Fehlt `list.captions` (Datensatz vor 1.6),
+  druckt die Vorlage ihre deutschen Texte wie bisher.
 
   Die Grundpreisspalte heisst, was `list.base_column_label` sagt: ohne
   Kalibrierart-Spalten "Betrag", mit ihnen "Standard": dann ist sie eine von
@@ -99,6 +106,38 @@
 	<field name="slot_3_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_3_label]]></fieldDescription></field>
 	<field name="slot_4_label" class="java.lang.String"><fieldDescription><![CDATA[list.slot_4_label]]></fieldDescription></field>
 	<field name="amount_block_slot" class="java.lang.Integer"><fieldDescription><![CDATA[list.amount_block_slot]]></fieldDescription></field>
+	<field name="cap_title" class="java.lang.String"><fieldDescription><![CDATA[list.captions.title]]></fieldDescription></field>
+	<field name="cap_title_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.title_secondary]]></fieldDescription></field>
+	<field name="cap_group" class="java.lang.String"><fieldDescription><![CDATA[list.captions.group]]></fieldDescription></field>
+	<field name="cap_group_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.group_secondary]]></fieldDescription></field>
+	<field name="cap_list_prices" class="java.lang.String"><fieldDescription><![CDATA[list.captions.list_prices]]></fieldDescription></field>
+	<field name="cap_list_prices_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.list_prices_secondary]]></fieldDescription></field>
+	<field name="cap_date" class="java.lang.String"><fieldDescription><![CDATA[list.captions.date]]></fieldDescription></field>
+	<field name="cap_date_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.date_secondary]]></fieldDescription></field>
+	<field name="cap_currency" class="java.lang.String"><fieldDescription><![CDATA[list.captions.currency]]></fieldDescription></field>
+	<field name="cap_currency_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.currency_secondary]]></fieldDescription></field>
+	<field name="cap_language" class="java.lang.String"><fieldDescription><![CDATA[list.captions.language]]></fieldDescription></field>
+	<field name="cap_language_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.language_secondary]]></fieldDescription></field>
+	<field name="cap_section_calibration" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_calibration]]></fieldDescription></field>
+	<field name="cap_section_calibration_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_calibration_secondary]]></fieldDescription></field>
+	<field name="cap_section_services" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_services]]></fieldDescription></field>
+	<field name="cap_section_services_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_services_secondary]]></fieldDescription></field>
+	<field name="cap_section_articles" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_articles]]></fieldDescription></field>
+	<field name="cap_section_articles_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.section_articles_secondary]]></fieldDescription></field>
+	<field name="cap_conditions" class="java.lang.String"><fieldDescription><![CDATA[list.captions.conditions]]></fieldDescription></field>
+	<field name="cap_conditions_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.conditions_secondary]]></fieldDescription></field>
+	<field name="cap_page" class="java.lang.String"><fieldDescription><![CDATA[list.captions.page]]></fieldDescription></field>
+	<field name="cap_page_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.page_secondary]]></fieldDescription></field>
+	<field name="cap_derivation" class="java.lang.String"><fieldDescription><![CDATA[list.captions.derivation]]></fieldDescription></field>
+	<field name="cap_derivation_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.derivation_secondary]]></fieldDescription></field>
+	<field name="cap_derived" class="java.lang.String"><fieldDescription><![CDATA[list.captions.derived]]></fieldDescription></field>
+	<field name="cap_derived_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.derived_secondary]]></fieldDescription></field>
+	<field name="cap_inherited" class="java.lang.String"><fieldDescription><![CDATA[list.captions.inherited]]></fieldDescription></field>
+	<field name="cap_inherited_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.inherited_secondary]]></fieldDescription></field>
+	<field name="cap_scale_from" class="java.lang.String"><fieldDescription><![CDATA[list.captions.scale_from]]></fieldDescription></field>
+	<field name="cap_scale_from_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.scale_from_secondary]]></fieldDescription></field>
+	<field name="cap_truncated" class="java.lang.String"><fieldDescription><![CDATA[list.captions.truncated]]></fieldDescription></field>
+	<field name="cap_truncated_secondary" class="java.lang.String"><fieldDescription><![CDATA[list.captions.truncated_secondary]]></fieldDescription></field>
 	<!--
 		Die oberen 128 pt (≈ 45 mm) des Titelbandes bleiben leer: dort stempelt
 		das PDF-Overlay den Briefkopf des Mandanten. Der Freiraum ist bewusst
@@ -111,31 +150,41 @@
 	<title>
 		<band height="224">
 			<textField>
-				<reportElement style="Section" x="0" y="168" width="330" height="18"/>
+				<reportElement style="Section" x="0" y="168" width="320" height="18"/>
 				<textElement><font size="14" isBold="true"/></textElement>
-				<textFieldExpression><![CDATA[$P{List_title}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{List_title} == null || $P{List_title}.trim().isEmpty() || "Preisliste".equals($P{List_title}.trim())) ? ($F{cap_title} == null ? "Preisliste" : $F{cap_title}) : $P{List_title}]]></textFieldExpression>
 			</textField>
-			<staticText><reportElement style="Label" x="380" y="168" width="90" height="12"/><text><![CDATA[Preisgruppe]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="168" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{group_name} == null ? "Listenpreise" : $F{group_name}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="182" width="90" height="12"/><text><![CDATA[Stichtag]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="182" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{date}]]></textFieldExpression></textField>
-			<staticText><reportElement style="Label" x="380" y="196" width="90" height="12"/><text><![CDATA[Währung]]></text></staticText>
-			<textField isBlankWhenNull="true"><reportElement style="Value" x="470" y="196" width="91" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression></textField>
+			<!-- Die Zweitsprache des Titels, nur zum Standardtitel: einen
+			     selbst gesetzten Titel kann die Vorlage nicht übersetzen. -->
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="190" width="360" height="20">
+				<reportElement x="0" y="186" width="320" height="12">
+					<printWhenExpression><![CDATA[($P{List_title} == null || $P{List_title}.trim().isEmpty() || "Preisliste".equals($P{List_title}.trim())) && $F{cap_title_secondary} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement><font size="10" isItalic="true"/></textElement>
+				<textFieldExpression><![CDATA[$F{cap_title_secondary}]]></textFieldExpression>
+			</textField>
+			<textField><reportElement style="Label" x="330" y="168" width="130" height="12"/><textElement markup="styled"/><textFieldExpression><![CDATA[($F{cap_group} == null ? "Preisgruppe" : $F{cap_group}) + ($F{cap_group_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='8'> / " + $F{cap_group_secondary} + "</style>")]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true" textAdjust="ScaleFont"><reportElement style="Value" x="460" y="168" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{group_name} == null ? ($F{cap_list_prices} == null ? "Listenpreise" : $F{cap_list_prices}) + ($F{cap_list_prices_secondary} == null ? "" : " / " + $F{cap_list_prices_secondary}) : $F{group_name}]]></textFieldExpression></textField>
+			<textField><reportElement style="Label" x="330" y="182" width="130" height="12"/><textElement markup="styled"/><textFieldExpression><![CDATA[($F{cap_date} == null ? "Stichtag" : $F{cap_date}) + ($F{cap_date_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='8'> / " + $F{cap_date_secondary} + "</style>")]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Value" x="460" y="182" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{date}]]></textFieldExpression></textField>
+			<textField><reportElement style="Label" x="330" y="196" width="130" height="12"/><textElement markup="styled"/><textFieldExpression><![CDATA[($F{cap_currency} == null ? "Währung" : $F{cap_currency}) + ($F{cap_currency_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='8'> / " + $F{cap_currency_secondary} + "</style>")]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true"><reportElement style="Value" x="460" y="196" width="101" height="12"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression></textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="199" width="320" height="18">
 					<printWhenExpression><![CDATA[$F{derivation_mode} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement><font size="7" isItalic="true"/></textElement>
-				<textFieldExpression><![CDATA["Diese Gruppe leitet vom Listenpreis ab: " + ($F{derivation_value} != null && $F{derivation_value}.signum() >= 0 ? "+" : "") + ($F{derivation_value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{derivation_value})) + ("absolute".equals($F{derivation_mode}) ? " " + ($F{currency} == null ? "" : $F{currency}) : " %") + "."]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{cap_derivation} == null ? "Diese Gruppe leitet vom Listenpreis ab:" : $F{cap_derivation}) + " " + ($F{derivation_value} != null && $F{derivation_value}.signum() >= 0 ? "+" : "") + ($F{derivation_value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{derivation_value})) + ("absolute".equals($F{derivation_mode}) ? " " + ($F{currency} == null ? "" : $F{currency}) : " %") + "." + ($F{cap_derivation_secondary} == null ? "" : "\n" + $F{cap_derivation_secondary} + " " + ($F{derivation_value} != null && $F{derivation_value}.signum() >= 0 ? "+" : "") + ($F{derivation_value} == null ? "" : new java.text.DecimalFormat("#,##0.##").format($F{derivation_value})) + ("absolute".equals($F{derivation_mode}) ? " " + ($F{currency} == null ? "" : $F{currency}) : " %") + ".")]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement style="Label" x="380" y="210" width="90" height="10">
+			<textField>
+				<reportElement style="Label" x="330" y="210" width="130" height="10">
 					<printWhenExpression><![CDATA[$F{language_mode} != null && !"primary".equals($F{language_mode})]]></printWhenExpression>
 				</reportElement>
-				<text><![CDATA[Sprache]]></text>
-			</staticText>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[($F{cap_language} == null ? "Sprache" : $F{cap_language}) + ($F{cap_language_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='8'> / " + $F{cap_language_secondary} + "</style>")]]></textFieldExpression>
+			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement style="Value" x="470" y="210" width="91" height="10">
+				<reportElement style="Value" x="460" y="210" width="101" height="10">
 					<printWhenExpression><![CDATA[$F{language_mode} != null && !"primary".equals($F{language_mode})]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right"><font size="8"/></textElement>
@@ -149,12 +198,13 @@
 	</pageHeader>
 	<detail>
 		<band height="68">
-			<staticText>
-				<reportElement style="Section" x="0" y="8" width="250" height="14">
+			<textField>
+				<reportElement style="Section" x="0" y="8" width="255" height="14">
 					<printWhenExpression><![CDATA[$F{count_categories} != null && $F{count_categories}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
-				<text><![CDATA[Kalibrierpreise]]></text>
-			</staticText>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[($F{cap_section_calibration} == null ? "Kalibrierpreise" : $F{cap_section_calibration}) + ($F{cap_section_calibration_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='9'> / " + $F{cap_section_calibration_secondary} + "</style>")]]></textFieldExpression>
+			</textField>
 			<!--
 				Vier Betragsfelder in einem Raster von 68 pt, von RECHTS belegt.
 				Welches Feld welche Spalte traegt, entscheidet der
@@ -197,15 +247,18 @@
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Leader_style"><subreportParameterExpression><![CDATA[$P{Leader_style}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Block_slot"><subreportParameterExpression><![CDATA[$F{amount_block_slot} == null ? Integer.valueOf(4) : $F{amount_block_slot}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Caption_derived"><subreportParameterExpression><![CDATA[($F{cap_derived} == null ? "abgel." : $F{cap_derived}) + ($F{cap_derived_secondary} == null ? "" : "\n" + $F{cap_derived_secondary})]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Caption_inherited"><subreportParameterExpression><![CDATA[($F{cap_inherited} == null ? "geerbt" : $F{cap_inherited}) + ($F{cap_inherited_secondary} == null ? "" : "\n" + $F{cap_inherited_secondary})]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.calibration")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-categories.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText>
-				<reportElement style="Section" positionType="Float" x="0" y="28" width="250" height="14" isRemoveLineWhenBlank="true">
+			<textField>
+				<reportElement style="Section" positionType="Float" x="0" y="28" width="255" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{count_services} != null && $F{count_services}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
-				<text><![CDATA[Zusatzleistungen]]></text>
-			</staticText>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[($F{cap_section_services} == null ? "Zusatzleistungen" : $F{cap_section_services}) + ($F{cap_section_services_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='9'> / " + $F{cap_section_services_secondary} + "</style>")]]></textFieldExpression>
+			</textField>
 			<!-- Derselbe Spaltenkopf wie in Abschnitt A, an denselben Stellen:
 			     die Betraege sollen ueber beide Abschnitte fluchten, sonst
 			     liest man eine DAkkS-Zahl unter einer ISO-Ueberschrift. -->
@@ -243,15 +296,17 @@
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Leader_style"><subreportParameterExpression><![CDATA[$P{Leader_style}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="Block_slot"><subreportParameterExpression><![CDATA[$F{amount_block_slot} == null ? Integer.valueOf(4) : $F{amount_block_slot}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="Caption_from"><subreportParameterExpression><![CDATA[($F{cap_scale_from} == null ? "ab" : $F{cap_scale_from}) + ($F{cap_scale_from_secondary} == null ? "" : " / " + $F{cap_scale_from_secondary})]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("list.services")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/price-list-services.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText>
+			<textField>
 				<reportElement style="Section" positionType="Float" x="0" y="48" width="404" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{count_articles} != null && $F{count_articles}.intValue() > 0]]></printWhenExpression>
 				</reportElement>
-				<text><![CDATA[Standardartikel]]></text>
-			</staticText>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[($F{cap_section_articles} == null ? "Standardartikel" : $F{cap_section_articles}) + ($F{cap_section_articles_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='9'> / " + $F{cap_section_articles_secondary} + "</style>")]]></textFieldExpression>
+			</textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="64" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
@@ -270,14 +325,14 @@
 			<textField>
 				<reportElement x="470" y="2" width="91" height="10"/>
 				<textElement textAlignment="Right"><font size="7"/></textElement>
-				<textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{cap_page} == null ? "Seite" : $F{cap_page}) + ($F{cap_page_secondary} == null ? "" : " / " + $F{cap_page_secondary}) + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
 		<band height="54">
 			<line><reportElement positionType="Float" x="0" y="4" width="561" height="1"/></line>
-			<staticText><reportElement style="Label" positionType="Float" x="0" y="8" width="200" height="11"/><text><![CDATA[Konditionen]]></text></staticText>
+			<textField><reportElement style="Label" positionType="Float" x="0" y="8" width="300" height="11"/><textElement markup="styled"/><textFieldExpression><![CDATA[($F{cap_conditions} == null ? "Konditionen" : $F{cap_conditions}) + ($F{cap_conditions_secondary} == null ? "" : "<style isBold='false' isItalic='true' size='8'> / " + $F{cap_conditions_secondary} + "</style>")]]></textFieldExpression></textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="20" width="561" height="1" isRemoveLineWhenBlank="true"/>
 				<subreportParameter name="Currency"><subreportParameterExpression><![CDATA[$F{currency} == null ? "" : $F{currency}]]></subreportParameterExpression></subreportParameter>
@@ -289,12 +344,12 @@
 				fünf Kalibrierarten zeigt und darüber schweigt, liest sich wie
 				eine vollständige.
 			-->
-			<textField isBlankWhenNull="true">
+			<textField isBlankWhenNull="true" textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="0" y="34" width="561" height="10" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{complexities_truncated} != null && $F{complexities_truncated}.booleanValue()]]></printWhenExpression>
 				</reportElement>
 				<textElement><font size="7" isItalic="true"/></textElement>
-				<textFieldExpression><![CDATA["Weitere Kalibrierarten sind gepflegt, aber auf diesem Dokument nicht abgebildet. Die vollständige Aufstellung liefert der CSV-Export."]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{cap_truncated} == null ? "Weitere Kalibrierarten sind gepflegt, aber auf diesem Dokument nicht abgebildet. Die vollständige Aufstellung liefert der CSV-Export." : $F{cap_truncated}) + ($F{cap_truncated_secondary} == null ? "" : "\n" + $F{cap_truncated_secondary})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
