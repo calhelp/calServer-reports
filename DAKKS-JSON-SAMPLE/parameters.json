@@ -221,8 +221,8 @@
         "en": "Page number position"
       },
       "description": {
-        "de": "HeaderLeft/HeaderCenter/HeaderRight bzw. footerLeft/footerCenter/footerRight.",
-        "en": "HeaderLeft/HeaderCenter/HeaderRight or footerLeft/footerCenter/footerRight."
+        "de": "HeaderLeft/HeaderCenter/HeaderRight bzw. FooterLeft/FooterCenter/FooterRight; None blendet die Seitenzahl aus. Links fluchtet sie mit dem Fließtext.",
+        "en": "HeaderLeft/HeaderCenter/HeaderRight or FooterLeft/FooterCenter/FooterRight; None hides the page number. Left positions align with the body text."
       },
       "role": "variable",
       "group": "Seitenzählung",
@@ -256,6 +256,38 @@
           "label": {
             "de": "ausblenden",
             "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
+      "name": "PageNumberShowTotal",
+      "label": {
+        "de": "Gesamtseitenzahl anzeigen",
+        "en": "Show total page count"
+      },
+      "description": {
+        "de": "„Y“ druckt „Seite x von y“, „N“ nur „Seite x“ wie im früheren Layout.",
+        "en": "\"Y\" prints \"Page x of y\", \"N\" only \"Page x\" as in the former layout."
+      },
+      "role": "variable",
+      "group": "Seitenzählung",
+      "order": 125,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "Seite x von y",
+            "en": "Page x of y"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "Seite x",
+            "en": "Page x"
           }
         }
       ],
