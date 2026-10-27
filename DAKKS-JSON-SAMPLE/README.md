@@ -52,7 +52,7 @@ per gleichnamiger Variable übersteuerbar).
 
 Neu gegenüber V1 ist `PageNumberShowTotal`: `Y` (Standard) druckt
 „Seite x von y / Page x of y", `N` nur „Seite x / Page x" wie im früheren
-Layout. Links platzierte Seitenzahlen stehen bündig am Rand.
+Layout. Links platzierte Seitenzahlen fluchten mit dem Fließtext.
 
 **Datenseitige Variablen** (füllen den JSON-Datensatz, Contract v1.2):
 

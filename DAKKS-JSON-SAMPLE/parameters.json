@@ -221,8 +221,8 @@
         "en": "Page number position"
       },
       "description": {
-        "de": "HeaderLeft/HeaderCenter/HeaderRight bzw. FooterLeft/FooterCenter/FooterRight; None blendet die Seitenzahl aus. Links steht sie bündig am Rand.",
-        "en": "HeaderLeft/HeaderCenter/HeaderRight or FooterLeft/FooterCenter/FooterRight; None hides the page number. Left positions are flush with the margin."
+        "de": "HeaderLeft/HeaderCenter/HeaderRight bzw. FooterLeft/FooterCenter/FooterRight; None blendet die Seitenzahl aus. Links fluchtet sie mit dem Fließtext.",
+        "en": "HeaderLeft/HeaderCenter/HeaderRight or FooterLeft/FooterCenter/FooterRight; None hides the page number. Left positions align with the body text."
       },
       "role": "variable",
       "group": "Seitenzählung",

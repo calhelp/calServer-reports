@@ -1689,14 +1689,14 @@
     : $P{MarkNumber2}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Master">
-				<reportElement x="0" y="8" width="200" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000011">
+				<reportElement x="16" y="8" width="200" height="17" uuid="a1b2c3d4-0001-4a01-8e01-000000000011">
 					<printWhenExpression><![CDATA[($P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{MASTER_CURRENT_PAGE} + (!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberShowTotal} == null ? "y" : $P{PageNumberShowTotal}.toString()).trim().toLowerCase()) ? " von " + $V{MASTER_TOTAL_PAGES} : "")) : ("Page " + $V{MASTER_CURRENT_PAGE} + (!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberShowTotal} == null ? "y" : $P{PageNumberShowTotal}.toString()).trim().toLowerCase()) ? " of " + $V{MASTER_TOTAL_PAGES} : ""))]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Master">
-				<reportElement x="0" y="25" width="200" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000011">
+				<reportElement x="16" y="25" width="200" height="15" uuid="a2b2c3d4-0001-4a01-8e01-000000000011">
 					<printWhenExpression><![CDATA[($P{PageNumberPosition} == null || $P{PageNumberPosition}.trim().isEmpty() || $P{PageNumberPosition}.trim().equalsIgnoreCase("HeaderLeft")) && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -1742,14 +1742,14 @@
 		<band height="63" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1 || ($P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().toLowerCase().startsWith("footer"))]]></printWhenExpression>
 			<textField evaluationTime="Master">
-				<reportElement x="0" y="8" width="200" height="17" uuid="a1b2c3d4-0004-4a01-8e01-000000000014">
+				<reportElement x="16" y="8" width="200" height="17" uuid="a1b2c3d4-0004-4a01-8e01-000000000014">
 					<printWhenExpression><![CDATA[($P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$P{Sprache}.equals("Deutsch") ? ("Seite " + $V{MASTER_CURRENT_PAGE} + (!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberShowTotal} == null ? "y" : $P{PageNumberShowTotal}.toString()).trim().toLowerCase()) ? " von " + $V{MASTER_TOTAL_PAGES} : "")) : ("Page " + $V{MASTER_CURRENT_PAGE} + (!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberShowTotal} == null ? "y" : $P{PageNumberShowTotal}.toString()).trim().toLowerCase()) ? " of " + $V{MASTER_TOTAL_PAGES} : ""))]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Master">
-				<reportElement x="0" y="25" width="200" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000014">
+				<reportElement x="16" y="25" width="200" height="15" uuid="a2b2c3d4-0004-4a01-8e01-000000000014">
 					<printWhenExpression><![CDATA[($P{PageNumberPosition} != null && $P{PageNumberPosition}.trim().equalsIgnoreCase("FooterLeft")) && !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{PageNumberBilingual} == null ? "y" : $P{PageNumberBilingual}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
