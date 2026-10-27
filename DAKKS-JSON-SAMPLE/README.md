@@ -50,6 +50,10 @@ Automatisch versorgt werden `P_CTAG`, `Sprache` (aus der Datensatz-Locale)
 und `QR_Code_Value` (calServer-Kurz-URL `/inventory/qrcode/{id}`,
 per gleichnamiger Variable übersteuerbar).
 
+Neu gegenüber V1 ist `PageNumberShowTotal`: `Y` (Standard) druckt
+„Seite x von y / Page x of y", `N` nur „Seite x / Page x" wie im früheren
+Layout. Links platzierte Seitenzahlen stehen bündig am Rand.
+
 **Datenseitige Variablen** (füllen den JSON-Datensatz, Contract v1.2):
 
 | Variable | Wirkung |
