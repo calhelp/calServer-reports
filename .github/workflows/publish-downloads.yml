@@ -570,6 +570,53 @@ jobs:
           output_path.write_text(json.dumps(payload, indent=2))
           PY
 
+      # calScript Runner: Pakete aus dem privaten calServer-yii-Release unter
+      # runner/<version>/ spiegeln. Nicht verlinkt, nicht in latest.json; die
+      # Adressen kennt nur calServer (config/calscript_runner.php). Welche
+      # Versionen: runner/versions.json. Siehe runner/README.md.
+      - name: Runner-Pakete spiegeln
+        env:
+          GH_TOKEN: ${{ secrets.CALSCRIPT_RUNNER_PAGES_TOKEN }}
+          SOURCE_REPO: calhelp/calServer-yii
+        run: |
+          set -euo pipefail
+
+          mapfile -t versions < <(
+            python -c "import json; [print(v) for v in json.load(open('runner/versions.json'))['versions'] if v]"
+          )
+          if [ "${#versions[@]}" -eq 0 ]; then
+            echo "runner/versions.json nennt keine Version; kein Runner-Spiegel."
+            exit 0
+          fi
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::warning::Secret CALSCRIPT_RUNNER_PAGES_TOKEN fehlt; Runner-Pakete werden nicht gespiegelt."
+            exit 0
+          fi
+
+          for version in "${versions[@]}"; do
+            tag="calscript-runner-v${version}"
+            target="site/runner/${version}"
+            mkdir -p "${target}"
+            if ! gh release download "${tag}" --repo "${SOURCE_REPO}" --dir "${target}" \
+                 --pattern 'calscript-runner-*' --pattern 'SHA256SUMS.txt'; then
+              echo "::warning::Release ${tag} in ${SOURCE_REPO} nicht ladbar; Version ${version} bleibt leer."
+              rm -rf "${target}"
+              continue
+            fi
+            if [ -f "${target}/SHA256SUMS.txt" ]; then
+              (cd "${target}" && sha256sum --check --strict SHA256SUMS.txt)
+            else
+              echo "::warning::${tag} ohne SHA256SUMS.txt; Prüfsummen nicht geprüft."
+            fi
+            echo "Runner ${version}:"
+            ls -l "${target}"
+          done
+
+          # Absichtserklärung für Crawler. Wirkt nur, wenn sie an der
+          # Domain-Wurzel läge (calhelp.github.io/robots.txt); hier dokumentiert
+          # sie den Ausschluss und schadet nicht.
+          printf 'User-agent: *\nDisallow: /calServer-reports/runner/\n' > site/robots.txt
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
