@@ -570,13 +570,16 @@ jobs:
           output_path.write_text(json.dumps(payload, indent=2))
           PY
 
-      # calScript Runner: Pakete aus dem privaten calServer-yii-Release unter
+      # calServer Runner: Pakete aus dem privaten calServer-yii-Release unter
       # runner/<version>/ spiegeln. Nicht verlinkt, nicht in latest.json; die
-      # Adressen kennt nur calServer (config/calscript_runner.php). Welche
+      # Adressen kennt nur calServer (config/calserver_runner.php). Welche
       # Versionen: runner/versions.json. Siehe runner/README.md.
+      # Bis 0.8.x hieß er calScript Runner: Tag calscript-runner-v<version>,
+      # Dateien calscript-runner-*. Beide Namen werden gespiegelt.
       - name: Runner-Pakete spiegeln
         env:
-          GH_TOKEN: ${{ secrets.CALSCRIPT_RUNNER_PAGES_TOKEN }}
+          # Neuer Name des Secrets; der alte gilt weiter.
+          GH_TOKEN: ${{ secrets.CALSERVER_RUNNER_PAGES_TOKEN || secrets.CALSCRIPT_RUNNER_PAGES_TOKEN }}
           SOURCE_REPO: calhelp/calServer-yii
         run: |
           set -euo pipefail
@@ -589,17 +592,23 @@ jobs:
             exit 0
           fi
           if [ -z "${GH_TOKEN}" ]; then
-            echo "::warning::Secret CALSCRIPT_RUNNER_PAGES_TOKEN fehlt; Runner-Pakete werden nicht gespiegelt."
+            echo "::warning::Secret CALSERVER_RUNNER_PAGES_TOKEN fehlt; Runner-Pakete werden nicht gespiegelt."
             exit 0
           fi
 
           for version in "${versions[@]}"; do
-            tag="calscript-runner-v${version}"
             target="site/runner/${version}"
             mkdir -p "${target}"
-            if ! gh release download "${tag}" --repo "${SOURCE_REPO}" --dir "${target}" \
-                 --pattern 'calscript-runner-*' --pattern 'SHA256SUMS.txt'; then
-              echo "::warning::Release ${tag} in ${SOURCE_REPO} nicht ladbar; Version ${version} bleibt leer."
+            tag=""
+            for name in calserver-runner calscript-runner; do
+              if gh release download "${name}-v${version}" --repo "${SOURCE_REPO}" --dir "${target}" \
+                   --pattern "${name}-*" --pattern 'SHA256SUMS.txt'; then
+                tag="${name}-v${version}"
+                break
+              fi
+            done
+            if [ -z "${tag}" ]; then
+              echo "::warning::Kein Release zu Runner ${version} in ${SOURCE_REPO}; Version bleibt leer."
               rm -rf "${target}"
               continue
             fi

@@ -1,20 +1,24 @@
-# calScript Runner: versteckter Download-Spiegel
+# calServer Runner: versteckter Download-Spiegel
 
-Dieser Ordner steuert, welche Versionen des calScript Runners (Messplatz-Programm
+Dieser Ordner steuert, welche Versionen des calServer Runners (Messplatz-Programm
 von calServer, gebaut im privaten Repository `calhelp/calServer-yii`) auf der
-GitHub-Pages-Seite dieses Repositories ausgeliefert werden.
+GitHub-Pages-Seite dieses Repositories ausgeliefert werden. Bis Version 0.8.x
+hieß er calScript Runner; diese Versionen tragen weiter die alten Namen
+(Tag `calscript-runner-v<version>`, Dateien `calscript-runner-*`).
 
 Die Pakete liegen **nicht** in diesem Repository. Der Workflow
 `publish-downloads.yml` lädt sie beim Bauen der Seite aus den GitHub-Releases
-von `calServer-yii` (Tag `calscript-runner-v<version>`) und legt sie unter
+von `calServer-yii` (Tag `calserver-runner-v<version>`, für 0.8.x und älter
+`calscript-runner-v<version>`) und legt sie unter
 
 ```
 https://calhelp.github.io/calServer-reports/runner/<version>/<datei>
 ```
 
-ab, zum Beispiel `runner/0.2.0/calscript-runner-0.2.0-windows-x64.zip`,
-daneben `SHA256SUMS.txt`. calServer verlinkt genau diese Adressen auf der
-Seite „Messplätze" (`config/calscript_runner.php`).
+ab, zum Beispiel `runner/0.9.0/calserver-runner-0.9.0-windows-x64.zip` oder
+`runner/0.8.1/calscript-runner-0.8.1-windows-x64.zip`, daneben
+`SHA256SUMS.txt`. calServer verlinkt genau diese Adressen auf der Seite
+„Messplätze" (`config/calserver_runner.php`).
 
 ## Versteckt, nicht geheim
 
@@ -40,12 +44,13 @@ Der Release-Workflow in `calServer-yii` trägt eine neue Version nach dem Bau
 automatisch hier ein (Commit auf `main`, der wie jeder Push die Paketierung
 und damit die Veröffentlichung der Seite auslöst). Von Hand geht es genauso:
 Version eintragen, mergen, fertig. Alte Versionen entfernen, sobald kein
-calServer sie mehr verlinkt (`CALSCRIPT_RUNNER_VERSION`).
+calServer sie mehr verlinkt (`CALSERVER_RUNNER_VERSION`).
 
 ## Voraussetzung: Zugriffstoken
 
 Das Repository `calServer-yii` ist privat. Der Workflow braucht deshalb das
-Actions-Secret `CALSCRIPT_RUNNER_PAGES_TOKEN`: ein Fine-grained Personal Access
+Actions-Secret `CALSERVER_RUNNER_PAGES_TOKEN` (der alte Name
+`CALSCRIPT_RUNNER_PAGES_TOKEN` gilt weiter): ein Fine-grained Personal Access
 Token mit
 
 - `calhelp/calServer-yii`: Contents **Read** (Release-Assets laden),
