@@ -584,9 +584,21 @@ jobs:
         run: |
           set -euo pipefail
 
-          mapfile -t versions < <(
-            python -c "import json; [print(v) for v in json.load(open('runner/versions.json'))['versions'] if v]"
+          # Nur die neuesten `keep` Versionen (Standard 5): GitHub Pages erlaubt
+          # 1 GB je Seite, jede Version bringt rund 90 MB. Ältere bleiben im
+          # Release von calServer-yii und in versions.json (Verlauf).
+          mapfile -t versions < <(python - <<'PY'
+          import json
+          data = json.load(open("runner/versions.json"))
+          keep = int(data.get("keep", 5))
+          def key(v):
+              return tuple(int(p) if p.isdigit() else 0 for p in v.split("."))
+          listed = [v for v in data["versions"] if v]
+          for v in sorted(set(listed), key=key, reverse=True)[:keep]:
+              print(v)
+          PY
           )
+          echo "Gespiegelte Runner-Versionen: ${versions[*]:-keine}"
           if [ "${#versions[@]}" -eq 0 ]; then
             echo "runner/versions.json nennt keine Version; kein Runner-Spiegel."
             exit 0
@@ -620,6 +632,12 @@ jobs:
             echo "Runner ${version}:"
             ls -l "${target}"
           done
+
+          size_mb=$(du -sm site | cut -f1)
+          echo "Größe der Seite mit Runner-Paketen: ${size_mb} MB"
+          if [ "${size_mb}" -gt 900 ]; then
+            echo "::warning::Seite ist ${size_mb} MB groß, GitHub Pages erlaubt 1024 MB. 'keep' in runner/versions.json senken."
+          fi
 
           # Absichtserklärung für Crawler. Wirkt nur, wenn sie an der
           # Domain-Wurzel läge (calhelp.github.io/robots.txt); hier dokumentiert
