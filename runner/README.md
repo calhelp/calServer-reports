@@ -34,17 +34,26 @@ Verlinkung.
 
 ## Versionen pflegen
 
-`versions.json` listet die Versionen, die veröffentlicht werden (neueste zuerst):
+`versions.json` listet die veröffentlichten Versionen (neueste zuerst). Gespiegelt
+werden davon nur die neuesten `keep` (Standard 5, nach Versionsnummer sortiert):
 
 ```json
-{ "versions": ["0.2.0"] }
+{ "keep": 5, "versions": ["0.12.0", "0.11.0", "0.10.1"] }
 ```
+
+Grund ist die Grenze von GitHub Pages: 1 GB je Seite. Jede Runner-Version
+bringt mit Setup, MSI, ZIP und tar.gz rund 90 MB; mit allen Versionen seit
+0.2.0 lag die Seite am 2026-11-01 bei 1,13 GB. Ältere Versionen bleiben im
+Release von `calServer-yii` und als Verlauf in `versions.json`, nur ihre
+Download-Adresse auf der Seite entfällt. Ein calServer, der per
+`CALSERVER_RUNNER_VERSION` auf einer älteren Version steht, bietet dann keinen
+Download mehr an; Messplätze sollen ohnehin auf die aktuelle Version. Der
+Schritt nennt die Größe der Seite und warnt ab 900 MB.
 
 Der Release-Workflow in `calServer-yii` trägt eine neue Version nach dem Bau
 automatisch hier ein (Commit auf `main`, der wie jeder Push die Paketierung
 und damit die Veröffentlichung der Seite auslöst). Von Hand geht es genauso:
-Version eintragen, mergen, fertig. Alte Versionen entfernen, sobald kein
-calServer sie mehr verlinkt (`CALSERVER_RUNNER_VERSION`).
+Version eintragen, mergen, fertig.
 
 ## Voraussetzung: Zugriffstoken
 
