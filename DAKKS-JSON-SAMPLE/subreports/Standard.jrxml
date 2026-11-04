@@ -180,7 +180,7 @@
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="67" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
+				<reportElement x="300" y="0" width="70" height="17" backcolor="#F2F2F2" uuid="2a7a8b63-4f95-491d-8bd9-877e4685632d"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -194,7 +194,7 @@
 				<text><![CDATA[nächste Kal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="17" width="67" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
+				<reportElement x="300" y="17" width="70" height="15" backcolor="#F2F2F2" uuid="150dddf1-3897-44b9-bc8b-39fb07dceba5"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -208,7 +208,7 @@
 				<text><![CDATA[Cal Due]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="367" y="0" width="168" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
+				<reportElement x="370" y="0" width="165" height="17" backcolor="#F2F2F2" uuid="c8442144-1c52-4ef8-81a1-2db448d9fcac"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
@@ -222,7 +222,7 @@
 				<text><![CDATA[Kalibrierscheinnummer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="367" y="17" width="168" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
+				<reportElement x="370" y="17" width="165" height="15" backcolor="#F2F2F2" uuid="31feaf16-5a22-43cd-9c01-5d42e9701bd2"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -268,7 +268,7 @@
 				<textFieldExpression><![CDATA[$F{I4203}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="300" y="0" width="67" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
+				<reportElement x="300" y="0" width="70" height="16" uuid="d49d27df-30b6-4274-97c9-0e5fcb80cf34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -279,7 +279,7 @@
         : $F{C2303})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="367" y="0" width="168" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
+				<reportElement x="370" y="0" width="165" height="16" uuid="dc4e45e7-01a9-4b84-aa1b-d35209b2d2fc"/>
                                 <textElement textAlignment="Center" verticalAlignment="Middle">
                                         <font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
                                 </textElement>
