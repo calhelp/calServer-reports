@@ -16,3 +16,12 @@ Akkreditierungsnummer in den Etiketten ist für die Bilder durch den Platzhalter
 | `jasper-kalibrieretiketten.webp` | `STICKER-DAKKS-40X30MM-QR`, `STICKER-INV-40X30MM-QR`, `STICKER-CAL-INV-ZEBRA`, `STICKER-DAKKS-18MM` (`-JSON-SAMPLE`) |
 
 Verwendet auf calserver.com unter /funktionen/berichtswesen.
+
+## E-Rechnung (ZUGFeRD)
+
+`rechnung-zugferd.pdf` ist `ORDER-JSON-SAMPLE` mit `document.type = invoice`,
+danach mit dem `ZugferdInvoiceService`/`ZugferdXmlBuilder` aus calServer-yii
+(horstoeko/zugferd, Profil EN 16931) zur hybriden PDF/A-3-Rechnung mit
+eingebetteter `factur-x.xml` gemacht. XSD-Prüfung bestanden; Beträge im XML
+(245,00 netto, 41,15 USt., 286,15 brutto) gleich dem Papierbild.
+`jasper-rechnung-zugferd.webp` zeigt die Rechnung mit einem Ausschnitt der XML.
