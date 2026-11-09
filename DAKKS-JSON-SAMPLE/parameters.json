@@ -1062,8 +1062,8 @@
         "en": "Conformity intro"
       },
       "description": {
-        "de": "Einleitungssatz des Konformitätsabschnitts. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Einleitungssatz des Konformitätsabschnitts. calServer setzt ihn nach der Entscheidungsregel der Kalibrierung (Regel, Abschnitt in ILAC-G8:09/2019, Schutzband). Eine Variable mit Text geht vor; leer lassen für den Text der Regel, ohne bewertete Punkte für den V1-Standardtext.",
+        "en": "Intro of the conformity section. calServer sets it from the calibration's decision rule (rule, section in ILAC-G8:09/2019, guard band). A variable with text takes precedence; leave empty for the rule's text, or the V1 default text when no point was judged."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1077,8 +1077,8 @@
         "en": "Conformity symbol list"
       },
       "description": {
-        "de": "Symbolzeilen der Konformitätslegende (HTML-Zeilenumbrüche). Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Zeichen der Konformitätslegende (HTML-Zeilenumbrüche), eines je Absatz der Symboltexte. calServer setzt sie nach der Entscheidungsregel der Kalibrierung. Eine Variable mit Text geht vor; leer lassen für die Zeichen der Regel, ohne bewertete Punkte für den V1-Standardtext.",
+        "en": "Symbols of the conformity legend (HTML line breaks), one per paragraph of the symbol details. calServer sets them from the calibration's decision rule. A variable with text takes precedence; leave empty for the rule's symbols, or the V1 default when no point was judged."
       },
       "role": "variable",
       "group": "Textbausteine",
@@ -1092,8 +1092,8 @@
         "en": "Conformity symbol details"
       },
       "description": {
-        "de": "Erläuterungstexte zu den Konformitätssymbolen. Leer lassen für den zweisprachigen V1-Standardtext.",
-        "en": "Overrides the built-in bilingual V1 default text; leave empty to keep it."
+        "de": "Erläuterungstexte zu den Konformitätssymbolen, ein Absatz je Zeichen. calServer setzt sie nach der Entscheidungsregel der Kalibrierung. Eine Variable mit Text geht vor; leer lassen für die Texte der Regel, ohne bewertete Punkte für den V1-Standardtext.",
+        "en": "Explanations of the conformity symbols, one paragraph per symbol. calServer sets them from the calibration's decision rule. A variable with text takes precedence; leave empty for the rule's texts, or the V1 default text when no point was judged."
       },
       "role": "variable",
       "group": "Textbausteine",

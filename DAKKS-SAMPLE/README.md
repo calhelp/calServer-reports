@@ -154,6 +154,19 @@ alle vier Prozedur-Abschnitte bei ihren Fallbacks.
 | Messbedingungen | `measurement_conditions` | „im permanenten Labor“ |
 | Geltungs­bereich | `scope` | `calibration_item` → `standards` → `Calibration_procedure_2` → „--“ |
 
+**Die Entscheidungsregel setzt den Abschnitt Konformität (calServer V2).** Hat
+calServer Punkte der Kalibrierung bewertet, setzt es `Conformity_description_1`
+bis `_3` nach der Entscheidungs­regel der Kalibrierung (ISO/IEC 17025:2017
+7.8.6.2): Die Einleitung nennt die Regel mit ihrem Abschnitt in
+ILAC-G8:09/2019 und das Schutzband, Zeichen und Legende passen zur Regel. Die
+nichtbinäre Regel erklärt `?`, `!?`, `!` und `*` wie der Standardtext, die
+beiden binären Regeln nur `!` und `*`. Eine Berichts­variable mit Text geht
+vor, eine leere zählt als nicht gesetzt. Ohne von calServer bewertete Punkte
+(importiert, ohne Toleranz) und in V1 bleibt es bei den Standardtexten. Wer
+eigene Texte hinterlegt, hält die Zeichen neben ihren Absätzen: Zwischen zwei
+Zeichen in `_2` stehen so viele Leerzeilen, wie der Absatz zum oberen Zeichen
+in `_3` Zeilen hat.
+
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `Cert_description` | ➖ | sprachabhängig | Einleitender Vorspann zum Zertifikat (Geltungs­bereich, Verbreitung). |
@@ -163,9 +176,9 @@ alle vier Prozedur-Abschnitte bei ihren Fallbacks.
 | `Measurements_description` | ➖ | sprachabhängig | Erläuterung zur Methodik der Mess­unsicherheit (z. B. GUM). |
 | `Measurements_description_1` | ➖ | sprachabhängig | Folgeabsatz zur Mess­unsicherheits­methodik. |
 | `Uncertainty_description` | ➖ | sprachabhängig | Vollständiger Textblock zu Messunsicherheiten. Wird der Parameter gesetzt, ersetzt er den kompletten Standard­abschnitt. |
-| `Conformity_description_1` | ➖ | sprachabhängig | Einleitung zur Konformitäts­bewertung. |
-| `Conformity_description_2` | ➖ | sprachabhängig | Mehrzeilige Kurzlegende zu den Konformitäts­symbolen (`?`, `!?`, `!`, `*`). |
-| `Conformity_description_3` | ➖ | sprachabhängig | Abschluss­hinweis zur Konformitäts­aussage. |
+| `Conformity_description_1` | ➖ | sprachabhängig | Einleitung zur Konformitäts­bewertung. calServer V2 setzt sie nach der Entscheidungs­regel der Kalibrierung (siehe oben). |
+| `Conformity_description_2` | ➖ | sprachabhängig | Mehrzeilige Kurzlegende zu den Konformitäts­symbolen, ein Zeichen je Absatz von `Conformity_description_3`: `?`, `!?`, `!`, `*` bei der nichtbinären Regel, `!` und `*` bei den binären. |
+| `Conformity_description_3` | ➖ | sprachabhängig | Texte zu den Konformitäts­symbolen, ein Absatz je Zeichen von `Conformity_description_2`. |
 | `Additional_information` | ➖ | sprachabhängig | Zusatzhinweise, u. a. zur internationalen DAkkS-Anerkennung. |
 | `Calibration_procedure_1` | ➖ | sprachabhängig | Fallback für das angewendete Kalibrier­verfahren. Der bessere Ort ist das Feld „Beschreibung“ der Prozedur. |
 | `Calibration_procedure_2` | ➖ | sprachabhängig | Fallback für den Geltungs­bereich, wenn weder Prozedur-Scope noch Kalibrier­gegenstand noch Normale gefüllt sind. Der bessere Ort ist das Feld „Geltungsbereich“ der Prozedur. |
