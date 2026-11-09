@@ -244,6 +244,12 @@ vier Schreibweisen — MET/TEAMs `Points.cPointPassFailStatus`:
 Alles andere — auch leer, auch `P`/`F`, auch `Conditional` — druckt eine leere
 Zelle.
 
+Welche Zeichen vorkommen, hängt von der Entscheidungsregel der Kalibrierung ab:
+Unter den beiden binären Regeln entscheidet calServer nur `Pass` oder `Fail`,
+`?` und `!?` kommen dann nicht vor. Die passende Legende setzt calServer in
+`Conformity_description_1` bis `_3`, der Datensatz trägt die Regel im Block
+`decision_rule` (ab Contract-Version 1.9).
+
 Das `*` daneben ist eine eigene Aussage und hängt an `results[].accred`, dem
 MET/CAL-Flag `ACCRED`: `1`/`ja`/`true` und `2`…`32767` = Flag gesetzt (`*`),
 `0`/`nein`/`false` = Flag nicht gesetzt, der MET/CAL-Standard (kein Zeichen),
