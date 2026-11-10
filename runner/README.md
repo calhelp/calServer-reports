@@ -55,6 +55,28 @@ automatisch hier ein (Commit auf `main`, der wie jeder Push die Paketierung
 und damit die Veröffentlichung der Seite auslöst). Von Hand geht es genauso:
 Version eintragen, mergen, fertig.
 
+## Wenn die Veröffentlichung hängt
+
+GitHub Pages bleibt beim Ausrollen gelegentlich hängen (Runner 0.26.0 am
+2026-11-09: zehn Minuten „syncing_files“, danach Abbruch; die Seite blieb auf
+dem alten Stand, alle Links der neuen Version gaben 404). `publish-downloads.yml`
+versucht den Deploy deshalb selbst ein zweites Mal mit demselben Paket.
+
+Scheitert auch der zweite Versuch, hilft **kein** „Re-run“ des Laufs: Er lädt
+ein zweites Paket `github-pages` hoch, und `deploy-pages` bricht mit „Multiple
+artifacts named github-pages“ ab. Stattdessen einen frischen Lauf starten, mit
+der Run-ID des zugehörigen Laufs „Package Reports“:
+
+```
+gh workflow run publish-downloads.yml --repo calhelp/calServer-reports --ref main \
+  -f run_id=<Run-ID von Package Reports> -f run_number=<Nummer> \
+  -f commit_sha=<Commit> -f workflow_name="Package Reports"
+```
+
+Der Release-Workflow in `calServer-yii` prüft nach dem Eintragen, ob die Pakete
+der neuen Version unter `runner/<version>/` abrufbar sind, und wird rot, wenn
+nicht.
+
 ## Voraussetzung: Zugriffstoken
 
 Das Repository `calServer-yii` ist privat. Der Workflow braucht deshalb das

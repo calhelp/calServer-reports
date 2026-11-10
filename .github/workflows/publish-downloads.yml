@@ -38,7 +38,7 @@ jobs:
       actions: read
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy_retry.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -652,6 +652,29 @@ jobs:
         with:
           path: site
 
+      # GitHub Pages bleibt gelegentlich beim Ausrollen hängen: Runner 0.26.0
+      # stand am 2026-11-09 zehn Minuten auf „syncing_files“, deploy-pages
+      # brach ab, und die Seite blieb auf dem alten Stand (alle 0.26.0-Links
+      # 404). Ein „Re-run“ des Laufs hilft dann nicht: Er lädt ein zweites
+      # Paket „github-pages“ hoch, und deploy-pages scheitert an „Multiple
+      # artifacts“. Deshalb versucht dieser Lauf es selbst ein zweites Mal mit
+      # demselben Paket; deploy-pages zieht die hängende Bereitstellung beim
+      # Abbruch zurück. Ein normaler Deploy dauert unter einer Minute, daher
+      # beim ersten Versuch 5 statt 10 Minuten Zeitlimit.
       - name: Deploy to GitHub Pages
         id: deploy
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 300000
+
+      - name: Kurz warten vor dem zweiten Versuch
+        if: steps.deploy.outcome == 'failure'
+        run: |
+          echo "::warning::Pages-Deploy im ersten Versuch gescheitert, zweiter Versuch in 30 s."
+          sleep 30
+
+      - name: Deploy to GitHub Pages (zweiter Versuch)
+        id: deploy_retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v4
