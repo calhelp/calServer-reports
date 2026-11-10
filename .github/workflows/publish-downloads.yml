@@ -652,10 +652,12 @@ jobs:
         with:
           path: site
 
-      # GitHub Pages bleibt gelegentlich beim Ausrollen hängen: Runner 0.26.0
-      # stand am 2026-11-09 zehn Minuten auf „syncing_files“, deploy-pages
-      # brach ab, und die Seite blieb auf dem alten Stand (alle 0.26.0-Links
-      # 404). Ein „Re-run“ des Laufs hilft dann nicht: Er lädt ein zweites
+      # Der Deploy scheitert gelegentlich an GitHub selbst, und die Seite bleibt
+      # auf dem alten Stand. Runner 0.25.0, 2026-11-08: „Found 0 artifact(s)“
+      # direkt nach dem Hochladen, 404 auf alle 0.25.0-Links, bis neun Stunden
+      # später zufällig der nächste Lauf durchging. Runner 0.26.0, 2026-11-09:
+      # zehn Minuten „syncing_files“, dann brach deploy-pages ab (404 bis zum
+      # nächsten Tag). Ein „Re-run“ des Laufs hilft dann nicht: Er lädt ein zweites
       # Paket „github-pages“ hoch, und deploy-pages scheitert an „Multiple
       # artifacts“. Deshalb versucht dieser Lauf es selbst ein zweites Mal mit
       # demselben Paket; deploy-pages zieht die hängende Bereitstellung beim
