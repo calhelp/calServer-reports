@@ -94,7 +94,7 @@
       "label": "Akkreditierung & Unterschriften",
       "subtitle": "Markennummern, DAkkS-Logo, Signaturen",
       "anchor": "#params-images",
-      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path", "ShowMarkOnFollowingPages"],
+      "params": ["MarkNumber1", "MarkNumber2", "sign_names", "P_Image_Path", "ShowMarkOnFollowingPages", "ShowCalibrationMark"],
       "height": 100,
       "tone": "accent"
     }

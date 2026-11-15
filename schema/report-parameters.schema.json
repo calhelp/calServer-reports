@@ -4,7 +4,10 @@
   "title": "calServer Report-Parameter-Manifest",
   "description": "Maschinenlesbarer Parameter-Katalog eines V2-JSON-Report-Bundles (parameters.json an der Bundle-Wurzel). Gilt NUR fuer Bundles ohne eingebettetes SQL, die der report-runner aus einem JSON-Datensatz fuellt (ADR-009); klassische V1/JDBC-Bundles tragen kein Manifest.",
   "type": "object",
-  "required": ["version", "parameters"],
+  "required": [
+    "version",
+    "parameters"
+  ],
   "additionalProperties": false,
   "properties": {
     "$schema": {
@@ -16,25 +19,36 @@
     },
     "parameters": {
       "type": "array",
-      "items": { "$ref": "#/definitions/parameter" }
+      "items": {
+        "$ref": "#/definitions/parameter"
+      }
     }
   },
   "definitions": {
     "localizedText": {
       "description": "Anzeigetext: einfacher String oder Objekt je Sprache (de, en, ...). Aufloesung im Backend: Anfragesprache, dann de, dann en, dann erste vorhandene.",
       "oneOf": [
-        { "type": "string" },
+        {
+          "type": "string"
+        },
         {
           "type": "object",
           "minProperties": 1,
-          "propertyNames": { "pattern": "^[a-z]{2}(-[A-Z]{2})?$" },
-          "additionalProperties": { "type": "string" }
+          "propertyNames": {
+            "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       ]
     },
     "parameter": {
       "type": "object",
-      "required": ["name", "label"],
+      "required": [
+        "name",
+        "label"
+      ],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -42,24 +56,46 @@
           "type": "string",
           "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
         },
-        "label": { "$ref": "#/definitions/localizedText" },
-        "description": { "$ref": "#/definitions/localizedText" },
+        "label": {
+          "$ref": "#/definitions/localizedText"
+        },
+        "description": {
+          "$ref": "#/definitions/localizedText"
+        },
         "role": {
           "description": "variable = Admin-Konfiguration (Berichtsvariable, als JRXML-Parameter injiziert), data = Berichtsvariable, die den DATENSATZ steuert statt das Layout (kein JRXML-Parameter; calServer liest sie beim Bauen des JSON, z. B. procedure_field), prompt = Nutzerabfrage beim Generieren, system = wird automatisch versorgt und nie angeboten.",
           "type": "string",
-          "enum": ["variable", "data", "prompt", "system"],
+          "enum": [
+            "variable",
+            "data",
+            "prompt",
+            "system"
+          ],
           "default": "variable"
         },
         "scope": {
           "description": "Empfohlener Geltungsbereich der Berichtsvariable (nur Vorauswahl im Dialog).",
           "type": "string",
-          "enum": ["report", "type", "global"],
+          "enum": [
+            "report",
+            "type",
+            "global"
+          ],
           "default": "report"
         },
         "input": {
           "description": "UI-Eingabetyp im Variablen-Dialog.",
           "type": "string",
-          "enum": ["text", "textarea", "select", "boolean", "number", "date", "color", "image"],
+          "enum": [
+            "text",
+            "textarea",
+            "select",
+            "boolean",
+            "number",
+            "date",
+            "color",
+            "image"
+          ],
           "default": "text"
         },
         "options": {
@@ -68,14 +104,33 @@
           "minItems": 1,
           "items": {
             "oneOf": [
-              { "type": "string" },
+              {
+                "type": "string"
+              },
               {
                 "type": "object",
-                "required": ["value"],
+                "required": [
+                  "value"
+                ],
                 "additionalProperties": false,
                 "properties": {
-                  "value": { "type": "string" },
-                  "label": { "$ref": "#/definitions/localizedText" }
+                  "value": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "description": {
+                    "description": "Was diese Auswahl im Bericht aendert, ein bis zwei Saetze. Erscheint im Variablen-Dialog unter der Auswahl.",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/localizedText"
+                      }
+                    ]
+                  },
+                  "preview": {
+                    "$ref": "#/definitions/optionPreview"
+                  }
                 }
               }
             ]
@@ -104,11 +159,70 @@
       },
       "allOf": [
         {
-          "if": { "properties": { "input": { "const": "select" } }, "required": ["input"] },
-          "then": { "required": ["options"] },
-          "else": { "not": { "required": ["options"] } }
+          "if": {
+            "properties": {
+              "input": {
+                "const": "select"
+              }
+            },
+            "required": [
+              "input"
+            ]
+          },
+          "then": {
+            "required": [
+              "options"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "options"
+              ]
+            }
+          }
         }
       ]
+    },
+    "optionPreview": {
+      "description": "Vorschau einer Auswahl als kleine Beispieltabelle: Spaltenkoepfe und wenige Beispielzeilen, so wie der Bericht sie mit dieser Auswahl druckt. Reine Anzeige im Variablen-Dialog; aeltere calServer-Versionen ignorieren das Feld.",
+      "type": "object",
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/definitions/localizedText"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "note": {
+          "description": "Optionaler Hinweis unter der Beispieltabelle.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/localizedText"
+            }
+          ]
+        }
+      }
     }
   }
 }

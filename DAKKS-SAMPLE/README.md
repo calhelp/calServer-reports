@@ -81,8 +81,13 @@ Report selbst zu verändern.
 * **Unicode-Schrift:** Der Report nutzt die von JasperStarter mitgelieferten
   **DejaVu-Schriften** mit Identity-H-Encoding, sodass Umlaute und Sonderzeichen
   ohne eingebettete TTF-Datei erhalten bleiben.
-* **Seitenzahlen im Fließtext:** `Results_description` nutzt `msg(..., Seite)`
-  und passt die Seitenreferenz beim Rendern automatisch an.
+* **Seitenzahlen im Fließtext:** Der Platzhalter `{0}` in `Results_description`
+  wird durch die Seite ersetzt, auf der die Messergebnisse beginnen. Die Zahl
+  steht erst fest, wenn der Unterbericht gelaufen ist; der Satz mit dem
+  Platzhalter wird deshalb als eigene Zeile am Berichtsende ausgewertet, der
+  restliche Text folgt darunter. Bis dahin druckte der Schein an dieser Stelle
+  immer „ab Seite 1“. Ein Text ohne `{0}` erscheint unverändert und ohne
+  Seitenzahl.
 
 ---
 
@@ -117,6 +122,7 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `ShowMarkOnFollowingPages` | ➖ | `Y` | Blendet den Kennzeichnungs-/Akkreditierungsblock (`MarkNumber1`, `MarkNumber2`, Kalibrierdatum oben rechts) auf Folgeseiten ein/aus. `Y` = auf allen Seiten anzeigen (Default). `N` = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden. |
+| `ShowCalibrationMark` | ➖ | `Y` | Blendet den Kalibrierzeichen-Kasten (`MarkNumber1`, `MarkNumber2`, Kalibriermonat) samt Beschriftung „Kalibrierzeichen / Calibration mark“ vollständig ein oder aus. `Y` = anzeigen (Default). `N` = auf allen Seiten ausblenden, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. `N` hat Vorrang vor `ShowMarkOnFollowingPages`. |
 | `P_Image_Path` | ➖ | `""` | Pfad zu Logos/Siegeln, die im Kopf- und Fußbereich (z. B. DAkkS-Logo) eingeblendet werden. Wird auch an den Subreport `Results` durchgereicht. |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für das QR-/Barcode-Element (z. B. URL zum digitalen Zertifikat). Bleibt der Wert leer, wird kein QR-Code gerendert. |
 | `MarkNumber1` | ➖ | `123456` | Erste Markennummer im Akkreditierungs­block. Es wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt, sodass z. B. `123456 (intern)` zu `123456` reduziert wird. |
@@ -128,7 +134,7 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
-| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit). Leere, nicht-numerische **und unbekannte** Eingaben werden als `1` behandelt — eine `5` druckte bis dahin eine komplett leere Ergebnistabelle, ohne Kopf und ohne Hinweis. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
+| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit, `5` MET/CAL-Layout für DAkkS-Scheine, `51` MET/CAL-Layout für Werkskalibrierscheine). Leere, nicht-numerische **und unbekannte** Eingaben werden als `1` behandelt — eine unbekannte Zahl druckte bis dahin eine komplett leere Ergebnistabelle, ohne Kopf und ohne Hinweis. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
 | `ModernResultsHeader` | ➖ | `Y` | Tabellenkopf-Stil im `Results`-Unterbericht. Standard ist der moderne Kopf ohne umlaufende Rahmen (gilt auch für leere oder unbekannte Werte); nur ein explizites `N` schaltet auf den klassischen Kopf mit Rahmen zurück. Beide Stile sind je `MeasurementDetails`-Variante an den Datenspalten ausgerichtet. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
 | `environmental_conditions` | ➖ | `""` | Name der Ressource, deren Klimabereich gedruckt wird. Der Bericht joint `resource.name = $P{environmental_conditions}` und liest deren Feld „Umgebungs­bedingungen“ (`environment_resources`) – ein Text mit `\|` als Trenner, links die Temperatur, rechts die Feuchte, jeweils mit Einheit, z. B. `21,0 ... 23,0 °C\|40 ... 60 %`. **Jede Hälfte fällt für sich zurück:** bleibt sie leer, druckt der Schein den an der Kalibrierung erfassten Wert (`C2311` + ` °C` bzw. `C2312` + ` %`). So steht der Klimabereich des Labors einmal an der Ressource statt in jedem Bericht erneut. |
@@ -277,12 +283,40 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   | `21` | Messbedingungen · Sollwert · Messwert · % rel. Abw. · erw. MU | `sys_actual` / `uut_ind` | ja |
   | `3` | Messbedingungen · Sollwert · Messwert · % rel. Abw. · erw. MU · % Tol · Konformität | `fixq` / `varq` | ja |
   | `4` | wie `3`, Unsicherheit aus `exp_uncert_iso_p` statt `exp_uncert_iso_e` | `fixq` / `varq` | ja |
+  | `5` | Test · Bereich · Richtiger Wert / Messbedingung · Anzeige · Toleranz · Abweichung · erw. MU · % Tol. / Hinweise | `sys_actual` / `uut_ind` | ja |
+  | `51` | Test · Bereich · Richtiger Wert / Messbedingung · Anzeige · Toleranz · Abweichung · % Tol. · erw. MU · Hinweise | `sys_actual` / `uut_ind` | ja |
 
   Jede Spalte jeder Variante hat eine Datenzelle, und jede Datenzelle steht
   exakt unter ihrem Spaltenkopf — in beiden Kopfstilen. `21` und `22` drucken
   bewusst das andere Spaltenpaar; welches von beiden der Sollwert ist, hängt am
   Toleranzbezug der Prozedur, deshalb gibt es die Varianten überhaupt.
 
+* **Varianten `5` und `51` (MET/CAL-Layout):** Beide folgen dem Aufbau der
+  MET/CAL-Kalibrierscheine und lesen dafür Spalten, die die anderen Varianten
+  nicht brauchen. Jede davon darf leer sein.
+
+  | Spalte | Quelle | Rückfall |
+  | --- | --- | --- |
+  | Test | Hauptnummer aus `test_step` (`1.001` wird `0001`); nicht-numerische Werte unverändert | leer |
+  | Bereich | `uut_range` (+`_p`/`_u`) | leer |
+  | Richtiger Wert | `sys_actual` (+`_p`/`_u`) | `fixq` |
+  | Messbedingung (zweite Zeile) | `condition2` | `@` + `mod1` (+`_p`/`_u`) |
+  | Anzeige | `uut_ind` (+`_p`/`_u`) | `varq` |
+  | Toleranz | `tol_pos` / `tol_neg` (+`_p`/`_u`) | `tol` (+`_p`/`_u`), sonst halbe Spanne aus `upper_limit` − `lower_limit` |
+  | Abweichung | `error` (+`_p`/`_u`) | Anzeige − richtiger Wert, wenn beide dieselbe Einheit tragen |
+  | erw. MU | `exp_uncert` (+`_p`/`_u`), `°C` wird `K` | leer |
+  | % Tol. | `tol_err`, drei signifikante Stellen, dahinter `Pass` oder `Fail` aus `pass_fail` | leer |
+  | Hinweise | `?`, `!?`, `!` aus `pass_fail`, dazu `*` aus `accred` | leer |
+
+  Toleranz und Abweichung druckt Variante `5` wie MET/CAL mit drei
+  signifikanten Stellen und dem passenden SI-Vorsatz (`0.63 °C` wird `630 mK`,
+  `0.0000105 V` wird `10.5 µV`); als Temperaturdifferenz steht `K` statt `°C`.
+  Einheiten ohne Vorsatz (`%rH`, `%`, `dB`) bleiben, wie sie erfasst sind. Eine
+  asymmetrische Toleranz steht zweizeilig als `+…` und `-…`. Variante `51`
+  druckt die Toleranz in der erfassten Einheit ohne Umrechnung (`0.63 °C`), die
+  Abweichung wie Variante `5`. `test_desc` hat in diesen Layouts keine Spalte;
+  Zwischenüberschriften kommen wie bei MET/CAL aus `remark`-Zeilen und stehen
+  in Normalschrift statt fett.
 * **Besonderheiten:**
   * Variante `1` druckt den Sollwert in der Spalte `Sollwert / True Value`, die
     ihr Tabellenkopf seit jeher ausweist; bis dahin war die Spalte in beiden
@@ -291,7 +325,8 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     Min/Max-Spalten.
   * `RoundedRelError` rundet die relative Abweichung auf eine Nachkommastelle;
     `RoundedTolErr` rundet die Toleranzausnutzung auf ganze Prozent und deckelt
-    sie bei `>500`. Das Prozentzeichen steht im Spaltenkopf, nicht in der Zelle.
+    sie bei `>500`; Werte in Exponentialschreibweise (`3.22e-011`, so schreibt
+    MET/CAL eine Null) werden als Zahl gelesen statt unverändert gedruckt. Das Prozentzeichen steht im Spaltenkopf, nicht in der Zelle.
   * `FormattedUncertainty` formatiert wissenschaftliche Schreib­weisen
     (`×10ⁿ`), sofern keine HTML-Markups vorliegen.
   * `ExpUncertaintyDisplay` setzt die erweiterte Messunsicherheit aus

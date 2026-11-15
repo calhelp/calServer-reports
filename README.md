@@ -215,6 +215,11 @@ Workflow für Berichtsentwickler:
 3. Labels und Beschreibungen (deutsch **und** englisch), Rollen
    (`variable`/`prompt`/`system`), Scope-Empfehlungen und Eingabetypen
    ergänzen — Format siehe [`schema/report-parameters.schema.json`](schema/report-parameters.schema.json).
+   Bei Auswahllisten (`input: select`) kann jede Option zusätzlich eine
+   `description` (was die Auswahl ändert) und eine `preview` tragen: eine
+   kleine Beispieltabelle aus `columns` und `rows`, die calServer an der
+   Variablenauswahl anzeigt. Sinnvoll überall, wo ein Wert wie `21` oder `51`
+   für sich nichts sagt; Referenz ist `MeasurementDetails` im DAkkS-Bundle.
 4. Lokal prüfen: `python3 scripts/check_parameters_manifest.py MEIN-BUNDLE`
    — derselbe Check läuft in jedem Pull Request (Workflow „Validate Reports“).
 

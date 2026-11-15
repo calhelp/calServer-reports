@@ -62,7 +62,7 @@
 	</parameter>
 	<parameter name="Results_end_note" class="java.lang.String">
 		<parameterDescription><![CDATA[Abschließender Hinweis unterhalb der Messergebnisse.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["---Ende des Ergebnisberichts---"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Measurements_description" class="java.lang.String">
 		<parameterDescription><![CDATA[Standardhinweis zur Berechnung der erweiterten Messunsicherheit.]]></parameterDescription>
@@ -160,6 +160,10 @@
 	</parameter>
 	<parameter name="ShowMarkOnFollowingPages" class="java.lang.String">
 		<parameterDescription><![CDATA[Steuert die Anzeige des Kennzeichnungs-/Akkreditierungsblocks (Markennummern, DAkkS-Kalibrierzeichen, Kalibrierdatum) auf Folgeseiten. Y = auf allen Seiten anzeigen (Standard). N = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden.]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ShowCalibrationMark" class="java.lang.String">
+		<parameterDescription><![CDATA[Blendet den Kalibrierzeichen-Kasten (Markennummern, DAkkS-Kalibrierzeichen, Kalibriermonat) samt Beschriftung vollständig ein oder aus. Y = anzeigen (Standard). N = auf allen Seiten ausblenden, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. N hat Vorrang vor ShowMarkOnFollowingPages.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="sign_names" class="java.lang.String">
@@ -485,9 +489,30 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
     .replace("/n", "\n")
     .replace("\\n", "\n")]]></variableExpression>
         </variable>
-        <variable name="Results_StartPage" class="java.lang.Integer" resetType="Group" resetGroup="ResultsGroup" calculation="Sum">
-                <variableExpression><![CDATA[$V{ResultsGroup_COUNT} <= 1 ? $V{PAGE_NUMBER} : 0]]></variableExpression>
-        </variable>
+	<!--
+	    Einleitung der Messergebnisse, zerlegt in den Satz mit dem
+	    Seitenverweis {0} und den Rest. Der Satz endet am ersten Punkt nach dem
+	    Platzhalter, an einem <br> oder am Textende. Ohne Platzhalter bleibt der
+	    Kopf leer und der ganze Text steht im Rest.
+	-->
+	<variable name="Results_intro_head" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$V{Results_description_clean}.contains("{0}")
+  ? $V{Results_description_clean}.replaceFirst(
+      "(?s)^(.*?\\{0\\}.*?(?:\\.(?=\\s|<|$)|(?=<br)|$)).*$", "$1")
+  : ""]]></variableExpression>
+	</variable>
+	<variable name="Results_intro_tail" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$V{Results_description_clean}
+  .substring($V{Results_intro_head}.length())
+  .replaceFirst("(?i)^(\\s|<br\\s*/?>)+", "")]]></variableExpression>
+	</variable>
+	<!--
+	    Erste Seite der Messergebnisse. Der Wert kommt aus dem Unterbericht
+	    zurück: der Hauptbericht hat nur einen Datensatz, eine eigene
+	    Berechnung sähe deshalb immer Seite 1. Der Verweis in der Einleitung
+	    wird erst am Berichtsende ausgewertet.
+	-->
+	<variable name="Results_StartPage" class="java.lang.Integer" calculation="System"/>
 	<variable name="ResultsRowCount" class="java.lang.Integer">
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
@@ -948,33 +973,41 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					</textElement>
 					<textFieldExpression><![CDATA["MEASUREMENTS RESULTS"]]></textFieldExpression>
 				</textField>
-                                <textField textAdjust="StretchHeight">
-                                        <reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="32" width="535" height="28" uuid="9264980a-8e3a-447a-9020-a9504746db94"/>
-                                        <textElement markup="html">
-                                                <font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-                                                <paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
-                                        </textElement>
-                                        <textFieldExpression><![CDATA[
-(
-  $V{Results_description_clean}.contains("{0}")
-    ? $V{Results_description_clean}.replace(
-        "{0}",
-        Integer.toString(
-          $V{Results_StartPage} == null || $V{Results_StartPage} == 0
-            ? 1
-            : $V{Results_StartPage}
-        )
-      )
-    : $V{Results_description_clean}
-        + " "
-        + Integer.toString(
-          $V{Results_StartPage} == null || $V{Results_StartPage} == 0
-            ? 1
-            : $V{Results_StartPage}
-        )
-)
-]]></textFieldExpression>
-                                </textField>
+				<!--
+				    Der Seitenverweis "ab Seite {0}" steht erst fest, wenn der Unterbericht
+				    der Messergebnisse gelaufen ist. Der Satz mit dem Platzhalter steht
+				    deshalb in einem eigenen Feld, das am Berichtsende ausgewertet wird.
+				    Ein spät ausgewertetes Feld kann nicht mehr wachsen: es ist eine Zeile
+				    hoch und verkleinert die Schrift, falls der Satz länger ist, statt Text
+				    abzuschneiden. Der restliche Text folgt darunter und wächst wie bisher.
+				-->
+				<textField textAdjust="ScaleFont" evaluationTime="Report">
+					<reportElement positionType="Float" x="16" y="32" width="535" height="14" isRemoveLineWhenBlank="true" uuid="9264980a-8e3a-447a-9020-a9504746db94">
+						<printWhenExpression><![CDATA[!$V{Results_intro_head}.isEmpty()]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Results_intro_head}.replace(
+  "{0}",
+  Integer.toString(
+    $V{Results_StartPage} == null || $V{Results_StartPage}.intValue() == 0
+      ? 1
+      : $V{Results_StartPage}.intValue()
+  )
+)]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="16" y="46" width="535" height="14" isRemoveLineWhenBlank="true" uuid="5d6b7c1e-3f1a-4a52-9a7e-2f0c1d9e4b10">
+						<printWhenExpression><![CDATA[!$V{Results_intro_tail}.isEmpty()]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Results_intro_tail}]]></textFieldExpression>
+				</textField>
                         </band>
 			<band height="64" splitType="Stretch">
 				<property name="com.calserver.bandLabel" value="Messunsicherheiten"/>
@@ -1185,8 +1218,14 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<subreportParameter name="P_Image_Path">
 						<subreportParameterExpression><![CDATA[$P{P_Image_Path}]]></subreportParameterExpression>
 					</subreportParameter>
+					<subreportParameter name="MasterStartPage">
+						<subreportParameterExpression><![CDATA[Integer.valueOf(
+    $V{PAGE_NUMBER}.intValue()
+)]]></subreportParameterExpression>
+					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<returnValue subreportVariable="REPORT_COUNT" toVariable="ResultsRowCount"/>
+					<returnValue subreportVariable="MasterStartPage" toVariable="Results_StartPage"/>
 					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/Results.jasper"]]></subreportExpression>
 				</subreport>
 				<frame>
@@ -1471,53 +1510,75 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				<textFieldExpression><![CDATA[($F{C2307} == null || $F{C2307}.trim().isEmpty()) ? "" : $F{C2307}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="495" y="259" width="57" height="1" uuid="3ed42e77-2aa2-4be2-be0d-0ce223e06b89"/>
+				<reportElement x="495" y="259" width="57" height="1" uuid="3ed42e77-2aa2-4be2-be0d-0ce223e06b89">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="495" y="332" width="57" height="1" uuid="460a43c6-08ec-4e5d-be32-fde200c23007"/>
+				<reportElement x="495" y="332" width="57" height="1" uuid="460a43c6-08ec-4e5d-be32-fde200c23007">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="495" y="259" width="1" height="74" uuid="bde378ae-42b8-4347-917a-7e261033d1a3"/>
+				<reportElement x="495" y="259" width="1" height="74" uuid="bde378ae-42b8-4347-917a-7e261033d1a3">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="551" y="259" width="1" height="74" uuid="34bf7c98-8c37-43f5-bf74-030cc47913b4"/>
+				<reportElement x="551" y="259" width="1" height="74" uuid="34bf7c98-8c37-43f5-bf74-030cc47913b4">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="495" y="279" width="57" height="1" uuid="75751c09-0866-491d-a5dd-4910f0e89069"/>
+				<reportElement x="495" y="279" width="57" height="1" uuid="75751c09-0866-491d-a5dd-4910f0e89069">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="495" y="312" width="57" height="1" uuid="81d49edb-e44c-4c2d-92ce-113066cefb21"/>
+				<reportElement x="495" y="312" width="57" height="1" uuid="81d49edb-e44c-4c2d-92ce-113066cefb21">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 			</line>
 			<textField>
-				<reportElement x="498" y="315" width="51" height="15" uuid="ddc3a39d-cd0f-4bbc-9037-f2d353ae7633"/>
+				<reportElement x="498" y="315" width="51" height="15" uuid="ddc3a39d-cd0f-4bbc-9037-f2d353ae7633">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{cal_date} == null || $F{cal_date}.trim().isEmpty()) ? "" : $F{cal_date}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="498" y="284" width="51" height="25" uuid="60fddce2-e8d5-44ad-996f-6df91281c5ea"/>
+				<reportElement x="498" y="284" width="51" height="25" uuid="60fddce2-e8d5-44ad-996f-6df91281c5ea">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2} == null
     ? ""
     : $P{MarkNumber2}.replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="498" y="261" width="51" height="17" uuid="2a566f7c-747b-41b9-93d9-8f1f4e51fee2"/>
+				<reportElement x="498" y="261" width="51" height="17" uuid="2a566f7c-747b-41b9-93d9-8f1f4e51fee2">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
     ? ""
     : $P{MarkNumber1}.trim().split("\\s+")[0]]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="395" y="296" width="90" height="14" uuid="f06142e5-e22b-449b-bf4d-9078c56651e7"/>
+				<reportElement x="395" y="296" width="90" height="14" uuid="f06142e5-e22b-449b-bf4d-9078c56651e7">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="10" isBold="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Kalibrierzeichen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="395" y="310" width="90" height="12" uuid="0dfa57a6-2083-497e-b47e-05f45bf1fd0c"/>
+				<reportElement x="395" y="310" width="90" height="12" uuid="0dfa57a6-2083-497e-b47e-05f45bf1fd0c">
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -1578,13 +1639,15 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="493" y="80" width="57" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
@@ -1592,20 +1655,23 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="549" y="7" width="1" height="74" uuid="cf1fba74-b971-480b-865d-faba195c6210">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="493" y="27" width="57" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
@@ -1613,14 +1679,16 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<textField>
 				<reportElement x="496" y="63" width="51" height="15" uuid="90f179b7-2edc-4a33-a163-1a924f334717">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
@@ -1639,7 +1707,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</line>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="496" y="9" width="51" height="17" uuid="51bf3d6d-24d5-46da-ad16-8c72fe133333">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
@@ -1648,7 +1717,8 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 			</textField>
 			<textField textAdjust="ScaleFont">
 				<reportElement x="496" y="32" width="51" height="25" uuid="747bc264-431f-421d-a203-f3c25a1ec82b">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+    && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[$P{MarkNumber2} == null

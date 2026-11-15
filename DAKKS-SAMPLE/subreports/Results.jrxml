@@ -9,7 +9,7 @@
 		<parameterDescription><![CDATA[Kalibrierungs-ID als Filter für alle Messwerte.]]></parameterDescription>
 	</parameter>
 	<parameter name="MeasurementDetails" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/21/22/3/4 = alternative Layouts).]]></parameterDescription>
+		<parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/21/22/3/4 = alternative Layouts, 5 = MET/CAL-Layout mit Test, Bereich, Toleranz und Abweichung, 51 = dasselbe für Werkskalibrierscheine).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ModernResultsHeader" class="java.lang.String">
@@ -18,7 +18,10 @@
 	</parameter>
 	<parameter name="Results_end_note" class="java.lang.String">
 		<parameterDescription><![CDATA[Textbaustein, der das Ende des Ergebnisberichts markiert.]]></parameterDescription>
-		<defaultValueExpression><![CDATA["---Ende des Ergebnisberichts--"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["---Ende des Ergebnisberichts---"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MasterStartPage" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Seite des Hauptberichts, auf der die Messergebnisse beginnen. Wird vom Hauptbericht übergeben und unverändert zurückgegeben.]]></parameterDescription>
 	</parameter>
 	<parameter name="Debug" class="java.lang.String" isForPrompting="false">
 		<parameterDescription><![CDATA[Interner Schalter für Protokollzwecke (Y/N).]]></parameterDescription>
@@ -57,6 +60,26 @@
       COALESCE(pass_fail,'')           AS pass_fail,
       COALESCE(fsc,'')                 AS Fsc,
       COALESCE(accred, '')             AS accred,
+      COALESCE(test_step,'')           AS test_step,
+      COALESCE(uut_range,'')           AS uut_range,
+      COALESCE(uut_range_p,'')         AS uut_range_p,
+      COALESCE(uut_range_u,'')         AS uut_range_u,
+      COALESCE(mod1,'')                AS mod1,
+      COALESCE(mod1_p,'')              AS mod1_p,
+      COALESCE(mod1_u,'')              AS mod1_u,
+      COALESCE(condition2,'')          AS condition2,
+      COALESCE(error,'')               AS error,
+      COALESCE(error_p,'')             AS error_p,
+      COALESCE(error_u,'')             AS error_u,
+      COALESCE(tol,'')                 AS tol,
+      COALESCE(tol_p,'')               AS tol_p,
+      COALESCE(tol_u,'')               AS tol_u,
+      COALESCE(tol_pos,'')             AS tol_pos,
+      COALESCE(tol_pos_p,'')           AS tol_pos_p,
+      COALESCE(tol_pos_u,'')           AS tol_pos_u,
+      COALESCE(tol_neg,'')             AS tol_neg,
+      COALESCE(tol_neg_p,'')           AS tol_neg_p,
+      COALESCE(tol_neg_u,'')           AS tol_neg_u,
       row_num
     FROM $P!{PrefixTable}results
     WHERE ctag = $P{P_CTAG}
@@ -93,7 +116,31 @@
         <field name="pass_fail" class="java.lang.String"/>
 	<field name="Fsc" class="java.lang.String"/>
 	<field name="accred" class="java.lang.String"/>
+	<field name="test_step" class="java.lang.String"/>
+	<field name="uut_range" class="java.lang.String"/>
+	<field name="uut_range_p" class="java.lang.String"/>
+	<field name="uut_range_u" class="java.lang.String"/>
+	<field name="mod1" class="java.lang.String"/>
+	<field name="mod1_p" class="java.lang.String"/>
+	<field name="mod1_u" class="java.lang.String"/>
+	<field name="condition2" class="java.lang.String"/>
+	<field name="error" class="java.lang.String"/>
+	<field name="error_p" class="java.lang.String"/>
+	<field name="error_u" class="java.lang.String"/>
+	<field name="tol" class="java.lang.String"/>
+	<field name="tol_p" class="java.lang.String"/>
+	<field name="tol_u" class="java.lang.String"/>
+	<field name="tol_pos" class="java.lang.String"/>
+	<field name="tol_pos_p" class="java.lang.String"/>
+	<field name="tol_pos_u" class="java.lang.String"/>
+	<field name="tol_neg" class="java.lang.String"/>
+	<field name="tol_neg_p" class="java.lang.String"/>
+	<field name="tol_neg_u" class="java.lang.String"/>
 	<field name="row_num" class="java.lang.Number"/>
+	<variable name="MasterStartPage" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$P{MasterStartPage}]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{MasterStartPage}]]></initialValueExpression>
+	</variable>
 	<variable name="MeasurementDetailsValue" class="java.lang.Integer" resetType="None">
 		<variableExpression><![CDATA[(
     $P{MeasurementDetails} != null
@@ -114,7 +161,8 @@
     $V{MeasurementDetailsValue} == null
     || !java.util.Arrays.asList(
            Integer.valueOf(2), Integer.valueOf(21), Integer.valueOf(22),
-           Integer.valueOf(3), Integer.valueOf(4)
+           Integer.valueOf(3), Integer.valueOf(4),
+           Integer.valueOf(5), Integer.valueOf(51)
        ).contains($V{MeasurementDetailsValue})
 )]]></variableExpression>
 	</variable>
@@ -396,12 +444,12 @@
                 <variableExpression><![CDATA[$F{tol_err}==null || $F{tol_err}.trim().isEmpty()
       ? ""
       : (
-          $F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?")
-            ? (Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")) > 500
+          $F{tol_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".").matches("[+-]?\\d+(\\.\\d+)?([eE][+-]?\\d+)?")
+            ? (Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".")) > 500
                 ? ">500"
                 : new java.text.DecimalFormat("0",
                     new java.text.DecimalFormatSymbols(java.util.Locale.US))
-                    .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+]", "").replace(",", ".")))
+                    .format(Double.parseDouble($F{tol_err}.replaceAll("[^0-9\\.,\\-+eE]", "").replace(",", ".")))
               )
             : $F{tol_err}.trim().replaceAll("(?<=\\d),(?=\\d)", ".")
         )]]></variableExpression>
@@ -545,6 +593,213 @@
           ? "*"
           : ""
         )]]></variableExpression>
+	</variable>
+	<!--
+	    Varianten 5 und 51: das Layout der MET/CAL-Kalibrierscheine (Test,
+	    Bereich, richtiger Wert mit Messbedingung, Anzeige, Toleranz,
+	    Abweichung, erweiterte Messunsicherheit, % Tol. mit Pass/Fail,
+	    Hinweise). Sie lesen Spalten der Results-Tabelle, die die anderen
+	    Varianten nicht brauchen: `test_step`, `uut_range`, `mod1`,
+	    `condition2`, `error`, `tol` und `tol_pos`/`tol_neg`. Jede davon darf
+	    fehlen; die Zelle bleibt dann leer oder greift auf das zurück, was die
+	    Zeile sonst trägt (Toleranz aus den Grenzen, Abweichung aus Anzeige
+	    minus richtigem Wert).
+
+	    Toleranz und Abweichung druckt MET/CAL mit drei signifikanten Stellen
+	    und dem passenden SI-Vorsatz ("630 mK", "10.5 µV", "1.11 K"); als
+	    Differenz einer Temperatur steht K statt °C. Dieselbe Regel gilt hier.
+	    Einheiten, die keinen Vorsatz tragen (%rH, %, dB), bleiben wie erfasst.
+	-->
+	<variable name="IsMetLayout" class="java.lang.Boolean" resetType="None">
+		<variableExpression><![CDATA[Boolean.valueOf(
+    $V{MeasurementDetailsValue} != null
+    && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 51)
+)]]></variableExpression>
+	</variable>
+	<variable name="MetTestDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[($F{test_step} == null ? "" : $F{test_step}.trim()).replaceFirst("[.,].*$", "").matches("\\d{1,4}")
+      ? String.format("%04d", Integer.valueOf(($F{test_step} == null ? "" : $F{test_step}.trim()).replaceFirst("[.,].*$", "")))
+      : ($F{test_step} == null ? "" : $F{test_step}.trim())]]></variableExpression>
+	</variable>
+	<variable name="MetRangeDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[(($F{uut_range} == null ? "" : $F{uut_range}.trim()).isEmpty()
+      ? ""
+      : ($F{uut_range} == null ? "" : $F{uut_range}.trim()).replaceAll("(?<=\\d),(?=\\d)", ".")
+        + ((($F{uut_range_p} == null ? "" : $F{uut_range_p}.trim()) + ($F{uut_range_u} == null ? "" : $F{uut_range_u}.trim())).isEmpty()
+             || ($F{uut_range} == null ? "" : $F{uut_range}.trim()).replaceFirst("^[+-]?\\d+([.,]\\d+)?([eE][+-]?\\d+)?", "").matches(".*\\p{L}.*")
+           ? ""
+           : " " + ($F{uut_range_p} == null ? "" : $F{uut_range_p}.trim()) + ($F{uut_range_u} == null ? "" : $F{uut_range_u}.trim()))
+    ).replaceAll("(?i)ohm", "Ω")]]></variableExpression>
+	</variable>
+	<variable name="MetConditionDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[(!($F{condition2} == null ? "" : $F{condition2}.trim()).isEmpty()
+      ? ($F{condition2} == null ? "" : $F{condition2}.trim())
+      : (($F{mod1} == null ? "" : $F{mod1}.trim()).isEmpty()
+          ? ""
+          : "@" + ($F{mod1} == null ? "" : $F{mod1}.trim()) + ($F{mod1_p} == null ? "" : $F{mod1_p}.trim()) + ($F{mod1_u} == null ? "" : $F{mod1_u}.trim()))
+    ).replaceAll("(?i)ohm", "Ω")]]></variableExpression>
+	</variable>
+	<variable name="MetTrueValueDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[($V{SysActualDisplay} == null ? "" : $V{SysActualDisplay})
+      + ($V{MetConditionDisplay} == null || $V{MetConditionDisplay}.isEmpty()
+          ? ""
+          : (($V{SysActualDisplay} == null || $V{SysActualDisplay}.isEmpty()) ? "" : "\n") + $V{MetConditionDisplay})]]></variableExpression>
+	</variable>
+	<variable name="MetTolValue" class="java.lang.String">
+		<variableExpression><![CDATA[($F{tol_pos} != null && !$F{tol_pos}.trim().isEmpty()) ? $F{tol_pos}.trim() : ($F{tol} == null ? "" : $F{tol}.trim())]]></variableExpression>
+	</variable>
+	<variable name="MetTolPrefix" class="java.lang.String">
+		<variableExpression><![CDATA[($F{tol_pos} != null && !$F{tol_pos}.trim().isEmpty()) ? ($F{tol_pos_p} == null ? "" : $F{tol_pos_p}.trim()).replace("μ", "µ").replace("u", "µ") : ($F{tol_p} == null ? "" : $F{tol_p}.trim()).replace("μ", "µ").replace("u", "µ")]]></variableExpression>
+	</variable>
+	<variable name="MetTolUnit" class="java.lang.String">
+		<variableExpression><![CDATA[($F{tol_pos} != null && !$F{tol_pos}.trim().isEmpty()) ? ($F{tol_pos_u} == null ? "" : $F{tol_pos_u}.trim()) : ($F{tol_u} == null ? "" : $F{tol_u}.trim())]]></variableExpression>
+	</variable>
+	<variable name="MetTolNum" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{MetTolValue}.replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?")
+      ? new java.math.BigDecimal($V{MetTolValue}.replace(",", ".")).abs().scaleByPowerOfTen((($V{MetTolPrefix}).length() == 1 && "pnµmkMGT".contains($V{MetTolPrefix}) ? ("pnµm kMGT".indexOf($V{MetTolPrefix}) - 4) * 3 : 0))
+      : ((($F{upper_limit} == null ? "" : $F{upper_limit}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?") && ($F{lower_limit} == null ? "" : $F{lower_limit}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?"))
+          ? new java.math.BigDecimal(($F{upper_limit} == null ? "" : $F{upper_limit}.trim()).replace(",", ".")).subtract(new java.math.BigDecimal(($F{lower_limit} == null ? "" : $F{lower_limit}.trim()).replace(",", "."))).abs()
+              .divide(new java.math.BigDecimal("2")).scaleByPowerOfTen(((($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ")) ? ("pnµm kMGT".indexOf(($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ")) - 4) * 3 : 0))
+          : null)]]></variableExpression>
+	</variable>
+	<variable name="MetTolUnitNorm" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetTolValue}.replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?")
+      ? (((($V{MetTolPrefix}).length() == 1 && "pnµmkMGT".contains($V{MetTolPrefix})) ? "" : ($V{MetTolPrefix})) + $V{MetTolUnit}).replaceAll("(?i)ohm", "Ω").replace("°C", "K")
+      : ((((($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ"))) ? "" : (($F{upper_limit_p} == null ? "" : $F{upper_limit_p}.trim()).replace("μ", "µ").replace("u", "µ"))) + ($F{upper_limit_u} == null ? "" : $F{upper_limit_u}.trim())).replaceAll("(?i)ohm", "Ω").replace("°C", "K")]]></variableExpression>
+	</variable>
+	<variable name="MetTolRounded" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{MetTolNum} == null
+      ? null
+      : ($V{MetTolNum}.signum() == 0 ? java.math.BigDecimal.ZERO : $V{MetTolNum}.round(new java.math.MathContext(3, java.math.RoundingMode.HALF_UP)))]]></variableExpression>
+	</variable>
+	<variable name="MetTolExp3" class="java.lang.Integer">
+		<variableExpression><![CDATA[Integer.valueOf(
+      $V{MetTolRounded} == null || $V{MetTolRounded}.signum() == 0
+        || $V{MetTolUnitNorm} == null || !$V{MetTolUnitNorm}.matches("V|A|Ω|Hz|W|F|H|S|K|s|m|g|Pa|bar|N|VA")
+      ? 0
+      : Math.max(-12, Math.min(12,
+          (int) Math.floor(($V{MetTolRounded}.precision() - $V{MetTolRounded}.scale() - 1) / 3.0) * 3)))]]></variableExpression>
+	</variable>
+	<variable name="MetTolAuto" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetTolRounded} == null
+      ? ""
+      : ($V{MetTolRounded}.scaleByPowerOfTen(-$V{MetTolExp3}.intValue()).stripTrailingZeros().toPlainString()
+          + ((("pnµm kMGT".substring($V{MetTolExp3}.intValue() / 3 + 4, $V{MetTolExp3}.intValue() / 3 + 5).trim())
+               + ($V{MetTolUnitNorm} == null ? "" : $V{MetTolUnitNorm})).isEmpty()
+             ? ""
+             : " " + "pnµm kMGT".substring($V{MetTolExp3}.intValue() / 3 + 4, $V{MetTolExp3}.intValue() / 3 + 5).trim()
+                   + ($V{MetTolUnitNorm} == null ? "" : $V{MetTolUnitNorm})))]]></variableExpression>
+	</variable>
+	<variable name="MetTolNegNum" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[(($F{tol_pos} != null && !$F{tol_pos}.trim().isEmpty()) && ($F{tol_neg} == null ? "" : $F{tol_neg}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?"))
+      ? new java.math.BigDecimal(($F{tol_neg} == null ? "" : $F{tol_neg}.trim()).replace(",", ".")).abs().scaleByPowerOfTen(((($F{tol_neg_p} == null ? "" : $F{tol_neg_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{tol_neg_p} == null ? "" : $F{tol_neg_p}.trim()).replace("μ", "µ").replace("u", "µ")) ? ("pnµm kMGT".indexOf(($F{tol_neg_p} == null ? "" : $F{tol_neg_p}.trim()).replace("μ", "µ").replace("u", "µ")) - 4) * 3 : 0))
+      : null]]></variableExpression>
+	</variable>
+	<variable name="MetTolNegUnitNorm" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetTolUnitNorm}]]></variableExpression>
+	</variable>
+	<variable name="MetTolNegRounded" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{MetTolNegNum} == null
+      ? null
+      : ($V{MetTolNegNum}.signum() == 0 ? java.math.BigDecimal.ZERO : $V{MetTolNegNum}.round(new java.math.MathContext(3, java.math.RoundingMode.HALF_UP)))]]></variableExpression>
+	</variable>
+	<variable name="MetTolNegExp3" class="java.lang.Integer">
+		<variableExpression><![CDATA[Integer.valueOf(
+      $V{MetTolNegRounded} == null || $V{MetTolNegRounded}.signum() == 0
+        || $V{MetTolNegUnitNorm} == null || !$V{MetTolNegUnitNorm}.matches("V|A|Ω|Hz|W|F|H|S|K|s|m|g|Pa|bar|N|VA")
+      ? 0
+      : Math.max(-12, Math.min(12,
+          (int) Math.floor(($V{MetTolNegRounded}.precision() - $V{MetTolNegRounded}.scale() - 1) / 3.0) * 3)))]]></variableExpression>
+	</variable>
+	<variable name="MetTolNegAuto" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetTolNegRounded} == null
+      ? ""
+      : ($V{MetTolNegRounded}.scaleByPowerOfTen(-$V{MetTolNegExp3}.intValue()).stripTrailingZeros().toPlainString()
+          + ((("pnµm kMGT".substring($V{MetTolNegExp3}.intValue() / 3 + 4, $V{MetTolNegExp3}.intValue() / 3 + 5).trim())
+               + ($V{MetTolNegUnitNorm} == null ? "" : $V{MetTolNegUnitNorm})).isEmpty()
+             ? ""
+             : " " + "pnµm kMGT".substring($V{MetTolNegExp3}.intValue() / 3 + 4, $V{MetTolNegExp3}.intValue() / 3 + 5).trim()
+                   + ($V{MetTolNegUnitNorm} == null ? "" : $V{MetTolNegUnitNorm})))]]></variableExpression>
+	</variable>
+	<variable name="MetTolDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[($V{MetTolNum} != null && $V{MetTolNegNum} != null
+        && $V{MetTolNegNum}.compareTo($V{MetTolNum}) != 0)
+      ? "+" + $V{MetTolAuto} + "\n-" + $V{MetTolNegAuto}
+      : $V{MetTolAuto}]]></variableExpression>
+	</variable>
+	<variable name="MetTolRawDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[(!$V{MetTolValue}.replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?")
+      ? $V{MetTolDisplay}
+      : (($V{MetTolNum} != null && $V{MetTolNegNum} != null
+        && $V{MetTolNegNum}.compareTo($V{MetTolNum}) != 0) ? "+" : "")
+        + $V{MetTolValue}.replace(",", ".").replaceFirst("^[+-]", "")
+        + (($V{MetTolPrefix} + $V{MetTolUnit}).isEmpty() ? "" : " " + $V{MetTolPrefix} + $V{MetTolUnit})
+        + (($V{MetTolNum} != null && $V{MetTolNegNum} != null
+        && $V{MetTolNegNum}.compareTo($V{MetTolNum}) != 0)
+            ? "\n-" + ($F{tol_neg} == null ? "" : $F{tol_neg}.trim()).replace(",", ".").replaceFirst("^[+-]", "")
+                + ((($F{tol_neg_p} == null ? "" : $F{tol_neg_p}.trim()) + ($F{tol_neg_u} == null ? "" : $F{tol_neg_u}.trim())).isEmpty() ? "" : " " + ($F{tol_neg_p} == null ? "" : $F{tol_neg_p}.trim()) + ($F{tol_neg_u} == null ? "" : $F{tol_neg_u}.trim()))
+            : "")
+    ).replaceAll("(?i)ohm", "Ω")]]></variableExpression>
+	</variable>
+	<variable name="MetDevNum" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[(($F{error} != null && !$F{error}.trim().isEmpty()) && ($F{error} == null ? "" : $F{error}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?"))
+      ? new java.math.BigDecimal(($F{error} == null ? "" : $F{error}.trim()).replace(",", ".")).scaleByPowerOfTen(((($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ")) ? ("pnµm kMGT".indexOf(($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ")) - 4) * 3 : 0))
+      : ((!($F{error} != null && !$F{error}.trim().isEmpty())
+             && ($V{UutIndValue} == null ? "" : $V{UutIndValue}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?") && ($V{SysActualValue} == null ? "" : $V{SysActualValue}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?")
+             && ($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).equals(($V{SysActualPrefix} == null ? "" : $V{SysActualPrefix}.trim()))
+             && ($V{UutIndUnit} == null ? "" : $V{UutIndUnit}.trim()).equals(($V{SysActualUnit} == null ? "" : $V{SysActualUnit}.trim())))
+          ? new java.math.BigDecimal(($V{UutIndValue} == null ? "" : $V{UutIndValue}.trim()).replace(",", ".")).subtract(new java.math.BigDecimal(($V{SysActualValue} == null ? "" : $V{SysActualValue}.trim()).replace(",", ".")))
+              .scaleByPowerOfTen(((($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ")) ? ("pnµm kMGT".indexOf(($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ")) - 4) * 3 : 0))
+          : null)]]></variableExpression>
+	</variable>
+	<variable name="MetDevUnitNorm" class="java.lang.String">
+		<variableExpression><![CDATA[($F{error} != null && !$F{error}.trim().isEmpty())
+      ? ((((($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ"))) ? "" : (($F{error_p} == null ? "" : $F{error_p}.trim()).replace("μ", "µ").replace("u", "µ"))) + ($F{error_u} == null ? "" : $F{error_u}.trim())).replaceAll("(?i)ohm", "Ω").replace("°C", "K")
+      : ((((($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ"))) ? "" : (($V{UutIndPrefix} == null ? "" : $V{UutIndPrefix}.trim()).replace("μ", "µ").replace("u", "µ"))) + ($V{UutIndUnit} == null ? "" : $V{UutIndUnit}.trim())).replaceAll("(?i)ohm", "Ω").replace("°C", "K")]]></variableExpression>
+	</variable>
+	<variable name="MetDevRounded" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{MetDevNum} == null
+      ? null
+      : ($V{MetDevNum}.signum() == 0 ? java.math.BigDecimal.ZERO : $V{MetDevNum}.round(new java.math.MathContext(3, java.math.RoundingMode.HALF_UP)))]]></variableExpression>
+	</variable>
+	<variable name="MetDevExp3" class="java.lang.Integer">
+		<variableExpression><![CDATA[Integer.valueOf(
+      $V{MetDevRounded} == null || $V{MetDevRounded}.signum() == 0
+        || $V{MetDevUnitNorm} == null || !$V{MetDevUnitNorm}.matches("V|A|Ω|Hz|W|F|H|S|K|s|m|g|Pa|bar|N|VA")
+      ? 0
+      : Math.max(-12, Math.min(12,
+          (int) Math.floor(($V{MetDevRounded}.precision() - $V{MetDevRounded}.scale() - 1) / 3.0) * 3)))]]></variableExpression>
+	</variable>
+	<variable name="MetDevAuto" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetDevRounded} == null
+      ? ""
+      : ($V{MetDevRounded}.scaleByPowerOfTen(-$V{MetDevExp3}.intValue()).stripTrailingZeros().toPlainString()
+          + ((("pnµm kMGT".substring($V{MetDevExp3}.intValue() / 3 + 4, $V{MetDevExp3}.intValue() / 3 + 5).trim())
+               + ($V{MetDevUnitNorm} == null ? "" : $V{MetDevUnitNorm})).isEmpty()
+             ? ""
+             : " " + "pnµm kMGT".substring($V{MetDevExp3}.intValue() / 3 + 4, $V{MetDevExp3}.intValue() / 3 + 5).trim()
+                   + ($V{MetDevUnitNorm} == null ? "" : $V{MetDevUnitNorm})))]]></variableExpression>
+	</variable>
+	<variable name="MetTolErrDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[($F{tol_err} == null ? "" : $F{tol_err}.trim()).isEmpty()
+      ? ""
+      : (($F{tol_err} == null ? "" : $F{tol_err}.trim()).replace(",", ".").matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?")
+          ? (new java.math.BigDecimal(($F{tol_err} == null ? "" : $F{tol_err}.trim()).replace(",", ".")).abs().compareTo(new java.math.BigDecimal("0.0005")) < 0
+              ? "0"
+              : new java.math.BigDecimal(($F{tol_err} == null ? "" : $F{tol_err}.trim()).replace(",", ".")).round(new java.math.MathContext(3, java.math.RoundingMode.HALF_UP)).stripTrailingZeros().toPlainString())
+          : ($F{tol_err} == null ? "" : $F{tol_err}.trim()))]]></variableExpression>
+	</variable>
+	<variable name="MetPassWord" class="java.lang.String">
+		<variableExpression><![CDATA[($F{pass_fail} == null ? "" : $F{pass_fail}.trim()).toLowerCase().startsWith("pass")
+      ? "Pass"
+      : (($F{pass_fail} == null ? "" : $F{pass_fail}.trim()).toLowerCase().startsWith("fail") ? "Fail" : "")]]></variableExpression>
+	</variable>
+	<variable name="MetHintDisplay" class="java.lang.String">
+		<variableExpression><![CDATA[(($F{pass_fail} == null ? "" : $F{pass_fail}.trim()).equalsIgnoreCase("fail")               ? "!"  :
+     ($F{pass_fail} == null ? "" : $F{pass_fail}.trim()).equalsIgnoreCase("pass indeterminate") ? "?"  :
+     ($F{pass_fail} == null ? "" : $F{pass_fail}.trim()).equalsIgnoreCase("fail indeterminate") ? "!?" :
+     "")
+    + ($V{AccredMark} == null ? "" : $V{AccredMark})]]></variableExpression>
 	</variable>
 	<columnHeader>
 		<band height="54">
@@ -2516,13 +2771,794 @@
 					<text><![CDATA[Conformity]]></text>
 				</staticText>
 			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="54" uuid="afb54687-764f-5776-8416-4f28d17dc707">
+					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{UseModernHeader})
+    && $V{MeasurementDetailsValue} != null
+    && $V{MeasurementDetailsValue}.intValue() == 5]]></printWhenExpression>
+				</reportElement>
+					<staticText>
+						<reportElement mode="Opaque" x="180" y="0" width="196" height="9" backcolor="#F5F7FA" uuid="d719b5bf-78d9-51eb-9ae6-a8d27da5a8e6"/>
+						<box>
+							<bottomPen lineWidth="0.25" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Kalibriergegenstand / unit under test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="0" width="36" height="21" backcolor="#F5F7FA" uuid="4454266a-c174-537a-b396-8bfe2a350189"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="21" width="36" height="19" backcolor="#F5F7FA" uuid="2b6130bb-98cd-51e1-8d72-28ee08ea618b"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="36" y="0" width="62" height="21" backcolor="#F5F7FA" uuid="8675f46e-fbb5-57ec-8ac4-6e431d9565c2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Bereich]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="36" y="21" width="62" height="19" backcolor="#F5F7FA" uuid="39373072-1025-57c0-8a0f-48e0ae2fef5c"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Range]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="98" y="0" width="82" height="21" backcolor="#F5F7FA" uuid="5ed99edd-7ffa-5a43-9658-ec7cb1ebb518"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Richtiger Wert /
+Messbedingung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="98" y="21" width="82" height="19" backcolor="#F5F7FA" uuid="6e11e3f5-710f-5d47-ba8b-63266c96b9bd"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Conventional true value /
+condition]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="180" y="9" width="72" height="12" backcolor="#F5F7FA" uuid="96fd1100-1d3f-5771-b4e9-f35f72a4f3f8"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Anzeige]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="180" y="21" width="72" height="19" backcolor="#F5F7FA" uuid="654a29bb-5694-591b-95a0-e3de6ebdc69a"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Reading]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="252" y="9" width="62" height="12" backcolor="#F5F7FA" uuid="87caae35-9cbe-590c-b7f9-bddad631601c"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Toleranz]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="252" y="21" width="62" height="19" backcolor="#F5F7FA" uuid="9506ab27-1135-526e-bee6-e5a502e848a5"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Tolerance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="314" y="9" width="62" height="12" backcolor="#F5F7FA" uuid="d99a745d-b712-5903-8e68-2f1a45b31164"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Abweichung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="314" y="21" width="62" height="19" backcolor="#F5F7FA" uuid="56b79d1f-d23b-5301-b200-08271b87e670"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Deviation]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="376" y="0" width="70" height="21" backcolor="#F5F7FA" uuid="17d51e73-9c06-5e37-86de-20927c4758af"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Erweiterte
+Messunsicherheit]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="376" y="21" width="70" height="19" backcolor="#F5F7FA" uuid="a27aae82-f1fd-53ef-b0f9-7b9396e97bd8"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Expanded uncertainty
+of measurement]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="446" y="0" width="89" height="21" backcolor="#F5F7FA" uuid="9ec775c2-9efe-52b7-b107-dab62ab1a194"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[% Tol. / Hinweise]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="446" y="21" width="89" height="19" backcolor="#F5F7FA" uuid="81990292-3a3e-52b7-85ee-85df7944114a"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[% of tol. / Remarks]]></text>
+					</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="54" uuid="e3b957d4-a6ae-55ba-91a7-a03ddd5530ca">
+					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{UseModernHeader})
+    && $V{MeasurementDetailsValue} != null
+    && $V{MeasurementDetailsValue}.intValue() == 5]]></printWhenExpression>
+				</reportElement>
+					<staticText>
+						<reportElement x="180" y="0" width="196" height="9" uuid="28f7de56-d9bb-5e04-8b64-c078c1c89eea"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.25"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Kalibriergegenstand / unit under test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="0" width="36" height="21" uuid="f81ccf93-b49c-5ac1-bf32-2aadf1249609"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="21" width="36" height="19" uuid="817116d9-d57b-517f-800d-ede11dd857f9"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="36" y="0" width="62" height="21" uuid="89ff88eb-331c-5ae1-983a-b59e14772cd9"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Bereich]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="36" y="21" width="62" height="19" uuid="702dd600-36e3-5d41-83d7-9cc34205d9f4"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Range]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="98" y="0" width="82" height="21" uuid="4ca3b3ff-e0be-517a-a766-37e600dfe326"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Richtiger Wert /
+Messbedingung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="98" y="21" width="82" height="19" uuid="204d5b78-c9a8-5c00-ad1f-6fef83f1ae0e"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Conventional true value /
+condition]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="180" y="9" width="72" height="12" uuid="dbb3876f-455d-58c5-95d3-d697ca47161a"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Anzeige]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="180" y="21" width="72" height="19" uuid="c973355c-7fe0-5766-90b9-a85a1291d669"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Reading]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="252" y="9" width="62" height="12" uuid="eb8ae876-8880-50ba-824f-a796c625c1bc"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Toleranz]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="252" y="21" width="62" height="19" uuid="4467222c-3207-5f19-8da9-ca207ab1362c"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Tolerance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="314" y="9" width="62" height="12" uuid="7adde20f-1f93-5d45-a758-6d2f5deb9519"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Abweichung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="314" y="21" width="62" height="19" uuid="25dd3252-ceae-5c3e-92d6-d42cd6782ae7"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Deviation]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="376" y="0" width="70" height="21" uuid="9369cc87-bad0-51ef-89da-988096e1bddf"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Erweiterte
+Messunsicherheit]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="376" y="21" width="70" height="19" uuid="aec24eff-5150-5d46-a52e-2dba5b3a80f7"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Expanded uncertainty
+of measurement]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="446" y="0" width="89" height="21" uuid="2e4d1779-7a9a-5318-aacd-572855ee0723"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[% Tol. / Hinweise]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="446" y="21" width="89" height="19" uuid="4b2ac4b2-75f9-558e-8f0f-171c95eac1fb"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[% of tol. / Remarks]]></text>
+					</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="54" uuid="a57fdab6-9bc9-5493-9025-244b754d5352">
+					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{UseModernHeader})
+    && $V{MeasurementDetailsValue} != null
+    && $V{MeasurementDetailsValue}.intValue() == 51]]></printWhenExpression>
+				</reportElement>
+					<staticText>
+						<reportElement mode="Opaque" x="176" y="0" width="254" height="9" backcolor="#F5F7FA" uuid="e230788b-c37d-56f6-89ab-ba1c747146d2"/>
+						<box>
+							<bottomPen lineWidth="0.25" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Kalibriergegenstand / unit under test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="0" width="36" height="21" backcolor="#F5F7FA" uuid="e1516fe1-aaf8-5f93-b825-7952645e9d59"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="21" width="36" height="19" backcolor="#F5F7FA" uuid="e48f379d-22f8-502f-b0aa-d708acb44fa9"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="36" y="0" width="60" height="21" backcolor="#F5F7FA" uuid="3deb67a6-69e0-50a8-b7c9-d872a9d0f127"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Bereich]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="36" y="21" width="60" height="19" backcolor="#F5F7FA" uuid="3b066658-ef4c-5a10-bf81-6d5032825c69"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Range]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="96" y="0" width="80" height="21" backcolor="#F5F7FA" uuid="65f07d3c-f9df-5db8-befb-f9b88cfe0d9f"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Richtiger Wert /
+Messbedingung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="96" y="21" width="80" height="19" backcolor="#F5F7FA" uuid="0a9a2c72-7373-5f25-9363-7358397e66e7"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Conventional true value /
+condition]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="176" y="9" width="70" height="12" backcolor="#F5F7FA" uuid="938fcc43-af69-5d91-b8d1-d30387d216fe"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Anzeige]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="176" y="21" width="70" height="19" backcolor="#F5F7FA" uuid="323ab026-db30-57df-8cea-8da1812b06c1"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Reading]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="246" y="9" width="68" height="12" backcolor="#F5F7FA" uuid="8be77d98-1694-5ca6-9a0f-4e8a365c097b"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Toleranz]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="246" y="21" width="68" height="19" backcolor="#F5F7FA" uuid="83904e8f-eb79-51de-8c4c-dda203e78fba"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Tolerance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="314" y="9" width="58" height="12" backcolor="#F5F7FA" uuid="5465fcef-ea54-53ee-abd7-ba265aabfbdf"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Abweichung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="314" y="21" width="58" height="19" backcolor="#F5F7FA" uuid="e67e0938-6e41-5287-8483-7ad25c939d14"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Deviation]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="372" y="9" width="58" height="12" backcolor="#F5F7FA" uuid="597902f6-083b-56d4-8123-76b0bbc2c08e"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[% Tol.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="372" y="21" width="58" height="19" backcolor="#F5F7FA" uuid="a4787c2e-2c95-5610-a8d7-7399a5c379b4"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[% of tol.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="430" y="0" width="68" height="21" backcolor="#F5F7FA" uuid="833364a4-0fee-5542-8369-5dce272895e7"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Erweiterte
+Messunsicherheit]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="430" y="21" width="68" height="19" backcolor="#F5F7FA" uuid="de9d4c2c-63fa-5d82-b7d5-44472e07339f"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Expanded uncertainty
+of measurement]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="498" y="0" width="37" height="21" backcolor="#F5F7FA" uuid="5cd72b82-4c6c-54a2-9c12-7af1b46d5ea8"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Hinweise]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="498" y="21" width="37" height="19" backcolor="#F5F7FA" uuid="f5d23ad2-728c-5603-b2c5-f56ac7ce0709"/>
+						<box>
+							<bottomPen lineWidth="0.5" lineColor="#9CA3AF"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Remarks]]></text>
+					</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="54" uuid="7f1b2ec2-4906-5984-8082-649416d39bd2">
+					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{UseModernHeader})
+    && $V{MeasurementDetailsValue} != null
+    && $V{MeasurementDetailsValue}.intValue() == 51]]></printWhenExpression>
+				</reportElement>
+					<staticText>
+						<reportElement x="176" y="0" width="254" height="9" uuid="9a2513a5-d239-56b8-be92-98cc1062db7b"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.25"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Kalibriergegenstand / unit under test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="0" width="36" height="21" uuid="31256dc2-ed4c-5950-b9a6-d218eeff6941"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="21" width="36" height="19" uuid="67953194-b901-56f3-b206-90c0c2652c53"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Test]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="36" y="0" width="60" height="21" uuid="52f459c2-5e18-5dad-9e08-4286d92c7c45"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Bereich]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="36" y="21" width="60" height="19" uuid="6b6d6b94-d040-520e-9353-93fc7f259aff"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Range]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="96" y="0" width="80" height="21" uuid="0e08678f-fb2a-5947-bf80-54e7cc21541a"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Richtiger Wert /
+Messbedingung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="96" y="21" width="80" height="19" uuid="be0a6a78-9d2a-5b3c-b32d-514f52cd6577"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Conventional true value /
+condition]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="176" y="9" width="70" height="12" uuid="8088828b-9a68-555d-a808-9c1d7ef13b74"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Anzeige]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="176" y="21" width="70" height="19" uuid="e5cd675a-e407-5146-9612-b92372b909a7"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Reading]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="246" y="9" width="68" height="12" uuid="d1f45f43-a887-5a79-9fb9-765c6b3b7068"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Toleranz]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="246" y="21" width="68" height="19" uuid="972829d9-d6fc-5db3-a83c-4ca41d42fe54"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Tolerance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="314" y="9" width="58" height="12" uuid="7ac93c78-60d2-5113-a90a-4df5cb31dad1"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Abweichung]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="314" y="21" width="58" height="19" uuid="f58a3ae8-1037-5801-ac79-1b7a3bca06a8"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Deviation]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="372" y="9" width="58" height="12" uuid="091d239f-2f5c-5a88-81b7-7b46173652c7"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[% Tol.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="372" y="21" width="58" height="19" uuid="144f623f-0cea-5a08-8880-3881de73f465"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[% of tol.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="430" y="0" width="68" height="21" uuid="3279013f-4dd0-5417-980b-c64cfe6d1ead"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Erweiterte
+Messunsicherheit]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="430" y="21" width="68" height="19" uuid="83cd391a-7428-5d21-a3a3-a9b0bd5d17ad"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Expanded uncertainty
+of measurement]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="498" y="0" width="37" height="21" uuid="149c0f2d-ed69-5536-87ed-588f7865e4ec"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="6" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Hinweise]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="498" y="21" width="37" height="19" uuid="0b80b6fb-83b9-5101-888d-283f3e8d3d5e"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="5" isItalic="true"/>
+						</textElement>
+						<text><![CDATA[Remarks]]></text>
+					</staticText>
+			</frame>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="14" splitType="Stretch">
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="cd036d03-b1ab-44dd-b715-70e353ff8b25">
-					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{HasMeasurementData})
+					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{IsMetLayout})
+            && !Boolean.TRUE.equals($V{HasMeasurementData})
             && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
 				</reportElement>
 				<textField textAdjust="StretchHeight">
@@ -2994,6 +4030,186 @@
             )
             + ($V{AccredMark}==null ? "" : $V{AccredMark})]]></textFieldExpression>
 				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="14" uuid="c2060c3e-3e73-522e-83d3-5dd5b3377c79">
+					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{IsMetLayout})
+            && !Boolean.TRUE.equals($V{HasMeasurementData})
+            && $F{remark} != null && $F{remark}.trim().length() > 0]]></printWhenExpression>
+				</reportElement>
+					<textField textAdjust="StretchHeight">
+						<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="497" height="14" uuid="f23432d9-16b0-55d0-bbb0-cac8389cef3e"/>
+						<box leftPadding="6" topPadding="2"/>
+						<textElement verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+							<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($F{remark} == null ? "" : $F{remark}.trim())]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight">
+						<reportElement stretchType="ContainerHeight" x="497" y="0" width="38" height="14" uuid="470eebbf-673b-5a73-ad07-8edd70051466"/>
+						<box topPadding="2"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{AccredMark}==null ? "" : $V{AccredMark}]]></textFieldExpression>
+					</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="14" uuid="ed76902c-2966-5fde-a943-5744e8a86b31">
+					<printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 5 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+				</reportElement>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="0" y="0" width="36" height="14" uuid="53c2e7bd-12df-5629-b17c-71f0639acf8f"/>
+						<box leftPadding="6" rightPadding="0"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTestDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="36" y="0" width="62" height="14" uuid="6384c799-ea2b-56ca-bd3a-9454257cd297"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetRangeDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="98" y="0" width="82" height="14" uuid="5000278a-90ad-5c9d-bbf4-a0d2d6712f8f"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTrueValueDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="180" y="0" width="72" height="14" uuid="d93b8c8a-f034-5b11-b6a3-9dc5c7f0e8b7"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{UutIndDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="252" y="0" width="62" height="14" uuid="cde4d1e8-0256-533d-b8b0-7f914c2757cd"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTolDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="314" y="0" width="62" height="14" uuid="24ae0096-106e-5911-9b1a-74f7aa67d4d2"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetDevAuto}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="376" y="0" width="70" height="14" uuid="bba6118d-b2ee-57f9-b929-aed8a171c27e"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{ExpUncertaintyDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="446" y="0" width="62" height="14" uuid="83025c48-26dc-541e-a261-2e23ce0104c2"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($V{MetTolErrDisplay} == null ? "" : $V{MetTolErrDisplay})
+              + " " + ($V{MetPassWord} == null ? "" : $V{MetPassWord})).trim()]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="508" y="0" width="27" height="14" uuid="ca4fac17-4cfa-554d-bb62-87b8769363e9"/>
+						<box leftPadding="2" rightPadding="0"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetHintDisplay}]]></textFieldExpression>
+					</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="535" height="14" uuid="8e70ddef-32ca-51f4-87b0-796f8e41b3c2">
+					<printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 51 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+				</reportElement>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="0" y="0" width="36" height="14" uuid="4d6ccf00-c093-555e-a4a1-94cfe242a270"/>
+						<box leftPadding="6" rightPadding="0"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTestDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="36" y="0" width="60" height="14" uuid="48ff4650-5fe4-5814-b011-bbdbc6731649"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetRangeDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="96" y="0" width="80" height="14" uuid="a2e5985c-b5ab-55fc-bbf0-b7f876d0aab5"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTrueValueDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="176" y="0" width="70" height="14" uuid="889a1e7e-230f-50ee-bad0-4e46f73d2144"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{UutIndDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="246" y="0" width="68" height="14" uuid="34b4a0a0-373f-52f5-bd22-16ce7e6a27b6"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetTolRawDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="314" y="0" width="58" height="14" uuid="56ee595a-f35e-5db9-9dd9-00f987147b22"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetDevAuto}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="372" y="0" width="58" height="14" uuid="f4c1352a-f105-57d3-8bed-56f4ef5d21f8"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($V{MetTolErrDisplay} == null ? "" : $V{MetTolErrDisplay})
+              + " " + ($V{MetPassWord} == null ? "" : $V{MetPassWord})).trim()]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="430" y="0" width="68" height="14" uuid="c7bd18e4-9d31-5116-b927-35b9e073f50b"/>
+						<box leftPadding="0" rightPadding="3"/>
+						<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{ExpUncertaintyDisplay}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="498" y="0" width="37" height="14" uuid="a2062dd2-1567-559a-bbc7-ea9597da7f66"/>
+						<box leftPadding="0" rightPadding="0"/>
+						<textElement textAlignment="Center" verticalAlignment="Top">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{MetHintDisplay}]]></textFieldExpression>
+					</textField>
 			</frame>
 		</band>
 	</detail>
