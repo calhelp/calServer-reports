@@ -577,7 +577,7 @@
 	       genau dieses Feld: "*" kennzeichnet, jeder andere Wert (auch leer)
 	       druckt kein Zeichen. Wer den Datensatz baut, kennt die Herkunft der
 	       Zeile und damit die Lesart von `accred`; calServer liefert das Feld
-	       ab Vertrag calibration-certificate v1.13.
+	       ab Vertrag calibration-certificate v1.14.
 
 	    2. Fehlt das Feld (SQL-Bericht, aelterer Datensatz), gilt wie bisher das
 	       MET/CAL-Flag ACCRED (Results-Tabelle, Spalte `accred`). ACCRED ist in

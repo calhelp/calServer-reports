@@ -277,7 +277,7 @@ Unter den beiden binären Regeln entscheidet calServer nur `Pass` oder `Fail`,
 
 Das `*` daneben ist eine eigene Aussage: „nicht im Akkreditierungsumfang“
 (Legende `Conformity_description_3`). Gebunden ist das Druckfeld
-`results[].accred_mark` (ab Contract-Version 1.13): `*` kennzeichnet die
+`results[].accred_mark` (ab Contract-Version 1.14): `*` kennzeichnet die
 Zeile, jeder andere Wert, auch der leere, druckt kein Zeichen. calServer
 rechnet es aus `accred` und dessen Herkunft `accred_source`, weil dasselbe
 Feld zwei Lesarten trägt: die eigene Erfassung schreibt `1` für „im Umfang“,
