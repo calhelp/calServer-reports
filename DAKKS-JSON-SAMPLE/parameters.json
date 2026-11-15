@@ -332,8 +332,8 @@
         "en": "Results table layout"
       },
       "description": {
-        "de": "Wählt die Spaltenvariante der Ergebnistabelle. Unter der Auswahl stehen Beschreibung und Beispielzeilen des gewählten Werts, „Alle Werte vergleichen“ stellt die übrigen daneben. Unbekannte Werte fallen auf Variante 1 zurück. Die Spalte „Messbedingungen“ der Varianten 1 bis 4 ist die Bezeichnung des Prüfschritts und wird in der Prozedur gepflegt, nicht im Bericht. Ist das Wertepaar einer Variante leer, druckt sie das andere (Sollwert und Messwert oder Wert des Normals und Anzeige). Welche Felder die Varianten 5 und 51 lesen, steht im README des Pakets.",
-        "en": "Selects the column variant of the results table. Description and sample rows of the selected value appear below the select, \"Compare all values\" puts the others next to it. Unknown values fall back to variant 1. The \"measuring condition\" column of variants 1 to 4 is the test step label and is maintained in the procedure, not in the report. If a variant's value pair is empty it prints the other one (nominal and reading, or standard value and indication). The fields read by variants 5 and 51 are listed in the package README."
+        "de": "Wählt die Spaltenvariante der Ergebnistabelle. Unter der Auswahl stehen Beschreibung und Beispielzeilen des gewählten Werts, „Alle Werte vergleichen“ stellt die übrigen daneben. Unbekannte Werte fallen auf Variante 1 zurück. Die Spalte „Messbedingungen“ der Varianten 1 bis 4 ist die Bezeichnung des Prüfschritts und wird in der Prozedur gepflegt, nicht im Bericht. Ist das Wertepaar einer Variante leer, druckt sie das andere (Sollwert und Messwert oder Wert des Normals und Anzeige). Welche Felder die Varianten 5, 51 und 52 lesen, steht im README des Pakets.",
+        "en": "Selects the column variant of the results table. Description and sample rows of the selected value appear below the select, \"Compare all values\" puts the others next to it. Unknown values fall back to variant 1. The \"measuring condition\" column of variants 1 to 4 is the test step label and is maintained in the procedure, not in the report. If a variant's value pair is empty it prints the other one (nominal and reading, or standard value and indication). The fields read by variants 5, 51 and 52 are listed in the package README."
       },
       "role": "variable",
       "group": "Ergebnistabelle",
@@ -961,6 +961,85 @@
                 "87.5 Pass",
                 "21 mK",
                 "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "52",
+          "label": {
+            "de": "52 · MET/CAL-Layout (Symbole, MU technisch)",
+            "en": "52 · MET/CAL layout (symbols, engineering uncertainty)"
+          },
+          "description": {
+            "de": "Wie Variante 5, aber ohne die Wörter Pass/Fail: Die Konformität zeigen allein die Symbole der Legende (kein Symbol innerhalb, ? innerhalb und nicht eindeutig, !? außerhalb und nicht eindeutig, ! außerhalb). Die erweiterte Messunsicherheit steht mit zwei signifikanten Stellen und SI-Vorsatz (0.31 K wird 310 mK).",
+            "en": "Like variant 5 but without the words Pass/Fail: conformity is shown by the legend symbols only (no symbol within, ? within but indeterminate, !? outside but indeterminate, ! outside). The expanded uncertainty is printed with two significant digits and an SI prefix (0.31 K becomes 310 mK)."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Test",
+                "en": "Test"
+              },
+              {
+                "de": "Bereich",
+                "en": "Range"
+              },
+              {
+                "de": "Richtiger Wert / Messbedingung",
+                "en": "Conv. true value / condition"
+              },
+              {
+                "de": "Anzeige",
+                "en": "Reading"
+              },
+              {
+                "de": "Toleranz",
+                "en": "Tolerance"
+              },
+              {
+                "de": "Abweichung",
+                "en": "Deviation"
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol. / Hinweise",
+                "en": "% of tol. / Remarks"
+              }
+            ],
+            "rows": [
+              [
+                "0001",
+                "1370 °C",
+                "-100.00 °C @3,5536mV",
+                "-99.8 °C",
+                "630 mK",
+                "200 mK",
+                "310 mK",
+                "31.7"
+              ],
+              [
+                "0003",
+                "26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "10.5 µV",
+                "1 µV",
+                "3.0 µV",
+                "9.52"
+              ],
+              [
+                "0008",
+                "400 °C",
+                "0.000 °C @100,000Ω",
+                "-0.07 °C",
+                "80 mK",
+                "-70 mK",
+                "21 mK",
+                "87.5 ?"
               ]
             ]
           }

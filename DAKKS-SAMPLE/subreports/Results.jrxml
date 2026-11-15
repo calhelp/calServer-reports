@@ -9,7 +9,7 @@
 		<parameterDescription><![CDATA[Kalibrierungs-ID als Filter für alle Messwerte.]]></parameterDescription>
 	</parameter>
 	<parameter name="MeasurementDetails" class="java.lang.String">
-		<parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/21/22/3/4 = alternative Layouts, 5 = MET/CAL-Layout mit Test, Bereich, Toleranz und Abweichung, 51 = dasselbe für Werkskalibrierscheine).]]></parameterDescription>
+		<parameterDescription><![CDATA[Steuert das Layout der Messwert-Frames (1 = Standard, 2/21/22/3/4 = alternative Layouts, 5 = MET/CAL-Layout mit Test, Bereich, Toleranz und Abweichung, 51 = dasselbe für Werkskalibrierscheine, 52 = wie 5 mit Konformitätssymbolen statt Pass/Fail und Messunsicherheit mit SI-Vorsatz).]]></parameterDescription>
 		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ModernResultsHeader" class="java.lang.String">
@@ -162,7 +162,7 @@
     || !java.util.Arrays.asList(
            Integer.valueOf(2), Integer.valueOf(21), Integer.valueOf(22),
            Integer.valueOf(3), Integer.valueOf(4),
-           Integer.valueOf(5), Integer.valueOf(51)
+           Integer.valueOf(5), Integer.valueOf(51), Integer.valueOf(52)
        ).contains($V{MeasurementDetailsValue})
 )]]></variableExpression>
 	</variable>
@@ -595,7 +595,7 @@
         )]]></variableExpression>
 	</variable>
 	<!--
-	    Varianten 5 und 51: das Layout der MET/CAL-Kalibrierscheine (Test,
+	    Varianten 5, 51 und 52: das Layout der MET/CAL-Kalibrierscheine (Test,
 	    Bereich, richtiger Wert mit Messbedingung, Anzeige, Toleranz,
 	    Abweichung, erweiterte Messunsicherheit, % Tol. mit Pass/Fail,
 	    Hinweise). Sie lesen Spalten der Results-Tabelle, die die anderen
@@ -609,11 +609,18 @@
 	    und dem passenden SI-Vorsatz ("630 mK", "10.5 µV", "1.11 K"); als
 	    Differenz einer Temperatur steht K statt °C. Dieselbe Regel gilt hier.
 	    Einheiten, die keinen Vorsatz tragen (%rH, %, dB), bleiben wie erfasst.
+
+	    Variante 52 ist Variante 5 ohne die Wörter Pass/Fail (die Konformität
+	    tragen allein die Symbole ?, !?, ! der Legende) und mit der erweiterten
+	    Messunsicherheit im technischen Format: zwei signifikante Stellen
+	    (EA-4/02 M:2022, DAkkS-DKD-3), SI-Vorsatz in Dreierschritten
+	    ("0.31 K" wird "310 mK").
 	-->
 	<variable name="IsMetLayout" class="java.lang.Boolean" resetType="None">
 		<variableExpression><![CDATA[Boolean.valueOf(
     $V{MeasurementDetailsValue} != null
-    && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 51)
+    && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 51
+        || $V{MeasurementDetailsValue}.intValue() == 52)
 )]]></variableExpression>
 	</variable>
 	<variable name="MetTestDisplay" class="java.lang.String">
@@ -779,6 +786,57 @@
              ? ""
              : " " + "pnµm kMGT".substring($V{MetDevExp3}.intValue() / 3 + 4, $V{MetDevExp3}.intValue() / 3 + 5).trim()
                    + ($V{MetDevUnitNorm} == null ? "" : $V{MetDevUnitNorm})))]]></variableExpression>
+	</variable>
+	<!--
+	    Variante 52: Layout wie 5, aber ohne die Wörter "Pass"/"Fail" (die
+	    Konformität steht nur als Zeichen der Legende: ?, !?, !, *) und mit der
+	    erweiterten Messunsicherheit im technischen Format: höchstens zwei
+	    signifikante Stellen (EA-4/02 M:2022, Abschnitt 6.3, DAkkS-DKD-3) und
+	    ein SI-Vorsatz in Dreierschritten, also "310 mK" statt "0.31 K" und
+	    "3.0 µV" statt "0.0000030 V". Gerundet wird kaufmännisch; bei zwei
+	    Stellen verkleinert das den Wert nie um mehr als 5 %, die Grenze, ab
+	    der EA-4/02 das Aufrunden verlangt. Stellen, die nicht erfasst sind,
+	    werden nicht erfunden: aus "0.3 K" wird "300 mK". Einheiten ohne
+	    Vorsatz (%rH, %, dB) behalten ihre Einheit und werden nur gerundet.
+	    Lässt sich der erfasste Wert nicht als Zahl lesen, steht er wie in
+	    Variante 5.
+	-->
+	<variable name="IsMetSymbolLayout" class="java.lang.Boolean" resetType="None">
+		<variableExpression><![CDATA[Boolean.valueOf(
+    $V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 52
+)]]></variableExpression>
+	</variable>
+	<variable name="MetMuNum" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{ExpUncertaintyValue} != null && $V{ExpUncertaintyValue}.trim().matches("[+-]?(\\d+(\\.\\d*)?|\\.\\d+)([eE][+-]?\\d+)?"))
+      ? new java.math.BigDecimal($V{ExpUncertaintyValue}.trim()).abs().scaleByPowerOfTen(((($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ")) ? ("pnµm kMGT".indexOf(($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ")) - 4) * 3 : 0))
+      : null]]></variableExpression>
+	</variable>
+	<variable name="MetMuUnitNorm" class="java.lang.String">
+		<variableExpression><![CDATA[((((($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ")).length() == 1 && "pnµmkMGT".contains(($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ"))) ? "" : (($F{exp_uncert_p} == null ? "" : $F{exp_uncert_p}.trim()).replace("μ", "µ").replace("u", "µ")))
+      + ($V{ExpUncertaintyUnit} == null ? "" : $V{ExpUncertaintyUnit}.trim())).replaceAll("(?i)ohm", "Ω")]]></variableExpression>
+	</variable>
+	<variable name="MetMuRounded" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{MetMuNum} == null
+      ? null
+      : ($V{MetMuNum}.signum() == 0 ? java.math.BigDecimal.ZERO : $V{MetMuNum}.round(new java.math.MathContext(2, java.math.RoundingMode.HALF_UP)))]]></variableExpression>
+	</variable>
+	<variable name="MetMuExp3" class="java.lang.Integer">
+		<variableExpression><![CDATA[Integer.valueOf(
+      $V{MetMuRounded} == null || $V{MetMuRounded}.signum() == 0
+        || $V{MetMuUnitNorm} == null || !$V{MetMuUnitNorm}.matches("V|A|Ω|Hz|W|F|H|S|K|s|m|g|Pa|bar|N|VA")
+      ? 0
+      : Math.max(-12, Math.min(12,
+          (int) Math.floor(($V{MetMuRounded}.precision() - $V{MetMuRounded}.scale() - 1) / 3.0) * 3)))]]></variableExpression>
+	</variable>
+	<variable name="MetMuEng" class="java.lang.String">
+		<variableExpression><![CDATA[$V{MetMuRounded} == null
+      ? $V{ExpUncertaintyDisplay}
+      : ($V{MetMuRounded}.scaleByPowerOfTen(-$V{MetMuExp3}.intValue()).toPlainString()
+          + ((("pnµm kMGT".substring($V{MetMuExp3}.intValue() / 3 + 4, $V{MetMuExp3}.intValue() / 3 + 5).trim())
+               + ($V{MetMuUnitNorm} == null ? "" : $V{MetMuUnitNorm})).isEmpty()
+             ? ""
+             : " " + "pnµm kMGT".substring($V{MetMuExp3}.intValue() / 3 + 4, $V{MetMuExp3}.intValue() / 3 + 5).trim()
+                   + ($V{MetMuUnitNorm} == null ? "" : $V{MetMuUnitNorm})))]]></variableExpression>
 	</variable>
 	<variable name="MetTolErrDisplay" class="java.lang.String">
 		<variableExpression><![CDATA[($F{tol_err} == null ? "" : $F{tol_err}.trim()).isEmpty()
@@ -2775,7 +2833,7 @@
 				<reportElement x="0" y="0" width="535" height="54" uuid="afb54687-764f-5776-8416-4f28d17dc707">
 					<printWhenExpression><![CDATA[Boolean.TRUE.equals($V{UseModernHeader})
     && $V{MeasurementDetailsValue} != null
-    && $V{MeasurementDetailsValue}.intValue() == 5]]></printWhenExpression>
+    && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 52)]]></printWhenExpression>
 				</reportElement>
 					<staticText>
 						<reportElement mode="Opaque" x="180" y="0" width="196" height="9" backcolor="#F5F7FA" uuid="d719b5bf-78d9-51eb-9ae6-a8d27da5a8e6"/>
@@ -2932,7 +2990,7 @@ of measurement]]></text>
 				<reportElement x="0" y="0" width="535" height="54" uuid="e3b957d4-a6ae-55ba-91a7-a03ddd5530ca">
 					<printWhenExpression><![CDATA[!Boolean.TRUE.equals($V{UseModernHeader})
     && $V{MeasurementDetailsValue} != null
-    && $V{MeasurementDetailsValue}.intValue() == 5]]></printWhenExpression>
+    && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 52)]]></printWhenExpression>
 				</reportElement>
 					<staticText>
 						<reportElement x="180" y="0" width="196" height="9" uuid="28f7de56-d9bb-5e04-8b64-c078c1c89eea"/>
@@ -4057,7 +4115,7 @@ of measurement]]></text>
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="535" height="14" uuid="ed76902c-2966-5fde-a943-5744e8a86b31">
-					<printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && $V{MeasurementDetailsValue}.intValue() == 5 && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$V{MeasurementDetailsValue} != null && ($V{MeasurementDetailsValue}.intValue() == 5 || $V{MeasurementDetailsValue}.intValue() == 52) && Boolean.TRUE.equals($V{HasMeasurementData})]]></printWhenExpression>
 				</reportElement>
 					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 						<reportElement stretchType="ContainerHeight" x="0" y="0" width="36" height="14" uuid="53c2e7bd-12df-5629-b17c-71f0639acf8f"/>
@@ -4113,7 +4171,7 @@ of measurement]]></text>
 						<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
 							<font fontName="DejaVu Sans" size="8"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$V{ExpUncertaintyDisplay}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[Boolean.TRUE.equals($V{IsMetSymbolLayout}) ? $V{MetMuEng} : $V{ExpUncertaintyDisplay}]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 						<reportElement stretchType="ContainerHeight" x="446" y="0" width="62" height="14" uuid="83025c48-26dc-541e-a261-2e23ce0104c2"/>
@@ -4122,7 +4180,7 @@ of measurement]]></text>
 							<font fontName="DejaVu Sans" size="8"/>
 						</textElement>
 						<textFieldExpression><![CDATA[(($V{MetTolErrDisplay} == null ? "" : $V{MetTolErrDisplay})
-              + " " + ($V{MetPassWord} == null ? "" : $V{MetPassWord})).trim()]]></textFieldExpression>
+              + " " + (Boolean.TRUE.equals($V{IsMetSymbolLayout}) || $V{MetPassWord} == null ? "" : $V{MetPassWord})).trim()]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 						<reportElement stretchType="ContainerHeight" x="508" y="0" width="27" height="14" uuid="ca4fac17-4cfa-554d-bb62-87b8769363e9"/>
