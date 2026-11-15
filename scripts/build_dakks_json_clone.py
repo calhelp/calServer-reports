@@ -144,7 +144,7 @@ def bind_fields(text: str, kind: str, source: str) -> str:
             bound += 1
         else:
             out.append(line)
-    expected = {"main": 27, "standard": 6, "results": 32}[kind]
+    expected = {"main": 27, "standard": 6, "results": 52}[kind]
     if bound != expected:
         raise SystemExit(f"ERROR: bound {bound} fields in {source}, expected {expected}")
     return "\n".join(out)

@@ -136,6 +136,38 @@
       "example": "D-K-15208-01-00"
     },
     {
+      "name": "ShowCalibrationMark",
+      "label": {
+        "de": "Kalibrierzeichen anzeigen",
+        "en": "Show calibration mark"
+      },
+      "description": {
+        "de": "„N“ blendet den Kalibrierzeichen-Kasten samt Beschriftung auf allen Seiten aus, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. „N“ hat Vorrang vor „Kalibrierzeichen auf Folgeseiten“.",
+        "en": "\"N\" hides the calibration-mark box and its caption on every page, including the cover page. Meant for letterhead that already carries the calibration mark. \"N\" takes precedence over \"Mark on following pages\"."
+      },
+      "role": "variable",
+      "group": "Kalibrierzeichen",
+      "order": 85,
+      "input": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": {
+            "de": "anzeigen",
+            "en": "show"
+          }
+        },
+        {
+          "value": "N",
+          "label": {
+            "de": "ausblenden",
+            "en": "hide"
+          }
+        }
+      ],
+      "default": "Y"
+    },
+    {
       "name": "ShowMarkOnFollowingPages",
       "label": {
         "de": "Kalibrierzeichen auf Folgeseiten",
@@ -300,12 +332,640 @@
         "en": "Results table layout"
       },
       "description": {
-        "de": "Wählt die Spaltenvariante des Ergebnis-Subreports (1, 2, 21, 22, 3, 4 — wie V1 MET/CAL). Tipp: Die Spalte „Messbedingungen“ ist `test_desc` — die Bezeichnung des Prüfschritts aus der Prozedur. Wer sie sprechend haben will („Kanal 1, Anzeigeabweichung bei 15 °C“), pflegt sie in der Prozedur, nicht im Bericht. Sollwert und Messwert füllen sich aus dem Spaltenpaar, das die Zeile trägt: `fixq`/`varq` oder `sys_actual`/`uut_ind`; ist das eigene Paar leer, greift die Variante auf das andere zurück. Die Wahl der Variante entscheidet damit über das Layout, nicht mehr darüber, ob überhaupt Zahlen erscheinen. Unbekannte oder nicht-numerische Werte fallen auf Variante 1 zurück, statt eine leere Ergebnistabelle zu drucken. Die Varianten 2, 21, 22, 3 und 4 drucken Wert, SI-Vorsatz und Einheit als eine Angabe („9.9 mg“); Variante 1 ist die Basisdarstellung und druckt die Rohwerte.",
-        "en": "Selects the column variant of the results subreport (1, 2, 21, 22, 3, 4 — as in V1 MET/CAL). Tip: the \"measuring condition\" column is `test_desc`, the test step's label from the procedure. Maintain it there, not in the report. Nominal and measured value come from whichever column pair the row carries — `fixq`/`varq` or `sys_actual`/`uut_ind`; if its own pair is empty the variant falls back to the other one. The variant therefore decides the layout, no longer whether any numbers show up at all. Unknown or non-numeric values fall back to variant 1 instead of printing an empty results table. Variants 2, 21, 22, 3 and 4 print value, SI prefix and unit as one quantity (\"9.9 mg\"); variant 1 is the base layout and prints the raw values."
+        "de": "Wählt die Spaltenvariante der Ergebnistabelle. Die Vorschau an jeder Auswahl zeigt Spaltenköpfe und Beispielzeilen. Tipp: Die Spalte „Messbedingungen“ der Varianten 1 bis 4 ist `test_desc`, die Bezeichnung des Prüfschritts aus der Prozedur; wer sie sprechend haben will („Kanal 1, Anzeigeabweichung bei 15 °C“), pflegt sie in der Prozedur, nicht im Bericht. Sollwert und Messwert füllen sich aus dem Spaltenpaar, das die Zeile trägt: `fixq`/`varq` oder `sys_actual`/`uut_ind`; ist das eigene Paar leer, greift die Variante auf das andere zurück. Unbekannte oder nicht-numerische Werte fallen auf Variante 1 zurück, statt eine leere Ergebnistabelle zu drucken. Die Varianten 5 und 51 lesen zusätzlich `test_step`, `uut_range`, `condition2` oder `mod1`, `tol_pos`/`tol_neg` oder `tol` und `error`; fehlt eine Angabe, bleibt die Zelle leer oder wird aus Grenzen und Anzeige berechnet.",
+        "en": "Selects the column variant of the results table. The preview on each option shows column headers and sample rows. Tip: the \"measuring condition\" column of variants 1 to 4 is `test_desc`, the test step's label from the procedure; maintain it there, not in the report. Nominal and measured value come from whichever column pair the row carries, `fixq`/`varq` or `sys_actual`/`uut_ind`; if its own pair is empty the variant falls back to the other one. Unknown or non-numeric values fall back to variant 1 instead of printing an empty results table. Variants 5 and 51 additionally read `test_step`, `uut_range`, `condition2` or `mod1`, `tol_pos`/`tol_neg` or `tol` and `error`; a missing value leaves the cell empty or is derived from limits and reading."
       },
       "role": "variable",
       "group": "Ergebnistabelle",
       "order": 140,
+      "input": "select",
+      "options": [
+        {
+          "value": "1",
+          "label": {
+            "de": "1 · Basis, Rohwerte ohne Einheit",
+            "en": "1 · Base, raw values without unit"
+          },
+          "description": {
+            "de": "Neun Spalten mit Sollwert, Grenzen und Messwert. Druckt die Zahlen so, wie sie erfasst sind, ohne SI-Vorsatz und Einheit. Sollwert und Messwert aus fixq/varq.",
+            "en": "Nine columns with nominal value, limits and measured value. Prints the numbers as captured, without SI prefix and unit. Nominal and measured value from fixq/varq."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "untere Spez.",
+                "en": "Lower limit"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "obere Spez.",
+                "en": "Upper limit"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol",
+                "en": "% Tol"
+              },
+              {
+                "de": "Konformität",
+                "en": "Conformity"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00",
+                "-100.63",
+                "-99.8",
+                "-99.37",
+                "0.2",
+                "0.31",
+                "32",
+                "i.T."
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000",
+                "24.9895",
+                "25.001",
+                "25.0105",
+                "0.0",
+                "3.0",
+                "10",
+                "i.T."
+              ],
+              [
+                "Kanal M1",
+                "0.000",
+                "-0.080",
+                "-0.07",
+                "0.080",
+                "--",
+                "21",
+                "88",
+                "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "2",
+          "label": {
+            "de": "2 · wie 1, mit Einheiten",
+            "en": "2 · like 1, with units"
+          },
+          "description": {
+            "de": "Dieselben neun Spalten wie Variante 1, jede Wertespalte mit SI-Vorsatz und Einheit. Sollwert und Messwert aus fixq/varq.",
+            "en": "The same nine columns as variant 1, every value column with SI prefix and unit. Nominal and measured value from fixq/varq."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "untere Spez.",
+                "en": "Lower limit"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "obere Spez.",
+                "en": "Upper limit"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol",
+                "en": "% Tol"
+              },
+              {
+                "de": "Konformität",
+                "en": "Conformity"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00 °C",
+                "-100.63 °C",
+                "-99.8 °C",
+                "-99.37 °C",
+                "0.2",
+                "0.31 K",
+                "32",
+                "i.T."
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000 mV",
+                "24.9895 mV",
+                "25.001 mV",
+                "25.0105 mV",
+                "0.0",
+                "3.0 µV",
+                "10",
+                "i.T."
+              ],
+              [
+                "Kanal M1",
+                "0.000 °C",
+                "-0.080 °C",
+                "-0.07 °C",
+                "0.080 °C",
+                "--",
+                "21 mK",
+                "88",
+                "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "22",
+          "label": {
+            "de": "22 · wie 2, Wert des Normals und Anzeige",
+            "en": "22 · like 2, standard value and reading"
+          },
+          "description": {
+            "de": "Layout wie Variante 2. Sollwert und Messwert kommen aus sys_actual/uut_ind (Wert des Normals und Anzeige des Prüflings) statt aus fixq/varq. Bei MET/CAL-Daten ändert das, welcher der beiden Werte als Sollwert gilt.",
+            "en": "Layout as in variant 2. Nominal and measured value come from sys_actual/uut_ind (value of the standard and reading of the unit under test) instead of fixq/varq. With MET/CAL data this changes which of the two values counts as nominal."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "untere Spez.",
+                "en": "Lower limit"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "obere Spez.",
+                "en": "Upper limit"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol",
+                "en": "% Tol"
+              },
+              {
+                "de": "Konformität",
+                "en": "Conformity"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00 °C",
+                "-100.63 °C",
+                "-99.8 °C",
+                "-99.37 °C",
+                "0.2",
+                "0.31 K",
+                "32",
+                "i.T."
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000 mV",
+                "24.9895 mV",
+                "25.001 mV",
+                "25.0105 mV",
+                "0.0",
+                "3.0 µV",
+                "10",
+                "i.T."
+              ],
+              [
+                "Kanal M1",
+                "0.000 °C",
+                "-0.080 °C",
+                "-0.07 °C",
+                "0.080 °C",
+                "--",
+                "21 mK",
+                "88",
+                "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "21",
+          "label": {
+            "de": "21 · kurz, ohne Grenzen und Konformität",
+            "en": "21 · short, without limits and conformity"
+          },
+          "description": {
+            "de": "Fünf Spalten: Messbedingungen, Sollwert, Messwert, relative Abweichung, Messunsicherheit. Keine Grenzen, keine Toleranzausnutzung, keine Konformitätsspalte. Werte aus sys_actual/uut_ind.",
+            "en": "Five columns: measuring condition, nominal value, measured value, relative deviation, uncertainty. No limits, no tolerance usage, no conformity column. Values from sys_actual/uut_ind."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00 °C",
+                "-99.8 °C",
+                "0.2",
+                "0.31 K"
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "0.0",
+                "3.0 µV"
+              ],
+              [
+                "Kanal M1",
+                "0.000 °C",
+                "-0.07 °C",
+                "--",
+                "21 mK"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "3",
+          "label": {
+            "de": "3 · ohne Grenzen, Messunsicherheit als Zehnerpotenz",
+            "en": "3 · without limits, uncertainty as power of ten"
+          },
+          "description": {
+            "de": "Sieben Spalten ohne untere und obere Spezifikation. Die Messunsicherheit kommt in Exponentialschreibweise aus exp_uncert_iso_e (MET/CAL); ist das Feld leer, steht der erfasste Wert mit Einheit.",
+            "en": "Seven columns without lower and upper limit. The uncertainty is taken in exponent notation from exp_uncert_iso_e (MET/CAL); if that field is empty the captured value with unit is printed."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol",
+                "en": "% Tol"
+              },
+              {
+                "de": "Konformität",
+                "en": "Conformity"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00 °C",
+                "-99.8 °C",
+                "0.2",
+                "3.1 ×10⁻¹",
+                "32",
+                "i.T."
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "0.0",
+                "3.0 ×10⁻⁶",
+                "10",
+                "i.T."
+              ],
+              [
+                "Kanal M1",
+                "0.000 °C",
+                "-0.07 °C",
+                "--",
+                "2.1 ×10⁻²",
+                "88",
+                "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "4",
+          "label": {
+            "de": "4 · wie 3, Messunsicherheit mit SI-Vorsatz",
+            "en": "4 · like 3, uncertainty with SI prefix"
+          },
+          "description": {
+            "de": "Layout wie Variante 3. Die Messunsicherheit kommt in der Schreibweise mit SI-Vorsatz aus exp_uncert_iso_p (MET/CAL); ist das Feld leer, steht der erfasste Wert mit Einheit.",
+            "en": "Layout as in variant 3. The uncertainty is taken in SI-prefix notation from exp_uncert_iso_p (MET/CAL); if that field is empty the captured value with unit is printed."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Messbedingungen",
+                "en": "Measuring condition"
+              },
+              {
+                "de": "Sollwert",
+                "en": "True value"
+              },
+              {
+                "de": "Messwert",
+                "en": "Measured value"
+              },
+              {
+                "de": "% rel. Abw.",
+                "en": "% rel. dev."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol",
+                "en": "% Tol"
+              },
+              {
+                "de": "Konformität",
+                "en": "Conformity"
+              }
+            ],
+            "rows": [
+              [
+                "Kanal M0",
+                "-100.00 °C",
+                "-99.8 °C",
+                "0.2",
+                "310 m",
+                "32",
+                "i.T."
+              ],
+              [
+                "Messbereich 26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "0.0",
+                "3.0 µ",
+                "10",
+                "i.T."
+              ],
+              [
+                "Kanal M1",
+                "0.000 °C",
+                "-0.07 °C",
+                "--",
+                "21 m",
+                "88",
+                "?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "5",
+          "label": {
+            "de": "5 · MET/CAL-Layout (DAkkS)",
+            "en": "5 · MET/CAL layout (DAkkS)"
+          },
+          "description": {
+            "de": "Acht Spalten wie auf MET/CAL-Kalibrierscheinen: Test, Bereich, richtiger Wert mit Messbedingung in der zweiten Zeile, Anzeige, Toleranz, Abweichung, Messunsicherheit, Toleranzausnutzung mit Pass/Fail und Hinweisen. Toleranz und Abweichung mit drei signifikanten Stellen und SI-Vorsatz.",
+            "en": "Eight columns as on MET/CAL certificates: test, range, conventional true value with the condition on a second line, reading, tolerance, deviation, uncertainty, tolerance usage with Pass/Fail and remarks. Tolerance and deviation with three significant digits and SI prefix."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Test",
+                "en": "Test"
+              },
+              {
+                "de": "Bereich",
+                "en": "Range"
+              },
+              {
+                "de": "Richtiger Wert / Messbedingung",
+                "en": "Conv. true value / condition"
+              },
+              {
+                "de": "Anzeige",
+                "en": "Reading"
+              },
+              {
+                "de": "Toleranz",
+                "en": "Tolerance"
+              },
+              {
+                "de": "Abweichung",
+                "en": "Deviation"
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "% Tol. / Hinweise",
+                "en": "% of tol. / Remarks"
+              }
+            ],
+            "rows": [
+              [
+                "0001",
+                "1370 °C",
+                "-100.00 °C @3,5536mV",
+                "-99.8 °C",
+                "630 mK",
+                "200 mK",
+                "0.31 K",
+                "31.7 Pass"
+              ],
+              [
+                "0003",
+                "26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "10.5 µV",
+                "1 µV",
+                "3.0 µV",
+                "9.52 Pass"
+              ],
+              [
+                "0008",
+                "400 °C",
+                "0.000 °C @100,000Ω",
+                "-0.07 °C",
+                "80 mK",
+                "-70 mK",
+                "21 mK",
+                "87.5 Pass ?"
+              ]
+            ]
+          }
+        },
+        {
+          "value": "51",
+          "label": {
+            "de": "51 · MET/CAL-Layout (Werkskalibrierung)",
+            "en": "51 · MET/CAL layout (factory calibration)"
+          },
+          "description": {
+            "de": "Wie Variante 5, für Werkskalibrierscheine: die Toleranz steht in der erfassten Einheit ohne Umrechnung, die Toleranzausnutzung vor der Messunsicherheit, die Hinweise in einer eigenen Spalte.",
+            "en": "Like variant 5, for factory calibration certificates: the tolerance is printed in the captured unit without conversion, tolerance usage comes before the uncertainty, remarks have their own column."
+          },
+          "preview": {
+            "columns": [
+              {
+                "de": "Test",
+                "en": "Test"
+              },
+              {
+                "de": "Bereich",
+                "en": "Range"
+              },
+              {
+                "de": "Richtiger Wert / Messbedingung",
+                "en": "Conv. true value / condition"
+              },
+              {
+                "de": "Anzeige",
+                "en": "Reading"
+              },
+              {
+                "de": "Toleranz",
+                "en": "Tolerance"
+              },
+              {
+                "de": "Abweichung",
+                "en": "Deviation"
+              },
+              {
+                "de": "% Tol.",
+                "en": "% of tol."
+              },
+              {
+                "de": "erw. MU",
+                "en": "Exp. uncertainty"
+              },
+              {
+                "de": "Hinweise",
+                "en": "Remarks"
+              }
+            ],
+            "rows": [
+              [
+                "0001",
+                "1370 °C",
+                "-100.00 °C @3,5536mV",
+                "-99.8 °C",
+                "0.63 °C",
+                "200 mK",
+                "31.7 Pass",
+                "0.31 K",
+                ""
+              ],
+              [
+                "0003",
+                "26 mV",
+                "25.0000 mV",
+                "25.001 mV",
+                "0.0000105 V",
+                "1 µV",
+                "9.52 Pass",
+                "3.0 µV",
+                ""
+              ],
+              [
+                "0008",
+                "400 °C",
+                "0.000 °C @100,000Ω",
+                "-0.07 °C",
+                "0.08 °C",
+                "-70 mK",
+                "87.5 Pass",
+                "21 mK",
+                "?"
+              ]
+            ]
+          }
+        }
+      ],
       "default": "1"
     },
     {
