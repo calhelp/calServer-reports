@@ -111,13 +111,13 @@
         "en": "Calibration mark line 1"
       },
       "description": {
-        "de": "Obere Nummer im Kalibrierzeichen-Kasten (Titelseite und Folgeseiten).",
-        "en": "Upper number in the calibration-mark box (title and following pages)."
+        "de": "Laufende Nummer im Kalibrierzeichen (Titelseite und Folgeseiten). Leer: Die Nummer kommt aus der Kalibrierscheinnummer, gedruckt wird ihr erster durch Leerzeichen getrennter Teil.",
+        "en": "Serial number in the calibration mark (title and following pages). Empty: the number comes from the certificate number, its first whitespace-separated part is printed."
       },
       "role": "variable",
       "group": "Kalibrierzeichen",
       "order": 70,
-      "default": "123456"
+      "default": ""
     },
     {
       "name": "MarkNumber2",
