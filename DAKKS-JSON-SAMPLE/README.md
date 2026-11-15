@@ -50,9 +50,12 @@ Automatisch versorgt werden `P_CTAG`, `Sprache` (aus der Datensatz-Locale)
 und `QR_Code_Value` (calServer-Kurz-URL `/inventory/qrcode/{id}`,
 per gleichnamiger Variable übersteuerbar).
 
-`ShowCalibrationMark` = `N` blendet den Kalibrierzeichen-Kasten samt
-Beschriftung auf allen Seiten aus, auch auf dem Deckblatt, etwa für Briefpapier,
-das das Kalibrierzeichen bereits trägt. `MeasurementDetails` ist im Manifest
+`ShowCalibrationMark` steuert den Kalibrierzeichen-Kasten: `Y` druckt Kasten,
+Beschriftung und Werte, `V` nur die drei Werte (laufende Nummer, D-K-Nummer,
+Kalibriermonat) für Briefpapier, das das komplette Kalibrierzeichen mit leerem
+Kasten trägt, `N` blendet alles auf allen Seiten aus, auch auf dem Deckblatt.
+Die Flächen stehen im README von `DAKKS-SAMPLE`, Abschnitt 4.3.
+`MeasurementDetails` ist im Manifest
 eine Auswahlliste; jede Variante bringt dort eine Kurzbeschreibung und eine
 Beispieltabelle (`options[].description`, `options[].preview`) mit, die calServer
 an der Variablenauswahl als Vorschau zeigt.
@@ -144,7 +147,7 @@ und die Layout-Variante entscheidet nur noch, welches sie **zuerst** liest:
 | Messbedingung, zweite Zeile (`5`, `51`, `52`) | `results[].condition2` | `@` + `mod1` (+`_p`/`_u`) |
 | Toleranz (`5`, `51`, `52`) | `results[].tol_pos` / `tol_neg` (+`_p`/`_u`) | `tol`, sonst halbe Spanne der Grenzen |
 | Abweichung (`5`, `51`, `52`) | `results[].error` (+`_p`/`_u`) | Anzeige − richtiger Wert |
-| % Tol. mit Pass/Fail (`52` ohne), Hinweise (`5`, `51`, `52`) | `results[].tol_err`, `pass_fail`, `accred` | – |
+| % Tol. mit Pass/Fail (`52` ohne), Hinweise (`5`, `51`, `52`) | `results[].tol_err`, `pass_fail`, `accred_mark` (ersatzweise `accred`) | – |
 | erw. MU im technischen Format (`52`) | `results[].exp_uncert` (+`_p`/`_u`), zwei signifikante Stellen, SI-Vorsatz | Darstellung wie `5`, wenn der Wert keine Zahl ist |
 
 Die Varianten `5`, `51` und `52` bilden das MET/CAL-Layout nach (Test, Bereich,
@@ -272,12 +275,21 @@ Unter den beiden binären Regeln entscheidet calServer nur `Pass` oder `Fail`,
 `Conformity_description_1` bis `_3`, der Datensatz trägt die Regel im Block
 `decision_rule` (ab Contract-Version 1.9).
 
-Das `*` daneben ist eine eigene Aussage und hängt an `results[].accred`, dem
-MET/CAL-Flag `ACCRED`: `1`/`ja`/`true` und `2`…`32767` = Flag gesetzt (`*`),
-`0`/`nein`/`false` = Flag nicht gesetzt, der MET/CAL-Standard (kein Zeichen),
-leer = keine Aussage erfasst (kein Zeichen). Ein Schein, dessen Prozedur
-`ACCRED` nie setzt, trägt also kein Zeichen; was das Zeichen bedeutet, sagt
-die Legende (`Conformity_description_3`). In der Variante `MeasurementDetails=1` kommt ein zweites Gatter dazu:
+Das `*` daneben ist eine eigene Aussage: „nicht im Akkreditierungsumfang“
+(Legende `Conformity_description_3`). Gebunden ist das Druckfeld
+`results[].accred_mark` (ab Contract-Version 1.13): `*` kennzeichnet die
+Zeile, jeder andere Wert, auch der leere, druckt kein Zeichen. calServer
+rechnet es aus `accred` und dessen Herkunft `accred_source`, weil dasselbe
+Feld zwei Lesarten trägt: die eigene Erfassung schreibt `1` für „im Umfang“,
+MET/CAL setzt das Flag `ACCRED` für die gekennzeichnete Zeile.
+
+Fehlt `accred_mark` im Datensatz (älterer Contract), fällt die Vorlage auf
+`results[].accred` in der MET/CAL-Lesart zurück: `1`/`ja`/`true` und
+`2`…`32767` = Flag gesetzt (`*`), `0`/`nein`/`false` = Flag nicht gesetzt
+(kein Zeichen), leer = keine Aussage erfasst (kein Zeichen). Ein Datensatz,
+der das Feld mitführt, muss es deshalb in **jeder** Zeile mitführen, auch
+leer: ein fehlender Schlüssel ist nicht „kein Zeichen“, sondern „alte
+Lesart“. In der Variante `MeasurementDetails=1` kommt ein zweites Gatter dazu:
 gedruckt wird nur, wenn `fsc` „EVAL" oder „PICE" enthält.
 
 Die Felder `conformity`, `test_status` und `guardband_meth` des Contracts sind

@@ -142,8 +142,8 @@
         "en": "Show calibration mark"
       },
       "description": {
-        "de": "„N“ blendet den Kalibrierzeichen-Kasten samt Beschriftung auf allen Seiten aus, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. „N“ hat Vorrang vor „Kalibrierzeichen auf Folgeseiten“.",
-        "en": "\"N\" hides the calibration-mark box and its caption on every page, including the cover page. Meant for letterhead that already carries the calibration mark. \"N\" takes precedence over \"Mark on following pages\"."
+        "de": "Steuert den Kalibrierzeichen-Kasten auf allen Seiten. „nur Werte“ ist für Briefpapier gedacht, das das komplette Kalibrierzeichen mit leerem Kasten trägt: der Bericht druckt dann nur laufende Nummer, D-K-Nummer und Kalibriermonat an dieselbe Stelle. „ausblenden“ hat Vorrang vor „Kalibrierzeichen auf Folgeseiten“.",
+        "en": "Controls the calibration-mark box on every page. \"values only\" is meant for letterhead that carries the complete calibration mark with an empty box: the report then prints only the serial number, the D-K number and the calibration month in the same place. \"hide\" takes precedence over \"Mark on following pages\"."
       },
       "role": "variable",
       "group": "Kalibrierzeichen",
@@ -155,6 +155,21 @@
           "label": {
             "de": "anzeigen",
             "en": "show"
+          },
+          "description": {
+            "de": "Der Bericht druckt Kasten, Beschriftung „Kalibrierzeichen“ und die drei Werte. Für Briefpapier ohne Kalibrierzeichen.",
+            "en": "The report prints the box, the caption \"Calibration mark\" and the three values. For letterhead without a calibration mark."
+          }
+        },
+        {
+          "value": "V",
+          "label": {
+            "de": "nur Werte",
+            "en": "values only"
+          },
+          "description": {
+            "de": "Der Bericht druckt nur laufende Nummer, D-K-Nummer und Kalibriermonat, ohne Rahmen und Beschriftung. Für Briefpapier, das DAkkS-Symbol, Kasten und Beschriftung bereits trägt.",
+            "en": "The report prints only the serial number, the D-K number and the calibration month, without frame and caption. For letterhead that already carries the DAkkS symbol, the box and the caption."
           }
         },
         {
@@ -162,6 +177,10 @@
           "label": {
             "de": "ausblenden",
             "en": "hide"
+          },
+          "description": {
+            "de": "Der Bericht druckt an dieser Stelle nichts, auch nicht auf dem Deckblatt. Für Scheine ohne Kalibrierzeichen, etwa Werkskalibrierscheine.",
+            "en": "The report prints nothing in this place, not even on the cover page. For certificates without a calibration mark, such as factory calibration certificates."
           }
         }
       ],
