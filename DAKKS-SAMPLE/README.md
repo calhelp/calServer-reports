@@ -129,6 +129,30 @@ für optionale Parameter.
 | `MarkNumber2` | ➖ | `D-K-\nYYYYY-ZZ-N` | Zweite Markennummer (Akkreditierungs­kennung). `\n` erzeugt einen Zeilenumbruch im gedruckten Block. |
 | `sign_names` | ➖ | `Y` | Steuert die Anzeige der Namen im Unterschriftsbereich. Werte: `Y` (anzeigen, Default auch bei fehlendem Parameter) oder `N` (ausblenden). |
 
+#### Briefpapier: was der Bericht frei lässt {#letterhead-areas}
+
+Der Bericht druckt weder Logo noch Titel noch Laboranschrift. Das trägt das
+Briefpapier, das calServer unter jede Seite legt (Berichtseinstellungen,
+PDF-Vorlage mit einer Seite für das Deckblatt und einer für die Folgeseiten).
+Wer eines baut, braucht die Flächen, die der Bericht selbst belegt. Angaben in
+Punkten von der oberen linken Blattecke, Blatt 595 × 842:
+
+| Seite | Der Bericht belegt | Frei für das Briefpapier |
+| --- | --- | --- |
+| Deckblatt | Inhalt von y 358 bis 760. Kalibrierzeichen-Kasten x 512–569, y 271–345, Beschriftung x 412–502, y 308–334 | y 22–350 über die ganze Breite (mit Kalibrierzeichen: rechts nur bis y 265), Fuß ab y 770 |
+| Folgeseiten | Kopf y 12–100: Seitenzahl je nach `PageNumberPosition` links, mittig oder rechts (y 20–52), Kalibrierzeichen-Kasten x 510–567, y 19–93, Linie auf y 95. Fuß y 767–830, nur bei `Footer*`-Seitenzahl | im Kopf, was Seitenzahl und Kasten übrig lassen; im Fuß alles neben der Seitenzahl |
+
+Drei Dinge, die dabei regelmäßig schiefgehen:
+
+* Ein Logo oben links auf den Folgeseiten liegt unter der Seitenzahl, solange
+  `PageNumberPosition` auf `HeaderLeft` steht. `FooterRight` räumt den Kopf.
+* Ein Siegel oder Kopffeld für das Kalibrierzeichen gehört bündig über den
+  Kasten (Unterkante y 271), dann wirkt beides wie ein Element. Trägt das
+  Briefpapier das vollständige Kalibrierzeichen samt Nummern, `ShowCalibrationMark`
+  auf `N` setzen.
+* Das Briefpapier liegt unter dem Bericht. Eine Fläche im Briefpapier verdeckt
+  nie Berichtstext, ein Logo unter einer Tabelle scheint aber durch.
+
 ### 4.4 Zertifikats- und Inhaltssteuerung {#params-content}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
