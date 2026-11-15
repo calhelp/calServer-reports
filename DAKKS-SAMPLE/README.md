@@ -129,12 +129,36 @@ für optionale Parameter.
 | `MarkNumber2` | ➖ | `D-K-\nYYYYY-ZZ-N` | Zweite Markennummer (Akkreditierungs­kennung). `\n` erzeugt einen Zeilenumbruch im gedruckten Block. |
 | `sign_names` | ➖ | `Y` | Steuert die Anzeige der Namen im Unterschriftsbereich. Werte: `Y` (anzeigen, Default auch bei fehlendem Parameter) oder `N` (ausblenden). |
 
+#### Briefpapier: was der Bericht frei lässt {#letterhead-areas}
+
+Der Bericht druckt weder Logo noch Titel noch Laboranschrift. Das trägt das
+Briefpapier, das calServer unter jede Seite legt (Berichtseinstellungen,
+PDF-Vorlage mit einer Seite für das Deckblatt und einer für die Folgeseiten).
+Wer eines baut, braucht die Flächen, die der Bericht selbst belegt. Angaben in
+Punkten von der oberen linken Blattecke, Blatt 595 × 842:
+
+| Seite | Der Bericht belegt | Frei für das Briefpapier |
+| --- | --- | --- |
+| Deckblatt | Inhalt von y 358 bis 760. Kalibrierzeichen-Kasten x 512–569, y 271–345, Beschriftung x 412–502, y 308–334 | y 22–350 über die ganze Breite (mit Kalibrierzeichen: rechts nur bis y 265), Fuß ab y 770 |
+| Folgeseiten | Kopf y 12–100: Seitenzahl je nach `PageNumberPosition` links, mittig oder rechts (y 20–52), Kalibrierzeichen-Kasten x 510–567, y 19–93, Linie auf y 95. Fuß y 767–830, nur bei `Footer*`-Seitenzahl | im Kopf, was Seitenzahl und Kasten übrig lassen; im Fuß alles neben der Seitenzahl |
+
+Drei Dinge, die dabei regelmäßig schiefgehen:
+
+* Ein Logo oben links auf den Folgeseiten liegt unter der Seitenzahl, solange
+  `PageNumberPosition` auf `HeaderLeft` steht. `FooterRight` räumt den Kopf.
+* Ein Siegel oder Kopffeld für das Kalibrierzeichen gehört bündig über den
+  Kasten (Unterkante y 271), dann wirkt beides wie ein Element. Trägt das
+  Briefpapier das vollständige Kalibrierzeichen samt Nummern, `ShowCalibrationMark`
+  auf `N` setzen.
+* Das Briefpapier liegt unter dem Bericht. Eine Fläche im Briefpapier verdeckt
+  nie Berichtstext, ein Logo unter einer Tabelle scheint aber durch.
+
 ### 4.4 Zertifikats- und Inhaltssteuerung {#params-content}
 
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `Cert_field` | ➖ | `""` | Quelle der Zertifikats­nummer und des Kalibrier­kennzeichens. Erlaubte Werte: `C2396`, `C2395`, `C2364` oder `C2356`; andere Werte fallen auf `C2356` zurück. Wird zugleich an den Subreport `Standard` durchgereicht. |
-| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit, `5` MET/CAL-Layout für DAkkS-Scheine, `51` MET/CAL-Layout für Werkskalibrierscheine). Leere, nicht-numerische **und unbekannte** Eingaben werden als `1` behandelt — eine unbekannte Zahl druckte bis dahin eine komplett leere Ergebnistabelle, ohne Kopf und ohne Hinweis. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
+| `MeasurementDetails` | ➖ | `1` | Wählt eines der Messwert-Layouts im Subreport `Results` (`1` Basis­darstellung, `2`/`22` formatierte Eingaben, `21` Kurzform ohne Spezifikations­spalten, `3` autoformatierte Anzeige, `4` ISO-konforme Unsicherheit, `5` MET/CAL-Layout für DAkkS-Scheine, `51` MET/CAL-Layout für Werkskalibrierscheine, `52` MET/CAL-Layout mit Konformitätssymbolen statt Pass/Fail und Messunsicherheit im technischen Format). Leere, nicht-numerische **und unbekannte** Eingaben werden als `1` behandelt — eine unbekannte Zahl druckte bis dahin eine komplett leere Ergebnistabelle, ohne Kopf und ohne Hinweis. **Die Variante entscheidet über das Layout, nicht darüber, ob Zahlen erscheinen** – Sollwert und Messwert greifen auf das jeweils andere Spaltenpaar zurück (siehe Abschnitt 5.2). |
 | `ModernResultsHeader` | ➖ | `Y` | Tabellenkopf-Stil im `Results`-Unterbericht. Standard ist der moderne Kopf ohne umlaufende Rahmen (gilt auch für leere oder unbekannte Werte); nur ein explizites `N` schaltet auf den klassischen Kopf mit Rahmen zurück. Beide Stile sind je `MeasurementDetails`-Variante an den Datenspalten ausgerichtet. |
 | `ExpUncType` | ➖ | `""` | Freitext für ergänzende Hinweise zur erweiterten Messunsicherheit (z. B. `k=2`-Anmerkungen). |
 | `environmental_conditions` | ➖ | `""` | Name der Ressource, deren Klimabereich gedruckt wird. Der Bericht joint `resource.name = $P{environmental_conditions}` und liest deren Feld „Umgebungs­bedingungen“ (`environment_resources`) – ein Text mit `\|` als Trenner, links die Temperatur, rechts die Feuchte, jeweils mit Einheit, z. B. `21,0 ... 23,0 °C\|40 ... 60 %`. **Jede Hälfte fällt für sich zurück:** bleibt sie leer, druckt der Schein den an der Kalibrierung erfassten Wert (`C2311` + ` °C` bzw. `C2312` + ` %`). So steht der Klimabereich des Labors einmal an der Ressource statt in jedem Bericht erneut. |
@@ -285,13 +309,14 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   | `4` | wie `3`, Unsicherheit aus `exp_uncert_iso_p` statt `exp_uncert_iso_e` | `fixq` / `varq` | ja |
   | `5` | Test · Bereich · Richtiger Wert / Messbedingung · Anzeige · Toleranz · Abweichung · erw. MU · % Tol. / Hinweise | `sys_actual` / `uut_ind` | ja |
   | `51` | Test · Bereich · Richtiger Wert / Messbedingung · Anzeige · Toleranz · Abweichung · % Tol. · erw. MU · Hinweise | `sys_actual` / `uut_ind` | ja |
+  | `52` | wie `5`; % Tol. ohne die Wörter Pass/Fail, erw. MU mit zwei signifikanten Stellen und SI-Vorsatz | `sys_actual` / `uut_ind` | ja |
 
   Jede Spalte jeder Variante hat eine Datenzelle, und jede Datenzelle steht
   exakt unter ihrem Spaltenkopf — in beiden Kopfstilen. `21` und `22` drucken
   bewusst das andere Spaltenpaar; welches von beiden der Sollwert ist, hängt am
   Toleranzbezug der Prozedur, deshalb gibt es die Varianten überhaupt.
 
-* **Varianten `5` und `51` (MET/CAL-Layout):** Beide folgen dem Aufbau der
+* **Varianten `5`, `51` und `52` (MET/CAL-Layout):** Alle drei folgen dem Aufbau der
   MET/CAL-Kalibrierscheine und lesen dafür Spalten, die die anderen Varianten
   nicht brauchen. Jede davon darf leer sein.
 
@@ -317,6 +342,30 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
   Abweichung wie Variante `5`. `test_desc` hat in diesen Layouts keine Spalte;
   Zwischenüberschriften kommen wie bei MET/CAL aus `remark`-Zeilen und stehen
   in Normalschrift statt fett.
+
+  Variante `52` ist Variante `5` mit zwei Unterschieden:
+
+  * **Konformität nur als Symbol.** Hinter der Toleranzausnutzung steht kein
+    `Pass` oder `Fail`. Die Aussage tragen allein die Symbole der Legende im
+    Abschnitt Konformität: kein Symbol heißt innerhalb der Spezifikation, `?`
+    innerhalb, aber wegen der Messunsicherheit nicht eindeutig, `!?` außerhalb,
+    aber nicht eindeutig, `!` außerhalb. `*` kennzeichnet weiter die Zeilen
+    nach `accred`. Die Zuordnung aus `pass_fail` ist dieselbe wie in `5`.
+  * **Erweiterte Messunsicherheit im technischen Format.** Der Zahlenwert wird
+    auf zwei signifikante Stellen gerundet (EA-4/02 M:2022, Abschnitt 6.3;
+    DAkkS-DKD-3) und mit einem SI-Vorsatz in Dreierschritten gedruckt, sodass
+    die Zahl zwischen 1 und 999 liegt: `0.31 K` wird `310 mK`, `0.000058 V`
+    wird `58 µV`, `0.003 mV` wird `3.0 µV`. `°C` wird wie bisher `K`. Gerundet
+    wird kaufmännisch; bei zwei Stellen verkleinert das den Wert nie um mehr
+    als 5 %, die Grenze, ab der EA-4/02 aufzurunden verlangt. Einen Vorsatz
+    bekommen nur Einheiten, die ihn tragen (`V`, `A`, `Ω`, `Hz`, `W`, `F`,
+    `H`, `S`, `K`, `s`, `m`, `g`, `Pa`, `bar`, `N`, `VA`); `%rH`, `%`, `dB`
+    und alles andere bleiben in ihrer Einheit und werden nur gerundet. Ist
+    `exp_uncert` keine Zahl, steht der Wert wie in Variante `5`.
+
+  Was Variante `52` nicht tut: Sie rundet Anzeige und richtigen Wert nicht auf
+  die letzte Stelle der Messunsicherheit. Die Messwerte stehen, wie sie
+  erfasst sind; die Stellenzahl gibt die Prozedur vor.
 * **Besonderheiten:**
   * Variante `1` druckt den Sollwert in der Spalte `Sollwert / True Value`, die
     ihr Tabellenkopf seit jeher ausweist; bis dahin war die Spalte in beiden

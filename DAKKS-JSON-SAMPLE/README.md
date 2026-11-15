@@ -31,7 +31,7 @@ mit `--write` neu generieren.
 |-------|-------|
 | `main_reports/dakks-json-sample.jrxml` | Hauptbericht (1:1 aus `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml`) |
 | `subreports/Standard.jrxml` | Verwendete Normale (1:1 aus V1 `Standard.jrxml`; `subDataSource("standards")`) |
-| `subreports/Results.jrxml` | Messergebnisse mit allen V1-Layoutvarianten (`MeasurementDetails` 1/2/21/22/3/4/5/51, `ModernResultsHeader`; `subDataSource("results")`) |
+| `subreports/Results.jrxml` | Messergebnisse mit allen V1-Layoutvarianten (`MeasurementDetails` 1/2/21/22/3/4/5/51/52, `ModernResultsHeader`; `subDataSource("results")`) |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.2**) |
 | `main_reports/dakks-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Adapter auf `sample-data.json` (turnkey-Vorschau) |
 | `parameters.json` | **Kompletter Katalog aller 52 V1-Parameter** (Labels, Beschreibung, Defaults, Gruppen) für die calServer-Berichtsvariablen-UI |
@@ -138,15 +138,16 @@ und die Layout-Variante entscheidet nur noch, welches sie **zuerst** liest:
 | Messbedingungen | `results[].test_desc` | – |
 | % rel. Abweichung | `results[].rel_err` | – |
 | % Tol (`1`, `2`, `22`, `3`, `4`) | `results[].tol_err` | – |
-| Test (`5`, `51`) | `results[].test_step` (Hauptnummer, vierstellig) | – |
-| Bereich (`5`, `51`) | `results[].uut_range` (+`_p`/`_u`) | – |
-| Richtiger Wert / Anzeige (`5`, `51`) | `results[].sys_actual` / `uut_ind` (+`_p`/`_u`) | `fixq` / `varq` |
-| Messbedingung, zweite Zeile (`5`, `51`) | `results[].condition2` | `@` + `mod1` (+`_p`/`_u`) |
-| Toleranz (`5`, `51`) | `results[].tol_pos` / `tol_neg` (+`_p`/`_u`) | `tol`, sonst halbe Spanne der Grenzen |
-| Abweichung (`5`, `51`) | `results[].error` (+`_p`/`_u`) | Anzeige − richtiger Wert |
-| % Tol. mit Pass/Fail, Hinweise (`5`, `51`) | `results[].tol_err`, `pass_fail`, `accred` | – |
+| Test (`5`, `51`, `52`) | `results[].test_step` (Hauptnummer, vierstellig) | – |
+| Bereich (`5`, `51`, `52`) | `results[].uut_range` (+`_p`/`_u`) | – |
+| Richtiger Wert / Anzeige (`5`, `51`, `52`) | `results[].sys_actual` / `uut_ind` (+`_p`/`_u`) | `fixq` / `varq` |
+| Messbedingung, zweite Zeile (`5`, `51`, `52`) | `results[].condition2` | `@` + `mod1` (+`_p`/`_u`) |
+| Toleranz (`5`, `51`, `52`) | `results[].tol_pos` / `tol_neg` (+`_p`/`_u`) | `tol`, sonst halbe Spanne der Grenzen |
+| Abweichung (`5`, `51`, `52`) | `results[].error` (+`_p`/`_u`) | Anzeige − richtiger Wert |
+| % Tol. mit Pass/Fail (`52` ohne), Hinweise (`5`, `51`, `52`) | `results[].tol_err`, `pass_fail`, `accred` | – |
+| erw. MU im technischen Format (`52`) | `results[].exp_uncert` (+`_p`/`_u`), zwei signifikante Stellen, SI-Vorsatz | Darstellung wie `5`, wenn der Wert keine Zahl ist |
 
-Die Varianten `5` und `51` bilden das MET/CAL-Layout nach (Test, Bereich,
+Die Varianten `5`, `51` und `52` bilden das MET/CAL-Layout nach (Test, Bereich,
 Toleranz, Abweichung). Die Schlüssel `test_step`, `uut_range`, `mod1`,
 `condition2`, `error`, `tol`, `tol_pos` und `tol_neg` liefert der Contract ab
 **v1.11**; gegen ein älteres Backend bleiben Test und Bereich leer, Toleranz
