@@ -386,23 +386,36 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     (`i.T.`, `?`, `!?`, `!`). Sie erwartet MET/TEAMs Schreibweise (`Pass`,
     `Fail`, `Pass Indeterminate`, `Fail Indeterminate`); alles andere — auch
     ein bereits übersetztes Symbol — druckt eine leere Zelle.
-  * **Kennzeichnung (`accred`):** Das `*` hängt am MET/CAL-Flag `ACCRED`
-    (Results-Tabelle, Spalte `accred`). `ACCRED` ist in der Prozedur
-    standardmäßig `No` (`0`) und wird vom Prozedurschreiber gezielt pro Test
-    (`TSET`) oder für die ganze Prozedur (`VSET`) auf `Yes` (`1`) gesetzt;
-    die Werte `2`…`32767` sind weitere Kennzeichnungsarten. Das Zeichen folgt
-    dem Flag:
+  * **Kennzeichnung (`accred_mark`, `accred`):** Das `*` kennzeichnet
+    Messergebnisse außerhalb des Akkreditierungsumfangs; was es bedeutet, sagt
+    die Legende (`Conformity_description_3`). Die Vorlage entscheidet in zwei
+    Stufen:
 
-    | `accred` | Bedeutung | Druck |
-    | --- | --- | --- |
-    | `1`, `y`, `yes`, `ja`, `true`, `2`…`32767` | Flag gesetzt, Zeile gekennzeichnet | `*` |
-    | `0`, `n`, `no`, `nein`, `false` | Flag nicht gesetzt (MET/CAL-Standard) | kein Zeichen |
-    | leer / nicht erfasst | keine Aussage erfasst | kein Zeichen |
+    1. **Liefert der Datensatz das Druckfeld `accred_mark`, gilt nur dieses
+       Feld.** `*` kennzeichnet die Zeile, jeder andere Wert, auch der leere,
+       druckt kein Zeichen. Wer den Datensatz baut, kennt die Herkunft der
+       Zeile und damit die Lesart von `accred`: calServer V2 schreibt
+       `accred = 1` für „im Umfang“, MET/CAL setzt das Flag für die
+       gekennzeichnete Zeile. calServer liefert das Feld ab dem Vertrag
+       `calibration-certificate` v1.13 (JSON-Paket `DAKKS-JSON-SAMPLE`).
+    2. **Fehlt das Feld, gilt wie bisher das MET/CAL-Flag `ACCRED`**
+       (Results-Tabelle, Spalte `accred`). Das ist der Weg dieses SQL-Berichts
+       (die Abfrage liefert `accred_mark` als `NULL`) und jedes älteren
+       Datensatzes. `ACCRED` ist in der Prozedur standardmäßig `No` (`0`) und
+       wird vom Prozedurschreiber gezielt pro Test (`TSET`) oder für die
+       ganze Prozedur (`VSET`) auf `Yes` (`1`) gesetzt; die Werte
+       `2`…`32767` sind weitere Kennzeichnungsarten. Das Zeichen folgt dem
+       Flag:
 
-    Ein Schein, dessen Prozedur `ACCRED` nie setzt, trägt also kein Zeichen;
-    die Fußnote erscheint nur in den Zeilen, die der Prozedurschreiber
-    ausdrücklich gekennzeichnet hat. Was das Zeichen bedeutet, sagt die
-    Legende (`Conformity_description_3`).
+       | `accred` | Bedeutung | Druck |
+       | --- | --- | --- |
+       | `1`, `y`, `yes`, `ja`, `true`, `2`…`32767` | Flag gesetzt, Zeile gekennzeichnet | `*` |
+       | `0`, `n`, `no`, `nein`, `false` | Flag nicht gesetzt (MET/CAL-Standard) | kein Zeichen |
+       | leer / nicht erfasst | keine Aussage erfasst | kein Zeichen |
+
+       Ein Schein, dessen Prozedur `ACCRED` nie setzt, trägt also kein
+       Zeichen; die Fußnote erscheint nur in den Zeilen, die der
+       Prozedurschreiber ausdrücklich gekennzeichnet hat.
   * Das Zeichen steht in den Varianten `1`, `2`, `22`, `3` und `4` hinter der
     Konformitätsaussage. Variante `21` hat keine Konformitätsspalte und hängt
     es deshalb an die Messbedingung — die Kennzeichnungspflicht gilt in jeder

@@ -120,6 +120,9 @@
 	<field name="accred" class="java.lang.String">
 		<fieldDescription><![CDATA[accred]]></fieldDescription>
 	</field>
+	<field name="accred_mark" class="java.lang.String">
+		<fieldDescription><![CDATA[accred_mark]]></fieldDescription>
+	</field>
 	<field name="test_step" class="java.lang.String">
 		<fieldDescription><![CDATA[test_step]]></fieldDescription>
 	</field>
@@ -614,30 +617,40 @@
         )]]></variableExpression>
 	</variable>
 	<!--
-	    Das "*" haengt am MET/CAL-Flag ACCRED (Results-Tabelle, Spalte
-	    `accred`). ACCRED ist in der Prozedur standardmaessig "No" (0) und wird
-	    vom Prozedurschreiber gezielt pro Test (TSET) oder fuer die ganze
-	    Prozedur (VSET) auf "Yes" (1) gesetzt; die Werte 2..32767 sind weitere
-	    Kennzeichnungsarten. Das Zeichen folgt dem Flag:
+	    Das "*" kennzeichnet Messergebnisse ausserhalb des
+	    Akkreditierungsumfangs (Legende: Parameter Conformity_description_3).
+
+	    1. Liefert der Datensatz das Druckfeld `accred_mark`, druckt die Vorlage
+	       genau dieses Feld: "*" kennzeichnet, jeder andere Wert (auch leer)
+	       druckt kein Zeichen. Wer den Datensatz baut, kennt die Herkunft der
+	       Zeile und damit die Lesart von `accred`; calServer liefert das Feld
+	       ab Vertrag calibration-certificate v1.13.
+
+	    2. Fehlt das Feld (SQL-Bericht, aelterer Datensatz), gilt wie bisher das
+	       MET/CAL-Flag ACCRED (Results-Tabelle, Spalte `accred`). ACCRED ist in
+	       der Prozedur standardmaessig "No" (0) und wird vom Prozedurschreiber
+	       gezielt pro Test (TSET) oder fuer die ganze Prozedur (VSET) auf "Yes"
+	       (1) gesetzt; die Werte 2..32767 sind weitere Kennzeichnungsarten:
 
 	      1 / y / yes / ja / true, 2..32767 -> Flag gesetzt       -> "*"
 	      0 / n / no / nein / false        -> Flag nicht gesetzt -> kein Zeichen
 	      leer / nicht erfasst             -> keine Aussage      -> kein Zeichen
 
-	    Ein Schein, dessen Prozedur ACCRED nie setzt (MET/CAL schreibt dann 0),
-	    traegt also kein Zeichen; die Fussnote erscheint nur in den Zeilen, die
-	    der Prozedurschreiber ausdruecklich gekennzeichnet hat. Was das Zeichen
-	    bedeutet, sagt die Legende des Hauptberichts
-	    (Parameter Conformity_description_3).
+	    Die Abfrage dieses SQL-Berichts liefert `accred_mark` als NULL, damit
+	    hier immer der zweite Weg gilt.
 	-->
 	<variable name="AccredMark" class="java.lang.String">
-		<variableExpression><![CDATA[$F{accred} == null
-      ? ""
+		<variableExpression><![CDATA[$F{accred_mark} != null
+      ? ("*".equals($F{accred_mark}.trim()) ? "*" : "")
       : (
-          $F{accred}.toString().trim().toLowerCase()
-            .matches("[1-9][0-9]*|y|yes|ja|true|t")
-          ? "*"
-          : ""
+          $F{accred} == null
+          ? ""
+          : (
+              $F{accred}.toString().trim().toLowerCase()
+                .matches("[1-9][0-9]*|y|yes|ja|true|t")
+              ? "*"
+              : ""
+            )
         )]]></variableExpression>
 	</variable>
 	<!--
