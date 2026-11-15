@@ -406,7 +406,7 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
        Zeile und damit die Lesart von `accred`: calServer V2 schreibt
        `accred = 1` für „im Umfang“, MET/CAL setzt das Flag für die
        gekennzeichnete Zeile. calServer liefert das Feld ab dem Vertrag
-       `calibration-certificate` v1.13 (JSON-Paket `DAKKS-JSON-SAMPLE`).
+       `calibration-certificate` v1.14 (JSON-Paket `DAKKS-JSON-SAMPLE`).
     2. **Fehlt das Feld, gilt wie bisher das MET/CAL-Flag `ACCRED`**
        (Results-Tabelle, Spalte `accred`). Das ist der Weg dieses SQL-Berichts
        (die Abfrage liefert `accred_mark` als `NULL`) und jedes älteren
