@@ -163,7 +163,7 @@
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ShowCalibrationMark" class="java.lang.String">
-		<parameterDescription><![CDATA[Blendet den Kalibrierzeichen-Kasten (Markennummern, DAkkS-Kalibrierzeichen, Kalibriermonat) samt Beschriftung vollständig ein oder aus. Y = anzeigen (Standard). N = auf allen Seiten ausblenden, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. N hat Vorrang vor ShowMarkOnFollowingPages.]]></parameterDescription>
+		<parameterDescription><![CDATA[Steuert den Kalibrierzeichen-Kasten (Markennummern, Kalibriermonat) samt Beschriftung. Y = Kasten, Beschriftung und Werte drucken (Standard). V = nur die Werte drucken (laufende Nummer, D-K-Nummer, Kalibriermonat), ohne Rahmen und Beschriftung: für Briefpapier, das das komplette Kalibrierzeichen mit leerem Kasten trägt. N = auf allen Seiten ausblenden, auch auf dem Deckblatt: für Briefpapier, das auch die Nummern trägt, oder Scheine ohne Kalibrierzeichen. N hat Vorrang vor ShowMarkOnFollowingPages; bei V entscheidet ShowMarkOnFollowingPages weiter über die Folgeseiten.]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="sign_names" class="java.lang.String">
@@ -1544,32 +1544,32 @@
 			</textField>
 			<line>
 				<reportElement x="495" y="259" width="57" height="1" uuid="3ed42e77-2aa2-4be2-be0d-0ce223e06b89">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="495" y="332" width="57" height="1" uuid="460a43c6-08ec-4e5d-be32-fde200c23007">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="495" y="259" width="1" height="74" uuid="bde378ae-42b8-4347-917a-7e261033d1a3">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="551" y="259" width="1" height="74" uuid="34bf7c98-8c37-43f5-bf74-030cc47913b4">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="495" y="279" width="57" height="1" uuid="75751c09-0866-491d-a5dd-4910f0e89069">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="495" y="312" width="57" height="1" uuid="81d49edb-e44c-4c2d-92ce-113066cefb21">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<textField>
@@ -1601,7 +1601,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="395" y="296" width="90" height="14" uuid="f06142e5-e22b-449b-bf4d-9078c56651e7">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="10" isBold="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
@@ -1610,7 +1610,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="395" y="310" width="90" height="12" uuid="0dfa57a6-2083-497e-b47e-05f45bf1fd0c">
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font fontName="DejaVu Sans" size="8" isItalic="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
@@ -1672,14 +1672,14 @@
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="493" y="80" width="57" height="1" uuid="8dc20a19-6755-4231-9b66-660b0c8cd881">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
@@ -1688,14 +1688,14 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
 				<reportElement x="549" y="7" width="1" height="74" uuid="cf1fba74-b971-480b-865d-faba195c6210">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
@@ -1703,7 +1703,7 @@
 				<reportElement x="493" y="27" width="57" height="1" uuid="5242d1f8-07c4-4417-90d8-71017fb8f2de">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>
@@ -1712,7 +1712,7 @@
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
+					<printWhenExpression><![CDATA[!java.util.Arrays.asList("n", "no", "false", "0", "v", "values").contains(($P{ShowCalibrationMark} == null ? "y" : $P{ShowCalibrationMark}.toString()).trim().toLowerCase())
     && ($V{PAGE_NUMBER} == 1 || !java.util.Arrays.asList("n", "no", "false", "0").contains(($P{ShowMarkOnFollowingPages} == null ? "y" : $P{ShowMarkOnFollowingPages}.toString()).trim().toLowerCase()))]]></printWhenExpression>
 				</reportElement>
 			</line>

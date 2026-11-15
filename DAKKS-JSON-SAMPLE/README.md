@@ -50,9 +50,12 @@ Automatisch versorgt werden `P_CTAG`, `Sprache` (aus der Datensatz-Locale)
 und `QR_Code_Value` (calServer-Kurz-URL `/inventory/qrcode/{id}`,
 per gleichnamiger Variable übersteuerbar).
 
-`ShowCalibrationMark` = `N` blendet den Kalibrierzeichen-Kasten samt
-Beschriftung auf allen Seiten aus, auch auf dem Deckblatt, etwa für Briefpapier,
-das das Kalibrierzeichen bereits trägt. `MeasurementDetails` ist im Manifest
+`ShowCalibrationMark` steuert den Kalibrierzeichen-Kasten: `Y` druckt Kasten,
+Beschriftung und Werte, `V` nur die drei Werte (laufende Nummer, D-K-Nummer,
+Kalibriermonat) für Briefpapier, das das komplette Kalibrierzeichen mit leerem
+Kasten trägt, `N` blendet alles auf allen Seiten aus, auch auf dem Deckblatt.
+Die Flächen stehen im README von `DAKKS-SAMPLE`, Abschnitt 4.3.
+`MeasurementDetails` ist im Manifest
 eine Auswahlliste; jede Variante bringt dort eine Kurzbeschreibung und eine
 Beispieltabelle (`options[].description`, `options[].preview`) mit, die calServer
 an der Variablenauswahl als Vorschau zeigt.

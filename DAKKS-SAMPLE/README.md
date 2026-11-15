@@ -122,7 +122,7 @@ für optionale Parameter.
 | Parameter | Pflicht | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `ShowMarkOnFollowingPages` | ➖ | `Y` | Blendet den Kennzeichnungs-/Akkreditierungsblock (`MarkNumber1`, `MarkNumber2`, Kalibrierdatum oben rechts) auf Folgeseiten ein/aus. `Y` = auf allen Seiten anzeigen (Default). `N` = nur auf Seite 1 anzeigen, ab Seite 2 ausblenden. |
-| `ShowCalibrationMark` | ➖ | `Y` | Blendet den Kalibrierzeichen-Kasten (`MarkNumber1`, `MarkNumber2`, Kalibriermonat) samt Beschriftung „Kalibrierzeichen / Calibration mark“ vollständig ein oder aus. `Y` = anzeigen (Default). `N` = auf allen Seiten ausblenden, auch auf dem Deckblatt. Gedacht für Briefpapier, das das Kalibrierzeichen bereits trägt. `N` hat Vorrang vor `ShowMarkOnFollowingPages`. |
+| `ShowCalibrationMark` | ➖ | `Y` | Steuert den Kalibrierzeichen-Kasten (`MarkNumber1`, `MarkNumber2`, Kalibriermonat) samt Beschriftung „Kalibrierzeichen / Calibration mark“. `Y` = Kasten, Beschriftung und Werte drucken (Default). `V` = nur die drei Werte drucken, ohne Rahmen und Beschriftung: für Briefpapier, das das komplette Kalibrierzeichen (DAkkS-Symbol, Kasten, Beschriftung) mit leerem Kasten trägt. `N` = auf allen Seiten ausblenden, auch auf dem Deckblatt: für Scheine ohne Kalibrierzeichen. `N` hat Vorrang vor `ShowMarkOnFollowingPages`; bei `V` entscheidet `ShowMarkOnFollowingPages` weiter über die Folgeseiten. |
 | `P_Image_Path` | ➖ | `""` | Pfad zu Logos/Siegeln, die im Kopf- und Fußbereich (z. B. DAkkS-Logo) eingeblendet werden. Wird auch an den Subreport `Results` durchgereicht. |
 | `QR_Code_Value` | ➖ | `""` | Inhalt für das QR-/Barcode-Element (z. B. URL zum digitalen Zertifikat). Bleibt der Wert leer, wird kein QR-Code gerendert. |
 | `MarkNumber1` | ➖ | `123456` | Erste Markennummer im Akkreditierungs­block. Es wird nur die erste durch Leerzeichen getrennte Ziffernfolge dargestellt, sodass z. B. `123456 (intern)` zu `123456` reduziert wird. |
@@ -147,9 +147,18 @@ Drei Dinge, die dabei regelmäßig schiefgehen:
 * Ein Logo oben links auf den Folgeseiten liegt unter der Seitenzahl, solange
   `PageNumberPosition` auf `HeaderLeft` steht. `FooterRight` räumt den Kopf.
 * Ein Siegel oder Kopffeld für das Kalibrierzeichen gehört bündig über den
-  Kasten (Unterkante y 271), dann wirkt beides wie ein Element. Trägt das
-  Briefpapier das vollständige Kalibrierzeichen samt Nummern, `ShowCalibrationMark`
-  auf `N` setzen.
+  Kasten (Unterkante y 271), dann wirkt beides wie ein Element.
+* Trägt das Briefpapier das komplette Kalibrierzeichen, also DAkkS-Symbol,
+  Kasten und Beschriftung, `ShowCalibrationMark` auf `V` setzen: Der Bericht
+  druckt dann nur noch die drei Werte, und zwar an dieselbe Stelle wie mit
+  `Y`. Der Kasten im Briefpapier muss deshalb genau auf den Flächen der
+  Tabelle oben liegen, mit den Trennlinien auf y 291 und y 324 (Deckblatt)
+  bzw. y 39 und y 72 (Folgeseiten): oben die laufende Nummer, in der Mitte
+  die D-K-Nummer, unten der Kalibriermonat. Mit `ShowMarkOnFollowingPages` =
+  `N` druckt der Bericht die Werte nur auf dem Deckblatt; dann darf die
+  Folgeseite des Briefpapiers keinen leeren Kasten tragen.
+* Trägt das Briefpapier auch die Nummern oder soll der Schein gar kein
+  Kalibrierzeichen zeigen, `ShowCalibrationMark` auf `N` setzen.
 * Das Briefpapier liegt unter dem Bericht. Eine Fläche im Briefpapier verdeckt
   nie Berichtstext, ein Logo unter einer Tabelle scheint aber durch.
 
