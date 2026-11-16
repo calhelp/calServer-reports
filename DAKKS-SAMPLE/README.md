@@ -2,7 +2,7 @@
 
 > **Artefakt:** `dakks-sample`  
 > **Hauptbericht:** `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml`  
-> **Unterberichte:** `DAKKS-SAMPLE/subreports/Standard.jrxml`, `DAKKS-SAMPLE/subreports/Results.jrxml`
+> **Unterberichte:** `DAKKS-SAMPLE/subreports/Standard.jrxml`, `DAKKS-SAMPLE/subreports/Results.jrxml`, `DAKKS-SAMPLE/subreports/TextBlocks.jrxml`
 
 ---
 
@@ -222,6 +222,21 @@ in `_3` Zeilen hat.
 | `Calibration_procedure_1` | ➖ | sprachabhängig | Fallback für das angewendete Kalibrier­verfahren. Der bessere Ort ist das Feld „Beschreibung“ der Prozedur. |
 | `Calibration_procedure_2` | ➖ | sprachabhängig | Fallback für den Geltungs­bereich, wenn weder Prozedur-Scope noch Kalibrier­gegenstand noch Normale gefüllt sind. Der bessere Ort ist das Feld „Geltungsbereich“ der Prozedur. |
 | `Calibration_document` | ➖ | sprachabhängig | Fallback für die Verfahrens­anweisung bzw. das QMS-Dokument. Der bessere Ort ist das Feld „Kalibriermethode“ der Prozedur. |
+
+**Textbausteine mit Bildern (calServer V2, Contract v1.15).** calServer V2
+pflegt die Texte der Abschnitte Kalibrierverfahren, Messunsicherheiten und
+Weitere Hinweise als Textbausteine an der Prüfprozedur. Ein reiner Text kommt
+wie bisher als HTML im Parameter des Abschnitts an. Enthält ein Baustein ein
+Bild (Formel, Diagramm, Foto), setzt calServer zusätzlich einen der drei
+Systemparameter unten. Dann druckt an Stelle des Textfelds der Subreport
+`TextBlocks.jrxml` die Folge aus Texten und Bildern (siehe 5.3). Ohne Bild
+bleibt der Parameter leer, und der Abschnitt druckt exakt wie zuvor.
+
+| Parameter | Pflicht | Standardwert | Beschreibung |
+| --- | --- | --- | --- |
+| `Text_blocks_method` | ➖ | leer | Kalibrierverfahren als JSON-Liste aus Text- und Bildeinträgen; gesetzt nur, wenn ein Baustein des Abschnitts ein Bild trägt. |
+| `Text_blocks_uncertainty` | ➖ | leer | Dasselbe für die Messunsicherheiten. |
+| `Text_blocks_notes` | ➖ | leer | Dasselbe für die weiteren Hinweise. |
 
 ### 4.6 Abschnittsumschalter (`ShowGroup1*`) {#params-showgroup}
 
@@ -445,7 +460,26 @@ sowie optional `P_Image_Path`. `Cert_field` wird zusätzlich an
     der jeweiligen Variante ausgerichtet.
 * **Frame-Auswahl über `MeasurementDetails`** – siehe Parameter­tabelle, Abschnitt 4.4.
 
-### 5.3 Integration & Pflege
+### 5.3 `subreports/TextBlocks.jrxml`
+
+Druckt einen Abschnitt aus Text und Bildern in der gepflegten Reihenfolge. Er
+hat keine Datenbankverbindung: Datenquelle ist eine `JsonDataSource` über den
+Parameter des Abschnitts (`Text_blocks_method`, `_uncertainty`, `_notes`),
+dessen Wurzel eine Liste ist. Jeder Eintrag ist entweder
+
+* `{"kind": "text", "html": "…"}`: ein Textstück, gedruckt mit
+  `markup="html"` wie das Textfeld, das der Subreport ersetzt, oder
+* `{"kind": "image", "image": "<Base64>", "width": 25|50|75|100, "caption": "…"}`:
+  ein PNG-, JPEG- oder GIF-Bild in Prozent der Textbreite (535 pt), darunter
+  die Bildunterschrift in 8 pt. Auf einem deutschen Schein trägt sie Deutsch
+  und darunter Englisch kursiv.
+
+Jasper kann die Breite eines Elements nicht aus den Daten nehmen. Je Breite
+gibt es deshalb ein eigenes Band; das Bild skaliert darin mit `RealSize` und
+behält sein Seitenverhältnis. Zwischen zwei Einträgen stehen 8 pt Abstand.
+Übergeben werden nur `Sprache` und `REPORT_LOCALE`.
+
+### 5.4 Integration & Pflege
 
 * Subreports werden im Hauptreport als kompiliertes `.jasper` referenziert
   (`Standard.jasper` bzw. `Results.jasper`). Stelle sicher, dass die

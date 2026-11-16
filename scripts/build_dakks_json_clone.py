@@ -20,6 +20,9 @@ Allowed transformations (nothing else changes, byte for byte):
      JsonDataSource cannot instantiate the abstract Number the way the JDBC
      source could; no template expression reads $F{row_num}, so the change
      is invisible to the layout.
+  6. Subreports without SQL (VERBATIM) are copied unchanged: they read a
+     JSON parameter in both bundles (TextBlocks: text and images of the
+     certificate text blocks).
 
 Usage:
   python3 scripts/build_dakks_json_clone.py --write   # (re)generate the clone
@@ -50,6 +53,15 @@ FILES = [
         "DAKKS-SAMPLE/subreports/Results.jrxml",
         "DAKKS-JSON-SAMPLE/subreports/Results.jrxml",
         "results",
+    ),
+]
+
+# Subreports that carry no SQL in the V1 original either and are therefore
+# identical in both bundles.
+VERBATIM = [
+    (
+        "DAKKS-SAMPLE/subreports/TextBlocks.jrxml",
+        "DAKKS-JSON-SAMPLE/subreports/TextBlocks.jrxml",
     ),
 ]
 
@@ -193,6 +205,8 @@ def build() -> dict[str, str]:
             text = swap_subreport_sources(text, source)
             text = retarget_main(text)
         generated[target] = text
+    for source, target in VERBATIM:
+        generated[target] = (ROOT / source).read_text(encoding="utf-8")
     return generated
 
 

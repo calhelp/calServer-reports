@@ -116,6 +116,15 @@
 ? "Kalibrierung gemäß gültiger interner Verfahrensanweisung."
 : "Calibration according to the applicable internal procedure."]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Text_blocks_method" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Von calServer gesetzt (V2): Text und Bilder der Textbausteine im Abschnitt Kalibrierverfahren als JSON-Liste, nur wenn der Abschnitt ein Bild enthaelt. Gesetzt ersetzt der Unterbericht TextBlocks den Text des Abschnitts.]]></parameterDescription>
+	</parameter>
+	<parameter name="Text_blocks_uncertainty" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Von calServer gesetzt (V2): Text und Bilder der Textbausteine im Abschnitt Messunsicherheiten als JSON-Liste, nur wenn der Abschnitt ein Bild enthaelt. Gesetzt ersetzt der Unterbericht TextBlocks den Text des Abschnitts.]]></parameterDescription>
+	</parameter>
+	<parameter name="Text_blocks_notes" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Von calServer gesetzt (V2): Text und Bilder der Textbausteine im Abschnitt Weitere Hinweise als JSON-Liste, nur wenn der Abschnitt ein Bild enthaelt. Gesetzt ersetzt der Unterbericht TextBlocks den Text des Abschnitts.]]></parameterDescription>
+	</parameter>
 	<parameter name="Calibration_procedure_2" class="java.lang.String">
 		<parameterDescription><![CDATA[Optionaler Freitext für computergestützte Kalibrierverfahren.]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{Sprache}.equals("Deutsch")
@@ -701,12 +710,28 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA["CALIBRATION PROCEDURE"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="27" width="535" height="42" uuid="6dacd792-d5f8-4fce-b6a2-1ff6304ffaf7">
+						<printWhenExpression><![CDATA[($P{Text_blocks_method} == null || $P{Text_blocks_method}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{procedure_calibration_method_var}]]></textFieldExpression>
 				</textField>
+				<subreport overflowType="Stretch">
+					<reportElement positionType="Float" x="16" y="27" width="535" height="10" uuid="b060964d-a642-4a4c-91c4-cd4288a8b923">
+						<property name="com.calserver.elementLabel" value="Textbausteine mit Bildern"/>
+						<printWhenExpression><![CDATA[!($P{Text_blocks_method} == null || $P{Text_blocks_method}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="Sprache">
+						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_LOCALE">
+						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JsonDataSource(new java.io.ByteArrayInputStream($P{Text_blocks_method}.getBytes(java.nio.charset.StandardCharsets.UTF_8)))]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/TextBlocks.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 			<band height="62">
 				<property name="com.calserver.bandLabel" value="Verfahrensanweisung"/>
@@ -1032,7 +1057,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA["UNCERTAINTY OF MEASUREMENTS"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68"/>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="30" width="535" height="30" uuid="a731bd77-3b4c-4041-b146-10c23ddaba68">
+						<printWhenExpression><![CDATA[($P{Text_blocks_uncertainty} == null || $P{Text_blocks_uncertainty}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
@@ -1047,6 +1074,20 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
     : $P{Uncertainty_description}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
+				<subreport overflowType="Stretch">
+					<reportElement positionType="Float" x="16" y="30" width="535" height="10" uuid="b086799f-efcd-4fd4-924f-9fdf96ca51b5">
+						<property name="com.calserver.elementLabel" value="Textbausteine mit Bildern"/>
+						<printWhenExpression><![CDATA[!($P{Text_blocks_uncertainty} == null || $P{Text_blocks_uncertainty}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="Sprache">
+						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_LOCALE">
+						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JsonDataSource(new java.io.ByteArrayInputStream($P{Text_blocks_uncertainty}.getBytes(java.nio.charset.StandardCharsets.UTF_8)))]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/TextBlocks.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 			<band height="186" splitType="Stretch">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -1146,7 +1187,9 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 					<textFieldExpression><![CDATA["ADDITIONAL INFORMATION"]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="25" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b"/>
+					<reportElement stretchType="ContainerHeight" x="16" y="25" width="535" height="25" uuid="4aaae715-9ab2-4617-8f75-78ef316b9b1b">
+						<printWhenExpression><![CDATA[($P{Text_blocks_notes} == null || $P{Text_blocks_notes}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
 					<textElement markup="html">
 						<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
@@ -1159,6 +1202,20 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
     : $P{Additional_information}
 ).replace("/n", "\n").replace("\\n", "\n")]]></textFieldExpression>
 				</textField>
+				<subreport overflowType="Stretch">
+					<reportElement positionType="Float" x="16" y="25" width="535" height="10" uuid="4fd111c5-6cc5-4514-9b6a-87d48de7314b">
+						<property name="com.calserver.elementLabel" value="Textbausteine mit Bildern"/>
+						<printWhenExpression><![CDATA[!($P{Text_blocks_notes} == null || $P{Text_blocks_notes}.trim().isEmpty())]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="Sprache">
+						<subreportParameterExpression><![CDATA[$P{Sprache}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_LOCALE">
+						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JsonDataSource(new java.io.ByteArrayInputStream($P{Text_blocks_notes}.getBytes(java.nio.charset.StandardCharsets.UTF_8)))]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{Reportpath} + "/subreports/TextBlocks.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</groupHeader>
 	</group>

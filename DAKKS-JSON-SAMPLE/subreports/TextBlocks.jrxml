@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 6.20.6  -->
+<!--
+  TextBlocks: Text und Bilder der Textbausteine eines Abschnitts des
+  Kalibrierscheins (calServer, ADR 2026-11-15 "Textbausteine fuer den
+  Kalibrierschein sind ein Stammdatum", Etappe 2).
+
+  Datenquelle ist die JSON-Liste aus dem Parameter Text_blocks_<abschnitt>,
+  die das Hauptformular als JsonDataSource uebergibt. Jeder Eintrag ist
+  {"kind": "text", "html": ...} oder
+  {"kind": "image", "image": <base64>, "width": 25|50|75|100, "caption": ...}.
+  Texte und Bildunterschrift kommen schon in der Sprache des Scheins.
+
+  Breite eines Bilds: JasperReports kann die Breite eines Elements nicht aus
+  den Daten setzen. Je Breite gibt es deshalb ein Band mit einem Bild dieser
+  Breite (100 % = 535 pt Textbreite). scaleImage RealSize setzt das Bild
+  verhaeltnistreu auf diese Breite und laesst das Band in der Hoehe wachsen;
+  ein Bild mit weniger Pixeln als Punkten Breite druckt kleiner, ein Pixel je
+  Punkt. Die Datei landet unveraendert im PDF, in voller Aufloesung.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TextBlocks" pageWidth="535" pageHeight="818" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenNoDataType="NoPages" uuid="70f39606-a53f-4338-9c50-da96aa0f1527">
+	<parameter name="Sprache" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Deutsch"]]></defaultValueExpression>
+	</parameter>
+	<field name="kind" class="java.lang.String">
+		<fieldDescription><![CDATA[kind]]></fieldDescription>
+	</field>
+	<field name="html" class="java.lang.String">
+		<fieldDescription><![CDATA[html]]></fieldDescription>
+	</field>
+	<field name="image" class="java.lang.String">
+		<fieldDescription><![CDATA[image]]></fieldDescription>
+	</field>
+	<field name="width" class="java.lang.Integer">
+		<fieldDescription><![CDATA[width]]></fieldDescription>
+	</field>
+	<field name="caption" class="java.lang.String">
+		<fieldDescription><![CDATA[caption]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="8" splitType="Prevent">
+			<property name="com.calserver.bandLabel" value="Abstand"/>
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() > 1]]></printWhenExpression>
+		</band>
+		<band height="14" splitType="Stretch">
+			<property name="com.calserver.bandLabel" value="Text"/>
+			<printWhenExpression><![CDATA["text".equals($F{kind}) && $F{html} != null && !$F{html}.trim().isEmpty()]]></printWhenExpression>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="0" y="0" width="535" height="14" uuid="6f4db2d2-dd67-42d3-b5e7-0dc3bc548a24"/>
+				<textElement markup="html">
+					<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{html}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="2" splitType="Prevent">
+			<printWhenExpression><![CDATA["image".equals($F{kind}) && $F{width} != null && $F{width}.intValue() == 100]]></printWhenExpression>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Top" isUsingCache="false" onErrorType="Blank">
+				<reportElement key="textbaustein_bild" positionType="Float" x="0" y="0" width="535" height="2" uuid="0b702833-d33e-45d9-a980-f7742781a29b"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{image}))]]></imageExpression>
+				<hyperlinkTooltipExpression><![CDATA[$F{caption} == null || $F{caption}.trim().isEmpty() ? ("Deutsch".equals($P{Sprache}) ? "Abbildung" : "Figure") : $F{caption}.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim()]]></hyperlinkTooltipExpression>
+			</image>
+		</band>
+		<band height="2" splitType="Prevent">
+			<printWhenExpression><![CDATA["image".equals($F{kind}) && $F{width} != null && $F{width}.intValue() == 75]]></printWhenExpression>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Top" isUsingCache="false" onErrorType="Blank">
+				<reportElement key="textbaustein_bild" positionType="Float" x="0" y="0" width="401" height="2" uuid="e64e25ba-db31-4ebe-8c0f-208c478193cd"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{image}))]]></imageExpression>
+				<hyperlinkTooltipExpression><![CDATA[$F{caption} == null || $F{caption}.trim().isEmpty() ? ("Deutsch".equals($P{Sprache}) ? "Abbildung" : "Figure") : $F{caption}.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim()]]></hyperlinkTooltipExpression>
+			</image>
+		</band>
+		<band height="2" splitType="Prevent">
+			<printWhenExpression><![CDATA["image".equals($F{kind}) && $F{width} != null && $F{width}.intValue() == 50]]></printWhenExpression>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Top" isUsingCache="false" onErrorType="Blank">
+				<reportElement key="textbaustein_bild" positionType="Float" x="0" y="0" width="268" height="2" uuid="5ca16a6f-9623-4908-9894-05965ac71b67"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{image}))]]></imageExpression>
+				<hyperlinkTooltipExpression><![CDATA[$F{caption} == null || $F{caption}.trim().isEmpty() ? ("Deutsch".equals($P{Sprache}) ? "Abbildung" : "Figure") : $F{caption}.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim()]]></hyperlinkTooltipExpression>
+			</image>
+		</band>
+		<band height="2" splitType="Prevent">
+			<printWhenExpression><![CDATA["image".equals($F{kind}) && $F{width} != null && $F{width}.intValue() == 25]]></printWhenExpression>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Top" isUsingCache="false" onErrorType="Blank">
+				<reportElement key="textbaustein_bild" positionType="Float" x="0" y="0" width="134" height="2" uuid="146698ec-fefe-4b31-97cb-5fe4100ba9df"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{image}))]]></imageExpression>
+				<hyperlinkTooltipExpression><![CDATA[$F{caption} == null || $F{caption}.trim().isEmpty() ? ("Deutsch".equals($P{Sprache}) ? "Abbildung" : "Figure") : $F{caption}.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim()]]></hyperlinkTooltipExpression>
+			</image>
+		</band>
+		<band height="13" splitType="Prevent">
+			<property name="com.calserver.bandLabel" value="Bildunterschrift"/>
+			<printWhenExpression><![CDATA["image".equals($F{kind}) && $F{caption} != null && !$F{caption}.trim().isEmpty()]]></printWhenExpression>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="0" y="2" width="535" height="11" uuid="b187986d-b442-40c4-81ca-185e96da36f2"/>
+				<textElement markup="html">
+					<font fontName="DejaVu Sans" size="8" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caption}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
