@@ -105,6 +105,48 @@
       "default": "Deutsch"
     },
     {
+      "name": "Text_blocks_method",
+      "label": {
+        "de": "Textbausteine mit Bild: Kalibrierverfahren",
+        "en": "Text blocks with images: calibration procedure"
+      },
+      "description": {
+        "de": "Wird von calServer automatisch gesetzt, wenn ein Textbaustein des Abschnitts „Kalibrierverfahren“ ein Bild enthält: eine JSON-Liste aus Text- und Bildeinträgen, die der Subreport TextBlocks in dieser Reihenfolge druckt. Ohne Bild bleibt der Parameter leer, und der Abschnitt druckt wie bisher.",
+        "en": "Set automatically by calServer when a text block of the calibration procedure section contains an image: a JSON list of text and image entries that the TextBlocks subreport prints in this order. Without an image the parameter stays empty and the section prints as before."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 70
+    },
+    {
+      "name": "Text_blocks_uncertainty",
+      "label": {
+        "de": "Textbausteine mit Bild: Messunsicherheiten",
+        "en": "Text blocks with images: measurement uncertainties"
+      },
+      "description": {
+        "de": "Wird von calServer automatisch gesetzt, wenn ein Textbaustein des Abschnitts „Messunsicherheiten“ ein Bild enthält: eine JSON-Liste aus Text- und Bildeinträgen, die der Subreport TextBlocks in dieser Reihenfolge druckt. Ohne Bild bleibt der Parameter leer, und der Abschnitt druckt wie bisher.",
+        "en": "Set automatically by calServer when a text block of the measurement uncertainties section contains an image: a JSON list of text and image entries that the TextBlocks subreport prints in this order. Without an image the parameter stays empty and the section prints as before."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 80
+    },
+    {
+      "name": "Text_blocks_notes",
+      "label": {
+        "de": "Textbausteine mit Bild: Weitere Hinweise",
+        "en": "Text blocks with images: additional information"
+      },
+      "description": {
+        "de": "Wird von calServer automatisch gesetzt, wenn ein Textbaustein des Abschnitts „Weitere Hinweise“ ein Bild enthält: eine JSON-Liste aus Text- und Bildeinträgen, die der Subreport TextBlocks in dieser Reihenfolge druckt. Ohne Bild bleibt der Parameter leer, und der Abschnitt druckt wie bisher.",
+        "en": "Set automatically by calServer when a text block of the additional information section contains an image: a JSON list of text and image entries that the TextBlocks subreport prints in this order. Without an image the parameter stays empty and the section prints as before."
+      },
+      "role": "system",
+      "group": "System",
+      "order": 90
+    },
+    {
       "name": "MarkNumber1",
       "label": {
         "de": "Kalibrierzeichen Zeile 1",

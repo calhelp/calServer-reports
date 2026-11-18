@@ -32,6 +32,7 @@ mit `--write` neu generieren.
 | `main_reports/dakks-json-sample.jrxml` | Hauptbericht (1:1 aus `DAKKS-SAMPLE/main_reports/dakks-sample.jrxml`) |
 | `subreports/Standard.jrxml` | Verwendete Normale (1:1 aus V1 `Standard.jrxml`; `subDataSource("standards")`) |
 | `subreports/Results.jrxml` | Messergebnisse mit allen V1-Layoutvarianten (`MeasurementDetails` 1/2/21/22/3/4/5/51/52, `ModernResultsHeader`; `subDataSource("results")`) |
+| `subreports/TextBlocks.jrxml` | Text und Bilder eines Abschnitts aus den Textbausteinen (1:1 aus `DAKKS-SAMPLE`; `JsonDataSource` über `Text_blocks_*`, ab Contract-Version 1.15) |
 | `main_reports/sample-data.json` | Beispiel-Datensatz (Contract `calibration-certificate` **v1.2**) |
 | `main_reports/dakks-json-sample_adapter.xml` | Jaspersoft-Studio-JSON-Adapter auf `sample-data.json` (turnkey-Vorschau) |
 | `parameters.json` | **Kompletter Katalog aller 52 V1-Parameter** (Labels, Beschreibung, Defaults, Gruppen) für die calServer-Berichtsvariablen-UI |
@@ -252,6 +253,28 @@ mit Einheit, z. B. `21,0 ... 23,0 °C|40 ... 60 %`. Jede Hälfte fällt für sic
 den an der Kalibrierung erfassten Wert zurück (`calibration.custom_fields.C2311`
 bzw. `C2312`), wenn sie leer bleibt. So steht der Klimabereich des Labors einmal
 an der Ressource statt in jedem Bericht erneut.
+
+## Textbausteine mit Bildern (ab Contract-Version 1.15)
+
+Die Abschnitte Kalibrierverfahren, Messunsicherheiten und Weitere Hinweise
+kommen in V2 aus den Textbausteinen der Prüfprozedur. Reiner Text landet wie
+bisher als HTML in `Calibration_document` (und `procedure.calibration_method`), `Uncertainty_description` und
+`Additional_information`. Enthält ein Baustein des Abschnitts ein Bild, setzt
+calServer zusätzlich `Text_blocks_method`, `Text_blocks_uncertainty` oder
+`Text_blocks_notes`: eine JSON-Liste aus `{kind: text, html}` und
+`{kind: image, image (Base64), width, caption}`. Ist der Parameter gesetzt,
+druckt der Subreport `TextBlocks` den Abschnitt statt des Textfelds; leer
+bleibt alles wie bisher. Die drei Parameter stehen als `role: system` im
+[`parameters.json`](../DAKKS-JSON-SAMPLE/parameters.json), die Berichtsvariablen
+bieten sie also nicht zur Eingabe an.
+
+Der Datensatz trägt die Bilder zusätzlich in `text_blocks.{abschnitt}[]` als
+Segment mit `kind: image`, `image_width`, `image_mime` und `image_data`
+(Base64), für Vorlagen, die den Abschnitt selbst aus dem Datensatz bauen.
+
+Breiten sind 25, 50, 75 und 100 % der Textbreite (535 pt). Ein Bild mit
+weniger Pixeln, als die Breite in Punkten hat, druckt kleiner als gewählt;
+druckreif ist es ab etwa 150 dpi, für die volle Breite also ab rund 1.100 px.
 
 ## Konformitätsspalte: welche Werte die Vorlage liest
 
