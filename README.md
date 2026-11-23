@@ -282,6 +282,7 @@ Die [Downloads-Seite](https://calhelp.github.io/calServer-reports/downloads/) is
 Alle aktuellen und früheren ZIP-Archive stehen zusätzlich als Release-Pakete zur Verfügung:
 
 - [Latest Downloads (immer aktuelle Artefakte)](https://calhelp.github.io/calServer-reports/downloads/)
+- [Alle Berichtspakete als ein ZIP (immer aktuell)](https://calhelp.github.io/calServer-reports/downloads/files/all-reports.zip): alle Berichts- und Sticker-Pakete (V2 und V1 Legacy) flach in einem Archiv, ohne Prüfpläne, Wiki-, Kategorie-, Status- und Ticket-Pakete. In calServer V2 unter Administration › Berichte › „Alle Berichtsdateien aktualisieren“ hochladen; zugeordnet wird über den Dateinamen. Gebaut von `scripts/build_report_collection.py` im Workflow `publish-downloads`, dasselbe Archiv hängt als `all-reports.zip` an jedem Release.
 - [Letztes Release herunterladen (empfohlen)](https://github.com/calhelp/calServer-reports/releases/latest)
 - [Alle Releases durchsuchen](https://github.com/calhelp/calServer-reports/releases)
 

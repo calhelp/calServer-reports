@@ -19,6 +19,8 @@
         <div class="page__meta" id="page-meta"></div>
       </header>
 
+      <section class="card collection" id="collection" hidden></section>
+
       <section class="toolbar">
         <label class="search">
           <span>Kategorie</span>
@@ -166,6 +168,46 @@
           }</div>
           <div><strong>Build:</strong> ${buildDate}</div>
         `;
+
+        // Sammelpaket: alle Berichtspakete in einem ZIP, unter fester Adresse
+        // (files/all-reports.zip). Gebaut von scripts/build_report_collection.py.
+        const collectionRoot = document.getElementById("collection");
+        const collection = payload.collection;
+        if (collection && collection.url) {
+          const collectionUrl = (() => {
+            try {
+              return new URL(
+                collection.url.replace(/^\/+/, ""),
+                downloadsRoot
+              ).toString();
+            } catch (error) {
+              return collection.url;
+            }
+          })();
+          const count = (collection.packages || []).length;
+          collectionRoot.innerHTML = `
+            <div class="collection__text">
+              <h2>Alle Berichte als ein Paket</h2>
+              <p>
+                ${count} Berichtspakete (V2 und V1 Legacy) in einem ZIP, immer der
+                aktuelle Stand dieser Seite. In calServer unter Administration ›
+                Berichte › „Alle Berichtsdateien aktualisieren“ hochladen: die
+                Vorschau ordnet jedes Paket über den Dateinamen dem passenden
+                Bericht zu, geschrieben wird erst nach Bestätigung. Prüfpläne,
+                Wiki-, Kategorie-, Status- und Ticket-Pakete sind nicht enthalten.
+              </p>
+              <p class="collection__meta">
+                <code>${collection.filename}</code> · ${bytesToSize(
+                  collection.sizeBytes
+                )}
+              </p>
+            </div>
+            <div class="actions">
+              <a class="button" href="${collectionUrl}" download>Alle herunterladen</a>
+            </div>
+          `;
+          collectionRoot.hidden = false;
+        }
 
         const groupedArtifacts = (payload.artifacts || []).reduce(
           (groups, artifact) => {
