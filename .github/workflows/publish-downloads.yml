@@ -198,6 +198,14 @@ jobs:
             exit 1
           fi
 
+          # Sammelpaket: alle Berichtspakete in einem ZIP unter fester Adresse
+          # (files/all-reports.zip), das calServer V2 unter Administration ›
+          # Berichte › „Alle Berichtsdateien aktualisieren“ direkt annimmt.
+          # Steht nicht in metadata.tsv, sondern als "collection" in latest.json.
+          python scripts/build_report_collection.py \
+            artifacts/report-zips "${FILES_DIR}/all-reports.zip" \
+            --commit "${COMMIT_SHA:-}" --json artifacts/collection.json
+
           python - <<'PY'
           import html
           import json
@@ -565,6 +573,12 @@ jobs:
               "commitSha": os.environ.get("COMMIT_SHA"),
               "artifacts": artifacts,
           }
+
+          collection_path = Path("artifacts/collection.json")
+          if collection_path.exists():
+              collection = json.loads(collection_path.read_text(encoding="utf-8"))
+              collection["url"] = f"files/{collection['filename']}"
+              payload["collection"] = collection
 
           output_path = Path("site/downloads/latest.json")
           output_path.write_text(json.dumps(payload, indent=2))

@@ -140,6 +140,12 @@ jobs:
           create_zip "PRICE-LIST-JSON-SAMPLE" "price-list-json-sample"
           create_zip "FREE-DELIVERY-JSON-SAMPLE" "free-delivery-json-sample"
 
+      # Sammelpaket aller Berichtspakete, wie auf der Downloads-Seite
+      # (scripts/build_report_collection.py): ein Upload in calServer V2 unter
+      # Administration › Berichte › „Alle Berichtsdateien aktualisieren“.
+      - name: Build report collection
+        run: python3 scripts/build_report_collection.py output output/all-reports.zip --commit "${GITHUB_SHA}"
+
       - name: Determine release metadata
         id: release_meta
         run: |

@@ -97,6 +97,43 @@ h1 {
   overflow: hidden;
 }
 
+.collection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #c7d6f7;
+}
+
+.collection[hidden] {
+  display: none;
+}
+
+.collection__text {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+.collection h2 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.collection p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4e5d78;
+}
+
+.collection p.collection__meta {
+  margin-top: 8px;
+  color: #697386;
+}
+
 #downloads-sections {
   display: grid;
   gap: 20px;
