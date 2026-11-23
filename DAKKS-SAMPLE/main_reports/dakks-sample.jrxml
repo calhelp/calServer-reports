@@ -148,8 +148,8 @@
 		<defaultValueExpression><![CDATA["V0.8.2"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="MarkNumber1" class="java.lang.String">
-		<parameterDescription><![CDATA[Text für die erste Kennziffer im Akkreditierungsblock (z. B. Auftragsnummer).]]></parameterDescription>
-		<defaultValueExpression><![CDATA["123456"]]></defaultValueExpression>
+		<parameterDescription><![CDATA[Laufende Nummer im Kalibrierzeichen. Leer (Default): die Nummer kommt aus der Kalibrierscheinnummer (cert_field), gedruckt wird ihr erster durch Leerzeichen getrennter Teil. Ein gesetzter Wert geht vor.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="MarkNumber2" class="java.lang.String">
 		<parameterDescription><![CDATA[Mehrzeilige Kennzeichnung des DAkkS-Kalibrierzeichens.]]></parameterDescription>
@@ -1620,7 +1620,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
-    ? ""
+    ? (($F{cert_field} == null || $F{cert_field}.trim().isEmpty()) ? "" : $F{cert_field}.trim().split("\\s+")[0])
     : $P{MarkNumber1}.trim().split("\\s+")[0]]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -1769,7 +1769,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
 				<textFieldExpression><![CDATA[($P{MarkNumber1} == null || $P{MarkNumber1}.trim().isEmpty())
-    ? ""
+    ? (($F{cert_field} == null || $F{cert_field}.trim().isEmpty()) ? "" : $F{cert_field}.trim().split("\\s+")[0])
     : $P{MarkNumber1}.trim().split("\\s+")[0]]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
