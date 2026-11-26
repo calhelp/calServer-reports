@@ -1484,7 +1484,7 @@ END AS cert_field, COALESCE(c.C2307, "") AS C2307, COALESCE(c.C2327, "") AS C232
 				</textElement>
 				<textFieldExpression><![CDATA[$V{inv_number}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField textAdjust="ScaleFont">
 				<reportElement x="202" y="488" width="116" height="40" uuid="5f016946-6721-48c5-bbbd-22da1fec173c"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>

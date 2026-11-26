@@ -308,6 +308,21 @@
       "default": "Y"
     },
     {
+      "name": "approver_field",
+      "label": {
+        "de": "Rückfallfeld Freigabe",
+        "en": "Approval fallback field"
+      },
+      "description": {
+        "de": "Woraus der Name unter „Freigabe des Kalibrierscheins durch“ kommt, solange niemand über den Freigabevorgang oder den Freigabeknopf freigegeben hat: api_name oder V1-Spaltenname eines Kalibrierfelds (Vorgabe C2327). „-“ heißt kein Feld, die Zeile bleibt dann bis zur Freigabe leer; das ist richtig, wenn das Feld etwas anderes trägt als einen Namen. Nach einer Freigabe steht dort immer die Person, die freigegeben hat, mit dem Datum der Freigabe (Datensatz-Block release, ab Contract-Version 1.16).",
+        "en": "Where the name under \"Approval of the certificate of calibration by\" comes from as long as nobody has released the certificate through the release workflow or the release button: api_name or V1 column name of a calibration field (default C2327). \"-\" means no field; the line then stays empty until the release, which is right if that field holds something other than a name. After a release the line always names the person who released it, with the release date (dataset block release, from contract version 1.16)."
+      },
+      "role": "data",
+      "group": "Kalibrierzeichen",
+      "order": 115,
+      "example": "-"
+    },
+    {
       "name": "PageNumberPosition",
       "label": {
         "de": "Position der Seitenzahl",

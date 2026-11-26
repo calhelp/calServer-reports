@@ -20,6 +20,11 @@ mechanisch aus dem V1-Original abgeleitet. Erlaubte Unterschiede sind genau:
 4. Report-Name + Studio-Default-Adapter (Vorschau-Komfort),
 5. `Results`: Feld `row_num` als `java.lang.Integer` statt des abstrakten
    `java.lang.Number` (JsonDataSource-Anforderung; im Layout ungenutzt).
+6. Freigabezeile (ab Contract-Version 1.16): Name und Datum unter „Freigabe
+   des Kalibrierscheins durch" kommen aus dem Block `release` und tragen die
+   Stempelkennungen `stamp.release_name` / `stamp.release_date`, dazu eine
+   unsichtbare Box `stamp.release_signature` für die Unterschrift. Siehe
+   [Freigabezeile](#freigabezeile-ab-contract-version-116).
 
 `python3 scripts/build_dakks_json_clone.py --check` weist die Ableitung
 byte-genau nach. **Nie von Hand editieren** — Mapping im Skript ändern und
@@ -275,6 +280,34 @@ Segment mit `kind: image`, `image_width`, `image_mime` und `image_data`
 Breiten sind 25, 50, 75 und 100 % der Textbreite (535 pt). Ein Bild mit
 weniger Pixeln, als die Breite in Punkten hat, druckt kleiner als gewählt;
 druckreif ist es ab etwa 150 dpi, für die volle Breite also ab rund 1.100 px.
+
+## Freigabezeile (ab Contract-Version 1.16)
+
+Bis 1.15 druckte die Vorlage unter „Freigabe des Kalibrierscheins durch" das
+Zusatzfeld `C2327` und als Datum den Tag des Erzeugens. Das passte nicht, wenn
+das Feld anders belegt ist (bei einem Kunden stand dort der Kalibrierbereich),
+und im Freigabevorgang trug der Schein den Tag des Antrags statt den der
+Freigabe. Ab 1.16 liest die Zeile den Block `release` des Datensatzes:
+
+| Feld | JSON-Pfad | Druck |
+|------|-----------|-------|
+| `release_state` | `release.state` | `approved`, `pending` oder `none` |
+| `release_approver` | `release.approved_by_name` | Name unter „Freigabe … durch" |
+| `release_date` | `release.issue_date` | Datum links (`Y-m-d`, gedruckt als `dd.MM.yyyy`) |
+
+Was in `release` steht, entscheidet calServer: freigegeben heißt die Person,
+die entschieden hat (Vorname Nachname aus dem Benutzerkonto), mit dem Datum
+der Entscheidung; offen heißt beides leer; ohne Freigabevorgang das Feld, das
+die Berichtsvariable `approver_field` nennt (Vorgabe `C2327`, `-` heißt kein
+Feld), mit dem Tag des Erzeugens. Fehlt der Block (älteres calServer), druckt
+die Vorlage genau wie V1.
+
+Die beiden Felder und die Box `stamp.release_signature` darüber tragen eine
+Stempelkennung im `key`. Der report-runner meldet, wo sie nach dem Umbruch
+gelandet sind, und calServer stempelt bei der Freigabe-Entscheidung Name,
+Datum und Unterschrift auf den eingefrorenen Schein, ohne ihn neu zu
+erzeugen. Eine eigene Vorlage bekommt dasselbe Verhalten, wenn sie dieselben
+Kennungen setzt.
 
 ## Konformitätsspalte: welche Werte die Vorlage liest
 

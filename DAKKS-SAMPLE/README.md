@@ -59,7 +59,9 @@ Report selbst zu verändern.
 * **Messmittel-Stammdaten** – Bezeichnung, Typ, Serien- und Inventarnummern
   (`I4204`, `I4203`, `I4202`, `I4201`) sowie optionaler QR-/Barcode-Wert.
 * **Auftraggeber:in** – Kund:innenname und Adresse (`customer`), Datum der
-  Kalibrierung (`C2301`) sowie interne Referenzen (`C2307`, `C2327`).
+  Kalibrierung (`C2301`) sowie interne Referenzen (`C2307`, `C2327`). Eine
+  Anschrift mit mehr als vier Zeilen setzt die Vorlage kleiner, statt sie über
+  das Datum der Kalibrierung laufen zu lassen (`textAdjust="ScaleFont"`).
 * **Kalibrierstatus** – Informationen zu letzter und nächster Kalibrierung
   (`C2308`, `C2311`, `C2312`) inklusive Hervorhebung der beteiligten Personen.
 * **Normative Textblöcke** – vordefinierte Absätze zu Rückführbarkeit,

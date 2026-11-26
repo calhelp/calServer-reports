@@ -23,6 +23,13 @@ Allowed transformations (nothing else changes, byte for byte):
   6. Subreports without SQL (VERBATIM) are copied unchanged: they read a
      JSON parameter in both bundles (TextBlocks: text and images of the
      certificate text blocks).
+  7. main report only, the approval line (contract v1.16, ADR 2026-11-26):
+     three extra fields read the block `release`; the name and the date of
+     the approval line print from it and carry the stamp keys
+     `stamp.release_name` / `stamp.release_date`, and an invisible box
+     `stamp.release_signature` marks where the release signature goes. A
+     dataset without the block (older calServer) prints exactly what V1
+     prints: the old field and the day of generation.
 
 Usage:
   python3 scripts/build_dakks_json_clone.py --write   # (re)generate the clone
@@ -195,6 +202,96 @@ def retarget_main(text: str) -> str:
     return text.replace(old, adapter, 1)
 
 
+# 7. The approval line. Element uuids of the V1 original.
+RELEASE_NAME_UUID = "96f612ed-7910-45bf-9fe9-d55ab07a416e"
+RELEASE_DATE_UUID = "044e752b-dca8-40fb-b616-ec3540122645"
+
+RELEASE_FIELDS = [
+    ("release_state", "release.state"),
+    ("release_approver", "release.approved_by_name"),
+    ("release_date", "release.issue_date"),
+]
+
+RELEASE_NAME_EXPRESSION = (
+    '$F{release_state} == null\n'
+    '? (($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327})\n'
+    ': ($F{release_approver} == null ? "" : $F{release_approver})'
+)
+
+RELEASE_DATE_EXPRESSION = (
+    '$F{release_state} == null\n'
+    '? new java.text.SimpleDateFormat("dd.MM.yyyy").format(new java.util.Date())\n'
+    ': (($F{release_date} == null || $F{release_date}.trim().isEmpty())\n'
+    '    ? ""\n'
+    '    : java.time.LocalDate.parse($F{release_date}.trim()).format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")))'
+)
+
+# Above the printed name, between the label and the value row. Transparent,
+# no pen: the box is never visible, the runner only reports where it landed.
+RELEASE_SIGNATURE_BOX = (
+    '\t\t\t<rectangle>\n'
+    '\t\t\t\t<reportElement key="stamp.release_signature" mode="Transparent" positionType="Float" '
+    'x="192" y="703" width="120" height="21" uuid="0c5e7d2a-4f1b-4b8e-9a37-6d2f5c1e8b40"/>\n'
+    '\t\t\t\t<graphicElement>\n'
+    '\t\t\t\t\t<pen lineWidth="0.0"/>\n'
+    '\t\t\t\t</graphicElement>\n'
+    '\t\t\t</rectangle>\n'
+)
+
+
+def replace_once(text: str, old: str, new: str, what: str) -> str:
+    if text.count(old) != 1:
+        raise SystemExit(f"ERROR: expected exactly 1 {what} in main report, found {text.count(old)}")
+    return text.replace(old, new, 1)
+
+
+def bind_release(text: str) -> str:
+    """Transformation 7: name and date of the approval line from `release`."""
+    anchor = "report_variant.template]]></fieldDescription>\n\t</field>\n"
+    fields = "".join(
+        f'\t<field name="{name}" class="java.lang.String">\n'
+        f"\t\t<fieldDescription><![CDATA[{path}]]></fieldDescription>\n"
+        "\t</field>\n"
+        for name, path in RELEASE_FIELDS
+    )
+    text = replace_once(text, anchor, anchor + fields, "last bound field")
+
+    # Name: key on the element, expression reads the block.
+    name_element = f'uuid="{RELEASE_NAME_UUID}">'
+    text = replace_once(
+        text,
+        f'<reportElement positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" {name_element}',
+        f'<reportElement key="stamp.release_name" positionType="Float" stretchType="ContainerHeight" x="192" y="720" width="179" height="20" {name_element}',
+        "approver name element",
+    )
+    text = replace_once(
+        text,
+        '<textFieldExpression><![CDATA[($F{C2327} == null || $F{C2327}.trim().isEmpty()) ? "" : $F{C2327}]]></textFieldExpression>',
+        f"<textFieldExpression><![CDATA[{RELEASE_NAME_EXPRESSION}]]></textFieldExpression>",
+        "approver name expression",
+    )
+
+    # Date: the pattern goes, the expression formats itself (a String may
+    # be empty, a Date with a pattern cannot say "not yet").
+    old_date = (
+        '\t\t\t<textField pattern="dd.MM.yyyy">\n'
+        f'\t\t\t\t<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="720" width="134" height="20" uuid="{RELEASE_DATE_UUID}"/>\n'
+    )
+    new_date = (
+        RELEASE_SIGNATURE_BOX
+        + '\t\t\t<textField>\n'
+        f'\t\t\t\t<reportElement key="stamp.release_date" positionType="Float" stretchType="ContainerHeight" x="16" y="720" width="134" height="20" uuid="{RELEASE_DATE_UUID}"/>\n'
+    )
+    text = replace_once(text, old_date, new_date, "approval date element")
+    text = replace_once(
+        text,
+        "<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>",
+        f"<textFieldExpression><![CDATA[{RELEASE_DATE_EXPRESSION}]]></textFieldExpression>",
+        "approval date expression",
+    )
+    return text
+
+
 def build() -> dict[str, str]:
     generated = {}
     for source, target, kind in FILES:
@@ -204,6 +301,7 @@ def build() -> dict[str, str]:
         if kind == "main":
             text = swap_subreport_sources(text, source)
             text = retarget_main(text)
+            text = bind_release(text)
         generated[target] = text
     for source, target in VERBATIM:
         generated[target] = (ROOT / source).read_text(encoding="utf-8")
