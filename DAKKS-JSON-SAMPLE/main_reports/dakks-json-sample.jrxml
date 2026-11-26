@@ -1717,7 +1717,10 @@
 				<text><![CDATA[Person in charge]]></text>
 			</staticText>
 			<textField pattern="dd.MM.yyyy">
-				<reportElement x="16" y="720" width="134" height="19" uuid="044e752b-dca8-40fb-b616-ec3540122645"/>
+				<reportElement positionType="Float" stretchType="ContainerHeight" x="16" y="720" width="134" height="20" uuid="044e752b-dca8-40fb-b616-ec3540122645"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
